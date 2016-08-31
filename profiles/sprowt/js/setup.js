@@ -3,7 +3,7 @@
     /**
      * Attaches the batch behavior to progress bars.
      */
-    Drupal.behaviors.sproutSetup = {
+    Drupal.behaviors.sprowtSetup = {
       attach: function (context, settings) {
         $('#progress', context).once('batch', function () {
             var holder = $(this);
@@ -13,7 +13,7 @@
                 if (progress == 100) {
                   pb.stopMonitoring();
                   console.log('done');
-                  $('#sprout-setup-form').submit();
+                  $('#sprowt-setup-form').submit();
                 }
             };
       
@@ -25,11 +25,11 @@
             var progress = new Drupal.progressBar('updateprogress', updateCallback, 'POST', errorCallback);
             progress.setProgress(-1, "initialize");
             holder.append(progress.element);
-            progress.startMonitoring('/profiles/sprout/ajax_setup.php', 10);
+            progress.startMonitoring('/profiles/sprowt/ajax_setup.php', 10);
             
-            //var setup_url = '/profiles/sprout/background_sprout_build.php?XDEBUG_SESSION_START=1';
+            //var setup_url = '/profiles/sprowt/background_sprowt_build.php?XDEBUG_SESSION_START=1';
             
-            var setup_url = '/profiles/sprout/background_sprout_build.php';
+            var setup_url = '/profiles/sprowt/background_sprowt_build.php';
 
             var ajax_ops = {
                 url: setup_url,

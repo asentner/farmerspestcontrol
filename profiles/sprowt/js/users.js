@@ -1,7 +1,7 @@
 (function($){
     $(document).ready(function(){
         
-        $.users.default_image = '/profiles/sprout/images/default.jpg';
+        $.users.default_image = '/profiles/sprowt/images/default.jpg';
         
         if ($('#users_hidden').val() != "[]") {
             var default_users = JSON.parse($('#users_hidden').val());
@@ -156,7 +156,7 @@
                 formData.append("image", file);
                 formData.append("user_id", userId);
                 $.ajax({
-                  url: "/profiles/sprout/ajax_image_handler.php",
+                  url: "/profiles/sprowt/ajax_image_handler.php",
                   type: "POST",
                   data: formData,
                   processData: false,
@@ -188,7 +188,7 @@
             formData.append("image", image);
             formData.append("user_id", userId);
             $.ajax({
-              url: "/profiles/sprout/ajax_image_handler.php",
+              url: "/profiles/sprowt/ajax_image_handler.php",
               type: "POST",
               data: formData,
               processData: false,
