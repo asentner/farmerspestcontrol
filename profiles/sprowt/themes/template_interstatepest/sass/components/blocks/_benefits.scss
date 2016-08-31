@@ -1,0 +1,12 @@
+.benefits-hero {
+  .views-row {
+    border-color: palette(secondary, base);
+  }
+  .node__title {
+    color: palette(secondary, base);
+  }
+}
+
+.block--leadbuilder-views-leadbuilder-views-lt-benefits {
+    @extend .benefits-hero;
+}

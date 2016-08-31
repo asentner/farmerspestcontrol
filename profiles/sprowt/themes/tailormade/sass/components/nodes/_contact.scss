@@ -1,0 +1,14 @@
+.webform-client-form-29 {
+	margin-top: 2em;
+	> div {
+		margin: 0 -10px;
+		> .form-item {
+			@include ranged-columns(1, 4);
+			@include ranged-columns(6, 7, odd);
+			padding: 0 10px;
+		}
+		> .form-actions {
+			padding: 0 10px;
+		}
+	}
+}

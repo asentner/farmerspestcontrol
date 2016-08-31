@@ -1,0 +1,9 @@
+.block--views-locations-list {
+  color: $color-brand-primary;
+  @include breakpoint($tab) {
+    .field-street-address,
+    .field-locality, .field-phone-number {
+      border-left-color: $color-brand-secondary;
+    }
+  }
+}

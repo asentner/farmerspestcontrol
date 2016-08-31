@@ -1,0 +1,214 @@
+<?php
+
+/*
+ * Implements hook_block_info().
+ */
+function leadbuilder_views_block_info() {
+  return array(
+    'leadbuilder_views_testimonials' => array(
+      'info' => t('Sprowt: Testimonials'),
+    ),
+    'leadbuilder_views_lt_benefits' => array(
+    	'info' => t('Sprowt: LocalTarget Benefits'),
+    ),
+  );
+}
+
+/*
+ * Implements hook_block_view().
+ */
+function leadbuilder_views_block_view($delta) {
+  $block = array();
+
+  switch($delta) {
+    case 'leadbuilder_views_testimonials':
+      $block['content'] = _leadbuilder_views_testimonials();
+      break;
+    case 'leadbuilder_views_lt_benefits': //Use shorthand, localtarget makes delta too long
+    	$block['content'] = _leadbuilder_views_lt_benefits();
+    	break;
+  }
+
+  return $block;
+}
+
+//Returns rendered testimonial teaser (random if no service/market terms set for page, related if terms set)
+function _leadbuilder_views_testimonials() {
+	$DEBUG = FALSE;
+	$block = array();
+	$limit = 1;
+
+	$node = menu_get_object();
+
+	// Generate the base query
+	$query = db_select('node', 'n')
+		->fields('n', array('nid'))
+		->condition('status', 1)
+		->condition('type', 'testimonial')
+		->orderRandom()
+		->range(0, $limit);
+
+	// Check if we're on a page with related categories
+	$relatedQuery = clone $query;
+	$service_set = FALSE;
+	$market_set = FALSE;
+	if (!empty($node)) {
+	  if (!empty($node->field_service['und'][0]['tid'])) {
+	  	$service_set = TRUE;
+	    $relatedQuery->leftJoin('field_data_field_service', 's', 'n.nid=entity_id');
+	    $relatedQuery->condition('field_service_tid', $node->field_service['und'][0]['tid']);
+	  }
+	  if (!empty($node->field_market['und'][0]['tid'])) {
+	  	$market_set = TRUE;
+	    $relatedQuery->leftJoin('field_data_field_market', 'm', 'n.nid=m.entity_id');
+	    $relatedQuery->condition('field_market_tid', $node->field_market['und'][0]['tid']);
+	  }
+	}
+
+	if ($DEBUG) {
+		dsm('Fully Related (Service and Market) Query:');
+		dpq($relatedQuery);
+	}
+
+	$relatedNids = $relatedQuery->execute()->fetchCol(); 
+
+	if (count($relatedNids) && ($service_set || $market_set)) { //If related testimonial was found and it used one of the related fields, no further queries necessary
+		$nids = $relatedNids;
+	}
+	else { //There are no fully related testimonials
+		$relatedServiceNids = array();
+		if ($service_set && $market_set) { //Only run extra service query if both terms were set previously, otherwise it's redundant
+			$relatedServiceQuery = clone $query;
+			$relatedServiceQuery->leftJoin('field_data_field_service', 's', 'n.nid=entity_id');
+			$relatedServiceQuery->condition('field_service_tid', $node->field_service['und'][0]['tid']);
+			if ($DEBUG) {
+				dsm('Related Service Query:');
+				dpq($relatedServiceQuery);
+			}	
+			$relatedServiceNids = $relatedServiceQuery->execute()->fetchCol();
+		}
+
+		if (count($relatedServiceNids)) {
+			$nids = $relatedServiceNids;
+		}
+		else {
+			//Grab random testimonial using base query
+			if ($DEBUG) {
+				dsm('Random Query:');
+				dpq($query);
+			}
+			$nids = $query->execute()->fetchCol();
+		}
+	}
+
+	$items = array();
+	foreach(node_load_multiple($nids) as $node) {
+	  $node_view = node_view($node, 'teaser');
+	  $items[] = render($node_view);
+	}
+
+	if (count($items)) {
+	  $block['related_testimonials'] = array(
+	    '#type' => 'markup',
+	    '#markup' => implode('', $items),
+	  );
+	}
+
+	return $block;
+}
+
+function _leadbuilder_views_lt_benefits() {
+	$DEBUG = FALSE;
+	$block = array();
+	$node = menu_get_object();
+	$limit = 3;
+
+	if ($DEBUG) { dsm($node); }
+
+	if (!empty($node) && $node->type == 'localtarget') {
+		// First, grab 3 default localtarget nodes
+		$weight_map = db_query('
+			SELECT w.weight, n.nid FROM {node} n
+			LEFT JOIN {weight_weights} w ON w.entity_id = n.nid
+			LEFT JOIN {field_data_field_service} s ON s.entity_id = n.nid
+			LEFT JOIN {field_data_field_market} m ON m.entity_id = n.nid
+			WHERE n.type = :type
+				AND n.status = 1 
+				AND n.promote = 0 
+				AND s.field_service_tid IS NULL
+				AND m.field_market_tid IS NULL
+				ORDER BY w.weight ASC 
+				LIMIT '.$limit, 
+			array(':type' => 'benefit'))->fetchAllKeyed();
+
+		if ($DEBUG) { dsm($weight_map); }
+
+		if (!empty($node->field_market)) {
+			$market_weight_map = db_query('
+				SELECT w.weight, n.nid FROM {node} n
+				LEFT JOIN {weight_weights} w ON w.entity_id = n.nid
+				LEFT JOIN {field_data_field_service} s ON s.entity_id = n.nid
+				LEFT JOIN {field_data_field_market} m ON m.entity_id = n.nid
+				WHERE n.type = :type 
+					AND n.status = 1 
+					AND n.promote = 0 
+					AND s.field_service_tid IS NULL
+					AND m.field_market_tid = '.$node->field_market['und'][0]['tid'].'
+					ORDER BY w.weight ASC 
+					LIMIT '.$limit, 
+				array(':type' => 'benefit'))->fetchAllKeyed();
+				if ($DEBUG) { dsm($market_weight_map); }
+				if (!empty($market_weight_map)) {
+					$weight_map = $market_weight_map + $weight_map; //left keys take priority over right using '+' operator
+				}
+		}
+
+		if (!empty($node->field_service) && !empty($node->field_market)) {
+			$service_market_weight_map = db_query('
+				SELECT w.weight, n.nid FROM {node} n
+				LEFT JOIN {weight_weights} w ON w.entity_id = n.nid
+				LEFT JOIN {field_data_field_service} s ON s.entity_id = n.nid
+				LEFT JOIN {field_data_field_market} m ON m.entity_id = n.nid
+				WHERE n.type = :type 
+					AND n.status = 1 
+					AND n.promote = 0 
+					AND s.field_service_tid = '.$node->field_service['und'][0]['tid'].'
+					AND m.field_market_tid = '.$node->field_market['und'][0]['tid'].'
+					ORDER BY w.weight ASC 
+					LIMIT '.$limit, 
+				array(':type' => 'benefit'))->fetchAllKeyed();
+				if ($DEBUG) { dsm($service_market_weight_map); }
+				if (!empty($service_market_weight_map)) {
+					$weight_map = $service_market_weight_map + $weight_map; //left keys take priority over right using '+' operator
+				}
+		}
+
+		// Sort (potentially overwritten) default weight map by key (weight)
+		ksort($weight_map);
+		$count = count($weight_map);
+		
+		if ($DEBUG) { dsm($weight_map); }
+
+		if ($count) {
+			if ($count <= $limit) {
+				$weight_map = array_slice($weight_map, 0, $count);
+			}
+			else {
+				$weight_map = array_slice($weight_map, 0, $limit);
+			}
+			
+			$items = array();
+			foreach(node_load_multiple(array_values($weight_map)) as $node) {
+			  $node_view = node_view($node, 'teaser');
+			  $items[] = '<div class="views-row">'.render($node_view).'</div>';
+			}
+
+		  $block['lt_benefits'] = array(
+		    '#type' => 'markup',
+		    '#markup' => '<div class="view-content">'.implode('', $items).'</div>',
+		  );
+		}
+	}
+
+	return $block;
+}

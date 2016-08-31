@@ -1,0 +1,15 @@
+.block--nav-mobile {
+	background: palette(primary, base);
+	color: palette(white, pure);
+	a {
+		color: palette(white, pure);
+	}
+	.block__title {
+		background: palette(secondary, base);
+	}
+	.block__content {
+		a {
+			background: palette(primary, dark);
+		}
+	}
+}

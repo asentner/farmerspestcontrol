@@ -1,0 +1,16 @@
+.block--views-locations-list {
+	text-align: center;
+	.address {
+		div {
+			display: inline;
+		}
+	}
+	.field--name-field-phone-number {
+		font-size: 30px;
+		font-weight: bold;
+		line-height: normal;
+		a {
+			color: black;
+		}
+	}
+}

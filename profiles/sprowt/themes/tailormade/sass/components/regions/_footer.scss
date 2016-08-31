@@ -1,0 +1,23 @@
+.l-footer {
+	background: white;
+	margin-top: 20px;
+	@include breakpoint($tab) {
+		margin-top: 70px;
+	}
+}
+
+.l-region--footer-second {
+	@include container;
+	@include breakpoint($tab) {
+		@include flexbox;
+		@include justify-content(space-between);
+		@include align-items(center);
+		.block {
+			width: percentage(1/3);
+		}
+	}
+}
+
+.l-region--footer-third {
+	background: #f2f2f2;
+}

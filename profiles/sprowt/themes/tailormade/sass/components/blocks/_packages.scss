@@ -1,0 +1,67 @@
+.block--views-packages-services,
+.block--packages {
+	background-color: $color-front-content-bg;
+	padding: 30px 20px;
+	margin-top: 30px;
+	text-align: center;
+	.block__title {
+		margin-top: 0;
+		margin-bottom: 30px;
+	}
+	.views-row {
+		max-width: 300px;
+		margin: 0 auto;
+		+ .views-row {
+			margin-top: 30px;
+		}
+	}
+	.node__title {
+		margin-top: 10px;
+	}
+	.field--name-body {
+		font-size: 14px;
+	}
+	.more-link {
+		@extend .button;
+		margin: auto;
+		margin-top: 15px;
+		display: block;
+		clear: both;
+		text-align: center;
+		max-width: 200px;
+	}
+	@include breakpoint($desk) {
+		.view-content {
+			@include flexbox;
+		}
+		.views-row {
+			+ .views-row {
+				margin-top: 0;
+				margin-left: 20px;
+			}
+		}
+		.views-row,
+		.node--package,
+		.node__content,
+		.field--name-body,
+		.field__items,
+		.field__item {
+			@include flexbox;
+			@include flex-direction(column);
+			@include flex(1 1 auto);
+			width: 100%;
+		}
+		.field__item {
+			@include justify-content(space-between);
+			&.field__item {
+				&:after {
+					display: none;
+				}
+			}
+		}
+		.more-link {
+			margin: 0 auto;
+			margin-top: 10px;
+		}
+	}
+}

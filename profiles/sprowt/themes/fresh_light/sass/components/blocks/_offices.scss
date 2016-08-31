@@ -1,0 +1,46 @@
+// localtarget
+.block--views-localtarget-office {
+	color: white;
+	padding: 20px;
+	margin: 20px 0;
+	text-align: center;
+	border-bottom: 1px solid $color-brand-primary-light;
+	border-top: 1px solid $color-brand-primary-light;
+	background: $color-brand-primary-dark;
+
+	a {
+		color: inherit;
+	}
+	.node__title {
+		margin-top: 0;
+		font-weight: 600;
+		color: inherit;
+	}
+	.bullet {
+		display: none;
+	}
+	.field-street-address {
+		.bullet {
+			display: inline;
+		}
+	}
+	@include breakpoint($tab) {
+		font-size: 18px;
+		padding: 50px 20px;
+		.views-row {
+			div {
+				display: inline;
+			}
+		}
+		.node__content + .bullet {
+			display: inline;
+		}
+	}
+	@include breakpoint($desk) {
+		.node__title {
+			display: inline;
+			margin-right: 1em;
+			margin-bottom: 0;
+		}
+	}
+}

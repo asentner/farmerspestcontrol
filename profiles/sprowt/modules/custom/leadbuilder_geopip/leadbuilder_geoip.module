@@ -1,0 +1,64 @@
+<?php
+
+define('GEOIP_CITY_DATABASE', __DIR__.'/data/GeoIPCity.dat');
+
+module_load_include('inc', 'leadbuilder_geoip', 'lib/geoip');
+module_load_include('inc', 'leadbuilder_geoip', 'lib/geoipcity');
+module_load_include('inc', 'leadbuilder_geoip', 'lib/geoipregionvars');
+module_load_include('inc', 'leadbuilder_geoip', 'lib/timezone');
+
+/**
+ * To incorporate this function add logic to output a phone number ($vars['phone']) in a module or template.php:
+ *
+ *  function hook_leadbuilder_geoip_phone_number_alter(&$vars)
+ *
+ */
+function leadbuilder_geoip_get_phone() {
+    if (file_exists(GEOIP_CITY_DATABASE)) {
+        $gi = geoip_open(GEOIP_CITY_DATABASE, GEOIP_STANDARD);
+
+        // Get the client's IP
+        $ip_pattern = '/\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b/';
+        if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1') {
+            if (isset($_GET['ip']) && preg_match($ip_pattern, $_GET['ip'])) {
+                $ip = $_GET['ip'];
+            }
+            else {
+                $ip = '70.62.126.50'; // Coalmarch IP
+            }
+        }
+        elseif (isset($_SERVER['PANTHEON_ENVIRONMENT']) && $_SERVER['PANTHEON_ENVIRONMENT'] === 'dev') {
+            if (isset($_GET['ip']) && preg_match($ip_pattern, $_GET['ip'])) {
+                $ip = $_GET['ip'];
+            }
+            else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+        }
+        elseif (isset($_GET['test_geocode'])) {
+            if (isset($_GET['ip']) && preg_match($ip_pattern, $_GET['ip'])) {
+                $ip = $_GET['ip'];
+            }
+            else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+        }
+        else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        //ignore errors. If it fails it fails.
+        $record = @geoip_record_by_addr($gi, $ip);
+
+        $vars = array(
+            'record' => $record,
+            'phone' => null,
+        );
+
+        drupal_alter('leadbuilder_geoip_phone_number', $vars);
+
+        return $vars['phone'];
+    }
+
+    return null;
+}

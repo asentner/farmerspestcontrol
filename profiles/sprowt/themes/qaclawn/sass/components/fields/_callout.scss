@@ -1,0 +1,27 @@
+.field--name-field-call-out {
+  background: $color-brand-primary;
+  color: $color-brand-primary-light;
+  font-size: 18px;
+  text-align: center;
+  padding: 30px 20px 40px;
+  margin: 40px auto 20px;
+  max-width: 650px;
+  h2 {
+    margin-top: 0;
+    color: white;
+  }
+  a {
+    color: white;
+    &:hover {
+      color: $color-brand-primary-light;
+    }
+    &.button {
+      background: $color-brand-secondary;
+      min-width: 220px;
+      margin-top: 0;
+      &:hover {
+        background: $color-brand-secondary-dark;
+      }
+    }
+  }
+}

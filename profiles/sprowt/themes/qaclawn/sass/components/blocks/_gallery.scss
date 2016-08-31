@@ -1,0 +1,37 @@
+// Overview of galleries block
+.block--views-gallery-grid {
+  margin-top: 30px;
+  .views-row {
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+    .views-field-title {
+      text-align: center;
+      margin-top: 5px;
+    }
+  }
+  @include breakpoint($desk) {
+    .view-content {
+      @include flexbox;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+// Individual gallery nodes
+.node--gallery-image--full {
+  .field--type-image .field__item {
+    margin-top: 20px;
+  }
+  @include breakpoint($desk) {
+    .field--name-field-image .field__items {
+      @include flexbox;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      > * {
+        flex: 1 0 auto; // necessary for IE10
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.block--cta-footer {
+	@include background-image($gradient-dark);
+	color: white;
+	padding: 20px;
+	text-align: center;
+	a {
+		color: inherit;
+	}
+	.block__content {
+		@include container;
+	}
+	.node__title {
+		margin-top: 0;
+		font-weight: bold;
+	}
+	.field--name-body {
+		font-size: 18px;
+		font-weight: 600;
+		margin-top: 10px;
+		color: $color-brand-primary;
+	}
+	.button {
+		margin-top: 10px;
+		color: black;
+	}
+	@include breakpoint(380px) {
+		.button {
+			margin-top: 0px;
+			margin-left: 10px;
+		}
+	}
+	@include breakpoint($tab) {
+		.field--name-body {
+			margin-top: 0;
+			font-size: 32px;
+		}
+	}
+	@include breakpoint($nav) {
+		padding: 33px 20px;
+		.node--cta {
+			@include flexbox;
+			@include align-items(center);
+			@include justify-content(center);
+		}
+		.node__content {
+			margin-left: 30px;
+		}
+	}
+}

@@ -1,0 +1,72 @@
+// see variables/layout
+
+body {
+	margin: 0;
+	padding: 0;
+	background: $color-body-bg;
+}
+
+@mixin container {
+	max-width: $layout-width;
+	margin: auto;
+}
+
+@include breakpoint($tab) {
+	.l-main {
+		@include container;
+		@include flexbox;
+		align-items: stretch;
+		justify-content: space-between;
+	}
+	.l-content {
+		width: $layout-tablet-widebar;
+	}
+	.l-region--sidebar {
+		width: $layout-tablet-sidebar;
+	}
+	.no-sidebars {
+		.l-content {
+			width: 100%;
+		}
+	}
+}
+
+@include breakpoint($desk) {
+	.l-main {
+		.l-content,
+		.l-region--sidebar {
+			padding-bottom: 150px;
+		}
+	}
+	.l-content {
+		width: $layout-desktop-widebar;
+	}
+	.l-region--sidebar {
+		width: $layout-desktop-sidebar;
+	}
+	.no-sidebars {
+		.l-content {
+			width: 100%;
+		}
+	}
+}
+
+@include breakpoint(1400px) {
+	.l-main {
+		.l-content,
+		.l-region--sidebar {
+			padding-bottom: 195px + 50;
+		}
+	}
+}
+
+.not-front {
+	.l-content {
+		padding-left: 20px;
+		padding-right: 20px;
+		@include breakpoint($tab) {
+			padding-left: 65px;
+			padding-right: 65px;
+		}
+	}
+}

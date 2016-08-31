@@ -1,0 +1,116 @@
+// Homepage CTA in postscript
+.block--leadbuilder-block-cta-leadbuilder-block-cta-5 {
+  @include container;
+  text-align: center;
+  padding: 15px 0;
+  a {
+    color: white;
+    &[href^='tel:'] {
+      font-weight: bold;
+    }
+    &.button {
+      color: black !important;
+      background: $color-brand-tertiary;
+      margin-top: 10px;
+      &:hover {
+        background: $color-brand-tertiary-dark;
+      }
+    }
+  }
+  p + p {
+    margin-top: .25em;
+  }
+  .node__title {
+    font-size: 30px;
+    line-height: (36/30);
+    margin-bottom: 15px;
+    color: white;
+  }
+  .node__content {
+    color: white;
+    font-size: 23px;
+    line-height: (28/23);
+  }
+  @include breakpoint($tab) {
+    .node--cta--teaser {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+    }
+    .node__title {
+      margin: 0 20px 0 0;
+      padding-bottom: 10px;
+      font-size: 25px;
+      line-height: (25/25);
+    }
+    .node__content {
+      margin-left: 3%;
+      font-size: 20px;
+    }
+    p {
+      display: inline-block;
+      line-height: (23/23);
+      + p {
+        margin-top: 0;
+        margin-left: 10px;
+      }
+    }
+    a.button {
+      margin-top: 0;
+      font-size: 14px;
+    }
+  }
+  @include breakpoint($desk) {
+    .node__title {
+      font-size: 30px;
+    }
+    .node__content {
+      font-size: 23px;
+    }
+    a.button {
+      font-size: 15px;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+}
+
+// Sidebar CTA
+.l-region--sidebar .block--leadbuilder-block-cta {
+  margin-bottom: 20px;
+  text-align: center;
+  .node__title {
+    font-size: 24px;
+  }
+  .button {
+    margin: 0 auto;
+    width: 220px;
+  }
+  &.primary,
+  &.secondary {
+    margin-bottom: 30px;
+    .node__title,
+    .node__content {
+      color: white;
+    }
+  }
+  &.primary {
+    background: $color-brand-primary;
+    a.button {
+      background: $color-brand-secondary;
+      &:hover {
+        background: $color-brand-secondary-dark;
+      }
+    }
+  }
+  &.secondary {
+    background: $color-brand-secondary;
+    a.button {
+      background: $color-brand-tertiary;
+      color: black;
+      &:hover {
+        background: $color-brand-tertiary-dark;
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+.block--leadbuilder-block-cta {
+  background: palette(tertiary, darker-base);
+  padding-top: 50px;
+  padding-bottom: 100px;
+  text-align: center;
+  .node__title {
+    color: white;
+    font-size: 47px;
+    line-height: (50/47);
+  }
+  h3,
+  p {
+    margin-top: 0;
+    padding-top: 10px;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: (30/26);
+    text-transform: uppercase;
+    color: palette(secondary, base);
+  }
+  h3 a {
+    color: palette(secondary, base);
+    &:hover {
+      color: darken(palette(secondary, base), 10);
+    }
+  }
+  .button {
+    @extend %button;
+    margin-top: 10px;
+    &:hover {
+      color: palette(white, pur);
+    }
+  }
+  @include breakpoint($tab) {
+    background: palette(tertiary, base);
+    padding-bottom: 50px;
+    .field__item {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 30px;
+      padding-bottom: 20px;
+    }
+    h3 {
+      margin: 0 10px;
+      padding: 0;
+    }
+    p {
+      padding: 0 10px;
+    }
+    .button {
+      position: relative;
+      top: 0;
+      margin-left: 10px;
+      margin-top: 0;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "username" : "khofmeyer",
+    "password" : "$S$DEAlGu1ciZKZ8wDld5oDF3ofHLZi15AHSt6uvJ7kC8oI.jpcce7e",
+    "encrypted" : true,
+    "email" : "khofmeyer@coalmarch.com",
+    "first_name" : "Kyle",
+    "last_name" : "Hofmeyer",
+    "image" : "/profiles/sprout/images/coalmarch/khofmeyer.png",
+    "position" : "Manager",
+    "google_plus_id" : "",
+    "Description" : "",
+    "roles": ["administrator"]
+}

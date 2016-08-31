@@ -1,0 +1,89 @@
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}
+
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin flex-order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+@mixin align-content($val) {
+    $msval: $val;
+    $index: str-index($val, 'flex-');
+    @if $index {
+        $msval: str-replace($val, 'flex-', '');
+    }
+    -webkit-align-content: $val;
+    -ms-flex-line-pack: $msval;
+    align-content: $val;
+}
+
+@mixin flex-direction($val) {
+    -webkit-flex-direction: $val;
+    -ms-flex-direction: $val;
+    flex-direction: $val;
+}
+
+@mixin flex-wrap($val) {
+    -webkit-flex-wrap: $val;
+    -ms-flex-wrap: $val;
+    flex-wrap: $val;
+}
+
+@mixin justify-content($val) {
+    $msval: $val;
+    $index: str-index($val, 'flex-');
+    @if $index {
+        $msval: str-replace($val, 'flex-', '');
+    }
+    -webkit-justify-content: $val;
+    -ms-flex-pack: $msval;
+    justify-content: $val;
+}
+
+@mixin align-items($val) {
+    $msval: $val;
+    $index: str-index($val, 'flex-');
+    @if $index {
+        $msval: str-replace($val, 'flex-', '');
+    }
+    -webkit-align-items: $val;
+    -ms-flex-align: $msval;
+    align-items: $val;
+}
+
+@mixin align-self($val) {
+    $msval: $val;
+    $index: str-index($val, 'flex-');
+    @if $index {
+        $msval: str-replace($val, 'flex-', '');
+    }
+    -webkit-align-self: $val;
+    -ms-flex-item-align: $msval;
+    align-self: $val;
+}

@@ -1,0 +1,87 @@
+.l-region--header-second {
+	&:before {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background: white;
+		content: " ";
+	}
+}
+
+.block--nav-main {
+	display: none;
+	@include breakpoint($nav) {
+		display: block;
+		background: $color-brand-primary-dark;
+		//border-top: 2px solid white;
+		border-bottom: 2px solid white;
+		font-size: 14px;
+		font-weight: bold;
+		font-family: $font-headings;
+		text-transform: uppercase;
+		position: relative;
+		z-index: 52;
+		.menu-block-wrapper {
+			a, .nolink {
+				display: block;
+				color: white;
+				padding: 10px 25px;
+				white-space: nowrap;
+			}
+			.nolink {
+				cursor: default;
+			}
+			> .menu {
+				@include flexbox;
+				justify-content: center;
+			}
+			// first level
+			> .menu > li {
+				position: relative;
+			}
+			> .menu > li:hover a,
+			> .menu > li:hover .nolink,
+			> .menu > li:active a,
+			> .menu > li:active .nolink {
+				background: $color-brand-secondary;
+			}
+			// second level
+			> .menu > li > .menu {
+				display: none;
+			}
+			> .menu > li > .menu > li {
+				position: relative;
+			}
+			> .menu > li:hover > .menu,
+			> .menu > li:active > .menu
+			{
+				display: block;
+				position: absolute;
+				left: 0;
+				min-width: 100%;
+			}
+			> .menu > li > .menu > li:hover a,
+			> .menu > li > .menu > li:hover .nolink,
+			> .menu > li > .menu > li:active a,
+			> .menu > li > .menu > li:active .nolink
+			{
+				background: $color-brand-tertiary;
+			}
+			// third level
+			> .menu > li > .menu > li > .menu {
+				display: none;
+			}
+			> .menu > li > .menu > li:active > .menu,
+			> .menu > li > .menu > li:hover > .menu {
+				display: block;
+				position: absolute;
+				left: 100%;
+				top: 0;
+			}
+			> .menu > li > .menu > li > .menu > li:active > a,
+			> .menu > li > .menu > li > .menu > li:hover > a {
+				background: darken($color-brand-tertiary, 10);
+			}
+		}
+	}
+}

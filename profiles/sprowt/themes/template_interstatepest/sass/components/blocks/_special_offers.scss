@@ -1,0 +1,32 @@
+.block--views-special-offers-front {
+  .node--special-offer {
+    background: palette(primary, dark);
+    border-color: palette(white, pure);
+  }
+  .button {
+    color: palette(white, pure);
+  }
+}
+
+// localtarget
+.block--views-special-offers-related {
+  .node--special-offer {
+    border-color: palette(secondary, base);
+  }
+  .button {
+    color: palette(white, pure);
+  }
+}
+
+// list of all offers
+.block--views-special-offers-list {
+  .views-row {
+    background: palette(neutral, concrete);
+    border-color: palette(secondary, base);
+  }
+  .button {
+    &:hover {
+      color: palette(white, pure);
+    }
+  }
+}

@@ -1,0 +1,135 @@
+// front intro
+.block--special-offers-intro {
+    @include breakpoint($tab) {
+        width: percentage(660/1170);
+        .block__title {
+            font-size: 47px;
+        }
+        .block__content {
+            font-size: 17px;
+            line-height: (26/17);
+        }
+    }
+}
+
+.block--views-special-offers-front {
+    margin-top: 30px;
+    font-size: 15px;
+    a {
+        color: inherit;
+    }
+    .node--special-offer {
+        background: $color-brand-primary-dark;
+        border: 3px dashed white;
+        padding: 30px;
+        max-width: 350px;
+        margin: auto;
+    }
+    .node__title {
+        font-size: 25px;
+    }
+    .field--name-body {
+        margin-bottom: 1em;
+    }
+    .field--group-offer {
+        font-size: 1.5em;
+        font-weight: bold;
+        div {
+            display: inline;
+        }
+    }
+    .field--name-field-original-price {
+        text-decoration: line-through;
+    }
+    .field--name-field-expiration-date {
+        margin: 1em 0;
+    }
+    .button {
+        color: white;
+    }
+    @include breakpoint($tab) {
+        margin-top: 0;
+        text-align: left;
+        width: percentage(430/1170);
+        .node--special-offer {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+// localtarget
+.block--views-special-offers-related {
+    .node--special-offer {
+        border: 3px dashed $color-brand-secondary;
+        padding: 20px;
+    }
+    .field--name-field-button {
+        margin-top: 20px;
+    }
+    .button {
+        color: white;
+        text-align: center;
+    }
+}
+
+// list of all offers
+.block--views-special-offers-list {
+    margin-top: 30px;
+    .views-row {
+        background: $color-body-bg;
+        border: 5px dashed $color-brand-secondary;
+        font-size: 15px;
+        padding: 20px;
+    }
+    .node__content {
+        padding: 30px 0;
+    }
+    .views-row + .views-row {
+        margin-top: 30px;
+    }
+    .field--name-field-button {
+        margin-top: 1em;
+    }
+    .button {
+        &:hover {
+            color: white;
+        }
+    }
+    .field--group-offer {
+        margin-top: .75em;
+        div {
+            display: inline;
+            font-weight: bold;
+        }
+    }
+    .field--name-field-original-price {
+        text-decoration: line-through;
+    }
+    .field--name-field-expiration-date {
+        font-style: italic;
+        margin-top: .75em;
+    }
+}
+
+// Lyndsay's original code -- for learning purposes!
+// .node--special-offer--teaser {
+//     padding-top: 30px;
+//     .node__title {
+//         a {
+//             color: white;
+//             font-size: 25px;
+//         }
+//     }
+//     .button {
+//         &:hover {
+//             color: white;
+//         }
+//     }
+//     .field--name-field-expiration-date {
+//         padding: 15px 0;
+//     }
+// }

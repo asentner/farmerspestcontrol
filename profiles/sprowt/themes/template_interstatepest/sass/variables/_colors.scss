@@ -1,0 +1,33 @@
+$palettes: (
+  black: (
+    base: #111,
+    pure: #000,
+  ),
+  white: (
+    base: #eee,
+    pure: #fff,
+  ),
+  neutral: (
+    // http://chir.ag/projects/name-that-color/
+    concrete: #f4f4f4, // body background
+    mine-shaft: #333, // body text
+  ),
+  primary: (
+    light: #589bcb,
+    base: #1b7cc0,
+    dark: #0e61b0,
+  ),
+  secondary: (
+    base: #2ea443,
+  ),
+  tertiary: (
+    base: #ff9600,
+  ),
+  quaternary: (
+    base: #3c3c3c,
+  ),
+);
+
+@function palette($palette, $tone: base) {
+  @return map-get(map-get($palettes, $palette), $tone);
+}

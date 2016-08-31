@@ -1,0 +1,13 @@
+{
+    "username" : "cnein",
+    "password" : "$S$DEAlGu1ciZKZ8wDld5oDF3ofHLZi15AHSt6uvJ7kC8oI.jpcce7e",
+    "encrypted" : true,
+    "email" : "cnein@coalmarch.com",
+    "first_name" : "Christin",
+    "last_name" : "Nein",
+    "image" : "/profiles/sprout/images/coalmarch/cnein.jpg",
+    "position" : "Account Coordinator",
+    "google_plus_id" : "",
+    "Description" : "",
+    "roles": ["administrator"]
+}

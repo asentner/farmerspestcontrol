@@ -1,0 +1,22 @@
+.benefits-hero {
+  .node__title {
+    color: $color-brand-tertiary;
+    a {
+      color: $color-brand-tertiary;
+      &:hover {
+        background: $color-brand-tertiary-dark;
+      }
+    }
+  }
+  .button {
+    background: $color-brand-tertiary;
+    &:hover {
+      background: $color-brand-tertiary-dark;
+    }
+  }
+}
+
+// Local Target Benefits
+.block--leadbuilder-views-leadbuilder-views-lt-benefits {
+  @extend .benefits-hero;
+}

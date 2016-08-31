@@ -1,0 +1,13 @@
+.field--name-field-image {
+	.node--full & {
+		margin: 20px 0;
+	}
+	img {
+		vertical-align: middle;
+	}
+	@include breakpoint($tab) {
+		.node--full & {
+			margin: 35px 0;
+		}
+	}
+}

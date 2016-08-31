@@ -1,0 +1,6 @@
+name = LeadBuilder Spotlight
+description = Fetches Google Analyitcs, Moz, and Harvest data from the Coalmarch Spotlight service.
+core = 7.x
+version = "7.x-1.0"
+package = LeadBuilder
+configure = admin/config/system/leadbuilder-spotlight

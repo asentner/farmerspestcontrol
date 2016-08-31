@@ -1,0 +1,16 @@
+.block-evidence {
+	.block__content {
+		background-color: $color-neutral-lightest;
+	}
+	.node__title {
+		@include background-image($color-gradient-neutral-dark);
+		text-align: center;
+		padding: 10px;
+		font-size: 18px;
+		font-weight: normal;
+		color: white;
+	}
+	.node__content {
+		padding: 10px;
+	}
+}

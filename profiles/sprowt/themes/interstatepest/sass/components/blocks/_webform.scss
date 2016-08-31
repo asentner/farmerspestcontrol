@@ -1,0 +1,52 @@
+.block--webform {
+	color: white;
+	.block__content {
+		text-align: left;
+		max-width: 660px;
+		margin: 0 auto;
+	}
+	@include breakpoint($tab) {
+		form > div {
+			@include flexbox;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			.form-item {
+				flex: 0 0 percentage(325/665);
+				margin: 0 0 12px;
+				&.webform-component-textarea {
+					flex: 0 0 100%;
+				}
+				input, textarea {
+					font-size: 16px;
+				}
+			}
+			.form-actions {
+				flex: 0 0 100%;
+				margin: 15px 0 0;
+			}
+		}
+	}
+}
+
+// sidebar
+
+.block--multiblock-2 { // @TODO better class name
+	.block__title {
+		font-size: 20px;
+		color: $color-brand-primary-dark;
+		margin-bottom: 15px;
+	}
+	@include breakpoint($tab) {
+		.form-submit {
+			min-width: 0;
+		}
+		.form-item {
+			flex: 0 0 100%;
+		}
+	}
+	@include breakpoint($super) {
+		.form-submit {
+			min-width: 220px;
+		}
+	}
+}

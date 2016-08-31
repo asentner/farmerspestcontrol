@@ -1,0 +1,29 @@
+// footer
+.block--views-locations-list {
+	color: white;
+	padding: 20px 0;
+	font-size: 15px;
+	a {
+		color: white;
+	}
+	.node__title {
+		color: white;
+		font: inherit;
+	}
+	.views-row {
+		div,
+		.node__title {
+			display: inline;
+		}
+	}
+	.node__title,
+	.field-street-address-line,
+	.field-postal-code {
+		margin-right: 5px;
+	}
+	.field-street-address-line,
+	.field-locality,
+	.field-phone-number {
+		margin-left: 5px;
+	}
+}

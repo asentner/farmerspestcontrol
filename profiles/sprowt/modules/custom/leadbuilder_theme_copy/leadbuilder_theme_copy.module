@@ -1,0 +1,325 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function leadbuilder_theme_copy_menu()
+{
+    $items = array();
+
+    $items['admin/appearance/theme-copy'] = array(
+        'title' => 'LeadBuilder Theme Copy',
+        'description' => 'Copy a Theme',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_leadbuilder_theme_copy_form'),
+        'access callback' => '_leadbuilder_theme_copy_access',
+        'type' => MENU_LOCAL_TASK
+    );
+
+    $items['admin/appearance/theme-copy/copy'] = array(
+        'title' => 'Copying Theme',
+        'description' => 'Copying Theme',
+        'page callback' => '_leadbuilder_theme_copy_copy_view',
+        'page arguments' => array(),
+        'access callback' => '_leadbuilder_theme_copy_access',
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['admin/appearance/theme-copy/copy-ajax'] = array(
+        'title' => 'Copying Theme',
+        'description' => 'Copying Theme',
+        'page callback' => '_leadbuilder_theme_copy_copy',
+        'page arguments' => array(),
+        'access callback' => '_leadbuilder_theme_copy_access',
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['admin/appearance/theme-copy/copy-progress'] = array(
+        'title' => 'Copying Theme',
+        'description' => 'Copying Theme',
+        'page callback' => '_leadbuilder_theme_copy_copy_progress',
+        'page_arguments' => array(),
+        'access callback' => '_leadbuilder_theme_copy_access',
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+/**
+ * Gets a list of copyable sprout themes
+ */
+function _leadbuilder_theme_copy_list_themes() {
+    $sprout_themes = array(
+        'fresh_light',
+        'sprout_starter',
+        'template_qaclawn',
+        'tailormade',
+        'template_interstatepest'
+    );
+
+    $theme_list = list_themes(TRUE);
+    $new_theme_list = array();
+
+    foreach($theme_list as $theme_name => $object) {
+        if(in_array($theme_name, $sprout_themes)) {
+            $new_theme_list[$theme_name] = $object;
+        }
+    }
+
+    return $new_theme_list;
+}
+
+/**
+ * Builds our form
+ */
+
+function _leadbuilder_theme_copy_form(){
+    require_once drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php';
+    $TB = new ThemeBuilder();
+
+    $form = $TB->theme_picker_form(array('_leadbuilder_theme_copy_form_submit'));
+
+    $css = &$form['#attached']['css'];
+    if($cssi = array_search(drupal_get_path('profile', 'sprout') . '/css/theme_copy.css')) {
+        unset($css[$cssi]);
+    }
+
+    $css[] = drupal_get_path('module', 'leadbuilder_theme_copy') . '/css/theme_copy.css';
+
+
+    $sprout_data = _sprout_get_data();
+    $branding = $sprout_data['branding'];
+    $copied = variable_get('leadbuilder_theme_copy_settings', false);
+
+    if(empty($copied)) {
+        $form['theme']['theme_chooser']['#default_value'] = !empty($branding['theme']) ? $branding['theme'] : null;
+        $form['new_theme_name']['#default_value'] = !empty($branding['new_theme_name']) ? $branding['new_theme_name'] : '';
+        $form['new_theme']['#default_value'] = !empty($branding['new_theme']) ? $branding['new_theme'] : '';
+        $form['colors']['primary']['#default_value'] = !empty($branding['primary-color']) ? $branding['primary-color'] : '';
+        $form['colors']['secondary']['#default_value'] = !empty($branding['secondary-color']) ? $branding['secondary-color'] : '';
+        $form['colors']['tertiary']['#default_value'] = !empty($branding['tertiary-color']) ? $branding['tertiary-color'] : '';
+    }
+
+
+    return $form;
+}
+
+function _leadbuilder_theme_copy_form_submit($form, &$form_state){
+
+    $values = $form_state['values'];
+
+    $fields = array(
+        'theme' => $values['theme_chooser'],
+        'new_theme_name' => $values['new_theme_name'],
+        'new_theme' => $values['new_theme'],
+        'primary-color' => $values['primary'],
+        'secondary-color' => $values['secondary'],
+        'tertiary-color' => $values['tertiary'],
+        'new_path' => "sites/all/themes/{$values['new_theme']}"
+    );
+
+    variable_set('leadbuilder_theme_copy_settings', $fields);
+
+    drupal_goto('admin/appearance/theme-copy/copy');
+
+}
+
+function _leadbuilder_machine_name_exists() {
+    return false;
+}
+
+function _leadbuilder_theme_copy_copy_view(){
+    drupal_add_js(drupal_get_path('module', 'leadbuilder_theme_copy') . '/js/theme_copy.js');
+
+    $fields = variable_get('leadbuilder_theme_copy_settings', array());
+
+    $vars = array(
+        'theme_name' => $fields['new_theme_name'],
+        'new_path' => $fields['new_path']
+    );
+
+    return theme('theme_copy', $vars);
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function leadbuilder_theme_copy_js_alter(&$js) {
+    $path = current_path();
+    if ($path == 'admin/appearance/theme-copy/copy') {
+        if(!empty($js['misc/jquery.js'])) {
+            $js['misc/jquery.js']['data'] = drupal_get_path('module', 'jquery_update') . '/replace/jquery/1.10/jquery.min.js';
+        }
+    }
+}
+
+function leadbuilder_theme_copy_machine_name($name) {
+    return preg_replace('/[^0-9a-zA-Z\_]/','',preg_replace('/\s/','_',str_replace('-','_',strtolower($name))));
+}
+
+
+function _leadbuilder_theme_copy_copy_theme($old_theme, $new_theme_name, $new_theme = null, $primary = null, $secondary = null, $tertiary = null) {
+    include_once(drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php');
+
+    if(empty($new_theme)) {
+        $new_theme = leadbuilder_theme_copy_machine_name($new_theme_name);
+    }
+
+    $themeBuilder = new ThemeBuilder();
+
+    variable_set('leadbuilder_theme_copy_finished', false);
+
+    if(!empty($old_theme) && !empty($new_theme_name)) {
+        if(!empty($_GET['overwrite'])) {
+            $path = DRUPAL_ROOT . "/sites/all/themes/$new_theme";
+            if(!empty($new_theme) && is_dir($path)) {
+                $themeBuilder->theme_delete($new_theme);
+            }
+        }
+        $exists = $themeBuilder->copy_theme($old_theme, $new_theme_name, $new_theme);
+        if($exists == 'exists') {
+            variable_set('leadbuilder_theme_copy_exists', true);
+            return false;
+        }
+    }
+
+    if(!empty($new_theme)
+        && (!empty($primary)
+            || !empty($secondary)
+            || !empty($tertiary)
+        )
+    )
+    {
+        $themeBuilder->color_rename($new_theme, $primary, $secondary, $tertiary);
+    }
+
+    //$themeBuilder->import_blocks($old_theme, $new_theme);
+    variable_set('leadbuilder_theme_copy_finished', true);
+    return true;
+}
+
+/**
+ * Implements hook_themes_enabled().
+ */
+function leadbuilder_theme_copy_themes_enabled($theme_list) {
+    include_once(drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php');
+    $themeBuilder = new ThemeBuilder();
+
+    $sprout_theme_list = _leadbuilder_theme_copy_list_themes();
+    $sprout_themes = array();
+    foreach($sprout_theme_list as $theme_name => $object) {
+        $sprout_themes[] = $theme_name;
+    }
+
+    $themes = list_themes(true);
+
+    foreach($theme_list as $theme) {
+        if(!empty($themes[$theme]->info['copied_from'])) {
+            $old = $themes[$theme]->info['copied_from'];
+            if(!(variable_get('leadbuilder_theme_copy_' . $theme . '_blocks_imported', 0))) {
+                db_delete('block')->condition('theme', $theme)->execute();
+                $themeBuilder->import_blocks($old, $theme);
+                variable_set('leadbuilder_theme_copy_' . $theme . '_blocks_imported', true);
+            }
+        }
+        else if (in_array($theme, $sprout_themes)){
+            if(!(variable_get('leadbuilder_theme_copy_' . $theme . '_blocks_imported', 0))) {
+                db_delete('block')->condition('theme', $theme)->execute();
+                $themeBuilder->import_blocks($theme, $theme);
+                variable_set('leadbuilder_theme_copy_' . $theme . '_blocks_imported', true);
+            }
+        }
+
+    }
+}
+
+function _leadbuilder_theme_copy_copy() {
+
+    $fields = variable_get('leadbuilder_theme_copy_settings', array());
+
+    if(!empty($fields)
+        && !empty($fields['theme'])
+        && !empty($fields['new_theme_name'])
+        && !empty($fields['new_theme'])
+    )
+    {
+        _leadbuilder_theme_copy_copy_theme($fields['theme'], $fields['new_theme_name'], $fields['new_theme'], $fields['primary-color'], $fields['secondary-color'], $fields['tertiary-color']);
+    }
+
+}
+
+function leadbuilder_theme_copy_theme(){
+    return array(
+        'theme_copy' => array(
+            'template' => "theme_copy",
+            'variables' => array(
+                'theme_name' => null,
+                'new_path' => null
+            ),
+            'path' => drupal_get_path('module', 'leadbuilder_theme_copy') . '/theme',
+        ),
+        'theme_field' => array(
+            'template' => "theme_field",
+            'variables' => array(
+                'theme' => array(),
+                'logo' => null
+            ),
+            'path' => drupal_get_path('module', 'leadbuilder_theme_copy') . '/theme',
+        )
+    );
+}
+
+function _leadbuilder_theme_copy_copy_progress(){
+    if(variable_get('leadbuilder_theme_copy_finished', false)) {
+        variable_set('leadbuilder_theme_copy_finished', false);
+        echo 'done123';
+    }
+
+    if(variable_get('leadbuilder_theme_copy_exists', false)) {
+        variable_set('leadbuilder_theme_copy_exists', false);
+        echo 'themeexists';
+    }
+}
+
+function _leadbuilder_theme_copy_access() {
+    $access = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1');
+
+    $access = $access && user_access('administer site configuration');
+
+    return $access;
+}
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function leadbuilder_theme_copy_form_system_theme_settings_alter(&$form, &$form_state) {
+    $var = $form['var']['#value'];
+    $theme_name = substr($var, 6);
+    $theme_name = substr($theme_name, 0, -9);
+
+
+    $form['disable_sprowt_warning'] = array(
+        '#type' => 'checkbox',
+        '#title' => 'Disable Sprowt Warning',
+        '#description' => 'Disables warning regarding the fact that this is an official Sprowt Theme.',
+        '#default_value' => theme_get_setting('disable_sprowt_warning', $theme_name)
+    );
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function leadbuilder_theme_copy_page_alter(&$page) {
+    require_once drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php';
+    $TB = new ThemeBuilder();
+    $default = variable_get('theme_default');
+    $sprout_themes = $TB->sprout_themes();
+    $is_sprout = in_array($default, array_keys($sprout_themes));
+    $disabled = theme_get_setting('disable_sprowt_warning', $default);
+    global $user;
+
+    if($is_sprout && !$disabled && !empty($user->uid)) {
+        drupal_set_message('This site is using a default Sprowt Theme. Either copy this theme <a href="/admin/appearance/theme-copy">here</a> and enable the copied theme or disable this message <a href="/admin/appearance/settings/'.$default.'">here</a>.', 'warning', false);
+    }
+}

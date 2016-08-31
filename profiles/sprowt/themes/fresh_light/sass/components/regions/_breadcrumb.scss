@@ -1,0 +1,14 @@
+.l-breadcrumb {
+	@include background-image($color-gradient-primary);
+	max-width: none;
+}
+
+.breadcrumb {
+	max-width: 1210px;
+	margin: 0 auto;
+	padding: 15px 20px;
+	color: white;
+	a {
+		color: white;
+	}
+}

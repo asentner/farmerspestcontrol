@@ -1,0 +1,22 @@
+.block--views-localtarget-value-prop {
+	text-align: center;
+	max-width: 870px;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	.field--name-field-display-title {
+		color: inherit;
+		font-size: 28px;
+	}
+	.field--name-field-intro {
+		font-size: 17px;
+		line-height: (27/17);
+		margin: 10px 5px 20px;
+	}
+	@include breakpoint($tab) {
+		margin-bottom: 50px;
+		.field--name-field-display-title {
+			font-size: 50px;
+		}
+	}
+}

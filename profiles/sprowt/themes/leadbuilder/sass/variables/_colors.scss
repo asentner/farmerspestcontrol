@@ -1,0 +1,20 @@
+// brand colors
+
+$color-brand-primary: #4FAB16;
+$color-brand-secondary: darken($color-brand-primary, 10);
+$color-brand-tertiary: darken($color-brand-primary, 20);
+
+// base
+
+$color-body-bg: white;
+$color-body-text: #222;
+
+$color-body-link: $color-brand-primary;
+$color-body-link-hover: $color-brand-secondary;
+
+$color-body-headings: $color-brand-tertiary;
+
+// buttons
+
+$color-button-bg: $color-brand-primary;
+$color-button-text: white;

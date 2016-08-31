@@ -1,0 +1,20 @@
+.node--package--full {
+	h1 {
+		margin-bottom: 20px;
+	}
+	.field--name-field-image {
+		margin-bottom: 20px;
+	}
+	.intro-block {
+		margin-bottom: 40px;
+	}
+	@include breakpoint($tab) {
+		.intro-block {
+			.field--name-field-image {
+				float: left;
+				width: 30%;
+				margin: 5px 20px 15px 0; 
+			}
+		}
+	}
+}

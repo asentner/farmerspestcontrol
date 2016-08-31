@@ -1,0 +1,26 @@
+.block--nav-main {
+  @include breakpoint($tab) {
+    .menu-block-wrapper > .menu {
+      a,
+      .nolink {
+        color: $color-brand-secondary;
+        &.active {
+          color: darken($color-link, 10);
+        }
+      }
+      > li:hover > .menu {
+        box-shadow: $layout-shadow;
+      }
+      > li > .menu > li:hover > a,
+      > li > .menu > li:hover > .nolink {
+        background: $color-brand-secondary;
+      }
+      > li > .menu > li > .menu > li > a {
+        background: $color-brand-secondary;
+        &:hover {
+          background: darken($color-brand-secondary, 10);
+        }
+      }
+    }
+  }
+}

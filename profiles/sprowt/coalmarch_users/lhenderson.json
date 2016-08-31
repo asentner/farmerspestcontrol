@@ -1,0 +1,13 @@
+{
+    "username" : "lhenderson",
+    "password" : "$S$DEAlGu1ciZKZ8wDld5oDF3ofHLZi15AHSt6uvJ7kC8oI.jpcce7e",
+    "encrypted" : true,
+    "email" : "lhenderson@coalmarch.com",
+    "first_name" : "Lauren",
+    "last_name" : "Henderson",
+    "image" : "/profiles/sprout/images/coalmarch/lhenderson.jpg",
+    "position" : "Account Executive",
+    "google_plus_id" : "",
+    "Description" : "",
+    "roles": ["administrator"]
+}

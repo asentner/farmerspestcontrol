@@ -1,0 +1,41 @@
+.l-footer {
+  background: palette(white, pure);
+  padding: 20px;
+}
+
+.green-thumb-logo-footer {
+  padding: 10px 0 0 0;
+  img {
+    display: block;
+    margin: 0 auto;
+    vertical-align: middle;
+  }
+}
+
+.l-region--footer-second {
+  max-width: 630px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@include breakpoint($desk) {
+  .l-footer {
+    background: palette(white, pure);
+    max-width: 100%;
+  }
+  .l-footer-content {
+    @include flexbox;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+  .l-region--footer-first {
+    @include flexbox;
+  }
+  .footer--logo {
+    height: auto;
+    padding-left: 20px ;
+    margin: auto 0;
+  }
+}

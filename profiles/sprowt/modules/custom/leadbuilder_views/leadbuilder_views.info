@@ -1,0 +1,5 @@
+name = LeadBuilder Views
+description = Provides custom view blocks for the LeadBuilder prototype.
+core = 7.x
+version = 7.x-1.0
+package = LeadBuilder

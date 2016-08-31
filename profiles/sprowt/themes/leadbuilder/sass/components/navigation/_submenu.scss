@@ -1,0 +1,36 @@
+.nav-submenu {
+	.menu-block-wrapper > .menu {
+		a {
+			display: block;
+		}
+		// first level
+		> li {
+			+ li {
+				margin-top: 10px;
+			}
+			> a {
+				&:before {
+					content: "\f0da";
+					font-family: 'FontAwesome';
+					margin-right: 7px;
+		}
+		&.active {
+		}
+			}
+		}
+		// second level
+		> li > .menu {
+			> li {
+				margin-top: 10px;
+			}
+			> li > a {
+				padding-left: 20px;
+				&:before {
+					content: "›";
+					margin-right: 5px;
+					margin-left: -10px;
+				}
+			}
+		}
+	}
+}

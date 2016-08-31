@@ -1,0 +1,58 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
+.l-content {
+  .node--full {
+    .field--name-field-image {
+      margin: 20px 0;
+    }
+  }
+}
+.image-left,
+.image-right {
+  display: block;
+  clear: both;
+}
+.image-left,
+.image-right {
+  display: block;
+  clear: both;
+}
+@include breakpoint($tab) {
+  .image-left {
+    float: left;
+    margin: 20px 20px 20px 0;
+  }
+  .image-right {
+    float: right;
+    margin: 20px 0 20px 20px;
+  }
+  .two-column {
+    ul,
+    ol {
+      @include flexbox;
+      flex-wrap: wrap;
+      li {
+        width: 50%;
+        min-width: 50%;
+        max-width: 50%;
+      }
+    }
+  }
+}
+
+.two-column-list {
+  @include breakpoint($tab) {
+    @include flexbox;
+    @include flex-wrap(wrap);
+    li {
+      padding: 0 10px;
+      width: percentage(1/2);
+      &:nth-child(1),
+      &:nth-child(2) {
+        margin-top: 0;
+      }
+    }
+  }
+}

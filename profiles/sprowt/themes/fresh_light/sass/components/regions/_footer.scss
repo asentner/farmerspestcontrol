@@ -1,0 +1,39 @@
+.l-footer {
+	max-width: none;
+	padding: 0;
+}
+
+.l-region--footer-second--wrap {
+	@include background-image($color-gradient-primary);
+}
+
+.l-region--footer-third--wrap {
+	@include background-image($color-gradient-primary);
+}
+
+.l-region--footer-first,
+.l-region--footer-second,
+.l-region--footer-third {
+	max-width: 1040px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 20px;
+}
+
+.l-region--footer-first {
+	padding-top: 45px;
+	padding-bottom: 45px;
+	background: white;
+	padding: 20px;
+	max-width: 100%;
+}
+
+.l-region--footer-second {
+	padding-top: 35px;
+	padding-bottom: 35px;
+}
+
+.l-region--footer-third {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}

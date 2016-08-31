@@ -1,0 +1,115 @@
+<?php
+
+function leadbuilder_block_cta_block_info() {
+  $blocks = array();
+
+  $result = db_query("SELECT nid, title FROM node WHERE type='cta' AND status=1");
+
+  foreach($result as $row) {
+    $blocks['leadbuilder_block_cta_'.$row->nid] = array(
+      'info' => t('Sprowt: CTA - ' . $row->title),
+    );
+  }
+
+  return $blocks;
+}
+
+function leadbuilder_block_cta_block_view($delta = '') {
+  $block = array();
+  $nid = str_replace('leadbuilder_block_cta_', '', $delta);
+
+  if (is_numeric($nid) && $node = node_load($nid)) {
+    $node_view = node_view($node, 'teaser');
+    $block['content'] = render($node_view);
+  }
+
+  return $block;
+}
+
+function leadbuilder_block_cta_block_configure($delta = '') {
+  $form = array();
+  $nid = str_replace('leadbuilder_block_cta_', '', $delta);
+
+  if (is_numeric($nid)) {
+    $node = node_load($nid);
+    $node_view = node_view($node, 'teaser');
+    $form['preview'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'This is a preview of the CTA',
+    );
+    $form['preview']['preview'] = array(
+      '#type' => 'markup',
+      '#markup' => render($node_view),
+    );
+  }
+
+  return $form;
+}
+
+function leadbuilder_block_cta_node_delete($node) {
+  if ($node->type == 'cta') {
+    $block_delta_to_delete = 'leadbuilder_block_cta_'.$node->nid;
+    db_delete('block')->condition('delta', $block_delta_to_delete)->execute();
+  }
+}
+
+// cta shortcode [cta:NID] (also works for special offers)
+function _leadbuilder_block_cta_shortcode($str){
+  preg_match_all('/(\[cta:.*\])/',$str,$matches);
+  foreach($matches[1] as $m) {
+    if(!empty($m)){
+      preg_match('/\[cta:(.*?[\d]+)\]/',$m,$n);
+      if(!empty($n[1])){
+        $nid = trim($n[1]);
+        if (is_numeric($nid) && $node = node_load($nid)) {
+          if($node->type == 'cta' || $node->type == 'special_offer'){
+            $node_view = node_view($node, 'teaser');
+            $node_view['css_class'] = "inline-cta";
+            $replace = render($node_view);
+            $str = str_replace($m, $replace, $str);
+          }
+          else {
+            $str = str_replace($m, "{$m}(!NODE NOT CTA/COUPON)", $str);
+          }
+        }
+        else {
+          $str = str_replace($m, "{$m}(!NODE NOT FOUND)", $str);
+        }
+      }
+      else {
+        $str = str_replace($m, "{$m}(!NODE NOT FOUND)", $str);
+      }
+    }
+  }
+  
+  return $str;
+}
+
+function leadbuilder_block_cta_preprocess_node(&$variables) {
+  if (!empty($variables['content']['body']['0']['#markup'])) {
+    $variables['content']['body']['0']['#markup'] = _leadbuilder_block_cta_shortcode($variables['content']['body']['0']['#markup']);
+  }
+  if($variables['node']->type == 'cta'
+     && !empty($variables['content']['css_class'])
+     )
+  {
+    $classes = explode(" ", $variables['content']['css_class']);
+    if(!is_array($classes)){
+      $classes = array($classes);
+    }
+    
+    foreach($classes as $class){
+      if(!empty($class)){
+        $variables['classes_array'][] = $class;
+      }
+    }
+    
+    unset($variables['content']['css_class']);
+  }
+}
+
+function leadbuilder_block_cta_preprocess_block(&$variables) {
+  if($variables['block']->delta != 'main'){
+    $variables['content'] = _leadbuilder_block_cta_shortcode($variables['content']);
+  }
+}

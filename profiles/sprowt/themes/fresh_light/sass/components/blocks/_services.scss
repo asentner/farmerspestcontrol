@@ -1,0 +1,66 @@
+// front
+.block--views-services-all {
+	.node-readmore a,
+	.more-link {
+		@extend %button;
+	}
+	//Front
+	.front & {
+		.views-row {
+			@include box-shadow($shadow);
+			background: white;
+			padding: 20px;
+			max-width: 275px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 15px;
+		}
+		.node__title {
+			font-size: 22px;
+			margin-top: 20px;
+			margin-bottom: 5px;
+		}
+		.node__content {
+			text-align: center;
+		}
+		.links--inline li {
+			float: none;
+			margin-right: 0;
+		}
+		.field--name-field-image {
+			margin-bottom: 0;
+		}
+		.field--name-body {
+			font-size: 15px;
+			line-height: (24/15);
+		}
+		@include breakpoint($tab) {
+			.views-row {
+				max-width: 1040px;
+			}
+			.node__title {
+				margin-top: 0;
+			}
+			.links--inline li {
+				float: left;
+			}
+			.field--name-field-image {
+				padding-top: 0;
+				width: percentage(235/1000);
+				float: left;
+			}
+			.node__content {
+				text-align: left;
+				padding-left: percentage(255/1000);
+				float: none;
+				width: auto;
+			}
+		}
+		@include breakpoint($desk) {
+			.node__title {
+				margin-top: 0;
+				padding-top: 20px;
+			}
+		}
+	}
+}

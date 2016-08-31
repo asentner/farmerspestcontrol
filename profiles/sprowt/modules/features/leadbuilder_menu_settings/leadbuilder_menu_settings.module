@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the LeadBuilder Menu Settings (Feature) feature.
+ */
+
+include_once 'leadbuilder_menu_settings.features.inc';

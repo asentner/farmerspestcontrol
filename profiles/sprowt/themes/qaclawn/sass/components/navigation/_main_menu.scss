@@ -1,0 +1,124 @@
+.block--nav-main {
+  display: none;
+  @include breakpoint($tab) {
+    display: block;
+    position: relative;
+    clear: right;
+    z-index: 51; // above contextual menus
+    font-size: 15px;
+    font-weight: 600;
+    .menu-block-wrapper {
+      padding-top: 10px;
+      text-align: center;
+    }
+    .menu-block-wrapper > .menu {
+      @include clearfix;
+      display: inline-block;
+      font-size: 16px;
+      a,
+      .nolink {
+        display: block;
+        white-space: nowrap;
+        background: white;
+        padding: 5px 25px;
+        text-transform: uppercase;
+        color: $color-brand-secondary;
+        &.active {
+          color: darken($color-link, 10);
+          font-weight: bold;
+        }
+      }
+      .nolink {
+        cursor: default;
+      }
+      // first level
+      > li {
+        float: left;
+        position: relative;
+        &:last-child > a {
+          padding-right: 0;
+        }
+      }
+      // second level
+      > li > .menu {
+        display: none;
+      }
+      > li:hover > .menu {
+        box-shadow: $layout-shadow;
+        display: block;
+        position: absolute;
+        left: 0;
+        min-width: 100%;
+        font-weight: normal;
+        font-size: 14px;
+        > li {
+          position: relative;
+        }
+      }
+      > li:last-child:hover > .menu {
+        left: auto;
+        right: -25px;
+        text-align: right;
+      }
+      > li > .menu > li > .nolink {
+        color: #999;
+      }
+      > li > .menu > li:hover > a,
+      > li > .menu > li:hover > .nolink {
+        background: $color-brand-secondary;
+        color: white;
+      }
+      // third level
+      > li > .menu > li > .menu {
+        display: none;
+      }
+      > li > .menu > li:hover > .menu {
+        display: block;
+        position: absolute;
+        left: 100%;
+        top: 0;
+      }
+      > li:last-child > .menu > li:hover > .menu {
+        left: auto;
+        right: 100%;
+      }
+      > li > .menu > li > .menu > li > a {
+        background: $color-brand-secondary;
+        color: white;
+        &:hover {
+          background: darken($color-brand-secondary, 10);
+        }
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    font-size: 15px;
+    float: right;
+    .menu-block-wrapper {
+      padding-top: 0;
+      text-align: right;
+    }
+    .menu-block-wrapper > .menu {
+      display: block;
+      a,
+      .nolink {
+        padding: 5px 10px;
+      }
+      > li:last-child:hover > .menu {
+        right: -10px;
+      }
+    }
+  }
+  @include breakpoint($nav) {
+    font-size: 16px;
+    .menu-block-wrapper > .menu {
+      a,
+      .nolink {
+        padding: 5px 25px;
+      }
+      > li:last-child:hover > .menu {
+        right: -25px;
+      }
+    }
+  }
+}

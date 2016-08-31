@@ -1,0 +1,21 @@
+// Sidebar
+.block--views-markets-list {
+  ul {
+    padding: 0;
+  }
+  li {
+    list-style: none;
+  }
+  h2 {
+    line-height: (15/31);
+  }
+  a {
+    font-size: 15px;
+    &:before {
+      @include faicon("\f0a9");
+      font-weight: normal;
+      margin-right: 5px;
+      color: $color-brand-secondary;
+    }
+  }
+}

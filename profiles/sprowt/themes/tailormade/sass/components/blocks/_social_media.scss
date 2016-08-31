@@ -1,0 +1,34 @@
+.block--leadbuilder-settings-leadbuilder-social-media {
+	padding: 20px;
+	padding-top: 0;
+	text-align: center;
+	.block__content {
+		ul, li {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		ul {
+			@include flexbox;
+			@include justify-content(center);
+		}
+	}
+	.social-description {
+		display: none;
+	}
+	.fa {
+		color: black;
+		font-size: 28px;
+	}
+	@include breakpoint($tab) {
+		padding: 20px;
+		.block__content {
+			ul {
+				@include justify-content(flex-end);
+			}
+			li + li {
+				margin-left: 15px;
+			}
+		}
+	}
+}

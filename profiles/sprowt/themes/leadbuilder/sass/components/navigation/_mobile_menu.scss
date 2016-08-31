@@ -1,0 +1,45 @@
+.mobile-menu-block {
+	background: $color-brand-primary;
+	padding: 10px 0;
+	.expanded {
+		margin-top: 10px;
+		&.first {
+			margin-top: 0;
+		}
+	}
+	.menu a {
+		color: white;
+		display: block;
+		padding: 5px 10px;
+		font-weight: bold;
+		&:hover {
+			background: darken($color-brand-primary, 10);
+		}
+	}
+	.menu .menu a {
+		padding-left: 30px;
+		font-weight: normal;
+	}
+}
+
+#menu-toggle {
+	background: $color-brand-primary;
+	color: white;
+	display: block;
+	padding: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align:right;
+	&:after {
+		font-family: FontAwesome;
+		content: $fa-var-bars;
+		margin-left: 10px;
+	}
+}
+
+@include breakpoint($tab) {
+	.mobile-menu-block,
+	#menu-toggle {
+		display: none !important; // override JS
+	}
+}

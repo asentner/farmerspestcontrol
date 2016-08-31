@@ -1,0 +1,19 @@
+.block--nav-submenu {
+    .block__title {
+        color: palette(primary, dark);
+    }
+    .menu-block-wrapper {
+        > .menu > li > a {
+            &:before {
+                color: palette(tertiary, base);
+            }
+        }
+        .menu {
+            .menu {
+                a {
+                    color: palette(secondary, base);
+                }
+            }
+        }
+    }
+}

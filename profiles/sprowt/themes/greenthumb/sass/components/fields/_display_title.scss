@@ -1,0 +1,7 @@
+.field--name-field-display-title {
+  @extend %heading;
+  @include breakpoint($tab) {
+    font-size: 47px;
+    line-height: (51/47);
+  }
+}

@@ -1,0 +1,13 @@
+.form-item {
+  input[type=text],
+  input[type=email],
+  input[type=password],
+  input[type=color],
+  textarea {
+  	color: palette(neutral, mine-shaft);
+  }
+}
+
+.form-submit {
+  @extend %button;
+}

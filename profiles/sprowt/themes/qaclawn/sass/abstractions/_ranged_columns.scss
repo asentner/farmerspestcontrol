@@ -1,0 +1,9 @@
+@mixin ranged-columns($first, $last, $omega:even) {
+  &:nth-of-type(n+#{$first}):nth-child(-n+#{$last}) {
+    width: 50%;
+    float: left;
+  }
+  &:nth-of-type(#{$last+1}) {
+    clear: both;
+  }
+}

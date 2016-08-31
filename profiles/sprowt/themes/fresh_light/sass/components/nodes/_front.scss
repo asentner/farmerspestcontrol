@@ -1,0 +1,55 @@
+.front {
+	.l-main {
+		@include front-arrow($color-brand-primary, white);
+		&:before {
+			margin-top: -50px;
+		}
+		padding-bottom: 60px;
+	}
+	.node--full {
+		max-width: 1040px;
+		margin: auto;
+		.field--name-body {
+			max-width: 830px;
+			margin: auto;
+			text-align: center;
+			font-size: 16px;
+			line-height: (28/16);
+		}
+	}
+	h1 {
+		font-size: 50px;
+		text-align: center;
+		border-bottom: 1px solid white;
+		margin-bottom: 20px;
+		&:after {
+			display: block;
+			width: 100%;
+			content: "";
+			border-bottom: 1px solid rgba(black, .05);
+			padding-top: 15px;
+		}
+	}
+	.l-region--postscript-first {
+		@include background-image($color-gradient-secondary);
+		padding: 20px;
+	}
+	.l-region--postscript-second {
+		@include background-image($color-gradient-neutral-dark);
+		color: white;
+		padding: 20px;
+	}
+	.l-region--postscript-third {
+		@include front-arrow($color-neutral-dark, white);
+		&:before {
+			margin-top: -62px;
+		}
+	}
+	@include breakpoint($tab) {
+		.l-main {
+			&:before {
+				margin-top: -30px;
+			}
+		}
+	}
+}

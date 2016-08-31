@@ -1,0 +1,32 @@
+.node--blog {
+  .node__submitted {
+    display: none;
+  }
+  .field--name-body {
+    margin-top: 20px;
+  }
+  .button {
+    max-width: 100%;
+  }
+}
+.flippy {
+  margin: 20px 0 0;
+  border-top: 1px solid #eee;
+  padding: 20px 0;
+  text-align: center;
+  @include breakpoint(800px) {
+    text-align: left;
+  }
+}
+.block--addtoany {
+  position: relative;
+  margin: 50px 0 0;
+  text-align: center;
+  @include breakpoint(800px) {
+    .a2a_kit {
+      position: absolute;
+      top: 20px;
+      right: 0;
+    }
+  }
+}

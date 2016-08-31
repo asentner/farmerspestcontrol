@@ -1,0 +1,46 @@
+@include layout($susy); // see options in variables/layout
+
+body {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.l-main,
+.l-header,
+.l-footer,
+.l-preface,
+.l-breadcrumb,
+.l-postscript {
+	@include container;
+	padding: 0 20px;
+}
+
+@include breakpoint($tab) {
+	.l-main {
+		margin-top: 30px;
+	}
+	.l-content {
+		@include span(9);
+	}
+	.l-region--sidebar-first,
+	.l-region--sidebar-second {
+		@include span(3 omega);
+	}
+	// crazy margins for first sidebar
+	.sidebar-first {
+		.l-content {
+			@include omega;
+		}
+		.l-region--sidebar-first {
+			@include span(3);
+		}
+	}
+	// full width for no sidebars
+	// also applies to landing pages, which never have sidebars
+	.no-sidebars,
+	.node-type-landing-page {
+		.l-content {
+			@include span(full);
+		}
+	}
+}

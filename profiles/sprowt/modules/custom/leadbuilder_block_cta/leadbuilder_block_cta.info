@@ -1,0 +1,5 @@
+name = LeadBuilder Block CTA
+description = Creates a block for each CTA on the site.
+core = 7.x
+version = 7.x-1.0
+package = LeadBuilder

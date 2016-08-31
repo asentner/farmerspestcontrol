@@ -1,0 +1,39 @@
+// branding
+
+$color-brand-primary: #1b7cc0; // blue
+$color-brand-primary-dark: #0e61b0;
+$color-brand-primary-light: #589bcb;
+$color-brand-primary-mega-dark: #00345B;
+
+$color-brand-secondary: #2ea443; // green
+
+$color-brand-tertiary: #ff9600; // orange
+
+$color-brand-quaternary: #3c3c3c; //grey
+$color-brand-quaternary-border: #DADAD8; //MCM grey
+$color-brand-quaternary-background: #FFFFFF; //MCM background
+
+//affliations backgroun color
+$color-neutral-1: #eee;
+
+// base
+
+$color-black: #000000;
+
+$color-body-bg: #f4f4f4;
+$color-body-text: #333;
+
+$color-link: $color-brand-secondary;
+$color-link-hover: $color-brand-primary-dark;
+
+$color-headings: $color-brand-primary-dark;
+
+// buttons
+
+$color-button-text: white;
+$color-button-primary-bg: $color-brand-tertiary;
+$color-button-secondary-bg: $color-brand-secondary;
+
+//package page table
+$color-package-table-header-1: $color-brand-primary-dark;
+$color-package-table-header-2: $color-brand-primary;

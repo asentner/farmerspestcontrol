@@ -1,0 +1,44 @@
+.block--leadbuilder-settings-leadbuilder-social-media {
+	.social-description {
+		display: none;
+	}
+	.block__content ul li {
+		margin-left: 10px;
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+	.fa {
+		font-size: 27px;
+		color: $color-brand-primary-dark;
+		position: absolute;
+	}
+	a {
+		display: inline-block;
+		background: white;
+		width: 48px;
+		height: 48px;
+		@include border-radius(50%);
+		position: relative;
+		box-sizing: content-box;
+		border: 2px solid white;
+		&:hover {
+			background: $color-brand-primary-dark;
+			.fa {
+				color: white;
+			}
+		}
+	}
+	.fa-twitter {
+		left: 8px;
+		top: 12px;
+	}
+	.fa-facebook {
+		left: 7px;
+		top: 12px;
+	}
+	.fa-google-plus {
+		left: 9px;
+		top: 13px;
+	}
+}

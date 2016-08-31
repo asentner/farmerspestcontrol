@@ -1,0 +1,20 @@
+// header
+.block--logo-block-logo {
+	text-align: center;
+	@include breakpoint($nav) {
+		text-align: left;
+	}
+}
+
+// footer
+.logo-block-reverse {
+	.block__content {
+		img {
+			width: 0;
+			height: 0;
+			padding-right: 250px;
+			height: 51px;
+			background: url("../images/freshlight-logo-reverse.png") no-repeat;
+		}
+	}
+}

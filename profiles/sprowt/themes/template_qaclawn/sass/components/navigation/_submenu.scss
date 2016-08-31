@@ -1,0 +1,18 @@
+.block--nav-submenu {
+  background: $color-brand-secondary;
+  .menu-block-wrapper {
+    a {
+      &:hover {
+        color: $color-brand-tertiary;
+      }
+    }
+    .active-trail {
+      color: $color-brand-tertiary;
+    }
+    > .menu > li > a {
+      &:before {
+        color: $color-brand-tertiary;
+      }
+    }
+  }
+}

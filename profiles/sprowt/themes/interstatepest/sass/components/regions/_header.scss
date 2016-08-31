@@ -1,0 +1,61 @@
+.l-header {
+	background: $color-brand-primary;
+	color: white;
+	@include breakpoint($tab) {
+		border-bottom: 2px solid white;
+	}
+}
+
+.l-region--header-first {
+	max-width: 1210px;
+	text-align: center;
+	a {
+		color: inherit;
+	}
+	@include breakpoint($tab) {
+		@include flexbox;
+		justify-content: center;
+		align-items: center;
+		padding: 0 20px;
+		margin: auto;
+		.block {
+			@include flexbox;
+			align-items: center;
+		}
+		.block--cta-header {
+			order: 1;
+			justify-content: flex-end;
+			width: percentage(275/870);
+		}
+		.block--logo-block {
+			order: 2;
+			justify-content: center;
+		}
+		.block--nav-header {
+			order: 3;
+			justify-content: flex-end;
+			width: percentage(275/870);
+		}
+	}
+}
+
+//front page header styling
+.l-header {
+	border-bottom: none;
+}
+.front {
+	.l-header {
+		background-image: $design-hero-bg, linear-gradient(bottom, #0c5cad 350px, $color-brand-primary 350px);
+    background-repeat: repeat-x, no-repeat;
+    background-position: center bottom 300px, bottom;
+    background-size: 100% auto;
+	}
+	.l-region--header-third {
+		padding: 50px 20px;
+		@include breakpoint($desk) {
+			background: $design-border-bg center bottom no-repeat;
+			background-size: 100% auto;
+			padding-bottom: 200px;
+		}
+	}
+}

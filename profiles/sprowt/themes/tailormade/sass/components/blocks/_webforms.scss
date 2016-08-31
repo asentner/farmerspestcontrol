@@ -1,0 +1,22 @@
+//sidebar get an estimate
+.block--webform-client-block-176 {
+  margin: 0 20px 30px;
+  .block__title {
+    padding: 0 40px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .webform-component-textfield,
+  .webform-component-email,
+  .webform-submit
+   {
+    width: 100%;
+    margin: 0;
+  }
+  @include breakpoint($tab) {
+    margin: 0 0 30px;
+    .block__content {
+      padding: 0 15px;
+    }
+  }
+}

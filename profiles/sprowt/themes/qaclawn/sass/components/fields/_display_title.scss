@@ -1,0 +1,9 @@
+.field--name-field-display-title {
+  @extend %heading;
+  @extend %h1;
+  color: $color-brand-secondary;
+}
+
+.field--name-field-display-title {
+  margin-bottom: 15px;
+}

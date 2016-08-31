@@ -1,0 +1,10 @@
+.block--leadbuilder-settings-leadbuilder-copyright {
+	font-size: 13px;
+	color: $color-brand-primary-darker;
+	a {
+		color: $color-brand-primary-darker;
+		&:hover {
+			color: darken($color-brand-primary-darker, 10);
+		}
+	}
+}

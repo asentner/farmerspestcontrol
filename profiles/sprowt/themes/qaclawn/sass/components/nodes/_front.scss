@@ -1,0 +1,21 @@
+.front {
+  .l-content {
+    padding: 50px 20px;
+    width: 100%;
+    h1,
+    .node__content {
+      margin: 0 auto;
+      max-width: 830px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 10px;
+      font-size: 40px;
+      line-height: (46/40);
+    }
+    .field--name-body {
+      font-size: 17px;
+      line-height: (26/17);
+    }
+  }
+}

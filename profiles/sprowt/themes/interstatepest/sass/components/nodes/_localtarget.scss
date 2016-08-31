@@ -1,0 +1,22 @@
+.node-type-localtarget {
+	.block--cta-header {
+		display: none;
+	}
+	.block--nav-header {
+		display: none;
+	}
+	.l-header {
+		background-image: $design-hero-bg, linear-gradient(bottom, #0c5cad 350px, $color-brand-primary 350px);
+    background-repeat: repeat-x, no-repeat;
+    background-position: center bottom 300px, bottom;
+    background-size: 100% auto;
+	}
+	.l-region--header-third {
+		padding: 50px 20px;
+		@include breakpoint($desk) {
+			background: $design-border-bg center bottom no-repeat;
+			background-size: 100% auto;
+			padding-bottom: 200px;
+		}
+	}
+}

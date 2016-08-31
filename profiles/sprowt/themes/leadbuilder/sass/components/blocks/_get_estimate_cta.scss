@@ -1,0 +1,64 @@
+// Bottom Content
+.cta-wide {
+	margin: 20px 0;
+	padding: 20px;
+	text-align: center;
+	.field--name-body {
+		margin: 10px 20px 20px;
+		font-size: 20px;
+	}
+	.button {
+		margin-top: 10px;
+	}
+	@include breakpoint($tab) {
+		display: block;
+		margin-top: 30px;
+	}
+	.button {
+		margin-left: 10px;
+	}
+	@include breakpoint($desk) {
+		.block__content {
+			@include clearfix;
+			padding: 0 30px;
+		}
+		.node__title {
+			float: left;
+			margin-top: 8px;
+		}
+		.field--name-body {
+			float: right;
+			margin: 0;
+		}
+		.button {
+			margin-top: 0;
+			margin-left: 10px;
+		}
+	}
+}
+
+// Sidebar block
+.block--multiblock-3 {
+	text-align: center;
+	.button {
+		margin-top: 10px;
+	}
+}
+
+// footer
+
+.cta-center {
+	text-align: center;
+	margin: 40px 0;
+	.node__title {
+		font-size: 41px;
+	}
+	.node__content {
+		h2 {
+			margin-top: 10px;
+		}
+		p {
+			margin-top: 5px;
+		}
+	}
+}

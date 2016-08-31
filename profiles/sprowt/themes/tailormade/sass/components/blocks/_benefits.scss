@@ -1,0 +1,78 @@
+.front .benefits-hero {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 16px;
+    line-height: 1.5em;
+    .node__title {
+        margin: 0 0 15px;
+        font-size: 30px;
+    }
+
+    .field--name-field-image {
+        margin: 0 auto 15px;
+        img {
+            border-radius: 50%;
+            box-shadow: 0 10px 4px rgba(black, .3);
+        }
+    }
+
+    .views-row {
+        &:not(:last-child) {
+            margin-bottom: 30px;
+        }
+    }
+
+    @include breakpoint($tab) {
+        max-width: 1160px;
+        margin: -110px auto 0;
+        padding: 0 20px 50px;
+
+        .view-content {
+            @include flexbox;
+            @include justify-content(space-between);
+            .views-row {
+                margin-bottom: 0;
+                width: percentage(340/1120);
+            }
+        }
+    }
+}
+//LocalTarget page
+.block--leadbuilder-views-leadbuilder-views-lt-benefits {
+    background: $color-brand-primary;
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 16px;
+    line-height: 1.5em;
+    .node__title {
+        margin: 0 0 15px;
+        font-size: 30px;
+    }
+    .field--name-field-image {
+        margin: 0 auto 15px;
+        img {
+            border-radius: 50%;
+            box-shadow: 0 10px 4px rgba(black, .3);
+        }
+    }
+    .views-row {
+        &:not(:last-child) {
+            margin-bottom: 30px;
+        }
+    }
+    @include breakpoint($tab) {
+        .block__content {
+        max-width: 1160px;
+        margin: -110px auto 0;
+        padding: 0 20px 10px;
+            }
+      .view-content {
+          @include flexbox;
+          @include justify-content(space-between);
+          .views-row {
+              margin-bottom: 0;
+              width: percentage(340/1120);
+            }
+        }
+    }
+}

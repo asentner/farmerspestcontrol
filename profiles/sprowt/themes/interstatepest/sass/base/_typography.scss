@@ -1,0 +1,91 @@
+body,
+input {
+	-webkit-font-smoothing: antialiased;
+}
+
+body {
+	font-family: $font-body;
+}
+
+a {
+	text-decoration: none;
+	color: $color-link;
+	&:hover {
+		color: $color-link-hover;
+	}
+}
+
+%heading {
+	margin: 0;
+	margin-top: 1em;
+	margin-bottom: 5px;
+	line-height: 1.2;
+	font-weight: bold;
+	font-family: $font-headings;
+	text-transform: uppercase;
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	@extend %heading;
+}
+
+%h1, h1 {
+	font-size: 34px;
+	color: $color-brand-primary-dark;
+	@include breakpoint($tab) {
+		font-size: 47px;
+	}
+}
+
+%h2, h2 {
+	font-size: 28px;
+	@include breakpoint($tab) {
+		font-size: 30px;
+	}
+}
+
+%h3, h3 {
+	font-size: 20px;
+}
+
+%p {
+	margin: 0;
+	+ %p {
+		margin-top: 1em;
+	}
+}
+
+p, ul, ol, table, blockquote {
+	@extend %p;
+}
+
+hr {
+	border: 0;
+	border-bottom: 1px solid #ccc;
+	margin: 1em auto;
+}
+
+blockquote {
+	font-size: 1.25em;
+	font-style: italic;
+	margin: 0 auto;
+	padding: 10px 40px;
+	max-width: 100%;
+}
+
+.two-column {
+	@include breakpoint($tab) {
+		ul {
+			@include clear;
+		}
+		li {
+			float: left;
+			width: 50%;
+			padding-right: 20px;
+			margin-top: .5em;
+		}
+	}
+}

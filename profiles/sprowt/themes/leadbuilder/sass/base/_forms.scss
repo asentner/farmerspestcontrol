@@ -1,0 +1,40 @@
+.form-item {
+	margin-top: .5em;
+	label {
+		margin-bottom: .15em;
+	}
+	.description {
+		color: #666;
+		font-style: italic;
+		margin-top: .5em;
+	}
+}
+
+.form-actions {
+	margin-top: 1.5em;
+}
+
+.form-text,
+.form-textarea {
+	width: 100%;
+	background: white;
+	border: 1px solid #ddd;
+	padding: 5px;
+	&:focus {
+		@include box-shadow(0 0 5px rgba($color-brand-primary, .25));
+		border-color: $color-brand-primary;
+		outline: 0;
+	}
+	.l-content & {
+		width: 100%;
+	}
+}
+
+.form-submit {
+	@extend .button;
+	&:focus {
+		background: darken($color-brand-primary,10);
+		border-color: darken($color-brand-primary,20);
+		outline: 0;
+	}
+}

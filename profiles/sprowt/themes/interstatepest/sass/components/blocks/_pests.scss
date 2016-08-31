@@ -1,0 +1,81 @@
+.block--views-pests-list {
+  h2 {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid $color-body-bg;
+    color: $color-brand-primary;
+  }
+  .node__title {
+    display: none;
+  }
+  .field__items {
+    p:first-of-type {
+      margin-top: 5px;
+    }
+  }
+  .views-row {
+    margin-top: 20px;
+  }
+  .node--pest {
+    @include flexbox;
+    flex-direction: column;
+  }
+  header {
+    order: 1;
+  }
+  .node__title {
+    margin-top: 1.5em;
+  }
+  .field--name-field-image {
+    order: 2;
+    margin: 10px 0;
+  }
+  .node__content {
+    order: 3;
+  }
+  .top {
+    text-align: right;
+    margin-top: 10px;
+    display: block;
+  }
+  @include breakpoint($tab) {
+    .node--pest {
+      display: block;
+    }
+    .field--name-field-image {
+      float: right;
+      margin-left: 20px;
+      margin-bottom: 10px;
+      margin-top: 0;
+      .field__label {
+        display: none;
+      }
+    }
+    .field--name-body {
+      h4 {
+        margin-top: 1em;
+      }
+    }
+  }
+}
+
+#block-views-pests-list-nav {
+  @include flexbox;
+  flex-wrap: wrap;
+  margin: 1em -10px;
+  padding: 0;
+  list-style: none;
+  font-weight: bold;
+  background: $color-body-bg;
+  padding: 20px;
+  li {
+    width: percentage(1/2);
+    padding: 0 10px;
+    margin: 0 0 10px;
+  }
+  @include breakpoint($tab) {
+    li {
+      width: percentage(1/3);
+    }
+  }
+}

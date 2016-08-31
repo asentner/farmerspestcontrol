@@ -1,0 +1,11 @@
+.block--views-packages-services,
+.block--packages {
+	background-color: $color-front-content-bg;
+	.more-link {
+		@extend %button;
+		background: $color-brand-secondary;
+	  &:hover {
+	    background: $color-brand-secondary-dark;
+	  }
+	}
+}

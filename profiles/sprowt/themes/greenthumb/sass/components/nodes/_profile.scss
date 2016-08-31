@@ -1,0 +1,47 @@
+.node--profile--full {
+  .field--name-field-position {
+    font-style: italic;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    font-size: 26px;
+    color: palette(neutral, dove-gray);
+  }
+  .field--name-field-image {
+    &.field--name-field-image {
+      margin: 0 auto;
+      max-width: 215px;
+      text-align: center;
+      img {
+        display: block;
+        box-shadow: 0 0 4px rgba(black, .3);
+        border-radius: 50%;
+      }
+    }
+  }
+  .flippy {
+    margin: 20px 0 0;
+    border-top: 1px solid #eee;
+    padding: 20px 0;
+    text-align: center;
+  }
+  @include breakpoint($tab) {
+    @include flexbox;
+    text-align: left;
+    .flippy {
+      text-align: left;
+    }
+    .field--name-field-image {
+      flex: 1 0 percentage(220/764);
+      &.field--name-field-image {
+        margin-right: 40px;
+      }
+    }
+    .node__content {
+      &:after {
+        content: " ";
+        display: block;
+        clear: both;
+      }
+    }
+  }
+}

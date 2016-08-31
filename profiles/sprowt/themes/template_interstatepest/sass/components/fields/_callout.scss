@@ -1,0 +1,9 @@
+.field--name-field-call-out {
+	color: palette(white, pure);
+	background: palette(primary, base);
+	.button {
+		&:hover {
+			color: palette(white, pure) !important;
+		}
+	}
+}

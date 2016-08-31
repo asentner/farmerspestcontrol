@@ -1,0 +1,10 @@
+.page-node-13 {
+  iframe {
+    width: 325px;
+  }
+  @include breakpoint($tab) {
+    iframe {
+    width: 500px;
+  }
+  }
+}

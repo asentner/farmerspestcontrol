@@ -1,0 +1,15 @@
+.l-content {
+  a {
+    color: $color-body-link;
+    &:hover {
+      color: $color-brand-primary-dark;
+    }
+  }
+  .button {
+    color: white;
+    &:hover {
+      color: white;
+      background: $color-brand-primary-dark;
+    }
+  }
+}

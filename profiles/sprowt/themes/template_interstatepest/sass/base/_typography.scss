@@ -1,0 +1,10 @@
+a {
+  color: palette(secondary, base);
+  &:hover {
+    color: palette(primary, dark);
+  }
+}
+
+%h1, h1 {
+	color: palette(primary, dark);
+}

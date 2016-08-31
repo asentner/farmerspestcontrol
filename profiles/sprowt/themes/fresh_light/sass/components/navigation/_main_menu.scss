@@ -1,0 +1,14 @@
+.nav-main-menu {
+	font-size: 16px;
+	font-weight: 600;
+	padding-top: 10px;
+	.menu-block-wrapper {
+		// first level
+		> .menu > li > a {
+			padding: 5px 20px;
+		}
+		> .menu > li:last-child > a {
+			padding-right: 0;
+		}
+	}
+}
