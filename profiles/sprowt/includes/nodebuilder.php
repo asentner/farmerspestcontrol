@@ -69,7 +69,7 @@ class NodeBuilder {
 */
 
 if(!defined('DRUPAL_ROOT')){
-    define('DRUPAL_ROOT', str_replace("/profiles/sprout", "", getcwd()));
+    define('DRUPAL_ROOT', str_replace("/profiles/sprowt", "", getcwd()));
     require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
     drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 }

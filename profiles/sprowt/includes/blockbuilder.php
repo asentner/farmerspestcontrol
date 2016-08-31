@@ -150,18 +150,18 @@ class BlockBuilder {
             switch ($row['module']) {
                 case 'block':
                     $row['delta'] = $this->block_custom_map[$current_row['delta']];
-                    $row['css_class'] .= ' sprout-block-imported';
+                    $row['css_class'] .= ' sprowt-block-imported';
                     break;
                 case 'multiblock':
                     $row['delta'] = $this->multiblock_map[$current_row['delta']];
-                    $row['css_class'] .= ' sprout-block-imported';
+                    $row['css_class'] .= ' sprowt-block-imported';
                     break;
-                case 'leadbuilder_block_cta':
-                    $nid = str_replace('leadbuilder_block_cta_', '', $row['delta']);
+                case 'sprowt_block_cta':
+                    $nid = str_replace('sprowt_block_cta_', '', $row['delta']);
                     $uuid = empty($this->uuid_map[$nid]) ? 0 : $this->uuid_map[$nid];
                     if (!empty($nid_map[$uuid])) {
-                        $row['css_class'] .= ' sprout-block-imported block--leadbuilder-block-cta-leadbuilder-block-cta-' . $nid;
-                        $row['delta'] = 'leadbuilder_block_cta_' . $nid_map[$uuid];
+                        $row['css_class'] .= ' sprowt-block-imported block--sprowt-block-cta-sprowt-block-cta-' . $nid;
+                        $row['delta'] = 'sprowt_block_cta_' . $nid_map[$uuid];
 
                     } else {
                         $row['delta'] = '';

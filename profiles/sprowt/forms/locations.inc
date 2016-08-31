@@ -3,21 +3,21 @@
  * Locations Form
  */
 
- function sprout_locations($form, &$form_state, &$install_state){
+ function sprowt_locations($form, &$form_state, &$install_state){
   drupal_set_title(st('Configure Locations'));
 
   //Adding scripts
   $form['#attached']['js'][] = "https://code.jquery.com/jquery-1.11.2.min.js"; //I don't wanna use drupal's old as dirt jQuery
-  $form['#attached']['js'][] = drupal_get_path('profile', 'sprout') . "/js/jsrender.min.js";
+  $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . "/js/jsrender.min.js";
   
-  $form['#attached']['js'][] = drupal_get_path('profile', 'sprout') . "/js/locations.js";//custom jQuery
+  $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . "/js/locations.js";//custom jQuery
   
   //Adding styles
-  $form['#attached']['css'][] = drupal_get_path('profile', 'sprout') . "/css/sprout.css";
+  $form['#attached']['css'][] = drupal_get_path('profile', 'sprowt') . "/css/sprowt.css";
   
   
   ob_start();
-  include drupal_get_path('profile', 'sprout') . '/includes/locations.tpl.php';
+  include drupal_get_path('profile', 'sprowt') . '/includes/locations.tpl.php';
   $location_form = ob_get_clean();
   
   
@@ -28,7 +28,7 @@
   $form['hidden_values'] = array(
    'locations' => array(
      '#type' => 'hidden',
-     '#default_value' => _sprout_form_default('locations', '[]'),
+     '#default_value' => _sprowt_form_default('locations', '[]'),
      '#attributes' => array(
        'id' => 'locations_hidden',
       ),
@@ -58,7 +58,7 @@
   return $form;
  }
  
- function sprout_locations_validate($form, &$form_state){
+ function sprowt_locations_validate($form, &$form_state){
   $locations = json_decode($form['hidden_values']['locations']['#value'], true);
   
   $hidden_errors = array();
@@ -94,7 +94,7 @@
   }
 }
  
- function sprout_locations_submit($form, &$form_state){
+ function sprowt_locations_submit($form, &$form_state){
   $fields = array();
   $locations = json_decode($form['hidden_values']['locations']['#value'], true);
 
@@ -104,6 +104,6 @@
     $fields[$location_id] = json_encode($location);
   }
   
-  _sprout_save_to_table('locations', $fields);
+  _sprowt_save_to_table('locations', $fields);
   
  }

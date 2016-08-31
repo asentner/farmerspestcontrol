@@ -93,7 +93,7 @@ class UserBuilder {
         user_save($user);
 
         if(!empty($userinfo['image'])
-            && $userinfo['image'] != "/profiles/sprout/images/default.jpg")
+            && $userinfo['image'] != "/profiles/sprowt/images/default.jpg")
         {
             $dest = file_unmanaged_copy(DRUPAL_ROOT . $userinfo['image'], $directory, FILE_EXISTS_REPLACE);
             $file = new stdClass();
@@ -124,7 +124,7 @@ class UserBuilder {
     }
 
     function addCoalmarchUser($username) {
-        $filepath = getcwd() . "/profiles/sprout/coalmarch_users/$username.json";
+        $filepath = getcwd() . "/profiles/sprowt/coalmarch_users/$username.json";
         if(!file_exists($filepath)) {
             return false;
         }

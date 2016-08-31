@@ -1,6 +1,6 @@
 <?php
 
-require_once drupal_get_path('profile', 'sprout') . '/includes/blockbuilder.php';
+require_once drupal_get_path('profile', 'sprowt') . '/includes/blockbuilder.php';
 
 Class ThemeBuilder {
     
@@ -285,16 +285,16 @@ Class ThemeBuilder {
         theme_disable(array($default));
     }
 
-    function sprout_themes(){
-        $json = file_get_contents(drupal_get_path('profile', 'sprout') . '/sprout_themes.json');
+    function sprowt_themes(){
+        $json = file_get_contents(drupal_get_path('profile', 'sprowt') . '/sprowt_themes.json');
 
-        $sprout_themes = json_decode($json, true);
+        $sprowt_themes = json_decode($json, true);
 
         $theme_list = list_themes(TRUE);
         $new_theme_list = array();
 
         foreach($theme_list as $theme_name => $object) {
-            if(in_array($theme_name, $sprout_themes)) {
+            if(in_array($theme_name, $sprowt_themes)) {
                 $new_theme_list[$theme_name] = $object;
             }
         }
@@ -310,15 +310,15 @@ Class ThemeBuilder {
     function theme_field($logo, $theme) {
         if(!empty($theme)){
             ob_start();
-            include drupal_get_path('profile', 'sprout') . '/includes/theme_field.tpl.php';
+            include drupal_get_path('profile', 'sprowt') . '/includes/theme_field.tpl.php';
             return ob_get_clean();
         }
     }
 
-    function theme_picker_form($submit = array(), $validate = array(), $machine_name_exists = 'sprout_theme_machine_name_exists') {
-        $sprout_theme_list = $this->sprout_themes();
+    function theme_picker_form($submit = array(), $validate = array(), $machine_name_exists = 'sprowt_theme_machine_name_exists') {
+        $sprowt_theme_list = $this->sprowt_themes();
         $theme_list = list_themes(TRUE);
-        $path = drupal_get_path('profile', 'sprout');
+        $path = drupal_get_path('profile', 'sprowt');
     
     
         $form['#attached']['js'][] = "https://code.jquery.com/jquery-1.11.2.min.js"; //I don't wanna use drupal's old as dirt jQuery
@@ -333,14 +333,14 @@ Class ThemeBuilder {
         $excluded = array(
             'omega',
             'ohm',
-            'seven_sprout'
+            'seven_sprowt'
         );
     
         $themes = array();
-        foreach($sprout_theme_list as $theme_name => $object) {
+        foreach($sprowt_theme_list as $theme_name => $object) {
             $location = str_replace("/$theme_name.info", "", $object->filename);
             if(!in_array($theme_name, $excluded)
-                && strpos($location, 'sprout/themes') !== false
+                && strpos($location, 'sprowt/themes') !== false
             )
             {
                 $logo = glob("$location/screenshot.*");

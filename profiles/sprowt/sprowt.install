@@ -4,50 +4,50 @@
  * Install, update and uninstall functions for the standard installation profile.
  */
 
- require_once('sproutbuilder.php');
+ require_once('sprowtbuilder.php');
 
 /**
  * Add install tasks
  * implements hook_install_tasks()
  */
-function sprout_install_tasks($install_state) {
+function sprowt_install_tasks($install_state) {
   $tasks = array (
-    'sprout_setup_tables' => array(),
-    'sprout_configure' => array(),
-    'sprout_install_features' => array(),
-    'sprout_company_info' => array(
+    'sprowt_setup_tables' => array(),
+    'sprowt_configure' => array(),
+    'sprowt_install_features' => array(),
+    'sprowt_company_info' => array(
       'display_name' => t('Company Info'),
       'type' => 'form',
     ),
-    'sprout_market_setup' => array(
+    'sprowt_market_setup' => array(
      'display_name' => t('Market Setup'),
      'type' => 'form',
     ),
-    'sprout_branding' => array(
+    'sprowt_branding' => array(
      'display_name' => t('Branding Setup'),
      'type' => 'form',
     ),
-    'sprout_users' => array(
+    'sprowt_users' => array(
      'display_name' => t('Users Setup'),
      'type' => 'form',
     ),
-    'sprout_locations' => array(
+    'sprowt_locations' => array(
      'display_name' => t('Locations Setup'),
      'type' => 'form',
     ),
-    'sprout_social' => array(
+    'sprowt_social' => array(
      'display_name' => t('Social Media Setup'),
      'type' => 'form',
     ),
-    'sprout_review' => array(
+    'sprowt_review' => array(
      'display_name' => t('Review Sites Setup'),
      'type' => 'form',
     ),
-    'sprout_integrations' => array(
+    'sprowt_integrations' => array(
      'display_name' => t('Integration Setup'),
      'type' => 'form',
     ),
-    'sprout_setup_form' => array(
+    'sprowt_setup_form' => array(
       'display_name' => t('Setting Up Sprout'),
       'type' => 'form',
     ),
@@ -55,12 +55,12 @@ function sprout_install_tasks($install_state) {
   );
   
   if(!empty($install_state['forms']['drush_setup'])){
-    unset($tasks['sprout_setup_form']);
-    $tasks['sprout_setup'] = array();
+    unset($tasks['sprowt_setup_form']);
+    $tasks['sprowt_setup'] = array();
   }
   
   
-  //$tasks['sprout_setup'] = array();
+  //$tasks['sprowt_setup'] = array();
   
   return $tasks;
 }
@@ -73,7 +73,7 @@ function sprout_install_tasks($install_state) {
  *
  * @see system_install()
  */
-function sprout_install() {
+function sprowt_install() {
   // Add text formats.
   $filtered_html_format = array(
     'format' => 'filtered_html',
@@ -383,7 +383,7 @@ function sprout_install() {
 /**
  * Fix url aliases in database
  */
-function sprout_update_7001() {
+function sprowt_update_7001() {
 
   db_query("UPDATE node SET language = :language WHERE language = ''", array(':language' => LANGUAGE_NONE));
 
@@ -415,8 +415,8 @@ function sprout_update_7001() {
 /**
  * Update Users
  */
-function sprout_update_7002() {
-  require_once drupal_get_path('profile', 'sprout') . '/sproutbuilder.php';
+function sprowt_update_7002() {
+  require_once drupal_get_path('profile', 'sprowt') . '/sprowtbuilder.php';
   $SB = new SproutBuilder();
   $SB->updateUsers();
   variable_set('image_allow_insecure_derivatives', true);
@@ -426,10 +426,10 @@ function sprout_update_7002() {
 }
 
 /**
- * Fix menu problems on current sprout sites
+ * Fix menu problems on current sprowt sites
  */
 
-function sprout_update_7003() {
+function sprowt_update_7003() {
   db_query("
     DELETE FROM menu_links WHERE menu_name = 'management' AND link_path LIKE 'node%'
   ")->execute();
@@ -439,7 +439,7 @@ function sprout_update_7003() {
  * Enable new admin theme
  */
 
-function sprout_update_7004() {
+function sprowt_update_7004() {
   // Enable the admin theme.
   db_update('system')
       ->fields(array('status' => 1))

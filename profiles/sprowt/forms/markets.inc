@@ -3,25 +3,25 @@
  * Market Setup
  */
 
-function sprout_market_setup($form, &$form_state, &$install_state){
+function sprowt_market_setup($form, &$form_state, &$install_state){
   drupal_set_title(st('Configure Markets'));
 
   //Adding scripts
   $form['#attached']['js'][] = "https://code.jquery.com/jquery-1.11.2.min.js"; //I don't wanna use drupal's old as dirt jQuery
   //drupal_add_js("https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"); Don't need this as we aren't going to o drag and drop
-  $form['#attached']['js'][] = drupal_get_path('profile', 'sprout') . "/js/jsrender.min.js";
+  $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . "/js/jsrender.min.js";
   
-  $form['#attached']['js'][] = drupal_get_path('profile', 'sprout') . "/js/market.js";//custom jQuery
+  $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . "/js/market.js";//custom jQuery
   
   //Adding styles
-  $form['#attached']['css'][] = drupal_get_path('profile', 'sprout') . "/css/sprout.css";
+  $form['#attached']['css'][] = drupal_get_path('profile', 'sprowt') . "/css/sprowt.css";
   
   ob_start();
-  include drupal_get_path('profile', 'sprout') .'/includes/market_setup.tpl.php';
+  include drupal_get_path('profile', 'sprowt') .'/includes/market_setup.tpl.php';
   $market_form = ob_get_clean();
   
   ob_start();
-  include drupal_get_path('profile', 'sprout') .'/includes/service_setup.tpl.php';
+  include drupal_get_path('profile', 'sprowt') .'/includes/service_setup.tpl.php';
   $service_form = ob_get_clean();
   
   $form['service_setup'] = array(
@@ -35,7 +35,7 @@ function sprout_market_setup($form, &$form_state, &$install_state){
   $form['service_setup']['hidden_values'] = array(
     'services' => array(
       '#type' => 'hidden',
-      '#default_value' => _sprout_form_default('services', '[]'),
+      '#default_value' => _sprowt_form_default('services', '[]'),
       '#attributes' => array(
         'id' => 'services_hidden'
       ),
@@ -53,7 +53,7 @@ function sprout_market_setup($form, &$form_state, &$install_state){
   $form['market_setup']['hidden_values']=array(
    'region_markets' => array(
     '#type' => 'hidden',
-    '#default_value' => _sprout_form_default('region_markets', '{}'),
+    '#default_value' => _sprowt_form_default('region_markets', '{}'),
     '#attributes' => array(
      'id' => 'region_markets'
     ),
@@ -79,19 +79,19 @@ function sprout_market_setup($form, &$form_state, &$install_state){
     '#value' => t('Save'),
   );
   
-  if(!empty($install_state['forms']['sprout_market_setup'])){
-    if(!empty($install_state['forms']['sprout_market_setup']['region_markets'])){
-      $form['market_setup']['hidden_values']['region_markets']['#default_value'] = $install_state['forms']['sprout_market_setup']['region_markets'];
+  if(!empty($install_state['forms']['sprowt_market_setup'])){
+    if(!empty($install_state['forms']['sprowt_market_setup']['region_markets'])){
+      $form['market_setup']['hidden_values']['region_markets']['#default_value'] = $install_state['forms']['sprowt_market_setup']['region_markets'];
     }
-    if(!empty($install_state['forms']['sprout_market_setup']['services'])){
-      $form['service_setup']['hidden_values']['services']['#default_value'] = $install_state['forms']['sprout_market_setup']['services'];
+    if(!empty($install_state['forms']['sprowt_market_setup']['services'])){
+      $form['service_setup']['hidden_values']['services']['#default_value'] = $install_state['forms']['sprowt_market_setup']['services'];
     }
   }
   
   return $form;
 }
 
-function sprout_market_setup_validate($form, &$form_state){
+function sprowt_market_setup_validate($form, &$form_state){
   $services = json_decode($form['service_setup']['hidden_values']['services']['#value'], true);
   
   $hidden_errors = array();
@@ -204,7 +204,7 @@ function sprout_market_setup_validate($form, &$form_state){
   }
 }
 
-function sprout_market_setup_submit($form, $form_state){
+function sprowt_market_setup_submit($form, $form_state){
   $service_map = json_decode($form['service_setup']['hidden_values']['services']['#value'], true);
   $region_map = json_decode($form['market_setup']['hidden_values']['region_markets']['#value'], true);
   
@@ -231,6 +231,6 @@ function sprout_market_setup_submit($form, $form_state){
     'regions' => json_encode($regions),
   );
   
-  _sprout_save_to_table('market_setup', $fields);
+  _sprowt_save_to_table('market_setup', $fields);
   
 }

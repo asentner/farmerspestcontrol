@@ -3,7 +3,7 @@
  * Company Info form
  */
 
-function sprout_company_info($form, &$form_state, &$install_state){
+function sprowt_company_info($form, &$form_state, &$install_state){
 
     drupal_set_title(st('Configure Company Input'));
     $form['company_info'] = array(
@@ -11,14 +11,14 @@ function sprout_company_info($form, &$form_state, &$install_state){
             '#type' => 'textfield',
             '#title' => t('Company Name'),
             '#required' => true,
-            '#default_value' => _sprout_form_default('company_name')
+            '#default_value' => _sprowt_form_default('company_name')
         ),
         'company_phone' => array(
             '#type' => 'textfield',
             '#title' => t('Company Phone'),
             '#required' => true,
             '#description' => 'Phone number used to throughout the site. Should be 10 digits and all numbers. e.g.: 9195555555',
-            '#default_value' => _sprout_form_default('company_phone')
+            '#default_value' => _sprowt_form_default('company_phone')
         ),
         'webform' => array(
             '#type' => 'fieldset',
@@ -31,21 +31,21 @@ function sprout_company_info($form, &$form_state, &$install_state){
                 '#title' => t('To Email'),
                 '#required' => true,
                 '#description' => 'This is the email all webform submissions are sent <strong>to</strong>. This should be an email at the domain the site is at (example@thissite.com) not a gmail, yahoo, or other account. This is so that emails don\'t get flagged as spam. This can be a comma seperated list.',
-                '#default_value' => _sprout_form_default('webform_to_email')
+                '#default_value' => _sprowt_form_default('webform_to_email')
             ),
             'webform_from_email' => array(
                 '#type' => 'textfield',
                 '#title' => t('From Email'),
                 '#required' => true,
                 '#description' => 'This is the email all webform submissions are sent <strong>from</strong>. This should be an email at the domain the site is at (example@thissite.com) not a gmail, yahoo, or other account. This is so that emails don\'t get flagged as spam. This can be a comma seperated list.',
-                '#default_value' => _sprout_form_default('webform_from_email')
+                '#default_value' => _sprowt_form_default('webform_from_email')
             ),
             'webform_from_name' => array(
                 '#type' => 'textfield',
                 '#title' => t('From Name'),
                 '#required' => true,
                 '#description' => 'This is the <strong>from name</strong> all emails are sent from.',
-                '#default_value' => _sprout_form_default('webform_from_name')
+                '#default_value' => _sprowt_form_default('webform_from_name')
             ),
         ),
         'contact' => array(
@@ -57,17 +57,17 @@ function sprout_company_info($form, &$form_state, &$install_state){
             'contact_name' => array(
                 '#type' => 'textfield',
                 '#title' => t('Contact Name'),
-                '#default_value' => _sprout_form_default('contact_name')
+                '#default_value' => _sprowt_form_default('contact_name')
             ),
             'contact_email' => array(
                 '#type' => 'textfield',
                 '#title' => t('Contact Email'),
-                '#default_value' => _sprout_form_default('contact_email')
+                '#default_value' => _sprowt_form_default('contact_email')
             ),
             'contact_phone' => array(
                 '#type' => 'textfield',
                 '#title' => t('Contact Phone'),
-                '#default_value' => _sprout_form_default('contact_phone')
+                '#default_value' => _sprowt_form_default('contact_phone')
             ),
         ),
     );
@@ -81,7 +81,7 @@ function sprout_company_info($form, &$form_state, &$install_state){
 
 }
 
-function sprout_company_info_validate($form, &$form_state){
+function sprowt_company_info_validate($form, &$form_state){
     $values = $form_state['values'];
     $field_names = array(
         'company_name',
@@ -98,11 +98,11 @@ function sprout_company_info_validate($form, &$form_state){
         $fields[$fn] = $values[$fn];
     }
 
-    $form_state['values']['webform_from_email'] = _sprout_check_email('webform_from_email', $fields['webform_from_email']);
-    $form_state['values']['webform_to_email'] = _sprout_check_email('webform_to_email', $fields['webform_to_email']);
+    $form_state['values']['webform_from_email'] = _sprowt_check_email('webform_from_email', $fields['webform_from_email']);
+    $form_state['values']['webform_to_email'] = _sprowt_check_email('webform_to_email', $fields['webform_to_email']);
 
     if(!empty($fields['contact_email'])){
-        $form_state['values']['contact_email'] = _sprout_check_email('contact_email', $fields['contact_email']);
+        $form_state['values']['contact_email'] = _sprowt_check_email('contact_email', $fields['contact_email']);
     }
 
     if(!preg_match('/^[\d]{10}$/',$fields['company_phone'])) {
@@ -114,7 +114,7 @@ function sprout_company_info_validate($form, &$form_state){
     }
 }
 
-function _sprout_check_email($field_name, &$emails) {
+function _sprowt_check_email($field_name, &$emails) {
     $emails = explode(',', $emails);
 
     if(!is_array($emails)) {
@@ -133,7 +133,7 @@ function _sprout_check_email($field_name, &$emails) {
     return $emails;
 }
 
-function sprout_company_info_submit($form, &$form_state){
+function sprowt_company_info_submit($form, &$form_state){
     $values = $form_state['values'];
     $field_names = array(
         'company_name',
@@ -150,5 +150,5 @@ function sprout_company_info_submit($form, &$form_state){
         $fields[$fn] = $values[$fn];
     }
 
-    _sprout_save_to_table('company_info', $fields);
+    _sprowt_save_to_table('company_info', $fields);
 }

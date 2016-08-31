@@ -3,22 +3,22 @@
  * User Info Form
  */
 
-function sprout_users($form, &$form_state, &$install_state){
+function sprowt_users($form, &$form_state, &$install_state){
     drupal_set_title(st('Configure Users'));
 
     //Adding scripts
     $form['#attached']['js'][] = "https://code.jquery.com/jquery-1.11.2.min.js"; //I don't wanna use drupal's old as dirt jQuery
     //drupal_add_js("https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"); Don't need this as we aren't going to o drag and drop
-    $form['#attached']['js'][] = drupal_get_path('profile', 'sprout') . "/js/jsrender.min.js";
+    $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . "/js/jsrender.min.js";
 
-    $form['#attached']['js'][] = drupal_get_path('profile', 'sprout') . "/js/users.js";//custom jQuery
+    $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . "/js/users.js";//custom jQuery
 
     //Adding styles
-    $form['#attached']['css'][] = drupal_get_path('profile', 'sprout') . "/css/sprout.css";
+    $form['#attached']['css'][] = drupal_get_path('profile', 'sprowt') . "/css/sprowt.css";
 
-    $users = _sprout_get_default_usernames();
+    $users = _sprowt_get_default_usernames();
 
-    $coalmarch_user_files = glob(drupal_get_path('profile', 'sprout') . '/coalmarch_users/*.json');
+    $coalmarch_user_files = glob(drupal_get_path('profile', 'sprowt') . '/coalmarch_users/*.json');
     $coalmarch_users = array();
 
     foreach($coalmarch_user_files as $cu_file) {
@@ -27,7 +27,7 @@ function sprout_users($form, &$form_state, &$install_state){
     }
 
     ob_start();
-    include drupal_get_path('profile', 'sprout') . '/includes/users.tpl.php';
+    include drupal_get_path('profile', 'sprowt') . '/includes/users.tpl.php';
     $users_form = ob_get_clean();
 
 
@@ -60,7 +60,7 @@ function sprout_users($form, &$form_state, &$install_state){
     $form['hidden_values'] = array(
         'additional_users' => array(
             '#type' => 'hidden',
-            '#default_value' => _sprout_form_default('additional_users', '[]'),
+            '#default_value' => _sprowt_form_default('additional_users', '[]'),
             '#attributes' => array(
                 'id' => 'users_hidden',
             ),
@@ -91,7 +91,7 @@ function sprout_users($form, &$form_state, &$install_state){
 }
 
 
-function sprout_users_validate($form, &$form_state){
+function sprowt_users_validate($form, &$form_state){
     $users = json_decode($form['hidden_values']['additional_users']['#value'], true);
 
     $hidden_errors = array();
@@ -131,12 +131,12 @@ function sprout_users_validate($form, &$form_state){
 }
 
 
-function sprout_users_submit($form, &$form_state){
+function sprowt_users_submit($form, &$form_state){
     require_once DRUPAL_ROOT . '/includes/password.inc';
     $fields = array();
     $users = json_decode($form['hidden_values']['additional_users']['#value'], true);
 
-    $default_users = _sprout_get_default_usernames();
+    $default_users = _sprowt_get_default_usernames();
 
     foreach($default_users as $username => $name_array){
         if($username == 'coalmarch'
@@ -145,10 +145,10 @@ function sprout_users_submit($form, &$form_state){
         )
         {
             if($username == 'coalmarch'){
-                $filepath = getcwd() . "/profiles/sprout/default_users/_$username.json";
+                $filepath = getcwd() . "/profiles/sprowt/default_users/_$username.json";
             }
             else {
-                $filepath = getcwd() . "/profiles/sprout/default_users/$username.json";
+                $filepath = getcwd() . "/profiles/sprowt/default_users/$username.json";
             }
             $fields[$username] = file_get_contents($filepath);
         }
@@ -161,6 +161,6 @@ function sprout_users_submit($form, &$form_state){
         $fields[$user['username']] = json_encode($user);
     }
 
-    _sprout_save_to_table('users', $fields);
+    _sprowt_save_to_table('users', $fields);
 
 }

@@ -5,7 +5,7 @@ api = 2
 ; Core
 projects[] = "drupal"
 ; Profiles
-projects[sprout][type] = "profile"
+projects[sprowt][type] = "profile"
 
 ; Modules
 projects[] = "addtoany"

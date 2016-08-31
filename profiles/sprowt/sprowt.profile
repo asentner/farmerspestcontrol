@@ -1,12 +1,12 @@
 <?php
 
-require_once('sproutbuilder.php');
+require_once('sprowtbuilder.php');
 
 /***
  * Include form functions
  */
 
-foreach(glob(drupal_get_path('profile', 'sprout') . "/forms/*.inc") as $include) {
+foreach(glob(drupal_get_path('profile', 'sprowt') . "/forms/*.inc") as $include) {
     include_once($include);
 }
 
@@ -17,11 +17,11 @@ foreach(glob(drupal_get_path('profile', 'sprout') . "/forms/*.inc") as $include)
  * implements hook_install_tasks_alter()
  */
 
-function sprout_install_tasks_alter(&$tasks, $install_state) {
+function sprowt_install_tasks_alter(&$tasks, $install_state) {
 
-    _sprout_set_maintenance_theme("adminimal");
+    _sprowt_set_maintenance_theme("adminimal");
 
-    $tasks['install_select_locale']['function'] = 'sprout_locale_selection';
+    $tasks['install_select_locale']['function'] = 'sprowt_locale_selection';
 
 
     $task_map = array(
@@ -32,20 +32,20 @@ function sprout_install_tasks_alter(&$tasks, $install_state) {
         'install_settings_form', //set up database
         'install_system_module',
         'install_bootstrap_full',
-        'sprout_setup_tables', //sprout
-        'sprout_company_info', //sprout
-        'sprout_market_setup', //sprout
-        'sprout_branding', //sprout
-        'sprout_users', //sprout
-        'sprout_locations', //sprout
-        'sprout_social', //sprout
-        'sprout_review', //sprout
-        'sprout_integrations', //sprout
+        'sprowt_setup_tables', //sprowt
+        'sprowt_company_info', //sprowt
+        'sprowt_market_setup', //sprowt
+        'sprowt_branding', //sprowt
+        'sprowt_users', //sprowt
+        'sprowt_locations', //sprowt
+        'sprowt_social', //sprowt
+        'sprowt_review', //sprowt
+        'sprowt_integrations', //sprowt
         'install_profile_modules',
         'install_import_locales',
-        'sprout_install_features', //sprout
+        'sprowt_install_features', //sprowt
         'install_configure_form',
-        'sprout_configure',
+        'sprowt_configure',
     );
 
     $new_tasks = array();
@@ -71,19 +71,19 @@ function sprout_install_tasks_alter(&$tasks, $install_state) {
  * process and forces enable the maintenance theme too early in the request
  * for us to modify it in a clean way.
  */
-function _sprout_set_maintenance_theme($target_theme) {
+function _sprowt_set_maintenance_theme($target_theme) {
     if ($GLOBALS['theme'] != $target_theme) {
         unset($GLOBALS['theme']);
 
         drupal_static_reset();
         $GLOBALS['conf']['maintenance_theme'] = $target_theme;
         $adminimal_settings = variable_get('theme_adminimal_settings', array());
-        $adminimal_settings['logo_path'] = 'profiles/sprout/images/sprowt-logo.png';
+        $adminimal_settings['logo_path'] = 'profiles/sprowt/images/sprowt-logo.png';
         $adminimal_settings['default_logo'] = false;
         //variable_set('theme_adminimal_settings', $adminimal_settings);
         $GLOBALS['conf']['theme_adminimal_settings'] = $adminimal_settings;
         _drupal_maintenance_theme();
-        drupal_add_css(drupal_get_path('profile', 'sprout') . '/css/maintenence.css');
+        drupal_add_css(drupal_get_path('profile', 'sprowt') . '/css/maintenence.css');
     }
 }
 
@@ -92,14 +92,14 @@ function _sprout_set_maintenance_theme($target_theme) {
  * Implements hook_install_configure_form_alter().
  */
 
-function sprout_form_install_configure_form_alter(&$form, &$form_state) {
+function sprowt_form_install_configure_form_alter(&$form, &$form_state) {
     global $install_state;
     drupal_add_css('.messages {display: none;}',array('type' => 'inline'));
 
     $form['#attached']['js'][] = "https://code.jquery.com/jquery-1.11.2.min.js"; //I don't wanna use drupal's old as dirt jQuery
-    $form['#attached']['js'][] = drupal_get_path('profile', 'sprout') . "/js/configure.js";
+    $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . "/js/configure.js";
 
-    $sb_info = _sprout_get_data();
+    $sb_info = _sprowt_get_data();
 
     $form['admin_account']['#access'] = false;
     $form['admin_account']['account']['name']['#required'] = false;
@@ -130,22 +130,22 @@ function system_form_install_settings_form_alter(&$form, &$form_state) {
     $form['settings']['mysql']['password']['#attributes']['value'] = 'root';
 
     //Only for testing purposes
-    //$form['settings']['mysql']['database']['#attributes']['value'] = 'sprout';
+    //$form['settings']['mysql']['database']['#attributes']['value'] = 'sprowt';
 }
 
 
-function sprout_locale_selection(&$install_state){
+function sprowt_locale_selection(&$install_state){
     $install_state['parameters']['locale'] = 'en';
     return;
 }
 
-function sprout_setup_tables($install_state){
+function sprowt_setup_tables($install_state){
 
-    if(db_table_exists('sprout_setup')){
-        db_drop_table('sprout_setup');
+    if(db_table_exists('sprowt_setup')){
+        db_drop_table('sprowt_setup');
     }
 
-    $sprout_setup_schema = array(
+    $sprowt_setup_schema = array(
         'description' => 'The initial setup for this leadbuilder site',
         'fields' => array(
             'setup_id' => array('type' => 'serial', 'unsigned' => true, 'not null' => true),
@@ -159,14 +159,14 @@ function sprout_setup_tables($install_state){
         'primary key' => array('setup_id')
     );
 
-    db_create_table('sprout_setup', $sprout_setup_schema);
+    db_create_table('sprowt_setup', $sprowt_setup_schema);
 
 
-    if(db_table_exists('sprout_process')){
-        db_drop_table('sprout_process');
+    if(db_table_exists('sprowt_process')){
+        db_drop_table('sprowt_process');
     }
 
-    $sprout_setup_schema = array(
+    $sprowt_setup_schema = array(
         'description' => 'The process db for Sprout',
         'fields' => array(
             'process_id' => array('type'=> 'varchar', 'length' => 255, 'not null' => true, 'default' => ''),
@@ -176,7 +176,7 @@ function sprout_setup_tables($install_state){
         'primary key' => array('process_id')
     );
 
-    db_create_table('sprout_process', $sprout_setup_schema);
+    db_create_table('sprowt_process', $sprowt_setup_schema);
 
 }
 
@@ -185,9 +185,9 @@ function sprout_setup_tables($install_state){
 /**
  * Function for getting the user names of the default users
  */
-function _sprout_get_default_usernames(){
+function _sprowt_get_default_usernames(){
     $glob = getcwd() . "default_users/*.json";
-    $json_files = glob(getcwd() . "/profiles/sprout/default_users/*.json");
+    $json_files = glob(getcwd() . "/profiles/sprowt/default_users/*.json");
 
     $names = array();
     foreach($json_files as $file){
@@ -200,11 +200,11 @@ function _sprout_get_default_usernames(){
 }
 
 /**
- * Submit function for forms to save to the sprout_setup table
+ * Submit function for forms to save to the sprowt_setup table
  */
-function _sprout_save_to_table($form_name, $fields) {
+function _sprowt_save_to_table($form_name, $fields) {
 
-    $insert = db_insert('sprout_setup')
+    $insert = db_insert('sprowt_setup')
         ->fields(
             array(
                 'form_name',
@@ -226,7 +226,7 @@ function _sprout_save_to_table($form_name, $fields) {
 /**
  * Set up base config for pantheon
  */
-function sprout_configure() {
+function sprowt_configure() {
     // Set default Pantheon variables
     variable_set('cache', 1);
     variable_set('block_cache', 1);
@@ -250,7 +250,7 @@ function sprout_configure() {
  * Function for installing features and other modules
  */
 
-function sprout_install_features(){
+function sprowt_install_features(){
 
     /*
   //Grabbing the theme
@@ -258,7 +258,7 @@ function sprout_install_features(){
     ':form' => 'branding',
     ':field' => 'theme'
   );
-  $theme = str_replace("-","_", db_query("SELECT field_value FROM sprout_setup WHERE form_name = :form AND form_field = :field", $array)->fetchField());
+  $theme = str_replace("-","_", db_query("SELECT field_value FROM sprowt_setup WHERE form_name = :form AND form_field = :field", $array)->fetchField());
   */
 
     //base features
@@ -282,7 +282,7 @@ function sprout_install_features(){
 }
 
 
-function sprout_setup(&$install_state){
+function sprowt_setup(&$install_state){
 
     $sb = new SproutBuilder();
     $data = $sb->getData();
@@ -304,12 +304,12 @@ function sprout_setup(&$install_state){
     }
 }
 
-function _sprout_get_data(){
+function _sprowt_get_data(){
     $sb = new SproutBuilder();
     return $sb->getData();
 }
 
-function _sprout_form_default($field_name, $default = '') {
+function _sprowt_form_default($field_name, $default = '') {
     if(!empty($_GET['example_values'])) {
         if($_GET['example_values'] == 1) {
             switch ($field_name) {
@@ -382,7 +382,7 @@ function _sprout_form_default($field_name, $default = '') {
                                 array (
                                     'administrator',
                                 ),
-                            'image' => '/profiles/sprout/images/coalmarch/wmcmillian.jpg',
+                            'image' => '/profiles/sprowt/images/coalmarch/wmcmillian.jpg',
                             'id' => 'wmcmillian',
                         ),
                     );
@@ -441,7 +441,7 @@ function _sprout_form_default($field_name, $default = '') {
                     return 'Sprout Theme 1';
                     break;
                 case 'new_theme':
-                    require_once DRUPAL_ROOT . '/' . drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php';
+                    require_once DRUPAL_ROOT . '/' . drupal_get_path('profile', 'sprowt') . '/includes/themebuilder.php';
                     $TB = new ThemeBuilder();
                     return $TB->machine_nameify('Sprout Theme 1');
                 case 'primary_color':

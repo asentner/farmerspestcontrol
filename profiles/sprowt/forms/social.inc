@@ -3,32 +3,32 @@
   * Social Panel
   */
  
- function sprout_social($form, &$form_state, &$install_state){
+ function sprowt_social($form, &$form_state, &$install_state){
   drupal_set_title(st('Configure Social Media'));
   
   $form['social_media']['facebook'] = array(
     '#type' => 'textfield',
     '#title' => 'Facebook URL',
-    '#default_value' => _sprout_form_default('facebook')
+    '#default_value' => _sprowt_form_default('facebook')
   );
   
   $form['social_media']['twitter'] = array(
     '#type' => 'textfield',
     '#title' => 'Twitter Handle',
-    '#default_value' => _sprout_form_default('twitter')
+    '#default_value' => _sprowt_form_default('twitter')
   );
   
   $form['social_media']['linkedin'] = array(
     '#type' => 'textfield',
     '#title' => 'Linked In URL',
-    '#default_value' => _sprout_form_default('linkedin')
+    '#default_value' => _sprowt_form_default('linkedin')
   );
   
   $form['social_media']['gplus'] = array(
     '#type' => 'textfield',
     '#title' => 'Google+ URL',
     '#description' => 'Site wide Google+ URL. Also used for site Publisher markup',
-    '#default_value' => _sprout_form_default('gplus')
+    '#default_value' => _sprowt_form_default('gplus')
   );
   
   $form['actions']['submit'] = array(
@@ -39,7 +39,7 @@
   return $form;
  }
  
- function sprout_social_submit($form, &$form_state){
+ function sprowt_social_submit($form, &$form_state){
   $fields = array(
     'facebook' => $form['social_media']['facebook']['#value'],
     'twitter' => $form['social_media']['twitter']['#value'],
@@ -53,6 +53,6 @@
     }
   }
   
-  _sprout_save_to_table('social_media', $fields);
+  _sprowt_save_to_table('social_media', $fields);
   
  }

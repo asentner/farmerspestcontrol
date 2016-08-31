@@ -25,5 +25,5 @@ else {
     
     move_uploaded_file($_FILES["image"]["tmp_name"], $basedir . "/" . $_FILES["image"]["name"]);
     
-    echo "/profiles/sprout/images/$user_id/" . $_FILES["image"]["name"];
+    echo "/profiles/sprowt/images/$user_id/" . $_FILES["image"]["name"];
 }

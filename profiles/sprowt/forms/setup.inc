@@ -1,11 +1,11 @@
 <?php
 /**
- * sprout Setup
+ * sprowt Setup
  */
 
- function sprout_setup_form($form, &$form_state, &$install_state) {
+ function sprowt_setup_form($form, &$form_state, &$install_state) {
     drupal_add_library('system', 'drupal.progress');
-    $form['#attached']['js'][] = drupal_get_path('profile', 'sprout') . "/js/setup.js";
+    $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . "/js/setup.js";
     
     $form['#suffix'] = '<div id="progress"></div>';
     

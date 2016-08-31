@@ -1,6 +1,6 @@
 ; $Id$
-name = Sprout
-description = Install Sprout with pre-configured integration for the Pantheon Platform
+name = Sprowt
+description = Install Sprowt with pre-configured integration for the Pantheon Platform
 version = VERSION
 core = 7.x
 
@@ -126,4 +126,4 @@ dependencies[] = leadbuilder_views
 
 ; Add in the .profile
 
-files[] = sprout.profile
+files[] = sprowt.profile

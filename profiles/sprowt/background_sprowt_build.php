@@ -4,17 +4,17 @@ set_time_limit(0);
 ignore_user_abort();
 
 if(!defined('DRUPAL_ROOT')){
-    define('DRUPAL_ROOT', str_replace("/profiles/sprout", "", getcwd()));
+    define('DRUPAL_ROOT', str_replace("/profiles/sprowt", "", getcwd()));
     require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
     drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 }
 
 //set profile because it's not set for some reason
 
-variable_set('install_profile', 'sprout');
+variable_set('install_profile', 'sprowt');
 
-if(!db_table_exists('sprout_progress')){
-    $sprout_progress_schema = array(
+if(!db_table_exists('sprowt_progress')){
+    $sprowt_progress_schema = array(
       'description' => 'The initial setup for this leadbuilder site',
       'fields' => array(
         'id' => array('type' => 'serial', 'unsigned' => true, 'not null' => true),
@@ -27,10 +27,10 @@ if(!db_table_exists('sprout_progress')){
       'primary key' => array('id')
     );
     
-    db_create_table('sprout_progress', $sprout_progress_schema);
+    db_create_table('sprowt_progress', $sprowt_progress_schema);
     
     global $base_url;
-    $progress_id = db_insert('sprout_progress')
+    $progress_id = db_insert('sprowt_progress')
         ->fields(array(
             'function' => 'init',
             'progress' => 0
@@ -38,11 +38,11 @@ if(!db_table_exists('sprout_progress')){
         ->execute();
 }
 
-$progress = db_query("SELECT * FROM sprout_progress")->fetchAssoc();
+$progress = db_query("SELECT * FROM sprowt_progress")->fetchAssoc();
 
 
 function update_progress($function, $perc, $message, $actions, $id) {
-    $updated = db_update('sprout_progress') // Table name no longer needs {}
+    $updated = db_update('sprowt_progress') // Table name no longer needs {}
       ->fields(array(
         'function' => $function,
         'progress' => floor($perc * 100),
@@ -84,7 +84,7 @@ foreach($actions as $method => $message) {
 }
 
 
-$updated = db_update('sprout_progress') // Table name no longer needs {}
+$updated = db_update('sprowt_progress') // Table name no longer needs {}
   ->fields(array(
     'function' => 'Done',
     'progress' => 100,

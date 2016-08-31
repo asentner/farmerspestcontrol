@@ -1,7 +1,7 @@
 <?php
 
 
-include_once('sproutbuilder.php');
+include_once('sprowtbuilder.php');
 
 include_once('modules/contrib/devel/krumo/class.krumo.php');
 
@@ -26,16 +26,16 @@ $SP->addMarketsServices();
 
 /*
 print "; Contrib Modules<br>";
-foreach(glob('profiles/sprout/modules/contrib/*') as $module){
-    $module = str_replace('profiles/sprout/modules/contrib/', '', $module);
+foreach(glob('profiles/sprowt/modules/contrib/*') as $module){
+    $module = str_replace('profiles/sprowt/modules/contrib/', '', $module);
     print "dependencies[] = $module<br>";
 }
 
 print "<br><br>; Custom Modules<br>";
 
 
-foreach(glob('profiles/sprout/modules/custom/*') as $module){
-    $module = str_replace('profiles/sprout/modules/custom/', '', $module);
+foreach(glob('profiles/sprowt/modules/custom/*') as $module){
+    $module = str_replace('profiles/sprowt/modules/custom/', '', $module);
     print "dependencies[] = $module<br>";
 }
 */

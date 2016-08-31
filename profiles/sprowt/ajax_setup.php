@@ -1,14 +1,14 @@
 <?php
 
 if(!defined('DRUPAL_ROOT')){
-    define('DRUPAL_ROOT', str_replace("/profiles/sprout", "", getcwd()));
+    define('DRUPAL_ROOT', str_replace("/profiles/sprowt", "", getcwd()));
     require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
     drupal_bootstrap(DRUPAL_BOOTSTRAP_DATABASE);
 }
 
 global $base_url;
 
-if(!db_table_exists('sprout_progress')){
+if(!db_table_exists('sprowt_progress')){
     $return = array(
         'status' => 1,
         'percentage' => 0,
@@ -20,7 +20,7 @@ if(!db_table_exists('sprout_progress')){
     exit();
 }
 
-$progress = db_query("SELECT * FROM sprout_progress")->fetchAssoc();
+$progress = db_query("SELECT * FROM sprowt_progress")->fetchAssoc();
 
 if(empty($progress)) {    
     $progress = array(

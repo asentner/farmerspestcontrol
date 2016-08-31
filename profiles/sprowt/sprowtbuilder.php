@@ -1,13 +1,13 @@
 <?php
 
 if(!defined('DRUPAL_ROOT')){
-    define('DRUPAL_ROOT', str_replace("/profiles/sprout", "", getcwd()));
+    define('DRUPAL_ROOT', str_replace("/profiles/sprowt", "", getcwd()));
     require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
     drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 }
 
 
-require_once DRUPAL_ROOT . '/profiles/sprout/includes/menubuilder.php';
+require_once DRUPAL_ROOT . '/profiles/sprowt/includes/menubuilder.php';
 
 Class SproutBuilder {
     
@@ -22,12 +22,12 @@ Class SproutBuilder {
     }
     
     /**
-     * Gets all the data from the sprout_setup table
+     * Gets all the data from the sprowt_setup table
      *
      */
     function getData(){
         $query = db_query(
-            "SELECT * FROM sprout_setup"
+            "SELECT * FROM sprowt_setup"
         );
         
         if(empty($query)){
@@ -169,13 +169,13 @@ Class SproutBuilder {
      */
     function addNodes(){
         
-        $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprout/sprout_export.json");
+        $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprowt/sprowt_export.json");
         
         
         $nodes = json_decode($node_json,true);
         $uuids = array();
 
-        $default_image_paths = glob(drupal_get_path('profile', 'sprout') . '/images/node_default/*');
+        $default_image_paths = glob(drupal_get_path('profile', 'sprowt') . '/images/node_default/*');
         $default_images = array();
         foreach($default_image_paths as $image_path) {
             $handle = fopen($image_path, 'r');
@@ -241,7 +241,7 @@ Class SproutBuilder {
             }
         }
         
-        require_once DRUPAL_ROOT . '/profiles/sprout/modules/contrib/node_export/formats/json.inc';
+        require_once DRUPAL_ROOT . '/profiles/sprowt/modules/contrib/node_export/formats/json.inc';
         
         //$result = $this->node_export_import($node_json);
         
@@ -284,7 +284,7 @@ Class SproutBuilder {
     }
 
     function import_menus() {
-        $path = drupal_get_path('profile', 'sprout');
+        $path = drupal_get_path('profile', 'sprowt');
 
         $files = array(
             'menu-mobile-menu' => "$path/menu-mobile-menu_link_export.json",
@@ -330,9 +330,9 @@ Class SproutBuilder {
     function update_main_menu($nids_array = array()){
         menu_delete_links('main-menu');
 
-        $file = drupal_get_path('profile', 'sprout') . '/main-menu_link_export.json';
+        $file = drupal_get_path('profile', 'sprowt') . '/main-menu_link_export.json';
 
-        require_once drupal_get_path('profile', 'sprout') . '/includes/menubuilder.php';
+        require_once drupal_get_path('profile', 'sprowt') . '/includes/menubuilder.php';
 
         $MB = new MenuBuilder();
         $MB->importFromFile($file);
@@ -393,7 +393,7 @@ Class SproutBuilder {
     }
     
     /**
-     * Adds users from the sprout_setup table
+     * Adds users from the sprowt_setup table
      *
      */
     function addUsers(){
@@ -481,7 +481,7 @@ Class SproutBuilder {
             user_save($user);
             
             if(!empty($userinfo['image'])
-               && $userinfo['image'] != "/profiles/sprout/images/default.jpg")
+               && $userinfo['image'] != "/profiles/sprowt/images/default.jpg")
             {
                 $dest = file_unmanaged_copy(DRUPAL_ROOT . $userinfo['image'], $directory, FILE_EXISTS_REPLACE);
                 $file = new stdClass();
@@ -519,14 +519,14 @@ Class SproutBuilder {
         require_once DRUPAL_ROOT . '/includes/password.inc';
         $fields = array();
 
-        $default_users = _sprout_get_default_usernames();
+        $default_users = _sprowt_get_default_usernames();
 
         foreach($default_users as $username => $name_array){
             if($username == 'coalmarch'){
-                $filepath = getcwd() . "/profiles/sprout/default_users/_$username.json";
+                $filepath = getcwd() . "/profiles/sprowt/default_users/_$username.json";
             }
             else {
-                $filepath = getcwd() . "/profiles/sprout/default_users/$username.json";
+                $filepath = getcwd() . "/profiles/sprowt/default_users/$username.json";
             }
             $fields[$username] = json_decode(file_get_contents($filepath), true);
         }
