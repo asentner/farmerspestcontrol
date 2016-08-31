@@ -1,0 +1,53 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+@mixin container {
+	max-width: $layout-width;
+	margin: 0 auto;
+}
+
+.l-content {
+	background: palette(white, pure);
+	padding: 20px;
+}
+
+@include breakpoint($tab) {
+	.l-page {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		min-height: 100vh;
+	}
+	.l-main {
+		@include container;
+		display: flex;
+		align-items: stretch;
+		justify-content: space-between;
+		flex: 1 0 auto;
+		width: 100%;
+		padding: 0 20px;
+	}
+	.l-content:not(:only-child) {
+		width: $layout-tablet-widebar;
+		flex: 1 1 auto;
+	}
+	.l-region--sidebar {
+		width: $layout-tablet-sidebar;
+	}
+	.l-footer {
+		width: 100%;
+	}
+}
+
+@include breakpoint($desk) {
+	.l-content {
+    width: $layout-desktop-widebar;
+		padding: 40px 70px;
+	}
+  .l-region--sidebar {
+    width: $layout-desktop-sidebar;
+  }
+}

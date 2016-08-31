@@ -1,0 +1,12 @@
+$tab: 768px;
+$nav: $tab;
+$desk: 1024px;
+
+$susy: (
+	container: 1210px, // change this if you add padding outside the grid
+	columns: 14,
+	column-width: 65px,
+	gutters: 20px/65px,
+	math: fluid,
+	global-box-sizing: border-box
+);

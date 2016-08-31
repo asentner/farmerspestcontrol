@@ -1,0 +1,21 @@
+.node--testimonial {
+	text-align: center;
+	.rating {
+		color: $color-brand-tertiary;
+		display: block;
+		margin-bottom: 15px;
+	}
+	.field--name-body {
+		font-family: $font-headings;
+		font-style: italic;
+		p:first-child:before {
+			content: '“';
+		}
+		p:last-child:after {
+			content: '”';
+		}
+	}
+	.field--title {
+		margin-top: 20px;
+	}
+}

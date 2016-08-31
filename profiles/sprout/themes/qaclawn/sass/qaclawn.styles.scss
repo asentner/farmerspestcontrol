@@ -1,0 +1,10 @@
+// Import external libraries.
+@import "../.npm/node_modules/node-normalize-scss/normalize";
+@import "../.npm/node_modules/breakpoint-sass/stylesheets/breakpoint";
+@import "../.npm/node_modules/font-awesome/scss/font-awesome";
+
+// Import variables, abstractions, base styles and components using globbing.
+@import "variables/**/*";
+@import "abstractions/**/*";
+@import "base/**/*";
+@import "components/**/*";

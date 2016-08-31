@@ -1,0 +1,17 @@
+.block--logo-block {
+	padding: 20px;
+	@include breakpoint($tab) {
+		border-left: 2px solid white;
+		border-right: 2px solid white;
+	}
+	@include breakpoint($desk) {
+		padding: 13px 50px;
+	}
+}
+
+.block--logo-footer {
+	padding: 20px;
+	img {
+		vertical-align: middle;
+	}
+}

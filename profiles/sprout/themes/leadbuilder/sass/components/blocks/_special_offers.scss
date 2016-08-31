@@ -1,0 +1,42 @@
+//Sidebar Special Offers Block
+.view-special-offers {
+	.field--name-body {
+		margin-bottom: 10px;
+	}
+}
+
+// Homepage
+.block--views-special-offers-block-1 {
+	margin-top: 40px;
+	.views-row {
+		margin-bottom: 35px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	.field--name-field-image {
+		img {
+			width: 100%;
+		}
+	}
+	.field--name-field-expiration-date {
+		margin-top: 10px;
+	}
+	@include breakpoint($tab) {
+		.field--name-field-image {
+			@include span(3 of 9);
+			margin-bottom: 0;
+			padding-top: 5px;
+		}
+		.node-content-wrap {
+			@include span(6 of 9);
+			@include omega;
+		}
+		.node__title {
+			margin-top: 0;
+		}
+		.views-row {
+			@include clearfix;
+		}
+	}
+}

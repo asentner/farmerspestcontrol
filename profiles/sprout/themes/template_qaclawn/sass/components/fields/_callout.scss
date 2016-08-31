@@ -1,0 +1,16 @@
+.field--name-field-call-out {
+  background: $color-brand-primary;
+  color: $color-brand-primary-light;
+  a {
+    color: white;
+    &:hover {
+      color: $color-brand-primary-light;
+    }
+    &.button {
+      background: $color-brand-secondary;
+      &:hover {
+        background: $color-brand-secondary-dark;
+      }
+    }
+  }
+}

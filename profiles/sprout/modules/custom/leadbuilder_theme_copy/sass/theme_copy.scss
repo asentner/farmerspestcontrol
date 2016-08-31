@@ -1,0 +1,75 @@
+//colors
+$color_mountain_mist_approx: #999;
+$color_alto_approx: rgb(217, 217, 217);
+$color_lochmara_approx: #0077c0;
+
+.choose_theme_radio_field {
+  > div {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .theme_logo {
+    width: 33%;
+    text-align: center;
+    img {
+      max-width: 100%;
+    }
+  }
+  .theme_content {
+    width: 60%;
+    margin-left: 10px;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.form-item-theme-chooser .form-radios {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  overflow: hidden;
+  .form-radio {
+    display: none;
+  }
+  label {
+    display: flex;
+    vertical-align: middle;
+    width: 100%;
+  }
+  .form-item {
+    display: flex;
+    margin-bottom: 15px;
+    margin-right: 30px;
+    width: 30%;
+    min-width: 300px;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+div.choose_theme_radio_field {
+  border: 1px solid $color_mountain_mist_approx;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  width: 100%;
+  &.checked {
+    background: none repeat scroll 0 0 $color_alto_approx;
+    box-shadow: 0 0 5px $color_lochmara_approx;
+  }
+}
+
+.color-picker {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  .form-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-text {
+    max-width: 200px;
+  }
+}

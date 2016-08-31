@@ -1,0 +1,9 @@
+.node--package--full {
+    .pricing-table {
+        tr:first-child {
+            th {
+                background: palette(primary, dark);
+            }
+        }
+    }
+}

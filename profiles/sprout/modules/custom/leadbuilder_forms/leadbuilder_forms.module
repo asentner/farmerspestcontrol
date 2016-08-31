@@ -1,0 +1,66 @@
+<?php
+
+function leadbuilder_forms_form_alter(&$form, &$form_state, $form_id){
+    if (strpos($form_id, 'webform_') !== false) {
+      $form['#submit'][] = '_onWebformSubmit';
+    }
+}
+
+function leadbuilder_forms_preprocess_node(&$variables) {
+    if(!empty($_COOKIE['SESStitleoverride'])){
+        $override = json_decode($_COOKIE['SESStitleoverride'], true);
+        if($override['nid'] == $variables['nid']) {
+            if(!empty($override['name'])) {
+                if(!empty($variables['content']['field_display_title'][0]['#markup'])) {
+                    $variables['content']['field_display_title'][0]['#markup'] = 'Thank you, ' . $override['name'] . '!';
+                }
+                else {
+                    $variables['title'] = 'Thank you, ' . $override['name'] . '!';   
+                }
+            }
+        }
+    }
+}
+
+function _onWebformSubmit(&$form, &$form_state) {
+  // Get the current node
+  $node = !empty($form['#node']) ? $form['#node'] : false;
+
+  // Override the redirect to drop the sid request parameter
+  if ($node
+      && $node->webform['redirect_url'] != '<confirmation>'
+      && $node->webform['redirect_url'] != '<none>'
+      && !empty($form['submitted']['are_you_a_current_customer'])
+  ) {
+    // Grab the redirect path and clean query string form it if set
+    $redirect = preg_replace('/\?.*/', '', $node->webform['redirect_url']);
+
+    // Setup a session variable to override an h1 on the redirect page
+    $name = null;
+    if (isset($form['submitted']['first_name']['#value'])) {
+      $name = $form['submitted']['first_name']['#value'];
+    } elseif (isset($form['submitted']['name']['#value'])) {
+      $name = $form['submitted']['name']['#value'];
+    }
+
+    // get the nid of the redirect
+    $normal = drupal_get_normal_path($redirect);
+    $parts = explode('/', $normal);
+    $nid = $parts[1];
+
+    if (null !== $name) {
+      setcookie('SESStitleoverride',json_encode(array(
+        'name' => ucwords(strtolower($name)),
+        'nid' => $nid,
+      )));
+    }
+
+    if (isset($form['submitted']['are_you_a_current_customer']['#value']) && $form['submitted']['are_you_a_current_customer']['#value'] == 'option1') {
+      $form_state['redirect'] = array($redirect, array('query' => array('t' => 'current-customer')));
+    } elseif (isset($form['submitted']['are_you_a_current_customer']['#value']) && $form['submitted']['are_you_a_current_customer']['#value'] == 'option2') {
+      $form_state['redirect'] = array($redirect, array('query' => array('t' => 'new-customer')));
+    } else {
+      $form_state['redirect'] = $redirect;
+    }
+  }
+}

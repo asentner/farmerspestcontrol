@@ -1,0 +1,110 @@
+// Front
+.block--views-slideshow-front {
+  text-align: center;
+  padding: 80px 20px 120px;
+  li.flex-active-slide {
+    margin-top: 0;
+  }
+  .node__title {
+    margin: 0 0 .2em;
+    color: white;
+    a {
+      color: white;
+    }
+  }
+  .field--name-body {
+    color: white;
+    font-size: 17px;
+    line-height: (27/17);
+    margin: 15px 5px 20px;
+  }
+  .button {
+    background: $color-brand-secondary;
+    margin-top: 5px;
+    &:hover {
+      background: $color-brand-secondary-dark;
+    }
+  }
+  .flex-direction-nav {
+    a {
+      font-size: 0;
+      width: 40px;
+      height: 55px;
+      &:before {
+        font-size: 40px;
+      }
+    }
+    .flex-prev {
+      left: -20px;
+    }
+    .flex-next {
+      right: -18px;
+    }
+  }
+  @include breakpoint($tab) {
+    .flex-direction-nav {
+      .flex-prev {
+        left: 0;
+      }
+      .flex-next {
+        right: 0;
+        text-align: right;
+      }
+      a {
+        height: 55px;
+      }
+    }
+    .node {
+      max-width: 870px;
+      margin: 0 auto;
+      font-size: 20px;
+      line-height: (30/20);
+    }
+    .node__title {
+      font-size: 50px;
+      font-weight: bold;
+      line-height: (50/50);
+    }
+  }
+}
+
+// Local Target
+.block--views-slideshow-localtarget {
+  padding: 80px 20px 120px;
+  text-align: center;
+  .node__title,
+  .field--name-body {
+    color: white;
+  }
+  .field--name-body {
+    margin: 15px 5px 20px;
+  }
+  .flex-direction-nav {
+    a {
+      height: 55px;
+    }
+  }
+  // background image is added via style attribute in template, this hides it for mobile only
+  @media (max-width:767px) {
+    .node {
+      background-image: none !important;
+    }
+  }
+  @include breakpoint($tab) {
+    padding: 0;
+    .node__content {
+      padding: 80px 20px 150px;
+      max-width: 830px;
+      margin: auto;
+    }
+    .node {
+      font-size: 20px;
+      line-height: (30/20);
+    }
+    .node__title {
+      font-weight: bold;
+      font-size: 50px;
+      line-height: (50/50);
+    }
+  }
+}

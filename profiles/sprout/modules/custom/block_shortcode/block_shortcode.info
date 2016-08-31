@@ -1,0 +1,5 @@
+; source: https://www.drupal.org/sandbox/seanfitzpatrick/2219069
+name = Block Shortcodes
+description = Sets up a custom filter that enables block shortcodes.
+core = 7.x
+dependencies[] = block

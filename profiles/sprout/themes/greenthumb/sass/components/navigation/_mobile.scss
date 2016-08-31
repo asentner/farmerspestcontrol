@@ -1,0 +1,27 @@
+.block--nav-mobile {
+  .block__title {
+    margin: 0;
+    background: palette(tertiary, base);
+    padding: 20px;
+    text-align: right;
+    text-transform: uppercase;
+    color: palette(white, pure);
+    font-size: 1em;
+    &:after {
+      @include faicon("\f0c9");
+      margin-left: .5em;
+    }
+  }
+  .block__content {
+    a {
+      display: block;
+      border-top: 1px solid palette(tertiary, base);
+      background: palette(primary, base);
+      padding: .5em 20px;
+      color: palette(white, pure);
+    }
+  }
+  @include breakpoint($nav) {
+    display: none;
+  }
+}

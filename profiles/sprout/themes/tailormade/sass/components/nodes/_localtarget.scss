@@ -1,0 +1,14 @@
+.node-type-localtarget {
+  .l-header {
+  	background-size: cover;
+  	@include breakpoint($tab) {
+  		padding-bottom: 70px;
+  	}
+  }
+  .breadcrumb-wrap {
+    display: none;
+  }
+  .field--name-field-seo-title {
+    line-height: 46px;
+  }
+}

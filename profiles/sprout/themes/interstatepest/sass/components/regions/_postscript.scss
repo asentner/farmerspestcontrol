@@ -1,0 +1,55 @@
+.l-region--postscript-first {
+	padding: 50px 20px;
+}
+
+.l-region--postscript-second {
+	background: $color-brand-quaternary $design-map-bg repeat;
+	padding: 50px 20px 140px 20px;
+}
+
+.front {
+	.l-postscript--first-wrap {
+		color: white;
+		background: $color-brand-primary;
+		text-align: center;
+		padding: 50px 20px;
+		border-top: 2px solid white;
+		border-bottom: 2px solid white;
+	}
+	.l-region--postscript-first {
+		max-width: 1170px;
+		margin: auto;
+		padding: 0;
+	}
+	@include breakpoint($tab) {
+		.l-postscript--first-wrap {
+			background-image: $design-arrow-bg, linear-gradient(left, #136eae 50%, #1b7cc0 50%);
+			background-repeat: no-repeat;
+			background-size: auto 100%;
+			background-position: center;
+		}
+		.l-region--postscript-first {
+			@include flexbox;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+}
+
+.front {
+	.l-region--postscript-third {
+		.block--webform {
+			padding: 0 20px 50px 20px;
+			background-color: $color-brand-secondary;
+			@include breakpoint($tab) {
+				background-image: $design-contact-bg;
+				background-position: center bottom;
+				background-repeat: no-repeat;
+				background-size: 100% auto;
+			}
+		}
+		.block__content {
+			background-image: none;
+		}
+	}
+}

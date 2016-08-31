@@ -1,0 +1,14 @@
+.offer-pricing {
+	margin-top: 1em;
+	font-weight: bold;
+	div {
+		display: inline;
+	}
+	.offer-pricing-savings {
+		color: $color-brand-tertiary;
+		text-transform: uppercase;
+		font-size: 1.5em;
+		margin-top: .25em;
+		display: block;
+	}
+}

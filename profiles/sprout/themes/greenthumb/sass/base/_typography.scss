@@ -1,0 +1,125 @@
+body {
+  font-size: 16px;
+  line-height: 25px;
+  font-family: $font-roboto;
+  color: palette(black,dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: palette(black, pure);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 1em;
+  margin-bottom: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: palette(primary);
+  &:hover {
+    color: palette(tertiary);
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+%p {
+  + %p {
+    margin-top: 1em;
+  }
+}
+
+p, ul, ol, blockquote {
+  @extend %p;
+}
+
+//font-sizes and line-heights not in comp taken from here: http://typecast.com/blog/a-more-modern-scale-for-web-typography
+h1, %h1 {
+  font-size: 2em;
+  line-height: 1.25em;
+}
+
+h2 {
+  font-size: 1.625em;
+  line-height: 1.15384615em;
+}
+
+h3 {
+  font-size: 1.375em;
+  line-height: 1.13636364em;
+}
+
+h4 {
+  font-size: 1.125em;
+  line-height: 1.11111111em;
+}
+
+blockquote {
+  font-size: 1.25em;
+  line-height: 1.25em;
+  font-style: italic;
+  margin: 1em;
+  margin-right: 0;
+  max-width: 100%;
+  padding: .5em 0;
+  padding-left: 1em;
+  color: palette(secondary, base);
+  + p,
+  + ul,
+  + ol,
+  + table {
+    margin-top: 0;
+  }
+}
+
+%heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: palette(black, pure);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+@include breakpoint($tab) {
+  body {
+    line-height: 1.5em;
+  }
+  h1 {
+    font-size: (47em/17);
+    line-height: 1.125em;
+  }
+  h2 {
+    font-size: (30em/17);
+    line-height: 1.25em;
+  }
+  h3 {
+    font-size: (22em/17);
+    line-height: 1.1em;
+  }
+  h4 {
+    font-size: 1.125em;
+    line-height: 1.22222222em
+  }
+  blockquote {
+    font-size: 1.5em;
+    line-height: 1.45833333em;
+  }
+}
+
+@include breakpoint($desk) {
+  h1 {
+    line-height: 1.05em;
+  }
+  h2 {
+    font-size: 1.75em;
+  }
+  h3 {
+    font-size: 1.5em;
+  }
+}

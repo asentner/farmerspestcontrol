@@ -1,0 +1,9 @@
+.l-region--sidebar-first {
+	.block--ac-newsletter {
+		margin-top: 30px;
+		.form-submit  {
+			@extend %button;
+			width: 100%;
+		}
+	}
+}

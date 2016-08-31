@@ -1,0 +1,11 @@
+@mixin button($bg, $fg, $pv, $ph) {
+	display: inline-block;
+	background: $bg;
+	color: $fg;
+	padding: $pv $ph;
+	border: 0;
+	&:hover {
+		background: darken($bg, 10);
+		color: $fg;
+	}
+}

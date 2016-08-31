@@ -1,0 +1,48 @@
+.nav-main-menu {
+	display: none;
+	@include breakpoint($nav) {
+		display: block;
+		position: relative;
+		float: right;
+		clear: right;
+		z-index: 51; // above contextual menus
+		.menu-block-wrapper > .menu {
+			@include clearfix;
+			a,
+			.nolink {
+				display: block;
+				white-space: nowrap;
+				background: white;
+				padding: 5px 10px;
+			}
+			// first level
+			> li {
+				float: left;
+				position: relative;
+			}
+			// second level
+			> li > .menu {
+				display: none;
+			}
+			> li:hover > .menu {
+				display: block;
+				position: absolute;
+				left: 0;
+				min-width: 100%;
+				> li {
+					position: relative;
+				}
+			}
+			// third level
+			> li > .menu > li > .menu {
+				display: none;
+			}
+			> li > .menu > li:hover > .menu {
+				display: block;
+				position: absolute;
+				left: 100%;
+				top: 0;
+			}
+		}
+	}
+}

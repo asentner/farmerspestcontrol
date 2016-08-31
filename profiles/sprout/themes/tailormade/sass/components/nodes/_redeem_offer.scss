@@ -1,0 +1,13 @@
+.page-node-173 .webform-client-form-173 {
+	margin-top: 2em;
+	> div {
+		margin: 0 -10px;
+		> .form-item {
+			@include ranged-columns(1, 4);
+			padding: 0 10px;
+		}
+		> .form-actions {
+			padding: 0 10px;
+		}
+	}
+}

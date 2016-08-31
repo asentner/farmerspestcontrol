@@ -1,0 +1,63 @@
+// see variables/layout
+body {
+  margin: 0;
+  padding: 0;
+  background: #eeeeee;
+  &.front {
+    background: white;
+  }
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+@mixin container {
+  max-width: $layout-width;
+  margin: auto;
+}
+
+.l-content {
+  background: white;
+  padding: 20px;
+}
+
+@include breakpoint($tab) {
+  .l-main {
+    @include container;
+    @include flexbox;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .l-content {
+    order: 2;
+    width: $layout-tablet-widebar;
+    background: white;
+    padding: 50px 20px;
+  }
+  .l-region--sidebar {
+    order: 1;
+    width: $layout-tablet-sidebar;
+  }
+  .node-type-localtarget {
+    .l-main {
+      justify-content: center;
+    }
+    .l-content {
+      width: 100%;
+      max-width: 1200px;
+    }
+  }
+}
+
+@include breakpoint($desk) {
+  .l-content {
+    padding: 50px 65px;
+    &:not(:only-child) {
+      width: $layout-desktop-widebar;
+    }
+  }
+  .l-region--sidebar {
+    width: $layout-desktop-sidebar;
+  }
+}

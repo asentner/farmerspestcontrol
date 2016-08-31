@@ -1,0 +1,11 @@
+.view-content {
+	.l-content & {
+		margin-top: 40px;
+	}
+}
+
+.views-row {
+	+ .views-row {
+		margin-top: 20px;
+	}
+}

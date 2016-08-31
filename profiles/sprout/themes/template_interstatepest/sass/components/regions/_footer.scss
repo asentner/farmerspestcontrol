@@ -1,0 +1,18 @@
+.l-footer {
+	background: palette(primary, base);
+	color: palette(white, pure);
+  border-color: palette(white, pure);
+}
+
+.l-region--footer-second {
+	@include breakpoint($tab) {
+		.block--logo-footer {
+			border-color: palette(white, pure);
+    }
+	}
+}
+
+.l-region--footer-third {
+	background: palette(primary, dark);
+  border-color: palette(white, pure);
+}

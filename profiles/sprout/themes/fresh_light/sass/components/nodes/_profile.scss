@@ -1,0 +1,28 @@
+.node--profile--full {
+	.profile-header {
+		@include flexbox;
+		@include flex-direction(column);
+		margin-bottom: 20px;
+	}
+	.profile-title {
+		@include flex-order(1);
+	}
+	.field--name-field-image {
+		@include flex-order(2);
+	}
+	@include breakpoint($tab) {
+		.profile-header {
+			@include align-items(center);
+			@include flex-direction(row);
+		}
+		.profile-title {
+			@include flex-order(2);
+		}
+		.field--name-field-image {
+			@include flex-order(1);
+			float: none;
+			margin: 0;
+			margin-right: 20px;
+		}
+	}
+}

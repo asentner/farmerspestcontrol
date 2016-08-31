@@ -1,0 +1,30 @@
+.l-region--postscript-second {
+    background: palette(quaternary, base) $design-map-bg repeat;
+}
+
+.front {
+    .l-postscript--first-wrap {
+        color: palette(white, pure);
+        background: palette(primary, base);
+        border-color: palette(white, pure);
+    }
+    @include breakpoint($tab) {
+        .l-postscript--first-wrap {
+            background-image: $design-arrow-bg, linear-gradient(to right, #136eae 50%, #1b7cc0 50%);
+        }
+    }
+}
+
+.front {
+    .l-region--postscript-third {
+        .block--webform {
+            background-color: palette(secondary, base);
+            @include breakpoint($tab) {
+                background-image: $design-contact-bg;
+            }
+        }
+        .block__content {
+            background-image: none;
+        }
+    }
+}

@@ -1,0 +1,114 @@
+// get your free estimate
+.cta-center {
+	padding: 0 20px;
+	.block__content {
+		font-size: 20px;
+		p:first-child {
+			font-size: 30px;
+			font-weight: bold;
+		}
+	}
+	.button {
+		font-size: 17px;
+	}
+}
+
+.front {
+	.cta-center {
+		h3 {
+			margin-top: 15px;
+		}
+	}
+}
+
+// interior cta
+.view-call-out .view-content .views-row,
+.inline-cta.node--teaser,
+.not-front .cta-wide,
+.block--views-call-out-localtarget.cta-center {
+	max-width: 1210px;
+	margin: 0 auto;
+	padding: 50px 20px;
+	text-align: center;
+	color: white;
+	h2, h3 {
+		color: inherit;
+	}
+	h2 {
+		float: none;
+		margin: 0 10px 15px;
+	}
+	h3 {
+		margin: 10px;
+	}
+	.field--name-body {
+		float: none;
+	}
+	@include breakpoint($tab) {
+		h2 {
+			font-size: 45px;
+		}
+		h3 {
+			font-size: 30px;
+		}
+	}
+}
+
+//cta called via shortcode
+.inline-cta.node--teaser {
+	margin: 20px 0;
+	text-align: center;
+	background: $color-brand-secondary;
+	padding: 30px 20px;
+	.node__title {
+		margin-top: 0;
+	}
+}
+
+@include breakpoint($desk){
+	.inline-cta.node--teaser {
+		h2 {
+			font-size: 1.5rem;
+		}
+		h3 {
+			font-size: 1.1rem;
+		}
+		header,
+		header h2,
+		.node__content,
+		.node__content div,
+		.node__content p,
+		.node__content h3 {
+			display: inline;
+		}
+		.button {
+			margin-left: 5px;
+		}
+	}
+}
+
+// sidebar cta
+.l-region--sidebar-first {
+	.node--cta {
+		.node__title {
+			font-weight: 700;
+			font-size: 21px;
+		}
+		.node__content {
+			h3 {
+				color: $color-neutral;
+				font-size: 18px;
+				margin-top: 10px;
+				font-weight: 600;
+			}
+			p {
+				color: $color-neutral;
+			}
+			.button {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
+

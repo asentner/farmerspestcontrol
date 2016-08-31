@@ -1,0 +1,13 @@
+.l-region--sidebar {
+	background: #f2f2f2;
+	font-size: 15px;
+	h2 {
+		@extend %h3;
+	}
+	.block {
+		padding: 20px;
+		+ .block {
+			border-top: 1px solid white;
+		}
+	}
+}

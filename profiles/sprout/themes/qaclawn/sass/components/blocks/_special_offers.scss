@@ -1,0 +1,313 @@
+// Special offers on homepage
+.block-special-offers-intro {
+  max-width: 830px;
+  margin: 0 auto;
+  font-size: 17px;
+  text-align: center;
+  color: white;
+  .block__title {
+    color: white;
+  }
+}
+
+.block--views-special-offers-front-slideshow {
+  max-width: 930px;
+  margin: 80px auto 0;
+  header {
+    display: table;
+    text-align: center;
+    margin: -75px auto 0;
+    width: 250px;
+    height: 250px;
+  }
+  li + li {
+    margin-top: 0;
+  }
+  .node--special-offer {
+    padding: 20px;
+    margin: 20px;
+    background: white;
+    border: 3px dashed $color-brand-primary;
+  }
+  .node__title {
+    border-radius: 50%;
+    font-size: 70px;
+    line-height: (76/70);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    display: table-cell;
+    vertical-align: middle;
+    background: $color-brand-primary;
+  }
+  .node__content {
+    text-align: center;
+  }
+  .field--name-body {
+    font-size: 15px;
+    line-height: (25/15);
+    margin-bottom: 15px;
+    margin-top: 20px;
+    h2 {
+      color: $color-brand-secondary;
+      font-size: 24px;
+    }
+  }
+  .field--name-field-button {
+    a {
+      background: $color-brand-secondary;
+      &:hover {
+        background: $color-brand-secondary-dark;
+      }
+    }
+  }
+  .field--name-field-expiration-date {
+    margin-top: 10px;
+    color: #717171;
+  }
+  .flex-control-nav {
+    display: none;
+  }
+  .flex-direction-nav {
+    display: none;
+    li {
+      a.flex-prev {
+        margin-left: 17px;
+        &:before {
+          @include faicon("\f0a8");
+          font-weight: normal;
+          margin-right: 5px;
+          margin-top: -10px;
+        }
+      }
+      a.flex-next {
+        margin-right: 12px;
+        &:before {
+          @include faicon("\f0a9");
+          font-weight: normal;
+          margin-right: 5px;
+          margin-top: -10px;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    margin-top: 80px;
+    .node--special-offer {
+      margin-top: -10px;
+      margin-bottom: 30px;
+    }
+    .field--name-field-button,
+    .field--name-field-expiration-date {
+      display: inline-block;
+    }
+    .field--name-field-expiration-date {
+      margin: 0 0 0 20px;
+    }
+    .flex-direction-nav {
+      a {
+        top: 42%;
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    margin-top: 50px;
+    header {
+      @include flexbox;
+      flex: 1 0 auto;
+      justify-content: center;
+      margin: 0;
+    }
+    .node--special-offer {
+      max-height: 200px;
+    }
+    .node-content-wrap {
+      @include flexbox;
+      margin-top: -40px;
+      margin-bottom: -40px;
+    }
+    .node__title {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      width: 250px;
+    }
+    .node__content {
+      flex: 1 0 auto;
+      @include flexbox;
+      align-items: center;
+      text-align: left;
+      padding: 20px;
+      max-width: 600px;
+    }
+    .field--name-body {
+      margin-top: 0;
+    }
+    .flex-direction-nav {
+      display: block;
+    }
+    .field--name-body {
+      max-width: 580px;
+      h2 {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+// Special offers page
+.block--views-special-offers-list {
+  max-width: 930px;
+  margin: 75px auto 0;
+  header {
+    display: table;
+    text-align: center;
+    margin: -75px auto 0;
+    width: 250px;
+    height: 250px;
+  }
+  li + li {
+    margin-top: 0;
+  }
+  .views-row {
+    margin-bottom: 75px;
+  }
+  .node--special-offer {
+    padding: 35px 20px;
+    background: #f8f8f8;
+  }
+  .node__title {
+    border-radius: 50%;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 70px;
+    line-height: (76/70);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    background: $color-brand-primary;
+  }
+  .node__content {
+    text-align: center;
+  }
+  .field--name-body {
+    font-size: 15px;
+    line-height: (25/15);
+    margin-bottom: 15px;
+    h2 {
+      color: $color-brand-secondary;
+      font-size: 24px;
+    }
+  }
+  .field--name-field-expiration-date {
+    margin-top: 10px;
+    color: #717171;
+    font-style: italic;
+  }
+  a.button {
+    background: $color-brand-secondary;
+    &:hover {
+      background: $color-brand-secondary-dark;
+    }
+  }
+  @include breakpoint($tab) {
+    header {
+      height: 200px;
+      width: 200px;
+    }
+    .node__title {
+      display: block;
+      min-height: 200px;
+      font-size: 55px;
+      line-height: (55/55);
+      padding-top: 45px;
+    }
+    .field--name-field-button,
+    .field--name-field-expiration-date {
+      display: inline-block;
+    }
+    .field--name-field-expiration-date {
+      margin: 0 0 0 20px;
+    }
+  }
+  @include breakpoint($desk) {
+    margin-top: 30px;
+    header {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      width: 150px;
+    }
+    .views-row {
+      margin-bottom: 30px;
+    }
+    .node--special-offer {
+      padding: 20px;
+    }
+    .node__title {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0;
+      font-size: 45px;
+      line-height: 1;
+      width: 150px;
+      height: 150px;
+      min-height: auto;
+      padding-top: 0;
+    }
+    .node-content-wrap {
+      @include flexbox;
+      align-items: center;
+    }
+    .node-content-inner-wrap {
+      width: 100%;
+    }
+    .node__content {
+      @include flexbox;
+      align-items: center;
+      text-align: left;
+      padding: 0 0 0 40px;
+      max-width: percentage(470 / 620);
+    }
+    .flex-direction-nav {
+      display: block;
+    }
+    .field--name-body {
+      h2 {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+// Special offers in sidebar
+.block--views-special-offers-sidebar {
+  .block__title {
+    text-align: center;
+  }
+  .block__content {
+    h2 {
+      font-size: 19px;
+    }
+    .node__title {
+      display: none;
+    }
+    .field--name-field-expiration-date {
+      margin-top: 10px;
+      font-style: italic;
+      color: #686868;
+    }
+    .button {
+      margin: 15px auto 10px;
+      min-width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+// Coupons on local target pages
+.block--views-special-offers-related {
+  @extend .block--views-special-offers-front-slideshow;
+}

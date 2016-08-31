@@ -1,0 +1,114 @@
+.benefits-hero {
+  @include container;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 16px;
+  line-height: (24/16);
+  .node__title {
+    margin: 0 0 15px;
+    font-size: 21px;
+    font-weight: bold;
+    color: $color-brand-tertiary;
+    a {
+      color: $color-brand-tertiary;
+      &:hover {
+        background: $color-brand-tertiary-dark;
+      }
+    }
+  }
+  .field--name-field-image {
+    margin: 0 auto 15px;
+  }
+  .field--name-body {
+    color: white;
+    font-size: 15px;
+    .field__items {
+      .button {
+        min-width: 190px;
+        padding: 8.5px 20px;
+      }
+    }
+  }
+  .views-row + .views-row {
+    margin-top: 50px;
+  }
+  .button {
+    background: $color-brand-tertiary;
+    color: black;
+    &:hover {
+      background: $color-brand-tertiary-dark;
+    }
+  }
+  @include breakpoint($tab) {
+    max-width: 1160px;
+    padding: 0 20px 35px;
+    z-index: 40;
+    .view-content {
+      @include flexbox;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .views-row,
+    .node--benefit,
+    .node__content,
+    .field--name-body,
+    .field--name-body .field__items,
+    .field--name-body .field__item,
+    .field--name-body p:last-child {
+      @include flexbox;
+    }
+    .node__content,
+    .field--name-body,
+    .field--name-body p:last-child {
+      flex: 1 1 auto;
+    }
+    .node--benefit,
+    .node__content,
+    .field--name-body .field__item {
+      flex-direction: column;
+    }
+    .field--name-body p:last-child {
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .views-row {
+      margin: -110px auto 0;
+      width: percentage(395/1170);
+      + .views-row {
+        margin-top: -110px;
+      }
+    }
+    .views-row-3,
+    .views-row-4 {
+      margin-top: 50px;
+    }
+  }
+  @include breakpoint($desk) {
+    .view-content {
+      .views-row {
+        width: percentage(245/1170);
+      }
+      .views-row-3,
+      .views-row-4 {
+        margin-top: -110px;
+      }
+    }
+  }
+}
+
+// Local Target Benefits
+.block--leadbuilder-views-leadbuilder-views-lt-benefits {
+  @extend .benefits-hero;
+  @include breakpoint($tab) {
+    .views-row:nth-child(3),
+    .views-row:nth-child(4) {
+      margin-top: 50px;
+    }
+  }
+  @include breakpoint($desk) {
+    .views-row:nth-child(3),
+    .views-row:nth-child(4) {
+      margin-top: -110px;
+    }
+  }
+}

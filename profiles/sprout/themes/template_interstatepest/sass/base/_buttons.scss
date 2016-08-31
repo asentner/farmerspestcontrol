@@ -1,0 +1,11 @@
+%button {
+	background: palette(primary, base);
+	color: palette(white, pure);
+	&:hover {
+		background: darken(palette(primary, base), 5);
+	}
+}
+
+.button {
+	@extend %button;
+}

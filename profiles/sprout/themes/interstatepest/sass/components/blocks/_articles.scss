@@ -1,0 +1,106 @@
+.not-front .block--views-blog-list {
+	padding: 30px 0;
+	text-align: center;
+	font-size: 15px;
+	overflow: hidden;
+	.views-row {
+		background: $color-body-bg;
+		width: 80%;
+		max-width: 320px;
+		margin: 0 auto;
+		border-radius: 5px;
+		padding: 20px 10px 80px;
+		position: relative;
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+	}
+	.field--name-field-image {
+		display: none;
+	}
+	.node.contextual-links-region {
+		position: static;
+	}
+	.node__title {
+		margin: 0 0 15px;
+		line-height: 1em;
+		font-size: 20px;
+		a {
+			color: $color-brand-primary;
+			&:hover {
+				color: $color-brand-primary-dark;
+			}
+		}
+	}
+	.node__submitted {
+		font-size: 15px;
+		font-style: italic;
+		margin-bottom: 5px;
+	}
+	.node__content {
+		width: percentage(275/320);
+		margin: 0 auto;
+	}
+	.more-link {
+		@extend %button;
+		margin: 0 auto;
+		display: block;
+		text-align: center;
+		width: 100%;
+		max-width: 166px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 20px;
+	}
+	.pager {
+		margin-top: 20px;
+		font-size: 16px;
+	}
+	@include breakpoint($tab) {
+		text-align: left;
+		.node__title {
+			font-size: 23px;
+		}
+		.node__content {
+			margin: 0;
+			padding: 15px;
+		}
+		.views-row {
+			margin: 0 0 20px;
+			padding: 10px;
+			width: 100%;
+			max-width: 100%;
+			@include flexbox;
+			flex-direction: row;
+			&:last-child {
+				margin: 0;
+			}
+		}
+		.node__title {
+			margin-bottom: 5px;
+		}
+		.field--name-field-image {
+			display: inline-block;
+			margin: 0;
+			padding-top: 15px;
+			width: percentage(300/800);
+			& + .node__content {
+				width: percentage(480/800);
+			}
+		}
+		.more-link {
+			margin: 20px 0 0;
+			position: static;
+		}
+		.node--blog--teaser {
+			@include flexbox;
+			justify-content: center;
+			width: 100%;
+			margin: 0;
+		}
+		.node {
+			@include flexbox;
+		}
+	}
+}

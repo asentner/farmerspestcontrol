@@ -1,0 +1,82 @@
+body {
+	-webkit-font-smoothing: antialiased;
+	font-family: $opensans;
+	color: $color-body-text;
+}
+
+a {
+	color: $color-body-link;
+	text-decoration: none;
+	&:hover {
+		color: $color-body-link-hover;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $color-body-headings;
+	line-height: 1.2;
+	margin-top: 1.5em;
+	margin-bottom: 5px;
+	margin-bottom: 5px;
+	+ p,
+	+ ul,
+	+ ol {
+		margin-top: 0;
+	}
+}
+
+p {
+	margin: 0;
+	+ p {
+		margin-top: 1em;
+	}
+}
+
+h1 {
+
+}
+
+h2 {
+
+}
+
+h3 {
+
+}
+
+h4 {
+
+}
+
+h5 {
+
+}
+
+h6 {
+
+}
+
+blockquote {
+	font-size: 1.25em;
+	font-style: italic;
+	margin: 0 auto;
+	padding: 10px 40px;
+	max-width: 100%;
+	width: 750px;
+	+ p {
+		margin-top: 0;
+	}
+}
+
+.two-column {
+	@include breakpoint($tab) {
+		ul {
+			@include clear;
+		}
+		li {
+			float: left;
+			width: 50%;
+			padding-right: 20px;
+		}
+	}
+}

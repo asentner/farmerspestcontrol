@@ -1,0 +1,39 @@
+//front
+.front {
+  .block--system-main {
+    color: palette(white, pure);
+  }
+  .field--name-field-display-title {
+    color: palette(white, pure);
+  }
+  .block--views-services-all {
+    .field--name-field-image {
+      border-color: palette(neutral, concrete);
+    }
+    .node__content {
+      border-color: palette(neutral, concrete);
+    }
+  }
+}
+
+//not front
+.block--views-services-all {
+  .node__title {
+    a {
+    	background: palette(primary, base);
+      color: palette(white, pure);
+      &:hover {
+      	background: palette(primary, dark);
+      }
+    }
+  }
+  .node__content {
+  	background: palette(neutral, concrete);
+  }
+  .node-readmore {
+    @extend .button;
+    a {
+      color: palette(white, pure);
+    }
+  }
+}

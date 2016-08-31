@@ -1,0 +1,16 @@
+.not-front .block--views-blog-list {
+  .views-row {
+    background: palette(neutral, concrete);
+  }
+  .node__title {
+    a {
+      color: palette(primary, base);
+      &:hover {
+        color: palette(primary, dark);
+      }
+    }
+  }
+  .more-link {
+    @extend .button;
+  }
+}

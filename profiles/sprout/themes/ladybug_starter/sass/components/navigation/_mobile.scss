@@ -1,0 +1,12 @@
+.block--nav-mobile {
+	a {
+		display: block;
+	}
+	.block__title {
+		text-align: right;
+		&:after {
+			@include faicon('\f0c9');
+			margin-left: 5px;
+		}
+	}
+}

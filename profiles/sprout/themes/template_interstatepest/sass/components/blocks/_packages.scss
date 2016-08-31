@@ -1,0 +1,7 @@
+.block--views-packages-services {
+	background: palette(neutral, concrete);
+}
+
+.block--packages {
+	@extend .block--views-packages-services;
+}

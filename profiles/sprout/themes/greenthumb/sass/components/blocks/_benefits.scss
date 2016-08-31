@@ -1,0 +1,67 @@
+.block--views-benefits-front,
+.block--leadbuilder-views-leadbuilder-views-lt-benefits {
+    text-align: center;
+    padding: 0 20px 30px;
+    .views-row  {
+        + .views-row {
+            margin-top: 20px;
+        }
+        img {
+            display: block;
+        }
+    }
+    .node--benefit {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .node__title {
+        background: palette(primary, base);
+        padding: 20px 25px;
+        color: palette(white, base);
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 1.1;
+        text-transform: uppercase;
+        margin: 0;
+    }
+    .node__content {
+        background: palette(white, pure);
+        padding: 20px;
+    }
+    .field--name-body {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    @include breakpoint($tab) {
+        padding-bottom: 50px;
+        .block__content {
+            @include container;
+        }
+        .view-content {
+            @include flexbox;
+            justify-content: center;
+        }
+        .views-row {
+            @include flexbox;
+            width: 100%;
+            max-width: 320px;
+            + .views-row {
+                margin-top: 0;
+            }
+        }
+        .node--benefit {
+            @include flexbox;
+            flex-direction: column;
+            padding: 0 10px;
+        }
+        .node__title {
+            font-size: 18px;
+        }
+        .node__content {
+            flex: 1 1 auto;
+        }
+    }
+    @include breakpoint($desk) {
+        padding-bottom: 80px;
+    }
+}

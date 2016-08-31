@@ -1,0 +1,128 @@
+// front: areas we service
+.block-areas-map {
+	@include front-arrow($color-brand-secondary-dark, white);
+	&:before {
+		margin-top: -20px;
+	}
+	margin: 0;
+	padding-top: 50px;
+	.block__title {
+		margin: 0 auto;
+		color: white;
+		font-size: 50px;
+		border-bottom: 1px solid rgba(white, .15);
+		margin-bottom: 20px;
+		max-width: 1040px;
+		&:after {
+			display: block;
+			width: 100%;
+			content: "";
+			border-bottom: 1px solid rgba(black, .25);
+			padding-top: 15px;
+		}
+	}
+	p {
+		max-width: 830px;
+		margin: auto;
+		font-size: 16px;
+		line-height: (28/16);
+	}
+	.media_embed {
+		max-width: 1170px;
+		margin: auto;
+	}
+	@include breakpoint($tab) {
+		.media_embed {
+			iframe {
+				height: 360px !important; // override inline styles
+			}
+		}
+	}
+	@include breakpoint($desk) {
+		.media_embed {
+			iframe {
+				height: 480px !important; // override inline styles
+			}
+		}
+	}
+}
+
+// front: markets list
+.block--views-markets-list {
+	text-align: center;
+	padding-bottom: 30px;
+	a {
+		color: white;
+	}
+	.item-list {
+		ul, li {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		> ul {
+			@include clearfix;
+			max-width: 1040px;
+			margin: auto;
+		}
+		.views-row {
+			@include background-image($color-gradient-neutral);
+			@include box-shadow($shadow);
+			margin: auto;
+			margin-top: 10px;
+			padding: 20px;
+			max-width: 230px + (20*2);
+		}
+	}
+	.field--name-field-image {
+		margin-bottom: 10px;
+	}
+	.node__title {
+		margin: 0;
+		font-weight: 600;
+		font-size: 22px;
+	}
+	@include breakpoint($tab) {
+		.item-list {
+			> ul {
+				max-width: (270px*2) + 10;
+			}
+			.views-row {
+				float: left;
+			}
+			.views-row-odd {
+				margin-right: 10px;
+			}
+		}
+	}
+	@include breakpoint($desk) {
+		.item-list {
+			> ul {
+				max-width: 1040px;
+			}
+			.views-row {
+				padding: 0;
+				width: percentage(510/1040);
+				max-width: 100%;
+				margin-top: 20px;
+			}
+			.views-row-odd {
+				margin-right: percentage(20/1040);
+			}
+		}
+		.node--market {
+			display: table;
+			width: 100%;
+		}
+		.field--name-field-image,
+		.node__content {
+			display: table-cell;
+		}
+		.field--name-field-image {
+			width: 230px;
+		}
+		.node__content {
+			text-align: center;
+		}
+	}
+}

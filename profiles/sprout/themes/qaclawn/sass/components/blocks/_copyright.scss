@@ -1,0 +1,20 @@
+.block--leadbuilder-settings-leadbuilder-copyright {
+  color: $color-brand-primary;
+  font-size: 12px;
+  margin-top: 15px;
+  text-align: center;
+  a {
+    color: inherit;
+    &:hover {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+  @include breakpoint($tab) {
+    text-align: left;
+    margin-top: 10px;
+  }
+  @include breakpoint($desk) {
+    margin-top: 7px;
+  }
+}

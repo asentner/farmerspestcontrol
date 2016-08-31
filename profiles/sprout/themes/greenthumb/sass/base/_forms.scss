@@ -1,0 +1,47 @@
+.form-item,
+.form-actions {
+  margin-bottom: 1em;
+  label {
+    margin-bottom: 3px;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+.webform-client-form {
+  .form-text,
+  .form-textarea {
+    padding: 10px;
+    border: 1px solid #eee;
+    font-family: $font-roboto;
+    font-size: 16px;
+  }
+  .form-textarea  {
+    width: 99%;
+  }
+  .grippie {
+    width: 99%;
+  }
+  .form-actions {
+    .form-submit {
+      font: inherit;
+      font-weight: bold;
+    }
+  }
+  @include breakpoint($tab) {
+    .form-actions {
+      .form-submit {
+        width: 250px;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.form-submit {
+  @extend %button;
+  border: 0;
+  cursor: pointer;
+  font-size: 14px;
+}

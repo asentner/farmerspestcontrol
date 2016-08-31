@@ -1,0 +1,17 @@
+.block--views-affiliates-simple {
+	padding: 20px 0;
+	img {
+		vertical-align: middle;
+	}
+	.view-content {
+		text-align: center;
+	}
+	@include breakpoint($tab) {
+		.views-row {
+			display: inline-block;
+			+ .views-row {
+				margin-top: 0;
+			}
+		}
+	}
+}

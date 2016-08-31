@@ -1,0 +1,9 @@
+.block-sidebar {
+	+ .block-sidebar {
+		margin-top: 30px;
+	}
+	.block__title {
+		text-align: center;
+		font-size: 22px;
+	}
+}

@@ -1,0 +1,37 @@
+.block--leadbuilder-settings-leadbuilder-social-media {
+  text-align: center;
+  margin-top: 15px;
+  .block__content {
+    ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+    }
+    li {
+      + li {
+        margin-left: 10px
+      }
+    }
+  }
+  .social-description {
+  	display: none;
+  }
+  .fa {
+    @include flexbox;
+    align-items: center;
+    justify-content: center;
+    background: palette(primary, base);
+    border-radius: 50%;
+    font-size: 23px;
+    color: palette(white, pure);
+    width: 42px;
+    height: 42px;
+    &:hover {
+      background: palette(primary, dark);
+    }
+  }
+  @include breakpoint($desk) {
+    margin: auto 0;
+    padding: 0 20px 0 0;
+  }
+}

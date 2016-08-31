@@ -1,0 +1,76 @@
+@mixin msflex($prop, $val){
+  @if $val == flex-start {
+    #{$prop}: start;
+  } @else if $val == flex-end {
+    #{$prop}: end;
+  } @else if $val == space-between {
+    #{$prop}: justify;
+  } @else if $val == space-around {
+    #{$prop}: distribute;
+  } @else {
+    #{$prop}: $val;
+  }
+}
+
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  > * {
+    -ms-flex:  0 1 auto;
+  }
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin flex-order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+@mixin align-content($val) {
+    -webkit-align-content: $val;
+    @include msflex(-ms-flex-line-pack, $val);
+    align-content: $val;
+}
+
+@mixin flex-direction($val) {
+    -webkit-flex-direction: $val;
+    -ms-flex-direction: $val;
+    flex-direction: $val;
+}
+
+@mixin flex-wrap($val) {
+    -webkit-flex-wrap: $val;
+    -ms-flex-wrap: $val;
+    flex-wrap: $val;
+}
+
+@mixin justify-content($val) {    
+    -webkit-justify-content: $val;
+     @include msflex(-ms-flex-pack, $val);
+    justify-content: $val;
+}
+
+@mixin align-items($val) {
+    -webkit-align-items: $val;
+     @include msflex(-ms-flex-align, $val);
+    align-items: $val;
+}
+
+@mixin align-self($val) {
+    -webkit-align-self: $val;
+    @include msflex(-ms-flex-item-align, $val);
+    align-self: $val;
+}

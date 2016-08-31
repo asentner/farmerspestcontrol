@@ -1,0 +1,68 @@
+//front
+.benefits-hero {
+	max-width: 1170px;
+	margin: auto;
+	.views-row {
+		@include flexbox;
+		justify-content: center;
+		align-items: center;
+		background-color: white;
+		border-radius: 50px;
+		max-width: 300px;
+		min-height: 300px;
+		margin: 0 auto;
+		border: 3px solid $color-brand-secondary;
+		margin-bottom: 30px;
+		padding: 20px;
+		.field--type-text-with-summary {
+			color: black;
+			text-align: center;
+			font-size: 15px;
+		}
+	}
+	.node--benefit--teaser {
+	}
+	.field--name-field-image {
+		text-align: center;
+		display: none;
+	}
+	.node__title {
+		color: $color-brand-secondary;
+		text-align: center;
+		font-size: 24px;
+	}
+	@include breakpoint(340px) {
+		.views-row {
+			border-radius: 50%;
+		}
+	}
+	@include breakpoint($tab) {
+		.view-content {
+			@include flexbox;
+		}
+		.views-row {
+			+ .views-row {
+				margin-left: 10px;
+			}
+		}
+	}
+	@include breakpoint($desk) {
+		.field--name-field-image {
+			display: block;
+			+ div {
+				margin-top: 10px;
+			}
+		}
+		.node--benefit--teaser {
+			margin: 0 20px;
+		}
+		.views-row {
+			max-width: 320px;
+			height: 320px;
+		}
+	}
+}
+
+.block--leadbuilder-views-leadbuilder-views-lt-benefits {
+	@extend .benefits-hero;
+}

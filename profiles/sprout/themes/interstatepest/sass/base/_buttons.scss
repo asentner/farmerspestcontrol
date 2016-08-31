@@ -1,0 +1,21 @@
+%button {
+	border-radius: 4px;
+	display: inline-block;
+	padding: 13px 35px;
+	border: 0;
+	background: $color-button-primary-bg;
+	color: white;
+	font-family: $font-headings;
+	font-weight: bold;
+	font-size: 14px;
+	text-transform: uppercase;
+	cursor: pointer;
+	line-height: 1.2;
+	&:hover {
+		background: darken($color-button-primary-bg, 5);
+	}
+}
+
+.button {
+	@extend %button;
+}

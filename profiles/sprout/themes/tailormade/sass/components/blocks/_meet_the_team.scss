@@ -1,0 +1,52 @@
+.block--views-team-list {
+    margin-top: 30px;
+    text-align: center;
+    .field--name-field-image {
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 4px rgba(black, .3);
+        img {
+            width: 100%;
+            max-width: 100%;
+        }
+        margin-bottom: 20px;
+    }
+    
+    .views-row {
+        max-width: 220px;
+        margin-bottom: 50px;
+        padding: 0 15px;
+    }
+    
+    .view-content {
+        @include flexbox;
+        @include flex-wrap(wrap);
+        @include justify-content(center);
+    }
+    
+    .node__title {
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-size: 25px;
+    }
+    
+    .field--name-field-position {
+        font-style: italic;
+    }
+    @include breakpoint($tab) {
+        .view-content {
+            @include justify-content(flex-start);
+        }
+        .views-row {
+            min-width: 50%;
+        }
+        .node__title {
+            font-size: 21px;
+        }
+    }
+    @include breakpoint($desk) {
+        .views-row {
+            min-width: percentage(1/3);
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.block--bbb-accredited {
+	background: #dcdcdc;
+	text-align: center;
+	img {
+		vertical-align: middle;
+	}
+}
+
+//front
+.bbb-front {
+	text-align: center;
+	width: 300px;
+	margin: 0 auto;
+	@include breakpoint($tab) {
+		margin: 0;
+		@include flexbox;
+		@include flex-direction(column);
+		@include justify-content(center);
+		
+		img {
+			width: percentage(186/300);
+			max-width: 186px;
+		}
+	}
+}
