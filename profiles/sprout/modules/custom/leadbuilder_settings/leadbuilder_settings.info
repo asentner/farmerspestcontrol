@@ -1,8 +1,0 @@
-name = LeadBuilder Settings
-description = Defines a form for site settings
-core = 7.x
-version = "7.x-1.0"
-package = LeadBuilder
-configure = admin/config/system/leadbuilder-settings
-
-scripts[] = js/leadbuilder.js

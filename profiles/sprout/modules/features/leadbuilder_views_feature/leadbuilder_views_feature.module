@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the LeadBuilder Views (Feature) feature.
- */
-
-include_once 'leadbuilder_views_feature.features.inc';

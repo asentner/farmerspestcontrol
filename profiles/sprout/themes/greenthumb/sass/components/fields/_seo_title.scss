@@ -1,7 +1,0 @@
-.field--name-field-seo-title {
-  @extend %heading;
-  @include breakpoint($tab) {
-    font-size: 34px;
-    line-height: (41/34);
-  }
-}

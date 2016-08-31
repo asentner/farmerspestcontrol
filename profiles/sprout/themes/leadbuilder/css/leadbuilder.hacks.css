@@ -1,9 +1,0 @@
-@media all and (max-width: 800px) {
-  /* line 3, ../sass/leadbuilder.hacks.scss */
-  #toolbar, #admin-menu {
-    display: none; }
-
-  /* line 8, ../sass/leadbuilder.hacks.scss */
-  html body.toolbar, html body.admin-menu {
-    padding-top: 0 !important;
-    margin-top: 0 !important; } }

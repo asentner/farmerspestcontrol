@@ -1,9 +1,0 @@
-.not-front {
-	.l-region--postscript-third {
-		@include background-image($color-gradient-secondary);
-		@include front-arrow(white, white);
-		&:before {
-			margin-top: 0px;
-		}
-	}
-}

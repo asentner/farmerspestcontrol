@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the LeadBuilder Taxonomy (Feature) feature.
- */
-
-include_once 'leadbuilder_taxonomy.features.inc';
