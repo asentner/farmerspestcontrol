@@ -11,14 +11,14 @@
  * @ingroup themeable
  */
 
-function leadbuilder_breadcrumb($variables) {
+function sprowt_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
   
   $returnString = function($string) {
     return $string;
   };
   
-  $replace = (function_exists('_leadbuilder_settings_shortcode_replace')) ? '_leadbuilder_settings_shortcode_replace' : $returnString;
+  $replace = (function_exists('_sprowt_settings_shortcode_replace')) ? '_sprowt_settings_shortcode_replace' : $returnString;
 
   if (drupal_is_front_page()) {
     $breadcrumb = array();

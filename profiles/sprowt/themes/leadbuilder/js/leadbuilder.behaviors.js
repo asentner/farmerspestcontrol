@@ -1,6 +1,6 @@
 (function ($) {
 
-  Drupal.behaviors.leadbuilderMobileMenu = {
+  Drupal.behaviors.sprowtMobileMenu = {
     attach: function () {
       if ($('.mobile-menu-block').length > 0) {
         var menuBlock = $('.mobile-menu-block').first();

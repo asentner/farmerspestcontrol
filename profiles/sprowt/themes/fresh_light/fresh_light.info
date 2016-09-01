@@ -1,6 +1,6 @@
 name = Ladybug - Fresh Light
 description = Please provide a description for your theme.
-base theme = leadbuilder
+base theme = sprowt
 screenshot = screenshot.png
 engine = phptemplate
 core = 7.x

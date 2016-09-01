@@ -6,7 +6,7 @@
  * Interstate Pest theme.
  */
 
-// function interstatepest_leadbuilder_geoip_phone_number_alter(&$vars){
+// function interstatepest_sprowt_geoip_phone_number_alter(&$vars){
 //     $record = $vars['record'];
 
 //     $ac = $record->area_code;

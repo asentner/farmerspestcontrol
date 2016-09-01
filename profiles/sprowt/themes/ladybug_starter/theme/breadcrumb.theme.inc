@@ -7,7 +7,7 @@ function ladybug_starter_breadcrumb($variables) {
     return $string;
   };
   
-  $replace = (function_exists('_leadbuilder_settings_shortcode_replace')) ? '_leadbuilder_settings_shortcode_replace' : $returnString;
+  $replace = (function_exists('_sprowt_settings_shortcode_replace')) ? '_sprowt_settings_shortcode_replace' : $returnString;
 
   if (drupal_is_front_page()) {
     $breadcrumb = array();

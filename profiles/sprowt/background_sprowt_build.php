@@ -15,7 +15,7 @@ variable_set('install_profile', 'sprowt');
 
 if(!db_table_exists('sprowt_progress')){
     $sprowt_progress_schema = array(
-      'description' => 'The initial setup for this leadbuilder site',
+      'description' => 'The initial setup for this sprowt site',
       'fields' => array(
         'id' => array('type' => 'serial', 'unsigned' => true, 'not null' => true),
         'function' => array('type'=> 'varchar', 'length' => 255, 'not null' => true, 'default' => ''),
