@@ -4,7 +4,7 @@
         if($('.messages').hasClass('status')){
             var interior = $('.messages.status').html();
 
-            var html = 'Sprout Installed! Click <a href="#" class="status_messages_toggle">here</a> to see module status messages';
+            var html = 'Sprowt Installed! Click <a href="#" class="status_messages_toggle">here</a> to see module status messages';
             html += '<div class="status_messages" style="display:none;">';
             html += '<div style="text-align:right;"><a href="#" class="status_messages_toggle">Close</a></div><br>'
             html += interior;

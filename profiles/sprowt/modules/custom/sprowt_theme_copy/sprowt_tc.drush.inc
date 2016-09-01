@@ -8,7 +8,7 @@ function sprowt_tc_drush_command() {
         $items['theme-copy'] = array(
             'description' => 'Copy a sprowt theme to the sites/all/themes directory',
             'arguments'   => array(
-                'old'      => 'Machine Name for Sprout theme being copied',
+                'old'      => 'Machine Name for Sprowt theme being copied',
                 'new-name' => 'Name of new theme'
             ),
             'options'     => array(

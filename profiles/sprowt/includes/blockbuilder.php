@@ -83,7 +83,7 @@ class BlockBuilder {
                     $bid = db_insert('block_custom')->fields($row)->execute();
                     $this->block_custom_map[$current_row['bid']] = $bid;
                 } catch (Exception $e) {
-                    watchdog_exception('Sprout BlockBuilder', $e);
+                    watchdog_exception('Sprowt BlockBuilder', $e);
                 }
             }
             else {
@@ -99,7 +99,7 @@ class BlockBuilder {
                     db_insert('block_node_type')->fields($type)->execute();
                 }
                 catch (Exception $e) {
-                    watchdog_exception('Sprout BlockBuilder',$e);
+                    watchdog_exception('Sprowt BlockBuilder',$e);
                 }
             }
         }
@@ -113,7 +113,7 @@ class BlockBuilder {
                     db_insert('block_role')->fields($role)->execute();
                 }
                 catch (Exception $e) {
-                    watchdog_exception('Sprout BlockBuilder',$e);
+                    watchdog_exception('Sprowt BlockBuilder',$e);
                 }
             }
         }
@@ -129,7 +129,7 @@ class BlockBuilder {
                     $delta = db_insert('multiblock')->fields($row)->execute();
                     $this->multiblock_map[$current_row['delta']] = $delta;
                 } catch (Exception $e) {
-                    watchdog_exception('Sprout BlockBuilder', $e);
+                    watchdog_exception('Sprowt BlockBuilder', $e);
                 }
             }
             else {
@@ -182,7 +182,7 @@ class BlockBuilder {
                     $trans[] = db_insert('block')->fields($row);
                 }
                 else {
-                    watchdog('Sprout BlockBuilder', 'Block not inserted. Missing delta map for block: <pre>%block</pre>', array(
+                    watchdog('Sprowt BlockBuilder', 'Block not inserted. Missing delta map for block: <pre>%block</pre>', array(
                         '%block' => print_r($current_row, true)
                     ));
                 }
@@ -201,7 +201,7 @@ class BlockBuilder {
                 }
                 catch(Exception $e) {
                     $t->rollback();
-                    watchdog_exception('Sprout BlockBuilder', $e);
+                    watchdog_exception('Sprowt BlockBuilder', $e);
                 }
             }
         }
@@ -257,7 +257,7 @@ class BlockBuilder {
                 }
                 catch(Exception $e) {
                     $t->rollback();
-                    watchdog_exception('Sprout BlockBuilder', $e);
+                    watchdog_exception('Sprowt BlockBuilder', $e);
                 }
             }
         }
@@ -462,7 +462,7 @@ class BlockBuilder {
         $json = file_get_contents($filepath);
         $array = json_decode($json, true);
         if(empty($array)) {
-            watchdog('Sprout BlockBuilder', 'File does not contain JSON data: %filepath', array('%filepath' => $filepath));
+            watchdog('Sprowt BlockBuilder', 'File does not contain JSON data: %filepath', array('%filepath' => $filepath));
             return false;
         }
 

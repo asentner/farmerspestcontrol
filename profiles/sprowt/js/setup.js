@@ -50,7 +50,7 @@
 
                     var error = {};
 
-                    error['Sprout Setup Error'] = obj;
+                    error['Sprowt Setup Error'] = obj;
 
                     console.log(error);
                 }

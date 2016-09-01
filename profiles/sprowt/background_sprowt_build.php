@@ -54,11 +54,11 @@ function update_progress($function, $perc, $message, $actions, $id) {
     $updated->execute();
 }
 
-$sb = new SproutBuilder();
+$sb = new SprowtBuilder();
 
 
 $actions = array(
-    'getData' => "Getting Sprout Data...",
+    'getData' => "Getting Sprowt Data...",
     'addUsers' => "Adding Users...",
     'addBranding' => "Adding Branding...",
     'addNodes' => "Adding Default Nodes...",
@@ -94,4 +94,4 @@ $updated = db_update('sprowt_progress') // Table name no longer needs {}
   ->condition('id', $progress['id'], '=')
   ->execute();
   
-echo "Sprout Setup Done!";
+echo "Sprowt Setup Done!";

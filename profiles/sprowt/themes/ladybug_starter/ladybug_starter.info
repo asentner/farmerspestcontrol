@@ -1,5 +1,5 @@
 name = Ladybug Starter
-description = A copyable theme which serves as a starting point for Sprout.
+description = A copyable theme which serves as a starting point for Sprowt.
 base theme = omega
 screenshot = screenshot.png
 engine = phptemplate

@@ -9,7 +9,7 @@ if(!defined('DRUPAL_ROOT')){
 
 require_once DRUPAL_ROOT . '/profiles/sprowt/includes/menubuilder.php';
 
-Class SproutBuilder {
+Class SprowtBuilder {
     
     public $data = array();
     
@@ -31,7 +31,7 @@ Class SproutBuilder {
         );
         
         if(empty($query)){
-            throw new Exception('Sprout Setup Table empty!!!');
+            throw new Exception('Sprowt Setup Table empty!!!');
             die;
         }
         

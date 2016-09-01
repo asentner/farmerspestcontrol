@@ -159,7 +159,7 @@ class MenuBuilder {
         $json = file_get_contents($filepath);
         $array = json_decode($json, true);
         if(empty($array)) {
-            watchdog('Sprout MenuBuilder', 'File does not contain JSON data: %filepath', array('%filepath' => $filepath));
+            watchdog('Sprowt MenuBuilder', 'File does not contain JSON data: %filepath', array('%filepath' => $filepath));
             return false;
         }
 

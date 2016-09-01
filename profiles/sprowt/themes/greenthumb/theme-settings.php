@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Theme settings file for the Sprout Starter theme.
+ * Theme settings file for the Sprowt Starter theme.
  */
 
 require_once dirname(__FILE__) . '/template.php';

@@ -48,7 +48,7 @@ function sprowt_install_tasks($install_state) {
      'type' => 'form',
     ),
     'sprowt_setup_form' => array(
-      'display_name' => t('Setting Up Sprout'),
+      'display_name' => t('Setting Up Sprowt'),
       'type' => 'form',
     ),
     
@@ -417,7 +417,7 @@ function sprowt_update_7001() {
  */
 function sprowt_update_7002() {
   require_once drupal_get_path('profile', 'sprowt') . '/sprowtbuilder.php';
-  $SB = new SproutBuilder();
+  $SB = new SprowtBuilder();
   $SB->updateUsers();
   variable_set('image_allow_insecure_derivatives', true);
   if (variable_get('maintenance_mode', 0)) {

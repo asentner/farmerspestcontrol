@@ -167,7 +167,7 @@ function sprowt_setup_tables($install_state){
     }
 
     $sprowt_setup_schema = array(
-        'description' => 'The process db for Sprout',
+        'description' => 'The process db for Sprowt',
         'fields' => array(
             'process_id' => array('type'=> 'varchar', 'length' => 255, 'not null' => true, 'default' => ''),
             'message' => array('type'=> 'varchar', 'length' => 255, 'not null' => true, 'default' => ''),
@@ -284,7 +284,7 @@ function sprowt_install_features(){
 
 function sprowt_setup(&$install_state){
 
-    $sb = new SproutBuilder();
+    $sb = new SprowtBuilder();
     $data = $sb->getData();
     $id = md5(serialize($data));
 
@@ -305,7 +305,7 @@ function sprowt_setup(&$install_state){
 }
 
 function _sprowt_get_data(){
-    $sb = new SproutBuilder();
+    $sb = new SprowtBuilder();
     return $sb->getData();
 }
 
@@ -438,12 +438,12 @@ function _sprowt_form_default($field_name, $default = '') {
                     return 'template_qaclawn';
                     break;
                 case 'new_theme_name':
-                    return 'Sprout Theme 1';
+                    return 'Sprowt Theme 1';
                     break;
                 case 'new_theme':
                     require_once DRUPAL_ROOT . '/' . drupal_get_path('profile', 'sprowt') . '/includes/themebuilder.php';
                     $TB = new ThemeBuilder();
-                    return $TB->machine_nameify('Sprout Theme 1');
+                    return $TB->machine_nameify('Sprowt Theme 1');
                 case 'primary_color':
                     return '#2ca8fc';
                     break;

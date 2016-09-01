@@ -5,7 +5,7 @@ include_once('sprowtbuilder.php');
 
 include_once('modules/contrib/devel/krumo/class.krumo.php');
 
-$SP = new SproutBuilder();
+$SP = new SprowtBuilder();
 
 $object = new stdClass();
 $object->variable = 'test variable';
