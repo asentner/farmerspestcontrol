@@ -110,19 +110,19 @@ dependencies[] = devel
 
 ; Custom Modules
 
-dependencies[] = leadbuilder_forms
-dependencies[] = leadbuilder_block_cta
-dependencies[] = leadbuilder_dashboard
-dependencies[] = leadbuilder_settings
-dependencies[] = leadbuilder_taxonomy_engine
-dependencies[] = leadbuilder_theme
-dependencies[] = leadbuilder_theme_copy
-dependencies[] = leadbuilder_views
+dependencies[] = sprowt_forms
+dependencies[] = sprowt_block_cta
+dependencies[] = sprowt_dashboard
+dependencies[] = sprowt_settings
+dependencies[] = sprowt_taxonomy_engine
+dependencies[] = sprowt_theme
+dependencies[] = sprowt_theme_copy
+dependencies[] = sprowt_views
 
 
 ; Features
 
-;dependencies[] = leadbuilder_all;
+;dependencies[] = sprowt_all;
 
 ; Add in the .profile
 

@@ -146,7 +146,7 @@ function sprowt_setup_tables($install_state){
     }
 
     $sprowt_setup_schema = array(
-        'description' => 'The initial setup for this leadbuilder site',
+        'description' => 'The initial setup for this sprowt site',
         'fields' => array(
             'setup_id' => array('type' => 'serial', 'unsigned' => true, 'not null' => true),
             'form_name' => array('type'=> 'varchar', 'length' => 255, 'not null' => true, 'default' => ''),
@@ -263,12 +263,12 @@ function sprowt_install_features(){
 
     //base features
     $base_features = array(
-        'leadbuilder_taxonomy',
-        'leadbuilder_fields_and_text_formats',
-        'leadbuilder_content_types',
-        'leadbuilder_views_feature',
-        'leadbuilder_user_settings',
-        'leadbuilder_menu_settings'
+        'sprowt_taxonomy',
+        'sprowt_fields_and_text_formats',
+        'sprowt_content_types',
+        'sprowt_views_feature',
+        'sprowt_user_settings',
+        'sprowt_menu_settings'
     );
 
     foreach($base_features as $feature){
@@ -416,16 +416,16 @@ function _sprowt_form_default($field_name, $default = '') {
                 case 'gplus':
                     return 'http://gplusurl.com';
                     break;
-                case 'leadbuilder_settings_yelp_url':
+                case 'sprowt_settings_yelp_url':
                     return 'http://yelp.com';
                     break;
-                case 'leadbuilder_settings_bbb_url':
+                case 'sprowt_settings_bbb_url':
                     return 'http://bbb.com';
                     break;
-                case 'leadbuilder_settings_angie_url':
+                case 'sprowt_settings_angie_url':
                     return 'http://angieslist.com';
                     break;
-                case 'leadbuilder_settings_yp_url':
+                case 'sprowt_settings_yp_url':
                     return 'http://yp.com';
                     break;
                 case 'gtm':

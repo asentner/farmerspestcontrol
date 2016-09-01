@@ -95,27 +95,27 @@ Class SproutBuilder {
         }
         
         if(!empty($this->data['social_media']['facebook'])){
-            variable_set('leadbuilder_settings_facebook_url', $this->data['social_media']['facebook']);
+            variable_set('sprowt_settings_facebook_url', $this->data['social_media']['facebook']);
         }
         
         if(!empty($this->data['social_media']['twitter'])){
-            variable_set('leadbuilder_settings_twitter_handle', $this->data['social_media']['twitter']);
+            variable_set('sprowt_settings_twitter_handle', $this->data['social_media']['twitter']);
         }
         
         if(!empty($this->data['social_media']['linkedin'])){
-            variable_set('leadbuilder_settings_linkedin_url', $this->data['social_media']['linkedin']);
+            variable_set('sprowt_settings_linkedin_url', $this->data['social_media']['linkedin']);
         }
         
         if(!empty($this->data['social_media']['yelp'])){
-            variable_set('leadbuilder_settings_yelp_url', $this->data['social_media']['yelp']);
+            variable_set('sprowt_settings_yelp_url', $this->data['social_media']['yelp']);
         }
         
         if(!empty($this->data['social_media']['bbb'])){
-            variable_set('leadbuilder_settings_bbb_url', $this->data['social_media']['bbb']);
+            variable_set('sprowt_settings_bbb_url', $this->data['social_media']['bbb']);
         }
         
         if(!empty($this->data['social_media']['gplus'])){
-            variable_set('leadbuilder_settings_gplus_url', $this->data['social_media']['gplus']);
+            variable_set('sprowt_settings_gplus_url', $this->data['social_media']['gplus']);
         }
         
     }
@@ -128,18 +128,18 @@ Class SproutBuilder {
             $this->getData();
         }
         
-        variable_set('leadbuilder_settings_company_name', $this->data['company_info']['company_name']);
-        variable_set('leadbuilder_settings_phone_number', $this->cleanPhone($this->data['company_info']['company_phone']));
+        variable_set('sprowt_settings_company_name', $this->data['company_info']['company_name']);
+        variable_set('sprowt_settings_phone_number', $this->cleanPhone($this->data['company_info']['company_phone']));
         if(!empty($this->data['company_info']['contact_phone'])){
-            variable_set('leadbuilder_settings_contact_phone', $this->cleanPhone($this->data['company_info']['contact_phone']));
+            variable_set('sprowt_settings_contact_phone', $this->cleanPhone($this->data['company_info']['contact_phone']));
         }
         
         if(!empty($this->data['company_info']['contact_name'])){
-            variable_set('leadbuilder_settings_contact_name', $this->data['company_info']['contact_name']);
+            variable_set('sprowt_settings_contact_name', $this->data['company_info']['contact_name']);
         }
         
         if(!empty($this->data['company_info']['contact_email'])){
-            variable_set('leadbuilder_settings_contact_email', $this->data['company_info']['contact_email']);
+            variable_set('sprowt_settings_contact_email', $this->data['company_info']['contact_email']);
         }
     }
     
@@ -164,7 +164,7 @@ Class SproutBuilder {
     }
     
     /**
-     * Pulls in nodes form leadbuilder and adds them, hopefully
+     * Pulls in nodes form sprowt and adds them, hopefully
      *
      */
     function addNodes(){
@@ -660,7 +660,7 @@ Class SproutBuilder {
             node_save($region);
             if(count($regions) > 1 && empty($region_added)){
                 $entities = array_values(entity_uuid_load('node', array('2b054fc1-1268-405d-9d93-9829b7c4a20c')));
-                $service_areas = _leadbuilder_taxonomy_engine_add_menu_info($entities[0]);
+                $service_areas = _sprowt_taxonomy_engine_add_menu_info($entities[0]);
                 $region->menu = array(
                     'link_title' => $region->title,
                     'menu_name' => 'main-menu',
