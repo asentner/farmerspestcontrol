@@ -329,11 +329,11 @@ Class ThemeBuilder {
     
         $form['#attached']['css'][] = $path . "/css/theme_copy.css";
         $form['#attached']['js'][] = $path . "/js/branding.js";
-    
+
         $excluded = array(
             'omega',
             'ohm',
-            'seven_sprowt'
+            'adminimal'
         );
     
         $themes = array();
