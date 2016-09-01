@@ -1,0 +1,7 @@
+<?php
+function sprowt_settings_install() {
+  db_update('system')
+    ->fields(array('weight' => 2))
+    ->condition('name', 'sprowt_settings', '=')
+    ->execute();
+}

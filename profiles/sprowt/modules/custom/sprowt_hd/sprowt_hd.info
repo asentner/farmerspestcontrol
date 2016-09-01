@@ -1,0 +1,8 @@
+name = Sprowt HD Features
+description = Adds Sprowt HD Features (CTM form reactor integration)
+core = 7.x
+version = 7.x-1.0
+package = Sprowt
+dependencies[] = webform
+
+scripts[] = js/sprowt_hd.js

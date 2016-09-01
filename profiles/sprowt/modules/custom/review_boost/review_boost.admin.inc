@@ -441,8 +441,8 @@ function _review_boost_admin_form($form, $form_state){
 }
 
 function _review_boost_generate_token_help($addtl = array()){
-    if(function_exists('leadbuilder_settings_get_phone_number')) {
-        $phone = leadbuilder_settings_get_phone_number();
+    if(function_exists('sprowt_settings_get_phone_number')) {
+        $phone = sprowt_settings_get_phone_number();
     }
     else if(function_exists('coal_admin_get_phone_number')) {
         $phone = coal_admin_get_phone_number();

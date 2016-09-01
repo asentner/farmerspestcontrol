@@ -226,8 +226,8 @@ function _review_boost_get_customer_email(){
 
 function _review_boost_get_signoff() {
 
-    $company_name = variable_get('leadbuilder_settings_company_name', variable_get('coal_admin_company_name', variable_get('site_name')));
-    $signoff_array = (function_exists('_leadbuilder_settings_get_address')) ? _leadbuilder_settings_get_address() : array(
+    $company_name = variable_get('sprowt_settings_company_name', variable_get('coal_admin_company_name', variable_get('site_name')));
+    $signoff_array = (function_exists('_sprowt_settings_get_address')) ? _sprowt_settings_get_address() : array(
         'street' => variable_get('coal_admin_address_street', false),
         'street2' => variable_get('coal_admin_address_additional', false),
         'locality' => variable_get('coal_admin_address_locality', false),
@@ -235,8 +235,8 @@ function _review_boost_get_signoff() {
         'postal_code' => variable_get('coal_admin_address_postal_code', false),
     );
 
-    if(function_exists('leadbuilder_settings_get_phone_number')) {
-        $phone = leadbuilder_settings_get_phone_number();
+    if(function_exists('sprowt_settings_get_phone_number')) {
+        $phone = sprowt_settings_get_phone_number();
     }
     else {
         $phone = (function_exists('coal_admin_get_phone_number')) ? coal_admin_get_phone_number() : false;
@@ -280,8 +280,8 @@ function _review_boost_translate_values($str, $token, $additional_trans = array(
         '%site_email' => variable_get('site_mail')
     );
 
-    if(function_exists('leadbuilder_settings_get_phone_number')) {
-        $trans['%company_phone'] = leadbuilder_settings_get_phone_number();
+    if(function_exists('sprowt_settings_get_phone_number')) {
+        $trans['%company_phone'] = sprowt_settings_get_phone_number();
     }
     else if(function_exists('coal_admin_get_phone_number')) {
         $trans['%company_phone'] = coal_admin_get_phone_number();
@@ -291,12 +291,12 @@ function _review_boost_translate_values($str, $token, $additional_trans = array(
     }
 
 
-    $company_name = variable_get('leadbuilder_settings_company_name', variable_get('coal_admin_company_name', variable_get('site_name')));
+    $company_name = variable_get('sprowt_settings_company_name', variable_get('coal_admin_company_name', variable_get('site_name')));
 
     $trans['%company_name'] = $company_name;
 
-    if(function_exists('_leadbuilder_settings_get_address')) {
-        $address = _leadbuilder_settings_get_address();
+    if(function_exists('_sprowt_settings_get_address')) {
+        $address = _sprowt_settings_get_address();
         $address_array = array(
             '%street' => $address['street'],
             '%street2' => '',
@@ -560,8 +560,8 @@ function _review_boost_questionnaire_complete_default($high = false) {
 
     return theme('review_boost_complete_default', array(
         'request_review' => $high,
-        'gplus_url' => variable_get('leadbuilder_settings_gplus_url', variable_get('coal_admin_gplus_url', false)),
-        'bbb_url' => variable_get('leadbuilder_settings_bbb_url', variable_get('coal_admin_bbb_url', false)),
+        'gplus_url' => variable_get('sprowt_settings_gplus_url', variable_get('coal_admin_gplus_url', false)),
+        'bbb_url' => variable_get('sprowt_settings_bbb_url', variable_get('coal_admin_bbb_url', false)),
         'company_email' => variable_get('site_mail'),
         'signoff' => _review_boost_get_signoff()
     ));
@@ -595,9 +595,9 @@ function _review_boost_questionnaire_complete($token) {
 
     $content = $content_val['value'];
 
-    if(function_exists('_leadbuilder_settings_shortcode_replace')) {
-        $title = _leadbuilder_settings_shortcode_replace($title);
-        $content = _leadbuilder_settings_shortcode_replace($content);
+    if(function_exists('_sprowt_settings_shortcode_replace')) {
+        $title = _sprowt_settings_shortcode_replace($title);
+        $content = _sprowt_settings_shortcode_replace($content);
     }
 
     $extra_trans = array(

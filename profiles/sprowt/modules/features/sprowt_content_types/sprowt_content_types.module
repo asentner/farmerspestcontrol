@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the LeadBuilder Content Types (Feature) feature.
+ */
+
+include_once 'sprowt_content_types.features.inc';

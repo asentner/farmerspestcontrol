@@ -1,0 +1,10 @@
+name = Sprowt Dashboard
+description = Provides functionality and pages for the RGA dashboard where regions, markets, service categories, and services can be managed.
+core = 7.x
+version = 7.x-1.0
+package = Sprowt
+
+
+stylesheets[all][] = sprowt_dashboard.css
+scripts[] = sprowt_dashboard.js
+

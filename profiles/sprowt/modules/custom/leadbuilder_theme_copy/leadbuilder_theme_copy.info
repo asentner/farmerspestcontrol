@@ -1,7 +1,0 @@
-name = LeadBuilder Theme Copy Function
-description = Functionality for copying a theme
-core = 7.x
-version = 7.x-1.0
-package = LeadBuilder
-
-dependencies[] = jquery_update

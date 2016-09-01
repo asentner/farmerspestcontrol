@@ -1,0 +1,91 @@
+<?php
+$includes = glob(drupal_get_path('module', 'sprowt_theme').'/preprocess/*.inc');
+foreach($includes as $include){
+    include_once($include);
+}
+
+
+function _sprowt_theme_breadcrumb() {
+  $breadcrumb = menu_get_active_breadcrumb();
+
+  if (drupal_is_front_page()) {
+    $breadcrumb = array();
+  }
+  else if ($node = menu_get_object()) {
+  	if ($node->type == 'profile') {
+  		$breadcrumb[] = l('About', 'about');
+        $breadcrumb[] = l('Team', 'about/team');
+  	}
+    else if ($node->type == 'service') {
+        $breadcrumb[] = l('Our Services', 'our-services');
+        $term = taxonomy_term_load($node->field_service['und'][0]['tid']);
+        $breadcrumb[] = l($term->name, arg(0, drupal_get_path_alias()));
+    }
+    else if ($node->type == 'localtarget') {
+        $breadcrumb = array(l('Home', '')); //Reset breadcrumb due to fly-out menu
+        $row = db_query("SELECT nid, title FROM node LEFT JOIN field_data_field_service ON nid=entity_id WHERE field_service_tid=:tid AND type='service'", array(':tid' => $node->field_service['und'][0]['tid']))->fetchObject();
+        $breadcrumb[] = l('Services', 'our-services');
+        $service = $node->field_service['und'][0]['taxonomy_term']->name;
+        $breadcrumb[] = l($node->field_service['und'][0]['taxonomy_term']->name, 'our-services/'. preg_replace("/[\s_]/", "-", strtolower($service)));
+        $breadcrumb[] = l($row->title, 'node/'.$row->nid);
+    }
+    else if ($node->type == 'blog') {
+      $service = db_query("SELECT nid, title FROM node 
+        LEFT JOIN field_data_field_service ON nid=entity_id 
+        WHERE field_service_tid=:tid AND type='service'", array(':tid' => $node->field_service['und'][0]['tid']))->fetchObject();
+      
+      $market = db_query("SELECT nid, title FROM node 
+        LEFT JOIN field_data_field_market ON nid=field_data_field_market.entity_id 
+        LEFT JOIN field_data_field_service ON nid=field_data_field_service.entity_id
+        WHERE field_market_tid=:tid AND field_service_tid=:ttid AND type='localtarget'", 
+        array(':tid' => $node->field_market['und'][0]['tid'], ':ttid' => $node->field_service['und'][0]['tid']))->fetchObject();
+
+      $breadcrumb[] = l('Our Services', 'our-services');
+      $breadcrumb[] = l($service->title, 'node/'.$service->nid);
+      $breadcrumb[] = l($market->title, 'node/'.$market->nid);
+    }
+
+    if ($node->type == 'localtarget') {
+      $market = taxonomy_term_load($node->field_market['und'][0]['tid']);
+      $breadcrumb[] = $market->name;
+    }
+    else {
+  	  $breadcrumb[] = $node->title;
+    }
+  }
+
+  return $breadcrumb;
+}
+
+/*
+ * TODO: Determine if we need this
+ *
+ *
+function sprowt_theme_preprocess_image(&$variables) {
+  $image = _sprowt_theme_get_dimens_from_path($variables['path']);
+  $variables['height'] = $image['height'];
+  $variables['width'] = $image['width'];
+
+  $new = explode('?', $variables['path']);
+  $new = $new[0];
+  $variables['path'] = $new;
+}
+
+function _sprowt_theme_get_dimens_from_path($path) {
+  $replacement = (isset($_SERVER['HTTPS'])) ? '/https:\/\//' : ('/http:\/\/' . $_SERVER['SERVER_NAME'] . '\/sites\/(\w+)\/files\//');
+
+  $new = preg_replace($replacement, 'public://', $path);
+  $new = explode('?', $new);
+  $new = $new[0];
+
+  $image = image_get_info($new);
+
+  $output = array(
+    'height' => $image['height'],
+    'width' => $image['width'],
+  );
+  
+  return $output;
+
+}
+*/

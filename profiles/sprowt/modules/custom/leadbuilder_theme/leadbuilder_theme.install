@@ -1,7 +1,0 @@
-<?php
-function leadbuilder_theme_install() {
-  db_update('system')
-    ->fields(array('weight' => 3))
-    ->condition('name', 'leadbuilder_theme', '=')
-    ->execute();
-}

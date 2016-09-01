@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function sprowt_dashboard_menu() {
+  $items = array();
+
+  $items['admin/dashboard'] = array(
+    'title' => t(' Dashboard'),
+    'page callback' => 'sprowt_dashboard_admin',
+    'access callback' => 'sprowt_dashboard_access',
+    'file' => 'sprowt_dashboard.pages.inc',
+    'menu_name' => 'management',
+    'weight' => -1000,
+  );
+
+  return $items;
+}
+
+function sprowt_dashboard_access() {
+  global $user;
+
+  return in_array('administrator', $user->roles);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

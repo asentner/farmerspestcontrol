@@ -1,7 +1,0 @@
-name = LeadBuilder Taxonomy Engine
-description = Manages creation/alteration/deletion of Region, Market, Service, and LocalTarget pages via the regions, markets, and services taxonomy vocabularies.
-core = 7.x
-version = 7.x-1.0
-package = LeadBuilder
-
-scripts[] = leadbuilder_taxonomy_engine.js

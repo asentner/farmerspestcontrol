@@ -1,0 +1,7 @@
+<?php
+function sprowt_theme_install() {
+  db_update('system')
+    ->fields(array('weight' => 3))
+    ->condition('name', 'sprowt_theme', '=')
+    ->execute();
+}

@@ -1,7 +1,0 @@
-<?php
-function leadbuilder_settings_install() {
-  db_update('system')
-    ->fields(array('weight' => 2))
-    ->condition('name', 'leadbuilder_settings', '=')
-    ->execute();
-}

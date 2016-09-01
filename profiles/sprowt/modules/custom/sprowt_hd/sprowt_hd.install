@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * Implements hook_schema()
+ */
+function sprowt_hd_schema() {
+    if (!db_table_exists('sprowt_hd_webform')) {
+        $schema['sprowt_hd_webform'] = array(
+            'fields' => array(
+                'nid' => array(
+                    'type' => 'int',
+                    'unsigned' => true,
+                    'not null' => true,
+                    'default' => 0,
+                ),
+                'form_reactor_enabled' => array(
+                    'type' => 'int',
+                    'size' => 'tiny',
+                    'default' => 0,
+                ),
+                'form_reactor_id' => array(
+                    'type' => 'varchar',
+                    'length' => 128,
+                ),
+                'form_reactor_first_name_field' => array(
+                    'type' => 'varchar',
+                    'length' => 128,
+                ),
+                'form_reactor_last_name_field' => array(
+                    'type' => 'varchar',
+                    'length' => 128,
+                ),
+                'form_reactor_email_field' => array(
+                    'type' => 'varchar',
+                    'length' => 128,
+                ),
+                'form_reactor_phone_field' => array(
+                    'type' => 'varchar',
+                    'length' => 128,
+                ),
+            ),
+            'indexes' => array(
+                'nid' => array(
+                    'nid',
+                    array(
+                        'form_reactor_first_name_field',
+                        128
+                    ),
+                    array(
+                        'form_reactor_last_name_field',
+                        128
+                    ),
+                    array(
+                        'form_reactor_email_field',
+                        128
+                    ),
+                    array(
+                        'form_reactor_phone_field',
+                        128
+                    ),
+                )
+            ),
+        );
+
+        return $schema;
+    }
+}
+
+function sprowt_hd_uninstall() {
+    if (db_table_exists('sprowt_hd_webform')) {
+        db_drop_table('sprowt_hd_webform');
+    }
+}

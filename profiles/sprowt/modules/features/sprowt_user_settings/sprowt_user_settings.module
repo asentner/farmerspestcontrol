@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the LeadBuilder User Settings (Feature) feature.
+ */
+
+include_once 'sprowt_user_settings.features.inc';

@@ -1,0 +1,7 @@
+name = Sprowt GeoIP Integration
+description = Extends sprowt_settings_get_phone_number() to get phone number based on geographical area
+core = 7.x
+version = 7.x-1.0
+package = Sprowt
+
+dependencies[] = sprowt_settings

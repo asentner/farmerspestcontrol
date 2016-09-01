@@ -1,0 +1,16 @@
+<?php
+
+function sprowt_taxonomy_engine_install() {
+  //pathauto settings
+  
+  $path_auto = variable_get('pathauto_node_localtarget_pattern',false);
+  
+  if(empty($path_auto)){
+      variable_set('pathauto_node_localtarget_pattern', '[node:title]');
+  }
+  
+  db_update('system')
+    ->fields(array('weight' => 2))
+    ->condition('name', 'sprowt_taxonomy_engine', '=')
+    ->execute();
+}
