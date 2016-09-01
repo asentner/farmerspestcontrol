@@ -8,15 +8,15 @@ core = 7.x
 ; ========================================
 ; Stylesheets
 ; ========================================
-stylesheets[all][] = css/sprowt.normalize.css
-stylesheets[all][] = css/sprowt.hacks.css
-stylesheets[all][] = css/sprowt.styles.css
-stylesheets[all][] = css/sprowt.no-query.css
+stylesheets[all][] = css/leadbuilder.normalize.css
+stylesheets[all][] = css/leadbuilder.hacks.css
+stylesheets[all][] = css/leadbuilder.styles.css
+stylesheets[all][] = css/leadbuilder.no-query.css
 
 ; ========================================
 ; Scripts
 ; ========================================
-scripts[] = js/sprowt.behaviors.js
+scripts[] = js/leadbuilder.behaviors.js
 
 ; ========================================
 ; Regions
@@ -53,7 +53,7 @@ settings[toggle_main_menu] = 0
 settings[toggle_secondary_menu] = 0
 settings[omega_toggle_front_page_content] = 0
 settings[default_logo] = 0
-settings[logo_path] = sites/all/themes/sprowt/images/sprowt-logo.png
+settings[logo_path] = sites/all/themes/leadbuilder/images/leadbuilder-logo.png
 settings[logo_upload] = ""
 settings[default_favicon] = 1
 settings[favicon_path] = ""
