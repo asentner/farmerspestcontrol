@@ -1614,7 +1614,7 @@ function theme_enable($theme_list) {
   list_themes(TRUE);
   menu_rebuild();
   drupal_theme_rebuild();
-  
+
   // Invoke hook_themes_enabled() after the themes have been enabled.
   module_invoke_all('themes_enabled', $theme_list);
 }

@@ -30,8 +30,7 @@
 ######################
 .DS_Store*
 ehthumbs.db
-Icon
-
+Icon
 Thumbs.db
 ._*
 
@@ -42,11 +41,3 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
-
-# PHPSTORM IDE #
-################
-.idea
-
-# Basic Drupal #
-################
-/sites/default/settings.php
