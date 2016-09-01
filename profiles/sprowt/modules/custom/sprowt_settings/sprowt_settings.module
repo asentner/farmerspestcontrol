@@ -10,7 +10,7 @@ function sprowt_settings_boot() {
     $adminimal_settings['default_logo'] = false;
     //variable_set('theme_adminimal_settings', $adminimal_settings);
     $GLOBALS['conf']['theme_adminimal_settings'] = $adminimal_settings;
-    if(defined('MAINTENANCE_MODE') && !empty(MAINTENANCE_MODE)) {
+    if(defined('MAINTENANCE_MODE')) {
         if(function_exists('drupal_add_css')) {
             drupal_add_css('profiles/sprowt/css/maintenence.css');
         }
