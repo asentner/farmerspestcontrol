@@ -3,7 +3,7 @@
 /**
  * Implements hook_preprocess_html().
  */
-function sprout_starter_preprocess_html(&$variables, $hook) {
+function sprowt_starter_preprocess_html(&$variables, $hook) {
   if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
     $variables['classes_array'][] = 'two-sidebars';
   }

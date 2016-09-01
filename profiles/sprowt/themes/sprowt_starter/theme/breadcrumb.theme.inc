@@ -1,6 +1,6 @@
 <?php
 
-function sprout_starter_breadcrumb($variables) {
+function sprowt_starter_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
 
   $returnString = function($string) {

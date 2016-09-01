@@ -40,10 +40,10 @@ These files are the main entry points for the Sass compiler and shouldn't
 directly contain any CSS code, instead they only serves to combine the Sass
 contained in the partials (see below) through @import directives.
 
-#### sprout-starter.styles.scss
+#### sprowt-starter.styles.scss
 This file aggregates all the components into a single file.
 
-#### sprout-starter.reset.scss
+#### sprowt-starter.reset.scss
 This file provides a CSS reset.
 
 ### Partials

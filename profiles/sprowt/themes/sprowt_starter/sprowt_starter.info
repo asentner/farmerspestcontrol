@@ -1,5 +1,5 @@
-name = Sprout Starter
-description = Please provide a description for your theme.
+name = Sprowt Starter
+description = A very basic theme for Sprowt
 base theme = omega
 screenshot = screenshot.png
 engine = phptemplate
@@ -8,13 +8,13 @@ core = 7.x
 ; ========================================
 ; Stylesheets
 ; ========================================
-stylesheets[all][] = css/sprout-starter.reset.css
-stylesheets[all][] = css/sprout-starter.styles.css
+stylesheets[all][] = css/sprowt-starter.reset.css
+stylesheets[all][] = css/sprowt-starter.styles.css
 
 ; ========================================
 ; Scripts
 ; ========================================
-scripts[] = js/sprout-starter.behaviors.js
+scripts[] = js/sprowt-starter.behaviors.js
 
 ; ========================================
 ; Regions
