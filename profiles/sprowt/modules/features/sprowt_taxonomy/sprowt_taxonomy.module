@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Code for the LeadBuilder Taxonomy (Feature) feature.
+ * Code for the Sprowt Taxonomy (Feature) feature.
  */
 
 include_once 'sprowt_taxonomy.features.inc';

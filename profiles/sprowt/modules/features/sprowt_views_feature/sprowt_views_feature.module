@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Code for the LeadBuilder Views (Feature) feature.
+ * Code for the Sprowt Views (Feature) feature.
  */
 
 include_once 'sprowt_views_feature.features.inc';

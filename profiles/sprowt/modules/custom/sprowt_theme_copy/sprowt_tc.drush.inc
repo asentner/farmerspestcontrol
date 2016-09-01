@@ -6,7 +6,7 @@ function sprowt_tc_drush_command() {
     $access = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1');
     if($access) {
         $items['theme-copy'] = array(
-            'description' => 'Copy a sprout theme to the sites/all/themes directory',
+            'description' => 'Copy a sprowt theme to the sites/all/themes directory',
             'arguments'   => array(
                 'old'      => 'Machine Name for Sprout theme being copied',
                 'new-name' => 'Name of new theme'
@@ -18,9 +18,9 @@ function sprowt_tc_drush_command() {
                 'tertiary'  => 'Hex of tertiary color'
             ),
             'examples'    => array(
-                'drush theme-copy sprout_starter "New Theme"',
-                'drush stc sprout_starter "New Theme" --primary="#000000" --secondary="#123456" --tertiary="#999999"',
-                'drush stc sprout_starter "New Theme" --machine-name=new --primary="#000000" --secondary="#123456" --tertiary="#999999"'
+                'drush theme-copy sprowt_starter "New Theme"',
+                'drush stc sprowt_starter "New Theme" --primary="#000000" --secondary="#123456" --tertiary="#999999"',
+                'drush stc sprowt_starter "New Theme" --machine-name=new --primary="#000000" --secondary="#123456" --tertiary="#999999"'
             ),
             'aliases'     => array('stc'),
         );

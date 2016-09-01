@@ -16,7 +16,7 @@ function sprowt_hd_webform_form_settings($form, $form_state, $node)
 
     if (empty($account_id) || empty($access_key) || empty($secret_key)) {
         // Compatibility with older Sprowt sites. If older site, use drush to set the variables! The three above are the required vars for this module.
-        // Can be set under Sprowt Settings for sprout upstream sites
+        // Can be set under Sprowt Settings for sprowt upstream sites
         // eg. drush vset --exact sprowt_ctm_account_id 123456
         if (module_exists('sprowt_settings')) {
             $message = 'WARNING! Don\'t forget to set the CTM Account ID, API Access Key, and Secret Key in <a href="/admin/config/system/sprowt-settings">Sprowt Settings</a>. The API credentials are required for the form reactor to function.';

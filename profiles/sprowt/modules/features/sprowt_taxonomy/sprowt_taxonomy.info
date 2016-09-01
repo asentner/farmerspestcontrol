@@ -1,7 +1,7 @@
-name = LeadBuilder Taxonomy (Feature)
-description = Feature containing settings for taxonomies on LeadBuilder sites
+name = Sprowt Taxonomy (Feature)
+description = Feature containing settings for taxonomies on Sprowt sites
 core = 7.x
-package = LeadBuilder Features
+package = Sprowt Features
 version = 7.x-1.0
 project = sprowt_taxonomy
 dependencies[] = ctools
@@ -17,4 +17,4 @@ features[taxonomy][] = projects
 features[taxonomy][] = regions
 features[taxonomy][] = services
 features[taxonomy][] = tags
-features_exclude[dependencies][sprowt_fields_and_text_formats] = leadbuilder_fields_and_text_formats
+features_exclude[dependencies][sprowt_fields_and_text_formats] = sprowt_fields_and_text_formats

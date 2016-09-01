@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Code for the LeadBuilder Menu Settings (Feature) feature.
+ * Code for the Sprowt Menu Settings (Feature) feature.
  */
 
 include_once 'sprowt_menu_settings.features.inc';

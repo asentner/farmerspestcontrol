@@ -1,7 +1,7 @@
-name = LeadBuilder Views (Feature)
-description = Database based Views on LeadBuilder sites
+name = Sprowt Views (Feature)
+description = Database based Views on Sprowt sites
 core = 7.x
-package = LeadBuilder Features
+package = Sprowt Features
 version = 7.x-1.0
 project = sprowt_views_feature
 dependencies[] = ctools

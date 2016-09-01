@@ -1,7 +1,7 @@
-name = LeadBuilder Menu Settings (Feature)
+name = Sprowt Menu Settings (Feature)
 description = Menu Settings Specific to Base Theme (copy of Fresh Light)
 core = 7.x
-package = LeadBuilder Features
+package = Sprowt Features
 version = 7.x-1.0
 project = sprowt_menu_settings
 dependencies[] = menu

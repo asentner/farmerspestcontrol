@@ -172,7 +172,7 @@ function sprowt_settings_admin()
         '#title' => t('Facebook'),
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_facebook']['leadbuilder_settings_facebook_url'] = array(
+    $form['sprowt_settings_social']['sprowt_settings_social_facebook']['sprowt_settings_facebook_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Company Facebook URL'),
         '#default_value' => variable_get('sprowt_settings_facebook_url'),
@@ -181,7 +181,7 @@ function sprowt_settings_admin()
         '#description' => t("Begins with \"http\"."),
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_facebook']['leadbuilder_settings_facebook_description'] = array(
+    $form['sprowt_settings_social']['sprowt_settings_social_facebook']['sprowt_settings_facebook_description'] = array(
         '#type' => 'textfield',
         '#title' => t('Link Description'),
         '#default_value' => variable_get('sprowt_settings_facebook_description'),
@@ -195,7 +195,7 @@ function sprowt_settings_admin()
         '#title' => t('Twitter'),
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_twitter']['leadbuilder_settings_twitter_handle'] = array(
+    $form['sprowt_settings_social']['sprowt_settings_social_twitter']['sprowt_settings_twitter_handle'] = array(
         '#type' => 'textfield',
         '#title' => t('Company Twitter Handle'),
         '#default_value' => variable_get('sprowt_settings_twitter_handle'),
@@ -204,7 +204,7 @@ function sprowt_settings_admin()
         '#description' => t("Company twitter handle (do not include the @)."),
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_twitter']['leadbuilder_settings_twitter_description'] = array(
+    $form['sprowt_settings_social']['sprowt_settings_social_twitter']['sprowt_settings_twitter_description'] = array(
         '#type' => 'textfield',
         '#title' => t('Link Description'),
         '#default_value' => variable_get('sprowt_settings_twitter_description'),
@@ -218,7 +218,7 @@ function sprowt_settings_admin()
         '#title' => t('Google+'),
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_gplus']['leadbuilder_settings_gplus_url'] = array(
+    $form['sprowt_settings_social']['sprowt_settings_social_gplus']['sprowt_settings_gplus_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Company Google+ URL'),
         '#default_value' => variable_get('sprowt_settings_gplus_url'),
@@ -227,7 +227,7 @@ function sprowt_settings_admin()
         '#description' => t("Begins with \"http\"."),
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_gplus']['leadbuilder_settings_gplus_description'] = array(
+    $form['sprowt_settings_social']['sprowt_settings_social_gplus']['sprowt_settings_gplus_description'] = array(
         '#type' => 'textfield',
         '#title' => t('Link Description'),
         '#default_value' => variable_get('sprowt_settings_gplus_description'),
@@ -241,7 +241,7 @@ function sprowt_settings_admin()
         '#title' => t('LinkedIn'),
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_linkedin']['leadbuilder_settings_linkedin_url'] = array(
+    $form['sprowt_settings_social']['sprowt_settings_social_linkedin']['sprowt_settings_linkedin_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Company LinkedIn URL'),
         '#default_value' => variable_get('sprowt_settings_linkedin_url'),
@@ -250,7 +250,7 @@ function sprowt_settings_admin()
         '#description' => t("Begins with \"http\"."),
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_linkedin']['leadbuilder_settings_linkedin_description'] = array(
+    $form['sprowt_settings_social']['sprowt_settings_social_linkedin']['sprowt_settings_linkedin_description'] = array(
         '#type' => 'textfield',
         '#title' => t('Link Description'),
         '#default_value' => variable_get('sprowt_settings_linkedin_description'),
@@ -272,7 +272,7 @@ function sprowt_settings_admin()
         '#title' => t('Yelp'),
     );
 
-    $form['sprowt_settings_reviews']['sprowt_settings_review_yelp']['leadbuilder_settings_yelp_url'] = array(
+    $form['sprowt_settings_reviews']['sprowt_settings_review_yelp']['sprowt_settings_yelp_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Company Yelp URL'),
         '#default_value' => variable_get('sprowt_settings_yelp_url'),
@@ -281,7 +281,7 @@ function sprowt_settings_admin()
         '#description' => t("Begins with \"http\"."),
     );
 
-    $form['sprowt_settings_reviews']['sprowt_settings_review_yelp']['leadbuilder_settings_yelp_description'] = array(
+    $form['sprowt_settings_reviews']['sprowt_settings_review_yelp']['sprowt_settings_yelp_description'] = array(
         '#type' => 'textfield',
         '#title' => t('Link Description'),
         '#default_value' => variable_get('sprowt_settings_yelp_description'),
@@ -295,7 +295,7 @@ function sprowt_settings_admin()
         '#title' => t('Better Business Bureau'),
     );
 
-    $form['sprowt_settings_reviews']['sprowt_settings_review_bbb']['leadbuilder_settings_bbb_url'] = array(
+    $form['sprowt_settings_reviews']['sprowt_settings_review_bbb']['sprowt_settings_bbb_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Company Better Business Bureau URL'),
         '#default_value' => variable_get('sprowt_settings_bbb_url'),
@@ -304,7 +304,7 @@ function sprowt_settings_admin()
         '#description' => t("Begins with \"http\"."),
     );
 
-    $form['sprowt_settings_reviews']['sprowt_settings_review_bbb']['leadbuilder_settings_bbb_description'] = array(
+    $form['sprowt_settings_reviews']['sprowt_settings_review_bbb']['sprowt_settings_bbb_description'] = array(
         '#type' => 'textfield',
         '#title' => t('Link Description'),
         '#default_value' => variable_get('sprowt_settings_bbb_description'),
@@ -318,7 +318,7 @@ function sprowt_settings_admin()
         '#title' => t("Angie's List"),
     );
 
-    $form['sprowt_settings_reviews']['sprowt_settings_review_angie']['leadbuilder_settings_angie_url'] = array(
+    $form['sprowt_settings_reviews']['sprowt_settings_review_angie']['sprowt_settings_angie_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Company Angie\'s List URL'),
         '#default_value' => variable_get('sprowt_settings_angie_url'),
@@ -327,7 +327,7 @@ function sprowt_settings_admin()
         '#description' => t("Begins with \"http\"."),
     );
 
-    $form['sprowt_settings_reviews']['sprowt_settings_review_angie']['leadbuilder_settings_angie_description'] = array(
+    $form['sprowt_settings_reviews']['sprowt_settings_review_angie']['sprowt_settings_angie_description'] = array(
         '#type' => 'textfield',
         '#title' => t('Link Description'),
         '#default_value' => variable_get('sprowt_settings_angie_description'),
@@ -341,7 +341,7 @@ function sprowt_settings_admin()
         '#title' => t("Yellow Pages"),
     );
 
-    $form['sprowt_settings_reviews']['sprowt_settings_review_yp']['leadbuilder_settings_yp_url'] = array(
+    $form['sprowt_settings_reviews']['sprowt_settings_review_yp']['sprowt_settings_yp_url'] = array(
         '#type' => 'textfield',
         '#title' => t('Company Yellow Pages URL'),
         '#default_value' => variable_get('sprowt_settings_yp_url'),
@@ -350,7 +350,7 @@ function sprowt_settings_admin()
         '#description' => t("Begins with \"http\"."),
     );
 
-    $form['sprowt_settings_reviews']['sprowt_settings_review_yp']['leadbuilder_settings_yp_description'] = array(
+    $form['sprowt_settings_reviews']['sprowt_settings_review_yp']['sprowt_settings_yp_description'] = array(
         '#type' => 'textfield',
         '#title' => t('Link Description'),
         '#default_value' => variable_get('sprowt_settings_yp_description'),

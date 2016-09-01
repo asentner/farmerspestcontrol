@@ -6,13 +6,13 @@
 function sprowt_settings_boot() {
     $GLOBALS['conf']['maintenance_theme'] = 'adminimal';
     $adminimal_settings = variable_get('theme_adminimal_settings', array());
-    $adminimal_settings['logo_path'] = 'profiles/sprout/images/sprowt-logo.png';
+    $adminimal_settings['logo_path'] = 'profiles/sprowt/images/sprowt-logo.png';
     $adminimal_settings['default_logo'] = false;
     //variable_set('theme_adminimal_settings', $adminimal_settings);
     $GLOBALS['conf']['theme_adminimal_settings'] = $adminimal_settings;
     if(defined('MAINTENANCE_MODE') && !empty(MAINTENANCE_MODE)) {
         if(function_exists('drupal_add_css')) {
-            drupal_add_css('profiles/sprout/css/maintenence.css');
+            drupal_add_css('profiles/sprowt/css/maintenence.css');
         }
     }
 }
@@ -571,7 +571,7 @@ function sprowt_settings_form_menu_edit_item_alter(&$form, &$form_state) {
 }
 
 function _sprowt_settings_get_address(){
-    require_once drupal_get_path('profile','sprout') . '/includes/nodebuilder.php';
+    require_once drupal_get_path('profile','sprowt') . '/includes/nodebuilder.php';
     $nid = db_query("
         SELECT nid
         FROM node n

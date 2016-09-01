@@ -47,12 +47,12 @@ function sprowt_theme_copy_menu()
 }
 
 /**
- * Gets a list of copyable sprout themes
+ * Gets a list of copyable sprowt themes
  */
 function _sprowt_theme_copy_list_themes() {
-    $sprout_themes = array(
+    $sprowt_themes = array(
         'fresh_light',
-        'sprout_starter',
+        'sprowt_starter',
         'template_qaclawn',
         'tailormade',
         'template_interstatepest'
@@ -62,7 +62,7 @@ function _sprowt_theme_copy_list_themes() {
     $new_theme_list = array();
 
     foreach($theme_list as $theme_name => $object) {
-        if(in_array($theme_name, $sprout_themes)) {
+        if(in_array($theme_name, $sprowt_themes)) {
             $new_theme_list[$theme_name] = $object;
         }
     }
@@ -75,21 +75,21 @@ function _sprowt_theme_copy_list_themes() {
  */
 
 function _sprowt_theme_copy_form(){
-    require_once drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php';
+    require_once drupal_get_path('profile', 'sprowt') . '/includes/themebuilder.php';
     $TB = new ThemeBuilder();
 
     $form = $TB->theme_picker_form(array('_sprowt_theme_copy_form_submit'));
 
     $css = &$form['#attached']['css'];
-    if($cssi = array_search(drupal_get_path('profile', 'sprout') . '/css/theme_copy.css')) {
+    if($cssi = array_search(drupal_get_path('profile', 'sprowt') . '/css/theme_copy.css')) {
         unset($css[$cssi]);
     }
 
     $css[] = drupal_get_path('module', 'sprowt_theme_copy') . '/css/theme_copy.css';
 
 
-    $sprout_data = _sprout_get_data();
-    $branding = $sprout_data['branding'];
+    $sprowt_data = _sprowt_get_data();
+    $branding = $sprowt_data['branding'];
     $copied = variable_get('sprowt_theme_copy_settings', false);
 
     if(empty($copied)) {
@@ -160,7 +160,7 @@ function sprowt_theme_copy_machine_name($name) {
 
 
 function _sprowt_theme_copy_copy_theme($old_theme, $new_theme_name, $new_theme = null, $primary = null, $secondary = null, $tertiary = null) {
-    include_once(drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php');
+    include_once(drupal_get_path('profile', 'sprowt') . '/includes/themebuilder.php');
 
     if(empty($new_theme)) {
         $new_theme = sprowt_theme_copy_machine_name($new_theme_name);
@@ -203,13 +203,13 @@ function _sprowt_theme_copy_copy_theme($old_theme, $new_theme_name, $new_theme =
  * Implements hook_themes_enabled().
  */
 function sprowt_theme_copy_themes_enabled($theme_list) {
-    include_once(drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php');
+    include_once(drupal_get_path('profile', 'sprowt') . '/includes/themebuilder.php');
     $themeBuilder = new ThemeBuilder();
 
-    $sprout_theme_list = _sprowt_theme_copy_list_themes();
-    $sprout_themes = array();
-    foreach($sprout_theme_list as $theme_name => $object) {
-        $sprout_themes[] = $theme_name;
+    $sprowt_theme_list = _sprowt_theme_copy_list_themes();
+    $sprowt_themes = array();
+    foreach($sprowt_theme_list as $theme_name => $object) {
+        $sprowt_themes[] = $theme_name;
     }
 
     $themes = list_themes(true);
@@ -223,7 +223,7 @@ function sprowt_theme_copy_themes_enabled($theme_list) {
                 variable_set('sprowt_theme_copy_' . $theme . '_blocks_imported', true);
             }
         }
-        else if (in_array($theme, $sprout_themes)){
+        else if (in_array($theme, $sprowt_themes)){
             if(!(variable_get('sprowt_theme_copy_' . $theme . '_blocks_imported', 0))) {
                 db_delete('block')->condition('theme', $theme)->execute();
                 $themeBuilder->import_blocks($theme, $theme);
@@ -311,15 +311,15 @@ function sprowt_theme_copy_form_system_theme_settings_alter(&$form, &$form_state
  * Implements hook_page_alter().
  */
 function sprowt_theme_copy_page_alter(&$page) {
-    require_once drupal_get_path('profile', 'sprout') . '/includes/themebuilder.php';
+    require_once drupal_get_path('profile', 'sprowt') . '/includes/themebuilder.php';
     $TB = new ThemeBuilder();
     $default = variable_get('theme_default');
-    $sprout_themes = $TB->sprout_themes();
-    $is_sprout = in_array($default, array_keys($sprout_themes));
+    $sprowt_themes = $TB->sprowt_themes();
+    $is_sprowt = in_array($default, array_keys($sprowt_themes));
     $disabled = theme_get_setting('disable_sprowt_warning', $default);
     global $user;
 
-    if($is_sprout && !$disabled && !empty($user->uid)) {
+    if($is_sprowt && !$disabled && !empty($user->uid)) {
         drupal_set_message('This site is using a default Sprowt Theme. Either copy this theme <a href="/admin/appearance/theme-copy">here</a> and enable the copied theme or disable this message <a href="/admin/appearance/settings/'.$default.'">here</a>.', 'warning', false);
     }
 }
