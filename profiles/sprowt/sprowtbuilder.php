@@ -281,6 +281,12 @@ Class SproutBuilder {
 
         $this->import_menus();
 
+        //webform settings
+        variable_set('webform_default_from_address', $this->data['company_info']['webform_from_email']);
+        variable_set('webform_default_from_name', $this->data['company_info']['webform_from_name']);
+        variable_set('webform_email_replyto', false);
+
+
     }
 
     function import_menus() {
@@ -375,8 +381,8 @@ Class SproutBuilder {
 
                 foreach($node['webform']['emails'] as $k => $email) {
                     $email['email'] = $this->data['company_info']['webform_to_email'];
-                    $email['from_name'] = $this->data['company_info']['webform_from_name'];
-                    $email['from_address'] = $this->data['company_info']['webform_from_email'];
+                    $email['from_name'] = 'default';
+                    $email['from_address'] = 'default';
                     $node['webform']['emails'][$k] = $email;
                 }
 
