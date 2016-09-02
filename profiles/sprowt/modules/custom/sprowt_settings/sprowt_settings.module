@@ -164,6 +164,7 @@ function _sprowt_settings_shortcode_replace($string)
     $shortcodes = array(
         '[company-name]' => variable_get('sprowt_settings_company_name'),
         '[phone-number]' => '<a href="tel:+1'.sprowt_settings_get_phone_number('$1$2$3').'">'.sprowt_settings_get_phone_number().'</a>',
+        '[phone-number nolink]' => sprowt_settings_get_phone_number(),
         '[twitter]' => variable_get('sprowt_settings_twitter_handle'),
         '[facebook]' => variable_get('sprowt_settings_facebook_url'),
         '[linkedin]' => variable_get('sprowt_settings_linkedin_url'),
