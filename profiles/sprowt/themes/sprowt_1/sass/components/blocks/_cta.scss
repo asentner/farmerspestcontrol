@@ -1,0 +1,45 @@
+.block--leadbuilder-block-cta {
+  .l-region--postscript-third & {
+    background: palette(primary, base);
+    color: palette(white, pure);
+    padding: 30px 20px;
+    text-align: center;
+    a {
+      color: inherit;
+      &[href^='tel:'] {
+        font-weight: 600;
+      }
+    }
+    .node__title {
+      margin-bottom: .5em;
+      color: inherit;
+    }
+    .button {
+      @include button-color(palette(white, pure), palette(primary, base), $fg-hover:palette(white, pure));
+      margin-top: .5em;
+    }
+    @include breakpoint($tab) {
+      .node__content {
+        @include flexbox;
+        justify-content: center;
+        align-items: baseline;
+      }
+      .node__title {
+        margin-bottom: 0;
+      }
+      .field--name-body {
+        margin-left: 1em;
+        font-size: 1.15em;
+      }
+      .button {
+        margin-top: 0;
+        margin-left: .5em;
+      }
+    }
+    @include breakpoint($desk) {
+      .field--name-body {
+        font-size: 1.5em;
+      }
+    }
+  }
+}

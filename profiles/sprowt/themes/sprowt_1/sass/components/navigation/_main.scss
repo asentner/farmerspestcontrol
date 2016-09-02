@@ -1,0 +1,142 @@
+.block--nav-main {
+
+  $color-toggle-bg: palette(secondary, base);
+  $color-toggle-fg: palette(white, pure);
+
+  $color-link-bg: palette(primary, base);
+  $color-link-fg: #fff;
+
+  $color-child-bg: darken($color-link-bg, 10);
+
+  $padding-link: 15px 20px;
+  $padding-left: 49px; // for JS menu
+
+  order: -1;
+
+  .block__title {
+    padding: $padding-link;
+    background: $color-toggle-bg;
+    color: $color-toggle-fg;
+    font-size: inherit;
+    margin-bottom: 0;
+  }
+  .menu-block-wrapper {
+    a {
+      padding: $padding-link;
+      background: $color-link-bg;
+      color: $color-link-fg;
+    }
+  }
+  .menu {
+    .menu {
+      display: none;
+    }
+  }
+  &.menu-processed {
+    .block__title {
+      text-align: right;
+      cursor: pointer;
+      &:after {
+        @include faicon("\F0C9");
+        margin-left: .5em;
+      }
+    }
+    .block__content {
+      display: none;
+    }
+    .expanded {
+      position: relative;
+      a:first-child {
+        padding-left: $padding-left;
+      }
+      .menu {
+        a {
+          background: $color-child-bg;
+        }
+      }
+    }
+    .menu-child-toggle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 0;
+      &:after {
+        @include faicon("\F105");
+        font-size: 1rem;
+      }
+      &.open {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  @include breakpoint($nav) {
+
+    $color-link-bg: palette(white, pure);
+    $color-link-fg: palette(black);
+    $color-link-drop: palette(primary, base);
+
+    $color-child-bg: palette(primary, base);
+    $color-child-fg: palette(white, pure);
+
+    order: 0;
+
+    .block__title {
+      display: none;
+    }
+    .block__content {
+      display: block !important; // override js
+    }
+    .menu-block-wrapper {
+      a {
+        background: $color-link-bg;
+        color: $color-link-fg;
+      }
+      > .menu { // first level
+        @include flexbox;
+        position: relative;
+        > li > a {
+          text-transform: uppercase;
+          font-weight: 600;
+          &:after {
+            @include faicon("\F107");
+            margin-left: 10px;
+            color: $color-link-drop;
+          }
+        }
+        > li:hover > a {
+          background: $color-child-bg;
+          color: $color-child-fg;
+          &:after {
+            color: darken($color-link-drop, 15);
+          }
+        }
+      }
+      > .menu > li:hover > .menu { // second level
+        display: block !important; // override JS
+        position: absolute;
+        min-width: 225px;
+        z-index: 52;
+        > li > a {
+          background: $color-child-bg;
+          color: $color-child-fg;
+          &:hover {
+            background: darken($color-child-bg, 10);
+          }
+        }
+      }
+      > .menu > li:last-child:hover > .menu {
+        right: 0;
+      }
+    }
+    &.menu-processed {
+      .menu-child-toggle {
+        display: none;
+      }
+      .expanded {
+        a:first-child {
+          padding: $padding-link;
+        }
+      }
+    }
+  }
+}

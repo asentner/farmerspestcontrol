@@ -1,0 +1,13 @@
+.block--leadbuilder-settings-leadbuilder-copyright {
+  margin: 20px 0 0;
+  padding: 0 20px 20px;
+  color: palette(neutral, xanadu);
+  font-size: 12px;
+  text-align: center;
+  a {
+    color: palette(secondary, base);
+  }
+  @include breakpoint($desk) {
+    text-align: left;
+  }
+}

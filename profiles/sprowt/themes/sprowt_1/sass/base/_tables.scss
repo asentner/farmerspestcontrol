@@ -1,0 +1,24 @@
+$color-table-border: #ddd;
+$color-table-heading-bg: palette(secondary, base);
+$color-table-heading-fg: #fff;
+$color-table-cell-bg: #fff;
+
+table {
+  background: $color-table-border;
+  border-collapse: separate;
+  border-spacing: 1px;
+  width: 100% !important;
+}
+
+td, th {
+  padding: .5em .75em;
+}
+
+th {
+  background: $color-table-heading-bg;
+  color: $color-table-heading-fg;
+}
+
+td {
+  background: $color-table-cell-bg;
+}

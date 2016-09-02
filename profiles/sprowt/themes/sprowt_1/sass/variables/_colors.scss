@@ -1,0 +1,50 @@
+// neutral names should come from [name that color](http://chir.ag/projects/name-that-color/)
+
+$COLORS: (
+  black: (
+    base: #373d38,
+    pure: #000,
+  ),
+  white: (
+    base: #eee,
+    pure: #fff,
+  ),
+  neutral: (
+    xanadu: #707972,
+    wild-sand: #f4f4f4,
+    mine-shaft: #292929,
+    alabaster: #fcfcfc,
+    lunar-green: #373d38,
+    abbey: #58595b,
+    alto: #dddddd,
+  ),
+  primary: (
+    base: #80b840,
+  ),
+  secondary: (
+    base: #216e82,
+  ),
+  tertiary: (
+    dark: #e5b319,
+    base: #ffc000,
+  ),
+);
+
+@function palette($color: primary, $tone: base) {
+  // Return warning if color is invalid
+  @if not map-has-key($COLORS, $color) {
+    @warn "There is no color '#{$color}'";
+    @return null;
+  }
+
+  // Grab color tones for given color
+  $color-tones: map-get($COLORS, $color);
+  // Return warning if color tone is invalid
+  @if not map-has-key($color-tones, $tone) {
+    @warn "There is no '#{$tone}' tone of the color '#{$color}'";
+    @return null;
+  }
+
+  // Return the proper shade
+  @return map-get($color-tones, $tone);
+}

@@ -1,0 +1,55 @@
+%block--list {
+  $block-padding-vert: 30px;
+  $block-padding-horiz: 0;
+
+  $row-spacing: 25px;
+  $image-padding: 40px;
+  $content-width: 60%;
+
+  $border-color: palette(neutral, wild-sand);
+
+  padding: $block-padding-vert $block-padding-horiz;
+  text-align: center;
+  .views-row {
+    + .views-row {
+      padding-top: $row-spacing;
+      margin-top: $row-spacing;
+      border-top: solid 1px $border-color;
+    }
+  }
+  .field--name-field-image {
+    padding-bottom: $image-padding;
+    img {
+      border-radius: 50%;
+    }
+  }
+  @include breakpoint($tab) {
+    text-align: left;
+    .node {
+      @include flexbox;
+    }
+    .field--name-field-image {
+      flex: 1 1 (185px + $image-padding);
+      min-width: (185px + $image-padding);
+      max-width: (185px + $image-padding);
+      padding-bottom: 0;
+      padding-right: $image-padding;
+    }
+    .node__content {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+.block--list {
+  @extend %block--list;
+}
+
+@media print {
+  %block--list {
+    text-align: left;
+    .field--name-field-image {
+      display: none;
+    }
+  }
+}

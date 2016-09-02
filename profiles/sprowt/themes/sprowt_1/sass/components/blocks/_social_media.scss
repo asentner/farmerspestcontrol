@@ -1,0 +1,41 @@
+.block--leadbuilder-settings-leadbuilder-social-media {
+  margin: 20px 0;
+  padding: 0 20px;
+  font-size: 23px;
+  .block__content {
+    ul {
+      @include flexbox;
+      justify-content: center;
+    }
+    li {
+      + li {
+        margin-left: .25em;
+      }
+    }
+    a {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      box-sizing: content-box;
+      background: palette(secondary, base);
+      color: palette(white, pure);
+      border-radius: 50%;
+      line-height: normal;
+      width: 45px;
+      height: 45px;
+      &:hover {
+        background: palette(primary, base);
+      }
+    }
+  }
+  .social-description {
+    display: none;
+  }
+  @include breakpoint($desk) {
+    .block__content {
+      ul {
+        justify-content: flex-end;
+      }
+    }
+  }
+}

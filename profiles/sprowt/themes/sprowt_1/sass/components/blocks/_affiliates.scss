@@ -1,0 +1,36 @@
+.block--views-affiliates-list {
+  $image-max-width: 220px; // should be controlled by image style
+  $image-spacing-vert: 30px; // vertical spacing for mobile
+  $image-spacing-horiz: 20px; // minimum horizontal spacing for tablet and wider
+  $content-max-width: $container; // smaller value for less affiliations
+
+  padding: 40px 0;
+  .view-content {
+    @include flexbox;
+    flex-direction: column;
+    align-items: center;
+  }
+  .views-row {
+    + .views-row {
+      margin-top: $image-spacing-vert;
+    }
+  }
+  .field--name-field-image {
+    max-width: $image-max-width;
+  }
+  @include breakpoint($tab) {
+    .view-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      max-width: $content-max-width;
+      margin: 0 auto;
+    }
+    .views-row {
+      padding: 0 $image-spacing-horiz/2;
+      + .views-row {
+        margin: 0;
+      }
+    }
+  }
+}

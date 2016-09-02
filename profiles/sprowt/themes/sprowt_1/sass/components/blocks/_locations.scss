@@ -1,0 +1,54 @@
+.block--views-locations-list {
+  margin: 20px 0;
+  padding: 0 20px;
+  font-size: 14px;
+  text-align: center;
+  color: palette(primary, base);
+  .node__content {
+    > .field,
+    .field-group-div {
+      + .field,
+      + .field-group-div {
+        margin-top: .5em;
+      }
+    }
+  }
+  .field-group-div {
+    @include flexbox;
+    justify-content: center;
+    .field {
+      + .field {
+        margin-left: .25em;
+      }
+    }
+  }
+  .field--name-field-locality {
+    div {
+      display: inline;
+    }
+    &:after {
+      content: ", ";
+    }
+  }
+  @include breakpoint($tab) {
+    .node__content {
+      @include flexbox;
+      justify-content: center;
+      > .field,
+      .field-group-div {
+        + .field,
+        + .field-group-div {
+          margin-top: 0;
+          margin-left: .75em;
+          border-left: 1px solid palette(primary, base);
+          padding-left: .75em;
+        }
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    .node__content {
+      justify-content: flex-start;
+    }
+  }
+}

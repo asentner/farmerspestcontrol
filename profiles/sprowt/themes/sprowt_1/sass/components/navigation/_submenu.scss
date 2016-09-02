@@ -1,0 +1,91 @@
+.block--nav-submenu {
+
+  // general menu properties
+  $color-menu-bg: palette(white, pure);
+  // menu background color, should match the bg color of the sidebar region
+  $padding-link-horiz: 20px; // horizontal link spacing
+  $padding-link-vert: .75em; // vertical link spacing
+  $active-border-width: 4px; //width of left border
+
+  // top level link properties
+  $color-link-fg: palette(neutral, mine-shaft); // top level link fg color
+  $color-active-link-bg: palette(neutral, wild-sand);  // top level active link bg
+  $color-link-accent: palette(primary, base); // arrow/chevron and left border color
+  $icon-spacing: 10px; // padding between arrow/chevron and link
+
+  // 2nd level link properties
+  $color-child-fg: palette(neutral, xanadu); // second level link color
+  $color-child-active-fg: palette(neutral, lunar-green); // second level active link
+  $color-child-bg: palette(neutral, alabaster); // bg color for child links
+  $child-padding-top: 15px; //vertical spacing of child links
+
+  background-color: $color-menu-bg;
+  font-weight: 600;
+  .menu-block-wrapper {
+    > .menu {
+      > li { // first level
+        + li {
+          border-top: solid 1px $color-active-link-bg;
+        }
+        a {
+          padding: $padding-link-vert $padding-link-horiz;
+          color: $color-link-fg;
+          border-left: solid $active-border-width $color-menu-bg;
+          &:before {
+            @include faicon("\F105");
+            color: $color-link-accent;
+            font-size: 1rem;
+            padding-right: $icon-spacing;
+          }
+          &:hover {
+            border-left-color: $color-link-accent;
+          }
+        }
+        &.active-trail {
+          background: $color-active-link-bg;
+          a {
+            border-left-color: $color-link-accent;
+          }
+        }
+        &.expanded {
+          a:before {
+            @include faicon("\F107");
+            padding-right: $icon-spacing - 5px;
+          }
+        }
+      }
+      .menu { // second level
+        background-color: $color-child-bg;
+        li {
+          + li {
+            border: none;
+            a {
+              padding-top: $child-padding-top;
+            }
+          }
+          a {
+            padding: 0;
+            padding-left: $padding-link-horiz + $icon-spacing + 5px;
+            color: $color-child-fg;
+            &:before {
+              content: none;
+            }
+            &:hover {
+              color: $color-link-fg;
+            }
+          }
+          &:first-of-type a {
+            padding-top: $padding-link-vert;
+          }
+          &:last-of-type a {
+            padding-bottom: $padding-link-vert;
+          }
+          &.active a {
+            color: $color-child-active-fg;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}

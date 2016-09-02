@@ -1,0 +1,33 @@
+%button {
+  display: block;
+  font: inherit;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px 30px;
+  border: 0;
+  border-radius: 5px;
+  outline: 0;
+  line-height: normal;
+  &:hover {
+    cursor: pointer;
+  }
+  @include breakpoint($tab) {
+    display: inline-block;
+  }
+}
+
+.button {
+  @extend %button;
+  @include button-color();
+}
+
+@media print {
+  %button {
+    background: transparent !important; // override button-color mixin
+    color: blue !important; // override button-color mixin
+    display: inline-block;
+    padding: 0;
+  }
+}
