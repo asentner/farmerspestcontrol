@@ -435,7 +435,7 @@ function _sprowt_form_default($field_name, $default = '') {
                     return 'optimizely123';
                     break;
                 case 'theme':
-                    return 'template_qaclawn';
+                    return 'sprowt_1';
                     break;
                 case 'new_theme_name':
                     return 'Sprowt Theme 1';
