@@ -9,5 +9,6 @@ features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[menu_custom][] = menu-mobile-callout
 features[menu_custom][] = menu-mobile-menu
+features[menu_custom][] = menu-utility-menu
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][features] = features

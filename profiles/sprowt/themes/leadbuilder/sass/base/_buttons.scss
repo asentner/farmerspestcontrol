@@ -1,7 +1,0 @@
-%button {
-	@include button($color-button-bg, $color-button-text, 10px, 15px);
-}
-
-.button {
-	@extend %button;
-}

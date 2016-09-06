@@ -11,7 +11,7 @@ function sprowt_branding($form, &$form_state, &$install_state){
 
   $form = $TB->theme_picker_form(array('sprowt_branding_submit'));
   $form['#prefix'] = '<div class="description">';
-  $form['#prefix'] .= '<p>This will set which theme is enabled when the site is created. The settings will also prepopulate the theme copy script located at Appearance->Leadbuilder Theme Copy.</p>';
+  $form['#prefix'] .= '<p>This will set which theme is enabled when the site is created. The settings will also prepopulate the theme copy script located at Appearance->sprowt Theme Copy.</p>';
   $form['#prefix'] .= '</div>';
 
   $form['new_theme']['#required'] = false;
@@ -48,4 +48,5 @@ function sprowt_theme_machine_name_exists($name) {
   $TB = new ThemeBuilder();
 
   return $TB->theme_machine_name_exists($name);
+  $node = entity_uuid_load('node')
 }
