@@ -48,5 +48,4 @@ function sprowt_theme_machine_name_exists($name) {
   $TB = new ThemeBuilder();
 
   return $TB->theme_machine_name_exists($name);
-  $node = entity_uuid_load('node')
 }
