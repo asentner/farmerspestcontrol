@@ -9,16 +9,16 @@
  */
 function block_shortcode_filter_info() {
 
-  $filters['block_shortcode'] = array(
-    'title' => t('Block Shortcodes'),
-    'description' => t('Sets up a custom filter that enables Block Shortcodes.'),
-    'prepare callback' => 'block_shortcode_filter_node_embed_prepare',
-    'process callback' => 'block_shortcode_filter_block_shortcode_process',
-    'tips callback'  => 'block_shortcode_filter_block_shortcode_tips',
-    'cache' => FALSE,
-  );
+    $filters['block_shortcode'] = array(
+        'title' => t('Block Shortcodes'),
+        'description' => t('Sets up a custom filter that enables Block Shortcodes.'),
+        'prepare callback' => 'block_shortcode_filter_node_embed_prepare',
+        'process callback' => 'block_shortcode_filter_block_shortcode_process',
+        'tips callback'  => 'block_shortcode_filter_block_shortcode_tips',
+        'cache' => FALSE,
+    );
 
-  return $filters;
+    return $filters;
 
 }
 
@@ -27,7 +27,7 @@ function block_shortcode_filter_info() {
  */
 function block_shortcode_filter_block_shortcode_prepare($text, $filter, $format, $langcode, $cache, $cache_id) {
 
-  return $text;
+    return $text;
 
 }
 
@@ -36,8 +36,8 @@ function block_shortcode_filter_block_shortcode_prepare($text, $filter, $format,
  */
 function block_shortcode_filter_block_shortcode_process($text, $filter, $format, $langcode, $cache, $cache_id) {
 
-  // Grab the relevant data from shortcode and convert it to block embed.
-  return preg_replace_callback('/\[block module:(.*) delta:(.*)\]/', '_block_shortcode_style_make_replacements', $text);
+    // Grab the relevant data from shortcode and convert it to block embed.
+    return preg_replace_callback('/\[block module:(.*) delta:(.*)\]/', '_block_shortcode_style_make_replacements', $text);
 
 }
 
@@ -46,9 +46,9 @@ function block_shortcode_filter_block_shortcode_process($text, $filter, $format,
  */
 function block_shortcode_filter_block_shortcode_tips($filter, $format, $long) {
 
-  return t('[block module:some_module delta:123] - embed a block with given 
+    return t('[block module:some_module delta:123] - embed a block with given 
             identification (module and delta). See block\'s edit page for a specific example.'
-          );
+    );
 
 }
 
@@ -57,16 +57,16 @@ function block_shortcode_filter_block_shortcode_tips($filter, $format, $long) {
  */
 function block_shortcode_form_block_admin_configure_alter(&$form, &$form_state, $form_id) {
 
-  $module = $form['module']['#value'];
-  $delta = $form['delta']['#value'];
-  $form['settings']['block_shortcode_example'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Shortcode:',
-    '#default_value' => '[block module:' . $module . ' delta:' . $delta . ']',
-    '#description' => t('Copy the text above and paste anywhere that allows the Block Shortcode filter'),
-    '#attributes' => array('readonly' => 'readonly'),
+    $module = $form['module']['#value'];
+    $delta = $form['delta']['#value'];
+    $form['settings']['block_shortcode_example'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Shortcode:',
+        '#default_value' => '[block module:' . $module . ' delta:' . $delta . ']',
+        '#description' => t('Copy the text above and paste anywhere that allows the Block Shortcode filter'),
+        '#attributes' => array('readonly' => 'readonly'),
 
-  );
+    );
 
 }
 
@@ -75,22 +75,32 @@ function block_shortcode_form_block_admin_configure_alter(&$form, &$form_state, 
  */
 function _block_shortcode_style_make_replacements($matches) {
 
-  // this has been modified (awelles)
+    // this has been modified (awelles and wmcmillian)
 
-  $module = $matches[1];
-  $view = 'block_view';
-  $delta = $matches[2];
+    $module = $matches[1];
+    $delta = $matches[2];
+    $block_item = block_load($module, $delta);
+    $rendered_array = _block_render_blocks(array($block_item));
+    $renderable = _block_get_renderable_array($rendered_array);
+    foreach ($renderable as &$element) {
+        if(is_array($element)) {
+            $element['attributes_array']['id'] = 'block-shortcode--' . $module . '-' . $delta;
+            $element['classes_array'][] = 'block-shortcode';
+            $element['classes_array'][] = 'block-shortcode--' . $module . '-' . $delta;
+        }
+    }
 
-  $block = module_invoke($module, $view, $delta);
-  $block_title = block_load($module, $delta)->title;
-  $block_class = block_load($module, $delta)->css_class;
+    $html = render($renderable);
 
-  $html = '<div class="block--shortcode '. $block_class .'"><h2 class="block__title">'. $block_title .'</h2>';
-  $html .= render($block['content']);
-  $html .= '</div>';
+    // end modifications
 
-  // end modifications
+    return $html;
 
-  return $html;
+}
 
+function block_shortcode_preprocess_block(&$variables) {
+    $elements = $variables['elements'];
+    if(!empty($elements['attributes_array']['id']) && strpos($elements['attributes_array']['id'], 'block-shortcode') !== false) {
+        $variables['classes_array'] = array_merge($variables['classes_array'], $elements['classes_array']);
+    }
 }
