@@ -1,0 +1,10 @@
+.field--name-field-seo-title {
+  .field--name-field-intro + & {
+    .field-item {
+      @extend h2;
+      &:first-child {
+        margin-top: 1em;
+      }
+    }
+  }
+}

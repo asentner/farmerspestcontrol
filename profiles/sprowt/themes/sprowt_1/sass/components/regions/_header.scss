@@ -1,0 +1,16 @@
+.l-region--header-first {
+  @include flexbox;
+  flex-direction: column;
+  @include breakpoint($nav) {
+    @include container;
+    @include clear;
+    display: block;
+    .block--logo-block-logo {
+      float: left;
+    }
+    .block--nav-utility,
+    .block--nav-main {
+      float: right;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+%form-text {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-border-focus: palette(neutral, xanadu);
+
+  background: $color-bg;
+  border: 1px solid $color-border;
+  width: 100%;
+  padding: .5em;
+  font: inherit;
+  &:focus {
+    border-color: $color-border-focus;
+    outline: 0;
+  }
+}
+
+input {
+  &[type=text],
+  &[type=email],
+  &[type=password] {
+    @extend %form-text;
+  }
+  &[type=submit] {
+    @extend %button;
+    @include button-color;
+  }
+}
+
+textarea {
+  @extend %form-text;
+}
+
+select {
+  @extend %form-text;
+}
+
+.form-item {
+  margin-top: 1.5em;
+  label {
+    margin-bottom: .5em;
+  }
+}
+
+.webform-component-select {
+  @include flexbox;
+  flex-direction: column;
+  select {
+    flex: 1 1 auto;
+  }
+}
+
+.form-inline {
+  @include breakpoint($tab) {
+    label {
+      + div {
+        @include flexbox;
+        .form-item {
+          margin-top: 0;
+          + .form-item {
+            margin-left: 1em;
+          }
+        }
+      }
+    }
+  }
+}
+
+.form-row {
+  @include breakpoint($tab) {
+    .fieldset-wrapper {
+      @include flexbox;
+      > .form-item {
+        flex: 1 1 auto;
+        + .form-item {
+          margin-left: 1em;
+        }
+      }
+    }
+  }
+}

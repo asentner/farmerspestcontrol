@@ -4,7 +4,7 @@
             <i class="cm-logo"></i>
             <span class="label">
                 <span class="head">
-                    LEADBUILDER&trade; REPORT
+                    sprowt&trade; REPORT
                 </span>
                 <span class="sub">
                     30 day lookback

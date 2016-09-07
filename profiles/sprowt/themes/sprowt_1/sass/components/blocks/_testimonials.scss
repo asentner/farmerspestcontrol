@@ -1,0 +1,57 @@
+%block--testimonials-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-title: palette(secondary, base);
+  $color-stars: palette(primary, base);
+  $color-body: palette(neutral, xanadu);
+
+  $border-width: 2px;
+
+  background: $color-bg;
+  border: $border-width solid $color-border;
+  padding: 30px 20px;
+  .block__title {
+    color: $color-title;
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .node__content {
+    color: $color-body;
+  }
+  .fa-star {
+    color: $color-stars;
+    font-size: 1.2em;
+  }
+  .node--testimonial {
+    .field--name-body {
+      font-style: italic;
+      padding: 0 15px;
+      margin-bottom: 1.6em;
+      p {
+        line-height: 1.6em;
+        &:before,
+        &:after {
+          content: '"';
+        }
+      }
+    }
+  }
+  .field--title,
+  .field--name-field-market {
+    font-style: normal;
+    font-size: 0.8em;
+    padding-left: 25px;
+  }
+  @include breakpoint($tab) {
+    padding: 30px 20px 50px;
+  }
+}
+
+.block--testimonials-sidebar {
+  @extend %block--testimonials-sidebar;
+}
+
+.block--views-testimonials-random {
+  @extend %block--testimonials-sidebar;
+}

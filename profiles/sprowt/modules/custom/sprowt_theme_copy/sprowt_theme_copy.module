@@ -50,24 +50,10 @@ function sprowt_theme_copy_menu()
  * Gets a list of copyable sprowt themes
  */
 function _sprowt_theme_copy_list_themes() {
-    $sprowt_themes = array(
-        'fresh_light',
-        'sprowt_starter',
-        'template_qaclawn',
-        'tailormade',
-        'template_interstatepest'
-    );
+    require_once drupal_get_path('profile', 'sprowt') . '/includes/themebuilder.php';
+    $TB = new ThemeBuilder();
 
-    $theme_list = list_themes(TRUE);
-    $new_theme_list = array();
-
-    foreach($theme_list as $theme_name => $object) {
-        if(in_array($theme_name, $sprowt_themes)) {
-            $new_theme_list[$theme_name] = $object;
-        }
-    }
-
-    return $new_theme_list;
+    return $TB->sprowt_themes();
 }
 
 /**
