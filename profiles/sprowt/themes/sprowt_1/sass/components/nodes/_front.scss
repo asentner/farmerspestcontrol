@@ -1,0 +1,22 @@
+.front {
+  .l-main {
+    $color-bg: palette(secondary, base);
+    $color-block-title: palette(white, pure);
+    $color-body: palette(white, pure);
+
+    background: $color-bg;
+    margin: 0 auto;
+    padding: 60px 20px;
+    max-width: 100%;
+    .node--page--full {
+      text-align: center;
+      padding-bottom: 30px;
+      h1 {
+        color: $color-block-title;
+      }
+      .field--name-body {
+        color: $color-body;
+      }
+    }
+  }
+}

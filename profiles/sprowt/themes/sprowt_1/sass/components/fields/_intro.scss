@@ -1,6 +1,9 @@
 .field--name-field-intro {
-  font-size: 1.25em;
+  font-size: 1.05em;
   + h1 {
     @extend h2;
+  }
+  p {
+    line-height: 1.6em;
   }
 }

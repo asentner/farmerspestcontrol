@@ -40,6 +40,7 @@
 .l-main {
   margin-top: 1em;
   margin-bottom: 1em;
+  padding: 0 20px;
 }
 
 @include breakpoint($tab) {
@@ -49,6 +50,7 @@
     justify-content: space-between;
     margin-top: 2em;
     margin-bottom: 2em;
+    padding: 0;
   }
   .l-content,
   .l-region--sidebar {
@@ -62,6 +64,8 @@
   .l-region--sidebar {
     order: -1;
     max-width: $sidebar;
+    margin-left: 20px;
+    padding-top: 6px // align top of sidebar with page heading
   }
   .no-sidebar {
     .l-content {

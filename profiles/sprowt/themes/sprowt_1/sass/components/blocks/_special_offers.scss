@@ -24,7 +24,7 @@
   }
   .node {
     .field--name-field-button {
-      margin-top: 2em;
+      margin-top: 1.25em;
     }
   }
   .button {
@@ -47,5 +47,62 @@
     border: 3px dashed palette(neutral, alto);
     padding: 20px;
     max-width: 600px;
+  }
+}
+
+// homepage
+
+.block-special-offers-intro {
+  $color-block-title: palette(secondary, base);
+
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 60px 20px 30px;
+  text-align: center;
+  .block__title {
+    @extend h3;
+    color: $color-block-title;
+    text-transform: uppercase;
+  }
+}
+
+.block--views-special-offers-front,
+.local-target-special-offer {
+  $color-bg: palette(white, pure);
+  $color-block-title: palette(secondary, base);
+  $color-border: palette(primary, base);
+
+  padding: 0 20px 50px;
+  .block__title {
+    @extend h3;
+    color: $color-block-title;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 40px 0 30px;
+  }
+  .node {
+    background: $color-bg;
+    border: 5px dashed $color-border;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .field--name-body {
+    font-size: 15px;
+  }
+  .button {
+    max-width: 220px;
+  }
+  @include breakpoint($tab) {
+    .block__title {
+      padding: 40px 0 10px;  
+    }
+    .view-content {
+      @include flexbox;
+      justify-content: center;
+    }
+    .node {
+      max-width: 490px;
+      margin: 20px;
+    }
   }
 }

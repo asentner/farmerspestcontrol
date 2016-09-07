@@ -126,7 +126,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image_link_formatter',
         'settings' => array(
           'image_link' => 'field_link',
-          'image_style' => '',
+          'image_style' => 'affiliation_image',
         ),
         'type' => 'image_link_formatter',
         'weight' => 0,
@@ -456,7 +456,7 @@ function sprowt_content_types_field_default_field_instances() {
           'trim_type' => 'chars',
         ),
         'type' => 'smart_trim_format',
-        'weight' => 2,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -519,20 +519,9 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'smart_trim',
-        'settings' => array(
-          'more_link' => FALSE,
-          'more_text' => 'Read more',
-          'summary_handler' => 'full',
-          'trim_length' => 300,
-          'trim_link' => FALSE,
-          'trim_options' => array(),
-          'trim_preserve_tags' => '',
-          'trim_suffix' => '...',
-          'trim_type' => 'chars',
-        ),
-        'type' => 'smart_trim_format',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -595,10 +584,10 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'benefits__front_page_',
         ),
         'type' => 'image',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
@@ -1854,17 +1843,16 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -1909,7 +1897,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 9,
+      'weight' => 4,
     ),
   );
 
@@ -1924,24 +1912,14 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 9,
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'smart_trim',
-        'settings' => array(
-          'more_link' => FALSE,
-          'more_text' => 'Read more',
-          'summary_handler' => 'full',
-          'trim_length' => 300,
-          'trim_link' => FALSE,
-          'trim_options' => array(),
-          'trim_preserve_tags' => '',
-          'trim_suffix' => '...',
-          'trim_type' => 'chars',
-        ),
-        'type' => 'smart_trim_format',
-        'weight' => 4,
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -1971,7 +1949,7 @@ function sprowt_content_types_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
+      'weight' => 5,
     ),
   );
 
@@ -1984,16 +1962,26 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
+        'module' => 'smart_trim',
+        'settings' => array(
+          'more_link' => FALSE,
+          'more_text' => 'Read more',
+          'summary_handler' => 'full',
+          'trim_length' => 300,
+          'trim_link' => FALSE,
+          'trim_options' => array(),
+          'trim_preserve_tags' => '',
+          'trim_suffix' => '...',
+          'trim_type' => 'chars',
+        ),
+        'type' => 'smart_trim_format',
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2024,7 +2012,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => -1,
     ),
   );
 
@@ -2036,20 +2024,16 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 2,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'primary__800x400_',
+          'image_style' => '',
         ),
         'type' => 'image',
         'weight' => 1,
@@ -2098,7 +2082,7 @@ function sprowt_content_types_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -2111,10 +2095,20 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
+        'module' => 'smart_trim',
+        'settings' => array(
+          'more_link' => FALSE,
+          'more_text' => 'Read more',
+          'summary_handler' => 'full',
+          'trim_length' => 300,
+          'trim_link' => FALSE,
+          'trim_options' => array(),
+          'trim_preserve_tags' => '',
+          'trim_suffix' => '...',
+          'trim_type' => 'chars',
+        ),
+        'type' => 'smart_trim_format',
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -2151,7 +2145,7 @@ function sprowt_content_types_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 6,
+      'weight' => 0,
     ),
   );
 
@@ -2164,17 +2158,15 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
+        'type' => 'hidden',
+        'weight' => 7,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2205,7 +2197,7 @@ function sprowt_content_types_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 1,
     ),
   );
 
@@ -2220,13 +2212,13 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 10,
       ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -2253,7 +2245,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => -3,
     ),
   );
 
@@ -2268,13 +2260,13 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2304,7 +2296,7 @@ function sprowt_content_types_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 7,
     ),
   );
 
@@ -2319,13 +2311,13 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2355,7 +2347,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 6,
     ),
   );
 
@@ -2368,10 +2360,9 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -2409,7 +2400,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 2,
     ),
   );
 
@@ -2424,13 +2415,13 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 11,
       ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -2457,7 +2448,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => -4,
     ),
   );
 
@@ -2492,7 +2483,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -2545,7 +2536,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'node',
@@ -2600,7 +2591,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -2653,7 +2644,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -2707,7 +2698,7 @@ function sprowt_content_types_field_default_field_instances() {
           'title' => '',
         ),
         'type' => 'telephone_link',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -2761,7 +2752,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -2816,7 +2807,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -3097,7 +3088,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'smart_trim',
         'settings' => array(
           'more_link' => 1,
-          'more_text' => 'Learn More!',
+          'more_text' => 'Learn More',
           'summary_handler' => 'full',
           'trim_length' => 240,
           'trim_link' => 0,
@@ -3266,7 +3257,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => '',
+          'image_style' => 'package_icon',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -3278,7 +3269,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 0,
+      'default_image' => 13,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -3832,11 +3823,21 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
+        'module' => 'smart_trim',
         'settings' => array(
+          'more_link' => 1,
+          'more_text' => 'Learn more',
+          'summary_handler' => 'full',
           'trim_length' => 220,
+          'trim_link' => 0,
+          'trim_options' => array(
+            'text' => 'text',
+          ),
+          'trim_preserve_tags' => '',
+          'trim_suffix' => '...',
+          'trim_type' => 'chars',
         ),
-        'type' => 'text_summary_or_trimmed',
+        'type' => 'smart_trim_format',
         'weight' => 2,
       ),
     ),
@@ -4193,7 +4194,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'smart_trim',
         'settings' => array(
-          'more_link' => 0,
+          'more_link' => 1,
           'more_text' => 'Learn more',
           'summary_handler' => 'full',
           'trim_length' => 200,
@@ -4811,8 +4812,8 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image_url_formatter',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
-          'url_type' => '',
+          'image_style' => 'slideshow__homepage_',
+          'url_type' => 0,
         ),
         'type' => 'image_url',
         'weight' => 0,
@@ -5002,9 +5003,13 @@ function sprowt_content_types_field_default_field_instances() {
   // Exported field_instance: 'node-special_offer-field_button'.
   $field_instances['node-special_offer-field_button'] = array(
     'bundle' => 'special_offer',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'url' => 'node/44',
+      ),
+    ),
     'deleted' => 0,
-    'description' => 'Redemption Button',
+    'description' => 'Redemption Button - Default URL goes to the Redeem offers form',
     'display' => array(
       'alt_teaser' => array(
         'label' => 'above',
@@ -5030,7 +5035,7 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_button',
     'label' => 'Button URL',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
       'attributes' => array(
@@ -5049,7 +5054,7 @@ function sprowt_content_types_field_default_field_instances() {
       'title' => 'value',
       'title_label_use_field_label' => 0,
       'title_maxlength' => 128,
-      'title_value' => 'Redeem Offer!',
+      'title_value' => 'Redeem Offer',
       'url' => 0,
       'user_register_form' => FALSE,
       'validate_url' => 1,
@@ -5706,7 +5711,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Position');
   t('Postal code');
   t('Project');
-  t('Redemption Button');
+  t('Redemption Button - Default URL goes to the Redeem offers form');
   t('Region');
   t('SEO title');
   t('Select the offer you\'d like to appear on this page.');

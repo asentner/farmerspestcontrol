@@ -22,13 +22,22 @@
   .node {
     background: $grid-color-bg;
   }
+  .node__title {
+    font-size: 1.325em;
+  }
   .node__content {
     padding: $node-padding;
+  }
+  .field--name-body {
+    font-size: .95em;
   }
   .field--name-field-image {
     img {
       width: 100%;
     }
+  }
+  .more-link {
+    align-self: center;
   }
   @include breakpoint($tab) {
     text-align: left;
@@ -46,6 +55,9 @@
       + .views-row {
         margin: 0;
       }
+    }
+    .more-link {
+      align-self: flex-start;
     }
   }
   @include breakpoint($desk) {

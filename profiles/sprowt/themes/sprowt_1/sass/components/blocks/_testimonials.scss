@@ -55,3 +55,46 @@
 .block--views-testimonials-random {
   @extend %block--testimonials-sidebar;
 }
+
+// Front page testimonial
+
+.block--views-testimonials-front,
+.local-target-testimonial {
+  $color-title: palette(secondary, base);
+  $color-star: palette(primary, base);
+
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: $color-title;
+  font-size: 24px;
+  text-align: center;
+  .rating {
+    color: $color-star;
+  }
+  .field--name-body {
+    position: relative;
+  		&:before,
+  		&:after {
+  			position: absolute;
+  			font-family: "Georgia", "Times", sans-serif;
+  			font-size: 65px;
+  			line-height: 1em;
+  		}
+  		&:before {
+  			content: "\201C";
+  			top: -10px;
+  			left: 0;
+  		}
+  		&:after {
+  			content: "\201D";
+  			bottom: -40px;
+  			right: 0;
+  		}
+    }
+  .field--title,
+  .field--name-field-market {
+    font-size: 15px;
+    //display: inline-block;
+  }
+}

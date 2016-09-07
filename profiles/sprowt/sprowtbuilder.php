@@ -168,19 +168,21 @@ Class SprowtBuilder {
      *
      */
     function addNodes(){
-        
+        // drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
         $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprowt/sprowt_export.json");
         
         
         $nodes = json_decode($node_json,true);
         $uuids = array();
 
+        $image_dest = 'public://default_node_images';
+        file_prepare_directory($image_dest, FILE_CREATE_DIRECTORY);
         $default_image_paths = glob(drupal_get_path('profile', 'sprowt') . '/images/node_default/*');
         $default_images = array();
         foreach($default_image_paths as $image_path) {
             $handle = fopen($image_path, 'r');
             $filename = basename($image_path);
-            $dest = 'public://' . $filename;
+            $dest = 'public://default_node_images/' . $filename;
             $file = file_save_data($handle, $dest, FILE_EXISTS_REPLACE);
             $default_images[$filename] = $file;
             switch($filename) {
@@ -199,8 +201,12 @@ Class SprowtBuilder {
             }
         }
 
-        $image_dest = 'public://default_node_images';
-        file_prepare_directory($image_dest, FILE_CREATE_DIRECTORY);
+        $styles = image_styles();
+        foreach($styles as $style_name => $style) {
+            foreach($default_images as $filename => $file) {
+                image_style_create_derivative($style, $file->uri, image_style_path($style_name, $file->uri));
+            }
+        }
         
         foreach($nodes as $key => $node){
             $uuids[$node['nid']] = $node['uuid'];
@@ -276,8 +282,6 @@ Class SprowtBuilder {
         }
         
         $this->update_display();
-        
-        $this->update_main_menu($nid_array);
 
         $this->import_menus();
 
@@ -286,21 +290,28 @@ Class SprowtBuilder {
         variable_set('webform_default_from_name', $this->data['company_info']['webform_from_name']);
         variable_set('webform_email_replyto', false);
 
-
     }
 
     function import_menus() {
-        $path = drupal_get_path('profile', 'sprowt');
+        $sprowt_path = drupal_get_path('profile', 'sprowt');
+        $theme_path = drupal_get_path('theme', $this->data['branding']['theme']);
 
         $files = array(
-            'menu-mobile-menu' => "$path/menu-mobile-menu_link_export.json",
-            'menu-mobile-callout' => "$path/menu-mobile-callout_link_export.json",
+            'main-menu' => "main-menu_link_export.json",
+            'menu-mobile-menu' => "menu-mobile-menu_link_export.json",
+            'menu-mobile-callout' => "menu-mobile-callout_link_export.json",
+            'menu-utility-menu' => "menu-utility-menu_link_export.json",
         );
 
         $MB = new MenuBuilder();
 
-        foreach($files as $menu => $filepath) {
-            $MB->importFromFile($filepath);
+        foreach($files as $menu => $filename) {
+            if(file_exists("$theme_path/$filename")) {
+                $MB->importFromFile("$theme_path/$filename");
+            }
+            else if(file_exists("$sprowt_path/$filename")) {
+                $MB->importFromFile("$sprowt_path/$filename");
+            }
         }
     }
     
@@ -309,39 +320,6 @@ Class SprowtBuilder {
         foreach($objs as $obj) {
             variable_set('node_submitted_' . $obj->type, '0');
         }
-    }
-    
-    function update_menu($menu_items, $menu){
-        foreach($menu_items as $item) {
-            $children = array();
-            if(isset($item['children'])) {
-                $children = $item['children'];
-                unset($item['children']);
-            }
-            
-            $item['menu_name'] = $menu;
-            
-            $mlid = menu_link_save($item);
-            
-            if(!empty($children)) {
-                foreach($children as $i =>$child) {
-                    $children[$i]['plid'] = $mlid;
-                }
-                $this->update_menu($children, $menu);
-            }
-            
-        }
-    }
-    
-    function update_main_menu($nids_array = array()){
-        menu_delete_links('main-menu');
-
-        $file = drupal_get_path('profile', 'sprowt') . '/main-menu_link_export.json';
-
-        require_once drupal_get_path('profile', 'sprowt') . '/includes/menubuilder.php';
-
-        $MB = new MenuBuilder();
-        $MB->importFromFile($file);
     }
     
     function node_import($nodes = array()) {

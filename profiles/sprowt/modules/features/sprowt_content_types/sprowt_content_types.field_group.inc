@@ -241,17 +241,18 @@ function sprowt_content_types_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_display_title',
-      2 => 'field_intro',
-      3 => 'field_seo_title',
-      4 => 'field_image',
-      5 => 'field_service',
-      6 => 'field_local_content',
-      7 => 'field_market',
-      8 => 'field_call_out',
-      9 => 'field_packages_title',
-      10 => 'title',
-      11 => 'field_packages_intro',
+      1 => 'field_call_out',
+      2 => 'field_display_title',
+      3 => 'field_image',
+      4 => 'field_intro',
+      5 => 'field_local_content',
+      6 => 'field_market',
+      7 => 'field_packages_intro',
+      8 => 'field_packages_title',
+      9 => 'field_seo_title',
+      10 => 'field_service',
+      11 => 'field_hero_image',
+      12 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -622,9 +623,44 @@ function sprowt_content_types_field_group_info() {
   );
   $field_groups['group_content|node|webform|form'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_locale|node|location|teaser';
+  $field_group->group_name = 'group_locale';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'location';
+  $field_group->mode = 'teaser';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Locale',
+    'weight' => '1',
+    'children' => array(
+      0 => 'field_locality',
+      1 => 'field_postal_code',
+      2 => 'field_state',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Locale',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-locale field-group-div',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_locale|node|location|teaser'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Content');
+  t('Locale');
 
   return $field_groups;
 }

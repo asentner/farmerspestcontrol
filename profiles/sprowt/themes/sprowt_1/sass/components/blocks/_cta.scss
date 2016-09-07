@@ -22,10 +22,10 @@
       .node__content {
         @include flexbox;
         justify-content: center;
-        align-items: baseline;
+        align-items: center;
       }
       .node__title {
-        margin-bottom: 0;
+        margin-bottom: .2em;
       }
       .field--name-body {
         margin-left: 1em;

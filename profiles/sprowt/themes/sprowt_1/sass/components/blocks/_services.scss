@@ -3,3 +3,23 @@
     @extend h3;
   }
 }
+
+
+// homepage service listing
+
+.front {
+  .block--views-services-all {
+    $color-border: palette(secondary, light);
+    $color-services-body: palette(white, pure);
+
+    .views-row {
+      border-color: $color-border;
+    }
+    .field--name-body {
+      color: $color-services-body;
+    }
+    @include breakpoint($tab) {
+      
+    }
+  }
+}

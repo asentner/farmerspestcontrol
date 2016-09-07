@@ -70,11 +70,13 @@ h2 {
 h3 {
   font-size: 1.375em;
   line-height: 1.14;
+  color: palette(black, base);
 }
 
 h4 {
   font-size: 1.125em;
   line-height: 1.11;
+  color: palette(black, base);
 }
 
 blockquote {
@@ -98,7 +100,7 @@ hr {
 
   %p,
   %body-copy {
-    line-height: 1.375;
+    line-height: 1.6;
   }
 
   h1 {

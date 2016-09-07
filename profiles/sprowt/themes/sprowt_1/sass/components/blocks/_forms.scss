@@ -1,0 +1,48 @@
+.block--form-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-title: palette(secondary, base);
+  $color-text: palette(neutral, xanadu);
+
+  $border-width: 2px;
+
+  border: $border-width solid $color-border;
+  background: $color-bg;
+  color: $color-text;
+  padding: 30px 20px;
+  .block__title {
+    color: $color-title;
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .form-row {
+    @include breakpoint($tab) {
+      .fieldset-wrapper {
+        display: block;
+        > .form-item {
+          margin-bottom: 0;
+          + .form-item {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+  label {
+    color: $color-text;
+  }
+  input {
+    width: 100%;
+  }
+  .form-actions {
+    margin: 1.5em auto 0;
+  }
+
+  @include breakpoint($tab) {
+    .block__title {
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  }
+}

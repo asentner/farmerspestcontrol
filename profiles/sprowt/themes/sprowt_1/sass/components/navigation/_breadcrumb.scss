@@ -4,7 +4,14 @@
   padding: 20px;
   a {
     color: inherit;
+    &:hover {
+      color: darken(palette(white, pure), 10);
+    }
   }
+}
+
+.node-type-localtarget .l-breadcrumb {
+  padding: 0;
 }
 
 .breadcrumb {
