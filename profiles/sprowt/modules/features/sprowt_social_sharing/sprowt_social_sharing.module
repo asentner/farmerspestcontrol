@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Social Sharing feature.
+ */
+
+include_once 'sprowt_social_sharing.features.inc';
