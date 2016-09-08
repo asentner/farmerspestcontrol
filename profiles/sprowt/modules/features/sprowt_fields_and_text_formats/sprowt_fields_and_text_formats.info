@@ -79,6 +79,7 @@ features[field_base][] = field_special_offer
 features[field_base][] = field_state
 features[field_base][] = field_street_address
 features[field_base][] = field_tags
+features[field_instance][] = node-benefit-field_link
 features[filter][] = filtered_html
 features[filter][] = full_html
 features[filter][] = no_wysiwyg
