@@ -45,6 +45,7 @@ features[field_instance][] = node-article-field_tags
 features[field_instance][] = node-benefit-body
 features[field_instance][] = node-benefit-field_display_title
 features[field_instance][] = node-benefit-field_image
+features[field_instance][] = node-benefit-field_link
 features[field_instance][] = node-benefit-field_market
 features[field_instance][] = node-benefit-field_service
 features[field_instance][] = node-blog-body

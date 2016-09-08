@@ -54,11 +54,12 @@ function sprowt_content_types_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_image',
-      2 => 'field_service',
+      1 => 'field_display_title',
+      2 => 'field_image',
       3 => 'field_market',
-      4 => 'field_display_title',
-      5 => 'title',
+      4 => 'field_service',
+      5 => 'field_link',
+      6 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
