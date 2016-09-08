@@ -108,8 +108,8 @@ function sprowt_fields_and_text_formats_image_default_styles() {
       1 => array(
         'name' => 'focal_point_scale_and_crop',
         'data' => array(
-          'width' => 320,
-          'height' => 200,
+          'width' => 185,
+          'height' => 185,
           'focal_point_advanced' => array(
             'shift_x' => '',
             'shift_y' => '',

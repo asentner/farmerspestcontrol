@@ -79,6 +79,25 @@ function sprowt_content_types_image_default_styles() {
     ),
   );
 
+  // Exported image style: profile.
+  $styles['profile'] = array(
+    'label' => 'Profile',
+    'effects' => array(
+      1 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 180,
+          'height' => 180,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: slideshow_homepage.
   $styles['slideshow_homepage'] = array(
     'label' => 'Slideshow (Homepage)',

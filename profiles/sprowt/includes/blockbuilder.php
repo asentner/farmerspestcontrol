@@ -289,6 +289,33 @@ class BlockBuilder {
                 $row['orig_delta'] = implode('-', $delta_parts);
                 $this->multiblock[$k] = $row;
             }
+            if($row['module'] == 'sprowt_block_cta') {
+                $delta_parts = explode('_', $row['orig_delta']);
+                $nid = array_pop($delta_parts);
+                $uuid = $this->uuid_map[$nid];
+                $delta_parts[] = $nid_map[$uuid];
+                $row['orig_delta'] = implode('_', $delta_parts);
+                $this->block_node_type[$k] = $row;
+            }
+        }
+
+        foreach($this->block_node_type as $k => $row) {
+            if($row['module'] == 'webform') {
+                $delta_parts = explode('-', $row['delta']);
+                $nid = array_pop($delta_parts);
+                $uuid = $this->uuid_map[$nid];
+                $delta_parts[] = $nid_map[$uuid];
+                $row['delta'] = implode('-', $delta_parts);
+                $this->block_node_type[$k] = $row;
+            }
+            if($row['module'] == 'sprowt_block_cta') {
+                $delta_parts = explode('_', $row['delta']);
+                $nid = array_pop($delta_parts);
+                $uuid = $this->uuid_map[$nid];
+                $delta_parts[] = $nid_map[$uuid];
+                $row['delta'] = implode('_', $delta_parts);
+                $this->block_node_type[$k] = $row;
+            }
         }
     }
 

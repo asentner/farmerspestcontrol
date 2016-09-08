@@ -60,12 +60,12 @@ $sb = new SprowtBuilder();
 $actions = array(
     'getData' => "Getting Sprowt Data...",
     'addUsers' => "Adding Users...",
-    'addBranding' => "Adding Branding...",
     'addNodes' => "Adding Default Nodes...",
     'addCompanyInfo' => "Adding Company Info...",
     'addReview' => "Adding Review Sites...",
     'addMarketsServices' => "Adding Markets and Services...",
     'addLocations' => "Adding Locations...",
+    'addBranding' => "Adding Branding...",
     'addSocial' => "Adding Social Media...",
     'addIntegrations' => "Adding Integrations...",
 );

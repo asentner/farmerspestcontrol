@@ -266,19 +266,7 @@ Class SprowtBuilder {
         
         $menu = db_query("SELECT * FROM menu_links WHERE menu_name = :main", array(':main' => 'main-menu'))->fetchAll(PDO::FETCH_ASSOC);
         foreach($menu as $link){
-            if(preg_match('/node\/([\d]+)/',$link['link_path'], $matches)){
-                if(!empty($uuids[$matches[1]]) && !empty($nid_array[$uuids[$matches[1]]])){
-                    db_update('menu_links')
-                    ->fields(array(
-                        'link_path' => "node/" . $nid_array[$uuids[$matches[1]]],
-                    ))
-                    ->condition('mlid',$link['mlid'],'=')
-                    ->execute();
-                }
-                else {
-                    _menu_delete_item($link);
-                }
-            }
+            _menu_delete_item($link);
         }
         
         $this->update_display();
