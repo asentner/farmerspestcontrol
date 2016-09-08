@@ -123,6 +123,7 @@ dependencies[] = sprowt_views
 ; Features
 
 ;dependencies[] = sprowt_all;
+;dependencies[] = sprowt_social_sharing;
 
 ; Add in the .profile
 
