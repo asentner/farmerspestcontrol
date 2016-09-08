@@ -2,6 +2,8 @@
 .local-target-benefits {
    $color-bg: palette(neutral, wild-sand);
    $color-border: palette(white, pure);
+   $color-title: palette(primary, base);
+   $color-title-hover: palette(secondary, base);
 
    background: $color-bg;
    padding: 20px 20px 40px;
@@ -17,7 +19,14 @@
     margin: 0 auto 20px;
   }
    .node__title {
-      font-size: 24px;
+      font-size: 1.5em;
+      color: $color-title;
+      a {
+        color: $color-title;
+        &:hover {
+          color: $color-title-hover;
+        }
+      }
    }
    .field--name-field-image {
       margin-bottom: 20px;
@@ -25,6 +34,9 @@
          border-radius: 50%;
          border: 2px solid $color-border;
          background-color: $color-border;
+      }
+      a > img {
+        @extend %image-hover;
       }
    }
    @include breakpoint($tab) {

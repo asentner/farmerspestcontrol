@@ -46,3 +46,38 @@
     }
   }
 }
+
+// local target page form
+
+.local-target-webform {
+  //$color-bg: palette(secondary, base);
+  $color-bg: palette(neutral, cool-gray);
+  $color-title: palette(white, pure);
+  $color-body: palette(white, base);
+
+  background: $color-bg;
+  .block__content {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    color: $color-body;
+  }
+  .node__title {
+    color: $color-title;
+    text-align: center;
+  }
+  .field--name-body {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .form-item {
+    margin-top: 10px;
+  }
+  .form-actions {
+    text-align: center;
+    .form-submit {
+      min-width: 220px;
+      margin-top: 20px;
+    }
+  }
+}

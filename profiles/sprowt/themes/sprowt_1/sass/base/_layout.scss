@@ -18,6 +18,7 @@
 }
 
 .l-region--sidebar {
+  padding-top: 40px;
   .block {
     + .block {
       margin-top: 2em;
@@ -52,16 +53,15 @@
     margin-bottom: 2em;
     padding: 0;
   }
-  .l-content,
-  .l-region--sidebar {
-    flex: 1 1 auto;
-  }
   .l-content {
+    flex: 1 1 auto;
     max-width: $content;
+    width: 100%; // IE fix
     margin-left: 20px;
     margin-right: 20px;
   }
   .l-region--sidebar {
+    flex: 0 0 30%;
     order: -1;
     max-width: $sidebar;
     margin-left: 20px;

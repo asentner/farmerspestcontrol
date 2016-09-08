@@ -87,14 +87,14 @@
     margin-bottom: 20px;
   }
   .field--name-body {
-    font-size: 15px;
+    font-size: 1em;
   }
   .button {
     max-width: 220px;
   }
   @include breakpoint($tab) {
     .block__title {
-      padding: 40px 0 10px;  
+      padding: 40px 0 10px;
     }
     .view-content {
       @include flexbox;

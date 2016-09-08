@@ -12,14 +12,40 @@
     $color-border: palette(secondary, light);
     $color-services-body: palette(white, pure);
 
+    $color-title: palette(primary, base);
+    $color-title-hover: palette(white, pure);
+
+    $color-button-bg: palette(primary, base);
+    $color-button-bg-hover: palette(white, pure);
+    $color-button-fg: palette(white, pure);
+    $color-button-fg-hover: palette(primary, base);
+
     .views-row {
       border-color: $color-border;
+    }
+    .node__title {
+      a {
+        color: $color-title;
+        &:hover {
+          color: $color-title-hover;
+        }
+      }
+    }
+    .more-link {
+      &.more-link {
+        background: $color-button-bg;
+        color: $color-button-fg;
+        &:hover {
+          background: $color-button-bg-hover;
+          color: $color-button-fg-hover;
+        }
+      }
     }
     .field--name-body {
       color: $color-services-body;
     }
     @include breakpoint($tab) {
-      
+
     }
   }
 }

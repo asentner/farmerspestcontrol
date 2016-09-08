@@ -1,0 +1,52 @@
+.block--views-localtarget-value-prop {
+  $color-image-overlay: palette(secondary, base);
+	$overlay-opacity: 0.8; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+	$color-text: palette(white, pure);
+
+  .node {
+    background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-color: $color-image-overlay;
+  }
+  .slide-image-background {
+    min-height: 350px;
+		background: rgba($color-image-overlay, $overlay-opacity);
+  }
+  .field--name-field-display-title {
+    color: $color-text;
+		line-height: 1.1;
+    margin-bottom: 0;
+  }
+  .field--name-field-intro {
+		color: $color-text;
+		margin-top: 20px;
+    margin-top: 10px;
+	}
+  .node__content {
+    max-width: 800px;
+		margin: auto;
+		padding: 80px 20px 60px;
+		position: relative;
+    text-align: center;
+  }
+  @include breakpoint($tab) {
+		.slide-image-background {
+			min-height: 520px;
+		}
+		.node__content {
+			padding: 140px 20px 60px;
+		}
+		.field--name-field-display-title {
+			font-size: 3.0em;
+		}
+	}
+	@include breakpoint($desk) {
+		.node__content {
+			padding: 150px 20px 60px;
+		}
+		.field--name-field-display-title {
+			font-size: 3.7em;
+		}
+	}
+}
