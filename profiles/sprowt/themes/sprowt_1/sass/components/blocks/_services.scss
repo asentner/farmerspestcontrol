@@ -12,13 +12,13 @@
     $color-border: palette(secondary, light);
     $color-services-body: palette(white, pure);
 
-    $color-title: palette(primary, base);
-    $color-title-hover: palette(white, pure);
+    $color-title: palette(white, pure);
+    $color-title-hover: palette(primary, base);
 
     $color-button-bg: palette(primary, base);
-    $color-button-bg-hover: palette(white, pure);
+    $color-button-bg-hover: palette(primary, dark);
     $color-button-fg: palette(white, pure);
-    $color-button-fg-hover: palette(primary, base);
+    $color-button-fg-hover: palette(white, pure);
 
     .views-row {
       border-color: $color-border;
@@ -41,11 +41,16 @@
         }
       }
     }
+    .field--name-field-image {
+      padding-bottom: 20px;
+    }
     .field--name-body {
       color: $color-services-body;
     }
     @include breakpoint($tab) {
-
+      .field--name-field-image {
+        padding-bottom: 0;
+      }
     }
   }
 }

@@ -4,11 +4,12 @@
     attach: function (context, settings) {
 
       $('.block--nav-main', context).once('menu', function () {
-
+        var $block = $(this);
         // whole menu toggle
         $(this).children('.block__title').click(function(e) {
           e.preventDefault();
           $(this).next().slideToggle();
+          $block.toggleClass('open');
         });
 
         // add children toggles
@@ -20,9 +21,11 @@
           $(this).toggleClass('open');
           $(this).next().slideToggle();
         });
-
       });
-
+      $('#block-logo-block-logo').once().append('<div class="tablet-menu-toggle"><i class="fa fa-bars"></i><span>Menu</span></div>');
+      $('#block-logo-block-logo').on('click', '.tablet-menu-toggle', function(){
+        $('.block--nav-main').toggleClass('open');
+      });
     }
   };
 

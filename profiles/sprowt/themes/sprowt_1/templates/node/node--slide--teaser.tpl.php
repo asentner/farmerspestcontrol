@@ -6,8 +6,7 @@
 <?php else: ?>
   <div<?php print $attributes; ?>>
 <?php endif; ?>
-    <div class="slide-image-background">
-
+    <div class="slide-image">
     	<div class="slide-content">
     	  <h2<?php print $title_attributes; ?>><?php print $title; ?></h2>
     	  <div<?php print $content_attributes; ?>>

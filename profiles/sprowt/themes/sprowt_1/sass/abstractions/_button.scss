@@ -1,4 +1,4 @@
-@mixin button-color($bg:palette(primary, base), $fg:palette(white, pure), $bg-hover:palette(secondary), $fg-hover:null) {
+@mixin button-color($bg:palette(primary, base), $fg:palette(white, pure), $bg-hover:palette(primary, dark), $fg-hover:null) {
   background: $bg;
   color: $fg;
   &:hover,

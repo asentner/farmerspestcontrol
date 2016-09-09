@@ -1,7 +1,15 @@
 .block--sprowt-block-cta {
+  $color-bg: palette(primary, base);
+  $color-fg: palette(white, pure);
+  $color-button-bg: palette(white, pure);
+  $color-button-fg: palette(primary, base);
+  $color-button-bg-hover: palette(secondary, base);
+  $color-button-fg-hover: palette(white, pure);
+
+
   .l-region--postscript-third & {
-    background: palette(primary, base);
-    color: palette(white, pure);
+    background: $color-bg;
+    color: $color-fg;
     padding: 30px 20px;
     text-align: center;
     a {
@@ -15,8 +23,9 @@
       color: inherit;
     }
     .button {
-      @include button-color(palette(white, pure), palette(primary, base), $fg-hover:palette(white, pure));
-      margin-top: .5em;
+      @include button-color($color-button-bg, $color-button-fg, $color-button-bg-hover, $color-button-fg-hover);
+      margin: .5em auto 0;
+      max-width: 220px;
     }
     @include breakpoint($tab) {
       .node__content {

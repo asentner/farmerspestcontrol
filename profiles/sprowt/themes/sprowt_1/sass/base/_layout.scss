@@ -30,6 +30,8 @@
   @include flexbox;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
   > div {
     width: 100%;
   }
@@ -68,6 +70,9 @@
     padding-top: 6px // align top of sidebar with page heading
   }
   .no-sidebar {
+    .l-main {
+      padding: 0 20px;
+    }
     .l-content {
       margin: 0 auto;
     }

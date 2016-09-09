@@ -27,10 +27,12 @@
         + li {
           border-top: solid 1px $color-active-link-bg;
         }
-        a {
+        a,
+        .nolink {
           padding: $padding-link-vert $padding-link-horiz;
           color: $color-link-fg;
           border-left: solid $active-border-width $color-menu-bg;
+          display: block;
           &:before {
             @include faicon("\F105");
             color: $color-link-accent;
@@ -43,7 +45,8 @@
         }
         &.active-trail {
           background: $color-active-link-bg;
-          a {
+          a,
+          .nolink {
             border-left-color: $color-link-accent;
           }
         }
@@ -63,7 +66,8 @@
               padding-top: $child-padding-top;
             }
           }
-          a {
+          a,
+          .nolink {
             padding: 0;
             padding-left: $padding-link-horiz + $icon-spacing + 5px;
             color: $color-child-fg;
@@ -74,10 +78,12 @@
               color: $color-link-fg;
             }
           }
-          &:first-of-type a {
+          &:first-of-type a,
+          .nolink {
             padding-top: $padding-link-vert;
           }
-          &:last-of-type a {
+          &:last-of-type a,
+          .nolink {
             padding-bottom: $padding-link-vert;
           }
           &.active a {

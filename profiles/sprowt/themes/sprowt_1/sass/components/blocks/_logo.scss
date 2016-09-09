@@ -4,6 +4,33 @@
   text-align: center;
   position: relative;
   top: 4px; // used to verically center logo
+  .tablet-menu-toggle {
+    display: none;
+  }
+  @include breakpoint($tab) {
+    @include flexbox;
+    align-items: center;
+    margin-left: percentage(100/1880);
+    .tablet-menu-toggle {
+      display: block;
+      margin-left: auto;
+      font-weight: 600;
+      color: palette(neutral, emperor);
+      margin-right: percentage(150/1880);
+      cursor: pointer;
+      i {
+        margin-right: 15px;
+        color: palette(primary);
+      }
+    }
+  }
+  @include breakpoint($nav) {
+    display: block;
+    margin-left: 0;
+    .tablet-menu-toggle {
+      display: none;
+    }
+  }
 }
 
 // footer

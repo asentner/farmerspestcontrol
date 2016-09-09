@@ -5,11 +5,12 @@
 
   $color-link-bg: palette(primary, base);
   $color-link-fg: #fff;
+  $color-link-border: palette(primary, dark);
 
-  $color-child-bg: darken($color-link-bg, 10);
+  $color-child-bg: palette(primary, dark);
 
-  $padding-link: 15px 20px;
-  $padding-left: 49px; // for JS menu
+  $padding-link: 10px 20px;
+  $padding-left: 60px; // for JS menu
 
   order: -1;
 
@@ -25,6 +26,7 @@
       padding: $padding-link;
       background: $color-link-bg;
       color: $color-link-fg;
+      border-bottom: 1px solid $color-link-border;
     }
     .nolink {
       display: block;
@@ -66,7 +68,17 @@
           padding-left: $padding-left + 20px;
         }
       }
-
+    }
+    .menu > li.expanded > a:first-child { //background for first level arrows
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 46px;
+        height: 100%;
+        background: $color-child-bg;
+      }
     }
     .menu-child-toggle {
       position: absolute;
@@ -74,12 +86,36 @@
       left: 0;
       font-size: 0;
       background: none;
+      border-bottom: none;
       &:after {
         @include faicon("\F105");
         font-size: 1rem;
       }
       &.open {
         transform: rotate(90deg);
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    transition: transform .5s;
+    transform: translateX(100%);
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 52;
+    width: 50%;
+    &.open {
+      transform: translateX(0);
+    }
+    .block__content {
+      display: block !important; // override js
+      height: auto !important; //override js
+    }
+    &.menu-processed {
+      .block__title {
+        &:after {
+          @include faicon($fa-var-times);
+        }
       }
     }
   }
@@ -90,6 +126,7 @@
     $color-link-fg: palette(black, base);
     $color-link-fg-hover: palette(black, pure);
     $color-link-drop: palette(primary, base);
+    $color-link-drop-hover: palette(primary, dark);
 
     $color-child-border: palette(primary, base); // color of top border of 2nd level menu
     $border-width: 3px;
@@ -99,9 +136,9 @@
     $color-child-fg: palette(neutral, xanadu);
     $color-child-fg-hover: palette(white, pure);
 
-    $color-third-bg: palette(neutral, wild-sand);
-    $color-third-bg-hover: $color-child-bg-hover;
-    $color-third-fg: $color-child-fg;
+    $color-third-bg: palette(primary, base);
+    $color-third-bg-hover: palette(primary, dark);
+    $color-third-fg: $color-child-bg;
     $color-third-fg-hover: $color-child-fg-hover;
     $color-third-border: $color-child-border;
 
@@ -109,6 +146,11 @@
 
     order: 0;
 
+    transition: transform .5s;
+    transform: translateX(0);
+    position: static;
+    z-index: 52;
+    width: auto;
     .block__title {
       display: none;
     }
@@ -119,6 +161,9 @@
       a {
         background: $color-link-bg;
         color: $color-link-fg;
+      }
+      a, .nolink {
+        border: 0;
       }
       > .menu { // first level
         @include flexbox;
@@ -136,12 +181,17 @@
             margin-left: 10px;
             color: $color-link-drop;
           }
+          &:first-child {
+            &:before {
+              content: none;
+            }
+          }
         }
         > li:hover > a {
           background: $color-link-bg-hover;
           color: $color-link-fg-hover;
           &:after {
-            color: darken($color-link-drop, 15);
+            color: $color-link-drop-hover;
           }
         }
       }
@@ -151,7 +201,7 @@
         min-width: 180px;
         z-index: 52;
         border-top: $border-width solid $color-child-border;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         text-transform: uppercase;
         font-weight: 600;
         > li > a {
@@ -170,6 +220,15 @@
           color: $color-child-fg;
           white-space: nowrap;
           padding: $padding-link;
+          &:hover {
+            background: $color-child-bg-hover;
+            color: $color-child-fg-hover;
+          }
+        }
+        > li:hover > a,
+        > li:hover > .nolink {
+          background: $color-child-bg-hover;
+          color: $color-child-fg-hover;
         }
       }
       > .menu > li:last-child:hover > .menu {
@@ -179,9 +238,9 @@
         display: block !important; // overide js
         position: absolute;
         left: 100%;
-        top: -$border-width;
-        border-top: $border-width solid $color-third-border;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+        top: 0;
+        // border-top: $border-width solid $color-third-border;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         z-index: 52;
         > li > a {
           white-space: nowrap;
@@ -200,6 +259,10 @@
           color: $color-third-fg;
           padding: $padding-link;
         }
+      }
+      > .menu > li > .menu > li.first:hover > .menu {
+        border-top: $border-width solid $color-third-border;
+        top: -$border-width;
       }
       > .menu > li:last-child > .menu > li:hover > .menu {
         right: 100%;

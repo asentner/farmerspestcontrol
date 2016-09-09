@@ -17,16 +17,6 @@ function sprowt_1_breadcrumb($variables) {
       $breadcrumb = array();
     }
     else {
-      if ($node->type == 'blog') {
-        $localtarget = db_query("SELECT nid, title FROM {node} n
-          LEFT JOIN {field_data_field_market} m ON n.nid=m.entity_id
-          LEFT JOIN {field_data_field_service} s ON n.nid=s.entity_id
-          WHERE field_market_tid=:mtid AND field_service_tid=:stid AND type='localtarget'",
-          array(':mtid' => $node->field_market['und'][0]['tid'], ':stid' => $node->field_service['und'][0]['tid']))->fetchObject();
-
-        $breadcrumb[] = l('Services', 'services');
-        $breadcrumb[] = l($localtarget->title, 'node/'.$localtarget->nid);
-      }
       // else if ($node->type == 'service') {
       //   $breadcrumb = array(l('Home', '')); //Reset breadcrumb due to fly-out menu
       //   $breadcrumb[] = l('Services', 'services');

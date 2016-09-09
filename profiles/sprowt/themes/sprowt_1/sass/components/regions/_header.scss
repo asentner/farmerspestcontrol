@@ -1,3 +1,6 @@
+.l-header {
+  z-index: 100;
+}
 .l-region--header-first {
   @include flexbox;
   flex-direction: column;

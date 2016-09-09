@@ -75,6 +75,7 @@
     color: $color-star;
   }
   .field--name-body {
+    font-size: 0.8em;
     p {
       &:before,
       &:after {
@@ -85,6 +86,11 @@
   .field--title,
   .field--name-field-market {
     font-size: 15px;
+  }
+  @include breakpoint($tab) {
+    .field--name-body {
+      font-size: 1em;
+    }
   }
 }
 

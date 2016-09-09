@@ -1,54 +1,68 @@
 .block--views-locations-list {
-  margin: 20px 0;
-  padding: 0 20px;
-  font-size: 14px;
+  $color-title: palette(primary, base);
+  $color-border: palette(primary, base);
+
+  color: $color-title;
+  margin-top: 20px;
   text-align: center;
-  color: palette(primary, base);
-  .node__content {
-    > .field,
-    .field-group-div {
-      + .field,
-      + .field-group-div {
-        margin-top: .5em;
-      }
+  font-size: 14px;
+  .node {
+    text-align: center;
+  }
+  a {
+    color: inherit;
+    &:hover {
+      color: inherit;
+      text-decoration: underline;
     }
   }
-  .field-group-div {
-    @include flexbox;
-    justify-content: center;
-    .field {
-      + .field {
-        margin-left: .25em;
-      }
-    }
+  h2 {
+    margin: 0;
+    color: $color-title;
+    font-size: 14px;
+    line-height: (21/14);
+    font-weight: normal;
   }
-  .field--name-field-locality {
-    div {
-      display: inline;
-    }
-    &:after {
-      content: ", ";
-    }
+  .field-street-address {
+    display: block;
+  }
+  .field-street-address,
+  .field-locality, .field-phone-number {
+    line-height: 1.5em;
   }
   @include breakpoint($tab) {
+    margin-top: 0;
+    line-height: (14/14);
+    font-size: 13px;
+    h2 {
+      display: inline-block;
+      font-size: 13px;
+    }
     .node__content {
-      @include flexbox;
-      justify-content: center;
-      > .field,
-      .field-group-div {
-        + .field,
-        + .field-group-div {
-          margin-top: 0;
-          margin-left: .75em;
-          border-left: 1px solid palette(primary, base);
-          padding-left: .75em;
-        }
-      }
+      display: inline-block;
+    }
+    .field-street-address,
+    .field-locality, .field-phone-number {
+      display: inline-block;
+      padding-left: 6px;
+      margin-left: 4px;
+      border-left: 1px solid $color-border;
+      line-height: 1em;
     }
   }
   @include breakpoint($desk) {
-    .node__content {
-      justify-content: flex-start;
+    font-size: 14px;
+    .node {
+      text-align: left;
+      padding-left: 20px;
+    }
+    h2 {
+      font-size: 14px;
+    }
+    .field-street-address,
+    .field-locality, .field-phone-number {
+      padding-left: 12px;
+      margin-left: 10px;
     }
   }
 }

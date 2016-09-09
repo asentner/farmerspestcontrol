@@ -1,7 +1,6 @@
 .field--name-field-call-out {
   $color-callout-bg: palette(secondary);
   $color-callout-fg: palette(white, pure);
-  $color-button-bg-hover: darken($color-callout-bg, 10);
 
   margin-top: 1.5em;
   padding: 20px;
@@ -14,10 +13,6 @@
   }
   h1, h2, h3, h4, h5 {
     color: $color-callout-fg;
-  }
-  .button {
-    &:hover {
-      background: $color-button-bg-hover;
-    }
+    margin-bottom: .7em;
   }
 }

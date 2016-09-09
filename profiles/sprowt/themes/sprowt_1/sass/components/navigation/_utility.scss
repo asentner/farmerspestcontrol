@@ -29,6 +29,32 @@
         + li {
           margin-top: 0;
         }
+        a {
+          @include flexbox;
+          align-items: center;
+          text-transform: uppercase;
+        }
+        a:before {
+          display: inline-block;
+          color: palette(white, pure);
+          margin-right: 15px;
+          font-size: 32px;
+        }
+        &:nth-child(1) {
+          a:before {
+            @include faicon($fa-var-mobile);
+          }
+        }
+        &:nth-child(3) {
+          a:before {
+            @include faicon($fa-var-dollar);
+          }
+        }
+        &:nth-child(2) {
+          a:before {
+            @include faicon($fa-var-lock);
+          }
+        }
       }
     }
   }
@@ -42,7 +68,7 @@
     padding: 20px;
     .menu-block-wrapper {
       a {
-        @include button-color($bg-hover:palette(secondary, base));
+        @include button-color();
         border-radius: 5px;
         text-transform: uppercase;
         padding: 10px 30px;
@@ -67,6 +93,21 @@
       li {
         + li {
           margin-left: 1em;
+        }
+        &:nth-child(1n) {
+          a {
+            font-size: 16px;
+          }
+          a:before {
+            display: none;
+          }
+          a[href^='tel:']:before {
+            display: inline-block;
+            @include faicon("\F105");
+            margin-right: .5em;
+            color: $color-link-arrow;
+            font-size: 16px;
+          }
         }
       }
     }
