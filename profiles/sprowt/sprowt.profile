@@ -268,7 +268,8 @@ function sprowt_install_features(){
         'sprowt_content_types',
         'sprowt_views_feature',
         'sprowt_user_settings',
-        'sprowt_menu_settings'
+        'sprowt_menu_settings',
+        'sprowt_social_sharing'
     );
 
     foreach($base_features as $feature){

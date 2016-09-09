@@ -43,6 +43,7 @@ dependencies[] = block_class
 dependencies[] = block_shortcode
 dependencies[] = ckeditor
 dependencies[] = color_field
+dependencies[] = color
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = date_api
