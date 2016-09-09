@@ -22,18 +22,11 @@ function sprowt_menu_settings_menu_default_menu_custom() {
     'title' => 'Mobile menu',
     'description' => 'The <em>Mobile</em> menu should be a simplified version of the <em>Main</em> menu. It should include top-level links only, and it will only be displayed for small screens.',
   );
-  // Exported menu: menu-utility-menu.
-  $menus['menu-utility-menu'] = array(
-    'menu_name' => 'menu-utility-menu',
-    'title' => 'Utility Menu',
-    'description' => '',
-  );
   // Translatables
   // Included for use with string extractors like potx.
   t('Mobile callout');
   t('Mobile menu');
   t('The <em>Mobile</em> menu should be a simplified version of the <em>Main</em> menu. It should include top-level links only, and it will only be displayed for small screens.');
-  t('Utility Menu');
 
   return $menus;
 }

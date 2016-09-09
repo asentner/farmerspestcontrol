@@ -596,7 +596,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 3,
+      'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -622,7 +622,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'benefit',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Use the link field if you want the benefit to go somewhere.',
+    'description' => 'Link to the page this benefit will point to',
     'display' => array(
       'alt_teaser' => array(
         'label' => 'above',
@@ -632,9 +632,10 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
+        'type' => 'link_default',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -697,7 +698,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -745,7 +746,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -2044,7 +2045,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2076,6 +2077,63 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => -1,
+    ),
+  );
+
+  // Exported field_instance: 'node-localtarget-field_hero_image'.
+  $field_instances['node-localtarget-field_hero_image'] = array(
+    'bundle' => 'localtarget',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'image_url_formatter',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+          'url_type' => 0,
+        ),
+        'type' => 'image_url',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_hero_image',
+    'label' => 'Hero Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => -2,
     ),
   );
 
@@ -3965,7 +4023,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image_link_formatter',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'medium',
+          'image_style' => 'profile',
         ),
         'type' => 'image_link_formatter',
         'weight' => 0,
@@ -4435,7 +4493,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 3,
+      'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -4505,7 +4563,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 5,
+      'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -5706,9 +5764,10 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 0,
       ),
     ),
@@ -5750,6 +5809,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Enter a comma-separated list of words to describe your content.');
   t('Expiration date');
   t('Google+ URL');
+  t('Hero Image');
   t('Icon');
   t('Image');
   t('Include suite number if applicable.');
@@ -5757,6 +5817,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Intro');
   t('Leave this field blank to default to the end of the current month, which will dynamically update each month.');
   t('Link');
+  t('Link to the page this benefit will point to');
   t('Local content');
   t('Locality');
   t('Market');
@@ -5790,7 +5851,6 @@ function sprowt_content_types_field_default_field_instances() {
   t('The original price, before applying the special offer.');
   t('This will be the main headline (H1) on the page, overlaid with the hero image.');
   t('Upload an image to go with this article.');
-  t('Use the link field if you want the benefit to go somewhere.');
   t('Use this to describe the local area. This sets the page apart from other LocalTarget pages in other service areas.');
   t('Which market is this landing page associated with?');
   t('Which service is associated with this landing page?');

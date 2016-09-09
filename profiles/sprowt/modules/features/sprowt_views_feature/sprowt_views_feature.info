@@ -1,7 +1,7 @@
-name = Sprowt Views (Feature)
-description = Database based Views on Sprowt sites
+name = sprowt Views (Feature)
+description = Database based Views on sprowt sites
 core = 7.x
-package = Sprowt Features
+package = sprowt Features
 version = 7.x-1.0
 project = sprowt_views_feature
 dependencies[] = ctools

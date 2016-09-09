@@ -25,6 +25,22 @@ function sprowt_fields_and_text_formats_ctools_plugin_api($module = NULL, $api =
 function sprowt_fields_and_text_formats_image_default_styles() {
   $styles = array();
 
+  // Exported image style: affiliation_image.
+  $styles['affiliation_image'] = array(
+    'label' => 'Affiliation',
+    'effects' => array(
+      4 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 200,
+          'height' => 200,
+          'upscale' => 1,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: benefits.
   $styles['benefits'] = array(
     'label' => 'Benefits (235 x 150)',
@@ -34,6 +50,25 @@ function sprowt_fields_and_text_formats_image_default_styles() {
         'data' => array(
           'width' => 300,
           'height' => 150,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: benefits__front_page_.
+  $styles['benefits__front_page_'] = array(
+    'label' => 'Benefits (Front Page)',
+    'effects' => array(
+      5 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 185,
+          'height' => 185,
           'focal_point_advanced' => array(
             'shift_x' => '',
             'shift_y' => '',
@@ -82,6 +117,22 @@ function sprowt_fields_and_text_formats_image_default_styles() {
     ),
   );
 
+  // Exported image style: package_icon.
+  $styles['package_icon'] = array(
+    'label' => 'Package Icon',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 55,
+          'height' => '',
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: primary__800x400_.
   $styles['primary__800x400_'] = array(
     'label' => 'primary (800x400)',
@@ -101,11 +152,30 @@ function sprowt_fields_and_text_formats_image_default_styles() {
     ),
   );
 
+  // Exported image style: profile.
+  $styles['profile'] = array(
+    'label' => 'Profile',
+    'effects' => array(
+      6 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 180,
+          'height' => 180,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: service.
   $styles['service'] = array(
     'label' => 'Service',
     'effects' => array(
-      1 => array(
+      2 => array(
         'name' => 'focal_point_scale_and_crop',
         'data' => array(
           'width' => 185,
@@ -137,6 +207,12 @@ function sprowt_fields_and_text_formats_image_default_styles() {
         'weight' => 1,
       ),
     ),
+  );
+
+  // Exported image style: slideshow_homepage.
+  $styles['slideshow_homepage'] = array(
+    'label' => 'Slideshow (Homepage)',
+    'effects' => array(),
   );
 
   // Exported image style: special_offers_slideshow.

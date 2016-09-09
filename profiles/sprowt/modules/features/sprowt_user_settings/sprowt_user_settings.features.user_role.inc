@@ -16,6 +16,12 @@ function sprowt_user_settings_user_default_roles() {
     'weight' => 2,
   );
 
+  // Exported role: client.
+  $roles['client'] = array(
+    'name' => 'client',
+    'weight' => 4,
+  );
+
   // Exported role: content admin.
   $roles['content admin'] = array(
     'name' => 'content admin',

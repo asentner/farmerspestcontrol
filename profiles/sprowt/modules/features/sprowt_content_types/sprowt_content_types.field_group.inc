@@ -58,8 +58,8 @@ function sprowt_content_types_field_group_info() {
       2 => 'field_image',
       3 => 'field_market',
       4 => 'field_service',
-      5 => 'field_link',
-      6 => 'title',
+      5 => 'title',
+      6 => 'field_link',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

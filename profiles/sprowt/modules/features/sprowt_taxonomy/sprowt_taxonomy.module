@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Code for the Sprowt Taxonomy (Feature) feature.
+ * Code for the sprowt Taxonomy (Feature) feature.
  */
 
 include_once 'sprowt_taxonomy.features.inc';

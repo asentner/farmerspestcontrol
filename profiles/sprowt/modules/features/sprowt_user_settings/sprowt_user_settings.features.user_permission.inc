@@ -25,6 +25,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'access administration pages',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'system',
@@ -44,6 +45,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'access all webform results',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'webform',
@@ -56,6 +58,7 @@ function sprowt_user_settings_user_default_permissions() {
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',
@@ -76,6 +79,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'access contextual links',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'contextual',
   );
@@ -85,6 +89,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'access dashboard',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'dashboard',
   );
@@ -103,6 +108,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'access own webform results',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'webform',
@@ -113,6 +119,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'access own webform submissions',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'webform',
@@ -568,7 +575,9 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'create affiliation content'.
   $permissions['create affiliation content'] = array(
     'name' => 'create affiliation content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -577,6 +586,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'create article content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'node',
   );
@@ -584,70 +594,90 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'create benefit content'.
   $permissions['create benefit content'] = array(
     'name' => 'create benefit content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create blog content'.
   $permissions['create blog content'] = array(
     'name' => 'create blog content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create cta content'.
   $permissions['create cta content'] = array(
     'name' => 'create cta content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create faq content'.
   $permissions['create faq content'] = array(
     'name' => 'create faq content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create gallery_image content'.
   $permissions['create gallery_image content'] = array(
     'name' => 'create gallery_image content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create landing_page content'.
   $permissions['create landing_page content'] = array(
     'name' => 'create landing_page content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create localtarget content'.
   $permissions['create localtarget content'] = array(
     'name' => 'create localtarget content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create location content'.
   $permissions['create location content'] = array(
     'name' => 'create location content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create market content'.
   $permissions['create market content'] = array(
     'name' => 'create market content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create package content'.
   $permissions['create package content'] = array(
     'name' => 'create package content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -656,6 +686,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'create page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',
@@ -671,35 +702,45 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'create region content'.
   $permissions['create region content'] = array(
     'name' => 'create region content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create service content'.
   $permissions['create service content'] = array(
     'name' => 'create service content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create slide content'.
   $permissions['create slide content'] = array(
     'name' => 'create slide content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create special_offer content'.
   $permissions['create special_offer content'] = array(
     'name' => 'create special_offer content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create testimonial content'.
   $permissions['create testimonial content'] = array(
     'name' => 'create testimonial content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -708,6 +749,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'create url aliases',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'path',
@@ -753,7 +795,9 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'delete any affiliation content'.
   $permissions['delete any affiliation content'] = array(
     'name' => 'delete any affiliation content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -762,6 +806,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'delete any article content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'node',
   );
@@ -769,70 +814,90 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'delete any benefit content'.
   $permissions['delete any benefit content'] = array(
     'name' => 'delete any benefit content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any blog content'.
   $permissions['delete any blog content'] = array(
     'name' => 'delete any blog content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any cta content'.
   $permissions['delete any cta content'] = array(
     'name' => 'delete any cta content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any faq content'.
   $permissions['delete any faq content'] = array(
     'name' => 'delete any faq content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any gallery_image content'.
   $permissions['delete any gallery_image content'] = array(
     'name' => 'delete any gallery_image content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any landing_page content'.
   $permissions['delete any landing_page content'] = array(
     'name' => 'delete any landing_page content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any localtarget content'.
   $permissions['delete any localtarget content'] = array(
     'name' => 'delete any localtarget content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any location content'.
   $permissions['delete any location content'] = array(
     'name' => 'delete any location content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any market content'.
   $permissions['delete any market content'] = array(
     'name' => 'delete any market content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any package content'.
   $permissions['delete any package content'] = array(
     'name' => 'delete any package content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -856,28 +921,36 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'delete any region content'.
   $permissions['delete any region content'] = array(
     'name' => 'delete any region content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any service content'.
   $permissions['delete any service content'] = array(
     'name' => 'delete any service content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any slide content'.
   $permissions['delete any slide content'] = array(
     'name' => 'delete any slide content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any special_offer content'.
   $permissions['delete any special_offer content'] = array(
     'name' => 'delete any special_offer content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -900,7 +973,9 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'delete own affiliation content'.
   $permissions['delete own affiliation content'] = array(
     'name' => 'delete own affiliation content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -909,6 +984,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'delete own article content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'node',
   );
@@ -916,70 +992,90 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'delete own benefit content'.
   $permissions['delete own benefit content'] = array(
     'name' => 'delete own benefit content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own blog content'.
   $permissions['delete own blog content'] = array(
     'name' => 'delete own blog content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own cta content'.
   $permissions['delete own cta content'] = array(
     'name' => 'delete own cta content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own faq content'.
   $permissions['delete own faq content'] = array(
     'name' => 'delete own faq content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own gallery_image content'.
   $permissions['delete own gallery_image content'] = array(
     'name' => 'delete own gallery_image content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own landing_page content'.
   $permissions['delete own landing_page content'] = array(
     'name' => 'delete own landing_page content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own localtarget content'.
   $permissions['delete own localtarget content'] = array(
     'name' => 'delete own localtarget content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own location content'.
   $permissions['delete own location content'] = array(
     'name' => 'delete own location content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own market content'.
   $permissions['delete own market content'] = array(
     'name' => 'delete own market content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own package content'.
   $permissions['delete own package content'] = array(
     'name' => 'delete own package content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -988,6 +1084,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'delete own page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',
@@ -1003,35 +1100,45 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'delete own region content'.
   $permissions['delete own region content'] = array(
     'name' => 'delete own region content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own service content'.
   $permissions['delete own service content'] = array(
     'name' => 'delete own service content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own slide content'.
   $permissions['delete own slide content'] = array(
     'name' => 'delete own slide content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own special_offer content'.
   $permissions['delete own special_offer content'] = array(
     'name' => 'delete own special_offer content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own testimonial content'.
   $permissions['delete own testimonial content'] = array(
     'name' => 'delete own testimonial content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -1049,6 +1156,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'delete own webform submissions',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'webform',
@@ -1059,6 +1167,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'delete revisions',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',
@@ -1124,7 +1233,9 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'edit any affiliation content'.
   $permissions['edit any affiliation content'] = array(
     'name' => 'edit any affiliation content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -1133,6 +1244,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'edit any article content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'node',
   );
@@ -1140,70 +1252,90 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'edit any benefit content'.
   $permissions['edit any benefit content'] = array(
     'name' => 'edit any benefit content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any blog content'.
   $permissions['edit any blog content'] = array(
     'name' => 'edit any blog content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any cta content'.
   $permissions['edit any cta content'] = array(
     'name' => 'edit any cta content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any faq content'.
   $permissions['edit any faq content'] = array(
     'name' => 'edit any faq content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any gallery_image content'.
   $permissions['edit any gallery_image content'] = array(
     'name' => 'edit any gallery_image content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any landing_page content'.
   $permissions['edit any landing_page content'] = array(
     'name' => 'edit any landing_page content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any localtarget content'.
   $permissions['edit any localtarget content'] = array(
     'name' => 'edit any localtarget content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any location content'.
   $permissions['edit any location content'] = array(
     'name' => 'edit any location content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any market content'.
   $permissions['edit any market content'] = array(
     'name' => 'edit any market content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any package content'.
   $permissions['edit any package content'] = array(
     'name' => 'edit any package content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -1212,6 +1344,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'edit any page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',
@@ -1227,35 +1360,45 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'edit any region content'.
   $permissions['edit any region content'] = array(
     'name' => 'edit any region content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any service content'.
   $permissions['edit any service content'] = array(
     'name' => 'edit any service content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any slide content'.
   $permissions['edit any slide content'] = array(
     'name' => 'edit any slide content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any special_offer content'.
   $permissions['edit any special_offer content'] = array(
     'name' => 'edit any special_offer content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any testimonial content'.
   $permissions['edit any testimonial content'] = array(
     'name' => 'edit any testimonial content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -1281,7 +1424,9 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'edit own affiliation content'.
   $permissions['edit own affiliation content'] = array(
     'name' => 'edit own affiliation content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -1290,6 +1435,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'edit own article content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'node',
   );
@@ -1297,70 +1443,90 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'edit own benefit content'.
   $permissions['edit own benefit content'] = array(
     'name' => 'edit own benefit content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own blog content'.
   $permissions['edit own blog content'] = array(
     'name' => 'edit own blog content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own cta content'.
   $permissions['edit own cta content'] = array(
     'name' => 'edit own cta content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own faq content'.
   $permissions['edit own faq content'] = array(
     'name' => 'edit own faq content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own gallery_image content'.
   $permissions['edit own gallery_image content'] = array(
     'name' => 'edit own gallery_image content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own landing_page content'.
   $permissions['edit own landing_page content'] = array(
     'name' => 'edit own landing_page content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own localtarget content'.
   $permissions['edit own localtarget content'] = array(
     'name' => 'edit own localtarget content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own location content'.
   $permissions['edit own location content'] = array(
     'name' => 'edit own location content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own market content'.
   $permissions['edit own market content'] = array(
     'name' => 'edit own market content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own package content'.
   $permissions['edit own package content'] = array(
     'name' => 'edit own package content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -1369,6 +1535,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'edit own page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',
@@ -1377,42 +1544,54 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'edit own profile content'.
   $permissions['edit own profile content'] = array(
     'name' => 'edit own profile content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own region content'.
   $permissions['edit own region content'] = array(
     'name' => 'edit own region content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own service content'.
   $permissions['edit own service content'] = array(
     'name' => 'edit own service content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own slide content'.
   $permissions['edit own slide content'] = array(
     'name' => 'edit own slide content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own special_offer content'.
   $permissions['edit own special_offer content'] = array(
     'name' => 'edit own special_offer content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own testimonial content'.
   $permissions['edit own testimonial content'] = array(
     'name' => 'edit own testimonial content',
-    'roles' => array(),
+    'roles' => array(
+      'client' => 'client',
+    ),
     'module' => 'node',
   );
 
@@ -1430,6 +1609,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'edit own webform submissions',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'webform',
@@ -1595,6 +1775,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'revert revisions',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',
@@ -1605,6 +1786,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'search content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'search',
   );
@@ -1650,6 +1832,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'use advanced search',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'search',
   );
@@ -1669,6 +1852,7 @@ function sprowt_user_settings_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
+      'client' => 'client',
     ),
     'module' => 'filter',
   );
@@ -1687,6 +1871,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'use text format no_wysiwyg',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
     ),
     'module' => 'filter',
   );
@@ -1696,6 +1881,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'view own unpublished content',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',
@@ -1706,6 +1892,7 @@ function sprowt_user_settings_user_default_permissions() {
     'name' => 'view revisions',
     'roles' => array(
       'administrator' => 'administrator',
+      'client' => 'client',
       'content admin' => 'content admin',
     ),
     'module' => 'node',

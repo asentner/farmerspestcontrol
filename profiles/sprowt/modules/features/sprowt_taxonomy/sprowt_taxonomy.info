@@ -1,7 +1,7 @@
-name = Sprowt Taxonomy (Feature)
-description = Feature containing settings for taxonomies on Sprowt sites
+name = sprowt Taxonomy (Feature)
+description = Feature containing settings for taxonomies on sprowt sites
 core = 7.x
-package = Sprowt Features
+package = sprowt Features
 version = 7.x-1.0
 project = sprowt_taxonomy
 dependencies[] = ctools

@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Code for the Sprowt Fields and Text Formats feature.
+ * Code for the sprowt Fields and Text Formats feature.
  */
 
 include_once 'sprowt_fields_and_text_formats.features.inc';

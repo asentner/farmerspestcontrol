@@ -118,7 +118,7 @@ function sprowt_content_types_metatag_export_default() {
         'value' => '[site:name]',
       ),
       'og:type' => array(
-        'value' => '',
+        'value' => 'website',
       ),
       'og:url' => array(
         'value' => '[current-page:url:absolute]',
