@@ -4,11 +4,9 @@ $info = array();
 
 $info['fields'] = array(
    'primary' => t('Primary Base'),
-   'primary_1' => t('Primary 1'),
-   'primary_2' => t('Primary 2'),
-   'primary_3' => t('Primary 3'),
+   'primary_1' => t('Primary Dark'),
    'secondary' => t('Secondary Base'),
-   'secondary_1' => t('Secondary 1'),
+   'secondary_1' => t('Secondary Light'),
 );
 
 $info['schemes'] = array(
@@ -16,11 +14,9 @@ $info['schemes'] = array(
      'title' => t('Default'),
      'colors' => array(
          'primary' => '#80b840',
-         'primary_1' => '#669233',
-         'primary_2' => '#597f2c',
-         'primary_3' => '#373d38',
+         'primary_1' => '#6fab34',
          'secondary' => '#216e82',
-         'secondary_1' => '#174c59',
+         'secondary_1' => '#21768c',
      ),
    ),
 );
