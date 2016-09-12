@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the sprowt Breadcrumbs (Features) feature.
+ */
+
+include_once 'sprowt_breadcrumbs.features.inc';
