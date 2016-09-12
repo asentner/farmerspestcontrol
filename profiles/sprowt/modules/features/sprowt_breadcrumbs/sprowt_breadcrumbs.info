@@ -1,7 +1,7 @@
-name = sprowt Breadcrumbs (Features)
+name = Sprowt Breadcrumbs (Features)
 description = Manages settings related to custom breadcrumbs.
 core = 7.x
-package = sprowt Features
+package = Sprowt Features
 dependencies[] = ctools
 dependencies[] = custom_breadcrumbs
 dependencies[] = custom_breadcrumbs_features

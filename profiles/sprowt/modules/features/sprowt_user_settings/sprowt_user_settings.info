@@ -1,7 +1,7 @@
-name = sprowt User Settings (Feature)
+name = Sprowt User Settings (Feature)
 description = Feature containing settings related to user
 core = 7.x
-package = sprowt Features
+package = Sprowt Features
 version = 7.x-1.0
 project = sprowt_user_settings
 dependencies[] = dashboard

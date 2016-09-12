@@ -1,7 +1,7 @@
-name = sprowt Fields and Text Formats (feature)
+name = Sprowt Fields and Text Formats (feature)
 description = Base feature for base fields and text formats
 core = 7.x
-package = sprowt Features
+package = Sprowt Features
 version = 7.x-1.0
 project = sprowt_fields_and_text_formats
 dependencies[] = block_shortcode
