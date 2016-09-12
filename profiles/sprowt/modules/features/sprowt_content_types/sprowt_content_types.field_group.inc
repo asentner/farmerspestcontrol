@@ -253,7 +253,8 @@ function sprowt_content_types_field_group_info() {
       9 => 'field_seo_title',
       10 => 'field_service',
       11 => 'field_hero_image',
-      12 => 'title',
+      12 => 'field_content_edited',
+      13 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -351,12 +352,13 @@ function sprowt_content_types_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_image',
-      2 => 'field_attachments',
-      3 => 'field_display_title',
+      1 => 'field_attachments',
+      2 => 'field_display_title',
+      3 => 'field_image',
       4 => 'field_intro',
-      5 => 'title',
-      6 => 'field_seo_title',
+      5 => 'field_seo_title',
+      6 => 'field_content_edited',
+      7 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
