@@ -371,7 +371,7 @@ function sprowt_content_types_strongarm() {
           'weight' => '40',
         ),
         'title' => array(
-          'weight' => '43',
+          'weight' => '-5',
         ),
         'path' => array(
           'weight' => '30',
@@ -513,23 +513,7 @@ function sprowt_content_types_strongarm() {
       ),
     ),
     'extra_fields' => array(
-      'form' => array(
-        'metatags' => array(
-          'weight' => '40',
-        ),
-        'title' => array(
-          'weight' => '42',
-        ),
-        'path' => array(
-          'weight' => '30',
-        ),
-        'rabbit_hole' => array(
-          'weight' => '0',
-        ),
-        'xmlsitemap' => array(
-          'weight' => '30',
-        ),
-      ),
+      'form' => array(),
       'display' => array(),
     ),
   );
@@ -1755,7 +1739,7 @@ function sprowt_content_types_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_profile';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['node_submitted_profile'] = $strongarm;
 
   $strongarm = new stdClass();
