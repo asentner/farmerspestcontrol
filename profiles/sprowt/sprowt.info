@@ -105,6 +105,7 @@ dependencies[] = pathauto
 dependencies[] = xmlsitemap
 dependencies[] = xmlsitemap_engines
 dependencies[] = views
+dependencies[] = views_bulk_operations
 dependencies[] = features
 dependencies[] = admin_menu
 dependencies[] = admin_menu_toolbar
