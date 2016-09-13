@@ -1,13 +1,5 @@
 .not-front .l-breadcrumb {
-  background: palette(secondary, base);
-  color: palette(white, pure);
   padding: 20px;
-  a {
-    color: inherit;
-    &:hover {
-      color: darken(palette(white, pure), 10);
-    }
-  }
 }
 
 .node-type-localtarget .l-breadcrumb {

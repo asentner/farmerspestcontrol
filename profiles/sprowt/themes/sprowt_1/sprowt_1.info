@@ -10,6 +10,7 @@ core = 7.x
 ; ========================================
 stylesheets[all][] = css/sprowt-1.reset.css
 stylesheets[all][] = css/sprowt-1.styles.css
+stylesheets[all][] = css/sprowt-1.colors.css
 stylesheets[print][] = css/sprowt-1.print.css
 
 ; ========================================

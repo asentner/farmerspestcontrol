@@ -1,22 +1,10 @@
 .block-areas-map {
-  $color-bg: palette(neutral, cool-gray);
-  $color-title: palette(white, pure);
-  $color-body: palette(white, base);
-  $color-map-link: palette(white, pure);
-  $color-map-link-hover: palette(primary, base);
-  $color-map-arrow: palette(primary, base);
-
   //starting styling of block
-  background: $color-bg;
   padding: 60px 20px;
   text-align: center;
   .block__title {
     @extend h3;
-    color: $color-title;
     text-transform: uppercase;
-  }
-  .block__content {
-    color: $color-body;
   }
   .intro {
     margin-bottom: 30px;
@@ -24,16 +12,11 @@
   ul {
     margin: 20px 0 15px;
     a {
-      color: $color-map-link;
       font-size: 1.2em;
       padding: 0 20px;
-      &:hover {
-        color: $color-map-link-hover;
-      }
     }
     a::before {
         @include faicon("\f105");
-        color: $color-map-arrow;
         margin: 0 5px 0 0;
     }
   }

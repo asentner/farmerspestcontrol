@@ -1,0 +1,54 @@
+%special-offers-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-block-title: palette(secondary, base);
+  $color-offer-title: palette(primary, base);
+  $color-offer-body: palette(neutral, xanadu);
+
+  background-color: $color-bg;
+  border-color: $color-border;
+  .block__title {
+    color: $color-block-title;
+  }
+  .node__title {
+    color: $color-offer-title;
+  }
+  .node__content {
+    color: $color-offer-body;
+  }
+}
+
+.block--views-special-offers-sidebar {
+  @extend %special-offers-sidebar;
+}
+
+.block--views-special-offers-list {
+  .node {
+    border-color: palette(neutral, alto);
+  }
+}
+
+// homepage
+
+.block-special-offers-intro {
+  $color-block-title: palette(secondary, base);
+
+  .block__title {
+    color: $color-block-title;
+  }
+}
+
+.block--views-special-offers-front,
+.local-target-special-offer {
+  $color-bg: palette(white, pure);
+  $color-block-title: palette(secondary, base);
+  $color-border: palette(primary, base);
+
+  .block__title {
+    color: $color-block-title;
+  }
+  .node {
+    background-color: $color-bg;
+    border-color: $color-border;
+  }
+}

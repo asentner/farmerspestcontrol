@@ -1,0 +1,10 @@
+.block--views-affiliates-list {
+
+  $color-bg: palette(white, pure);
+  $color-title: palette(secondary, base);
+
+  background-color: $color-bg;
+  .block__title {
+    color: $color-title;
+  }
+}

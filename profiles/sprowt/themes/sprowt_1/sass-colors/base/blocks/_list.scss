@@ -1,0 +1,14 @@
+%block--list {
+
+  $border-color: palette(neutral, mercury);
+
+  .views-row {
+    + .views-row {
+      border-top-color: $border-color;
+    }
+  }
+}
+
+.block--list {
+  @extend %block--list;
+}

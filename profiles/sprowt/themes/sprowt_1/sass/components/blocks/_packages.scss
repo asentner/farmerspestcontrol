@@ -1,17 +1,4 @@
 %package-list {
-  $color-title-bg: palette(primary, base);
-  $color-title-fg: palette(white, pure);
-
-  $color-row-odd-bg: palette(neutral, wild-sand);
-  $color-row-even-bg: lighten($color-row-odd-bg, 10);
-
-  $color-node-title: palette(primary, base);
-  $color-node-title-hover: palette(secondary, base);
-
-  $color-button-bg: palette(primary, base);
-  $color-button-fg: palette(white, pure);
-  $color-button-hover: palette(secondary, base);
-
   padding: 30px 0;
   .block__title {
     padding: 15px;
@@ -19,23 +6,15 @@
     font-size: 1.5em;
     text-align: center;
     text-transform: uppercase;
-    background: $color-title-bg;
-    color: $color-title-fg;
   }
   .view-content {
-    border: 2px solid $color-row-odd-bg;
+    border: 2px solid;
   }
   .views-row {
     padding: 30px;
     + .views-row {
       border: none;
     }
-  }
-  .views-row-odd {
-    background: $color-row-odd-bg;
-  }
-  .views-row-even {
-    background: $color-row-even-bg;
   }
   .node {
     display: block;
@@ -51,12 +30,6 @@
     text-transform: uppercase;
     margin: 0;
     padding-left: 10px;
-    a {
-      color: $color-node-title;
-      &:hover {
-        color: $color-node-title-hover;
-      }
-    }
   }
   .node__content {
     padding: 15px 0 0;
@@ -65,13 +38,8 @@
   .field--name-body {
     .field__item {
       .more-link {
-        background: $color-button-bg;
-        color: $color-button-fg;
         max-width: 220px;
         margin-left: 0;
-        &:hover {
-          background: $color-button-hover;
-        }
       }
     }
   }
@@ -84,20 +52,14 @@
 
 %package-grid {
   $column-count: 2;
-  $color-block-bg: palette(neutral, wild-sand);
   .view-content {
-    background: $color-block-bg;
     padding: 30px;
   }
   .views-row {
-    background: none;
     padding: 0;
     + .views-row {
       margin-top: 30px;
     }
-  }
-  .node {
-    background: none;
   }
   .icon-wrap {
     flex-direction: column;

@@ -17,15 +17,10 @@
       justify-content: center;
       align-items: center;
       box-sizing: content-box;
-      background: palette(secondary, base);
-      color: palette(white, pure);
       border-radius: 50%;
       line-height: normal;
       width: 45px;
       height: 45px;
-      &:hover {
-        background: palette(primary, base);
-      }
     }
   }
   .social-description {

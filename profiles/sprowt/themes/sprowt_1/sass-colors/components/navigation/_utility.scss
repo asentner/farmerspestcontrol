@@ -1,0 +1,53 @@
+.block--nav-utility {
+  $color-link-bg: palette(primary, base);
+  $color-link-fg: palette(white, pure);
+
+  background-color: $color-link-bg;
+  .menu-block-wrapper {
+    a {
+      background-color: $color-link-bg;
+      color: $color-link-fg;
+    }
+  }
+  @include breakpoint($tab) {
+    .menu {
+      li {
+        a:before {
+          color: palette(white, pure);
+        }
+      }
+    }
+  }
+  @include breakpoint($nav) {
+    $color-link-bg: transparent;
+    $color-link-fg: #555;
+    $color-link-fg-hover: palette(primary, base);
+    $color-link-arrow: palette(primary, base);
+
+    background-color: $color-link-bg;
+    .menu-block-wrapper {
+      a {
+        @include button-color();
+        &[href^='tel:'] {
+          background-color: $color-link-bg;
+          color: $color-link-fg;
+          &:before {
+            color: $color-link-arrow;
+          }
+          &:hover {
+            color: $color-link-fg-hover;
+          }
+        }
+      }
+    }
+    .menu {
+      li {
+        &:nth-child(1n) {
+          a[href^='tel:']:before {
+            color: $color-link-arrow;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,14 +1,9 @@
 .block--nav-utility {
-  $color-link-bg: palette(primary, base);
-  $color-link-fg: palette(white, pure);
-
-  background: $color-link-bg;
+  display: none;
   padding: 10px 0;
   font-weight: 600;
   .menu-block-wrapper {
     a {
-      background: $color-link-bg;
-      color: $color-link-fg;
       padding: 10px 20px;
     }
   }
@@ -20,7 +15,8 @@
       }
     }
   }
-  @include breakpoint($utility) {
+  @include breakpoint($tab) {
+    display: block;
     .menu {
       @include flexbox;
       justify-content: center;
@@ -36,7 +32,6 @@
         }
         a:before {
           display: inline-block;
-          color: palette(white, pure);
           margin-right: 15px;
           font-size: 32px;
         }
@@ -59,32 +54,19 @@
     }
   }
   @include breakpoint($nav) {
-    $color-link-bg: transparent;
-    $color-link-fg: #555;
-    $color-link-fg-hover: palette(primary, base);
-    $color-link-arrow: palette(primary, base);
-
-    background: $color-link-bg;
     padding: 20px;
     .menu-block-wrapper {
       a {
-        @include button-color();
         border-radius: 5px;
         text-transform: uppercase;
         padding: 10px 30px;
         font-weight: bold;
         &[href^='tel:'] {
-          background: $color-link-bg;
-          color: $color-link-fg;
           padding: 0;
           text-transform: none;
           &:before {
             @include faicon("\F105");
             margin-right: .5em;
-            color: $color-link-arrow;
-          }
-          &:hover {
-            color: $color-link-fg-hover;
           }
         }
       }
@@ -105,7 +87,6 @@
             display: inline-block;
             @include faicon("\F105");
             margin-right: .5em;
-            color: $color-link-arrow;
             font-size: 16px;
           }
         }

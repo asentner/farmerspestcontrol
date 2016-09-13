@@ -1,15 +1,9 @@
 %form-text {
-  $color-bg: palette(white, pure);
-  $color-border: palette(neutral, wild-sand);
-  $color-border-focus: palette(neutral, xanadu);
-
-  background: $color-bg;
-  border: 1px solid $color-border;
+  border: 1px solid;
   width: 100%;
   padding: .5em;
   font: inherit;
   &:focus {
-    border-color: $color-border-focus;
     outline: 0;
   }
 }
@@ -22,7 +16,6 @@ input {
   }
   &[type=submit] {
     @extend %button;
-    @include button-color;
   }
 }
 

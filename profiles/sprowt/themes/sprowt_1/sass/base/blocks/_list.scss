@@ -7,15 +7,13 @@
   $image-padding: 40px;
   $content-width: 60%;
 
-  $border-color: palette(neutral, mercury);
-
   padding: $block-padding-vert $block-padding-horiz;
   text-align: center;
   .views-row {
     + .views-row {
       padding-top: $row-spacing;
       margin-top: $row-spacing;
-      border-top: solid 1px $border-color;
+      border-top: solid 1px;
     }
   }
   .field--name-field-image {

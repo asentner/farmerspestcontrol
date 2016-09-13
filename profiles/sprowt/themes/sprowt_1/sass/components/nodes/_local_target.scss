@@ -1,25 +1,29 @@
 .block--views-localtarget-value-prop {
-  $color-image-overlay: palette(secondary, base);
 	$overlay-opacity: 0.8; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
-	$color-text: palette(white, pure);
 
   .node {
     background-position: center center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		background-color: $color-image-overlay;
   }
-  .slide-image-background {
-    min-height: 350px;
-		background: rgba($color-image-overlay, $overlay-opacity);
-  }
+	.slide-image-background {
+		position: relative;
+		min-height: 360px;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: $overlay-opacity;
+		}
+	}
   .field--name-field-display-title {
-    color: $color-text;
 		line-height: 1.1;
     margin-bottom: 0;
   }
   .field--name-field-intro {
-		color: $color-text;
 		margin-top: 20px;
     margin-top: 10px;
 	}

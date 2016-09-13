@@ -20,13 +20,10 @@
 
 .button {
   @extend %button;
-  @include button-color();
 }
 
 @media print {
   %button {
-    background: transparent !important; // override button-color mixin
-    color: blue !important; // override button-color mixin
     display: inline-block;
     padding: 0;
   }

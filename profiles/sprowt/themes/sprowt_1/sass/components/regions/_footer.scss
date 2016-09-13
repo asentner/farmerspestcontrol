@@ -1,6 +1,9 @@
 .l-footer-wrap {
-  background: palette(neutral, wild-sand);
   padding-top: 20px;
+  padding-bottom: 70px; // make room for the sticky bottom menu at mobile
+  @include breakpoint($tab) {
+    padding-bottom: 0;
+  }
 }
 
 .l-footer {

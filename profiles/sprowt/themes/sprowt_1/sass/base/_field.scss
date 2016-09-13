@@ -11,7 +11,6 @@
     }
     > .more-link {
       @extend %button;
-      @include button-color();
       display: block;
       margin: 1em auto 0;
       max-width: 225px;

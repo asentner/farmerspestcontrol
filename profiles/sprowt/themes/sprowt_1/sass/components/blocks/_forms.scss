@@ -1,17 +1,9 @@
 .block--form-sidebar {
-  $color-bg: palette(white, pure);
-  $color-border: palette(neutral, wild-sand);
-  $color-title: palette(secondary, base);
-  $color-text: palette(neutral, xanadu);
-
   $border-width: 2px;
 
-  border: $border-width solid $color-border;
-  background: $color-bg;
-  color: $color-text;
+  border: $border-width solid;
   padding: 30px 20px;
   .block__title {
-    color: $color-title;
     font-size: 1.4em;
     text-align: center;
     margin-bottom: 1em;
@@ -28,9 +20,6 @@
         }
       }
     }
-  }
-  label {
-    color: $color-text;
   }
   input {
     width: 100%;
@@ -50,20 +39,12 @@
 // local target page form
 
 .local-target-webform {
-  //$color-bg: palette(secondary, base);
-  $color-bg: palette(neutral, cool-gray);
-  $color-title: palette(white, pure);
-  $color-body: palette(white, base);
-
-  background: $color-bg;
   .block__content {
     max-width: 850px;
     margin: 0 auto;
     padding: 40px 20px;
-    color: $color-body;
   }
   .node__title {
-    color: $color-title;
     text-align: center;
   }
   .field--name-body {

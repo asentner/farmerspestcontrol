@@ -1,9 +1,6 @@
 .block--views-team-list {
-  $color-border: palette(white, base);
-  $color-bg: palette(white, pure);
 
-  .node {
-    background: none;
+.node {
     text-align: center;
   }
   .field--name-field-image {
@@ -11,8 +8,7 @@
       @extend %image-hover;
       width: auto;
       border-radius: 50%;
-      background: $color-bg;
-      border: 2px solid $color-border;
+      border: 2px solid;
     }
   }
   .node__title {

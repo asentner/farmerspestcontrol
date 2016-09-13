@@ -1,0 +1,22 @@
+.block--views-locations-list {
+  $color-title: palette(primary, base);
+  $color-border: palette(primary, base);
+
+  color: $color-title;
+  a {
+    color: inherit;
+    &:hover {
+      color: inherit;
+    }
+  }
+  h2 {
+    color: $color-title;
+  }
+
+  @include breakpoint($tab) {
+    .field-street-address,
+    .field-locality, .field-phone-number {
+      border-left-color: $color-border;
+    }
+  }
+}

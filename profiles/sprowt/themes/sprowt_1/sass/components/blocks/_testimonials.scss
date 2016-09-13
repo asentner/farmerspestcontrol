@@ -1,26 +1,14 @@
 %block--testimonials-sidebar {
-  $color-bg: palette(white, pure);
-  $color-border: palette(neutral, wild-sand);
-  $color-title: palette(secondary, base);
-  $color-stars: palette(primary, base);
-  $color-body: palette(neutral, xanadu);
-
   $border-width: 2px;
 
-  background: $color-bg;
-  border: $border-width solid $color-border;
+  border: $border-width solid;
   padding: 30px 20px;
   .block__title {
-    color: $color-title;
     font-size: 1.4em;
     text-align: center;
     margin-bottom: 1em;
   }
-  .node__content {
-    color: $color-body;
-  }
   .fa-star {
-    color: $color-stars;
     font-size: 1.2em;
   }
   .node--testimonial {
@@ -60,19 +48,12 @@
 
 .block--views-testimonials-front,
 .local-target-testimonial {
-  $color-title: palette(secondary, base);
-  $color-star: palette(primary, base);
-
   .block__content {
     max-width: 800px;
     margin: 0 auto;
     padding: 40px 20px;
-    color: $color-title;
     font-size: 1.5em;
     text-align: center;
-  }
-  .rating {
-    color: $color-star;
   }
   .field--name-body {
     font-size: 0.8em;
@@ -92,14 +73,4 @@
       font-size: 1em;
     }
   }
-}
-
-.local-target-testimonial {
-    $color-bg: palette(secondary, base);
-    $color-body: palette(white, pure);
-
-    background: $color-bg;
-    .block__content {
-      color: $color-body;
-    }
 }

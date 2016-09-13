@@ -3,6 +3,13 @@
   Drupal.behaviors.sprowtMenu = {
     attach: function (context, settings) {
 
+      $('#block-logo-block-logo').once().append('<div class="mobile-menu-toggle"><i class="fa fa-bars"></i></div><div class="tablet-menu-toggle"><i class="fa fa-bars"></i><span>Menu</span></div>');
+
+      $('#block-logo-block-logo').on('click', '.tablet-menu-toggle', function(){
+        $('.block--nav-main').toggleClass('open');
+      });
+
+
       $('.block--nav-main', context).once('menu', function () {
         var $block = $(this);
         // whole menu toggle
@@ -12,6 +19,12 @@
           $block.toggleClass('open');
         });
 
+        $('.mobile-menu-toggle').click(function(e){
+          e.preventDefault();
+          $('.block--nav-main .block__content').slideToggle();
+          $(this).toggleClass('open');
+        });
+
         // add children toggles
         $(this).find('.expanded .menu').before('<a href="#" class="menu-child-toggle">Toggle children</a>');
 
@@ -19,13 +32,16 @@
         $('.menu-child-toggle').click(function(e) {
           e.preventDefault();
           $(this).toggleClass('open');
+          $(this).siblings('a').toggleClass('open');
+          $(this).parent().toggleClass('open');
           $(this).next().slideToggle();
         });
       });
-      $('#block-logo-block-logo').once().append('<div class="tablet-menu-toggle"><i class="fa fa-bars"></i><span>Menu</span></div>');
-      $('#block-logo-block-logo').on('click', '.tablet-menu-toggle', function(){
-        $('.block--nav-main').toggleClass('open');
-      });
+
+
+
+
+
     }
   };
 

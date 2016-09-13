@@ -1,18 +1,13 @@
 .benefits-hero,
 .local-target-benefits {
-   $color-bg: palette(neutral, wild-sand);
-   $color-border: palette(white, pure);
-   $color-title: palette(primary, base);
-   $color-title-hover: palette(secondary, base);
 
-   background: $color-bg;
    padding: 20px 20px 40px;
    text-align: center;
    .view-content {
       flex-wrap: nowrap;
       max-width: 1160px;
       position: relative;
-      z-index: 100;
+      z-index: 99;
    }
    .views-row {
     max-width: 360px;
@@ -21,20 +16,12 @@
    .node__title {
       font-size: 1.325em;
       font-weight: 600;
-      color: $color-title;
-      a {
-        color: $color-title;
-        &:hover {
-          color: $color-title-hover;
-        }
-      }
    }
    .field--name-field-image {
       margin-bottom: 20px;
       img {
          border-radius: 50%;
-         border: 2px solid $color-border;
-         background-color: $color-border;
+         border: 2px solid;
       }
       a > img {
         @extend %image-hover;

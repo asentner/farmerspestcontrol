@@ -1,35 +1,25 @@
 .block--nav-main {
-
-  $color-toggle-bg: palette(secondary, base);
-  $color-toggle-fg: palette(white, pure);
-
-  $color-link-bg: palette(primary, base);
-  $color-link-fg: #fff;
-  $color-link-border: palette(primary, dark);
-
-  $color-child-bg: palette(primary, dark);
-
-  $padding-link: 10px 20px;
+  $padding-link: 15px 20px;
   $padding-left: 60px; // for JS menu
 
-  order: -1;
-
+  // order: -1;
   .block__title {
-    padding: $padding-link;
-    background: $color-toggle-bg;
-    color: $color-toggle-fg;
-    font-size: inherit;
-    margin-bottom: 0;
+    display: none;
   }
   .menu-block-wrapper {
     a, .nolink {
       padding: $padding-link;
-      background: $color-link-bg;
-      color: $color-link-fg;
-      border-bottom: 1px solid $color-link-border;
+    }
+    > .menu > li {
+      border-bottom: 1px solid;
     }
     .nolink {
       display: block;
+    }
+
+    > .menu > li > a,
+    > .menu > li > .nolink {
+      font-weight: 700;
     }
   }
   .menu {
@@ -38,72 +28,53 @@
     }
   }
   &.menu-processed {
-    .block__title {
-      text-align: right;
-      cursor: pointer;
-      &:after {
-        @include faicon("\F0C9");
-        margin-left: .5em;
-      }
-    }
     .block__content {
       display: none;
     }
     .expanded,
     .leaf {
       position: relative;
-      a:first-child,
-      .nolink {
-        padding-left: $padding-left;
-      }
       .menu {
-        a, .nolink {
-          background: $color-child-bg;
+        > li > a,
+        > li > .nolink {
+          padding: 5px 20px 5px 30px;
         }
-        .menu-child-toggle {
-          background: none;
+        > li:last-of-type > a,
+        > li:last-of-type > .nolink {
+          padding-bottom: 30px;
         }
         > li > .menu > li > a,
         > li > .menu > li > .nolink {
-          padding-left: $padding-left + 20px;
+          padding-left: 50px;
+        }
+        > li > .menu > li:last-of-type > a {
+          padding-bottom: 5px;
         }
       }
     }
-    .menu > li.expanded > a:first-child { //background for first level arrows
-      &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 46px;
-        height: 100%;
-        background: $color-child-bg;
-      }
-    }
     .menu-child-toggle {
+      height: 100%; // iphone 6 landscape fix
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       font-size: 0;
-      background: none;
-      border-bottom: none;
       &:after {
-        @include faicon("\F105");
+        @include faicon("\F107");
         font-size: 1rem;
-      }
-      &.open {
-        transform: rotate(90deg);
+        font-weight: 600;
       }
     }
   }
+
   @include breakpoint($tab) {
     transition: transform .5s;
     transform: translateX(100%);
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
     z-index: 52;
     width: 50%;
+    height: 100%;
     &.open {
       transform: translateX(0);
     }
@@ -113,61 +84,49 @@
     }
     &.menu-processed {
       .block__title {
+        display: block;
+        text-align: right;
+        cursor: pointer;
+        font-size: 0;
+        padding: 50px 6px;
         &:after {
           @include faicon($fa-var-times);
+          font-size: 16px;
+          border: 1px solid;
+          padding: 10px 12px;
         }
       }
     }
   }
   @include breakpoint($nav) {
-
-    $color-link-bg: palette(white, pure);
-    $color-link-bg-hover: palette(white, pure);
-    $color-link-fg: palette(black, base);
-    $color-link-fg-hover: palette(black, pure);
-    $color-link-drop: palette(primary, base);
-    $color-link-drop-hover: palette(primary, dark);
-
-    $color-child-border: palette(primary, base); // color of top border of 2nd level menu
     $border-width: 3px;
 
-    $color-child-bg: palette(white, pure);
-    $color-child-bg-hover: palette(primary, base);
-    $color-child-fg: palette(neutral, xanadu);
-    $color-child-fg-hover: palette(white, pure);
-
-    $color-third-bg: palette(primary, base);
-    $color-third-bg-hover: palette(primary, dark);
-    $color-third-fg: $color-child-bg;
-    $color-third-fg-hover: $color-child-fg-hover;
-    $color-third-border: $color-child-border;
-
+    $padding-link: 10px 20px;
     $padding-link-top: 5px; // top padding of 1st level menu items
 
-    order: 0;
+    // order: 0;
 
     transition: transform .5s;
     transform: translateX(0);
     position: static;
     z-index: 52;
     width: auto;
-    .block__title {
-      display: none;
-    }
+    margin-bottom: 1px; // fix firefox issue
+
     .block__content {
       display: block !important; // override js
     }
     .menu-block-wrapper {
-      a {
-        background: $color-link-bg;
-        color: $color-link-fg;
-      }
       a, .nolink {
         border: 0;
+        padding: $padding-link;
       }
       > .menu { // first level
         @include flexbox;
         position: relative;
+        > li {
+          border-bottom: none;
+        }
         > li > a {
           text-transform: uppercase;
           font-weight: 600;
@@ -179,19 +138,11 @@
           &:after {
             @include faicon("\F107");
             margin-left: 10px;
-            color: $color-link-drop;
           }
           &:first-child {
             &:before {
               content: none;
             }
-          }
-        }
-        > li:hover > a {
-          background: $color-link-bg-hover;
-          color: $color-link-fg-hover;
-          &:after {
-            color: $color-link-drop-hover;
           }
         }
       }
@@ -200,35 +151,17 @@
         position: absolute;
         min-width: 180px;
         z-index: 52;
-        border-top: $border-width solid $color-child-border;
+        border-top: $border-width solid;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         text-transform: uppercase;
         font-weight: 600;
         > li > a {
-          background: $color-child-bg;
-          color: $color-child-fg;
-          white-space: nowrap;
-          &:hover,
-          &.active,
-          &.active-trail {
-            background: $color-child-bg-hover;
-            color: $color-child-fg-hover;
-          }
-        }
-        > li > .nolink {
-          background: $color-child-bg;
-          color: $color-child-fg;
           white-space: nowrap;
           padding: $padding-link;
-          &:hover {
-            background: $color-child-bg-hover;
-            color: $color-child-fg-hover;
-          }
         }
-        > li:hover > a,
-        > li:hover > .nolink {
-          background: $color-child-bg-hover;
-          color: $color-child-fg-hover;
+        > li > .nolink {
+          white-space: nowrap;
+          padding: $padding-link;
         }
       }
       > .menu > li:last-child:hover > .menu {
@@ -239,29 +172,19 @@
         position: absolute;
         left: 100%;
         top: 0;
-        // border-top: $border-width solid $color-third-border;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         z-index: 52;
         > li > a {
           white-space: nowrap;
-          background: $color-third-bg;
-          color: $color-third-fg;
           padding: $padding-link;
-          &:hover,
-          &.active {
-            background: $color-third-bg-hover;
-            color: $color-third-fg-hover;
-          }
         }
         > li > .nolink {
           white-space: nowrap;
-          background: $color-third-bg;
-          color: $color-third-fg;
           padding: $padding-link;
         }
       }
       > .menu > li > .menu > li.first:hover > .menu {
-        border-top: $border-width solid $color-third-border;
+        border-top: $border-width solid;
         top: -$border-width;
       }
       > .menu > li:last-child > .menu > li:hover > .menu {
@@ -270,6 +193,9 @@
       }
     }
     &.menu-processed {
+      .block__title {
+        display: none;
+      }
       .menu-child-toggle {
         display: none;
       }

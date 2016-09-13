@@ -1,18 +1,12 @@
 .field--name-field-call-out {
-  $color-callout-bg: palette(secondary);
-  $color-callout-fg: palette(white, pure);
-
   margin-top: 1.5em;
   padding: 20px;
-  background: $color-callout-bg;
-  color: $color-callout-fg;
   text-align: center;
   .field__items {
     margin: 0 auto;
     max-width: 600px;
   }
   h1, h2, h3, h4, h5 {
-    color: $color-callout-fg;
     margin-bottom: .7em;
   }
 }

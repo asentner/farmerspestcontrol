@@ -6,7 +6,6 @@
   $image-padding: 15px;
 
   $node-padding: 20px;
-  $grid-color-bg: palette(neutral, wild-sand);
 
   $image-width: 320px;
 
@@ -18,9 +17,6 @@
     + .views-row {
       margin-top: $grid-spacing;
     }
-  }
-  .node {
-    background: $grid-color-bg;
   }
   .node__title {
     font-size: 1.325em;
@@ -79,8 +75,7 @@
       max-width: none;
     }
     .node {
-      background: transparent;
-      border: .3pt solid black;
+      border: .3pt solid;
     }
   }
 }

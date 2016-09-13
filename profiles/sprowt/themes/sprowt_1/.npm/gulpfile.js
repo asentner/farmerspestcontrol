@@ -26,11 +26,19 @@ gulp.task('sass', function() {
     .pipe(autoprefixer())
     .pipe(gulp.dest('../css'))
     .pipe(livereload());
+  gulp.src('../sass-colors/**/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sassGlob())
+    .pipe(sass().on('error', notify.onError('<%= error.message %>')))
+    .pipe(autoprefixer())
+    .pipe(gulp.dest('../css'))
+    .pipe(livereload());
 });
 
 gulp.task('watch', function() {
     livereload.listen();
     gulp.watch('../sass/**/*.scss', ['sass']);
+    gulp.watch('../sass-colors/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['clean', 'sass', 'watch']);

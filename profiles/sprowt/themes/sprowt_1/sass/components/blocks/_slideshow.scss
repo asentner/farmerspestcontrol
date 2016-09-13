@@ -1,15 +1,12 @@
 .block--views-slideshow-front,
 .block--views-slideshow-localtarget {
-	$color-image-overlay: palette(secondary, base);
 	$overlay-opacity: 0.8; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
-	$color-text: palette(white, pure);
 
 	text-align: center;
 	.node--slide {
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		background-color: $color-image-overlay;
 	}
 	.slide-image {
 		position: relative;
@@ -21,12 +18,10 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: $color-image-overlay;
 			opacity: $overlay-opacity;
 		}
 	}
 	.node__title {
-		color: $color-text;
 		line-height: 1.1;
 	}
 	.flexslider:hover .flex-direction-nav a {
@@ -40,7 +35,6 @@
 			@extend .fa;
 			content: "\f104";
 			font-size: 45px;
-			color: rgba(white, .7);
 		}
 		&.flex-next:before {
 			@extend .fa;
@@ -55,7 +49,6 @@
 		width: 100%;
 	}
 	.field--name-body {
-		color: $color-text;
 		margin-top: 20px;
 	}
 	.slide-content {
