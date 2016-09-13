@@ -289,6 +289,8 @@ Class SprowtBuilder {
             'menu-mobile-menu' => "menu-mobile-menu_link_export.json",
             'menu-mobile-callout' => "menu-mobile-callout_link_export.json",
             'menu-utility-menu' => "menu-utility-menu_link_export.json",
+            'menu-mobile-footer' => "menu-mobile-footer_link_export.json",
+            'menu-mobile-utility' => "menu-mobile-utility_link_export.json"
         );
 
         $MB = new MenuBuilder();
