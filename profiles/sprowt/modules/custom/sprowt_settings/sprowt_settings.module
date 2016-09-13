@@ -592,3 +592,74 @@ function _sprowt_settings_get_address(){
 
     return $location_array;
 }
+
+function _sprowt_settings_machine_name($name) {
+    return preg_replace('/[^0-9a-zA-Z\_]/','',preg_replace('/\s/','_',str_replace('-','_',strtolower($name))));
+}
+
+
+function _sprowt_settings_get_main_menu_nodes() {
+    $path = drupal_get_path('profile', 'sprowt');
+    $nodes = json_decode(file_get_contents($path . '/sprowt_export.json'),true);
+    $nodes_array = array();
+    foreach($nodes as $node) {
+        $nodes_array[$node['uuid']] = $node;
+    }
+    $menu = json_decode(file_get_contents($path . '/main-menu_link_export.json'),true);
+    $return = array();
+    foreach($menu['menu_links'] as $m) {
+        $nid = str_replace('node/','', $m['link_path']);
+        $uuid = $menu['uuid_map'][$nid];
+        $return[] = $nodes_array[$uuid];
+    }
+
+    return $return;
+}
+
+/**
+ * Implements hook_cb_identifier_list().
+ * @return array
+ */
+
+function sprowt_settings_cb_identifier_list() {
+    $identifiers = array();
+    $nodes = _sprowt_settings_get_main_menu_nodes();
+
+    foreach($nodes as $node) {
+        if($node['type'] == 'page') {
+            $identifiers['<' . _sprowt_settings_machine_name($node['title']) . '>'] = t('Corresponds to imported basic page with title: ' . $node['title']);
+        }
+    }
+
+
+    return $identifiers;
+}
+
+/**
+ * Implements hook_cb_identifier_values().
+ *
+ * @param $identifier
+ * @param $obj
+ *
+ * @return array|null
+ */
+function sprowt_settings_cb_identifier_values($identifier, $obj) {
+    $crumb_items = NULL;
+    $nodes = _sprowt_settings_get_main_menu_nodes();
+
+    foreach($nodes as $node) {
+        $id = '<' . _sprowt_settings_machine_name($node['title']) . '>';
+        if($id == $identifier) {
+            $n = array_pop(entity_uuid_load('node', array($node['uuid'])));
+            $path = drupal_get_path_alias('node/' . $n->nid);
+            $crumb_item = array(
+                'crumb' => l($obj['title'], $path),
+                'title' => $obj['title'],
+                'href' => $path
+            );
+            $crumb_items[] = $crumb_item;
+        }
+    }
+
+    return $crumb_items;
+}

@@ -24,7 +24,7 @@ function sprowt_breadcrumbs_custom_breadcrumb_features_default_settings() {
     'name' => 'Areas We Service',
     'titles' => '<none>',
     'paths' => '<none>',
-    'visibility_php' => 'if($node->nid == 25) {return TRUE;}',
+    'visibility_php' => 'if($node->uuid == \'2b054fc1-1268-405d-9d93-9829b7c4a20c\') {return TRUE;}',
     'node_type' => 'page',
     'language' => '',
     'machine_name' => 'areas_we_service',
@@ -35,8 +35,8 @@ function sprowt_breadcrumbs_custom_breadcrumb_features_default_settings() {
     'name' => 'blog',
     'titles' => 'About
 Our Blog',
-    'paths' => 'node/19
-node/31',
+    'paths' => '<about>
+<our_blog>',
     'visibility_php' => '',
     'node_type' => 'blog',
     'language' => '',
@@ -48,8 +48,8 @@ node/31',
     'name' => 'profile',
     'titles' => 'About
 Meet the Team',
-    'paths' => 'node/19
-node/23',
+    'paths' => '<about>
+<meet_our_trusted_team>',
     'visibility_php' => '',
     'node_type' => 'profile',
     'language' => '',
