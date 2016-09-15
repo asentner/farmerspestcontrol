@@ -27,7 +27,31 @@ function review_boost_drush_command() {
         );
     }
 
+    $items['queue-delete'] = array(
+        'description' => "Deletes all items from the queue with a given name",
+        'arguments' => array(
+            'queue' => 'Name of the queued item',
+        ),
+        'examples' => array(
+            'drush queue-delete review_boost_email_worker',
+        ),
+    );
+
     return $items;
+}
+
+function drush_review_boost_queue_delete($queue) {
+    $count = db_query("
+        SELECT count(*) as 'count' FROM queue WHERE name = :queue;
+    ", array(
+        ':queue' => $queue
+    ))->fetchField();
+
+
+    $delete = db_delete('queue')
+        ->condition('name',$queue)
+        ->execute();
+    drush_print("$count items deleted from queue with name $queue");
 }
 
 function drush_review_boost_result_generate($count) {

@@ -1,9 +1,18 @@
 <?php
 
+require_once drupal_get_path('module', 'review_boost') . '/review_boost.php';
+
 /**
  * Implements hook_menu().
  */
 function review_boost_menu() {
+    $items['customer-survey'] = array(
+        'title' => 'Thank you for taking our customer satisfaction survey!',
+        'page callback' => '_review_boost_questionnaire_anon',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK
+    );
+
     $items['customer-survey/%'] = array(
         'title' => 'Thank you for taking our customer satisfaction survey!',
         'page callback' => '_review_boost_questionnaire',
@@ -42,6 +51,14 @@ function review_boost_menu() {
         'title' => 'Review Boost settings',
         'description' => 'Administration for Review Boost',
         'page callback' => '_review_boost_admin',
+        'access callback' => '_review_boost_admin_access',
+        'file' => 'review_boost.admin.inc',
+    );
+
+    $items['admin/survey/review-settings'] = array(
+        'title' => 'Review Boost Review settings',
+        'description' => 'Review Administration for Review Boost',
+        'page callback' => '_review_boost_admin_review',
         'access callback' => '_review_boost_admin_access',
         'file' => 'review_boost.admin.inc',
     );
@@ -124,6 +141,13 @@ function review_boost_theme($existing, $type, $theme, $path)
             'template' => 'review_boost_admin_import_csv',
             'path' => $template_path,
         ),
+        'review_boost_admin' => array(
+            'variables' => array(
+                'form' => null,
+            ),
+            'template' => 'review_boost_admin',
+            'path' => $template_path,
+        ),
         'review_boost_email_request' => array(
             'variables' => array(
                 'customer_name' => null,
@@ -152,6 +176,13 @@ function review_boost_theme($existing, $type, $theme, $path)
                 'form' => null,
             ),
             'template' => 'review_boost_settings',
+            'path' => $template_path,
+        ),
+        'review_boost_review_settings' => array(
+            'variables' => array(
+                'form' => null,
+            ),
+            'template' => 'review_boost_review_settings',
             'path' => $template_path,
         ),
         'review_boost_survey_result' => array(
@@ -203,136 +234,24 @@ function review_boost_cron_queue_info() {
     );
 }
 
-function _review_boost_get_customer_email(){
-
-
-    if(module_exists('smtp')) {
-        $allow_html = variable_get('smtp_allowhtml', false);
-    }
-    else {
-        $allow_html = false;
-    }
-
-
-    $body = theme('review_boost_email_request');
-
-    if(!$allow_html) {
-        $body = preg_replace('/<.?\/?br.?>/',"\r\n\t" , $body);
-        $body = drupal_html_to_text($body);
-    }
-
-    return $body;
+function _review_boost_get_signoff() {
+    $RB = new ReviewBoost();
+    return $RB->companySignoff();
 }
 
-function _review_boost_get_signoff() {
+function _review_boost_get_email(){
+    $RB = new ReviewBoost();
+    return $RB->getEmail();
+}
 
-    $company_name = variable_get('sprowt_settings_company_name', variable_get('coal_admin_company_name', variable_get('site_name')));
-    $signoff_array = (function_exists('_sprowt_settings_get_address')) ? _sprowt_settings_get_address() : array(
-        'street' => variable_get('coal_admin_address_street', false),
-        'street2' => variable_get('coal_admin_address_additional', false),
-        'locality' => variable_get('coal_admin_address_locality', false),
-        'province' => variable_get('coal_admin_address_province', false),
-        'postal_code' => variable_get('coal_admin_address_postal_code', false),
-    );
-
-    if(function_exists('sprowt_settings_get_phone_number')) {
-        $phone = sprowt_settings_get_phone_number();
-    }
-    else {
-        $phone = (function_exists('coal_admin_get_phone_number')) ? coal_admin_get_phone_number() : false;
-    }
-
-    $signoff_array['phone_number'] = $phone;
-    $signoff_array['company_name'] = $company_name;
-    $signoff = theme('review_boost_email_signoff', $signoff_array);
-
-    return $signoff;
+function _review_boost_get_phone(){
+    $RB = new ReviewBoost();
+    return $RB->getPhone();
 }
 
 function _review_boost_translate_values($str, $token, $additional_trans = array()) {
-    global $base_url;
-    $data = db_query("
-        SELECT *
-        FROM review_boost_token
-        WHERE token = :token
-    ", array(
-        ':token' => $token
-    ))->fetchAssoc();
-
-    if(empty($data)) {
-        watchdog('review_boost', 'No data found for token: $token! No email sent!',array(
-            '%token' => $token
-        ),'error');
-        return false;
-    }
-
-    $survey_link = $base_url . '/customer-survey/' . $token;
-
-    $trans = array(
-        '%customer_id' => $data['customer_id'],
-        '%customer_first_name' => $data['first_name'],
-        '%customer_last_name' => $data['last_name'],
-        '%customer_email' => $data['email'],
-        '%technician' => $data['tech'],
-        '%sales' => $data['sales'],
-        '%branch' => $data['branch'],
-        '%survey_link' => $survey_link,
-        '%site_email' => variable_get('site_mail')
-    );
-
-    if(function_exists('sprowt_settings_get_phone_number')) {
-        $trans['%company_phone'] = sprowt_settings_get_phone_number();
-    }
-    else if(function_exists('coal_admin_get_phone_number')) {
-        $trans['%company_phone'] = coal_admin_get_phone_number();
-    }
-    else {
-        $trans['%company_phone'] = '';
-    }
-
-
-    $company_name = variable_get('sprowt_settings_company_name', variable_get('coal_admin_company_name', variable_get('site_name')));
-
-    $trans['%company_name'] = $company_name;
-
-    if(function_exists('_sprowt_settings_get_address')) {
-        $address = _sprowt_settings_get_address();
-        $address_array = array(
-            '%street' => $address['street'],
-            '%street2' => '',
-            '%locality' => $address['locality'],
-            '%province' => $address['province'],
-            '%postal_code' => $address['postal_code'],
-        );
-    }
-    else {
-        $address_array = array(
-            '%street' => variable_get('coal_admin_address_street', ''),
-            '%street2' => variable_get('coal_admin_address_additional', ''),
-            '%locality' => variable_get('coal_admin_address_locality', ''),
-            '%province' => variable_get('coal_admin_address_province', ''),
-            '%postal_code' => variable_get('coal_admin_address_postal_code', ''),
-        );
-    }
-
-
-
-    $trans = array_merge($trans, $address_array);
-
-    $tz = new DateTimeZone(date_default_timezone(true));
-    $service_date = new DateTime(date('c', $data['service_date']), $tz);
-
-    $trans['%service_date'] = $service_date->format('Y/m/d');
-    $trans['%service'] = $data['service'];
-
-
-    $trans = array_merge($trans, $additional_trans);
-
-    foreach($trans as $t => $value) {
-        $str = str_replace($t, $value , $str);
-    }
-
-    return $str;
+    $RB = new ReviewBoost($token);
+    return $RB->translateValues($str, $additional_trans);
 }
 
 function review_boost_mail($key, &$message, $params) {
@@ -355,78 +274,67 @@ function review_boost_mail($key, &$message, $params) {
     }
     switch($key) {
         case 'survey_email':
+            $RB = new ReviewBoost($params['data']['token']);
             $data = array(
                 '%from_email' => $message['from']
             );
 
+            $RB->addTokenValues($data);
+
             $message['subject'] = variable_get('review_boost_customer_subject', 'How did we do?');
 
-            $message['subject'] = _review_boost_translate_values($message['subject'], $params['data']['token']);
+            $message['subject'] = $RB->translateValues($message['subject']);
 
-            $customer_email_body = variable_get('review_boost_customer_body');
-
-            if(!empty($customer_email_body)) {
-                if(is_array($customer_email_body)) {
-                    $customer_email_body = $customer_email_body['value'];
-                }
-
-                if(!$allow_html) {
-                    $customer_email_body = drupal_html_to_text($customer_email_body);
-                }
-            }
-            else {
-
-                $customer_email_body = _review_boost_get_customer_email();
-            }
-
-            $body = _review_boost_translate_values($customer_email_body, $params['data']['token'], $data);
-
-            $message['body'][] = $body;
+            $message['body'][] = $RB->customerEmailBody();
             break;
         case 'admin_email':
             global $base_url;
-
+            $RB = new ReviewBoost($params['token']);
             $survey_link = $base_url . '/admin/survey/' . $params['token'] . '/result';
-
-
             $data = array(
                 '%rating' => $params['rating'],
                 '%comments' => $params['comments'],
                 '%survey_link' => $survey_link,
                 '%from_email' => $message['from']
             );
+            if($RB->allowHtml()) {
+                $data['%comments'] = nl2br($data['%comments']);
+            }
+            $RB->addTokenValues($data);
 
             $message['subject'] = variable_get('review_boost_admin_subject', 'A new ReviewBoost survey has been filled out');
 
-            $message['subject'] = _review_boost_translate_values($message['subject'], $params['token'], $data);
+            $message['subject'] = $RB->translateValues($message['subject']);
 
-            $admin_email_body = variable_get('review_boost_admin_body');
-
-            if(!empty($admin_email_body)) {
-                if(is_array($admin_email_body)) {
-                    $admin_email_body = $admin_email_body['value'];
-                }
-            }
-            else {
-                $admin_email_body = _review_boost_get_default_admin_email_body();
-            }
-
-            if(!$allow_html) {
-                $admin_email_body = drupal_html_to_text($admin_email_body);
-            }
-            else {
-                $data['%comments'] = nl2br($data['%comments']);
-            }
-
-            $body = _review_boost_translate_values($admin_email_body, $params['token'], $data);
-
-            $message['body'][] = $body;
+            $message['body'][] = $RB->adminEmailBody();
     }
 }
 
 function _review_boost_email_worker($item) {
-    $from_email = variable_get('review_boost_customer_from_email', variable_get('site_mail'));
+    $from_email = variable_get('review_boost_customer_from_email', _review_boost_get_email());
     $message = drupal_mail('review_boost', 'survey_email', $item['data']['customer_email'], LANGUAGE_NONE, $item, $from_email, true);
+}
+
+function _review_boost_questionnaire_anon(){
+    $now = new DateTime();
+    $token = _review_boost_generate_token();
+    db_insert('review_boost_token')
+        ->fields(array(
+            'token' => $token,
+            'customer_id' => 'anon_' . $now->format('YmdHis'),
+            'first_name' => 'Anonymous',
+            'last_name' => '',
+            'email' => '',
+            'tech' => '',
+            'sales' => '',
+            'branch' => '',
+            'service' => '',
+            'service_date' => $now->getTimestamp(),
+            'creation_date' => time(),
+        ))
+        ->execute();
+
+    return _review_boost_questionnaire($token);
 }
 
 function _review_boost_questionnaire($token) {
@@ -447,7 +355,7 @@ function _review_boost_questionnaire($token) {
         drupal_set_title('Survey Expired');
         $signoff = _review_boost_get_signoff();
         return theme('review_boost_expired', array(
-            'company_email' => variable_get('site_mail'),
+            'company_email' => _review_boost_get_email(),
             'signoff' => $signoff
         ));
     }
@@ -485,7 +393,7 @@ function _review_boost_questionnaire_form($form, $form_state, $tid) {
     $form['rateit'] = array(
         '#title' => t('Overall, how would you rate your satisfaction with our service?'),
         '#type' => 'markup',
-        '#markup' => '<div id="rateit" class="rateit bigstars" data-rateit-backingfld="#backingServiceRating" data-rateit-starwidth="32" data-rateit-starheight="32"></div>',
+        '#markup' => '<div id="rateit" class="rateit bigstars" data-rateit-backingfld="#backingServiceRating" data-rateit-starwidth="32" data-rateit-starheight="32" data-rateit-step="1"></div>',
         '#weight' => 2,
     );
 
@@ -552,18 +460,20 @@ function _review_boost_send_admin_email($token, $rating, $comments) {
         'comments' => $comments
     );
 
-    drupal_mail('review_boost', 'admin_email', $to, LANGUAGE_NONE, $data);
+    drupal_mail('review_boost', 'admin_email', $to, LANGUAGE_NONE, $data, _review_boost_get_email());
 }
 
 
 function _review_boost_questionnaire_complete_default($high = false) {
 
+    $RB = new ReviewBoost();
+
     return theme('review_boost_complete_default', array(
         'request_review' => $high,
         'gplus_url' => variable_get('sprowt_settings_gplus_url', variable_get('coal_admin_gplus_url', false)),
         'bbb_url' => variable_get('sprowt_settings_bbb_url', variable_get('coal_admin_bbb_url', false)),
-        'company_email' => variable_get('site_mail'),
-        'signoff' => _review_boost_get_signoff()
+        'company_email' => $RB->getEmail(),
+        'signoff' => $RB->companySignoff()
     ));
 }
 
@@ -576,6 +486,7 @@ function _review_boost_questionnaire_complete($token) {
         return MENU_NOT_FOUND;
     }
 
+    $RB = new ReviewBoost($token);
     $high = $result['service_rating'] >= 3;
 
     if($high) {
@@ -599,14 +510,20 @@ function _review_boost_questionnaire_complete($token) {
         $title = _sprowt_settings_shortcode_replace($title);
         $content = _sprowt_settings_shortcode_replace($content);
     }
+    elseif (function_exists('_leadbuilder_settings_shortcode_replace')) {
+        $title = _leadbuilder_settings_shortcode_replace($title);
+        $content = _leadbuilder_settings_shortcode_replace($content);
+    }
 
     $extra_trans = array(
         '%rating' => $result['service_rating'],
         '%comments' => nl2br($result['service_comments'])
     );
 
-    $title = _review_boost_translate_values($title, $token, $extra_trans);
-    $content = _review_boost_translate_values($content, $token, $extra_trans);
+    $RB->addTokenValues($extra_trans);
+
+    $title = $RB->translateValues($title);
+    $content = $RB->translateValues($content);
 
     return theme('review_boost_complete', array(
         'request_review' => $high,
@@ -654,40 +571,8 @@ function _review_boost_generate_token() {
 }
 
 function _review_boost_get_default_admin_email_body(){
-    if(module_exists('smtp')) {
-        $allow_html = variable_get('smtp_allowhtml', false);
-    }
-    else {
-        $allow_html = false;
-    }
-
-    $tokens = array(
-        '%customer_id',
-        '%customer_first_name',
-        '%customer_last_name',
-        '%customer_email',
-        '%technician',
-        '%sales',
-        '%branch',
-        '%service',
-        '%service_date',
-        '%survey_link',
-    );
-
-    $admin_email_body = "<p>A new survey has come in with the following results:</p>";
-    $admin_email_body .= '<ul><li><b>rating</b>: %rating</li><li><b>comments</b>: %comments</li></ul>';
-    $admin_email_body .= '<p>And the following customer info:</p><ul>';
-
-    foreach($tokens as $t) {
-        $admin_email_body .= '<li><b>' . str_replace('%', '' , $t) . '</b>: ' . $t . '</li>';
-    }
-    $admin_email_body .= '</ul>';
-
-    if(!$allow_html) {
-        $admin_email_body = drupal_html_to_text($admin_email_body);
-    }
-
-    return $admin_email_body;
+    $RB = new ReviewBoost();
+    return $RB->defaultAdminEmailBody();
 }
 
 function _review_boost_rand_words($count = 1, $clean = true){

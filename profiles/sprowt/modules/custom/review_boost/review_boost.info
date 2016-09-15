@@ -1,5 +1,7 @@
 name = Review Boost
 description = Survey tool for Sprowt/Coalmarch Marketing sites
 core = 7.x
-version = "7.x-1.0"
+version = "7.x-2.0"
 package = Coalmarch
+
+stylesheets[all][] = css/review_links.css

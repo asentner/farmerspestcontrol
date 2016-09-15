@@ -1,5 +1,6 @@
 <?php
 $filters = array(
+    'survey_score' => 'Survey Rating',
     'survey_completed' => 'Survey Completed',
     'survey_sent' => 'Survey Sent',
     'service_date' => 'Service Date',
@@ -52,6 +53,20 @@ $filters = array(
                             </div>
                          </div>
                         <?php break; ?>
+                    <?php case 'survey_score': ?>
+                        <div data-filter-type="score" class="filter-val">
+                            <select class="op-type">
+                                <option value="eq">Equal To</option>
+                                <option value="gt">Greater Than</option>
+                                <option value="lt">Less Than</option>
+                                <option value="gte">Greater Than Or Equal To</option>
+                                <option value="lte">Less Than Or Equal To</option>
+                            </select>
+                            <div style="margin-left: 10px;">
+                                <input type="number" class="form-text">
+                            </div>
+                        </div>
+                        <?php break; ?>
                     <?php default: ?>
                         <div data-filter-type="text" class="filter-val">
                             <input type="text" class="form-text">
@@ -59,13 +74,14 @@ $filters = array(
                 <?php } ?>
             </div>
             <?php endforeach; ?>
-            <button type="button" class="button" id="add-filter">+</button>
+            <button type="button" class="button" id="add-filter">Filter</button>
         </div>
     </div>
 
     <div class="totals">
         <ul>
-            <li><strong>Total Surveys (completed/sent):</strong> <?php print $totals['completed'].'/'.$totals['sent']; ?></li>
+            <li><strong>Total: </strong> <?php print $totals['filtered'] ?></li>
+            <li><strong>All Surveys (completed/sent):</strong> <?php print $totals['completed'].'/'.$totals['sent']; ?></li>
             <li><strong>Average Score:</strong> <?php print $totals['average_score'] ?></li>
         </ul>
     </div>
