@@ -3,7 +3,7 @@
 function sprowt_tc_drush_command() {
     $items = array();
 
-    $access = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1');
+    $access = (!defined('PANTHEON_ENVIRONMENT'));
     if($access) {
         $items['theme-copy'] = array(
             'description' => 'Copy a sprowt theme to the sites/all/themes directory',
