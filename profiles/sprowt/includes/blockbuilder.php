@@ -190,6 +190,13 @@ class BlockBuilder {
             else {
                 $trans[] = db_update('block')->fields($row)->condition('bid', $exists);
             }
+
+            //update all block rows with new info
+            $update_row = $row;
+            unset($update_row['theme']);
+            unset($update_row['region']);
+            $trans[] = db_update('block')->fields($update_row)->condition('module', $row['module'])->condition('delta', $row['delta']);
+
         }
 
         if(!empty($trans)) {
