@@ -162,6 +162,7 @@ if(!function_exists('str_putcsv'))
 }
 
 function _review_boost_admin_sample_csv(){
+    drupal_page_is_cacheable(false);
     $lines = array();
 
     $lines[] = array(
@@ -200,19 +201,13 @@ function _review_boost_admin_sample_csv(){
 }
 
 function _review_boost_admin(){
-    return theme('review_boost_admin_import_csv', array(
+    return theme('review_boost_admin', array(
         'form' => drupal_get_form('_review_boost_admin_form'),
     ));
 }
 
-function _review_boost_admin_form($form, $form_state){
-
-    if(module_exists('smtp')) {
-        $allow_html = variable_get('smtp_allowhtml', false);
-    }
-    else {
-        $allow_html = false;
-    }
+function _review_boost_admin_form($form, &$form_state){
+    $RB = new ReviewBoost();
 
     $customer_email = array();
 
@@ -220,7 +215,7 @@ function _review_boost_admin_form($form, $form_state){
         '#type' => 'textfield',
         '#title' => t('From Email'),
         '#description' => 'The email address this customer email will be marked as coming from',
-        '#default_value' => variable_get('review_boost_customer_from_email', variable_get('site_mail'))
+        '#default_value' => variable_get('review_boost_customer_from_email', $RB->getEmail())
     );
 
     $customer_email['review_boost_customer_subject'] = array(
@@ -230,29 +225,17 @@ function _review_boost_admin_form($form, $form_state){
         '#default_value' => variable_get('review_boost_customer_subject', 'How did we do?')
     );
 
-    $customer_email_body = variable_get('review_boost_customer_body');
-
-    $email_format = 'full_html';
-    if(!empty($customer_email_body)) {
-        if(is_array($customer_email_body)) {
-            $email_format = $customer_email_body['format'];
-            $customer_email_body = $customer_email_body['value'];
-        }
-
-        if(!$allow_html) {
-            $customer_email_body = drupal_html_to_text($customer_email_body);
-        }
-    }
-    else {
-        $customer_email_body = _review_boost_get_customer_email();
-    }
 
     $customer_email['review_boost_customer_body'] = array(
-        '#type' => $allow_html ? 'text_format' : 'textarea',
+        '#type' => $RB->allowHtml() ? 'text_format' : 'textarea',
         '#title' => t('Email Body'),
         '#description' => 'The body of the email sent to the customer.',
-        '#default_value' => $customer_email_body,
+        '#default_value' => $RB->customerEmailBody(array(), false),
     );
+
+    if($RB->allowHtml()) {
+        $customer_email['review_boost_customer_body']['#format'] = $RB->customerEmailFormat();
+    }
 
     $customer_email['tokens'] = array(
         '#type' => 'fieldset',
@@ -266,17 +249,13 @@ function _review_boost_admin_form($form, $form_state){
         )
     );
 
-    if($allow_html) {
-        $customer_email['review_boost_customer_body']['#format'] = $email_format;
-    }
-
     $admin_email = array();
 
     $admin_email['review_boost_admin_email'] = array(
         '#type' => 'textfield',
         '#title' => t('Admin Email(s)'),
         '#description' => 'A comma separated list of emails to send a notification to once a survey is filled out',
-        '#default_value' => variable_get('review_boost_admin_email', variable_get('site_mail'))
+        '#default_value' => variable_get('review_boost_admin_email', $RB->getEmail())
     );
 
     $admin_email['review_boost_admin_subject'] = array(
@@ -286,32 +265,18 @@ function _review_boost_admin_form($form, $form_state){
         '#default_value' => variable_get('review_boost_admin_subject', 'A new ReviewBoost survey has been filled out')
     );
 
-    $admin_email_body = variable_get('review_boost_admin_body');
-
-    $email_format = 'full_html';
-    if(!empty($admin_email_body)) {
-        if(is_array($admin_email_body)) {
-            $email_format = $admin_email_body['format'];
-            $admin_email_body = $admin_email_body['value'];
-        }
-
-        if(!$allow_html) {
-            $admin_email_body = drupal_html_to_text($admin_email_body);
-        }
-    }
-    else {
-        $admin_email_body = _review_boost_get_default_admin_email_body();
-    }
-
     $desc = 'The body of the email sent to the above email(s).';
 
 
     $admin_email['review_boost_admin_body'] = array(
-        '#type' => $allow_html ? 'text_format' : 'textarea',
+        '#type' => $RB->allowHtml() ? 'text_format' : 'textarea',
         '#title' => t('Email Body'),
         '#description' => $desc,
-        '#default_value' => $admin_email_body
+        '#default_value' => $RB->adminEmailBody(array(), false)
     );
+    if($RB->allowHtml()) {
+        $admin_email['review_boost_admin_body']['#format'] = $RB->adminEmailFormat();
+    }
 
     $extra_tokens = array(
         '%rating' => 'Rating value provided by the survey',
@@ -334,10 +299,6 @@ function _review_boost_admin_form($form, $form_state){
             '#markup' => _review_boost_generate_token_help($admin_tokens)
         )
     );
-
-    if($allow_html) {
-        $admin_email['review_boost_admin_body']['#format'] = $email_format;
-    }
 
     $ty_high = array();
 
@@ -411,6 +372,13 @@ function _review_boost_admin_form($form, $form_state){
         )
     );
 
+    $form['review_boost_settings_email'] = array(
+        '#type' => 'textfield',
+        '#description' => 'This is the email used in the token, "%admin_email" and also the email the "Email to Admin(s)" is marked as coming from.',
+        '#title' => 'Review Boost Admin Email',
+        '#default_value' => $RB->getEmail()
+    );
+
     $form['customer_email'] = array(
         '#type' => 'fieldset',
         '#title' => 'Email to Customer',
@@ -441,48 +409,9 @@ function _review_boost_admin_form($form, $form_state){
 }
 
 function _review_boost_generate_token_help($addtl = array()){
-    if(function_exists('sprowt_settings_get_phone_number')) {
-        $phone = sprowt_settings_get_phone_number();
-    }
-    else if(function_exists('coal_admin_get_phone_number')) {
-        $phone = coal_admin_get_phone_number();
-    }
-
-
-    $tokens = array(
-        '%customer_id' => 'Customer ID from the imported CSV',
-        '%customer_first_name' => 'Customer first name from the imported CSV',
-        '%customer_last_name' => 'Customer last name from the imported CSV',
-        '%customer_email' => 'Customer email from the imported CSV',
-        '%technician' => 'Technician ID/name from the imported CSV',
-        '%sales' => 'Sales ID/name from the imported CSV',
-        '%branch' => 'Branch ID/name from the imported CSV',
-        '%service' => 'Service from the imported CSV',
-        '%service_date' => 'Service Date from the imported CSV',
-        '%survey_link' => 'Link to the survey',
-        '%site_email' => 'Site Email ('.variable_get('site_mail').')',
-        '%street' => 'Site location address: Street',
-        '%street2' => 'Site location address: Additional',
-        '%locality' => 'Site location address: City',
-        '%province' => 'Site location address: State/Province',
-        '%postal_code' => 'Site location address: Postal Code',
-    );
-    if(!empty($phone)) {
-        $tokens['%company_phone'] = 'Phone number defined in settings: ' . $phone;
-    }
-
-    $tokens = array_merge($tokens, $addtl);
-
-    $token_list = '<ul>';
-
-    foreach($tokens as $t => $desc) {
-        $token_list .= "<li>$t - $desc</li>";
-    }
-
-    $token_list .= '</ul>';
-
-    return $token_list;
-
+    $RB = new ReviewBoost();
+    $RB->addTokenDescriptions($addtl);
+    return $RB->getTokenHelp();
 }
 
 function _review_boost_admin_form_validate(&$form, &$form_state){
@@ -561,7 +490,7 @@ function _review_boost_admin_survey_results(){
     $per_page = empty($_GET['per_page']) ? 10 : $_GET['per_page'];
     $count = db_select('review_boost_token', 't');
 
-    $count->leftJoin('review_boost_result', 'r', 't.tid = r.tid');
+    $count->Join('review_boost_result', 'r', 't.tid = r.tid');
     $count->fields(null, array('*'));
     $select = db_select('review_boost_token', 't')
         ->extend('PagerDefault')
@@ -599,9 +528,9 @@ function _review_boost_admin_survey_results(){
     }
 
     $pager = '';
-    if(count($results)) {
+    if(count($results) && $count > $per_page) {
         $current_page = pager_default_initialize($count, $per_page);
-        $pager = theme('pager', array('quantity', count($results)));
+        $pager = theme('pager');
     }
 
     $table = theme('table',array(
@@ -618,13 +547,19 @@ function _review_boost_admin_survey_results(){
 
 function _review_boost_get_totals(){
 
-    $sent = _review_boost_db_query("
+    $sent = db_query("
         SELECT count(*)
         FROM review_boost_token t
         LEFT JOIN review_boost_result r on r.tid = t.tid
     ")->fetchField();
 
-    $completed = _review_boost_db_query("
+    $completed = db_query("
+        SELECT count(*)
+        FROM review_boost_result r 
+        LEFT JOIN review_boost_token t on t.tid = r.tid
+    ")->fetchField();
+
+    $filtered = _review_boost_db_query("
         SELECT count(*)
         FROM review_boost_result r 
         LEFT JOIN review_boost_token t on t.tid = r.tid
@@ -641,12 +576,18 @@ function _review_boost_get_totals(){
         $total_score += $score;
     }
 
-    $average = round($total_score / count($scores), 3);
+    if(count($scores) == 0) {
+        $average = 0;
+    }
+    else {
+        $average = round($total_score / count($scores), 3);
+    }
 
     return array(
         'sent' => $sent,
         'completed' => $completed,
-        'average_score' => $average
+        'average_score' => $average,
+        'filtered' => $filtered
     );
 
 }
@@ -707,6 +648,9 @@ function _review_boost_apply_filters($query, $filters = null) {
             case 'technician':
                 $field = 't.tech';
                 break;
+            case 'survey_score':
+                $field = 'r.service_rating';
+                break;
             default:
                 $field = "t.{$filter['key']}";
         }
@@ -732,6 +676,16 @@ function _review_boost_apply_filters($query, $filters = null) {
                 $value = array($from->getTimestamp(), $to->getTimestamp());
                 $op = 'BETWEEN';
                 break;
+            case 'score':
+                $op_map = array(
+                    'eq' => '=',
+                    'gt' => '>',
+                    'lt' => '<',
+                    'gte' => '>=',
+                    'lte' => '<='
+                );
+                $value = $filter['value']['value'];
+                $op = $op_map[$filter['value']['op']];
         }
 
         if(is_array($sql)) {
@@ -806,6 +760,7 @@ function _review_boost_admin_survey_result($token) {
 }
 
 function _review_boost_admin_results_csv(){
+    drupal_page_is_cacheable(false);
     $sql = "
         SELECT r.creation_date as 'Survey Date',
         r.service_rating as 'Rating',
@@ -852,5 +807,78 @@ function _review_boost_admin_results_csv(){
     header('Content-disposition: attachment;filename='. $filename);
 
     echo implode("\n", $csv);
+}
 
+function _review_boost_admin_review() {
+    global $conf;
+    $conf['preprocess_js'] = false; //disable js aggregation for this page
+    drupal_page_is_cacheable(false); //disable caching for this page
+    drupal_add_js('//code.jquery.com/jquery-1.12.4.min.js');
+    drupal_add_js('//cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.80/jsrender.min.js');
+    drupal_add_js(drupal_get_path('module', 'review_boost') . '/js/review_links.js');
+    return theme('review_boost_review_settings', array(
+        'form' => drupal_get_form('_review_boost_admin_review_form'),
+    ));
+}
+
+function _review_boost_admin_review_form($form, &$form_state) {
+    $form = array();
+
+    $RB = new ReviewBoost();
+
+
+    $form['review_links'] = array(
+        '#type' => 'hidden',
+        '#default_value' => $RB->getReviewLinks(true),
+        '#attributes' => array(
+            'id' => 'review-links'
+        ),
+    );
+
+    $form['actions'] = array(
+        'submit' => array(
+            '#type' => 'submit',
+            '#value' => 'Save',
+        ),
+        'addRow' => array(
+            '#type' => 'button',
+            '#value' => 'Add Custom Site',
+            '#attributes' => array(
+                'id' => 'addRow'
+            )
+        ),
+    );
+
+    $form['#validate'][] = '_review_boost_admin_review_form_validate';
+    $form['#submit'][] = '_review_boost_admin_review_form_submit';
+
+    return $form;
+}
+
+function _review_boost_admin_review_form_validate(&$form, &$form_state) {
+    $values = &$form_state['values'];
+
+    $links = json_decode($values['review_links'], true);
+
+    $enabled = array();
+
+    foreach ($links as $link) {
+        if($link['enabled']) {
+            $enabled[] = $link['id'];
+        }
+    }
+
+    if(count($enabled) > 3) {
+        form_set_error('review_links', 'No more than three links can be enabled');
+        drupal_add_js(array('hidden_errors' => json_encode($enabled)), 'setting');
+        $form_state['rebuild'] = true;
+    }
+}
+
+function _review_boost_admin_review_form_submit(&$form, &$form_state) {
+    $values = $form_state['values'];
+    $links = json_decode($values['review_links'], true);
+
+    variable_set('review_boost_review_links', $links);
+    cache_clear_all();
 }

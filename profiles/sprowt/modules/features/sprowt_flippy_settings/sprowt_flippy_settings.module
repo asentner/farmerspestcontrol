@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt flippy settings feature.
+ */
+
+include_once 'sprowt_flippy_settings.features.inc';

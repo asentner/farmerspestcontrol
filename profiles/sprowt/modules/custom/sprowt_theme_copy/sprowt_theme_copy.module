@@ -269,7 +269,7 @@ function _sprowt_theme_copy_copy_progress(){
 }
 
 function _sprowt_theme_copy_access() {
-    $access = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1');
+    $access = (!defined('PANTHEON_ENVIRONMENT'));
 
     $access = $access && user_access('administer site configuration');
 

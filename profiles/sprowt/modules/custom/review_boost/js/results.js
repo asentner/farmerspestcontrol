@@ -98,8 +98,16 @@
                         }
                         break;
                     case 'text':
-                        var val = filter.value;
+                        val = filter.value;
                         break;
+                    case 'score':
+                        $('.op-type option').each(function(){
+                           $option = $(this);
+                            if(filter.value.op == $option.val()) {
+                                val = $option.text();
+                            }
+                        });
+                        val += ' ' + filter.value.value;
                 }
 
 
@@ -157,6 +165,12 @@
                     break;
                 case 'text':
                     var val = $val.find('input').val();
+                    break;
+                case 'score':
+                    var val = {
+                        op: $val.find('.op-type').val(),
+                        value: $val.find('input').val()
+                    };
                     break;
             }
             if(val != undefined && val != '') {
