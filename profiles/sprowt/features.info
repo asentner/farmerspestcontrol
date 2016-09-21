@@ -1,0 +1,11 @@
+;list all of the features to be enabled here in the format:
+;features[] = example_feature
+
+features[] = sprowt_taxonomy
+features[] = sprowt_fields_and_text_formats
+features[] = sprowt_content_types
+features[] = sprowt_views_feature
+features[] = sprowt_user_settings
+features[] = sprowt_menu_settings
+features[] = sprowt_social_sharing
+features[] = sprowt_breadcrumbs

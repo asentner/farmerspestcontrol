@@ -1,0 +1,13 @@
+{
+    "username" : "dward",
+    "password" : "changeme",
+    "encrypted" : true,
+    "email" : "dward@coalmarch.com",
+    "first_name" : "Desirae",
+    "last_name" : "Ward",
+    "image" : "/profiles/sprowt/images/coalmarch/default.jpg",
+    "position" : "Account Coordinator",
+    "google_plus_id" : "",
+    "Description" : "",
+    "roles": ["administrator"]
+}

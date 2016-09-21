@@ -252,28 +252,31 @@ function sprowt_configure() {
 
 function sprowt_install_features(){
 
-    /*
-  //Grabbing the theme
-  $array = array(
-    ':form' => 'branding',
-    ':field' => 'theme'
-  );
-  $theme = str_replace("-","_", db_query("SELECT field_value FROM sprowt_setup WHERE form_name = :form AND form_field = :field", $array)->fetchField());
-  */
+    $data = _sprowt_get_data();
+    $theme = $data['branding']['theme'];
 
-    //base features
-    $base_features = array(
-        'sprowt_taxonomy',
-        'sprowt_fields_and_text_formats',
-        'sprowt_content_types',
-        'sprowt_views_feature',
-        'sprowt_user_settings',
-        'sprowt_menu_settings',
-        'sprowt_social_sharing',
-        'sprowt_breadcrumbs'
-    );
+    $sprowt_info = drupal_get_path('profile', 'sprowt') . '/features.info';
+    $theme_info = drupal_get_path('theme', $theme) . '/features.info';
 
-    foreach($base_features as $feature){
+    $features = array();
+    if(file_exists($sprowt_info)) {
+        $info = drupal_parse_info_file($sprowt_info);
+        $features = (!empty($info['features'])) ? $info['features'] : array();
+    }
+
+    if(file_exists($theme_info)) {
+        $info = drupal_parse_info_file($theme_info);
+        $theme_features = (!empty($info['features'])) ? $info['features'] : array();
+        $features = array_merge($features, $theme_features);
+        $overrides = (!empty($info['overrides'])) ? $info['overrides'] : array();
+        foreach($overrides as $orig => $new) {
+            $key = array_search($orig, $features);
+            $features[$key] = $new;
+        }
+    }
+
+
+    foreach($features as $feature){
         module_enable(array($feature));
     }
 

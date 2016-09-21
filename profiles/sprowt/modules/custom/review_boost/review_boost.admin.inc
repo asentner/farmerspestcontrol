@@ -225,6 +225,11 @@ function _review_boost_admin_form($form, &$form_state){
         '#default_value' => variable_get('review_boost_customer_subject', 'How did we do?')
     );
 
+    $customer_email['review_boost_reset_customer_body'] = array(
+        '#type' => 'checkbox',
+        '#title' => 'Reset Body?',
+        '#description' => 'This will reset the body to the default value. Use this if you want to change from the text version to the HTML version or if you want to delete the current customized body. <strong>This will delete the current body value!</strong>'
+    );
 
     $customer_email['review_boost_customer_body'] = array(
         '#type' => $RB->allowHtml() ? 'text_format' : 'textarea',
@@ -267,6 +272,11 @@ function _review_boost_admin_form($form, &$form_state){
 
     $desc = 'The body of the email sent to the above email(s).';
 
+    $admin_email['review_boost_reset_admin_body'] = array(
+        '#type' => 'checkbox',
+        '#title' => 'Reset Body?',
+        '#description' => 'This will reset the body to the default value. Use this if you want to change from the text version to the HTML version or if you want to delete the current customized body. <strong>This will delete the current body value!</strong>'
+    );
 
     $admin_email['review_boost_admin_body'] = array(
         '#type' => $RB->allowHtml() ? 'text_format' : 'textarea',
@@ -404,6 +414,7 @@ function _review_boost_admin_form($form, &$form_state){
     );
 
     $form['#validate'][] = '_review_boost_admin_form_validate';
+    $form['#submit'][] = '_review_boost_admin_form_submit';
 
     return system_settings_form($form);
 }
@@ -438,6 +449,20 @@ function _review_boost_admin_form_validate(&$form, &$form_state){
     }
 
     $form_state['values']['review_boost_admin_email'] = implode(', ', $new_emails);
+}
+
+function _review_boost_admin_form_submit(&$from, &$form_state) {
+    $values = &$form_state['values'];
+
+    if($values['review_boost_reset_customer_body']) {
+        variable_del('review_boost_customer_body');
+        unset($values['review_boost_customer_body']);
+    }
+
+    if($values['review_boost_reset_admin_body']) {
+        variable_del('review_boost_admin_body');
+        unset($values['review_boost_admin_body']);
+    }
 }
 
 function _review_boost_admin_survey_results(){

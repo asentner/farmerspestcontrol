@@ -1,0 +1,37 @@
+<?php
+/**
+ * Fix blocks
+ */
+function sprowt_theme_copy_update_7100(){
+    $theme = variable_get('theme_default');
+
+    $rows = db_query("
+        SELECT *
+        FROM block
+        WHERE theme = :theme
+    ",array(
+        ':theme' => $theme
+    ))->fetchAll(PDO::FETCH_ASSOC);
+
+    $trans = array();
+    foreach($rows as $row) {
+        unset($row['bid']);
+        unset($row['theme']);
+        unset($row['region']);
+        $trans[] = db_update('block')->fields($row)->condition('module', $row['module'])->condition('delta', $row['delta']);
+    }
+
+    if(!empty($trans)) {
+        $t = db_transaction();
+
+        foreach($trans as $tran) {
+            try {
+                $tran->execute();
+            }
+            catch(Exception $e) {
+                $t->rollback();
+                watchdog_exception('sprowt_theme_copy_update_7100', $e);
+            }
+        }
+    }
+}
