@@ -1,4 +1,14 @@
-<article<?php print $attributes; ?>>
+<?php
+  $service_tid = $node->field_service['und'][0]['tid'];
+  $service_term = taxonomy_term_load($service_tid);
+  $service_name = $service_term->name;
+
+  $market_tid = $node->field_market['und'][0]['tid'];
+  $market_term = taxonomy_term_load($market_tid);
+  $market_name = $market_term->name;
+ ?>
+
+<div<?php print $attributes; ?> itemscope itemtype="http://schema.org/Service">
   <?php if ($page): ?>
     <header>
       <?php if (isset($content['field_display_title'])): ?>
@@ -14,6 +24,13 @@
         <h1><?php print $title; ?></h1>
       <?php endif; ?>
     </header>
+    <meta itemprop="serviceType" content="<?php print $service_name; ?>">
+    <span itemprop="provider" itemscope itemtype="http://schema.org/LocalBusiness">
+      <meta itemprop="name" content="<?php print variable_get('site_name'); ?>">
+    </span>
+    <span itemprop="areaServed" itemscope itemtype="http://schema.org/City">
+      <meta itemprop="name" content="<?php print $market_name; ?>">
+    </span>
   <?php endif; ?>
 
   <?php if ($display_submitted): ?>
@@ -34,4 +51,4 @@
 
   <?php print render($content['links']); ?>
   <?php print render($content['comments']); ?>
-</article>
+</div>
