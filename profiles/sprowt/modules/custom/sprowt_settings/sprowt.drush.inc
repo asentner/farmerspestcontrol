@@ -3,11 +3,13 @@
 function sprowt_drush_command() {
     $items = array();
 
-    $access = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1');
+    $access = (!defined('PANTHEON_ENVIRONMENT'));
     if($access) {
         $items['block-export'] = array(
             'description' => 'Export blocks and theme block settings to a file in the json format.',
-            'arguments' => array(),
+            'arguments' => array(
+                'bids'
+            ),
             'options'     => array(
                 'theme' => 'Machine Name of the theme to get the settings from',
                 'location' => 'directory to place the export file',
@@ -52,7 +54,13 @@ function sprowt_drush_command() {
     return $items;
 }
 
-function drush_sprowt_block_export() {
+function drush_sprowt_block_export($bids = array()) {
+    $bids = drush_get_arguments();
+    if(!is_array($bids)) {
+        if(!empty($bids)) {
+            $bids = array($bids);
+        }
+    }
     $theme = drush_get_option('theme');
     $location = drush_get_option('location');
     $file_name = drush_get_option('file-name');

@@ -11,8 +11,9 @@ class BlockBuilder {
     protected $theme;
     protected $uuid_map;
     protected $menu_block;
+    public $bids;
 
-    function __construct()
+    function __construct($bids = array())
     {
         $this->block_custom = array();
         $this->block_node_type = array();
@@ -23,6 +24,7 @@ class BlockBuilder {
         $this->block = array();
         $this->uuid_map = array();
         $this->menu_block = array();
+        $this->bids = $bids;
     }
 
 
@@ -353,35 +355,142 @@ class BlockBuilder {
         }
     }
 
+    function getModuleDeltaWhere($module_deltas) {
+        $sqlargs = array();
+        $args = array();
+        foreach($module_deltas as $k => $md) {
+            $sqlargs[] = "(module = :module{$k} AND delta = :delta{$k})";
+            $args[":module{$k}"] = $md['module'];
+            $args[":delta{$k}"] = $md['delta'];
+        }
+        return array(
+            'sql' => implode("\nOR ", $sqlargs),
+            'args' => $args
+        );
+
+    }
+
     function setFromDb($theme){
 
         $array = array();
 
-        $array['block_custom'] = db_query("SELECT * FROM block_custom")->fetchAll(PDO::FETCH_ASSOC);
-        $array['block_node_type'] = db_query("SELECT * FROM block_node_type")->fetchAll(PDO::FETCH_ASSOC);
-        $array['block_role'] = db_query("SELECT * FROM block_role")->fetchAll(PDO::FETCH_ASSOC);
-        if(db_table_exists('multiblock')) {
-            $array['multiblock'] = db_query("SELECT * FROM multiblock")->fetchAll(PDO::FETCH_ASSOC);
+        if(!empty($this->bids)) {
+            $block_query = "
+                SELECT *
+                FROM block
+                WHERE theme = :theme
+                AND bid IN (:bids)
+            ";
+            $block_args = array(
+                ':theme' => $theme,
+                ':bids' => $this->bids
+            );
+            $array['block'] = db_query($block_query, $block_args)->fetchAll(PDO::FETCH_ASSOC);
+            $modules = array();
+            $deltas = array();
+            $module_deltas = array();
+            foreach($array['block'] as $row) {
+                $deltas[] = $row['delta'];
+                if(!in_array($row['module'], $modules)) {
+                    $modules[] = $row['module'];
+                }
+                $module_deltas[] = array(
+                    'module' => $row['module'],
+                    'delta' => $row['delta']
+                );
+            }
+
+            $mdsql = $this->getModuleDeltaWhere($module_deltas);
+
+            $bc_deltas = array();
+            foreach($module_deltas as $md) {
+                if($md['module'] == 'block') {
+                    $bc_deltas[] = $md['delta'];
+                }
+            }
+
+
+            $array['block_custom'] = db_query("
+                SELECT * 
+                FROM block_custom
+                WHERE bid in (:deltas)
+                ", array(
+                    ':deltas' => $bc_deltas
+            ))->fetchAll(PDO::FETCH_ASSOC);
+
+            $array['block_node_type'] = db_query("
+                  SELECT * 
+                  FROM block_node_type
+                  WHERE 1 = 1
+                  AND {$mdsql['sql']}
+              ", $mdsql['args']
+            )->fetchAll(PDO::FETCH_ASSOC);
+            $array['block_role'] = db_query("
+                  SELECT * 
+                  FROM block_role
+                  WHERE 1 = 1
+                  AND {$mdsql['sql']}
+              ", $mdsql['args']
+            )->fetchAll(PDO::FETCH_ASSOC);
+            if(db_table_exists('multiblock')) {
+                $array['multiblock'] = db_query("
+                        SELECT * 
+                        FROM multiblock
+                  WHERE 1 = 1
+                  AND ".str_replace(':orig_delta', ':delta', str_replace('delta', 'orig_delta', $mdsql['sql']))."
+              ", $mdsql['args']
+                )->fetchAll(PDO::FETCH_ASSOC);
+            }
+
+            if(in_array('menu_block', $modules)) {
+                $args =  array();
+                foreach($module_deltas as $md) {
+                    if($md['module'] == 'menu_block') {
+                        $args[] = "name LIKE 'menu\\_block\\_{$md['delta']}\\_%'";
+                    }
+                }
+
+                $sql = "
+                    SELECT name, value
+                    FROM variable
+                    WHERE ".implode("\nOR ",$args)."
+                ";
+
+                $array['menu_block'] = db_query($sql)->fetchAllKeyed();
+            }
+            else {
+                $array['menu_block'] = array();
+            }
+
         }
+        else {
+            $array['block_custom'] = db_query("SELECT * FROM block_custom")->fetchAll(PDO::FETCH_ASSOC);
+            $array['block_node_type'] = db_query("SELECT * FROM block_node_type")->fetchAll(PDO::FETCH_ASSOC);
+            $array['block_role'] = db_query("SELECT * FROM block_role")->fetchAll(PDO::FETCH_ASSOC);
+            if (db_table_exists('multiblock')) {
+                $array['multiblock'] = db_query("SELECT * FROM multiblock")->fetchAll(PDO::FETCH_ASSOC);
+            }
 
 
-        $array['block'] = db_query("
-            SELECT *
-            FROM block
-            WHERE theme = :theme
-        ", array(':theme' => $theme))
-            ->fetchAll(PDO::FETCH_ASSOC);
+            $array['block'] = db_query("
+                SELECT *
+                FROM block
+                WHERE theme = :theme
+            ", array(':theme' => $theme))
+                    ->fetchAll(PDO::FETCH_ASSOC);
+
+            $array['menu_block'] = db_query("
+                SELECT name, value
+                FROM variable
+                WHERE name LIKE 'menu_block%'
+            ")->fetchAllKeyed();
+        }
 
         $array['uuid_map'] = db_query("
             SELECT nid, uuid
             FROM node
         ")->fetchAllKeyed();
 
-        $array['menu_block'] = db_query("
-            SELECT name, value
-            FROM variable
-            WHERE name LIKE 'menu_block%'
-        ")->fetchAllKeyed();
 
         foreach($array['menu_block'] as $k=>$v) {
             $v = unserialize($v);
