@@ -287,7 +287,7 @@ function sprowt_theme_copy_form_system_theme_settings_alter(&$form, &$form_state
     $theme_name = substr($var, 6);
     $theme_name = substr($theme_name, 0, -9);
     
-    if(sprowt_is_sprowt_theme($theme_name)) {
+    //if(sprowt_is_sprowt_theme($theme_name)) {
         // Work-around for this bug: https://drupal.org/node/1862892
         $theme_settings_path = drupal_get_path('theme', 'omega') . '/includes/assets/assets.settings.inc';
         if (file_exists($theme_settings_path) && !in_array($theme_settings_path, $form_state['build_info']['files'])) {
@@ -343,7 +343,7 @@ function sprowt_theme_copy_form_system_theme_settings_alter(&$form, &$form_state
         );
         
         $form['#submit'][] = 'sprowt_theme_copy_theme_settings_submit';
-    }
+    //}
 }
 
 function sprowt_theme_copy_theme_settings_submit($form, &$form_state) {
