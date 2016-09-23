@@ -2,8 +2,11 @@
 
 function sprowt_tc_drush_command() {
     $items = array();
-
+    
     $access = (!defined('PANTHEON_ENVIRONMENT'));
+    if(!$access) {
+        $access = (PANTHEON_ENVIRONMENT == 'kalabox');
+    }
     if($access) {
         $items['theme-copy'] = array(
             'description' => 'Copy a sprowt theme to the sites/all/themes directory',

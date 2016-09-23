@@ -270,6 +270,9 @@ function _sprowt_theme_copy_copy_progress(){
 
 function _sprowt_theme_copy_access() {
     $access = (!defined('PANTHEON_ENVIRONMENT'));
+    if(!$access) {
+        $access = (PANTHEON_ENVIRONMENT == 'kalabox');
+    }
 
     $access = $access && user_access('administer site configuration');
 

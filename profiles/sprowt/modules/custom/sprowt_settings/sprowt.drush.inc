@@ -2,8 +2,11 @@
 
 function sprowt_drush_command() {
     $items = array();
-
+    
     $access = (!defined('PANTHEON_ENVIRONMENT'));
+    if(!$access) {
+        $access = (PANTHEON_ENVIRONMENT == 'kalabox');
+    }
     if($access) {
         $items['block-export'] = array(
             'description' => 'Export blocks and theme block settings to a file in the json format.',
