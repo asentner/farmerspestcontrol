@@ -476,3 +476,15 @@ function _sprowt_form_default($field_name, $default = '') {
 
     return $default;
 }
+
+function sprowt_require_class($include) {
+    require_once drupal_get_path('profile', 'sprowt') . '/includes/' . "$include.php";
+}
+
+function sprowt_is_sprowt_theme($theme) {
+    sprowt_require_class('themebuilder');
+    $TB = new ThemeBuilder();
+    $sprowt_themes = $TB->sprowt_themes();
+    
+    return in_array($theme, array_keys($sprowt_themes));
+}

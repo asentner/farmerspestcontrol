@@ -286,14 +286,99 @@ function sprowt_theme_copy_form_system_theme_settings_alter(&$form, &$form_state
     $var = $form['var']['#value'];
     $theme_name = substr($var, 6);
     $theme_name = substr($theme_name, 0, -9);
+    
+    if(sprowt_is_sprowt_theme($theme_name)) {
+        // Work-around for this bug: https://drupal.org/node/1862892
+        $theme_settings_path = drupal_get_path('theme', 'omega') . '/includes/assets/assets.settings.inc';
+        if (file_exists($theme_settings_path) && !in_array($theme_settings_path, $form_state['build_info']['files'])) {
+            $form_state['build_info']['files'][] = $theme_settings_path;
+        }
+        $theme_settings_path = drupal_get_path('theme', 'omega') . '/theme-settings.php';
+        if (file_exists($theme_settings_path) && !in_array($theme_settings_path, $form_state['build_info']['files'])) {
+            $form_state['build_info']['files'][] = $theme_settings_path;
+        }
+        
+        $sprowt = array();
+        $sprowt['disable_sprowt_warning'] = array(
+            '#type'          => 'checkbox',
+            '#title'         => 'Disable Sprowt Warning',
+            '#description'   => 'Disables warning regarding the fact that this is an official Sprowt Theme.',
+            '#weight' => -1,
+            '#default_value' => theme_get_setting('disable_sprowt_warning', $theme_name)
+        );
+        
+        $images = array();
+        $images['sprowt_background_image'] = array(
+            '#type' => 'managed_file',
+            '#title' => 'Image',
+            '#description' => 'Image to use as a variable in the page template. The variable name is $background_image',
+            '#default_value' => theme_get_setting('sprowt_background_image', $theme_name)
+        );
 
+        $image_styles = image_styles();
+        $formatted_styles = array();
+        $formatted_styles[0] = t('- None -');
+        foreach ($image_styles as $name => $style) {
+            $formatted_styles[$name] = $name;
+        }
+        $images['sprowt_background_image_style'] = array(
+            '#type' => 'select',
+            '#title' => t('Image style'),
+            '#options' => $formatted_styles,
+            '#default_value' => theme_get_setting('sprowt_background_image_style', $theme_name),
+            '#description' => t('Select an optional image style to use for the rendering of the background image.'),
+        );
+    
+        $sprowt['sprowt_background_images'] = array(
+            '#title' => 'Background Image',
+            '#type' => 'fieldset',
+            $images
+        );
+    
+        $form['sprowt_theme_settings'] = array(
+            '#title' => 'Sprowt Theme Settings',
+            '#type' => 'fieldset',
+            '#weight' => -1,
+            $sprowt
+        );
+        
+        $form['#submit'][] = 'sprowt_theme_copy_theme_settings_submit';
+    }
+}
 
-    $form['disable_sprowt_warning'] = array(
-        '#type' => 'checkbox',
-        '#title' => 'Disable Sprowt Warning',
-        '#description' => 'Disables warning regarding the fact that this is an official Sprowt Theme.',
-        '#default_value' => theme_get_setting('disable_sprowt_warning', $theme_name)
-    );
+function sprowt_theme_copy_theme_settings_submit($form, &$form_state) {
+    $values = $form_state['values'];
+    $image = $values['sprowt_background_image'];
+    $style = $values['sprowt_background_image_style'];
+    if(!empty($image)) {
+        $image = file_load($image);
+        $image = file_move($image, 'public://');
+        file_save($image);
+        if(!empty($style)) {
+            $derivative_uri = image_style_path($style, $image->uri);
+            $success = file_exists($derivative_uri) || image_style_create_derivative(image_style_load($style), $image->uri, $derivative_uri);
+        }
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_theme_copy_preprocess_page(&$variables) {
+    $image = theme_get_setting('sprowt_background_image');
+    $style = theme_get_setting('sprowt_background_image_style');
+    
+    if(!empty($image)) {
+        $image = file_load($image);
+        if(!empty($style)) {
+            $url = image_style_url($style, $image->uri);
+        }
+        else {
+            $url = file_create_url($image->uri);
+        }
+        
+        $variables['background_image'] = $url;
+    }
 }
 
 /**
@@ -309,6 +394,6 @@ function sprowt_theme_copy_page_alter(&$page) {
     global $user;
 
     if($is_sprowt && !$disabled && !empty($user->uid)) {
-        drupal_set_message('This site is using a default Sprowt Theme. Either copy this theme <a href="/admin/appearance/theme-copy">here</a> and enable the copied theme or disable this message <a href="/admin/appearance/settings/'.$default.'">here</a>.', 'warning', false);
+        drupal_set_message('This site is using a default Sprowt Theme. Either copy this theme <a href="/admin/appearance/theme-copy">here</a> and enable the copied theme or disable this message <a href="/admin/appearance/settings/'.$default.'#edit-sprowt-theme-settings">here</a>.', 'warning', false);
     }
 }

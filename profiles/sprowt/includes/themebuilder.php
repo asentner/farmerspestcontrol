@@ -285,12 +285,12 @@ Class ThemeBuilder {
         theme_disable(array($default));
     }
 
-    function sprowt_themes(){
+    function sprowt_themes($refresh = true){
         $json = file_get_contents(drupal_get_path('profile', 'sprowt') . '/sprowt_themes.json');
 
         $sprowt_themes = json_decode($json, true);
 
-        $theme_list = list_themes(TRUE);
+        $theme_list = list_themes($refresh);
         $new_theme_list = array();
 
         foreach($theme_list as $theme_name => $object) {
