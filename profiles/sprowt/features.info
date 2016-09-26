@@ -9,3 +9,5 @@ features[] = sprowt_user_settings
 features[] = sprowt_menu_settings
 features[] = sprowt_social_sharing
 features[] = sprowt_breadcrumbs
+features[] = sprowt_social_sharing
+features[] = sprowt_security_features

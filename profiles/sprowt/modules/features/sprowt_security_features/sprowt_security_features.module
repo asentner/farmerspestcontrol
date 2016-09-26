@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Security (Features) feature.
+ */
+
+include_once 'sprowt_security_features.features.inc';

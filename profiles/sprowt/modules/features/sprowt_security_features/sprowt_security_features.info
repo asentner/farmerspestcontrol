@@ -1,0 +1,14 @@
+name = Sprowt Security (Features)
+core = 7.x
+package = Features
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = honeypot_element_name
+features[variable][] = honeypot_form_user_pass
+features[variable][] = honeypot_form_user_register_form
+features[variable][] = honeypot_form_webforms
+features[variable][] = honeypot_log
+features[variable][] = honeypot_protect_all_forms
+features[variable][] = honeypot_time_limit
