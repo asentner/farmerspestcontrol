@@ -1,0 +1,32 @@
+.front {
+  .l-main {
+    margin: 0 auto;
+    padding: 50px 20px 40px;
+    max-width: 100%;
+    .node--page--full {
+      @extend %down-arrow;
+      text-align: center;
+      padding-bottom: 80px;
+    }
+    .node__title {
+      font-weight: 600;
+    }
+  }
+  @include breakpoint($tab) {
+    .l-main {
+      .node__title {
+        max-width: 780px;
+        margin: 0 auto 10px;
+        font-size: 2em;
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    .l-main {
+      .node__title {
+        font-size: 2.5em;
+        line-height: 1.25em;
+      }
+    }
+  }
+}

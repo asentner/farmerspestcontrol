@@ -1,0 +1,5 @@
+.l-region--header-first {
+  @include breakpoint($desk) {
+    background-color: palette(neutral, seashell);
+  }
+}

@@ -1,0 +1,75 @@
+.block-areas-map {
+  padding: 45px 20px;
+  text-align: center;
+  .block__content {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .block__title {
+    margin-bottom: 5px;
+  }
+  .intro {
+    margin-bottom: 20px;
+  }
+  ul {
+    margin: 20px 0 15px;
+    a {
+      font-size: 1.2em;
+      padding: 0 20px;
+    }
+    a::before {
+        @include faicon("\f105");
+        margin: 0 5px 0 0;
+    }
+  }
+  @include breakpoint($tab) {
+    ul {
+      @include flexbox;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      a {
+        padding: 0;
+      }
+      li {
+        width: percentage(3/9);
+        overflow: hidden;
+        text-align: left;
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    .block__title {
+      font-size: 2.5em;
+    }
+    ul {
+      max-width: 750px;
+      li {
+        width: percentage(1/4);
+      }
+    }
+  }
+}
+
+// map styling
+
+.map-embed {
+  padding: 20px;
+  iframe {
+  	height: 50vh;
+  }
+  @include breakpoint($tab) {
+  	iframe {
+  		height: 340px;
+      width: 675px;
+  		margin: auto;
+  	}
+  }
+  @include breakpoint($desk) {
+    iframe {
+      width: 775px;
+    }
+  }
+}

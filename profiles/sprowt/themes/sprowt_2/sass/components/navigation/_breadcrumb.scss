@@ -1,0 +1,49 @@
+.not-front .l-breadcrumb {
+  padding: 2px;
+  font-size: 0;
+  @include breakpoint($tab) {
+    padding: 20px;
+    font-size: 1em;
+  }
+}
+
+.node-type-localtarget .l-breadcrumb {
+  padding: 0;
+}
+
+.breadcrumb {
+  @include container;
+  li {
+    display: inline-block;
+    &:first-child {
+      a {
+        font-size: 0;
+        &:before {
+          @extend .fa;
+          @extend .fa-home;
+          font-size: 0;
+        }
+      }
+    }
+    + li {
+      margin-left: .5em;
+      &:before {
+        @include faicon("\F105");
+        margin-right: .5em;
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    li {
+      font-size: 1em;
+      &:first-child {
+        a:before {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  @include breakpoint($container) {
+    padding: 0 20px;
+  }
+}

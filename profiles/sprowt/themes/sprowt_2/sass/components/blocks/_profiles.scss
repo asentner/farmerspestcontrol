@@ -1,0 +1,25 @@
+.block--views-team-list {
+
+.node {
+    text-align: center;
+  }
+  .field--name-field-image {
+    img {
+      @extend %image-hover;
+      width: auto;
+      border-radius: 50%;
+      border: 2px solid;
+    }
+  }
+  .node__title {
+    @extend h3;
+  }
+  .field--name-body {
+    .more-link {
+      &.more-link {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+}

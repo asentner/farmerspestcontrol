@@ -1,0 +1,67 @@
+// header
+.block--logo-block-logo {
+  @include flexbox;
+  align-items: center;
+  padding: 20px;
+  .block__content {
+    margin-right: 100px;
+  }
+  .mobile-menu-toggle {
+    @include flexbox;
+    align-items: center;
+    margin-left: auto;
+    cursor: pointer;
+    min-width: 22px; // keeps the logo from 'jumping'
+    i {
+      font-size: 1.5em;
+    }
+    &.open i:before {
+      @include faicon('\F00D');
+    }
+  }
+  .tablet-menu-toggle {
+    display: none;
+  }
+  @include breakpoint($tab) {
+    margin-left: percentage(100/1880);
+    padding: 20px 40px;
+    .block__content {
+      margin: 0;
+    }
+    .mobile-menu-toggle {
+      display: none;
+    }
+    .tablet-menu-toggle {
+      @include flexbox;
+      align-items: center;
+      margin-left: auto;
+      font-weight: 600;
+      margin-right: percentage(150/1880);
+      cursor: pointer;
+      i {
+        font-size: 1.25em;
+        margin-right: 15px;
+      }
+    }
+  }
+  @include breakpoint($nav) {
+    padding: 20px;
+    margin-left: 0;
+    .tablet-menu-toggle {
+      display: none;
+    }
+    @include breakpoint($desk) {
+      padding: 30px 20px;
+    }
+  }
+}
+
+// footer
+.block--logo {
+  margin: 20px 0;
+  padding: 0 20px;
+  text-align: center;
+  @include breakpoint($desk) {
+    text-align: left;
+  }
+}

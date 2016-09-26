@@ -1,0 +1,234 @@
+.block--nav-main {
+  $padding-link: 15px 20px;
+  $padding-left: 60px; // for JS menu
+
+  .block__title {
+    display: none;
+  }
+  .menu-block-wrapper {
+    a, .nolink {
+      padding: $padding-link;
+    }
+    > .menu > li {
+      border-bottom: 1px solid;
+    }
+    .nolink {
+      display: block;
+    }
+
+    > .menu > li > a,
+    > .menu > li > .nolink {
+      font-weight: 700;
+    }
+  }
+  .menu {
+    .menu {
+      display: none;
+    }
+  }
+  &.menu-processed {
+    .block__content {
+      display: none;
+    }
+    .expanded,
+    .leaf {
+      position: relative;
+      .menu {
+        > li > a,
+        > li > .nolink {
+          padding: 5px 20px 5px 30px;
+        }
+        > li:last-of-type > a,
+        > li:last-of-type > .nolink {
+          padding-bottom: 30px;
+        }
+        > li > .menu > li > a,
+        > li > .menu > li > .nolink {
+          padding-left: 50px;
+        }
+        > li > .menu > li:last-of-type > a {
+          padding-bottom: 5px;
+        }
+      }
+    }
+    .menu-child-toggle {
+      height: 100%; // iphone 6 landscape fix
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 0;
+      &:after {
+        @include faicon("\F107");
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    }
+  }
+  .expanded > .nolink:hover { // pointer for nolinks with childred
+    cursor: pointer;
+  }
+
+  @include breakpoint($tab) {
+    transition: transform .5s;
+    transform: translateX(100%);
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 52;
+    width: 50%;
+    height: 100%;
+    &.open {
+      transform: translateX(0);
+    }
+    .block__content {
+      display: block !important; // override js
+      height: auto !important; //override js
+    }
+    &.menu-processed {
+      .block__title {
+        display: block;
+        text-align: right;
+        cursor: pointer;
+        font-size: 0;
+        padding: 50px 6px;
+        &:after {
+          @include faicon($fa-var-times);
+          font-size: 16px;
+          border: 1px solid;
+          padding: 10px 12px;
+        }
+      }
+    }
+  }
+  @include breakpoint($nav) {
+    // $border-width: 3px;
+
+    $padding-link: 10px 20px;
+    $padding-vert-spacing: 51px; // will need to change based on logo/header size
+    $padding-link-spacing: 40px;
+
+    transition: transform .5s;
+    transform: translateX(0);
+    position: static;
+    z-index: 52;
+    width: auto;
+
+    .block__content {
+      display: block !important; // override js
+    }
+    .expanded > .nolink:hover {
+      cursor: initial;
+    }
+    .menu-block-wrapper {
+      a, .nolink {
+        border: 0;
+        padding: $padding-link;
+      }
+      > .menu { // first level
+        @include flexbox;
+        position: relative;
+        @-moz-document url-prefix() { // firefox only menu margin fix
+          margin-bottom: 1px;
+        }
+        > li {
+          border-bottom: none;
+          + li > a:first-child {
+            padding-left: $padding-link-spacing;
+          }
+        }
+        > li > a {
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+        > li.expanded > a,
+        > li.leaf > a {
+          &:first-child {
+            padding-top: $padding-vert-spacing;
+            padding-bottom: $padding-vert-spacing;
+            &:before {
+              content: none;
+            }
+          }
+        }
+      }
+      > .menu > li:hover > .menu { // second level
+        display: block !important; // override JS
+        position: absolute;
+        min-width: 180px;
+        z-index: 52;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        text-transform: uppercase;
+        font-weight: 600;
+        > li > a,
+        > li > .nolink {
+          white-space: nowrap;
+          padding: $padding-link;
+          position: relative;
+        }
+        > li.first {
+          &:before { // triangles
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid;
+	          border-right: 20px solid;
+	          border-bottom: 15px solid;
+            position: absolute;
+            left: 30px;
+            top: -15px;
+          }
+        }
+      }
+      > .menu { //2nd level positioning
+        > li:hover > .menu { // 2nd level position
+          left: $padding-link-spacing/2;
+        }
+        > li:first-child:hover > .menu {  // 2nd level position
+          left: 0;
+        }
+        > li:last-child:hover > .menu {  // 2nd level position
+          right: 0;
+          left: auto;
+          > li.first:before {
+            left: auto;
+            right: 30px;
+          }
+        }
+      }
+      > .menu > li > .menu > li:hover > .menu { // third level
+        display: block !important; // overide js
+        position: absolute;
+        left: 100%;
+        top: 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        z-index: 52;
+        > li > a {
+          white-space: nowrap;
+          padding: $padding-link;
+        }
+        > li > .nolink {
+          white-space: nowrap;
+          padding: $padding-link;
+        }
+      }
+      > .menu > li:last-child > .menu > li:hover > .menu {
+        right: 100%;
+        left: auto;
+      }
+    }
+    &.menu-processed {
+      .block__title {
+        display: none;
+      }
+      .menu-child-toggle {
+        display: none;
+      }
+      .expanded,
+      .leaf {
+        a:first-child {
+          padding: $padding-link;
+        }
+      }
+    }
+  }
+}

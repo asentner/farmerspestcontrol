@@ -234,5 +234,43 @@ function sprowt_fields_and_text_formats_image_default_styles() {
     ),
   );
 
+  // Exported image style: sprowt_2_benefits.
+  $styles['sprowt_2_benefits'] = array(
+    'label' => 'Sprowt 2 benefits',
+    'effects' => array(
+      1 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 100,
+          'height' => 100,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: sprowt_2_services.
+  $styles['sprowt_2_services'] = array(
+    'label' => 'Sprowt 2 services',
+    'effects' => array(
+      2 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 470,
+          'height' => 400,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }

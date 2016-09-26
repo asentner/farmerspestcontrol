@@ -1,0 +1,19 @@
+.field--name-field-call-out {
+  $color-callout-bg: palette(primary, base);
+  $color-callout-fg: palette(white, pure);
+  $color-button-bg: palette(secondary, base);
+  $color-button-hover-bg: palette(secondary, light);
+
+  padding: 20px;
+  background-color: $color-callout-bg;
+  color: $color-callout-fg;
+  h1, h2, h3, h4, h5 {
+    color: $color-callout-fg;
+  }
+  .button {
+    background-color: $color-button-bg;
+    &:hover {
+      background-color: $color-button-hover-bg;
+    }
+  }
+}

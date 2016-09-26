@@ -124,12 +124,6 @@ dependencies[] = sprowt_theme
 dependencies[] = sprowt_theme_copy
 dependencies[] = sprowt_views
 
-
-; Features
-
-;dependencies[] = sprowt_all;
-;dependencies[] = sprowt_social_sharing;
-
 ; Add in the .profile
 
 files[] = sprowt.profile

@@ -1,0 +1,7 @@
+.field--type-text-with-summary {
+  @extend %body-copy;
+  line-height: 1.6;
+  @include breakpoint($tab) {
+    line-height: 1.25;
+  }
+}

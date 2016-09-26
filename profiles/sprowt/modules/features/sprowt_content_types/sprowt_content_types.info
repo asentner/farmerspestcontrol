@@ -8,7 +8,6 @@ dependencies[] = field_group
 dependencies[] = list
 dependencies[] = metatag
 dependencies[] = smart_trim
-dependencies[] = sprowt_fields_and_text_formats
 dependencies[] = strongarm
 dependencies[] = text
 dependencies[] = weight

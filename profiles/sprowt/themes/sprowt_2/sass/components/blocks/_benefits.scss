@@ -1,0 +1,83 @@
+.benefits-hero,
+.local-target-benefits {
+
+   padding: 40px 20px 30px;
+   .view-content {
+      flex-wrap: nowrap;
+      max-width: 1160px;
+      position: relative;
+      z-index: 99;
+   }
+   .views-row {
+    @include flexbox;
+    justify-content: center;
+    margin: 0 auto 30px;
+  }
+  .node {
+    @include flexbox;
+    padding: 30px 40px 55px 65px;
+    margin-left: -50px;
+    max-width: 350px;
+  }
+   .field--name-field-image {
+    align-self: center;
+    z-index: 1;
+    flex: 0 0 auto;
+    img {
+       border-radius: 50%;
+       border: 2px solid;
+    }
+    a > img {
+      @extend %image-hover;
+    }
+   }
+   .node__title {
+      font-size: 1.325em;
+      font-weight: 600;
+   }
+   .field--name-body {
+     font-size: 0.95em;
+     p {
+       line-height: 1.7;
+     }
+   }
+   .read-more {
+     display: inline-block;
+     padding-top: 19px;
+     text-transform: uppercase;
+     font-weight: 600;
+     &:after {
+       @include faicon('\F105');
+       padding-left: 10px;
+       font-style: 1.3em;
+       font-weight: 700;
+     }
+   }
+ @include breakpoint($tab) {
+    .block__content {
+      margin-top: -120px;
+    }
+ }
+ @include breakpoint($desk) {
+    .block__content {
+      margin-top: 0;
+    }
+    .view-content {
+      @include flexbox;
+      justify-content: space-around;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -165px;
+    }
+    .views-row {
+      + .views-row {
+        padding-left: 10px;
+      }
+    }
+    .field--name-field-image {
+      align-self: flex-start;
+      margin-top: 75px;
+    }
+  }
+}

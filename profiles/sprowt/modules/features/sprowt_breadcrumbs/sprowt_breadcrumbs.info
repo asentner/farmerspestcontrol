@@ -6,7 +6,6 @@ dependencies[] = ctools
 dependencies[] = custom_breadcrumbs
 dependencies[] = custom_breadcrumbs_features
 dependencies[] = features
-dependencies[] = sprowt_content_types
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
 features[custom_breadcrumb][] = areas_we_service

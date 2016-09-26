@@ -524,6 +524,12 @@ Class SprowtBuilder {
         $branding = $this->data['branding'];
 
         $ThemeBuilder->enable($branding['theme']);
+        
+        //make double sure blocks import correctly
+        db_delete('block')->condition('theme', $branding['theme'])->execute();
+        $ThemeBuilder->import_blocks($branding['theme'], $branding['theme']);
+        
+        
         theme_enable(array('adminimal'));
     }
     

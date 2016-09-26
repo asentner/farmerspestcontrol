@@ -1,0 +1,245 @@
+.block--views-services-all {
+  .node__title {
+    @extend h3;
+  }
+}
+
+
+// homepage service listing
+
+// NOTE: if you have issues with over lap, etc on the hover state, there is alternate
+//       code commented out below
+
+.block--views-services-homepage {
+  $node-opacity: 0.5;
+  $node-hover-opacity: 0.8;
+
+  text-align: center;
+  .node {
+    @include flexbox;
+    flex-direction: column;
+    justify-content: center;
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    padding: 0 20px;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: $node-hover-opacity;
+    }
+  }
+  header,
+  .node__content {
+    max-width: 360px;
+    margin: 0 auto;
+    z-index: 50;
+  }
+  .node__title {
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .field--name-body {
+    font-size: .95em;
+  }
+  .more-link {
+    @extend %button;
+    max-width: 225px;
+    margin: 35px auto 0;
+    display: block;
+  }
+  @include breakpoint($tab) {
+    .block__content {
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: $node-hover-opacity;
+      }
+    }
+    .view-content {
+      @include flexbox;
+      flex-wrap: wrap;
+    }
+    .views-row {
+      width: percentage(1/2);
+    }
+  }
+  @include breakpoint($desk) {
+    .views-row {
+      width: percentage(1/3);
+    }
+    .node__title {
+      position: absolute;
+      z-index: 50;
+      width: 100%;
+      padding: 0 20px;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      transition: all .5s ease-in-out;
+    }
+    .node__content {
+      opacity: 0;
+      transition: all .5s ease-in-out;
+      z-index: 50;
+      position: absolute;
+      top: 155px;
+      left: 50%;
+      width: 100%;
+      padding: 0 20px;
+      transform: translate3d(-50%, 85px, 0);
+      width: 100%;
+    }
+
+    .node {
+      display: block;
+      position: relative;
+      &:before {
+        transition: opacity .5s ease-in-out;
+        opacity: $node-opacity;
+      }
+      &:hover {
+        .node__title {
+          transform: translate3d(-50%, -85px, 0);
+        }
+        .node__content {
+          transform: translate3d(-50%, 0, 0);
+          opacity: 1;
+        }
+        .field--name-body {
+          display: block;
+        }
+        &:before {
+          opacity: $node-hover-opacity;
+        }
+      }
+    }
+  }
+}
+
+// NOTE: the code below is an alternative to the homepage services block.
+//       If the titles and/or the content is too long for the hover affect to work
+//       (if there is overlap, etc), try the code below.
+
+// .block--views-services-homepage {
+//   $node-opacity: 0.5;
+//   $node-hover-opacity: 0.8;
+//
+//   text-align: center;
+//   .node {
+//     @include flexbox;
+//     flex-direction: column;
+//     justify-content: center;
+//     height: 400px;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     background-position: center;
+//     position: relative;
+//     padding: 0 20px;
+//     &:before {
+//       content: '';
+//       position: absolute;
+//       left: 0;
+//       top: 0;
+//       width: 100%;
+//       height: 100%;
+//       z-index: 1;
+//       opacity: $node-hover-opacity;
+//     }
+//   }
+//   header,
+//   .node__content {
+//     max-width: 360px;
+//     margin: 0 auto;
+//     z-index: 50;
+//   }
+//   .node__title {
+//     font-weight: 700;
+//   }
+//   .field--name-body {
+//     font-size: .95em;
+//   }
+//   .more-link {
+//     @extend %button;
+//     max-width: 225px;
+//     margin: 35px auto 0;
+//     display: block;
+//   }
+//   @include breakpoint($tab) {
+//     .block__content {
+//       position: relative;
+//       &:before {
+//         content: '';
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 100%;
+//         opacity: $node-hover-opacity;
+//       }
+//     }
+//     .view-content {
+//       @include flexbox;
+//       flex-wrap: wrap;
+//     }
+//     .views-row {
+//       width: percentage(1/2);
+//     }
+//   }
+//   @include breakpoint($desk) {
+//     .views-row {
+//       width: percentage(1/3);
+//     }
+//     .node__content {
+//       max-height: 0%;
+//       opacity: 0;
+//       transition: all .5s ease-in-out;
+//       overflow: hidden;
+//       position: relative; // safari fix
+//     }
+//     .node {
+//       &:before {
+//         transition: opacity .5s ease-in-out;
+//         opacity: $node-opacity;
+//       }
+//       &:hover {
+//         .node__content {
+//           max-height: 100%;
+//           opacity: 1;
+//           transition: all .75s ease-in-out;
+//         }
+//         .field--name-body {
+//           display: block;
+//         }
+//         &:before {
+//           opacity: $node-hover-opacity;
+//         }
+//       }
+//     }
+//   }
+// }
+
+.front { // styling for the services all block if placed on the front page
+  .block--views-services-all {
+    .field--name-field-image {
+      padding-bottom: 20px;
+    }
+    @include breakpoint($tab) {
+      .field--name-field-image {
+        padding-bottom: 0;
+      }
+    }
+  }
+}

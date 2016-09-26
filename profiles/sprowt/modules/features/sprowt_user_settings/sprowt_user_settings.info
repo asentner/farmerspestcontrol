@@ -7,7 +7,6 @@ project = sprowt_user_settings
 dependencies[] = dashboard
 dependencies[] = features
 dependencies[] = filter
-dependencies[] = sprowt_fields_and_text_formats
 dependencies[] = node
 dependencies[] = node_export
 dependencies[] = rabbit_hole

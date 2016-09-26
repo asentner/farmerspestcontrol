@@ -1,0 +1,24 @@
+.l-header {
+  z-index: 100;
+  @include breakpoint($tab) {
+    @include flexbox;
+    flex-direction: column;
+  }
+}
+
+
+.l-region--header-second {
+  @include flexbox;
+  flex-direction: column;
+  @include breakpoint($tab) {
+    order: -1;
+  }
+  @include breakpoint($nav) {
+    @include container;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    order: 0;
+    width: 100%;
+  }
+}

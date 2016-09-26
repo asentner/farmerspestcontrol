@@ -1,0 +1,11 @@
+%down-arrow {
+  position: relative;
+  &:after {
+    @include faicon("\F107");
+    position: absolute;
+    font-size: 50px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

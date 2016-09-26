@@ -1,0 +1,11 @@
+ @mixin transition {
+   transition: color .2s ease-in-out,
+               background-color .2s ease-in-out,
+               border-color .2s ease-in-out,
+               opacity .2s ease-in-out,
+               transform .2s ease-in-out;
+ }
+
+ a {
+   @include transition;
+ }

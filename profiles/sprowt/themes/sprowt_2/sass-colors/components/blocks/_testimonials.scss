@@ -1,0 +1,63 @@
+%block--testimonials-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-title: palette(secondary, base);
+  $color-stars: palette(primary, base);
+  $color-body: palette(neutral, xanadu);
+
+  background-color: $color-bg;
+  border-color: $color-border;
+  .block__title {
+    color: $color-title;
+  }
+  .node__content {
+    color: $color-body;
+  }
+  .fa-star {
+    color: $color-stars;
+  }
+}
+
+.block--testimonials-sidebar {
+  @extend %block--testimonials-sidebar;
+}
+
+.block--views-testimonials-random {
+  @extend %block--testimonials-sidebar;
+}
+
+// Front page testimonial
+
+.block--views-testimonials-front,
+.local-target-testimonial {
+  $color-title: palette(black, base);
+  $color-stars: palette(primary, base);
+
+  .block__content {
+    color: $color-title;
+  }
+  .rating {
+    color: $color-stars;
+  }
+  .field--title,
+  .field--name-field-market {
+    font-size: 15px;
+    color: $color-stars;
+  }
+}
+
+.local-target-testimonial {
+    $color-bg: palette(primary, base);
+    $color-stars: palette(white, pure);
+    $color-body: palette(white, pure);
+
+    background-color: $color-bg;
+    .fa-star {
+      color: $color-stars;
+    }
+    .block__content,
+    .field--title,
+    .field--name-field-market {
+      color: $color-body;
+    }
+}

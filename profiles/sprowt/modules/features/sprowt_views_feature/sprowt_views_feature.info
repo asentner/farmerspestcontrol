@@ -6,7 +6,6 @@ version = 7.x-1.0
 project = sprowt_views_feature
 dependencies[] = ctools
 dependencies[] = flexslider_views
-dependencies[] = sprowt_content_types
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2

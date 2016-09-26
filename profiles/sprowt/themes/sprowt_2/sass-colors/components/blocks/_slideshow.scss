@@ -1,0 +1,32 @@
+.block--views-slideshow-front,
+.block--views-slideshow-localtarget {
+	$color-text: palette(white, pure);
+	$color-button-bg: palette(secondary, base);
+	$color-button-bg-hover: palette(secondary, light);
+
+	.node--slide {
+		background-color: $color-overlay; // this color is used as a color-module place holder
+	}
+	.slide-image {
+		&:before {
+			background-color: $color-overlay; // this color is used as a color-module place holder
+		}
+	}
+	.node__title {
+		color: $color-text;
+	}
+	.flex-direction-nav a {
+		&:before {
+			color: rgba(white, .7);
+		}
+	}
+	.field--name-body {
+		color: $color-text;
+	}
+	.button {
+		background-color: $color-button-bg;
+		&:hover {
+			background-color: $color-button-bg-hover;
+		}
+	}
+}

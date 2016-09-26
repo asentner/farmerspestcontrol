@@ -1,0 +1,24 @@
+.block--nav-mobile-utility {
+  $color-fg: palette(white, pure);
+  $color-bg-left: palette(neutral, cool-gray);
+  $color-bg-right: palette(primary, base);
+
+  .menu {
+    li {
+      &.first {
+        background-color: $color-bg-left;
+      }
+      &.last {
+        background-color: $color-bg-right;
+      }
+    }
+    a {
+      color: $color-fg;
+      &[href^='tel:'] {
+        &:before {
+          color: $color-bg-right;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.benefits-hero,
+.local-target-benefits {
+   $color-block-bg: palette(neutral, wild-sand);
+   $color-node-bg: palette(white, pure);
+   $color-border: palette(white, pure);
+   $color-title: palette(primary, base);
+   $color-title-hover: palette(secondary, base);
+
+   background-color: $color-block-bg;
+   .node {
+      background-color: $color-node-bg;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+   }
+   .node__title {
+      color: $color-title;
+      a {
+        color: $color-title;
+        &:hover {
+          color: $color-title-hover;
+        }
+      }
+   }
+   .field--name-field-image {
+      img {
+         border-color: $color-border;
+         background-color: $color-border;
+      }
+   }
+   .read-more {
+      color: palette(black, base);
+      &:after {
+         color: palette(secondary, base);
+      }
+      &:hover {
+         color: palette(secondary, base);
+      }
+   }
+}

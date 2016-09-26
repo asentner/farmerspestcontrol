@@ -1,0 +1,77 @@
+%block--testimonials-sidebar {
+  $border-width: 2px;
+
+  border: $border-width solid;
+  padding: 30px 20px;
+  .block__title {
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .fa-star {
+    font-size: 1.2em;
+  }
+  .node--testimonial {
+    .field--name-body {
+      font-style: italic;
+      padding: 0 15px;
+      margin-bottom: 1.6em;
+      p {
+        line-height: 1.6em;
+        &:before,
+        &:after {
+          content: '"';
+        }
+      }
+    }
+  }
+  .field--title,
+  .field--name-field-market {
+    font-style: normal;
+    font-size: 0.8em;
+    padding-left: 25px;
+  }
+  @include breakpoint($tab) {
+    padding: 30px 20px 50px;
+  }
+}
+
+.block--testimonials-sidebar {
+  @extend %block--testimonials-sidebar;
+}
+
+.block--views-testimonials-random {
+  @extend %block--testimonials-sidebar;
+}
+
+// Front page testimonial
+
+.block--views-testimonials-front,
+.local-target-testimonial {
+  .block__content {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .field--name-body {
+    font-size: 0.8em;
+    font-weight: 600;
+    p {
+      &:before,
+      &:after {
+        content: '"';
+      }
+    }
+  }
+  .field--title,
+  .field--name-field-market {
+    font-size: 15px;
+  }
+  @include breakpoint($tab) {
+    .field--name-body {
+      font-size: 1em;
+    }
+  }
+}

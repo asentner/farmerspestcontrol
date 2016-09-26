@@ -1,0 +1,80 @@
+// homepage service listing
+
+.block--views-services-homepage {
+  $block-bg: $color-overlay;
+  $color-title: palette(white, pure);
+  $color-title-hover: palette(secondary, base);
+  $color-text: palette(white, pure);
+  $color-button-bg: palette(secondary, base);
+  $color-button-fg: palette(white, pure);
+  $color-button-bg-hover: palette(secondary, light);
+  $color-button-fg-hover: palette(white, pure);
+  $color-node-overlay: $color-overlay;
+
+  .block__content {
+    &:before {
+      background-color: $block-bg;
+    }
+  }
+  .node{
+    &:before {
+      background-color: $color-overlay;
+    }
+  }
+  .node__title {
+    a {
+      color: $color-title;
+      &:hover {
+        color: $color-title-hover;
+      }
+    }
+  }
+  .node__content {
+    color: $color-text;
+  }
+  .more-link {
+    @include button-color($color-button-bg, $color-button-fg, $color-button-bg-hover, $color-button-fg-hover);
+  }
+}
+
+
+
+.front { // styling for the services all block if placed on the front page
+  .block--views-services-all {
+    $color-border: palette(secondary, light);
+    $color-services-body: palette(white, pure);
+
+    $color-title: palette(white, pure);
+    $color-title-hover: palette(primary, base);
+
+    $color-button-bg: palette(primary, base);
+    $color-button-bg-hover: palette(primary, dark);
+    $color-button-fg: palette(white, pure);
+    $color-button-fg-hover: palette(white, pure);
+
+    .views-row {
+      border-color: $color-border;
+    }
+    .node__title {
+      a {
+        color: $color-title;
+        &:hover {
+          color: $color-title-hover;
+        }
+      }
+    }
+    .more-link {
+      &.more-link {
+        background-color: $color-button-bg;
+        color: $color-button-fg;
+        &:hover {
+          background-color: $color-button-bg-hover;
+          color: $color-button-fg-hover;
+        }
+      }
+    }
+    .field--name-body {
+      color: $color-services-body;
+    }
+  }
+}

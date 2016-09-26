@@ -1,6 +1,6 @@
-name = Sprowt Security (Features)
+name = Sprowt Security (Feature)
 core = 7.x
-package = Features
+package = Sprowt Features
 dependencies[] = ctools
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1

@@ -1,0 +1,30 @@
+.block--nav-mobile-utility {
+  .menu {
+    @include flexbox;
+    li {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+    }
+    a {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 15px 5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      &[href^='tel:'] {
+        &:before {
+          @include faicon($fa-var-phone);
+          padding-right: 10px;
+          font-size: 1.25em;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    display: none;
+  }
+}
