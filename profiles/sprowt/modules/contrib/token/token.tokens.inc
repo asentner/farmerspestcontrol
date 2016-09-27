@@ -358,6 +358,16 @@ function token_token_info() {
     'dynamic' => TRUE,
   );
 
+  // Site tokens.
+  $info['tokens']['site']['logo'] = array(
+    'name' => t('Site logo'),
+    'description' => t('The image showing the site logo.'),
+  );
+  $info['tokens']['site']['logo-url'] = array(
+    'name' => t('Site logo URL'),
+    'description' => t('URL to the image showing the site logo.'),
+  );
+
   return $info;
 }
 
@@ -891,6 +901,34 @@ function token_tokens($type, $tokens, array $data = array(), array $options = ar
         if (in_array($name, $algos)) {
           $replacements[$original] = hash($name, drupal_random_bytes(55));
         }
+      }
+    }
+  }
+
+  // Site tokens.
+  if ($type == 'site') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'logo':
+          // Use a logo; but only if we have one to use.
+          $replacements[$original] = '';
+          if ($uri = theme_get_setting('logo')) {
+            $replacements[$original] = theme('image', array('path' => $uri));
+          }
+          break;
+
+        case 'logo-url':
+          $replacements[$original] = '';
+          if ($uri = theme_get_setting('logo')) {
+            $replacements[$original] = $uri;
+          }
+          break;
+      }
+
+      // [site:logo-url:*] chained tokens.
+      if ($url_tokens = token_find_with_prefix($tokens, 'logo-url')) {
+        $uri = theme_get_setting('logo');
+        $replacements += token_generate('url', $url_tokens, array('path' => $uri), $options);
       }
     }
   }
