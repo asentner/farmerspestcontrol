@@ -650,7 +650,8 @@ function sprowt_settings_cb_identifier_values($identifier, $obj) {
     foreach($nodes as $node) {
         $id = '<' . _sprowt_settings_machine_name($node['title']) . '>';
         if($id == $identifier) {
-            $n = array_pop(entity_uuid_load('node', array($node['uuid'])));
+            $n = entity_uuid_load('node', array($node['uuid']));
+            $n = array_pop($n);
             $path = drupal_get_path_alias('node/' . $n->nid);
             $crumb_item = array(
                 'crumb' => l($obj['title'], $path),
