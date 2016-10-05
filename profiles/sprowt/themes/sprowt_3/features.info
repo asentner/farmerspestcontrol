@@ -2,7 +2,7 @@
 ;features[] = sprowt_3
 
 features[] = sprowt_3
-features[] = sprowt_3_blocks
+;features[] = sprowt_3_blocks
 
 ;list all features you want enabled instead of a sprowt feature in this format:
 ;overrides[sprowt_feature] = example_feature
