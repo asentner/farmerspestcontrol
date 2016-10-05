@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Image Styles (Features) feature.
+ */
+
+include_once 'sprowt_image_styles_features.features.inc';
