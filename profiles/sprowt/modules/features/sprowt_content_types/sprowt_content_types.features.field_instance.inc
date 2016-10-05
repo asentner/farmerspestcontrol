@@ -676,7 +676,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image_link_formatter',
         'settings' => array(
           'image_link' => 'field_link',
-          'image_style' => 'benefits__front_page_',
+          'image_style' => 'focal_point_scale_and_crop_100x100',
         ),
         'type' => 'image_link_formatter',
         'weight' => 0,
