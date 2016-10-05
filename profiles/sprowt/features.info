@@ -11,3 +11,4 @@ features[] = sprowt_social_sharing
 features[] = sprowt_breadcrumbs
 features[] = sprowt_social_sharing
 features[] = sprowt_security_features
+features[] = sprowt_flippy_settings
