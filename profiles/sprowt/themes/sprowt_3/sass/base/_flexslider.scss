@@ -1,0 +1,24 @@
+// this resets all the flexslider stuff
+.flexslider {
+	box-shadow: none;
+	margin: 0;
+	background: none;
+	border: 0;
+}
+
+.flex-control-nav {
+	display: none;
+}
+
+.flex-direction-nav a {
+	&:before {
+		@extend .fa;
+		content: "\f104";
+		font-size: 45px;
+	}
+	&.flex-next:before {
+		@extend .fa;
+		content: "\f105";
+		font-size: 45px;
+	}
+}

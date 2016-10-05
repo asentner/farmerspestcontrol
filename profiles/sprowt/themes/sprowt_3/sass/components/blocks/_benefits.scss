@@ -1,0 +1,91 @@
+.block--views-benefits-front,
+.local-target-benefits {
+
+  padding: 20px 20px 35px;
+  text-align: center;
+  .view-content {
+    max-width: 1160px;
+    position: relative;
+    z-index: 99;
+  }
+  .views-row {
+    max-width: 355px;
+    margin: 0 auto 30px;
+    padding: 0 15px;
+  }
+  .content-wrap {
+    padding: 40px 20px;
+  }
+  .field--name-field-image {
+    margin-bottom: 18px;
+    a > img {
+      @extend %image-hover;
+    }
+  }
+  .node__title {
+    font-size: 1.15em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 12px;
+  }
+  .field--name-body {
+    font-size: 1.1em;
+    p {
+      line-height: 1.55;
+    }
+  }
+  .link-wrap {
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
+    a {
+      padding-top: 25px;
+      padding-bottom: 25px;
+      padding-right: 66px;
+      display: block;
+    }
+    a:after {
+      @include faicon('\F105');
+      @include flexbox;
+      transition: width .35s;
+      align-items: center;
+      justify-content: flex-end;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 66px;
+      padding-right: 30px;
+      font-size: 1.3em;
+    }
+    a:hover:after {
+      width: 86px;
+    }
+  }
+   @include breakpoint($tab) {
+     padding: 20px 10px 35px;
+      .view-content {
+        @include container;
+        @include flexbox;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .views-row {
+        @include flexbox;
+        width: percentage(1/2);
+        padding: 0 15px;
+        margin: 0 0 30px;
+      }
+      .node {
+        @include flexbox;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+   }
+   @include breakpoint($desk) {
+      .views-row {
+        width: percentage(1/3);
+      }
+    }
+}

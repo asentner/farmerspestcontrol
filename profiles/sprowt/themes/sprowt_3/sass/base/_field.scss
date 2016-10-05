@@ -1,0 +1,28 @@
+.field__item {
+  .node--teaser .field--name-body &,
+  .node--alt-teaser .field--name-body & {
+    //commented items were taken out to fix an IE issue
+
+    // @include flexbox;
+    // flex-direction: column;
+    // align-items: center;
+    > * {
+      width: 100%;
+    }
+    > .more-link {
+      @extend %button;
+      display: block;
+      margin: 1em auto 0;
+      max-width: 225px;
+    }
+  }
+  @include breakpoint($tab) {
+    .node--teaser .field--name-body &,
+    .node--alt-teaser .field--name-body & {
+      // align-items: flex-start;
+      > .more-link {
+        margin-left: 0;
+      }
+    }
+  }
+}

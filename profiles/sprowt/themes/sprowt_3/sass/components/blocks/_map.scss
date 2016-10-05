@@ -1,0 +1,45 @@
+.block-areas-map {
+  //starting styling of block
+  padding: 60px 20px;
+  text-align: center;
+  .block__title {
+    @extend h3;
+    @extend %primary-border;
+  }
+  .intro {
+    margin-bottom: 30px;
+  }
+  ul {
+    margin: 20px 0 15px;
+    a {
+      font-size: 1.2em;
+      padding: 0 20px;
+    }
+    a::before {
+        @include faicon("\f105");
+        margin: 0 5px 0 0;
+    }
+  }
+  @include breakpoint($tab) {
+    ul {
+      @include flexbox;
+      justify-content: center;
+    }
+  }
+}
+
+// map styling
+
+.map-embed {
+  padding: 20px;
+  iframe {
+  	height: 50vh;
+  }
+  @include breakpoint($tab) {
+  	iframe {
+  		height: 350px;
+      width: 675px;
+  		margin: auto;
+  	}
+  }
+}

@@ -1,0 +1,25 @@
+.block--views-slideshow-front,
+.block--views-slideshow-localtarget {
+	$color-image-bg: palette(black, base);
+	$color-text: palette(white, pure);
+
+	.node--slide {
+		background-color: $color-image-bg;
+	}
+	.slide-image {
+		&:before {
+			background-color: $color-overlay; // this color is used as a color-module place holder
+		}
+	}
+	.node__title {
+		color: $color-text;
+	}
+	.flex-direction-nav a {
+		&:before {
+			color: rgba(white, .7);
+		}
+	}
+	.field--name-body {
+		color: $color-text;
+	}
+}

@@ -1,0 +1,67 @@
+// homepage service listing
+
+.block--views-services-homepage {
+  $color-bg: palette(primary, base);
+  $color-bg-hover: palette(black, pure);
+  $color-border: palette(primary, dark);
+  $color-services-body: palette(neutral, gray);
+  $color-title: palette(white, pure);
+
+  .block__content {
+    background-color: $color-bg;
+  }
+  .view-content {
+    &:after {
+      background-color: #000;
+    }
+  }
+  .views-row {
+    background-color: $color-bg;
+    &.views-row {
+      // border-color: $color-bg;
+      border-color: $color-border;
+    }
+    &:before,
+    &:after {
+      background-color: $color-border;
+    }
+  }
+  .node__title {
+    color: $color-title;
+    a {
+      color: $color-title;
+    }
+  }
+  .read-more {
+    color: $color-title;
+  }
+  .field--name-body {
+    color: $color-title;
+  }
+  @include breakpoint($desk) {
+    .node:hover {
+      background-color: $color-bg-hover;
+      .node__title a:hover {
+        color: $color-bg;
+      }
+    }
+    .field--name-body {
+      color: $color-services-body;
+    }
+    .read-more {
+      &:after {
+        color: $color-bg;
+      }
+      &:hover {
+        color: $color-bg;
+      }
+    }
+  }
+}
+
+// homepage service intro
+.service-intro {
+  h2 {
+    @extend %primary-border;
+  }
+}

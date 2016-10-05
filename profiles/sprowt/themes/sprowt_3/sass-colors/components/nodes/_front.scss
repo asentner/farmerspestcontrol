@@ -1,0 +1,26 @@
+.front {
+  .l-main {
+    $color-bg: palette(white, pure);
+    $color-block-title: palette(black, pure);
+    $color-body: palette(black, base);
+
+    background-color: $color-bg;
+    .node--page--full {
+      h1 {
+        color: $color-block-title;
+      }
+      .field--name-body {
+        color: $color-body;
+      }
+    }
+  }
+}
+
+.l-main {
+  $color-bg: palette(white, pure);
+
+  background-color: $color-bg;
+  h1 {
+    @extend %primary-border;
+  }
+}

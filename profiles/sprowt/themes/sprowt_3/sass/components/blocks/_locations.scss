@@ -1,0 +1,57 @@
+.block--views-locations-list {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  .node {
+    text-align: center;
+  }
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  h2 {
+    margin: 0;
+    font-size: 14px;
+    line-height: (21/14);
+    font-weight: normal;
+  }
+  .field-street-address {
+    display: block;
+  }
+  .field-street-address,
+  .field-locality, .field-phone-number {
+    line-height: 1.5em;
+  }
+  @include breakpoint($tab) {
+    margin-top: 0;
+    line-height: (14/14);
+    font-size: 13px;
+    h2 {
+      display: inline-block;
+      font-size: 13px;
+    }
+    .node__content {
+      display: inline-block;
+    }
+    .field-street-address,
+    .field-locality, .field-phone-number {
+      display: inline-block;
+      padding-left: 6px;
+      margin-left: 4px;
+      border-left: 1px solid;
+      line-height: 1em;
+    }
+  }
+  @include breakpoint($desk) {
+    font-size: 14px;
+    h2 {
+      font-size: 14px;
+    }
+    .field-street-address,
+    .field-locality, .field-phone-number {
+      padding-left: 12px;
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.block-areas-map {
+  $color-bg: palette(white, pure);
+  $color-title: palette(black, pure);
+  $color-body: palette(neutral, char);
+  $color-map-link: palette(black, pure);
+  $color-map-link-hover: palette(primary, base);
+  $color-map-arrow: palette(primary, base);
+
+  //starting styling of block
+  background-color: $color-bg;
+  .block__title {
+    color: $color-title;
+    @extend %primary-border;
+  }
+  .block__content {
+    color: $color-body;
+  }
+  ul {
+    a {
+      color: $color-map-link;
+      &:hover {
+        color: $color-map-link-hover;
+      }
+    }
+    a::before {
+        color: $color-map-arrow;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+%package-list {
+  $color-title-bg: palette(primary, base);
+  $color-title-fg: palette(white, pure);
+
+  $color-row-odd-bg: palette(neutral, wild-sand);
+  $color-row-even-bg: lighten($color-row-odd-bg, 10);
+
+  $color-node-title: palette(primary, base);
+  $color-node-title-hover: palette(primary, dark);
+
+  $color-button-bg: palette(primary, base);
+  $color-button-fg: palette(white, pure);
+  $color-button-hover: palette(primary, dark);
+
+  .block__title {
+    background-color: $color-title-bg;
+    color: $color-title-fg;
+  }
+  .view-content {
+    border-color: $color-row-odd-bg;
+  }
+  .views-row-odd {
+    background-color: $color-row-odd-bg;
+  }
+  .views-row-even {
+    background-color: $color-row-even-bg;
+  }
+  .node__title {
+    a {
+      color: $color-node-title;
+      &:hover {
+        color: $color-node-title-hover;
+      }
+    }
+  }
+  .field--name-body {
+    .field__item {
+      .more-link {
+        background-color: $color-button-bg;
+        color: $color-button-fg;
+        &:hover {
+          background-color: $color-button-hover;
+        }
+      }
+    }
+  }
+}
+
+%package-grid {
+  $color-block-bg: palette(neutral, wild-sand);
+  .view-content {
+    background-color: $color-block-bg;
+  }
+  .node {
+    background-color: transparent;
+  }
+}
+
+.block--views-packages-services {
+  @extend %package-list;
+}
+
+.block--views-packages-services.block--grid {
+  @extend %package-grid;
+}

@@ -1,0 +1,7 @@
+%primary-border {
+  $color-border: palette(primary, base);
+
+  &:after {
+      background-color: $color-border;
+    }
+}

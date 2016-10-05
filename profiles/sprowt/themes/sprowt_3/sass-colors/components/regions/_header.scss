@@ -1,0 +1,7 @@
+.l-header {
+  $color-bg: palette(white, pure);
+  $color-border: palette(primary, base);
+
+  background-color: $color-bg;
+  border-top: 2px solid $color-border;
+}

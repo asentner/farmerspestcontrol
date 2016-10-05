@@ -1,0 +1,19 @@
+.block--views-localtarget-value-prop {
+  $color-image-bg: palette(black, base);
+	$color-text: palette(white, pure);
+
+  .node {
+		background-color: $color-image-bg;
+  }
+	.slide-image-background {
+		&:before {
+			background-color: $color-overlay; // this color is used as a color-module place holder
+		}
+	}
+  .field--name-field-display-title {
+    color: $color-text;
+  }
+  .field--name-field-intro {
+		color: $color-text;
+	}
+}

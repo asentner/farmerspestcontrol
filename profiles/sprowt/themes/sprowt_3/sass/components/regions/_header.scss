@@ -1,0 +1,22 @@
+.l-header {
+  @include container;
+  width: 100%;
+  z-index: 100;
+}
+.l-region--header-first {
+  @include flexbox;
+  flex-direction: column;
+  @include breakpoint($nav) {
+    @include container;
+    @include clear;
+    display: block;
+    .block--logo-block-logo {
+      float: left;
+    }
+    .block--nav-utility,
+    .block--nav-main {
+      float: right;
+      margin-top: 15px;
+    }
+  }
+}

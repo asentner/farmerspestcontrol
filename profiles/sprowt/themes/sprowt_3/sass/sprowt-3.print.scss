@@ -1,0 +1,54 @@
+table {
+  background: black;
+  border-spacing: 2pt;
+}
+
+th {
+  background: white;
+  color: black;
+  font-weight: bold;
+}
+
+a {
+  color: blue !important;
+  &:after {
+    content: " (" attr(href) ")";
+    font-size: 12pt;
+    font-weight: normal;
+    text-transform: none;
+    color: gray;
+  }
+}
+
+.l-header,
+.l-footer,
+.l-region--sidebar,
+.breadcrumb,
+#main-content,
+.addtoany {
+  display: none;
+}
+
+.l-content {
+  margin: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.field--name-field-call-out {
+  background: transparent;
+  color: black;
+  border: .3pt solid black;
+  text-align: left;
+  .field__items {
+    max-width: none;
+  }
+}
+
+.field--name-field-image {
+  a {
+    &:after {
+      display: none;
+    }
+  }
+}

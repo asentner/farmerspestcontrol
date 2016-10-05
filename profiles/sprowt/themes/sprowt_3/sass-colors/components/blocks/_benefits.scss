@@ -1,0 +1,35 @@
+.block--views-benefits-front,
+.local-target-benefits {
+   $color-bg: palette(neutral, wild-sand);
+   $color-title: palette(primary, base);
+   $color-title-hover: palette(primary, dark);
+   $color-link-bg: palette(primary, base);
+   $color-link-fg: palette(white, pure);
+   $color-link-fg-hover: palette(white, pure);
+   $color-arrow-bg: palette(black, pure);
+
+   .node {
+     background-color: $color-bg;
+   }
+   .node__title {
+    color: $color-title;
+    a {
+      color: $color-title;
+      &:hover {
+        color: $color-title-hover;
+      }
+    }
+   }
+   .link-wrap {
+     background-color: $color-link-bg;
+     a {
+       color: $color-link-fg;
+       &:hover {
+         color: $color-link-fg-hover;
+       }
+       &:after {
+         background-color: $color-arrow-bg;
+       }
+     }
+   }
+}

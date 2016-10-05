@@ -1,0 +1,11 @@
+%primary-border {
+  position: relative;
+  &:after {
+      display: block;
+      width: 100%;
+      max-width: 80px;
+      height: 4px;
+      margin: 0.4em auto .3em;
+      content: "";
+    }
+}

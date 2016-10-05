@@ -1,0 +1,16 @@
+.front {
+  .l-main {
+    margin: 0 auto;
+    padding: 0;
+    max-width: $container;
+    .node--page--full {
+      text-align: center;
+      padding: 50px 30px 30px;
+      max-width: $content;
+      margin: 0 auto;
+    }
+    h1 {
+      @extend %primary-border;
+    }
+  }
+}

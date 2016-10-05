@@ -1,0 +1,31 @@
+.block--form-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-title: palette(black, pure);
+  $color-text: palette(neutral, xanadu);
+
+  border-color: $color-border;
+  background-color: $color-bg;
+  color: $color-text;
+  .block__title {
+    color: $color-title;
+  }
+  label {
+    color: $color-text;
+  }
+}
+
+// local target page form
+.local-target-webform {
+  $color-bg: palette(neutral, cool-gray);
+  $color-title: palette(white, pure);
+  $color-body: palette(white, base);
+
+  background-color: $color-bg;
+  .block__content {
+    color: $color-body;
+  }
+  .node__title {
+    color: $color-title;
+  }
+}

@@ -1,0 +1,64 @@
+.block--form-sidebar {
+  $border-width: 2px;
+
+  border: $border-width solid;
+  padding: 30px 20px;
+  .block__title {
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .form-row {
+    @include breakpoint($tab) {
+      .fieldset-wrapper {
+        display: block;
+        > .form-item {
+          margin-bottom: 0;
+          + .form-item {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+  input {
+    width: 100%;
+  }
+  .form-actions {
+    margin: 1.5em auto 0;
+  }
+
+  @include breakpoint($tab) {
+    .block__title {
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  }
+}
+
+// local target page form
+
+.local-target-webform {
+  .block__content {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  .node__title {
+    text-align: center;
+  }
+  .field--name-body {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .form-item {
+    margin-top: 10px;
+  }
+  .form-actions {
+    text-align: center;
+    .form-submit {
+      min-width: 220px;
+      margin-top: 20px;
+    }
+  }
+}

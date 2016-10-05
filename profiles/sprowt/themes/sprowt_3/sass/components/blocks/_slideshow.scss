@@ -1,0 +1,80 @@
+.block--views-slideshow-front,
+.block--views-slideshow-localtarget {
+	$overlay-opacity: 0.8; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+
+	text-align: center;
+	.node--slide {
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.slide-image {
+		position: relative;
+		min-height: 360px;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: $overlay-opacity;
+		}
+	}
+	.node__title {
+		line-height: 1.1;
+	}
+	.flexslider:hover .flex-direction-nav a {
+		opacity: 1;
+	}
+	.flexslider .slides {
+		width: 100%;
+	}
+	.flex-direction-nav a {
+		&:before {
+			@extend .fa;
+			content: "\f104";
+			font-size: 45px;
+		}
+		&.flex-next:before {
+			@extend .fa;
+			content: "\f105";
+			font-size: 45px;
+		}
+	}
+
+	.button {
+		margin: 20px auto 0;
+		max-width: 225px;
+		width: 100%;
+	}
+	.field--name-body {
+		margin-top: 20px;
+	}
+	.slide-content {
+		max-width: 800px;
+		margin: auto;
+		padding: 80px 20px 30px;
+		position: relative;
+	}
+	.field--name-body {
+		font-size: 1.15em;
+	}
+
+	@include breakpoint($tab) {
+		.slide-image {
+			min-height: 520px;
+		}
+		.slide-content {
+			padding-top: 115px;
+		}
+		.node__title {
+			font-size: 2.5em;
+		}
+	}
+	@include breakpoint($desk) {
+		.node__title {
+			font-size: 3.7em;
+		}
+	}
+}
