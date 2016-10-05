@@ -470,7 +470,7 @@ function sprowt_content_types_metatag_export_default() {
       'og:description' => array(
         'value' => '[node:summary]',
       ),
-      'og:image:url' => array(
+      'og:image' => array(
         'value' => '[node:field_image]',
       ),
       'twitter:description' => array(
@@ -478,6 +478,16 @@ function sprowt_content_types_metatag_export_default() {
       ),
       'twitter:image' => array(
         'value' => '[node:field_image]',
+      ),
+    ),
+  );
+
+  // Exported Metatag config instance: node:page.
+  $config['node:page'] = array(
+    'instance' => 'node:page',
+    'config' => array(
+      'og:image' => array(
+        'value' => '[site:logo-url]',
       ),
     ),
   );
