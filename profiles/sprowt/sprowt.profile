@@ -1,5 +1,19 @@
 <?php
 
+class SprowtException extends \Exception {
+    
+    /**
+     * Constructs a SprowtException.
+     *
+     * @param string $class
+     *   The class which does not correspond to an entity type.
+     */
+    public function __construct($message) {
+        parent::__construct($message);
+    }
+    
+}
+
 require_once('sprowtbuilder.php');
 
 /***
@@ -497,4 +511,17 @@ function sprowt_is_sprowt_theme($theme) {
     $sprowt_themes = $TB->sprowt_themes();
     
     return in_array($theme, array_keys($sprowt_themes));
+}
+
+function sprowt_add_cm_user($username) {
+    require_once drupal_get_path('profile', 'sprowt') . '/includes/userbuilder.php';
+    
+    $UB = new UserBuilder();
+    
+    if($account = $UB->addCoalmarchUser($username)) {
+        _user_mail_notify('register_admin_created', $account);
+    }
+    else {
+        throw new SprowtException('Coalmarch user, '.$username.',  could not be created');
+    }
 }

@@ -664,3 +664,4 @@ function sprowt_settings_cb_identifier_values($identifier, $obj) {
 
     return $crumb_items;
 }
+

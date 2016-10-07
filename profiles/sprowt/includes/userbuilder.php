@@ -130,7 +130,9 @@ class UserBuilder {
         }
         else {
             $json = file_get_contents($filepath);
-            return $this->addUser(json_decode($json, true));
+            $userinfo = json_decode($json, true);
+            $userinfo['password'] = user_hash_password(rand() . time());
+            return $this->addUser($userinfo);
         }
     }
 

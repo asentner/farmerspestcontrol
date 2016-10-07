@@ -201,6 +201,10 @@ Class ThemeBuilder {
             $old_name = $matches[1];
             $info_str = preg_replace('/name[\s]+?\=.*/', "name = $new_upper", $info_str);
 
+            if(preg_match('/copied_from[\s]+?\=(.*)/', $info_str, $matches)) {
+                $info_str = str_replace($matches[0], '', $info_str);
+            }
+            
             preg_match('/description[\s]+?\=(.*)/', $info_str, $matches);
             $info_str = preg_replace('/description[\s]+?\=.*/', "description = Theme copied from \"$old_name\".\ncopied_from = $old", $info_str);
 

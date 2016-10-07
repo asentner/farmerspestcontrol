@@ -185,9 +185,6 @@ function drush_sprowt_menu_export($menu) {
 }
 
 function drush_sprowt_cm_add(){
-    require_once drupal_get_path('profile', 'sprowt') . '/includes/userbuilder.php';
-
-    $UB = new UserBuilder();
     $username = drush_get_option('name');
 
     if(empty($username)) {
@@ -201,12 +198,13 @@ function drush_sprowt_cm_add(){
 
         $username = drush_choice($options, dt('Which user would you like to add?'));
     }
-
-    if($UB->addCoalmarchUser($username)) {
-        echo "$username Added!\n";
+    
+    try {
+        sprowt_add_cm_user($username);
+        drush_log("$username created!", 'ok');
     }
-    else {
-        drush_log("There was an error. $username not added.", 'error');
+    catch (SprowtException $e){
+        drush_log($e->getMessage(), 'error');
     }
 
 }

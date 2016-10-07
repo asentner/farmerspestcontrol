@@ -1,6 +1,4 @@
 name = Sprowt 3
-; description = Theme copied from " Sprowt 1".
-copied_from = sprowt_1
 base theme = omega
 screenshot = screenshot.png
 engine = phptemplate

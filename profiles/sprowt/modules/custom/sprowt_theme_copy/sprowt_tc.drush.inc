@@ -15,6 +15,8 @@ function sprowt_tc_drush_command() {
                 'new-name' => 'Name of new theme'
             ),
             'options'     => array(
+                'old' => 'Machine Name for Sprowt theme being copied',
+                'new' => 'Human readable name of new theme',
                 'machine-name' => 'Machine Name of the new theme',
                 'primary'   => 'Hex of primary color',
                 'secondary' => 'Hex of secondary color',
@@ -32,17 +34,38 @@ function sprowt_tc_drush_command() {
     return $items;
 }
 
-function drush_sprowt_tc_theme_copy($old, $new_name) {
+function drush_sprowt_tc_theme_copy($old = '', $new_name = '') {
     $machine_name = drush_get_option('machine-name');
     $primary = drush_get_option('primary');
     $secondary = drush_get_option('secondary');
     $tertiary = drush_get_option('tertiary');
+    
+    if(empty($old)) {
+        $theme_list = list_themes(TRUE);
+        $options = array();
+        foreach($theme_list as $theme_name => $theme) {
+            $options[$theme_name] = $theme->info['name'];
+        }
+        $choice = drush_choice($options, dt('Which theme would you like to copy?'));
+    
+        if($choice) {
+            $old = $choice;
+        }
+        else {
+            return drush_set_error('Theme Copy Error', 'Theme copy requires a theme to be chosen!');
+        }
+    }
+    
+    if(empty($new_name)) {
+        $new_name = drush_prompt('What human readable name would you like the new theme to use?', null, true);
+    }
 
     if(!empty($machine_name)) {
         $machine_name = sprowt_theme_copy_machine_name($machine_name);
     }
     else {
         $machine_name = sprowt_theme_copy_machine_name($new_name);
+        $machine_name = drush_prompt('What machine name would you like the new theme to use?', $machine_name);
     }
 
     $path = DRUPAL_ROOT . "/sites/all/themes/$machine_name";
@@ -62,12 +85,6 @@ function drush_sprowt_tc_theme_copy($old, $new_name) {
 }
 
 function drush_sprowt_tc_theme_copy_validate() {
-
-    $args = drush_get_arguments();
-
-    if(count($args) > 3 || count($args) < 3) {
-        drush_set_error('Theme Copy Error', 'Invalid number of arguments supplied');
-    }
 
     $options = array(
         'primary' => drush_get_option('primary'),
