@@ -68,6 +68,7 @@ $actions = array(
     'addBranding' => "Adding Branding...",
     'addSocial' => "Adding Social Media...",
     'addIntegrations' => "Adding Integrations...",
+    'revertFeatures' => "Revert Features...",
 );
 
 $i = 0;

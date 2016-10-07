@@ -1,4 +1,4 @@
-name = Sprowt-2
+name = Sprowt 2 Overrides
 core = 7.x
 package = Sprowt Features Overrides
 dependencies[] = flexslider

@@ -694,4 +694,16 @@ Class SprowtBuilder {
         }
         
     }
+    
+    /**
+     * Revert all features
+     */
+    
+    function revertFeatures() {
+        $features = _sprowt_get_features();
+        
+        foreach($features as $feature) {
+            features_revert_module($feature);
+        }
+    }
 }

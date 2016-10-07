@@ -247,23 +247,22 @@ function sprowt_configure() {
 
 
 /**
- * Function for installing features and other modules
+ * Get features to enable
  */
 
-function sprowt_install_features(){
-
+function _sprowt_get_features(){
     $data = _sprowt_get_data();
     $theme = $data['branding']['theme'];
-
+    
     $sprowt_info = drupal_get_path('profile', 'sprowt') . '/features.info';
     $theme_info = drupal_get_path('theme', $theme) . '/features.info';
-
+    
     $features = array();
     if(file_exists($sprowt_info)) {
         $info = drupal_parse_info_file($sprowt_info);
         $features = (!empty($info['features'])) ? $info['features'] : array();
     }
-
+    
     if(file_exists($theme_info)) {
         $info = drupal_parse_info_file($theme_info);
         $theme_features = (!empty($info['features'])) ? $info['features'] : array();
@@ -274,7 +273,18 @@ function sprowt_install_features(){
             $features[$key] = $new;
         }
     }
+    
+    return $features;
+}
 
+/**
+ * Function for installing features and other modules
+ */
+
+function sprowt_install_features(){
+
+
+    $features = _sprowt_get_features();
 
     foreach($features as $feature){
         module_enable(array($feature));
