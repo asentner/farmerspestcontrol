@@ -777,6 +777,21 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     ); /* WAS: '' */
   }
   if (isset($data['node-service-body'])) {
+    $data['node-service-body']['display']['alt_teaser']['label'] = 'hidden'; /* WAS: 'above' */
+    $data['node-service-body']['display']['alt_teaser']['module'] = 'smart_trim'; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['more_link'] = 1; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['more_text'] = 'Learn More'; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['summary_handler'] = 'full'; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['trim_length'] = 200; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['trim_link'] = 0; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['trim_options'] = array(
+      'text' => 'text',
+    ); /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['trim_preserve_tags'] = ''; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['trim_suffix'] = '...'; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['trim_type'] = 'chars'; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['type'] = 'smart_trim_format'; /* WAS: 'hidden' */
+    $data['node-service-body']['display']['alt_teaser']['weight'] = 1; /* WAS: 0 */
     $data['node-service-body']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -785,6 +800,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     ); /* WAS: '' */
   }
   if (isset($data['node-service-field_call_out'])) {
+    $data['node-service-field_call_out']['display']['alt_teaser']['weight'] = 7; /* WAS: 0 */
     $data['node-service-field_call_out']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -793,6 +809,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     ); /* WAS: '' */
   }
   if (isset($data['node-service-field_content_edited'])) {
+    $data['node-service-field_content_edited']['display']['alt_teaser']['weight'] = 8; /* WAS: 0 */
     $data['node-service-field_content_edited']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -801,6 +818,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     ); /* WAS: '' */
   }
   if (isset($data['node-service-field_display_title'])) {
+    $data['node-service-field_display_title']['display']['alt_teaser']['weight'] = 9; /* WAS: 0 */
     $data['node-service-field_display_title']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -809,6 +827,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     ); /* WAS: '' */
   }
   if (isset($data['node-service-field_icon'])) {
+    $data['node-service-field_icon']['display']['alt_teaser']['weight'] = 6; /* WAS: 0 */
     $data['node-service-field_icon']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -818,6 +837,11 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     $data['node-service-field_icon']['settings']['default_image'] = 3; /* WAS: 0 */
   }
   if (isset($data['node-service-field_image'])) {
+    $data['node-service-field_image']['display']['alt_teaser']['label'] = 'hidden'; /* WAS: 'above' */
+    $data['node-service-field_image']['display']['alt_teaser']['module'] = 'image'; /* WAS: '' */
+    $data['node-service-field_image']['display']['alt_teaser']['settings']['image_link'] = 'content'; /* WAS: '' */
+    $data['node-service-field_image']['display']['alt_teaser']['settings']['image_style'] = 'focal_point_scale_and_crop_185x150'; /* WAS: '' */
+    $data['node-service-field_image']['display']['alt_teaser']['type'] = 'image'; /* WAS: 'hidden' */
     $data['node-service-field_image']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -827,6 +851,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     $data['node-service-field_image']['settings']['default_image'] = 5; /* WAS: 0 */
   }
   if (isset($data['node-service-field_intro'])) {
+    $data['node-service-field_intro']['display']['alt_teaser']['weight'] = 2; /* WAS: 0 */
     $data['node-service-field_intro']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -835,6 +860,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     ); /* WAS: '' */
   }
   if (isset($data['node-service-field_package_intro'])) {
+    $data['node-service-field_package_intro']['display']['alt_teaser']['weight'] = 3; /* WAS: 0 */
     $data['node-service-field_package_intro']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -843,6 +869,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     ); /* WAS: '' */
   }
   if (isset($data['node-service-field_seo_title'])) {
+    $data['node-service-field_seo_title']['display']['alt_teaser']['weight'] = 4; /* WAS: 0 */
     $data['node-service-field_seo_title']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -851,6 +878,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
     ); /* WAS: '' */
   }
   if (isset($data['node-service-field_service'])) {
+    $data['node-service-field_service']['display']['alt_teaser']['weight'] = 5; /* WAS: 0 */
     $data['node-service-field_service']['display']['secondary_teaser'] = array(
       'label' => 'above',
       'settings' => array(),
@@ -1320,7 +1348,7 @@ function sprowt_4_views_default_views_alter(&$data) {
     $data['localtarget']->display['title_s4'] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:6:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:3:{s:5:"title";b:0;s:6:"fields";b:0;s:9:"arguments";b:0;}s:5:"title";s:6:"<none>";s:6:"fields";a:1:{s:5:"title";a:7:{s:2:"id";s:5:"title";s:5:"table";s:4:"node";s:5:"field";s:5:"title";s:5:"label";s:0:"";s:5:"alter";a:4:{s:10:"alter_text";b:1;s:4:"text";s:16:"<h1>[title]</h1>";s:13:"word_boundary";b:0;s:8:"ellipsis";b:0;}s:19:"element_label_colon";b:0;s:12:"link_to_node";b:0;}}s:9:"arguments";a:1:{s:3:"nid";a:7:{s:2:"id";s:3:"nid";s:5:"table";s:4:"node";s:5:"field";s:3:"nid";s:14:"default_action";s:7:"default";s:21:"default_argument_type";s:4:"node";s:7:"summary";a:2:{s:17:"number_of_records";s:1:"0";s:6:"format";s:15:"default_summary";}s:15:"summary_options";a:1:{s:14:"items_per_page";s:2:"25";}}}s:17:"block_description";s:23:"Local Target Title (S4)";}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"title_s4";s:13:"display_title";s:23:"Local Target Title (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}'); /* WAS: '' */
   }
   if (isset($data['services'])) {
-    $data['services']->display['front_s4'] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:5:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:4:{s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;}s:12:"style_plugin";s:7:"default";s:10:"row_plugin";s:4:"node";s:17:"block_description";s:24:"Front Page Services (S4)";}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"front_s4";s:13:"display_title";s:24:"Front Page Services (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}'); /* WAS: '' */
+    $data['services']->display['front_s4'] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:6:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:4:{s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;}s:12:"style_plugin";s:7:"default";s:10:"row_plugin";s:4:"node";s:11:"row_options";a:1:{s:9:"view_mode";s:10:"alt_teaser";}s:17:"block_description";s:24:"Front Page Services (S4)";}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"front_s4";s:13:"display_title";s:24:"Front Page Services (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}'); /* WAS: '' */
   }
   if (isset($data['special_offers'])) {
     $data['special_offers']->display['front_s4'] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:7:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:7:{s:5:"title";b:0;s:5:"pager";b:0;s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;s:5:"sorts";b:0;}s:5:"pager";a:2:{s:4:"type";s:4:"some";s:7:"options";a:2:{s:14:"items_per_page";s:1:"1";s:6:"offset";s:1:"0";}}s:12:"style_plugin";s:7:"default";s:10:"row_plugin";s:4:"node";s:11:"row_options";a:2:{s:9:"view_mode";s:16:"secondary_teaser";s:5:"links";b:0;}s:5:"sorts";a:1:{s:6:"random";a:3:{s:2:"id";s:6:"random";s:5:"table";s:5:"views";s:5:"field";s:6:"random";}}}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"front_s4";s:13:"display_title";s:13:"Homepage (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}'); /* WAS: '' */

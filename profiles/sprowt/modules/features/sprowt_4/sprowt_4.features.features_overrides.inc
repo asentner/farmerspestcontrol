@@ -588,30 +588,49 @@ function sprowt_4_features_override_default_overrides() {
     'type' => 'hidden',
     'weight' => 0,
   );
+  $overrides["field_instance.node-service-body.display|alt_teaser|label"] = 'hidden';
+  $overrides["field_instance.node-service-body.display|alt_teaser|module"] = 'smart_trim';
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|more_link"] = 1;
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|more_text"] = 'Learn More';
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|summary_handler"] = 'full';
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|trim_length"] = 200;
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|trim_link"] = 0;
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|trim_options"] = array(
+    'text' => 'text',
+  );
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|trim_preserve_tags"] = '';
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|trim_suffix"] = '...';
+  $overrides["field_instance.node-service-body.display|alt_teaser|settings|trim_type"] = 'chars';
+  $overrides["field_instance.node-service-body.display|alt_teaser|type"] = 'smart_trim_format';
+  $overrides["field_instance.node-service-body.display|alt_teaser|weight"] = 1;
   $overrides["field_instance.node-service-body.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
     'weight' => 0,
   );
+  $overrides["field_instance.node-service-field_call_out.display|alt_teaser|weight"] = 7;
   $overrides["field_instance.node-service-field_call_out.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
     'weight' => 0,
   );
+  $overrides["field_instance.node-service-field_content_edited.display|alt_teaser|weight"] = 8;
   $overrides["field_instance.node-service-field_content_edited.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
     'weight' => 0,
   );
+  $overrides["field_instance.node-service-field_display_title.display|alt_teaser|weight"] = 9;
   $overrides["field_instance.node-service-field_display_title.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
     'weight' => 0,
   );
+  $overrides["field_instance.node-service-field_icon.display|alt_teaser|weight"] = 6;
   $overrides["field_instance.node-service-field_icon.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
@@ -619,6 +638,11 @@ function sprowt_4_features_override_default_overrides() {
     'weight' => 0,
   );
   $overrides["field_instance.node-service-field_icon.settings|default_image"] = 3;
+  $overrides["field_instance.node-service-field_image.display|alt_teaser|label"] = 'hidden';
+  $overrides["field_instance.node-service-field_image.display|alt_teaser|module"] = 'image';
+  $overrides["field_instance.node-service-field_image.display|alt_teaser|settings|image_link"] = 'content';
+  $overrides["field_instance.node-service-field_image.display|alt_teaser|settings|image_style"] = 'focal_point_scale_and_crop_185x150';
+  $overrides["field_instance.node-service-field_image.display|alt_teaser|type"] = 'image';
   $overrides["field_instance.node-service-field_image.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
@@ -626,24 +650,28 @@ function sprowt_4_features_override_default_overrides() {
     'weight' => 0,
   );
   $overrides["field_instance.node-service-field_image.settings|default_image"] = 5;
+  $overrides["field_instance.node-service-field_intro.display|alt_teaser|weight"] = 2;
   $overrides["field_instance.node-service-field_intro.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
     'weight' => 0,
   );
+  $overrides["field_instance.node-service-field_package_intro.display|alt_teaser|weight"] = 3;
   $overrides["field_instance.node-service-field_package_intro.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
     'weight' => 0,
   );
+  $overrides["field_instance.node-service-field_seo_title.display|alt_teaser|weight"] = 4;
   $overrides["field_instance.node-service-field_seo_title.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
     'weight' => 0,
   );
+  $overrides["field_instance.node-service-field_service.display|alt_teaser|weight"] = 5;
   $overrides["field_instance.node-service-field_service.display|secondary_teaser"] = array(
     'label' => 'above',
     'settings' => array(),
@@ -937,7 +965,7 @@ function sprowt_4_features_override_default_overrides() {
   $overrides["views_view.glossary.display|default|display_options|style_options|sticky"]["DELETED"] = TRUE;
   $overrides["views_view.glossary.display|default|display_options|use_more_always"] = FALSE;
   $overrides["views_view.localtarget.display|title_s4"] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:6:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:3:{s:5:"title";b:0;s:6:"fields";b:0;s:9:"arguments";b:0;}s:5:"title";s:6:"<none>";s:6:"fields";a:1:{s:5:"title";a:7:{s:2:"id";s:5:"title";s:5:"table";s:4:"node";s:5:"field";s:5:"title";s:5:"label";s:0:"";s:5:"alter";a:4:{s:10:"alter_text";b:1;s:4:"text";s:16:"<h1>[title]</h1>";s:13:"word_boundary";b:0;s:8:"ellipsis";b:0;}s:19:"element_label_colon";b:0;s:12:"link_to_node";b:0;}}s:9:"arguments";a:1:{s:3:"nid";a:7:{s:2:"id";s:3:"nid";s:5:"table";s:4:"node";s:5:"field";s:3:"nid";s:14:"default_action";s:7:"default";s:21:"default_argument_type";s:4:"node";s:7:"summary";a:2:{s:17:"number_of_records";s:1:"0";s:6:"format";s:15:"default_summary";}s:15:"summary_options";a:1:{s:14:"items_per_page";s:2:"25";}}}s:17:"block_description";s:23:"Local Target Title (S4)";}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"title_s4";s:13:"display_title";s:23:"Local Target Title (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}');
-  $overrides["views_view.services.display|front_s4"] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:5:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:4:{s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;}s:12:"style_plugin";s:7:"default";s:10:"row_plugin";s:4:"node";s:17:"block_description";s:24:"Front Page Services (S4)";}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"front_s4";s:13:"display_title";s:24:"Front Page Services (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}');
+  $overrides["views_view.services.display|front_s4"] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:6:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:4:{s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;}s:12:"style_plugin";s:7:"default";s:10:"row_plugin";s:4:"node";s:11:"row_options";a:1:{s:9:"view_mode";s:10:"alt_teaser";}s:17:"block_description";s:24:"Front Page Services (S4)";}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"front_s4";s:13:"display_title";s:24:"Front Page Services (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}');
   $overrides["views_view.special_offers.display|front_s4"] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:7:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:7:{s:5:"title";b:0;s:5:"pager";b:0;s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;s:5:"sorts";b:0;}s:5:"pager";a:2:{s:4:"type";s:4:"some";s:7:"options";a:2:{s:14:"items_per_page";s:1:"1";s:6:"offset";s:1:"0";}}s:12:"style_plugin";s:7:"default";s:10:"row_plugin";s:4:"node";s:11:"row_options";a:2:{s:9:"view_mode";s:16:"secondary_teaser";s:5:"links";b:0;}s:5:"sorts";a:1:{s:6:"random";a:3:{s:2:"id";s:6:"random";s:5:"table";s:5:"views";s:5:"field";s:6:"random";}}}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"front_s4";s:13:"display_title";s:13:"Homepage (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}');
   $overrides["views_view.special_offers.display|list|display_options|block_description"]["DELETED"] = TRUE;
   $overrides["views_view.special_offers.display|ltp_s4"] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:8:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:8:{s:5:"title";b:0;s:5:"pager";b:0;s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;s:5:"sorts";b:0;s:9:"arguments";b:0;}s:5:"pager";a:2:{s:4:"type";s:4:"some";s:7:"options";a:2:{s:14:"items_per_page";s:1:"1";s:6:"offset";s:1:"0";}}s:12:"style_plugin";s:7:"default";s:10:"row_plugin";s:4:"node";s:11:"row_options";a:1:{s:5:"links";b:0;}s:5:"sorts";a:1:{s:6:"random";a:3:{s:2:"id";s:6:"random";s:5:"table";s:5:"views";s:5:"field";s:6:"random";}}s:9:"arguments";a:2:{s:3:"tid";a:8:{s:2:"id";s:3:"tid";s:5:"table";s:14:"taxonomy_index";s:5:"field";s:3:"tid";s:14:"default_action";s:7:"default";s:21:"default_argument_type";s:12:"taxonomy_tid";s:24:"default_argument_options";a:4:{s:4:"node";b:1;s:6:"anyall";s:1:"+";s:5:"limit";b:1;s:12:"vocabularies";a:1:{s:8:"services";s:8:"services";}}s:7:"summary";a:2:{s:17:"number_of_records";s:1:"0";s:6:"format";s:15:"default_summary";}s:15:"summary_options";a:1:{s:14:"items_per_page";s:2:"25";}}s:3:"nid";a:8:{s:2:"id";s:3:"nid";s:5:"table";s:4:"node";s:5:"field";s:3:"nid";s:14:"default_action";s:7:"default";s:21:"default_argument_type";s:4:"node";s:7:"summary";a:2:{s:17:"number_of_records";s:1:"0";s:6:"format";s:15:"default_summary";}s:15:"summary_options";a:1:{s:14:"items_per_page";s:2:"25";}s:3:"not";b:1;}}}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:6:"ltp_s4";s:13:"display_title";s:16:"LTP Content (S4)";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}');
