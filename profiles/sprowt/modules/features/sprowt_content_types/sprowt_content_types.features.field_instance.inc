@@ -2192,6 +2192,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'entityreference',
         'settings' => array(
           'links' => 0,
+          'use_content_language' => TRUE,
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
@@ -5921,7 +5922,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 51,
+      'weight' => 53,
     ),
   );
 
@@ -6057,7 +6058,7 @@ function sprowt_content_types_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 50,
+      'weight' => 52,
     ),
   );
 
@@ -6135,6 +6136,52 @@ function sprowt_content_types_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-special_offer-field_offer_headline'.
+  $field_instances['node-special_offer-field_offer_headline'] = array(
+    'bundle' => 'special_offer',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_offer_headline',
+    'label' => 'Offer headline',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 46,
+    ),
+  );
+
   // Exported field_instance: 'node-special_offer-field_offer_price'.
   $field_instances['node-special_offer-field_offer_price'] = array(
     'bundle' => 'special_offer',
@@ -6201,6 +6248,52 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
+      'weight' => 49,
+    ),
+  );
+
+  // Exported field_instance: 'node-special_offer-field_offer_subheadline'.
+  $field_instances['node-special_offer-field_offer_subheadline'] = array(
+    'bundle' => 'special_offer',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_offer_subheadline',
+    'label' => 'Offer subheadline',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 47,
     ),
   );
@@ -6271,7 +6364,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 46,
+      'weight' => 48,
     ),
   );
 
@@ -6319,7 +6412,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 49,
+      'weight' => 51,
     ),
   );
 
@@ -6362,7 +6455,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 48,
+      'weight' => 50,
     ),
   );
 
@@ -6651,7 +6744,9 @@ function sprowt_content_types_field_default_field_instances() {
   t('Locality');
   t('Market');
   t('Offer');
+  t('Offer headline');
   t('Offer price');
+  t('Offer subheadline');
   t('Optional intro text for the packages block');
   t('Optional title for the packages block');
   t('Or province.');
