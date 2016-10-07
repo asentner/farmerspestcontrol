@@ -69,6 +69,7 @@ $actions = array(
     'addSocial' => "Adding Social Media...",
     'addIntegrations' => "Adding Integrations...",
     'revertFeatures' => "Revert Features...",
+    'addNodeDefaultImages' => "Updating Default Images..."
 );
 
 $i = 0;

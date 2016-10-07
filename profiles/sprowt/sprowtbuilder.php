@@ -12,6 +12,7 @@ require_once DRUPAL_ROOT . '/profiles/sprowt/includes/menubuilder.php';
 Class SprowtBuilder {
     
     public $data = array();
+    public $default_images = array();
     
     
     function __construct() {
@@ -174,39 +175,10 @@ Class SprowtBuilder {
         
         $nodes = json_decode($node_json,true);
         $uuids = array();
-
+        
+        $this->addDefaultImages();
+        $default_images = $this->default_images;
         $image_dest = 'public://default_node_images';
-        file_prepare_directory($image_dest, FILE_CREATE_DIRECTORY);
-        $default_image_paths = glob(drupal_get_path('profile', 'sprowt') . '/images/node_default/*');
-        $default_images = array();
-        foreach($default_image_paths as $image_path) {
-            $handle = fopen($image_path, 'r');
-            $filename = basename($image_path);
-            $dest = 'public://default_node_images/' . $filename;
-            $file = file_save_data($handle, $dest, FILE_EXISTS_REPLACE);
-            $default_images[$filename] = $file;
-            switch($filename) {
-                case 'service-placeholder.png':
-                    $instance = field_info_instance('node', 'field_image', 'service');
-                    $instance['settings']['default_image'] = $file->fid;
-                    field_update_instance($instance);
-                    break;
-                case 'icon-placeholder.png':
-                    $instance = field_info_instance('node', 'field_image', 'benefit');
-                    $instance['settings']['default_image'] = $file->fid;
-                    field_update_instance($instance);
-                    $instance = field_info_instance('node', 'field_icon', 'service');
-                    $instance['settings']['default_image'] = $file->fid;
-                    field_update_instance($instance);
-            }
-        }
-
-        $styles = image_styles();
-        foreach($styles as $style_name => $style) {
-            foreach($default_images as $filename => $file) {
-                image_style_create_derivative($style, $file->uri, image_style_path($style_name, $file->uri));
-            }
-        }
         
         foreach($nodes as $key => $node){
             $uuids[$node['nid']] = $node['uuid'];
@@ -278,6 +250,55 @@ Class SprowtBuilder {
         variable_set('webform_default_from_name', $this->data['company_info']['webform_from_name']);
         variable_set('webform_email_replyto', false);
 
+    }
+    
+    function addDefaultImages() {
+        $image_dest = 'public://default_node_images';
+        file_prepare_directory($image_dest, FILE_CREATE_DIRECTORY);
+        $default_image_paths = glob(drupal_get_path('profile', 'sprowt') . '/images/node_default/*');
+        $default_images = array();
+        foreach($default_image_paths as $image_path) {
+            $handle = fopen($image_path, 'r');
+            $filename = basename($image_path);
+            $dest = 'public://default_node_images/' . $filename;
+            $file = file_save_data($handle, $dest, FILE_EXISTS_REPLACE);
+            $default_images[$filename] = $file;
+        }
+    
+        $styles = image_styles();
+        foreach($styles as $style_name => $style) {
+            foreach($default_images as $filename => $file) {
+                image_style_create_derivative($style, $file->uri, image_style_path($style_name, $file->uri));
+            }
+        }
+        
+        $this->default_images = $default_images;
+    }
+    
+    function addNodeDefaultImages() {
+        foreach($this->default_images as $file) {
+            switch($file->filename) {
+                case 'service-placeholder.png':
+                    $instance = field_info_instance('node', 'field_image', 'service');
+                    $instance['settings']['default_image'] = $file->fid;
+                    field_update_instance($instance);
+                    break;
+                case 'icon-placeholder.png':
+                    $instance = field_info_instance('node', 'field_image', 'benefit');
+                    $instance['settings']['default_image'] = $file->fid;
+                    field_update_instance($instance);
+                    $instance = field_info_instance('node', 'field_icon', 'service');
+                    $instance['settings']['default_image'] = $file->fid;
+                    field_update_instance($instance);
+            }
+        }
+    
+        $styles = image_styles();
+        foreach($styles as $style_name => $style) {
+            foreach($default_images as $filename => $file) {
+                image_style_create_derivative($style, $file->uri, image_style_path($style_name, $file->uri));
+            }
+        }
     }
 
     function import_menus() {
