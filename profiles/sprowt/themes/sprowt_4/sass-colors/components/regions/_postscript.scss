@@ -1,0 +1,15 @@
+.l-region--postscript-first {
+  $color-bg: palette(secondary, base);
+
+  background-color: $color-bg;
+}
+
+.l-wrap--postscript-second {
+  background-color: palette(primary, dark);
+}
+
+.l-region--postscript-third {
+  .front & {
+    background: palette(neutral, wild-sand);
+  }
+}

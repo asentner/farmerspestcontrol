@@ -1,0 +1,14 @@
+.node--profile--full {
+  $color-border: palette(white, base);
+  $color-bg: palette(white, pure);
+
+  .field--name-field-image {
+    img {
+      background-color: $color-bg;
+      border-color: $color-border;
+    }
+  }
+  .flippy {
+    border-top-color: $color-border;
+  }
+}

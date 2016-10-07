@@ -1,0 +1,83 @@
+%special-offers-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-block-title: $color-title-default;
+  $color-offer-title: palette(primary, base);
+  $color-offer-body: palette(neutral, xanadu);
+
+  background-color: $color-bg;
+  border-color: $color-border;
+  .block__title {
+    color: $color-block-title;
+  }
+  .node__title {
+    color: $color-offer-title;
+  }
+  .node__content {
+    color: $color-offer-body;
+  }
+}
+
+.block--views-special-offers-sidebar {
+  @extend %special-offers-sidebar;
+}
+
+// LTP special offers placed in content with shortcode
+.block-shortcode--views-special_offers-ltp_s4 {
+  $color-offer-body: palette(neutral, xanadu);
+
+  @extend %special-offers-sidebar;
+  .block__title {
+    color: $color-offer-body;
+  }
+}
+
+
+.block--views-special-offers-list {
+  .node {
+    border-color: palette(neutral, alto);
+  }
+}
+
+// homepage
+
+.block-special-offers-intro {
+  $color-block-title: inherit;
+
+  .block__title {
+    color: $color-block-title;
+  }
+}
+
+.block--views-special-offers-front-s4,
+.block--views-special-offers-related-s4,
+.local-target-special-offer {
+  background: palette(white, pure);
+  border-color: palette(neutral, mercury);
+  box-shadow: 0 11px 35px rgba(palette(black, pure), .2);
+  .node__title {
+    color: palette(primary, base);
+  }
+  .button {
+    @include button-color(palette(secondary, base), $bg-hover:palette(secondary, dark));
+  }
+  .offer-headline {
+    background: palette(primary, base);
+    color: palette(white, pure);
+  }
+}
+
+// .block--views-special-offers-front,
+// .local-target-special-offer {
+//   $color-bg: palette(white, pure);
+//   $color-block-title: palette(secondary, base);
+//   $color-border: palette(primary, base);
+//
+//   .block__title {
+//     color: $color-block-title;
+//   }
+//   .node {
+//     background-color: $color-bg;
+//     border-color: $color-border;
+//   }
+// }

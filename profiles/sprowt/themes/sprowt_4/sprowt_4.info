@@ -1,0 +1,49 @@
+name = Sprowt 4
+; description = Theme copied from " Sprowt 1".
+copied_from = sprowt_1
+base theme = omega
+screenshot = screenshot.png
+engine = phptemplate
+core = 7.x
+
+; ========================================
+; Stylesheets
+; ========================================
+stylesheets[all][] = css/sprowt-4.reset.css
+stylesheets[all][] = css/sprowt-4.styles.css
+stylesheets[all][] = css/sprowt-4.colors.css
+stylesheets[print][] = css/sprowt-4.print.css
+
+; ========================================
+; Scripts
+; ========================================
+scripts[] = js/sprowt-4.behaviors.js
+
+; ========================================
+; Regions
+; ========================================
+regions[header_first] = Header first
+regions[header_second] = Header second
+regions[header_third] = Header third
+
+regions[preface_first] = Preface first
+regions[preface_second] = Preface second
+regions[preface_third] = Preface third
+
+regions[content] = Content
+regions[sidebar] = Sidebar
+
+regions[postscript_first] = Postscript first
+regions[postscript_second] = Postscript second
+regions[postscript_third] = Postscript third
+regions[postscript_fourth] = Postscript fourth
+
+regions[footer_first] = Footer first
+regions[footer_second] = Footer second
+regions[footer_third] = Footer third
+
+; ========================================
+; Settings
+; ========================================
+
+settings[omega_toggle_extension_development] = 0

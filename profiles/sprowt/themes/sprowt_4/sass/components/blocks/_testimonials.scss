@@ -1,0 +1,125 @@
+%block--testimonials-sidebar {
+  $border-width: 2px;
+
+  border: $border-width solid;
+  padding: 30px 20px;
+  .block__title {
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .fa-star {
+    font-size: 1.2em;
+  }
+  .node--testimonial {
+    .field--name-body {
+      font-style: italic;
+      padding: 0 15px;
+      margin-bottom: 1.6em;
+      p {
+        line-height: 1.6em;
+        &:before,
+        &:after {
+          content: '"';
+        }
+      }
+    }
+  }
+  .field--title,
+  .field--name-field-market {
+    font-style: normal;
+    font-size: 0.8em;
+    padding-left: 25px;
+  }
+  @include breakpoint($tab) {
+    padding: 30px 20px 50px;
+  }
+}
+
+.block--testimonials-sidebar {
+  @extend %block--testimonials-sidebar;
+}
+
+.block--views-testimonials-random {
+  @extend %block--testimonials-sidebar;
+}
+
+// Front page testimonial
+
+.block--views-testimonials-front,
+.block--views-testimonials-front-s4,
+.local-target-testimonial {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+  .block__title,
+  .block__content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .block__title {
+    margin-bottom: 1em;
+    font-weight: 60;
+  }
+  .block__content {
+    font-size: 1.5em;
+  }
+  .field--name-body {
+    font-size: 0.8em;
+    font-style: italic;
+    p {
+      &:before,
+      &:after {
+        content: '"';
+      }
+    }
+  }
+  .field--title,
+  .field--name-field-market {
+    display: inline;
+    font-size: 15px;
+    font-style: normal;
+  }
+  .field--title {
+    font-weight: bold;
+    &:before {
+      @include faicon("\F10D");
+      margin-right: .5em;
+    }
+    &:after {
+      content: ",";
+    }
+  }
+  .field--name-field-market {
+    .field__items,
+    .field__item {
+      display: inline;
+    }
+  }
+  @include breakpoint($tab) {
+    @include flexbox;
+    flex-direction: column;
+    justify-content: center;
+    height: 350px;
+    margin: 0 20px -175px;
+    position: relative;
+    z-index: 99;
+    box-shadow: 0 11px 35px rgba(black, .25);
+    .block__title {
+      font-size: 30px;
+      margin-bottom: .65em;
+    }
+    .field--name-body {
+      font-size: 22px;
+    }
+    .field--title,
+    .field--name-field-market {
+      font-size: 20px;
+    }
+  }
+  @include breakpoint($desk) {
+    margin: 0 auto -175px;
+    width: 100%;
+  }
+}

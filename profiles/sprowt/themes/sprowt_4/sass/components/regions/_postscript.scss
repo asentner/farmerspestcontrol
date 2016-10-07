@@ -1,0 +1,19 @@
+.l-wrap--postscript-second {
+  background-size: cover;
+  background-position: center;
+  @include breakpoint($tab) {
+    .front & {
+      padding-top: 175px;
+    }
+  }
+}
+
+.l-region--postscript-third {
+  .front & {
+    padding: 0 20px;
+    padding-bottom: 20px;
+    @include breakpoint($desk) {
+      padding-bottom: 50px;
+    }
+  }
+}

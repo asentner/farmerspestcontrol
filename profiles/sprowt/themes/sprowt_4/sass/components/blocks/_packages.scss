@@ -1,0 +1,114 @@
+%package-list {
+  padding: 30px 0;
+  .block__title {
+    padding: 15px;
+    margin: 0;
+    font-size: 1.5em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .view-content {
+    border: 2px solid;
+  }
+  .views-row {
+    padding: 30px;
+    + .views-row {
+      border: none;
+    }
+  }
+  .node {
+    display: block;
+  }
+  .icon-wrap {
+    @include flexbox;
+    align-items: center;
+  }
+  .field--name-field-icon {
+    flex: 0 0 auto;
+  }
+  .node__title {
+    text-transform: uppercase;
+    margin: 0;
+    padding-left: 10px;
+  }
+  .node__content {
+    padding: 15px 0 0;
+    text-align: left;
+  }
+  .field--name-body {
+    .field__item {
+      .more-link {
+        max-width: 220px;
+        margin-left: 0;
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    .views-row {
+      padding: 40px 100px;
+    }
+  }
+}
+
+%package-grid {
+  $column-count: 2;
+  .view-content {
+    padding: 30px;
+  }
+  .views-row {
+    padding: 0;
+    + .views-row {
+      margin-top: 30px;
+    }
+  }
+  .icon-wrap {
+    flex-direction: column;
+  }
+  .node__title {
+    padding-left: 0;
+    padding-top: 20px;
+  }
+  .node__content {
+    text-align: center;
+  }
+  .field--name-body {
+    .field__item {
+      @include flexbox;
+      .more-link {
+        margin: 20px auto 0;
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    .view-content {
+      display: block;
+      margin: 0;
+      padding: 40px 40px 50px;
+    }
+    .views-row {
+      padding: 20px 0;
+      margin: 0 auto;
+      max-width: 300px;
+      + .views-row {
+        margin-top: 0;
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    .view-content {
+      @include flexbox;
+    }
+    .views-row {
+      max-width: percentage(1/$column-count);
+      padding: 20px;
+    }
+  }
+}
+
+.block--views-packages-services {
+  @extend %package-list;
+}
+
+.block--views-packages-services.block--grid {
+  @extend %package-grid;
+}

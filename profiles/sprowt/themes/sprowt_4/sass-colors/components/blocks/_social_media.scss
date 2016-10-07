@@ -1,0 +1,11 @@
+.block--sprowt-settings-sprowt-social-media {
+  .block__content {
+    a {
+      background: transparent;
+      color: palette(primary, base);
+      &:hover {
+        color: palette(primary, dark);
+      }
+    }
+  }
+}

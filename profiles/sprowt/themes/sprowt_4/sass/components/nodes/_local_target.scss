@@ -1,0 +1,108 @@
+.block--views-localtarget-value-prop {
+	$overlay-opacity: 0.8; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+
+  .node {
+    background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+  }
+	.slide-image-background {
+		position: relative;
+		min-height: 315px;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: $overlay-opacity;
+		}
+	}
+  .field--name-field-display-title {
+		line-height: 1.1;
+    margin-bottom: 0;
+  }
+  .field--name-field-intro {
+		margin-top: 20px;
+    margin-top: 10px;
+		font-size: 0.9em;
+	}
+  .node__content {
+    max-width: 800px;
+		margin: auto;
+		padding: 80px 20px 60px;
+		position: relative;
+    text-align: center;
+  }
+	.button {
+		margin: 20px auto 0;
+		max-width: 195px;
+		width: 100%;
+		font-size: 1em;
+		font-weight: 600;
+	}
+  @include breakpoint($tab) {
+		.slide-image-background {
+			min-height: 375px;
+		}
+		.node__content {
+			padding: 100px 20px 60px;
+		}
+		.field--name-field-display-title {
+			font-size: 2.0em;
+		}
+		.button {
+			font-size: 0.8em;
+			margin-top: 0;
+			max-width: 280px;
+		}
+	}
+	@include breakpoint($desk) {
+		.slide-image-background {
+			min-height: 495px;
+		}
+		.node__content {
+			padding: 120px 20px 60px;
+		}
+		.field--name-field-display-title {
+			font-size: 3.0em;
+		}
+		.field--name-field-intro {
+			font-size: 1.25em;
+		}
+	}
+}
+
+.node-type-localtarget {
+	.l-main {
+		max-width: none;
+	}
+	.field--name-body {  // special offers shortcode positioning
+		.field__item {
+			@include flexbox;
+			flex-direction: column;
+		}
+	}
+	@include breakpoint($tab) {
+		.field--name-body {
+			.field__item {
+				display: block;
+			}
+		}
+	}
+	@include breakpoint($tab) {
+		.l-main {
+			margin-top: 0;
+			padding-top: 175px;
+		}
+		.l-content {
+			padding-top: 60px;
+		}
+	}
+}
+
+.block--views-localtarget-title-s4 {
+	text-align: center;
+	padding: 60px 20px 40px;
+}

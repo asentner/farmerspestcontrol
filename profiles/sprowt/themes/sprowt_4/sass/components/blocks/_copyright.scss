@@ -1,0 +1,11 @@
+.block--sprowt-settings-sprowt-copyright {
+  margin: 20px 0 0;
+  padding: 0 20px 20px;
+  font-size: 15px;
+  text-align: center;
+  @include breakpoint($desk) {
+    @include container;
+    margin-top: 20px;
+    text-align: left;
+  }
+}

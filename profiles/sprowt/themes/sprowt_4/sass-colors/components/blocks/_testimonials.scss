@@ -1,0 +1,64 @@
+%block--testimonials-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-title: $color-title-default;
+  $color-stars: palette(primary, base);
+  $color-body: palette(neutral, xanadu);
+
+  background-color: $color-bg;
+  border-color: $color-border;
+  .block__title {
+    color: $color-title;
+  }
+  .node__content {
+    color: $color-body;
+  }
+  .fa-star {
+    color: $color-stars;
+  }
+}
+
+.block--testimonials-sidebar {
+  @extend %block--testimonials-sidebar;
+}
+
+.block--views-testimonials-random {
+  @extend %block--testimonials-sidebar;
+}
+
+// Front page testimonial
+
+.block--views-testimonials-front,
+.block--views-testimonials-front-s4,
+.local-target-testimonial {
+  $color-bg: palette(white, pure);
+  $color-star: palette(primary, base);
+
+  background: $color-bg;
+
+  .block__title {
+    // color: $color-title;
+  }
+  .rating {
+    color: $color-star;
+  }
+  .field--title {
+    &:before {
+      color: palette(primary, base);
+    }
+  }
+}
+
+.local-target-testimonial {
+  $color-bg-narrow: palette(neutral, gallery);
+  $color-bg-desk: palette(neutral, alabaster);
+  $color-body: palette(black, base);
+
+  background-color: $color-bg-narrow;
+  .block__content {
+    color: $color-body;
+  }
+  @include breakpoint($tab) {
+    background-color: $color-bg-desk;
+  }
+}

@@ -1,0 +1,98 @@
+.block--views-slideshow-front,
+.block--views-slideshow-localtarget {
+	$overlay-opacity: 0.8; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+
+	text-align: center;
+	.node--slide {
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.slide-image {
+		position: relative;
+		min-height: 275px;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: $overlay-opacity;
+		}
+	}
+	.node__title {
+		line-height: 1.1;
+	}
+	.flexslider:hover .flex-direction-nav a {
+		opacity: 1;
+	}
+	.flexslider .slides {
+		width: 100%;
+	}
+	.flex-direction-nav a {
+		&:before {
+			@extend .fa;
+			content: "\f104";
+			font-size: 45px;
+		}
+		&.flex-next:before {
+			@extend .fa;
+			content: "\f105";
+			font-size: 45px;
+		}
+	}
+	.button {
+		margin: 20px auto 0;
+		max-width: 195px;
+		width: 100%;
+		font-size: 1em;
+		font-weight: 600;
+	}
+	.field--name-body {
+		margin-top: 15px;
+	}
+	.slide-content {
+		max-width: 830px;
+		margin: auto;
+		padding: 40px 20px;
+		position: relative;
+	}
+	.field--name-body {
+		font-size: 0.9em;
+	}
+	@include breakpoint($tab) {
+		.slide-image {
+			min-height: 310px;
+		}
+		.slide-content {
+			padding: 55px 20px;
+		}
+		.node__title {
+			font-size: 2em;
+			max-width: 700px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.field--name-body {
+			font-size: 1.25em;
+			margin-top: 20px;
+		}
+		.button {
+			font-size: 0.8em;
+			margin-top: 0;
+			max-width: 280px;
+		}
+	}
+	@include breakpoint($desk) {
+		.slide-image {
+			min-height: 815px;
+		}
+		.slide-content {
+			padding-top: 75px;
+		}
+		.node__title {
+			font-size: 3em;
+		}
+	}
+}

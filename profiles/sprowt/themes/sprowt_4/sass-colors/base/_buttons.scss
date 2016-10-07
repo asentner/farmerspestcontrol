@@ -1,0 +1,14 @@
+%button {
+}
+
+.button {
+  @extend %button;
+  @include button-color();
+}
+
+@media print {
+  %button {
+    background-color: transparent !important; // override button-color mixin
+    color: blue !important; // override button-color mixin
+  }
+}

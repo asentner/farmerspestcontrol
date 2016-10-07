@@ -1,0 +1,23 @@
+.front {
+  .l-region--preface-third {
+    background-color: palette(white, pure);
+    @include breakpoint($desk) {
+      background-color: palette(secondary, base);
+    }
+  }
+  .l-main {
+    $color-bg: palette(secondary, base);
+    $color-block-title: palette(white, pure);
+    $color-body: palette(black, base);
+
+    background-color: $color-bg;
+    .node--page--full {
+      .node__title {
+        color: $color-block-title;
+      }
+      .field--name-body {
+        color: $color-body;
+      }
+    }
+  }
+}

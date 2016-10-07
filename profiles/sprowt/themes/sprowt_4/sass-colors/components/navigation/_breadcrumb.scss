@@ -1,0 +1,10 @@
+.not-front .l-breadcrumb {
+  background-color: palette(secondary, base);
+  color: palette(white, pure);
+  a {
+    color: inherit;
+    &:hover {
+      color: darken(palette(white, pure), 10);
+    }
+  }
+}

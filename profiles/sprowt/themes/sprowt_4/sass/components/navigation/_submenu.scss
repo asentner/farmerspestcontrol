@@ -1,0 +1,70 @@
+.block--nav-submenu {
+
+  // general menu properties
+  $padding-link-horiz: 20px; // horizontal link spacing
+  $padding-link-vert: .75em; // vertical link spacing
+  $active-border-width: 4px; //width of left border
+
+  // top level link properties
+  $icon-spacing: 10px; // padding between arrow/chevron and link
+
+  // 2nd level link properties
+  $child-padding-top: 15px; //vertical spacing of child links
+
+  font-weight: 600;
+  .menu-block-wrapper {
+    > .menu {
+      > li { // first level
+        + li {
+          border-top: solid 1px;
+        }
+        a,
+        .nolink {
+          padding: $padding-link-vert $padding-link-horiz;
+          border-left: solid $active-border-width;
+          display: block;
+          &:before {
+            @include faicon("\F105");
+            font-size: 1rem;
+            padding-right: $icon-spacing;
+          }
+        }
+        &.expanded {
+          a:before {
+            @include faicon("\F107");
+            padding-right: $icon-spacing - 5px;
+          }
+        }
+      }
+      .menu { // second level
+        li {
+          + li {
+            border: none;
+            a {
+              padding-top: $child-padding-top;
+            }
+          }
+          a,
+          .nolink {
+            padding: 0;
+            padding-left: $padding-link-horiz + $icon-spacing + 5px;
+            &:before {
+              content: none;
+            }
+          }
+          &:first-of-type a,
+          .nolink {
+            padding-top: $padding-link-vert;
+          }
+          &:last-of-type a,
+          .nolink {
+            padding-bottom: $padding-link-vert;
+          }
+          &.active a {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}

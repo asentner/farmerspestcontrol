@@ -1,0 +1,19 @@
+.block--nav-utility-footer {
+  $color-bg-odd: palette(neutral, cool-gray);
+  $color-bg-even: lighten($color-bg-odd, 10);
+  $color-fg: palette(white, pure);
+
+  .menu {
+    li {
+      &:nth-of-type(odd) {
+        background-color: $color-bg-odd;
+      }
+      &:nth-of-type(even) {
+        background-color: $color-bg-even;
+      }
+      a {
+        color: $color-fg;
+      }
+    }
+  }
+}

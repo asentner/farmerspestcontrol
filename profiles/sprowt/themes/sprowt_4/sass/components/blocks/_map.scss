@@ -1,0 +1,111 @@
+.block-areas-map {
+  //starting styling of block
+  padding: 60px 20px;
+  text-align: center;
+  .block__title {
+    @extend h2;
+    font-weight: 600;
+  }
+  .intro {
+    margin-bottom: 30px;
+  }
+  .locations {
+    ul {
+      font-size: 18px;
+      font-style: italic;
+    }
+    li {
+      + li {
+        margin-top: 1em;
+      }
+    }
+  }
+  .region {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    &:after {
+      content: ":";
+    }
+    &:before {
+      @include faicon("\F041");
+      margin-right: .5em;
+    }
+  }
+  @include breakpoint($tab) {
+    .block__title {
+      font-size: 41px;
+    }
+    .block__content {
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+    .intro {
+      max-width: 870px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 22px;
+      line-height: (35/22);
+    }
+    .locations {
+      > ul {
+        @include flexbox;
+        margin: 0 -10px;
+        > li {
+          padding: 0 10px;
+          max-width: 200px;
+          margin-left: auto;
+          margin-right: auto;
+          + li {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint(1170px) {
+    .areas {
+      @include flexbox;
+    }
+    .locations {
+      max-width: 490px;
+      margin: 0 auto;
+      > ul {
+        flex-wrap: wrap;
+        > li {
+          flex: 0 1 50%;
+          max-width: 200px;
+          width: 50%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+    }
+    .region {
+      &:before {
+        display: block;
+        font-size: 56px;
+        margin-bottom: 0;
+        margin-right: 0;
+        position: relative;
+        bottom: -10px;
+      }
+    }
+  }
+}
+
+// map styling
+
+.map-embed {
+  padding: 20px;
+  iframe {
+  	height: 50vh;
+  }
+  @include breakpoint($tab) {
+  	iframe {
+  		height: 334px;
+      width: 584px;
+  		margin: auto;
+  	}
+  }
+}

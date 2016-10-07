@@ -1,0 +1,39 @@
+.block--views-localtarget-value-prop {
+  $color-image-bg: $color-overlay;
+	$color-text: palette(white, pure);
+	$color-button: palette(secondary, base);
+	$color-button-hover: palette(secondary, dark);
+
+  .node {
+		background-color: $color-image-bg;
+  }
+	.slide-image-background {
+		&:before {
+			background-color: $color-overlay; // this color is used as a color-module place holder
+		}
+	}
+  .field--name-field-display-title {
+    color: $color-text;
+  }
+  .field--name-field-intro {
+		color: $color-text;
+	}
+	.button {
+		@include button-color($bg:$color-button, $bg-hover:$color-button-hover);
+	}
+}
+
+.node-type-localtarget {
+	.l-region--preface-second {
+		background-color: palette(secondary, base);
+	}
+	.l-main {
+		background-color: palette(white, pure);
+	}
+}
+
+.block--views-localtarget-title-s4 {
+	h1 {
+		color: palette(black, base);
+	}
+}

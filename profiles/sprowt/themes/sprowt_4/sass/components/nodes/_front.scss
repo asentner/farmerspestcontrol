@@ -1,0 +1,26 @@
+.front {
+  .l-main {
+    margin: 0 auto;
+    padding: 60px 20px 0;
+    max-width: 100%;
+    .node--page--full {
+      text-align: center;
+      padding-bottom: 30px;
+    }
+  }
+  @include breakpoint($desk) {
+    .l-main {
+      padding-top: 35px;
+      .node--page--full {
+        .node__title {
+          font-size: 50px;
+          font-weight: 600;
+        }
+        .field--name-body {
+          font-size: 22px;
+          line-height: (35/22);
+        }
+      }
+    }
+  }
+}

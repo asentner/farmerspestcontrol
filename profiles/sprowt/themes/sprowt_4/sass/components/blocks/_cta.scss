@@ -1,0 +1,35 @@
+.block--sprowt-block-cta {
+  .l-region--postscript-fourth & {
+    padding: 30px 20px;
+    text-align: center;
+    .node__title {
+      font-size: 34px;
+      line-height: (37/34);
+      margin-bottom: .5em;
+      text-transform: uppercase;
+    }
+    .field--name-body {
+      font-size: 29px;
+    }
+    .button {
+      margin: 1em auto 0;
+      max-width: 220px;
+    }
+    @include breakpoint($tab) {
+      .node__title {
+        font-size: 38px;
+        margin-bottom: 0;
+      }
+      .field--name-body {
+        font-size: 35px;
+      }
+      .button {
+        display: block;
+        margin-top: 1em;
+      }
+    }
+    @include breakpoint($desk) {
+      padding: 50px 20px;
+    }
+  }
+}
