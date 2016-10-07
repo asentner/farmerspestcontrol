@@ -83,6 +83,25 @@ function sprowt_image_styles_features_image_default_styles() {
     ),
   );
 
+  // Exported image style: focal_point_scale_and_crop_185x150.
+  $styles['focal_point_scale_and_crop_185x150'] = array(
+    'label' => 'Focal Point Scale and Crop 185x150',
+    'effects' => array(
+      1 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 185,
+          'height' => 150,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: focal_point_scale_and_crop_250x250.
   $styles['focal_point_scale_and_crop_250x250'] = array(
     'label' => 'Focal Point Scale And Crop 250x250',
