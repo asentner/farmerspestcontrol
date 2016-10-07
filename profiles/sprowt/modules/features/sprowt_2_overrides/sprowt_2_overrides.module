@@ -4,4 +4,4 @@
  * Code for the Sprowt-2 feature.
  */
 
-include_once 'sprowt_2.features.inc';
+include_once 'sprowt_2_overrides.features.inc';

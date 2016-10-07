@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * sprowt_4.features.features_overrides.inc
+ * sprowt_4_overrides.features.features_overrides.inc
  */
 
 /**

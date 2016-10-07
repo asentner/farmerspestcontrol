@@ -1,31 +1,38 @@
 <?php
 /**
  * @file
- * sprowt_2.features.inc
+ * sprowt_3_overrides.features.inc
  */
 
 /**
  * Implements hook_default_fe_block_settings_alter().
  */
-function sprowt_2_default_fe_block_settings_alter(&$data) {
+function sprowt_3_default_fe_block_settings_alter(&$data) {
   if (isset($data['addtoany-addtoany_button'])) {
     $data['addtoany-addtoany_button']['themes']['adminimal']['weight'] = -37; /* WAS: 0 */
-  }
-  if (isset($data['flippy-flippy_pager-node_type-profile'])) {
-    $data['flippy-flippy_pager-node_type-profile']['themes']['sprowt_2'] = array(
+    $data['addtoany-addtoany_button']['themes']['sprowt_3'] = array(
       'region' => '',
       'status' => 0,
-      'theme' => 'sprowt_2',
+      'theme' => 'sprowt_3',
+      'weight' => -41,
+    ); /* WAS: '' */
+    unset($data['addtoany-addtoany_button']['themes']['sprowt_1']);
+  }
+  if (isset($data['flippy-flippy_pager-node_type-profile'])) {
+    $data['flippy-flippy_pager-node_type-profile']['themes']['sprowt_3'] = array(
+      'region' => '',
+      'status' => 0,
+      'theme' => 'sprowt_3',
       'weight' => 0,
     ); /* WAS: '' */
     unset($data['flippy-flippy_pager-node_type-profile']['themes']['sprowt_1']);
   }
   if (isset($data['flippy-flippy_pager'])) {
-    $data['flippy-flippy_pager']['themes']['sprowt_2'] = array(
+    $data['flippy-flippy_pager']['themes']['sprowt_3'] = array(
       'region' => '',
       'status' => 0,
-      'theme' => 'sprowt_2',
-      'weight' => -29,
+      'theme' => 'sprowt_3',
+      'weight' => -32,
     ); /* WAS: '' */
     unset($data['flippy-flippy_pager']['themes']['sprowt_1']);
   }
@@ -34,17 +41,21 @@ function sprowt_2_default_fe_block_settings_alter(&$data) {
 /**
  * Implements hook_field_default_field_instances_alter().
  */
-function sprowt_2_field_default_field_instances_alter(&$data) {
+function sprowt_3_field_default_field_instances_alter(&$data) {
   if (isset($data['node-benefit-field_image'])) {
-    $data['node-benefit-field_image']['display']['teaser']['settings']['image_style'] = 'focal_point_scale_and_crop_100x100'; /* WAS: 'benefits__front_page_' */
+    $data['node-benefit-field_image']['display']['teaser']['settings']['image_style'] = 'sprowt_3_icon'; /* WAS: 'benefits__front_page_' */
+    $data['node-benefit-field_image']['settings']['default_image'] = 3; /* WAS: 0 */
+  }
+  if (isset($data['node-profile-field_image'])) {
+    $data['node-profile-field_image']['display']['default']['settings']['image_style'] = 'profile'; /* WAS: 'large' */
   }
   if (isset($data['node-service-body'])) {
     $data['node-service-body']['display']['alt_teaser']['label'] = 'hidden'; /* WAS: 'above' */
     $data['node-service-body']['display']['alt_teaser']['module'] = 'smart_trim'; /* WAS: '' */
-    $data['node-service-body']['display']['alt_teaser']['settings']['more_link'] = 1; /* WAS: '' */
-    $data['node-service-body']['display']['alt_teaser']['settings']['more_text'] = 'Learn More'; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['more_link'] = 0; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['more_text'] = 'Read more'; /* WAS: '' */
     $data['node-service-body']['display']['alt_teaser']['settings']['summary_handler'] = 'trim'; /* WAS: '' */
-    $data['node-service-body']['display']['alt_teaser']['settings']['trim_length'] = 150; /* WAS: '' */
+    $data['node-service-body']['display']['alt_teaser']['settings']['trim_length'] = 75; /* WAS: '' */
     $data['node-service-body']['display']['alt_teaser']['settings']['trim_link'] = 0; /* WAS: '' */
     $data['node-service-body']['display']['alt_teaser']['settings']['trim_options'] = array(
       'text' => 0,
@@ -54,53 +65,63 @@ function sprowt_2_field_default_field_instances_alter(&$data) {
     $data['node-service-body']['display']['alt_teaser']['settings']['trim_type'] = 'chars'; /* WAS: '' */
     $data['node-service-body']['display']['alt_teaser']['type'] = 'smart_trim_format'; /* WAS: 'hidden' */
     $data['node-service-body']['display']['alt_teaser']['weight'] = 1; /* WAS: 0 */
-    $data['node-service-body']['display']['teaser']['settings']['summary_handler'] = 'trim'; /* WAS: 'full' */
   }
   if (isset($data['node-service-field_call_out'])) {
     $data['node-service-field_call_out']['display']['alt_teaser']['weight'] = 7; /* WAS: 0 */
+    $data['node-service-field_call_out']['display']['teaser']['weight'] = 4; /* WAS: 0 */
   }
   if (isset($data['node-service-field_content_edited'])) {
     $data['node-service-field_content_edited']['display']['alt_teaser']['weight'] = 8; /* WAS: 0 */
+    $data['node-service-field_content_edited']['display']['teaser']['weight'] = 5; /* WAS: 0 */
   }
   if (isset($data['node-service-field_display_title'])) {
     $data['node-service-field_display_title']['display']['alt_teaser']['weight'] = 9; /* WAS: 0 */
+    $data['node-service-field_display_title']['display']['teaser']['weight'] = 9; /* WAS: 5 */
   }
   if (isset($data['node-service-field_icon'])) {
-    $data['node-service-field_icon']['display']['alt_teaser']['weight'] = 6; /* WAS: 0 */
+    $data['node-service-field_icon']['display']['alt_teaser']['label'] = 'hidden'; /* WAS: 'above' */
+    $data['node-service-field_icon']['display']['alt_teaser']['module'] = 'image_link_formatter'; /* WAS: '' */
+    $data['node-service-field_icon']['display']['alt_teaser']['settings']['image_link'] = 'content'; /* WAS: '' */
+    $data['node-service-field_icon']['display']['alt_teaser']['settings']['image_style'] = 'scale_60x60'; /* WAS: '' */
+    $data['node-service-field_icon']['display']['alt_teaser']['type'] = 'image_link_formatter'; /* WAS: 'hidden' */
+    $data['node-service-field_icon']['display']['teaser']['label'] = 'hidden'; /* WAS: 'above' */
+    $data['node-service-field_icon']['display']['teaser']['weight'] = 2; /* WAS: 0 */
+    $data['node-service-field_icon']['settings']['default_image'] = 3; /* WAS: 0 */
   }
   if (isset($data['node-service-field_image'])) {
-    $data['node-service-field_image']['display']['alt_teaser']['label'] = 'hidden'; /* WAS: 'above' */
-    $data['node-service-field_image']['display']['alt_teaser']['module'] = 'image'; /* WAS: '' */
-    $data['node-service-field_image']['display']['alt_teaser']['settings']['image_link'] = ''; /* WAS: '' */
-    $data['node-service-field_image']['display']['alt_teaser']['settings']['image_style'] = 'focal_point_scale_and_crop_470x400'; /* WAS: '' */
-    $data['node-service-field_image']['display']['alt_teaser']['type'] = 'image'; /* WAS: 'hidden' */
+    $data['node-service-field_image']['display']['alt_teaser']['weight'] = 6; /* WAS: 0 */
+    $data['node-service-field_image']['display']['teaser']['module'] = 'image_link_formatter'; /* WAS: 'image' */
+    $data['node-service-field_image']['display']['teaser']['type'] = 'image_link_formatter'; /* WAS: 'image' */
+    $data['node-service-field_image']['settings']['default_image'] = 5; /* WAS: 0 */
   }
   if (isset($data['node-service-field_intro'])) {
     $data['node-service-field_intro']['display']['alt_teaser']['weight'] = 2; /* WAS: 0 */
+    $data['node-service-field_intro']['display']['teaser']['weight'] = 6; /* WAS: 2 */
   }
   if (isset($data['node-service-field_package_intro'])) {
     $data['node-service-field_package_intro']['display']['alt_teaser']['weight'] = 3; /* WAS: 0 */
+    $data['node-service-field_package_intro']['display']['teaser']['weight'] = 3; /* WAS: 0 */
   }
   if (isset($data['node-service-field_seo_title'])) {
     $data['node-service-field_seo_title']['display']['alt_teaser']['weight'] = 4; /* WAS: 0 */
+    $data['node-service-field_seo_title']['display']['teaser']['weight'] = 8; /* WAS: 4 */
   }
   if (isset($data['node-service-field_service'])) {
     $data['node-service-field_service']['display']['alt_teaser']['weight'] = 5; /* WAS: 0 */
-  }
-  if (isset($data['node-special_offer-body'])) {
-    $data['node-special_offer-body']['display']['alt_teaser']['weight'] = 0; /* WAS: 1 */
+    $data['node-service-field_service']['display']['teaser']['weight'] = 7; /* WAS: 3 */
   }
   if (isset($data['node-special_offer-field_button'])) {
     $data['node-special_offer-field_button']['display']['alt_teaser']['label'] = 'hidden'; /* WAS: 'above' */
     $data['node-special_offer-field_button']['display']['alt_teaser']['module'] = 'link'; /* WAS: '' */
     $data['node-special_offer-field_button']['display']['alt_teaser']['type'] = 'link_default'; /* WAS: 'hidden' */
-    $data['node-special_offer-field_button']['display']['alt_teaser']['weight'] = 1; /* WAS: 0 */
+    $data['node-special_offer-field_button']['display']['alt_teaser']['weight'] = 2; /* WAS: 0 */
   }
   if (isset($data['node-special_offer-field_content_edited'])) {
     $data['node-special_offer-field_content_edited']['display']['alt_teaser']['weight'] = 4; /* WAS: 0 */
   }
   if (isset($data['node-special_offer-field_expiration_date'])) {
     $data['node-special_offer-field_expiration_date']['display']['alt_teaser']['type'] = 'hidden'; /* WAS: 'date_default' */
+    $data['node-special_offer-field_expiration_date']['display']['alt_teaser']['weight'] = 3; /* WAS: 2 */
     unset($data['node-special_offer-field_expiration_date']['display']['alt_teaser']['module']);
     unset($data['node-special_offer-field_expiration_date']['display']['alt_teaser']['settings']['format_type']);
     unset($data['node-special_offer-field_expiration_date']['display']['alt_teaser']['settings']['fromto']);
@@ -110,11 +131,8 @@ function sprowt_2_field_default_field_instances_alter(&$data) {
     unset($data['node-special_offer-field_expiration_date']['display']['alt_teaser']['settings']['show_remaining_days']);
   }
   if (isset($data['node-special_offer-field_image'])) {
-    $data['node-special_offer-field_image']['display']['alt_teaser']['type'] = 'hidden'; /* WAS: 'image' */
-    $data['node-special_offer-field_image']['display']['alt_teaser']['weight'] = 3; /* WAS: 0 */
-    unset($data['node-special_offer-field_image']['display']['alt_teaser']['module']);
-    unset($data['node-special_offer-field_image']['display']['alt_teaser']['settings']['image_link']);
-    unset($data['node-special_offer-field_image']['display']['alt_teaser']['settings']['image_style']);
+    $data['node-special_offer-field_image']['display']['alt_teaser']['settings']['image_style'] = 'focal_point_scale_and_crop_250x250'; /* WAS: 'special_offers_slideshow' */
+    $data['node-special_offer-field_image']['display']['teaser']['settings']['image_link'] = 'field_button'; /* WAS: '' */
   }
   if (isset($data['node-special_offer-field_offer_price'])) {
     $data['node-special_offer-field_offer_price']['display']['alt_teaser']['weight'] = 7; /* WAS: 4 */
@@ -133,7 +151,7 @@ function sprowt_2_field_default_field_instances_alter(&$data) {
 /**
  * Implements hook_flexslider_default_presets_alter().
  */
-function sprowt_2_flexslider_default_presets_alter(&$data) {
+function sprowt_3_flexslider_default_presets_alter(&$data) {
   if (isset($data['default'])) {
     unset($data['default']->export_type);
     unset($data['default']->type);
@@ -143,7 +161,7 @@ function sprowt_2_flexslider_default_presets_alter(&$data) {
 /**
  * Implements hook_image_styles_alter().
  */
-function sprowt_2_image_styles_alter(&$data) {
+function sprowt_3_image_styles_alter(&$data) {
   if (isset($data['flexslider_full'])) {
 
   if (!isset($data['flexslider_full']['storage']) || $data['flexslider_full']['storage'] == IMAGE_STORAGE_DEFAULT) {
@@ -170,7 +188,7 @@ function sprowt_2_image_styles_alter(&$data) {
 /**
  * Implements hook_strongarm_alter().
  */
-function sprowt_2_strongarm_alter(&$data) {
+function sprowt_3_strongarm_alter(&$data) {
   if (isset($data['menu_main_links_source'])) {
     unset($data['menu_main_links_source']);
   }
@@ -251,7 +269,7 @@ function sprowt_2_strongarm_alter(&$data) {
 /**
  * Implements hook_views_default_views_alter().
  */
-function sprowt_2_views_default_views_alter(&$data) {
+function sprowt_3_views_default_views_alter(&$data) {
   if (isset($data['archive'])) {
     $data['archive']->display['block']->display_options['arguments']['created_year_month']['exception']['title_enable'] = TRUE; /* WAS: 1 */
     $data['archive']->display['block']->display_options['arguments']['created_year_month']['specify_validation'] = TRUE; /* WAS: 1 */
@@ -299,21 +317,10 @@ function sprowt_2_views_default_views_alter(&$data) {
     $data['services']->display['homepage'] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:6:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:4:{s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;}s:12:"style_plugin";s:7:"default";s:10:"row_plugin";s:4:"node";s:11:"row_options";a:1:{s:9:"view_mode";s:10:"alt_teaser";}s:17:"block_description";s:22:"Homepage Services list";}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:8:"homepage";s:13:"display_title";s:8:"Homepage";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}'); /* WAS: '' */
   }
   if (isset($data['special_offers'])) {
-    $data['special_offers']->display['front']->display_options['defaults']['row_options'] = FALSE; /* WAS: '' */
-    $data['special_offers']->display['front']->display_options['defaults']['row_plugin'] = FALSE; /* WAS: '' */
-    $data['special_offers']->display['front']->display_options['defaults']['style_options'] = FALSE; /* WAS: '' */
-    $data['special_offers']->display['front']->display_options['defaults']['style_plugin'] = FALSE; /* WAS: '' */
-    $data['special_offers']->display['front']->display_options['pager']['options']['items_per_page'] = 0; /* WAS: 2 */
-    $data['special_offers']->display['front']->display_options['row_options'] = array(
-      'view_mode' => 'alt_teaser',
-      'links' => FALSE,
-    ); /* WAS: '' */
-    $data['special_offers']->display['front']->display_options['row_plugin'] = 'node'; /* WAS: '' */
-    $data['special_offers']->display['front']->display_options['style_options'] = array(
-      'optionset' => 'special_offers_slideshow',
-    ); /* WAS: '' */
-    $data['special_offers']->display['front']->display_options['style_plugin'] = 'flexslider'; /* WAS: '' */
-    $data['special_offers']->display['ltp_slideshow'] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:9:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:8:{s:5:"title";b:0;s:5:"pager";b:0;s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;s:5:"sorts";b:0;s:9:"arguments";b:0;}s:5:"pager";a:2:{s:4:"type";s:4:"none";s:7:"options";a:1:{s:6:"offset";s:1:"0";}}s:12:"style_plugin";s:10:"flexslider";s:13:"style_options";a:1:{s:9:"optionset";s:24:"special_offers_slideshow";}s:10:"row_plugin";s:4:"node";s:11:"row_options";a:2:{s:9:"view_mode";s:10:"alt_teaser";s:5:"links";b:0;}s:5:"sorts";a:1:{s:6:"random";a:3:{s:2:"id";s:6:"random";s:5:"table";s:5:"views";s:5:"field";s:6:"random";}}s:9:"arguments";a:2:{s:3:"tid";a:8:{s:2:"id";s:3:"tid";s:5:"table";s:14:"taxonomy_index";s:5:"field";s:3:"tid";s:14:"default_action";s:7:"default";s:21:"default_argument_type";s:12:"taxonomy_tid";s:24:"default_argument_options";a:4:{s:4:"node";b:1;s:6:"anyall";s:1:"+";s:5:"limit";b:1;s:12:"vocabularies";a:1:{s:8:"services";s:8:"services";}}s:7:"summary";a:2:{s:17:"number_of_records";s:1:"0";s:6:"format";s:15:"default_summary";}s:15:"summary_options";a:1:{s:14:"items_per_page";s:2:"25";}}s:3:"nid";a:8:{s:2:"id";s:3:"nid";s:5:"table";s:4:"node";s:5:"field";s:3:"nid";s:14:"default_action";s:7:"default";s:21:"default_argument_type";s:4:"node";s:7:"summary";a:2:{s:17:"number_of_records";s:1:"0";s:6:"format";s:15:"default_summary";}s:15:"summary_options";a:1:{s:14:"items_per_page";s:2:"25";}s:3:"not";b:1;}}}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:13:"ltp_slideshow";s:13:"display_title";s:17:"Related Slideshow";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}'); /* WAS: '' */
+    $data['special_offers']->display['front_slideshow']->display_options['pager']['type'] = 'none'; /* WAS: 'some' */
+    $data['special_offers']->display['ltp_slideshow'] = unserialize('O:13:"views_display":7:{s:15:"display_options";a:10:{s:5:"query";a:2:{s:4:"type";s:11:"views_query";s:7:"options";a:0:{}}s:8:"defaults";a:8:{s:5:"title";b:0;s:5:"pager";b:0;s:12:"style_plugin";b:0;s:13:"style_options";b:0;s:10:"row_plugin";b:0;s:11:"row_options";b:0;s:5:"sorts";b:0;s:9:"arguments";b:0;}s:5:"title";s:4:"none";s:5:"pager";a:2:{s:4:"type";s:4:"none";s:7:"options";a:1:{s:6:"offset";s:1:"0";}}s:12:"style_plugin";s:10:"flexslider";s:13:"style_options";a:1:{s:9:"optionset";s:24:"special_offers_slideshow";}s:10:"row_plugin";s:4:"node";s:11:"row_options";a:2:{s:9:"view_mode";s:10:"alt_teaser";s:5:"links";b:0;}s:5:"sorts";a:1:{s:6:"random";a:3:{s:2:"id";s:6:"random";s:5:"table";s:5:"views";s:5:"field";s:6:"random";}}s:9:"arguments";a:2:{s:3:"tid";a:8:{s:2:"id";s:3:"tid";s:5:"table";s:14:"taxonomy_index";s:5:"field";s:3:"tid";s:14:"default_action";s:7:"default";s:21:"default_argument_type";s:12:"taxonomy_tid";s:24:"default_argument_options";a:4:{s:4:"node";b:1;s:6:"anyall";s:1:"+";s:5:"limit";b:1;s:12:"vocabularies";a:1:{s:8:"services";s:8:"services";}}s:7:"summary";a:2:{s:17:"number_of_records";s:1:"0";s:6:"format";s:15:"default_summary";}s:15:"summary_options";a:1:{s:14:"items_per_page";s:2:"25";}}s:3:"nid";a:8:{s:2:"id";s:3:"nid";s:5:"table";s:4:"node";s:5:"field";s:3:"nid";s:14:"default_action";s:7:"default";s:21:"default_argument_type";s:4:"node";s:7:"summary";a:2:{s:17:"number_of_records";s:1:"0";s:6:"format";s:15:"default_summary";}s:15:"summary_options";a:1:{s:14:"items_per_page";s:2:"25";}s:3:"not";b:1;}}}s:8:"db_table";s:13:"views_display";s:3:"vid";i:0;s:2:"id";s:13:"ltp_slideshow";s:13:"display_title";s:17:"Related Slideshow";s:14:"display_plugin";s:5:"block";s:8:"position";i:0;}'); /* WAS: '' */
+    $data['special_offers']->display['related']->display_options['title'] = 'none'; /* WAS: '' */
+    unset($data['special_offers']->display['front_slideshow']->display_options['pager']['options']['items_per_page']);
   }
   if (isset($data['taxonomy_term'])) {
     $data['taxonomy_term']->display['default']->display_options['arguments']['term_node_tid_depth_modifier']['exception']['title_enable'] = TRUE; /* WAS: 1 */
