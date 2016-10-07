@@ -7,9 +7,8 @@
 /**
  * Implements hook_default_fe_block_settings_alter().
  */
-function sprowt_4_default_fe_block_settings_alter(&$data) {
+function sprowt_4_overrides_default_fe_block_settings_alter(&$data) {
   if (isset($data['addtoany-addtoany_button'])) {
-    $data['addtoany-addtoany_button']['themes']['adminimal']['weight'] = -37; /* WAS: 0 */
     $data['addtoany-addtoany_button']['themes']['sprowt_4'] = array(
       'region' => '',
       'status' => 0,
@@ -41,7 +40,7 @@ function sprowt_4_default_fe_block_settings_alter(&$data) {
 /**
  * Implements hook_field_group_info_alter().
  */
-function sprowt_4_field_group_info_alter(&$data) {
+function sprowt_4_overrides_field_group_info_alter(&$data) {
   if (isset($data['group_content|node|special_offer|form'])) {
     $data['group_content|node|special_offer|form']->data['children'][10] = 'title'; /* WAS: '' */
     $data['group_content|node|special_offer|form']->data['children'][11] = 'field_offer_subheadline'; /* WAS: '' */
@@ -59,7 +58,7 @@ function sprowt_4_field_group_info_alter(&$data) {
 /**
  * Implements hook_field_default_field_instances_alter().
  */
-function sprowt_4_field_default_field_instances_alter(&$data) {
+function sprowt_4_overrides_field_default_field_instances_alter(&$data) {
   if (isset($data['node-affiliation-body'])) {
     $data['node-affiliation-body']['display']['secondary_teaser'] = array(
       'label' => 'above',
@@ -1081,7 +1080,7 @@ function sprowt_4_field_default_field_instances_alter(&$data) {
 /**
  * Implements hook_flexslider_default_presets_alter().
  */
-function sprowt_4_flexslider_default_presets_alter(&$data) {
+function sprowt_4_overrides_flexslider_default_presets_alter(&$data) {
   if (isset($data['default'])) {
     unset($data['default']->export_type);
     unset($data['default']->type);
@@ -1091,7 +1090,7 @@ function sprowt_4_flexslider_default_presets_alter(&$data) {
 /**
  * Implements hook_image_styles_alter().
  */
-function sprowt_4_image_styles_alter(&$data) {
+function sprowt_4_overrides_image_styles_alter(&$data) {
   if (isset($data['flexslider_full'])) {
 
   if (!isset($data['flexslider_full']['storage']) || $data['flexslider_full']['storage'] == IMAGE_STORAGE_DEFAULT) {
@@ -1118,7 +1117,7 @@ function sprowt_4_image_styles_alter(&$data) {
 /**
  * Implements hook_strongarm_alter().
  */
-function sprowt_4_strongarm_alter(&$data) {
+function sprowt_4_overrides_strongarm_alter(&$data) {
   if (isset($data['entity_view_modes'])) {
     $data['entity_view_modes']->value['node']['secondary_teaser'] = array(
       'label' => 'Secondary teaser',
@@ -1297,7 +1296,7 @@ function sprowt_4_strongarm_alter(&$data) {
 /**
  * Implements hook_views_default_views_alter().
  */
-function sprowt_4_views_default_views_alter(&$data) {
+function sprowt_4_overrides_views_default_views_alter(&$data) {
   if (isset($data['archive'])) {
     $data['archive']->display['block']->display_options['arguments']['created_year_month']['exception']['title_enable'] = TRUE; /* WAS: 1 */
     $data['archive']->display['block']->display_options['arguments']['created_year_month']['specify_validation'] = TRUE; /* WAS: 1 */

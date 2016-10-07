@@ -1,4 +1,4 @@
-name = Sprowt-4
+name = Sprowt-4-Overrides
 core = 7.x
 package = Sprowt Features Overrides
 dependencies[] = flexslider
@@ -194,7 +194,6 @@ features[features_override_items][] = views_view.taxonomy_term
 features[features_override_items][] = views_view.testimonials
 features[features_override_items][] = views_view.webform_submissions
 features[features_override_items][] = views_view.weight
-features[features_overrides][] = fe_block_settings.addtoany-addtoany_button.themes|adminimal|weight
 features[features_overrides][] = fe_block_settings.addtoany-addtoany_button.themes|sprowt_1
 features[features_overrides][] = fe_block_settings.addtoany-addtoany_button.themes|sprowt_4
 features[features_overrides][] = fe_block_settings.flippy-flippy_pager-node_type-profile.themes|sprowt_1

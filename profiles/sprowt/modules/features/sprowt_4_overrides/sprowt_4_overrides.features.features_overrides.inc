@@ -7,12 +7,11 @@
 /**
  * Implements hook_features_override_default_overrides().
  */
-function sprowt_4_features_override_default_overrides() {
+function sprowt_4_overrides_features_override_default_overrides() {
   // This code is only used for UI in features. Exported alters hooks do the magic.
   $overrides = array();
 
   // Exported overrides for: fe_block_settings
-  $overrides["fe_block_settings.addtoany-addtoany_button.themes|adminimal|weight"] = -37;
   $overrides["fe_block_settings.addtoany-addtoany_button.themes|sprowt_1"]["DELETED"] = TRUE;
   $overrides["fe_block_settings.addtoany-addtoany_button.themes|sprowt_4"] = array(
     'region' => '',
