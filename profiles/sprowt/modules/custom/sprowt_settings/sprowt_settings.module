@@ -39,6 +39,16 @@ function sprowt_settings_menu()
         'type' => MENU_NORMAL_ITEM,
         'file' => 'sprowt_settings.pages.inc'
     );
+//
+//    $items['admin/people/add-coalmarch-user'] = array(
+//        'title' => 'Add Coalmarch User',
+//        'description' => 'Add a default Coalmarch User',
+//        'page callback' => 'drupal_get_form',
+//        'page arguments' => array('sprowt_settings_add_coalmarch_user'),
+//        'access arguments' => array('administer users'),
+//        'type' => MENU_NORMAL_ITEM,
+//        'file' => 'sprowt_settings.pages.inc'
+//    );
 
     return $items;
 }
@@ -665,3 +675,55 @@ function sprowt_settings_cb_identifier_values($identifier, $obj) {
     return $crumb_items;
 }
 
+/**
+ * Implements hook_webform_select_options_info().
+ */
+function sprowt_settings_webform_select_options_info() {
+    $items = array();
+    
+    $items['services'] = array(
+        'title' => t('Sprowt Services'),
+        'options callback' => '_sprowt_settings_webform_options_services',
+    );
+    
+    $items['markets'] = array(
+        'title' => t('Sprowt Markets'),
+        'options callback' => '_sprowt_settings_webform_options_markets',
+    );
+    
+    return $items;
+}
+
+function _sprowt_settings_webform_options_services() {
+    $options = array();
+    $services = db_query("
+        SELECT title
+        FROM node n
+        WHERE n.type = 'service'
+        AND n.status = 1
+        ORDER BY n.title ASC
+    ")->fetchCol();
+    
+    foreach($services as $service) {
+        $options[$service] = $service;
+    }
+    
+    return $options;
+}
+
+function _sprowt_settings_webform_options_markets() {
+    $options = array();
+    $markets = db_query("
+        SELECT title
+        FROM node n
+        WHERE n.type = 'market'
+        AND n.status = 1
+        ORDER BY n.title ASC
+    ")->fetchCol();
+    
+    foreach($markets as $market) {
+        $options[$market] = $market;
+    }
+    
+    return $options;
+}

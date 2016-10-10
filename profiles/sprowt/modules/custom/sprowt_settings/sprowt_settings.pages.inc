@@ -373,3 +373,7 @@ function _sprowt_settings_config_validate($form, &$form_state) {
         $form_state['values']['sprowt_settings_map_embed'] = $i[1];
     }
 }
+
+function sprowt_settings_add_coalmarch_user($form, &$form_state) {
+    
+}
