@@ -354,6 +354,7 @@ function sprowt_theme_copy_theme_settings_submit($form, &$form_state) {
         $image = file_load($image);
         $image = file_move($image, 'public://');
         file_save($image);
+        file_set_status($image, FILE_STATUS_PERMANENT);
         if(!empty($style)) {
             $derivative_uri = image_style_path($style, $image->uri);
             $success = file_exists($derivative_uri) || image_style_create_derivative(image_style_load($style), $image->uri, $derivative_uri);
@@ -368,16 +369,18 @@ function sprowt_theme_copy_preprocess_page(&$variables) {
     $image = theme_get_setting('sprowt_background_image');
     $style = theme_get_setting('sprowt_background_image_style');
     
+    $variables['background_image'] = '';
     if(!empty($image)) {
-        $image = file_load($image);
-        if(!empty($style)) {
-            $url = image_style_url($style, $image->uri);
+        if($image = file_load($image)) {
+            if (!empty($style)) {
+                $url = image_style_url($style, $image->uri);
+            }
+            else {
+                $url = file_create_url($image->uri);
+            }
+    
+            $variables['background_image'] = $url;
         }
-        else {
-            $url = file_create_url($image->uri);
-        }
-        
-        $variables['background_image'] = $url;
     }
 }
 
