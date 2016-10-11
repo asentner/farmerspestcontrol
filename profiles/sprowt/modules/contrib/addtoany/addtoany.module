@@ -155,8 +155,6 @@ function addtoany_page_alter(&$page) {
   if ( ! $_addtoany_init)
     return;
 
-  $script_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://static.addtoany.com/menu/page.js' : 'http://static.addtoany.com/menu/page.js';
-
   $javascript_header = "window.a2a_config=window.a2a_config||{};"
       . "window.da2a={done:false,"
         . "html_done:false,"
@@ -165,7 +163,7 @@ function addtoany_page_alter(&$page) {
           . "var a=document.createElement('script'),"
             . "s=document.getElementsByTagName('script')[0];"
           . "a.type='text/javascript';a.async=true;"
-          . "a.src='" . $script_url . "';"
+          . "a.src='https://static.addtoany.com/menu/page.js';"
           . "s.parentNode.insertBefore(a,s);"
           . "da2a.script_load=function(){};"
         . "},"
