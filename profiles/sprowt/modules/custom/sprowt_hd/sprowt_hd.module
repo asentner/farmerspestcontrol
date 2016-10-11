@@ -60,17 +60,34 @@ function _sprowt_hd_submit($form, &$form_state)
         watchdog('error', 'Sprowt SpeedLead form reactor cannot communicate with CTM because the account id, access key and/or secret, key is not set', array(), WATCHDOG_ERROR);
         return;
     }
-
-    $values = array();
+    
     $form_reactor_data = $form_state['webform']['form_reactor'];
 
     $apiUrl = 'https://api.calltrackingmetrics.com/api/v1/formreactor/' . $form_reactor_data['form_reactor_id'];
-
-    foreach($form['submitted'] as $key => $item) {
-        if(!empty($item['#value'])) {
-            $values[$key] = $item['#value'];
+    
+    $raw_values = $form_state['values']['submitted'];
+    $webform = $form['#node']->webform;
+    $componenents = $webform['components'];
+    $values = array();
+    foreach($raw_values as $cid => $v) {
+        if(!empty($componenents[$cid]['form_key'])) {
+            $values[$componenents[$cid]['form_key']] = $v;
+        }
+        else {
+            $values[$cid] = $v;
+        }
+        if(is_array($v)) {
+            foreach($v as $cid => $val) {
+                if(!empty($componenents[$cid]['form_key'])) {
+                    $values[$componenents[$cid]['form_key']] = $val;
+                }
+                else {
+                    $values[$cid] = $val;
+                }
+            }
         }
     }
+    
 
     // Check to see if the submission has a phone number
     if (array_key_exists($form_reactor_data['form_reactor_phone_field'], $values)) {
