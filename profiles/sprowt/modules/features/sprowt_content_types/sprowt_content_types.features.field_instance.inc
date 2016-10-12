@@ -31,6 +31,13 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'module' => 'text',
@@ -108,6 +115,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 2,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -148,6 +161,16 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
+        'label' => 'hidden',
+        'module' => 'image_link_formatter',
+        'settings' => array(
+          'image_link' => 'field_link',
+          'image_style' => '',
+        ),
+        'type' => 'image_link_formatter',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
         'label' => 'hidden',
         'module' => 'image_link_formatter',
         'settings' => array(
@@ -235,6 +258,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -310,6 +339,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -361,6 +396,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => -1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -418,6 +459,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 10,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -477,6 +524,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -548,6 +601,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 4,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -600,6 +659,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -660,6 +725,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -729,6 +800,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'link_default',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'link',
@@ -792,6 +869,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -839,6 +922,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -901,6 +990,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -968,6 +1063,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'file_default',
         'weight' => 2,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -1033,6 +1134,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'smart_trim_format',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -1088,6 +1195,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 4,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1135,6 +1248,12 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => 'primary__800x400_',
         ),
         'type' => 'image',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -1204,6 +1323,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1252,6 +1377,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 6,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1299,6 +1430,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -1361,6 +1498,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1402,6 +1545,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -1464,6 +1613,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1510,6 +1665,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 2,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1553,6 +1714,12 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -1623,6 +1790,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'taxonomy',
@@ -1672,6 +1845,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -1729,6 +1908,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 8,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1784,6 +1969,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 2,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1824,6 +2015,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -1884,6 +2081,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1931,6 +2134,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -1983,6 +2192,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 4,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2037,6 +2252,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2088,6 +2309,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 10,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2135,6 +2362,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 7,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -2186,6 +2419,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 3,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2240,6 +2479,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2308,6 +2553,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -2363,6 +2614,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 4,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2415,6 +2672,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2472,6 +2735,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2527,6 +2796,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2606,6 +2881,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -2657,6 +2938,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2710,6 +2997,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2757,6 +3050,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 11,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -2809,6 +3108,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 12,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -2859,6 +3164,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -2913,6 +3224,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 10,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2965,6 +3282,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 8,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3013,6 +3336,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 5,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3073,6 +3402,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 6,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3132,6 +3467,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3194,6 +3535,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 11,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3246,6 +3593,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 7,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3302,6 +3655,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -3367,6 +3726,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 4,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3427,6 +3792,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'link_default',
         'weight' => 9,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3499,6 +3870,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3561,6 +3938,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3622,6 +4005,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -3679,6 +4068,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 2,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3722,6 +4117,12 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => 'primary__800x400_',
         ),
         'type' => 'image',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -3791,6 +4192,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3839,6 +4246,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 3,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -3907,6 +4320,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 4,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -3962,6 +4381,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4003,6 +4428,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -4055,6 +4486,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -4122,6 +4559,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'image',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'image',
@@ -4186,6 +4629,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 2,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -4238,6 +4687,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4286,6 +4741,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 4,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -4342,6 +4803,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'file_default',
         'weight' => 5,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -4402,6 +4869,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 6,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4443,6 +4916,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -4499,6 +4978,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -4564,6 +5049,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -4617,6 +5108,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -4669,6 +5166,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -4740,6 +5243,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4788,6 +5297,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -4858,6 +5373,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -4910,6 +5431,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -4972,6 +5499,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5016,6 +5549,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -5081,6 +5620,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -5130,6 +5675,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 4,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -5198,6 +5749,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 6,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -5253,6 +5810,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5294,6 +5857,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -5346,6 +5915,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -5408,6 +5983,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -5477,6 +6058,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -5529,6 +6116,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 5,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -5583,6 +6176,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -5635,6 +6234,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -5683,6 +6288,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -5740,6 +6351,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -5792,6 +6409,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 2,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5835,6 +6458,12 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -5905,6 +6534,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 4,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5952,6 +6587,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 5,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -6002,6 +6643,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6063,6 +6710,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'link_default',
         'weight' => 5,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -6131,6 +6784,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -6187,6 +6846,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6270,6 +6935,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'image',
         'weight' => 0,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'image',
@@ -6338,6 +7009,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 11,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -6388,6 +7065,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'number_integer',
         'weight' => 4,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6454,6 +7137,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 10,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -6504,6 +7193,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'number_integer',
         'weight' => 3,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6569,6 +7264,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 8,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -6618,6 +7319,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 6,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -6659,6 +7366,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'sidebar' => array(
@@ -6722,6 +7435,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -6764,6 +7483,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -6816,6 +7541,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 1,
       ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'sidebar' => array(
         'label' => 'hidden',
         'module' => 'taxonomy',
@@ -6864,6 +7595,12 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'teaser' => array(
