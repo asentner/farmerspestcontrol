@@ -174,6 +174,10 @@ function sprowt_content_types_strongarm() {
         'label' => 'Alternate Teaser',
         'custom settings' => 1,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'Tertiary Teaser',
+        'custom settings' => 1,
+      ),
     ),
   );
   $export['entity_view_modes'] = $strongarm;
@@ -206,6 +210,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -262,6 +269,9 @@ function sprowt_content_types_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -316,6 +326,9 @@ function sprowt_content_types_strongarm() {
       'alt_teaser' => array(
         'custom_settings' => TRUE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -368,6 +381,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -424,6 +440,9 @@ function sprowt_content_types_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -476,6 +495,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -532,6 +554,9 @@ function sprowt_content_types_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -585,6 +610,9 @@ function sprowt_content_types_strongarm() {
       ),
       'alt_teaser' => array(
         'custom_settings' => TRUE,
+      ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(
@@ -640,6 +668,9 @@ function sprowt_content_types_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -693,6 +724,9 @@ function sprowt_content_types_strongarm() {
       ),
       'alt_teaser' => array(
         'custom_settings' => TRUE,
+      ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(
@@ -748,6 +782,9 @@ function sprowt_content_types_strongarm() {
       'alt_teaser' => array(
         'custom_settings' => TRUE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -802,6 +839,9 @@ function sprowt_content_types_strongarm() {
       'alt_teaser' => array(
         'custom_settings' => TRUE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -855,6 +895,9 @@ function sprowt_content_types_strongarm() {
       ),
       'alt_teaser' => array(
         'custom_settings' => TRUE,
+      ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(
@@ -921,6 +964,9 @@ function sprowt_content_types_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -975,6 +1021,9 @@ function sprowt_content_types_strongarm() {
       'alt_teaser' => array(
         'custom_settings' => TRUE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1027,6 +1076,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -1083,6 +1135,9 @@ function sprowt_content_types_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1137,6 +1192,9 @@ function sprowt_content_types_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1187,6 +1245,9 @@ function sprowt_content_types_strongarm() {
       ),
       'alt_teaser' => array(
         'custom_settings' => TRUE,
+      ),
+      'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(

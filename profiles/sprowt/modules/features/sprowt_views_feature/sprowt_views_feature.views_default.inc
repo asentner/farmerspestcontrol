@@ -1025,6 +1025,84 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+
+  /* Display: Location, Map, and Reviews */
+  $handler = $view->new_display('block', 'Location, Map, and Reviews', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'tertiary_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Street address */
+  $handler->display->display_options['fields']['field_street_address']['id'] = 'field_street_address';
+  $handler->display->display_options['fields']['field_street_address']['table'] = 'field_data_field_street_address';
+  $handler->display->display_options['fields']['field_street_address']['field'] = 'field_street_address';
+  $handler->display->display_options['fields']['field_street_address']['label'] = 'Address';
+  $handler->display->display_options['fields']['field_street_address']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['field_street_address']['element_label_colon'] = FALSE;
+  /* Field: Content: Call tracking number */
+  $handler->display->display_options['fields']['field_phone_number']['id'] = 'field_phone_number';
+  $handler->display->display_options['fields']['field_phone_number']['table'] = 'field_data_field_phone_number';
+  $handler->display->display_options['fields']['field_phone_number']['field'] = 'field_phone_number';
+  $handler->display->display_options['fields']['field_phone_number']['label'] = 'Phone';
+  $handler->display->display_options['fields']['field_phone_number']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['field_phone_number']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<a title="Contact Us" href="/contact-us" class="button">Contact Us</a>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Content: Map code */
+  $handler->display->display_options['fields']['field_map_code']['id'] = 'field_map_code';
+  $handler->display->display_options['fields']['field_map_code']['table'] = 'field_data_field_map_code';
+  $handler->display->display_options['fields']['field_map_code']['field'] = 'field_map_code';
+  $handler->display->display_options['fields']['field_map_code']['label'] = '';
+  $handler->display->display_options['fields']['field_map_code']['element_class'] = 'ltp-map';
+  $handler->display->display_options['fields']['field_map_code']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_map_code']['type'] = 'text_plain';
+  /* Field: Content: State */
+  $handler->display->display_options['fields']['field_state']['id'] = 'field_state';
+  $handler->display->display_options['fields']['field_state']['table'] = 'field_data_field_state';
+  $handler->display->display_options['fields']['field_state']['field'] = 'field_state';
+  $handler->display->display_options['fields']['field_state']['label'] = '';
+  $handler->display->display_options['fields']['field_state']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_state']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Has taxonomy term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['term_page'] = FALSE;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['anyall'] = '+';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
+    'markets' => 'markets',
+  );
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'location' => 'location',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $export['localtarget'] = $view;
 
   $view = new view();
