@@ -487,4 +487,8 @@ class ReviewBoost {
 
         return $html;
     }
+
+    function getThreshold() {
+        return variable_get('review_boost_threshold', 4);
+    }
 }

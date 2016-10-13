@@ -487,7 +487,7 @@ function _review_boost_questionnaire_complete($token) {
     }
 
     $RB = new ReviewBoost($token);
-    $high = $result['service_rating'] >= 3;
+    $high = $result['service_rating'] >= $RB->getThreshold();
 
     if($high) {
         $title = variable_get('review_boost_thank_you_high_title', 'We’re so glad you enjoyed your service!');

@@ -207,6 +207,7 @@ function _review_boost_admin(){
 }
 
 function _review_boost_admin_form($form, &$form_state){
+    drupal_add_css(drupal_get_path('module', 'review_boost') . '/css/admin.css');
     $RB = new ReviewBoost();
 
     $customer_email = array();
@@ -387,6 +388,21 @@ function _review_boost_admin_form($form, &$form_state){
         '#description' => 'This is the email used in the token, "%admin_email" and also the email the "Email to Admin(s)" is marked as coming from.',
         '#title' => 'Review Boost Admin Email',
         '#default_value' => $RB->getEmail()
+    );
+
+    $thresh_opts = array(
+        1 => 1,
+        2 => 2,
+        3 => 3,
+        4 => 4,
+        5 => 5
+    );
+    $form['review_boost_threshold'] = array(
+        '#type' => 'radios',
+        '#title' => 'Threshold',
+        '#description' => 'This number or greater will result in the "high rating" thank you page.',
+        '#options' => $thresh_opts,
+        '#default_value' => $RB->getThreshold()
     );
 
     $form['customer_email'] = array(
