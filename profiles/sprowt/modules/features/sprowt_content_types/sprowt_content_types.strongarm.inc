@@ -968,7 +968,7 @@ function sprowt_content_types_strongarm() {
             'visible' => TRUE,
           ),
           'teaser' => array(
-            'weight' => '5',
+            'weight' => '2',
             'visible' => TRUE,
           ),
         ),
