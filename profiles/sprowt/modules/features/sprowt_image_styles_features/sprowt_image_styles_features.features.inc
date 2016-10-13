@@ -251,6 +251,22 @@ function sprowt_image_styles_features_image_default_styles() {
     ),
   );
 
+  // Exported image style: scale_235.
+  $styles['scale_235'] = array(
+    'label' => 'Scale 235',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 235,
+          'height' => '',
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: scale_60x60.
   $styles['scale_60x60'] = array(
     'label' => 'Scale 60x60',

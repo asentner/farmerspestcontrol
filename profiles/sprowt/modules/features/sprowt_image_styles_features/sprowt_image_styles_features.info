@@ -16,6 +16,7 @@ features[image][] = markets
 features[image][] = package_icon
 features[image][] = primary__800x400_
 features[image][] = profile
+features[image][] = scale_235
 features[image][] = scale_60x60
 features[image][] = service
 features[image][] = service_primary

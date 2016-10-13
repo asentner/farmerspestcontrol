@@ -175,7 +175,7 @@ function sprowt_content_types_strongarm() {
         'custom settings' => 1,
       ),
       'secondary_teaser' => array(
-        'label' => 'Secondary Teaser',
+        'label' => 'Secondary teaser',
         'custom settings' => 1,
       ),
       'tertiary_teaser' => array(

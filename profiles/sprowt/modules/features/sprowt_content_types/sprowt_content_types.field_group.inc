@@ -568,9 +568,9 @@ function sprowt_content_types_field_group_info() {
       6 => 'field_original_price',
       7 => 'field_package',
       8 => 'field_services',
-      9 => 'field_offer_subheadline',
-      10 => 'field_offer_headline',
-      11 => 'title',
+      9 => 'field_offer_headline',
+      10 => 'title',
+      11 => 'field_offer_subheadline',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
