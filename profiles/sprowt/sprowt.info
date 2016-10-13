@@ -55,7 +55,6 @@ dependencies[] = entityreference
 dependencies[] = entity_view_mode
 dependencies[] = features
 dependencies[] = features_diff
-dependencies[] = fe_block
 dependencies[] = features_override
 dependencies[] = field_collection
 dependencies[] = find_content
