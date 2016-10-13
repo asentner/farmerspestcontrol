@@ -189,8 +189,8 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['filters']['promote']['value'] = '1';
   $handler->display->display_options['block_description'] = 'List of benefits';
 
-  /* Display: Front page benefits (S4) */
-  $handler = $view->new_display('block', 'Front page benefits (S4)', 'front_s4');
+  /* Display: Front page benefits (secondary teaser) */
+  $handler = $view->new_display('block', 'Front page benefits (secondary teaser)', 'front_s4');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -1136,8 +1136,8 @@ function sprowt_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
 
-  /* Display: Local Target Title (S4) */
-  $handler = $view->new_display('block', 'Local Target Title (S4)', 'title_s4');
+  /* Display: Local Target Title */
+  $handler = $view->new_display('block', 'Local Target Title', 'title_s4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<none>';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -1162,7 +1162,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['block_description'] = 'Local Target Title (S4)';
+  $handler->display->display_options['block_description'] = 'Local Target Title';
   $export['localtarget'] = $view;
 
   $view = new view();
@@ -1632,11 +1632,11 @@ function sprowt_views_feature_views_default_views() {
     'special_offer' => 'special_offer',
   );
 
-  /* Display: All offers */
-  $handler = $view->new_display('block', 'All offers', 'list');
+  /* Display: All Offers */
+  $handler = $view->new_display('block', 'All Offers', 'list');
 
-  /* Display: Sidebar offers */
-  $handler = $view->new_display('block', 'Sidebar offers', 'sidebar');
+  /* Display: Sidebar Offers */
+  $handler = $view->new_display('block', 'Sidebar Offers', 'sidebar');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Special Offers';
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -1728,8 +1728,8 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['nid']['not'] = TRUE;
 
-  /* Display: Homepage (S4) */
-  $handler = $view->new_display('block', 'Homepage (S4)', 'front_s4');
+  /* Display: Homepage (secondary teaser) */
+  $handler = $view->new_display('block', 'Homepage (secondary teaser)', 'front_s4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
@@ -1749,8 +1749,8 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['random']['table'] = 'views';
   $handler->display->display_options['sorts']['random']['field'] = 'random';
 
-  /* Display: LTP Content (S4) */
-  $handler = $view->new_display('block', 'LTP Content (S4)', 'ltp_s4');
+  /* Display: Special Offers (ltp) */
+  $handler = $view->new_display('block', 'Special Offers (ltp)', 'ltp_s4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
@@ -1795,8 +1795,8 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['nid']['not'] = TRUE;
 
-  /* Display: Related (S4) */
-  $handler = $view->new_display('block', 'Related (S4)', 'related_s4');
+  /* Display: Related (secondary teaser) */
+  $handler = $view->new_display('block', 'Related (secondary teaser)', 'related_s4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
@@ -2073,8 +2073,8 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['block_description'] = 'List of all testimonials';
 
-  /* Display: Front page testimonial (S4) */
-  $handler = $view->new_display('block', 'Front page testimonial (S4)', 'front_s4');
+  /* Display: Front page testimonial (title used) */
+  $handler = $view->new_display('block', 'Front page testimonial (title used)', 'front_s4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'What Our Customers Are Saying';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
