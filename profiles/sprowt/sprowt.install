@@ -450,3 +450,11 @@ function sprowt_update_7004() {
   variable_set('node_admin_theme', '1');
   module_enable(array('adminimal_admin_menu'));
 }
+
+/***
+ * Fix system table
+ */
+
+function sprowt_update_7005() {
+    db_delete('system')->condition('name','fe_block')->execute();
+}
