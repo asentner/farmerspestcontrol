@@ -6,14 +6,24 @@
 function sprowt_taxonomy_engine_menu(){
 	$items = array();
 
-	$items['admin/content/lb-generate-aliases'] = array(
+	$items['admin/config/sprowt/lb-generate-aliases'] = array(
 		'title' => 'Regenerate Aliases',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_sprowt_taxonomy_engine_generate_aliases'),
 		'access arguments' => array('access administration pages'),
 		'file' => 'sprowt_taxonomy_engine.pages.inc',
-		'type' =>  MENU_LOCAL_TASK
+		'type' =>  MENU_NORMAL_ITEM
 	);
+    
+    $items['admin/config/sprowt/unlock-types'] = array(
+        'title' => 'Unlock URL Aliases',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_sprowt_taxonomy_engine_unlock_types'),
+        'access arguments' => array('access administration pages'),
+        'file' => 'sprowt_taxonomy_engine.pages.inc',
+        'type' =>  MENU_NORMAL_ITEM
+    );
+    
 
 	return $items;
 }
@@ -43,9 +53,13 @@ function sprowt_taxonomy_engine_form_alter(&$form, &$form_state) {
 	if (in_array($form['#form_id'], $allowable_form_ids)) {
 		$form['title']['#disabled'] = TRUE;
 		unset($form['actions']['delete']);
-		$form['path']['alias']['#disabled'] = TRUE;
-		$form['path']['pathauto']['#disabled'] = TRUE;
-		$form['path']['pathauto']['#checked'] = true;
+        $type = $form['type']['#value'];
+        $unlocked = variable_get('sprowt_taxonomy_engine_unlocked_types', array());
+        if(!in_array($type, $unlocked)) {
+            $form['path']['alias']['#disabled'] = TRUE;
+            $form['path']['pathauto']['#disabled'] = TRUE;
+            $form['path']['pathauto']['#checked'] = TRUE;
+        }
 	}
 	//Unique items
 	switch ($form['#form_id']) {

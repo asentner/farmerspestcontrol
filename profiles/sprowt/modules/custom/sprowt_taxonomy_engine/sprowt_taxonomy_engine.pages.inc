@@ -45,3 +45,27 @@ function _sprowt_taxonomy_engine_generate_aliases_submit($form, &$form_state) {
         drupal_set_message(t('%d Nodes Updated!', array('%d' => count($nids))));
     }
 }
+
+function _sprowt_taxonomy_engine_unlock_types(){
+    drupal_set_title('Unlock URL Aliases');
+    
+    $types = variable_get('sprowt_taxonomy_engine_unlocked_types', array());
+    $opts = array(
+        'localtarget' => 'Local Target',
+        'service' => 'Service',
+        'market' => 'Market',
+        'region' => 'Region'
+    );
+    
+    $form = array();
+    
+    $form['sprowt_taxonomy_engine_unlocked_types'] = array(
+        '#type' => 'checkboxes',
+        '#options' => $opts,
+        '#title' => 'Content Types',
+        '#description' => 'Content Types you\'d like to unlock the aliases for.',
+        '#default_value' => $types
+    );
+    
+    return system_settings_form($form);
+}

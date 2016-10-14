@@ -29,15 +29,26 @@ function sprowt_settings_menu()
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-
-    $items['admin/config/system/sprowt-settings'] = array(
+    
+    
+    $items['admin/config/sprowt'] = array(
+        'title' => 'Sprowt',
+        'description' => 'Sprowt',
+        'page callback' => '_sprowt_admin_menu_block',
+        'access arguments' => array('administer site configuration'),
+        'file' => 'sprowt_settings.pages.inc',
+        'position' => 'left',
+    );
+    
+    $items['admin/config/sprowt/sprowt-settings'] = array(
         'title' => 'Sprowt Settings',
         'description' => 'Company specific settings for the Sprowt platform. Including address, company name, and social media accounts.',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('sprowt_settings_admin'),
         'access arguments' => array('administer site configuration'),
         'type' => MENU_NORMAL_ITEM,
-        'file' => 'sprowt_settings.pages.inc'
+        'file' => 'sprowt_settings.pages.inc',
+        'weight' => -50
     );
 //
 //    $items['admin/people/add-coalmarch-user'] = array(
