@@ -170,6 +170,7 @@ features[metatag][] = global:403
 features[metatag][] = global:404
 features[metatag][] = global:frontpage
 features[metatag][] = node
+features[metatag][] = node:page
 features[node][] = affiliation
 features[node][] = benefit
 features[node][] = blog
