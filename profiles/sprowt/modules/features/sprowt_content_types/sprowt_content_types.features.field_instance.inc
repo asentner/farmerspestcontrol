@@ -5303,7 +5303,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'large',
+          'image_style' => 'profile',
         ),
         'type' => 'image',
         'weight' => 1,
