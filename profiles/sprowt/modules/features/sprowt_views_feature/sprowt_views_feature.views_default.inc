@@ -1137,7 +1137,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['filters']['type']['group'] = 1;
 
   /* Display: Local Target Title */
-  $handler = $view->new_display('block', 'Local Target Title', 'title_s4');
+  $handler = $view->new_display('block', 'Local Target Title', 'title_h1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<none>';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -1165,7 +1165,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['block_description'] = 'Local Target Title';
 
   /* Display: Local Target Title (H2) */
-  $handler = $view->new_display('block', 'Local Target Title (H2)', 'block_2');
+  $handler = $view->new_display('block', 'Local Target Title (H2)', 'title_h2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '<none>';
   $handler->display->display_options['defaults']['fields'] = FALSE;
