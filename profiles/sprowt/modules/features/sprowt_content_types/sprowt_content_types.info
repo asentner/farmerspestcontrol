@@ -438,7 +438,6 @@ features[variable][] = redirect_setting_name_region
 features[variable][] = redirect_setting_name_slide
 features[variable][] = redirect_setting_name_special_offer
 features[variable][] = redirect_setting_name_testimonial
-features[variable][] = update_last_check
 features[variable][] = xmlsitemap_settings_node_affiliation
 features[variable][] = xmlsitemap_settings_node_benefit
 features[variable][] = xmlsitemap_settings_node_blog
