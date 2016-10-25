@@ -1,8 +1,26 @@
 <?php
 
+/**
+ * Implements hook_menu().
+ */
+function sprowt_forms_menu() {
+    $items = array();
+    $items['node/%webform_menu/webform/configure-sprowt-forms'] = array(
+        'title' => 'Sprowt Forms Settings',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('sprowt_forms_webform_settings', 1),
+        'access callback' => 'node_access',
+        'access arguments' => array('update', 1),
+        'weight' => 10,
+        'type' => MENU_LOCAL_TASK,
+    );
+    
+    return $items;
+}
+
 function sprowt_forms_form_alter(&$form, &$form_state, $form_id){
     if (strpos($form_id, 'webform_') !== false) {
-      $form['#submit'][] = '_onWebformSubmit';
+        $form['#submit'][] = '_onWebformSubmit';
     }
 }
 
@@ -11,11 +29,15 @@ function sprowt_forms_preprocess_node(&$variables) {
         $override = json_decode($_COOKIE['SESStitleoverride'], true);
         if($override['nid'] == $variables['nid']) {
             if(!empty($override['name'])) {
-                if(!empty($variables['content']['field_display_title'][0]['#markup'])) {
-                    $variables['content']['field_display_title'][0]['#markup'] = 'Thank you, ' . $override['name'] . '!';
-                }
-                else {
-                    $variables['title'] = 'Thank you, ' . $override['name'] . '!';   
+                $admin_values = _sprowt_forms_admin_value($override['nid']);
+                if($admin_values['sprowt_forms_enabled'] && !empty($admin_values['sprowt_forms_thank_you_title'])) {
+                    $title = str_replace('%name', $override['name'], $admin_values['sprowt_forms_thank_you_title']);
+                    if (!empty($variables['content']['field_display_title'][0]['#markup'])) {
+                        $variables['content']['field_display_title'][0]['#markup'] = $title;
+                    }
+                    else {
+                        $variables['title'] = $title;
+                    }
                 }
             }
         }
@@ -23,44 +45,233 @@ function sprowt_forms_preprocess_node(&$variables) {
 }
 
 function _onWebformSubmit(&$form, &$form_state) {
-  // Get the current node
-  $node = !empty($form['#node']) ? $form['#node'] : false;
-
-  // Override the redirect to drop the sid request parameter
-  if ($node
-      && $node->webform['redirect_url'] != '<confirmation>'
-      && $node->webform['redirect_url'] != '<none>'
-      && !empty($form['submitted']['are_you_a_current_customer'])
-  ) {
-    // Grab the redirect path and clean query string form it if set
-    $redirect = preg_replace('/\?.*/', '', $node->webform['redirect_url']);
-
-    // Setup a session variable to override an h1 on the redirect page
-    $name = null;
-    if (isset($form['submitted']['first_name']['#value'])) {
-      $name = $form['submitted']['first_name']['#value'];
-    } elseif (isset($form['submitted']['name']['#value'])) {
-      $name = $form['submitted']['name']['#value'];
+    // Get the current node
+    $node = !empty($form['#node']) ? $form['#node'] : false;
+    
+    
+    if(!empty($node)) {
+        $admin_values = _sprowt_forms_admin_value($node->nid);
+        
+        $new_customer_key = $admin_values['sprowt_forms_new_customer_key'];
+        $option_yes = $admin_values['sprowt_forms_option_yes'];
+        $option_no = $admin_values['sprowt_forms_option_no'];
+        $current_query_value = $admin_values['sprowt_forms_current_query'];
+        $new_query_value = $admin_values['sprowt_forms_new_query'];
+        $first_name_key = $admin_values['sprowt_forms_first_name_key'];
+        
+        
+        $raw_values = $form_state['values']['submitted'];
+        $webform = $form['#node']->webform;
+        $webform_componenents = $webform['components'];
+        $components = array();
+        foreach($webform_componenents as $cid => $v) {
+            $components[$cid] = $v['form_key'];
+        }
+        
+        $values = array();
+        foreach($raw_values as $cid => $v) {
+            if(!empty($components[$cid])) {
+                $values[$components[$cid]] = $v;
+            }
+            else {
+                $values[$cid] = $v;
+            }
+            if(is_array($v)) {
+                foreach($v as $cid => $val) {
+                    if(!empty($components[$cid])) {
+                        $values[$components[$cid]] = $val;
+                    }
+                    else {
+                        $values[$cid] = $val;
+                    }
+                }
+            }
+        }
     }
-
-    // get the nid of the redirect
-    $normal = drupal_get_normal_path($redirect);
-    $parts = explode('/', $normal);
-    $nid = $parts[1];
-
-    if (null !== $name) {
-      setcookie('SESStitleoverride',json_encode(array(
-        'name' => ucwords(strtolower($name)),
-        'nid' => $nid,
-      )));
+    
+    // Override the redirect to drop the sid request parameter
+    if ($node
+        && $node->webform['redirect_url'] != '<confirmation>'
+        && $node->webform['redirect_url'] != '<none>'
+        && in_array($new_customer_key, array_values($components))
+        && !empty($admin_values['sprowt_forms_enabled'])
+    ) {
+        // Grab the redirect path and clean query string form it if set
+        $redirect = preg_replace('/\?.*/', '', $node->webform['redirect_url']);
+        
+        // Setup a session variable to override an h1 on the redirect page
+        $name = null;
+        if(empty(variable_get('sprowt_forms_first_name_key'))) { //for legacy sites
+            if (isset($form['submitted']['first_name']['#value'])) {
+                $name = $form['submitted']['first_name']['#value'];
+            } elseif (isset($form['submitted']['name']['#value'])) {
+                $name = $form['submitted']['name']['#value'];
+            }
+        }
+        else {
+            if (!empty($values[$first_name_key])) {
+                $name = $values[$first_name_key];
+            }
+        }
+        
+        // get the nid of the redirect
+        $normal = ltrim('/',drupal_get_normal_path($redirect));
+        $parts = explode('/', $normal);
+        $nid = $parts[1];
+        
+        if (null !== $name) {
+            setcookie('SESStitleoverride',json_encode(array(
+                'name' => ucwords(strtolower($name)),
+                'nid' => $nid,
+            )));
+        }
+        
+        if (!empty($values[$new_customer_key]) && $values[$new_customer_key] == $option_yes) {
+            $form_state['redirect'] = array($redirect, array('query' => array('t' => $current_query_value)));
+        }
+        elseif (!empty($values[$new_customer_key]) && $values[$new_customer_key] == $option_no) {
+            $form_state['redirect'] = array($redirect, array('query' => array('t' => $new_query_value)));
+        }
+        else {
+            $form_state['redirect'] = $redirect;
+        }
     }
+}
 
-    if (isset($form['submitted']['are_you_a_current_customer']['#value']) && $form['submitted']['are_you_a_current_customer']['#value'] == 'option1') {
-      $form_state['redirect'] = array($redirect, array('query' => array('t' => 'current-customer')));
-    } elseif (isset($form['submitted']['are_you_a_current_customer']['#value']) && $form['submitted']['are_you_a_current_customer']['#value'] == 'option2') {
-      $form_state['redirect'] = array($redirect, array('query' => array('t' => 'new-customer')));
-    } else {
-      $form_state['redirect'] = $redirect;
+function sprowt_forms_admin() {
+    $form = array();
+    
+    $form['sprowt_forms_new_customer_key'] = array(
+        '#type' => 'textfield',
+        '#title' => 'The webform component key'
+    );
+}
+
+function _sprowt_forms_admin_value($nid) {
+    $sprowt_forms = variable_get('sprowt_forms', array());
+    $values = array(
+        'sprowt_forms_enabled' => false,
+        'sprowt_forms_new_customer_key' => '',
+        'sprowt_forms_option_yes' => '',
+        'sprowt_forms_option_no' => '',
+        'sprowt_forms_current_query' => '',
+        'sprowt_forms_new_query' => '',
+        'sprowt_forms_first_name_key' => '',
+        'sprowt_forms_thank_you_title' => ''
+    );
+    if(!empty($sprowt_forms[$nid])) {
+        $values = $sprowt_forms[$nid];
     }
-  }
+    
+    return $values;
+}
+
+/**
+ * Implements hook_webform_form_settings()
+ *
+ * @param array $form
+ * @param array $form_state
+ * @param object $node
+ * @return array
+ */
+function sprowt_forms_webform_settings($form, $form_state, $node) {
+    $admin_values = _sprowt_forms_admin_value($node->nid);
+    
+    // Grab the current webform components
+    $options = array();
+    if (count($node->webform['components'])) {
+        foreach($node->webform['components'] as $component) {
+            $options[$component['form_key']] = t($component['name']);
+        }
+    }
+    
+    $form['nid'] = array(
+        '#type' => 'hidden',
+        '#value' => $node->nid,
+    );
+    
+    $form['sprowt_forms_enabled'] = array(
+        '#title' => t('Enable Sprowt Form'),
+        '#type' => 'checkbox',
+        '#weight' => 0,
+        '#default_value' => $admin_values['sprowt_forms_enabled'],
+    );
+    
+    $form['sprowt_forms_new_customer_key'] = array(
+        '#title' => t('New Customer Componenet'),
+        '#type' => 'select',
+        '#description' => 'Webform Component Determining New Customer',
+        '#options' => array_merge(
+            array(
+                '' => '- Select -'
+            ), $options
+        ),
+        '#default_value' => $admin_values['sprowt_forms_new_customer_key']
+    );
+    
+    $form['sprowt_forms_option_yes'] = array(
+        '#type' => 'textfield',
+        '#title' => '"Yes" option value for new customer component',
+        '#default_value' => $admin_values['sprowt_forms_option_yes'],
+    );
+    
+    $form['sprowt_forms_option_no'] = array(
+        '#type' => 'textfield',
+        '#title' => '"No" option value for new customer component',
+        '#default_value' => $admin_values['sprowt_forms_option_no'],
+    );
+    
+    $form['sprowt_forms_current_query'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Query value for current customer',
+        '#default_value' => $admin_values['sprowt_forms_current_query'],
+    );
+    
+    $form['sprowt_forms_new_query'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Query value for new customer',
+        '#default_value' => $admin_values['sprowt_forms_new_query'],
+    );
+    
+    $form['sprowt_forms_first_name_key'] = array(
+        '#title' => t('First Name Componenet'),
+        '#type' => 'select',
+        '#description' => 'Webform Component Determining Customer\'s First Name (used on thank you page)',
+        '#options' => array_merge(
+            array(
+                '' => '- Select -'
+            ), $options
+        ),
+        '#default_value' => $admin_values['sprowt_forms_new_customer_key']
+    );
+    
+    $form['sprowt_forms_thank_you_title'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Thank You Page Title Override',
+        '#description' => 'Overrides the title of the thank you page (leave blank to keep current title). "<strong>%name</strong>" will be replaced with the first name from the above component.',
+        '#default_value' => $admin_values['sprowt_forms_thank_you_title'],
+    );
+    
+    $form['submit'] = array(
+        '#weight' => 100,
+        '#type' => 'submit',
+        '#value' => ('Save Configuration'),
+    );
+    
+    
+    $form['#submit'][] = 'sprowt_forms_webform_settings_submit';
+    
+    return $form;
+}
+
+function sprowt_forms_webform_settings_submit($form, $form_state) {
+    $values = $form_state['values'];
+    
+    $nid = $values['nid'];
+    unset($values['nid']);
+    
+    $sprowt_forms = variable_get('sprowt_forms', array());
+    $sprowt_forms[$nid] = $values;
+    
+    variable_set('sprowt_forms', $sprowt_forms);
 }

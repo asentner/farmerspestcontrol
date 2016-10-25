@@ -1,0 +1,47 @@
+<?php
+/**
+ * Set up contact forms
+ */
+function sprowt_forms_update_7100() {
+    $sprowt_forms = variable_get('sprowt_forms', array());
+    
+    $nids = db_query("
+        SELECT nid
+        FROM node
+        WHERE type = 'webform'
+    ")->fetchCol();
+    
+    foreach(node_load_multiple($nids) as $node) {
+        $webform = $node->webform;
+        $webform_componenents = $webform['components'];
+        $components = array();
+        foreach($webform_componenents as $cid => $v) {
+            $components[] = $v['form_key'];
+        }
+    
+        $values = array(
+            'sprowt_forms_enabled' => true,
+            'sprowt_forms_new_customer_key' => 'are_you_a_current_customer',
+            'sprowt_forms_option_yes' => 'option1',
+            'sprowt_forms_option_no' => 'option2',
+            'sprowt_forms_current_query' => 'current-customer',
+            'sprowt_forms_new_query' => 'new-customer',
+            'sprowt_forms_first_name_key' => '',
+            'sprowt_forms_thank_you_title' => 'Thank you, %name!'
+        );
+        
+        if(in_array($values['sprowt_forms_new_customer_key'], $components)) {
+            if(in_array('first_name', $components)) {
+                $values['sprowt_forms_first_name_key'] = 'first_name';
+            }
+            elseif (in_array('name', $components)) {
+                $values['sprowt_forms_first_name_key'] = 'name';
+            }
+            
+            $sprowt_forms[$node->nid] = $values;
+        }
+        
+    }
+    
+    variable_set('sprowt_forms', $sprowt_forms);
+}
