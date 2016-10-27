@@ -6,11 +6,18 @@ function sprowt_taxonomy_engine_install() {
   $path_auto = variable_get('pathauto_node_localtarget_pattern',false);
   
   if(empty($path_auto)){
-      variable_set('pathauto_node_localtarget_pattern', '[node:title]');
+      variable_set('pathauto_node_localtarget_pattern', '[node:sprowt_node:localtarget_url_pattern]');
   }
   
   db_update('system')
     ->fields(array('weight' => 2))
     ->condition('name', 'sprowt_taxonomy_engine', '=')
     ->execute();
+}
+
+/**
+ * Update URL alias pattern for LocalTarget pages
+ */
+function sprowt_taxonomy_engine_update_7100(){
+    variable_set('pathauto_node_localtarget_pattern', '[node:sprowt_node:localtarget_url_pattern]');
 }
