@@ -2694,7 +2694,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_localtarget_pattern';
-  $strongarm->value = '[node:title]';
+  $strongarm->value = '[node:sprowt_node:localtarget_url_pattern]';
   $export['pathauto_node_localtarget_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

@@ -109,6 +109,7 @@ features[field_instance][] = node-market-body
 features[field_instance][] = node-market-field_content_edited
 features[field_instance][] = node-market-field_image
 features[field_instance][] = node-market-field_market
+features[field_instance][] = node-market-field_state
 features[field_instance][] = node-package-body
 features[field_instance][] = node-package-field_call_out
 features[field_instance][] = node-package-field_content_edited
