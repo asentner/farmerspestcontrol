@@ -2694,7 +2694,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_localtarget_pattern';
-  $strongarm->value = '[node:title]';
+  $strongarm->value = '[node:sprowt_node:localtarget_url_pattern]';
   $export['pathauto_node_localtarget_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2892,13 +2892,6 @@ example.org';
   $strongarm->name = 'redirect_setting_name_testimonial';
   $strongarm->value = 'rh_node_redirect';
   $export['redirect_setting_name_testimonial'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'update_last_check';
-  $strongarm->value = 1476386882;
-  $export['update_last_check'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

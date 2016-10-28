@@ -459,10 +459,11 @@ function sprowt_content_types_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_image',
-      2 => 'field_market',
-      3 => 'field_content_edited',
+      1 => 'field_content_edited',
+      2 => 'field_image',
+      3 => 'field_market',
       4 => 'title',
+      5 => 'field_state',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

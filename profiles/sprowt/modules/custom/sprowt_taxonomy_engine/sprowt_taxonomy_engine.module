@@ -176,7 +176,7 @@ function sprowt_taxonomy_engine_form_alter(&$form, &$form_state) {
 	
 	if($form['#form_id'] == 'pathauto_patterns_form') {
 		$form['node']['pathauto_node_localtarget_pattern']['#disabled'] = true;
-		$form['node']['pathauto_node_localtarget_pattern']['#value'] = '[node:title]';
+		$form['node']['pathauto_node_localtarget_pattern']['#value'] = variable_get('pathauto_node_localtarget_pattern','[node:title]');
 	}
 }
 
@@ -771,23 +771,44 @@ function _sprowt_taxonomy_engine_add_menu_info($node){
 	return $node;
 }
 
+function _sprowt_service_term_map(){
+    $map = &drupal_static(__FUNCTION__);
 
+    if(!isset($map)) {
+        $map = db_query("
+            SELECT s.field_service_tid, n.nid
+            FROM node n
+            LEFT JOIN field_data_field_service s on s.entity_id = n.nid AND s.entity_type = 'node'
+            WHERE n.type = 'service'
+            GROUP BY n.nid
+		")->fetchAllKeyed();
+    }
+
+    return $map;
+}
+
+
+function _sprowt_market_term_map(){
+    $map = &drupal_static(__FUNCTION__);
+
+    if(!isset($map)) {
+        $map = db_query("
+            SELECT m.field_market_tid, n.nid
+            FROM node n
+            LEFT JOIN field_data_field_market m on m.entity_id = n.nid AND m.entity_type = 'node'
+            WHERE n.type = 'market'
+            GROUP BY n.nid
+		")->fetchAllKeyed();
+    }
+
+    return $map;
+}
 /**
  * Get the service node from a service tid
  */
 function _sprowt_service_node_from_tid($tid) {
-	$nid = db_query(
-		"SELECT n.nid
-		FROM node n
-		LEFT JOIN field_data_field_service s on s.entity_id = n.nid AND s.entity_type = 'node'
-		WHERE n.type = 'service'
-		AND s.field_service_tid = :tid
-		GROUP BY n.nid
-		",
-		array(
-			':tid' => $tid
-		)
-	)->fetchField();
+    $map = _sprowt_service_term_map();
+	$nid = $map[$tid];
 	
 	return node_load($nid);
 }
@@ -796,18 +817,108 @@ function _sprowt_service_node_from_tid($tid) {
  * Get the market node from a market tid
  */
 function _sprowt_market_node_from_tid($tid) {
-	$nid = db_query(
-		"SELECT n.nid
-		FROM node n
-		LEFT JOIN field_data_field_market m on m.entity_id = n.nid AND m.entity_type = 'node'
-		WHERE n.type = 'market'
-		AND m.field_market_tid = :tid
-		GROUP BY n.nid
-		",
-		array(
-			':tid' => $tid
-		)
-	)->fetchField();
+    $map = _sprowt_market_term_map();
+	$nid = $map[$tid];
 	
 	return node_load($nid);
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function sprowt_taxonomy_engine_token_info() {
+    $types = array(
+        'sprowt_node' => array(
+            'name' => 'Sprowt Node',
+            'description' => 'Sprowt specific tokens',
+            'needs-data' => 'node'
+        ),
+    );
+
+
+    $tokens = array(
+        'sprowt_node' => array(
+            'localtarget_url_pattern' => array(
+                'name' => 'Localtarget URL pattern',
+                'description' => 'then ending url pattern for Localtarget pages in the form of "service-market-state"',
+            )
+        ),
+    );
+
+    if (module_exists('node')) {
+        $tokens['node']['sprowt_node'] = array(
+            'name' => t('Sprowt Node'),
+            'description' => t('Sprowt specific tokens'),
+            'type' => 'sprowt_node',
+        );
+    }
+    return array(
+        'types' => $types,
+        'tokens' => $tokens
+    );
+}
+
+function _sprowt_taxonomy_engine_slugify($str) {
+    $str = strtolower($str);
+
+    return preg_replace('/[^a-z\-]/','-', $str);
+
+}
+
+
+/**
+ * Implements hook_tokens().
+ */
+function sprowt_taxonomy_engine_tokens($type, $tokens, array $data = array(), array $options = array()) {
+    $replacements = array();
+    if(!empty($data['node'])) {
+        $node = $data['node'];
+
+        foreach($tokens as $name => $original) {
+            switch($name) {
+                case 'sprowt_node:localtarget_url_pattern':
+                case 'localtarget_url_pattern':
+                    if($node->type == 'localtarget') {
+                        $market = _sprowt_market_node_from_tid($node->field_market[LANGUAGE_NONE][0]['tid']);
+                        $service = _sprowt_service_node_from_tid($node->field_service[LANGUAGE_NONE][0]['tid']);
+
+                        $state = $market->field_state[LANGUAGE_NONE][0]['value'];
+
+                        if(empty($state)) {
+                            $nid = db_query("
+                                SELECT entity_id
+                                FROM field_data_field_market
+                                WHERE field_market_tid = :tid
+                                AND bundle = 'location'
+                            ", array(
+                                ':tid' => $node->field_market[LANGUAGE_NONE][0]['tid']
+                            ))->fetchField();
+                            if(!empty($nid)) {
+                                $location = node_load($nid);
+                                $state = $location->field_state[LANGUAGE_NONE][0]['value'];
+                            }
+                        }
+
+                        $url = array(
+                            _sprowt_taxonomy_engine_slugify($service->title),
+                            _sprowt_taxonomy_engine_slugify($market->title),
+                            _sprowt_taxonomy_engine_slugify($state),
+                        );
+
+                        foreach($url as $k => $v) {
+                            if(empty($v)) {
+                                unset($url[$k]);
+                            }
+                        }
+
+                        $url = array_values($url);
+
+                        $replacements[$original] = implode('-', $url);
+                    }
+                    break;
+            }
+        }
+    }
+
+    return $replacements;
 }

@@ -482,5 +482,15 @@ function sprowt_content_types_metatag_export_default() {
     ),
   );
 
+  // Exported Metatag config instance: node:page.
+  $config['node:page'] = array(
+    'instance' => 'node:page',
+    'config' => array(
+      'og:image' => array(
+        'value' => '[site:logo]',
+      ),
+    ),
+  );
+
   return $config;
 }

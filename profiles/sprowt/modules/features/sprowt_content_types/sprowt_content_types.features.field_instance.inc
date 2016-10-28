@@ -781,7 +781,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 3,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -4089,7 +4089,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4213,7 +4213,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4247,6 +4247,57 @@ function sprowt_content_types_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 46,
+    ),
+  );
+
+  // Exported field_instance: 'node-market-field_state'.
+  $field_instances['node-market-field_state'] = array(
+    'bundle' => 'market',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Optional field to determine what state this market is in',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_state',
+    'label' => 'State',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 47,
     ),
   );
 
@@ -5303,7 +5354,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'large',
+          'image_style' => 'profile',
         ),
         'type' => 'image',
         'weight' => 1,
@@ -5981,7 +6032,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 3,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -6061,7 +6112,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 5,
+      'default_image' => 6,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -7725,6 +7776,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Offer headline');
   t('Offer price');
   t('Offer subheadline');
+  t('Optional field to determine what state this market is in');
   t('Optional intro text for the packages block');
   t('Optional title for the packages block');
   t('Or province.');
