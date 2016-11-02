@@ -1,0 +1,9 @@
+name = Sprowt Content Authoring (Features)
+description = Contains settings that pertain to content authoring.
+core = 7.x
+package = Sprowt Features
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = html_title_allowed_elements
