@@ -1059,7 +1059,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
 
   /* Display: Location, Map, and Reviews */
-  $handler = $view->new_display('block', 'Location, Map, and Reviews', 'block_1');
+  $handler = $view->new_display('block', 'Location, Map, and Reviews', 'map_reviews');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
