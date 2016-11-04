@@ -85,6 +85,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -374,6 +375,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -589,6 +591,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -711,6 +714,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -1060,6 +1064,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -1189,6 +1194,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 49,
@@ -1491,6 +1497,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -1606,6 +1613,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -1905,6 +1913,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -1963,6 +1972,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 49,
@@ -2191,6 +2201,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 46,
@@ -2306,6 +2317,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -2418,6 +2430,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 48,
@@ -2549,6 +2562,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -2608,6 +2622,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 81,
@@ -2728,6 +2743,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -2937,6 +2953,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 76,
@@ -2995,6 +3012,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 77,
@@ -3106,6 +3124,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 83,
@@ -3162,6 +3181,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -3221,6 +3241,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -3279,6 +3300,81 @@ function sprowt_content_types_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 72,
+    ),
+  );
+
+  // Exported field_instance: 'node-location-field_button'.
+  $field_instances['node-location-field_button'] = array(
+    'bundle' => 'location',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 12,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_button',
+    'label' => 'Button URL',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => 'button',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'rel_remove' => 'default',
+      'title' => 'value',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => 'Contact Us',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 54,
     ),
   );
 
@@ -3398,6 +3494,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -3463,6 +3560,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -3531,6 +3629,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -3591,9 +3690,10 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
-      'weight' => 54,
+      'weight' => 53,
     ),
   );
 
@@ -3789,6 +3889,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -3933,6 +4034,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -4001,6 +4103,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -4061,6 +4164,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -4294,6 +4398,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -4367,6 +4472,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -4426,6 +4532,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 50,
@@ -4536,6 +4643,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -4736,6 +4844,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 45,
@@ -4852,6 +4961,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -5024,6 +5134,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -5156,6 +5267,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 53,
@@ -5214,6 +5326,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -5274,6 +5387,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -5467,6 +5581,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -5530,6 +5645,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -5809,6 +5925,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -5868,6 +5985,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 52,
@@ -5978,6 +6096,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -6186,6 +6305,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 45,
@@ -6245,6 +6365,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 5,
+        'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
       'weight' => 51,
@@ -6303,6 +6424,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -6420,6 +6542,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -6788,6 +6911,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -7143,6 +7267,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -7272,6 +7397,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
+        'show_token_tree' => FALSE,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -7514,6 +7640,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -7734,6 +7861,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
+        'show_token_tree' => FALSE,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',

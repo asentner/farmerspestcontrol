@@ -286,7 +286,7 @@ function sprowt_content_types_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Content',
-    'weight' => '0',
+    'weight' => '1',
     'children' => array(
       0 => 'field_content_edited',
       1 => 'field_email',
@@ -297,10 +297,7 @@ function sprowt_content_types_field_group_info() {
       6 => 'field_postal_code',
       7 => 'field_state',
       8 => 'field_street_address',
-      9 => 'field_social_reviews',
-      10 => 'field_markets',
-      11 => 'field_map_code',
-      12 => 'title',
+      9 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -678,10 +675,41 @@ function sprowt_content_types_field_group_info() {
   );
   $field_groups['group_locale|node|location|teaser'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_social_map|node|location|form';
+  $field_group->group_name = 'group_social_map';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'location';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Social and Map',
+    'weight' => '2',
+    'children' => array(
+      0 => 'field_map_code',
+      1 => 'field_social_reviews',
+      2 => 'field_button',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'label' => 'Social and Map',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-content field-group-tab',
+        'description' => '',
+      ),
+      'formatter' => 'closed',
+    ),
+  );
+  $field_groups['group_social_map|node|location|form'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Content');
   t('Locale');
+  t('Social and Map');
 
   return $field_groups;
 }

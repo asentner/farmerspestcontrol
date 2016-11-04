@@ -706,19 +706,19 @@ function sprowt_content_types_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '5',
         ),
         'title' => array(
           'weight' => '43',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '3',
         ),
         'rabbit_hole' => array(
           'weight' => '0',
         ),
         'xmlsitemap' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
