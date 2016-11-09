@@ -149,6 +149,23 @@ hr {
   .local-target-webform .node__title {
     color: #fff; }
 
+.block--views-localtarget-map-reviews h2 {
+  background-color: #f3ba0d;
+  color: #fff; }
+
+.block--views-localtarget-map-reviews h3:before {
+  color: #3da244; }
+
+.block--views-localtarget-map-reviews .location-content {
+  background-color: #fff; }
+
+.block--views-localtarget-map-reviews .reviews-links {
+  background-color: #fff; }
+  .block--views-localtarget-map-reviews .reviews-links .field__item:before {
+    color: #f3ba0d; }
+  .block--views-localtarget-map-reviews .reviews-links .field__item + .field__item {
+    border-top-color: #dddddd; }
+
 .block--views-locations-list {
   color: inherit; }
   .block--views-locations-list a {
@@ -560,6 +577,13 @@ hr {
 
 .node-type-localtarget .l-region--preface-second {
   background-color: #f3ba0d; }
+
+.node-type-localtarget .l-region--preface-third {
+  background-image: -webkit-linear-gradient(top, #f3ba0d 50%, #fff 50%);
+  background-image: linear-gradient(to bottom, #f3ba0d 50%, #fff 50%); }
+
+.node-type-localtarget .l-region--preface-fourth {
+  background-color: #f4f4f4; }
 
 .node-type-localtarget .l-main {
   background-color: #fff; }
