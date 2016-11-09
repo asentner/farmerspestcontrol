@@ -34,6 +34,7 @@ regions[sidebar] = Sidebar
 regions[postscript_first] = Postscript first
 regions[postscript_second] = Postscript second
 regions[postscript_third] = Postscript third
+regions[preface_fourth] = Preface fourth
 
 regions[footer_first] = Footer first
 regions[footer_second] = Footer second

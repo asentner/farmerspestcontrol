@@ -45,10 +45,7 @@
 }
 
 // Front page testimonial
-
-.block--views-testimonials-front,
-.block--views-testimonials-front-s4,
-.local-target-testimonial {
+%block--views-testimonials {
   max-width: 1000px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -102,7 +99,7 @@
     flex-direction: column;
     justify-content: center;
     height: 350px;
-    margin: 0 20px -175px;
+    margin: 0 20px;
     position: relative;
     z-index: 99;
     box-shadow: 0 11px 35px rgba(black, .25);
@@ -119,7 +116,23 @@
     }
   }
   @include breakpoint($desk) {
-    margin: 0 auto -175px;
+    margin: 0 auto;
     width: 100%;
   }
+}
+
+
+.block--views-testimonials-front,
+.block--views-testimonials-front-s4 {
+  @extend %block--views-testimonials;
+  @include breakpoint($tab) {
+    margin: 0 20px -175px;
+  }
+  @include breakpoint($desk) {
+    margin: 0 auto -175px;
+  }
+}
+
+.local-target-testimonial {
+  @extend %block--views-testimonials;
 }

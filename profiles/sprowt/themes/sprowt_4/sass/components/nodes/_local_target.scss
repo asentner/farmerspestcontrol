@@ -85,19 +85,22 @@
 		}
 	}
 	@include breakpoint($tab) {
+		.l-region--preface-fourth {
+			position: relative;
+			margin-top: -175px;
+			padding-top: 175px;
+			padding-bottom: 60px;
+		}
+		.l-main {
+			margin-top: 0;
+		}
+		.l-content {
+			padding-top: 50px;
+		}
 		.field--name-body {
 			.field__item {
 				display: block;
 			}
-		}
-	}
-	@include breakpoint($tab) {
-		.l-main {
-			margin-top: 0;
-			padding-top: 175px;
-		}
-		.l-content {
-			padding-top: 60px;
 		}
 	}
 }
