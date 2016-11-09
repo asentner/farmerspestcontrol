@@ -9,6 +9,7 @@
     <?php print render($page['preface_first']); ?>
     <?php print render($page['preface_second']); ?>
     <?php print render($page['preface_third']); ?>
+    <?php print render($page['preface_fourth']); ?>
   </div>
 
   <div class="l-breadcrumb">
@@ -45,6 +46,6 @@
       <?php print render($page['footer_third']); ?>
     </footer>
   </div>
-  
+
   <?php print render($page['footer_second']); ?>
 </div>

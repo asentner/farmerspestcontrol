@@ -7,7 +7,7 @@
 
 // homepage service listing
 
-.block--views-services-front-s4 {
+.block--views-services-front-services {
   padding: 20px 20px 40px;
   .view-content {
     @include flexbox;
@@ -15,6 +15,15 @@
     justify-content: center;
     max-width: 600px;
     margin: 0 auto;
+        + .more-link {
+      text-align: center;
+      margin-top: 1.5em;
+      a {
+        @extend %button;
+        max-width: 250px;
+        margin: 0 auto;
+      }
+    }
   }
   .views-row {
     width: 50%;

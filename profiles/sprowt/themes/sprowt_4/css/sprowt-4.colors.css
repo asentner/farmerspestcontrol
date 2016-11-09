@@ -242,16 +242,23 @@ hr {
   background-color: #fff;
   border-color: #eee; }
 
+.block--views-services-front-services .view-content + .more-link a {
+  background-color: #3da244;
+  color: #fff; }
+  .block--views-services-front-services .view-content + .more-link a:hover, .block--views-services-front-services .view-content + .more-link a:focus {
+    background-color: #245927;
+    color: #fff; }
+
 @media (min-width: 768px) {
-  .block--views-services-front-s4 .node {
+  .block--views-services-front-services .node {
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     border-color: #f4f4f4; } }
 
 @media (min-width: 1024px) {
-  .block--views-services-front-s4 .node {
+  .block--views-services-front-services .node {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); }
-    .block--views-services-front-s4 .node:hover {
+    .block--views-services-front-services .node:hover {
       box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15); } }
 
 .block--views-slideshow-front .slides,
