@@ -1938,6 +1938,9 @@ function sprowt_views_feature_views_default_views() {
   $handler = $view->new_display('block', 'Team list', 'list');
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['block_description'] = 'List of team members';
   $export['team'] = $view;
 
