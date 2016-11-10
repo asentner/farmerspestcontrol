@@ -59,7 +59,7 @@ a {
     color: #e9b404; }
 
 h1 {
-  color: #e9b404; }
+  color: #58595b; }
 
 h2 {
   color: #373d38; }
@@ -222,24 +222,24 @@ hr {
   background-color: #fff;
   border-color: #eee; }
 
-.block--views-services-homepage .block__content:before {
+.block--views-services-front-all .block__content:before {
   background-color: #151616; }
 
-.block--views-services-homepage .node:before {
+.block--views-services-front-all .node:before {
   background-color: #151616; }
 
-.block--views-services-homepage .node__title a {
+.block--views-services-front-all .node__title a {
   color: #fff; }
-  .block--views-services-homepage .node__title a:hover {
+  .block--views-services-front-all .node__title a:hover {
     color: #e9b404; }
 
-.block--views-services-homepage .node__content {
+.block--views-services-front-all .node__content {
   color: #fff; }
 
-.block--views-services-homepage .more-link {
+.block--views-services-front-all .more-link {
   background-color: #e9b404;
   color: #fff; }
-  .block--views-services-homepage .more-link:hover, .block--views-services-homepage .more-link:focus {
+  .block--views-services-front-all .more-link:hover, .block--views-services-front-all .more-link:focus {
     background-color: #fdd244;
     color: #fff; }
 
@@ -298,7 +298,7 @@ hr {
   background-color: #fff;
   border-color: #f4f4f4; }
   .block--views-special-offers-sidebar .block__title {
-    color: #e9b404; }
+    color: #58595b; }
   .block--views-special-offers-sidebar .node__title {
     color: #47b649; }
   .block--views-special-offers-sidebar .node__content {
@@ -311,16 +311,19 @@ hr {
   color: #373d38; }
 
 .block--views-special-offers-front .block__title,
+.block--views-special-offers-front-slideshow .block__title,
 .local-target-special-offer .block__title,
 .block--views-special-offers-ltp-slideshow .block__title {
   color: #373d38; }
 
 .block--views-special-offers-front .node,
+.block--views-special-offers-front-slideshow .node,
 .local-target-special-offer .node,
 .block--views-special-offers-ltp-slideshow .node {
   background-color: #fff;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15); }
   .block--views-special-offers-front .node:after,
+  .block--views-special-offers-front-slideshow .node:after,
   .local-target-special-offer .node:after,
   .block--views-special-offers-ltp-slideshow .node:after {
     background-color: #e9b404;
@@ -328,29 +331,35 @@ hr {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15); }
 
 .block--views-special-offers-front .node__title,
+.block--views-special-offers-front-slideshow .node__title,
 .local-target-special-offer .node__title,
 .block--views-special-offers-ltp-slideshow .node__title {
   color: #47b649; }
 
 .block--views-special-offers-front .coupon-wrap,
+.block--views-special-offers-front-slideshow .coupon-wrap,
 .local-target-special-offer .coupon-wrap,
 .block--views-special-offers-ltp-slideshow .coupon-wrap {
   border-color: #dddddd; }
   .block--views-special-offers-front .coupon-wrap:before,
+  .block--views-special-offers-front-slideshow .coupon-wrap:before,
   .local-target-special-offer .coupon-wrap:before,
   .block--views-special-offers-ltp-slideshow .coupon-wrap:before {
     background-color: #fff; }
 
 .block--views-special-offers-front .button,
+.block--views-special-offers-front-slideshow .button,
 .local-target-special-offer .button,
 .block--views-special-offers-ltp-slideshow .button {
   background-color: transparent;
   color: #373d38; }
   .block--views-special-offers-front .button:after,
+  .block--views-special-offers-front-slideshow .button:after,
   .local-target-special-offer .button:after,
   .block--views-special-offers-ltp-slideshow .button:after {
     color: #e9b404; }
   .block--views-special-offers-front .button:hover,
+  .block--views-special-offers-front-slideshow .button:hover,
   .local-target-special-offer .button:hover,
   .block--views-special-offers-ltp-slideshow .button:hover {
     color: #e9b404; }
@@ -359,7 +368,7 @@ hr {
   background-color: #fff;
   border-color: #f4f4f4; }
   .block--testimonials-sidebar .block__title, .block--views-testimonials-random .block__title {
-    color: #e9b404; }
+    color: #58595b; }
   .block--testimonials-sidebar .node__content, .block--views-testimonials-random .node__content {
     color: #707972; }
   .block--testimonials-sidebar .fa-star, .block--views-testimonials-random .fa-star {
