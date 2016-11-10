@@ -16,6 +16,7 @@
     }
   }
   @include breakpoint($desk) {
+    background-color: palette(secondary, base);
     .node {
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
       &:hover {

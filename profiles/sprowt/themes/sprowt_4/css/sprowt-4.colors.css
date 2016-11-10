@@ -256,10 +256,12 @@ hr {
     border-color: #f4f4f4; } }
 
 @media (min-width: 1024px) {
-  .block--views-services-front-services .node {
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); }
-    .block--views-services-front-services .node:hover {
-      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15); } }
+  .block--views-services-front-services {
+    background-color: #f3ba0d; }
+    .block--views-services-front-services .node {
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); }
+      .block--views-services-front-services .node:hover {
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15); } }
 
 .block--views-slideshow-front .slides,
 .block--views-slideshow-localtarget .slides {
