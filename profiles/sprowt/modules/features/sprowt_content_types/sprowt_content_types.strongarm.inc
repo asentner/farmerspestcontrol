@@ -866,7 +866,7 @@ function sprowt_content_types_strongarm() {
           'weight' => '40',
         ),
         'title' => array(
-          'weight' => '43',
+          'weight' => '54',
         ),
         'path' => array(
           'weight' => '30',

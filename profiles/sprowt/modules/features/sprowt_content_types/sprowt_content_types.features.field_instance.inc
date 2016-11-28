@@ -340,6 +340,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'quaternary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -404,6 +410,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => -1,
+      ),
+      'quaternary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -473,6 +485,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 10,
+      ),
+      'quaternary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4476,7 +4494,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 49,
+      'weight' => 60,
     ),
   );
 
@@ -4535,7 +4553,7 @@ function sprowt_content_types_field_default_field_instances() {
         'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
-      'weight' => 50,
+      'weight' => 61,
     ),
   );
 
@@ -4587,7 +4605,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 42,
+      'weight' => 52,
     ),
   );
 
@@ -4647,7 +4665,60 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 44,
+      'weight' => 55,
+    ),
+  );
+
+  // Exported field_instance: 'node-package-field_highlight'.
+  $field_instances['node-package-field_highlight'] = array(
+    'bundle' => 'package',
+    'default_value' => array(
+      0 => array(
+        'value' => 'off',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Marking this field as "Yes" adds extra markup and design to standout in the list of other packages.',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 8,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_highlight',
+    'label' => 'Highlight',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 53,
     ),
   );
 
@@ -4715,7 +4786,7 @@ function sprowt_content_types_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 46,
+      'weight' => 57,
     ),
   );
 
@@ -4787,7 +4858,7 @@ function sprowt_content_types_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 47,
+      'weight' => 58,
     ),
   );
 
@@ -4847,7 +4918,7 @@ function sprowt_content_types_field_default_field_instances() {
         'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
-      'weight' => 45,
+      'weight' => 56,
     ),
   );
 
@@ -4901,7 +4972,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 48,
+      'weight' => 59,
     ),
   );
 
@@ -8042,6 +8113,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Expiration date');
   t('Google+ URL');
   t('Hero Image');
+  t('Highlight');
   t('Icon');
   t('Image');
   t('Include suite number if applicable.');
@@ -8054,6 +8126,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Locality');
   t('Map code');
   t('Market');
+  t('Marking this field as "Yes" adds extra markup and design to standout in the list of other packages.');
   t('Offer');
   t('Offer headline');
   t('Offer price');
