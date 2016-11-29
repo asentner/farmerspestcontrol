@@ -20,18 +20,21 @@ function _review_boost_admin_import_csv() {
 }
 
 function _review_boost_admin_import_csv_form($form, $form_state) {
+    variable_del('_review_boost_temp_data');
     $form['csv_file'] = array(
         '#type' => 'file',
         '#title' => 'CSV File',
         '#description' => 'Select a CSV (comma-separated values) document to upload. If you\'d like an example csv click <a href="/admin/survey/sample" target="_blank">here</a>.',
     );
-
-    // Add our submit handler
-    $form['#submit'][] = '_review_boost_admin_import_csv_form_submit';
-
-    $form =  system_settings_form($form);
-
-    $form['actions']['submit']['#value'] = 'Upload service calls';
+    
+    $form['actions'] = array(
+        '#type' => 'actions',
+        'submit' => array(
+            '#type' => 'submit',
+            '#value' => 'Upload service calls',
+            '#submit' => array('_review_boost_admin_import_csv_form_submit_redirect')
+        )
+    );
 
     return $form;
 }
@@ -124,6 +127,54 @@ function _review_boost_admin_import_csv_form_validate($form, &$form_state) {
     }
 }
 
+function _review_boost_admin_import_csv_form_submit_redirect($form, &$form_state) {
+    if (count($form_state['storage']['data'])) {
+        variable_set('_review_boost_temp_data', $form_state['storage']['data']);
+    }
+    else {
+        variable_del('_review_boost_temp_data');
+    }
+    
+    $form_state['redirect'] = array('admin/survey/import-csv-confirm');
+}
+
+function _review_boost_admin_import_csv_confirm() {
+    $data = variable_get('_review_boost_temp_data');
+    $test_data = array_slice($data, 0, 15);
+    
+    
+    return theme('review_boost_admin_import_csv_confirm', array(
+        'data' => $data,
+        'test_data' => $test_data,
+        'form' => drupal_get_form('_review_boost_admin_import_csv_form_confirm_form'),
+    ));
+}
+
+function _review_boost_admin_import_csv_form_confirm_form($form, &$form_state) {
+    $data = variable_get('_review_boost_temp_data');
+    $form_state['storage']['data'] = $data;
+    $form['actions'] = array(
+        '#type' => 'actions',
+        'submit' => array(
+            '#type' => 'submit',
+            '#value' => 'Import',
+            '#submit' => array('_review_boost_admin_import_csv_form_submit')
+        ),
+        'cancel' => array(
+            '#type' => 'submit',
+            '#value' => 'Cancel',
+            '#submit' => array('_review_boost_admin_import_csv_form_cancel')
+        ),
+    );
+    return $form;
+}
+
+function _review_boost_admin_import_csv_form_cancel($form, &$form_state) {
+    variable_del('_review_boost_temp_data');
+    drupal_set_message('CSV Import Cancelled');
+    $form_state['redirect'] = array('admin/survey/import-csv');
+}
+
 function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
     if (count($form_state['storage']['data'])) {
         foreach($form_state['storage']['data'] as $data) {
@@ -144,6 +195,9 @@ function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
                 ->execute();
         }
     }
+    variable_del('_review_boost_temp_data');
+    drupal_set_message('CSV Import Completed!');
+    $form_state['redirect'] = array('admin/survey/import-csv');
 }
 
 /**
