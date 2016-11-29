@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Content Authoring (Features) feature.
+ */
+
+include_once 'sprowt_content_authoring_features.features.inc';

@@ -44,6 +44,26 @@
 
     }
   };
+  
+Drupal.behaviors.sprowtAccordions = {
+    attach: function (context, settings) {
+      // find div's with class = accordion and turn them in to accordions
+      var $accordions = $('div.accordion').each(function(){
+        $(this).find('h3').first().addClass('accordion-header');
+        $(this).children().not('.accordion-header').wrapAll('<div class="accordion-content"></div>');
+      });
+
+      // close the accordions
+      $('.accordion-content').hide();
+
+      // make the accordions work
+      $('.accordion-header').click(function(){
+        $(this).toggleClass('open');
+        $(this).siblings('.accordion-content').slideToggle();
+      });
+
+    }
+  };
 
   Drupal.behaviors.sprowtMapMouseOver = {
     attach: function (context, settings) {

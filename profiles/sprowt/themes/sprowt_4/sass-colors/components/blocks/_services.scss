@@ -1,6 +1,13 @@
 // homepage service listing
 
-.block--views-services-front-s4 {
+.block--views-services-front-services {
+  .view-content {
+    + .more-link {
+      a {
+        @include button-color;
+      }
+    }
+  }
   @include breakpoint($tab) {
     .node {
       background-color: palette(white, pure);
@@ -9,6 +16,7 @@
     }
   }
   @include breakpoint($desk) {
+    background-color: palette(secondary, base);
     .node {
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
       &:hover {

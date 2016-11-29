@@ -9,6 +9,7 @@
     <?php print render($page['preface_first']); ?>
     <?php print render($page['preface_second']); ?>
     <?php print render($page['preface_third']); ?>
+    <?php print render($page['preface_fourth']); ?>
   </div>
 
   <div class="l-breadcrumb">
@@ -32,15 +33,19 @@
 
   <div class="l-postscript">
     <?php print render($page['postscript_first']); ?>
-    <?php print render($page['postscript_second']); ?>
+    <div class="l-wrap--postscript-second"<?php if (drupal_is_front_page() && isset($background_image)) {?> style="background-image:url('<?php print $background_image; ?>');"<?php } ?>>
+      <?php print render($page['postscript_second']); ?>
+    </div>
     <?php print render($page['postscript_third']); ?>
+    <?php print render($page['postscript_fourth']); ?>
   </div>
 
   <div class="l-footer-wrap">
     <footer class="l-footer">
       <?php print render($page['footer_first']); ?>
-      <?php print render($page['footer_second']); ?>
       <?php print render($page['footer_third']); ?>
     </footer>
   </div>
+
+  <?php print render($page['footer_second']); ?>
 </div>

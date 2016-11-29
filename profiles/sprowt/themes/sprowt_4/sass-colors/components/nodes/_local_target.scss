@@ -27,6 +27,14 @@
 	.l-region--preface-second {
 		background-color: palette(secondary, base);
 	}
+	.l-region--preface-third {
+		// background-image: linear-gradient(to bottom, palette(secondary, base) 50%, palette(neutral, wild-sand) 50%);
+		background-image: linear-gradient(to bottom, palette(secondary, base) 50%, palette(white, pure) 50%);
+
+	}
+	.l-region--preface-fourth {
+		background-color: palette(neutral, wild-sand);
+	}
 	.l-main {
 		background-color: palette(white, pure);
 	}

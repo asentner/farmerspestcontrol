@@ -28,6 +28,7 @@ regions[header_third] = Header third
 regions[preface_first] = Preface first
 regions[preface_second] = Preface second
 regions[preface_third] = Preface third
+regions[preface_fourth] = Preface fourth
 
 regions[content] = Content
 regions[sidebar] = Sidebar

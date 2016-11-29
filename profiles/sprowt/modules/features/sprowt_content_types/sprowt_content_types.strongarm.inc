@@ -182,6 +182,10 @@ function sprowt_content_types_strongarm() {
         'label' => 'Tertiary Teaser',
         'custom settings' => 1,
       ),
+      'quaternary_teaser' => array(
+        'label' => 'Quaternary Teaser',
+        'custom settings' => 1,
+      ),
     ),
   );
   $export['entity_view_modes'] = $strongarm;
@@ -220,6 +224,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -282,6 +289,9 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -340,6 +350,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -402,6 +415,9 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -460,6 +476,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -522,6 +541,9 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -580,6 +602,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -642,6 +667,9 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -702,23 +730,26 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => TRUE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '5',
         ),
         'title' => array(
           'weight' => '43',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '3',
         ),
         'rabbit_hole' => array(
           'weight' => '0',
         ),
         'xmlsitemap' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
@@ -760,6 +791,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -822,6 +856,9 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -829,7 +866,7 @@ function sprowt_content_types_strongarm() {
           'weight' => '40',
         ),
         'title' => array(
-          'weight' => '43',
+          'weight' => '54',
         ),
         'path' => array(
           'weight' => '30',
@@ -880,6 +917,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -940,6 +980,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -1013,6 +1056,9 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1071,7 +1117,10 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
+      ),
+      'quaternary_teaser' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
@@ -1131,6 +1180,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -1193,6 +1245,9 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1253,6 +1308,9 @@ function sprowt_content_types_strongarm() {
       'tertiary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1308,6 +1366,9 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),

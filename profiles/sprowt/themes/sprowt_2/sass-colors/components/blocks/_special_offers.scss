@@ -1,7 +1,7 @@
 %special-offers-sidebar {
   $color-bg: palette(white, pure);
   $color-border: palette(neutral, wild-sand);
-  $color-block-title: palette(secondary, base);
+  $color-block-title: palette(neutral, abbey);
   $color-offer-title: palette(primary, base);
   $color-offer-body: palette(neutral, xanadu);
 
@@ -39,6 +39,7 @@
 }
 
 .block--views-special-offers-front,
+.block--views-special-offers-front-slideshow,
 .local-target-special-offer,
 .block--views-special-offers-ltp-slideshow {
   $color-bg: palette(white, pure);
