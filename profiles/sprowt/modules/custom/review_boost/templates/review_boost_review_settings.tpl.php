@@ -25,7 +25,7 @@
         </td>
         <td>
             <div class="form-item form-type-text form-item-type" style="display: block;">
-                <input id="{{:id}}-link" size="60" maxlength="32" class="form-text" type="text" value="{{:link}}">
+                <input id="{{:id}}-link" size="60" class="form-text" type="text" value="{{:link}}">
             </div>
         </td>
         <td>
