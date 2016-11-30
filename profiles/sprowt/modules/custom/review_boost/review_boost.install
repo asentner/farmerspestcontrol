@@ -74,6 +74,12 @@ function review_boost_schema() {
                     'not null' => TRUE,
                     'default' => 0,
                 ),
+                'email_sent' => array(
+                    'type' => 'int',
+                    'size' => 'tiny',
+                    'not null' => TRUE,
+                    'default' => 0,
+                ),
             ),
             'indexes' => array(
                 'token' => array('token'),
@@ -139,4 +145,35 @@ function review_boost_update_7100(){
         'not null' => true,
         'default' => 0,
     ));
+}
+
+/**
+ * Add sent field
+ */
+
+function review_boost_update_7101() {
+    $field = array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+    );
+
+    db_add_field('review_boost_token', 'email_sent', $field);
+
+    //Email every outstanding email
+    $queue = DrupalQueue::get('review_boost_email_worker');
+    while ($item = $queue->claimItem()) {
+        try {
+            call_user_func('_review_boost_email_worker', $item->data);
+            $queue->deleteItem($item);
+        }
+        catch (Exception $e) {
+            // In case of exception log it and leave the item in the queue
+            // to be processed again later.
+            watchdog_exception('review_boost_update_7101', $e);
+        }
+    }
+
+    db_update('review_boost_token')->fields(array('email_sent' => 1))->execute();
 }

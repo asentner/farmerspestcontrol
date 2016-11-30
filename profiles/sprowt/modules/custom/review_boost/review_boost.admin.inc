@@ -135,7 +135,7 @@ function _review_boost_admin_import_csv_form_submit_redirect($form, &$form_state
         variable_del('_review_boost_temp_data');
     }
     
-    $form_state['redirect'] = array('admin/survey/import-csv-confirm');
+    $form_state['redirect'] = array('admin/survey/import-csv/confirm');
 }
 
 function _review_boost_admin_import_csv_confirm() {
@@ -191,6 +191,7 @@ function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
                     'service' => $data['service'],
                     'service_date' => $data['service_date'] instanceof DateTime ? $data['service_date']->getTimestamp() : time(),
                     'creation_date' => time(),
+                    'email_sent' => 0,
                 ))
                 ->execute();
         }
@@ -645,7 +646,7 @@ function _review_boost_get_totals(){
     $sent = db_query("
         SELECT count(*)
         FROM review_boost_token t
-        LEFT JOIN review_boost_result r on r.tid = t.tid
+        WHERE t.email_sent = 1
     ")->fetchField();
 
     $completed = db_query("
@@ -850,8 +851,37 @@ function _review_boost_admin_survey_result($token) {
     $result['Service Date'] = $service_date->format('m/d/Y');
 
     return theme('review_boost_survey_result', array(
-        'fields' => $result
+        'fields' => $result,
+        'token' => $token
     ));
+}
+
+function _review_boost_result_delete($form, &$form_state, $token) {
+    $form_state['storage']['token'] = $token;
+    $form['#submit'] = array('_review_boost_result_delete_submit');
+    return confirm_form($form,
+        'Are you sure you want to delete this result?',
+        'admin/survey/results',
+        t('This action cannot be undone.'),
+        t('Delete'),
+        t('Cancel')
+    );
+}
+
+function _review_boost_result_delete_submit($form, &$form_state) {
+    $token = $form_state['storage']['token'];
+    $tid = db_query("
+        SELECT tid
+        FROM review_boost_token
+        WHERE token = :token
+    ", array(
+        ':token' => $token
+    ))->fetchField();
+
+    db_delete('review_boost_token')->condition('tid', $tid)->execute();
+    db_delete('review_boost_result')->condition('tid', $tid)->execute();
+    drupal_set_message('Survey result deleted!');
+    $form_state['redirect'] = array('admin/survey/results');
 }
 
 function _review_boost_admin_results_csv(){

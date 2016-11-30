@@ -14,3 +14,8 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<form action="/admin/survey/<?php print $token; ?>/delete">
+    <div class="form-actions form-wrapper" id="edit-actions">
+        <input id="edit-delete" name="op" value="Delete" class="form-submit" type="submit">
+    </div>
+</form>

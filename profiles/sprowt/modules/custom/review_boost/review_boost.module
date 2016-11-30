@@ -47,12 +47,12 @@ function review_boost_menu() {
         'file' => 'review_boost.admin.inc',
     );
     
-    $items['admin/survey/import-csv-confirm'] = array(
+    $items['admin/survey/import-csv/confirm'] = array(
         'title' => 'Import CSV Confirm',
         'description' => 'Import a list of customers to receive a survey request',
         'page callback' => '_review_boost_admin_import_csv_confirm',
         'access callback' => '_review_boost_admin_access',
-        //'type' => MENU_NORMAL_ITEM,
+        'type' => MENU_CALLBACK,
         'file' => 'review_boost.admin.inc',
     );
 
@@ -86,6 +86,16 @@ function review_boost_menu() {
         'description' => 'survey result',
         'page callback' => '_review_boost_admin_survey_result',
         'page arguments' => array(2),
+        'access callback' => '_review_boost_admin_access',
+        'type' => MENU_CALLBACK,
+        'file' => 'review_boost.admin.inc',
+    );
+
+    $items['admin/survey/%/delete'] = array(
+        'title' => 'Survey Result',
+        'description' => 'survey result',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_review_boost_result_delete', 2),
         'access callback' => '_review_boost_admin_access',
         'type' => MENU_CALLBACK,
         'file' => 'review_boost.admin.inc',
@@ -197,6 +207,7 @@ function review_boost_theme($existing, $type, $theme, $path)
         'review_boost_survey_result' => array(
             'variables' => array(
                 'fields' => array(),
+                'token' => null,
             ),
             'template' => 'review_boost_survey_result',
             'path' => $template_path,
@@ -331,6 +342,7 @@ function review_boost_mail($key, &$message, $params) {
 function _review_boost_email_worker($item) {
     $from_email = variable_get('review_boost_customer_from_email', _review_boost_get_email());
     $message = drupal_mail('review_boost', 'survey_email', $item['data']['customer_email'], LANGUAGE_NONE, $item, $from_email, true);
+    db_update('review_boost_token')->fields(array('email_sent' => 1))->condition('token', $item['data']['token'])->execute();
 }
 
 function _review_boost_questionnaire_anon(){
@@ -349,6 +361,7 @@ function _review_boost_questionnaire_anon(){
             'service' => '',
             'service_date' => $now->getTimestamp(),
             'creation_date' => time(),
+            'email_sent' => 1
         ))
         ->execute();
 
