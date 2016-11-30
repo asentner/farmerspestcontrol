@@ -72,6 +72,7 @@ dependencies[] = imce
 dependencies[] = jquery_update
 dependencies[] = libraries
 dependencies[] = link
+dependencies[] = linkchecker
 dependencies[] = logo_block
 dependencies[] = menu_block
 dependencies[] = menu_icons

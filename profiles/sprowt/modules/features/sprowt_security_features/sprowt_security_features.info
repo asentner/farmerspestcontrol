@@ -1,4 +1,5 @@
 name = Sprowt Security (Feature)
+description = Contains security features and good practices.
 core = 7.x
 package = Sprowt Features
 dependencies[] = ctools
@@ -12,3 +13,9 @@ features[variable][] = honeypot_form_webforms
 features[variable][] = honeypot_log
 features[variable][] = honeypot_protect_all_forms
 features[variable][] = honeypot_time_limit
+features[variable][] = linkchecker_scan_node_affiliation
+features[variable][] = linkchecker_scan_node_faq
+features[variable][] = linkchecker_scan_node_location
+features[variable][] = linkchecker_scan_node_market
+features[variable][] = linkchecker_scan_node_region
+features[variable][] = linkchecker_scan_node_webform
