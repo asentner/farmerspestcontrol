@@ -4494,7 +4494,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 60,
+      'weight' => 61,
     ),
   );
 
@@ -4553,7 +4553,7 @@ function sprowt_content_types_field_default_field_instances() {
         'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
-      'weight' => 61,
+      'weight' => 62,
     ),
   );
 
@@ -4665,7 +4665,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 56,
     ),
   );
 
@@ -4719,6 +4719,68 @@ function sprowt_content_types_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 53,
+    ),
+  );
+
+  // Exported field_instance: 'node-package-field_highlight_icon'.
+  $field_instances['node-package-field_highlight_icon'] = array(
+    'bundle' => 'package',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 9,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_highlight_icon',
+    'label' => 'Highlight icon',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 1,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 54,
     ),
   );
 
@@ -4786,7 +4848,7 @@ function sprowt_content_types_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 57,
+      'weight' => 58,
     ),
   );
 
@@ -4858,7 +4920,7 @@ function sprowt_content_types_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 58,
+      'weight' => 59,
     ),
   );
 
@@ -4918,7 +4980,7 @@ function sprowt_content_types_field_default_field_instances() {
         'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
-      'weight' => 56,
+      'weight' => 57,
     ),
   );
 
@@ -4972,7 +5034,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 59,
+      'weight' => 60,
     ),
   );
 
@@ -8114,6 +8176,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Google+ URL');
   t('Hero Image');
   t('Highlight');
+  t('Highlight icon');
   t('Icon');
   t('Image');
   t('Include suite number if applicable.');
