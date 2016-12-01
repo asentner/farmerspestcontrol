@@ -4578,7 +4578,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4688,10 +4688,9 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 8,
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4736,13 +4735,9 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 9,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4800,7 +4795,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 8,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -5001,7 +4996,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 9,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
