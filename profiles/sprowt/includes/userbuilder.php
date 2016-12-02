@@ -124,6 +124,7 @@ class UserBuilder {
     }
 
     function addCoalmarchUser($username) {
+        require_once DRUPAL_ROOT . '/includes/password.inc';
         $filepath = getcwd() . "/profiles/sprowt/coalmarch_users/$username.json";
         if(!file_exists($filepath)) {
             return false;
