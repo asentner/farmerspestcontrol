@@ -14,7 +14,7 @@ function sprowt_content_types_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_affiliation';
-  $strongarm->value = 'edit-workflow';
+  $strongarm->value = 'edit-linkchecker';
   $export['additional_settings__active_tab_affiliation'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -35,14 +35,14 @@ function sprowt_content_types_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_location';
-  $strongarm->value = 'edit-rabbit-hole';
+  $strongarm->value = 'edit-linkchecker';
   $export['additional_settings__active_tab_location'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_market';
-  $strongarm->value = 'edit-rabbit-hole';
+  $strongarm->value = 'edit-linkchecker';
   $export['additional_settings__active_tab_market'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -56,7 +56,7 @@ function sprowt_content_types_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_region';
-  $strongarm->value = 'edit-rabbit-hole';
+  $strongarm->value = 'edit-linkchecker';
   $export['additional_settings__active_tab_region'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -866,7 +866,7 @@ function sprowt_content_types_strongarm() {
           'weight' => '40',
         ),
         'title' => array(
-          'weight' => '54',
+          'weight' => '55',
         ),
         'path' => array(
           'weight' => '30',
@@ -1689,7 +1689,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'linkchecker_log_level';
-  $strongarm->value = '6';
+  $strongarm->value = '5';
   $export['linkchecker_log_level'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2552,7 +2552,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_affiliation';
-  $strongarm->value = '0';
+  $strongarm->value = 0;
   $export['node_submitted_affiliation'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2580,7 +2580,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_faq';
-  $strongarm->value = '0';
+  $strongarm->value = 0;
   $export['node_submitted_faq'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2608,14 +2608,14 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_location';
-  $strongarm->value = '0';
+  $strongarm->value = 0;
   $export['node_submitted_location'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_market';
-  $strongarm->value = '0';
+  $strongarm->value = 0;
   $export['node_submitted_market'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2643,7 +2643,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_region';
-  $strongarm->value = '0';
+  $strongarm->value = 0;
   $export['node_submitted_region'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2678,7 +2678,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_webform';
-  $strongarm->value = '0';
+  $strongarm->value = 0;
   $export['node_submitted_webform'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -3037,6 +3037,26 @@ example.org';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_location';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_location'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_market';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_market'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_package';
   $strongarm->value = array(
     'status' => '0',
@@ -3063,6 +3083,16 @@ example.org';
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_profile'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_region';
+  $strongarm->value = array(
+    'status' => '0',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_region'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

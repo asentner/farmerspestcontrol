@@ -333,7 +333,8 @@ function sprowt_content_types_field_group_info() {
       6 => 'field_intro',
       7 => 'field_services',
       8 => 'field_highlight',
-      9 => 'title',
+      9 => 'field_highlight_icon',
+      10 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

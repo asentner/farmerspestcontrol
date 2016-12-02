@@ -59,5 +59,47 @@ function sprowt_security_features_strongarm() {
   $strongarm->value = '5';
   $export['honeypot_time_limit'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_scan_node_affiliation';
+  $strongarm->value = 1;
+  $export['linkchecker_scan_node_affiliation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_scan_node_faq';
+  $strongarm->value = 1;
+  $export['linkchecker_scan_node_faq'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_scan_node_location';
+  $strongarm->value = 1;
+  $export['linkchecker_scan_node_location'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_scan_node_market';
+  $strongarm->value = 1;
+  $export['linkchecker_scan_node_market'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_scan_node_region';
+  $strongarm->value = 1;
+  $export['linkchecker_scan_node_region'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_scan_node_webform';
+  $strongarm->value = 1;
+  $export['linkchecker_scan_node_webform'] = $strongarm;
+
   return $export;
 }
