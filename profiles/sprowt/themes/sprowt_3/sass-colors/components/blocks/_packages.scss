@@ -6,11 +6,11 @@
   $color-row-even-bg: lighten($color-row-odd-bg, 10);
 
   $color-node-title: palette(primary, base);
-  $color-node-title-hover: palette(primary, dark);
+  $color-node-title-hover: palette(secondary, base);
 
   $color-button-bg: palette(primary, base);
   $color-button-fg: palette(white, pure);
-  $color-button-hover: palette(primary, dark);
+  $color-button-hover: palette(secondary, base);
 
   .block__title {
     background-color: $color-title-bg;
@@ -56,10 +56,12 @@
   }
 }
 
-.block--views-packages-services {
+.block--views-packages-services,
+.block--views-packages-localtarget {
   @extend %package-list;
 }
 
-.block--views-packages-services.block--grid {
+.block--views-packages-services.block--grid,
+.block--views-packages-localtarget.block--grid {
   @extend %package-grid;
 }

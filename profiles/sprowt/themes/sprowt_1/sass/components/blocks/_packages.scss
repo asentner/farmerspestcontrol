@@ -1,4 +1,6 @@
 %package-list {
+  width: 80%;
+  margin: 0 auto;
   padding: 30px 0;
   .block__title {
     padding: 15px;
@@ -9,11 +11,20 @@
   }
   .view-content {
     border: 2px solid;
+    border-top: 0;
   }
   .views-row {
-    padding: 30px;
     + .views-row {
       border: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .node-wrap {
+    padding: 30px 30px 40px;
+    &.highlighted {
+      position: relative;
+      box-shadow: 0 0 23.5px 3.5px rgba(0, 0, 0, 0.2);
     }
   }
   .node {
@@ -22,30 +33,83 @@
   .icon-wrap {
     @include flexbox;
     align-items: center;
+    justify-content: center;
+    max-width: 100px;
+    margin: 0 auto;
   }
-  .field--name-field-icon {
-    flex: 0 0 auto;
+  .content-wrap {
+    margin-top: 20px;
+    text-align: center;
   }
   .node__title {
     text-transform: uppercase;
     margin: 0;
-    padding-left: 10px;
   }
   .node__content {
     padding: 15px 0 0;
     text-align: left;
   }
   .field--name-body {
+    margin-top: 20px;
+    p + p {
+      margin-top: 0;
+    }
     .field__item {
       .more-link {
+        @extend %button;
+        display: block;
         max-width: 220px;
-        margin-left: 0;
+        margin: 20px auto 0;
       }
     }
   }
+  .field--name-field-highlight-icon {
+    position: absolute;
+    top: -25px;
+    right: -50px;
+    max-width: 100px;
+  }
+  @include breakpoint($tab) {
+    .node__title {
+      font-size: 1.5em;
+    }
+    .field--name-body {
+      font-size: 1.15em;
+    }
+  }
   @include breakpoint($desk) {
-    .views-row {
-      padding: 40px 100px;
+    width: 100%;
+    .node-wrap {
+      padding: 40px 20px 30px;
+    }
+    .node {
+      @include flexbox;
+    }
+    .icon-wrap {
+      flex: 0 0 25%;
+      max-width: none;
+      margin: 0;
+    }
+    .content-wrap {
+      text-align: left;
+      margin: 0 20px;
+    }
+    .field--name-body {
+      .field__item {
+        .more-link {
+          margin-left: 0;
+        }
+      }
+    }
+    .field--name-field-highlight-icon {
+      @include flexbox;
+      align-items: center;
+      position: relative;
+      right: auto;
+      top: auto;
+      margin-right: 0;
+      margin-left: auto;
+      max-width: none;
     }
   }
 }
@@ -105,10 +169,24 @@
   }
 }
 
-.block--views-packages-services {
+%package-grid-override {
+  .view-content {
+    display: block;
+    margin: 0;
+  }
+  .views-row {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+}
+
+.block--views-packages-services,
+.block--views-packages-localtarget {
   @extend %package-list;
 }
 
-.block--views-packages-services.block--grid {
-  @extend %package-grid;
+.block--views-packages-services.block--grid,
+.block--views-packages-localtarget.block--grid {
+  @extend %package-grid-override;
 }
