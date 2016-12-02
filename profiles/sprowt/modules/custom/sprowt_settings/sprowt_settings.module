@@ -191,7 +191,7 @@ function _sprowt_settings_shortcode_replace($string)
         '[linkedin]' => variable_get('sprowt_settings_linkedin_url'),
         '[google+]' => variable_get('sprowt_settings_gplus_url'),
         '[node-service]' => _sprowt_settings_node_service(),
-        '[year]' => date('Y'),
+        '[current-year]' => date('Y'),
     );
 
     foreach ($shortcodes as $code => $value) {
