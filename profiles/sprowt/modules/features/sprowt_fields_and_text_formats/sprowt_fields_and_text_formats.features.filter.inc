@@ -145,5 +145,21 @@ function sprowt_fields_and_text_formats_filter_default_formats() {
     ),
   );
 
+  // Exported format: Webform options.
+  $formats['webform_options'] = array(
+    'format' => 'webform_options',
+    'name' => 'Webform options',
+    'cache' => 1,
+    'status' => 1,
+    'weight' => 0,
+    'filters' => array(
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+        'settings' => array(),
+      ),
+    ),
+  );
+
   return $formats;
 }

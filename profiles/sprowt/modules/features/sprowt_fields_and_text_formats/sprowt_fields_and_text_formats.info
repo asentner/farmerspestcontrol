@@ -83,6 +83,7 @@ features[filter][] = filtered_html
 features[filter][] = full_html
 features[filter][] = no_wysiwyg
 features[filter][] = plain_text
+features[filter][] = webform_options
 features[flexslider_optionset][] = gallery
 features[flexslider_optionset][] = thumbnails
 features_exclude[taxonomy][projects] = projects
