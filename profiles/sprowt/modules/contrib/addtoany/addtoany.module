@@ -10,7 +10,7 @@
  */
 function addtoany_install() {
   drupal_set_message(st("Your AddToAny settings are available under !link",
-    array( '!link' => l('Configuration > System > AddToAny ',  'admin/config/system/addtoany' ) )
+    array( '!link' => l('Configuration > Web services > AddToAny ',  'admin/config/services/addtoany' ) )
   ));
 }
 
@@ -87,9 +87,9 @@ function addtoany_views_api() {
 function addtoany_menu() {
   $items = array();
 
-  $items['admin/config/system/addtoany'] = array(
+  $items['admin/config/services/addtoany'] = array(
     'title'            => t('AddToAny'),
-    'description'      => t('Settings for your <a href="https://www.addtoany.com/" target="blank">AddToAny</a> Share/Save buttons.'),
+    'description'      => t('Settings for your <a href="https://www.addtoany.com/" target="blank">AddToAny</a> share buttons.'),
     'page callback'    => 'drupal_get_form',
     'page arguments'   => array('addtoany_admin_settings'),
     'access arguments' => array('administer addtoany'),
