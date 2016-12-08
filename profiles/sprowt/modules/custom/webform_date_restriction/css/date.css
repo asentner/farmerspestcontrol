@@ -1,0 +1,57 @@
+#edit-restriction .horizontal-checks {
+  font-size: 0;
+}
+#edit-restriction .horizontal-checks > .form-item {
+  font-size: 1rem;
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#edit-restriction .year-container {
+  margin-bottom: 3px;
+}
+#edit-restriction .year-container > div,
+#edit-restriction .year-container > input {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+#edit-restriction .day-container {
+  margin-bottom: 3px;
+}
+#edit-restriction .day-container > div,
+#edit-restriction .day-container > input {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 0;
+  vertical-align: top;
+}
+#edit-restriction .day-container .dayfield .form-type-date-popup {
+  padding-top: 0;
+}
+#edit-restriction .day-container .dayfield .form-type-date-popup label {
+  display: none;
+}
+#edit-restriction .day-container .dayfield .form-type-date-popup .form-item {
+  padding-top: 0;
+}
+#edit-restriction .day-container .dayfield .form-type-date-select {
+  padding-top: 0;
+}
+#edit-restriction .day-container .dayfield .form-type-date-select .form-type-select {
+  padding-top: 0;
+  display: inline-block;
+}
+
+#edit-restriction #dayoyear-wrap .day-container > div,
+#edit-restriction #dayoyear-wrap .day-container > input {
+  vertical-align: bottom;
+}
+
+#edit-restriction #dayoyear-wrap .day-container .removeDayoyear {
+  margin-bottom: 13px;
+}
+
+/*# sourceMappingURL=date.css.map */

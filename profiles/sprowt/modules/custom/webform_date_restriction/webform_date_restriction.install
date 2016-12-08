@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Install file for module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function webform_date_restriction_install() {
+  $t = get_t();
+  drupal_set_message($t("Webform Date Restriction Installed!"));
+}
+
+/**
+ * Schema for module. Implements hook_schema().
+ */
+function webform_date_restriction_schema() {
+  $schema = array();
+
+  $schema['webform_date_restriction_date'] = array(
+    'description' => 'Restriction settings for dates',
+    'fields' => array(
+      'did' => array(
+        'description' => 'The identifier for this restriction',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'The node identifier of a webform.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cid' => array(
+        'description' => 'The identifier for the webform component',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'The type of date restriction.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'value' => array(
+        'description' => 'The value of the date restriction.',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+    ),
+    'indexes' => array(
+      'nid_cid' => array('nid', 'cid'),
+      'nid_cid_type' => array('nid', 'cid', 'type'),
+    ),
+    'primary key' => array(
+      'did',
+    ),
+  );
+
+  return $schema;
+}
