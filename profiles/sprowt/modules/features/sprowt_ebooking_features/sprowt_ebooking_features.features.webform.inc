@@ -26,6 +26,13 @@ $webforms = array();
   'rh_redirect_response' => NULL,
   'uuid' => '004d6cbf-2c34-4d4a-a9b0-2a6c92dc7f70',
   'body' => array(),
+  'field_ebooking' => array(
+    'und' => array(
+      0 => array(
+        'value' => 'yes',
+      ),
+    ),
+  ),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -80,6 +87,9 @@ $webforms = array();
       'datatype' => 'xsd:dateTime',
       'callback' => 'date_iso8601',
     ),
+  ),
+  'path' => array(
+    'pathauto' => 1,
   ),
   'webform' => array(
     'next_serial' => 16,
