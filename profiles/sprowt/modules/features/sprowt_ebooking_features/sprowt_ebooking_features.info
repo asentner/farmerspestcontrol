@@ -1,0 +1,17 @@
+name = Sprowt eBooking (Features)
+description = Contains all initial settings and modules for ebooking.
+core = 7.x
+package = Sprowt Features
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = sprowt_content_types
+dependencies[] = strongarm
+dependencies[] = webform
+dependencies[] = webform_calculation_components
+dependencies[] = webform_date_restriction
+dependencies[] = webform_optionsmarkup
+__drupal_alter_by_ref[][node][webform] = webform
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = optionsmarkup_input_format
+features[webform][] = ebooking

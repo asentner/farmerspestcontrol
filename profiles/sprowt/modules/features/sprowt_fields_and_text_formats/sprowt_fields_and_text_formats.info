@@ -86,6 +86,7 @@ features[filter][] = plain_text
 features[filter][] = webform_options
 features[flexslider_optionset][] = gallery
 features[flexslider_optionset][] = thumbnails
+features[user_permission][] = use text format webform_options
 features_exclude[taxonomy][projects] = projects
 features_exclude[taxonomy][services] = services
 features_exclude[taxonomy][markets] = markets
