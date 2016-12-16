@@ -38,7 +38,6 @@ dependencies[] = pantheon_login
 ; Contrib Modules
 
 dependencies[] = webform
-dependencies[] = webform_features
 dependencies[] = addtoany
 dependencies[] = block_class
 dependencies[] = block_shortcode
