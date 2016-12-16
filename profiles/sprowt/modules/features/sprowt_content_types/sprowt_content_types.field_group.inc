@@ -629,8 +629,7 @@ function sprowt_content_types_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_ebooking',
-      2 => 'title',
+      1 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
