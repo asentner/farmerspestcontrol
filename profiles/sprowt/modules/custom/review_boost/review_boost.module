@@ -484,6 +484,14 @@ function _review_boost_questionnaire_form_submit($form, &$form_state) {
 
 function _review_boost_send_admin_email($token, $rating, $comments) {
     $to = variable_get('review_boost_admin_email', variable_get('site_mail'));
+    
+    $to_parts = explode(',', $to);
+    foreach($to_parts as $key => $v) {
+      $to_parts[$key] = trim($v);
+    }
+    
+    $to = implode(',', $to_parts);
+    
 
     $data = array(
         'token' => $token,
