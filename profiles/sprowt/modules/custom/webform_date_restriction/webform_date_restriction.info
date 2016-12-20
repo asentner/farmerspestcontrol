@@ -1,0 +1,7 @@
+name = Webform Date Restriction
+description = Adds ability to restrict dates in a date component
+core = 7.x
+package = Webform
+
+dependencies[] = 'date'
+dependencies[] = 'webform'

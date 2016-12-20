@@ -201,11 +201,11 @@ function sprowt_image_styles_features_image_default_styles() {
   $styles['package_icon'] = array(
     'label' => 'Package Icon',
     'effects' => array(
-      1 => array(
+      4 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 55,
-          'height' => '',
+          'width' => '',
+          'height' => 160,
           'upscale' => 0,
         ),
         'weight' => 1,

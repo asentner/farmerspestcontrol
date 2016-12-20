@@ -4467,7 +4467,7 @@ function sprowt_content_types_field_default_field_instances() {
           'trim_length' => 240,
           'trim_link' => 0,
           'trim_options' => array(
-            'text' => 'text',
+            'text' => 0,
           ),
           'trim_preserve_tags' => '',
           'trim_suffix' => '...',
@@ -4699,7 +4699,7 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -4747,11 +4747,11 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'package_icon',
         ),
         'type' => 'image',
         'weight' => 2,
@@ -8152,7 +8152,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => -4,
+      'weight' => -2,
     ),
   );
 

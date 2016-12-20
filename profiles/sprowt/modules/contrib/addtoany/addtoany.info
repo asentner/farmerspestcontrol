@@ -7,10 +7,10 @@ files[] = addtoany.admin.inc
 files[] = addtoany.variable.inc
 files[] = views/addtoany_handler_field_addtoany_link.inc
 files[] = views/addtoany.views.inc
-configure = admin/config/system/addtoany
-; Information added by Drupal.org packaging script on 2016-10-07
-version = "7.x-4.13"
+configure = admin/config/services/addtoany
+; Information added by Drupal.org packaging script on 2016-11-03
+version = "7.x-4.14"
 core = "7.x"
 project = "addtoany"
-datestamp = "1475876040"
+datestamp = "1478207943"
 

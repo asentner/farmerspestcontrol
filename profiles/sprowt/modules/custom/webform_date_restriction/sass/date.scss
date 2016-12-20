@@ -1,0 +1,60 @@
+#edit-restriction {
+  .horizontal-checks {
+    font-size: 0;
+    > .form-item {
+      font-size: 1rem;
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .year-container {
+    margin-bottom: 3px;
+    > div, > input {
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 0;
+    }
+  }
+
+  .day-container {
+    margin-bottom: 3px;
+    > div, > input {
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 0;
+      vertical-align: top;
+    }
+
+    .dayfield {
+      .form-type-date-popup {
+        padding-top: 0;
+        label {
+          display: none;
+        }
+        .form-item {
+          padding-top: 0;
+        }
+      }
+      .form-type-date-select {
+        padding-top: 0;
+        .form-type-select {
+          padding-top: 0;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  #dayoyear-wrap {
+    .day-container {
+      > div, > input {
+        vertical-align: bottom;
+      }
+      .removeDayoyear {
+        margin-bottom: 13px;
+      }
+    }
+  }
+}

@@ -56,10 +56,12 @@
   }
 }
 
-.block--views-packages-services {
+.block--views-packages-services,
+.block--views-packages-localtarget {
   @extend %package-list;
 }
 
-.block--views-packages-services.block--grid {
+.block--views-packages-services.block--grid,
+.block--views-packages-localtarget.block--grid {
   @extend %package-grid;
 }

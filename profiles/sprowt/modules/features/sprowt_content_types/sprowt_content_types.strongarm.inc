@@ -1371,6 +1371,9 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1378,7 +1381,7 @@ function sprowt_content_types_strongarm() {
           'weight' => '40',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '-3',
         ),
         'path' => array(
           'weight' => '30',
@@ -1386,11 +1389,14 @@ function sprowt_content_types_strongarm() {
         'xmlsitemap' => array(
           'weight' => '30',
         ),
+        'rabbit_hole' => array(
+          'weight' => '0',
+        ),
       ),
       'display' => array(
         'webform' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '1',
             'visible' => TRUE,
           ),
           'teaser' => array(

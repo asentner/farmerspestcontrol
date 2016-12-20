@@ -1,0 +1,141 @@
+<?php
+
+/**
+ * @file
+ * Module file.
+ */
+
+require_once drupal_get_path('module', 'webform_date_restriction') . '/webform_date_restriction.inc';
+
+/**
+ * Implements hook_help().
+ */
+function webform_date_restriction_help($path, $arg)
+{
+    $output = '';
+    switch($path) {
+        case 'node/%/webform/components/%':
+            $helptext = t('This date componenent has the ability to be restricted when shown to the user. 
+                See the <a href="#edit-restriction">restrictions section</a> for more details.');
+            if(!empty($arg[5]) && $arg[5] == 'date') {
+                $output .= $helptext;
+            }
+            else {
+                $nid = $arg[1];
+                $cid = $arg[4];
+                $type = db_query("
+                    SELECT type
+                    FROM {webform_component}
+                    WHERE nid = :nid
+                    AND cid = :cid
+                ", array(
+                    ':nid' => $nid,
+                    ':cid' => $cid
+                ))->fetchField();
+
+                if($type == 'date') {
+                    $output .= $helptext;
+                }
+            }
+            break;
+    }
+
+    return $output;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function webform_date_restriction_form_webform_component_edit_form_alter(&$form, &$form_state, $form_id) {
+  if ($form['type']['#value'] == 'date') {
+    _webform_date_restriction_date_form($form, $form_state);
+  }
+}
+
+/**
+ * Implements hook_webform_component_delete().
+ */
+function webform_date_restriction_webform_component_delete($component) {
+  if ($component['type'] == 'date') {
+    $nid = $component['nid'];
+    $cid = $component['cid'];
+    $transaction = db_transaction();
+    try {
+      db_delete('webform_date_restriction_date')
+        ->condition('nid', $nid)
+        ->condition('cid', $cid)
+        ->execute();
+    }
+    catch (Exception $e) {
+      $transaction->rollback();
+      watchdog_exception('webform_date_restriction', $e);
+      return FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function webform_date_restriction_form_alter(&$form, &$form_state, $form_id) {
+  if (strpos($form_id, 'webform_client_form') !== FALSE) {
+    $form['#validate'][] = '_webform_date_restriction_date_validate';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess theme_webform_date.
+ */
+function webform_date_restriction_preprocess_webform_date(&$variables) {
+  $element = &$variables['element'];
+  $componenent = $element['#webform_component'];
+  $rests = _webform_date_restriction_get_date_restrictions($componenent['nid'], $componenent['cid']);
+  
+  if(!empty($rests['phpval'])) {
+    $phpvals = array();
+    foreach ($rests['phpval'] as $php) {
+      try {
+        $DT = new DateTime($php);
+        $phpvals[] = $DT->format('Y-m-d');
+      }
+      catch(Exception $e) {
+        //nothing
+      }
+    }
+    $rests['phpval'] = $phpvals;
+  }
+  
+  drupal_add_js(array(
+    'webform_date_restriction_date' => array(
+      $element['#id'] => $rests,
+    ),
+  ),
+        array('type' => 'setting')
+    );
+  drupal_add_js(drupal_get_path('module', 'webform_date_restriction') . '/js/webform_date.js');
+
+}
+
+/**
+ * Utility function to get a specific element in a render/form array.
+ */
+function _webform_date_restriction_get_element($elements, $key) {
+  $keys = element_children($elements);
+  foreach ($keys as $k) {
+    if (isset($elements[$k]) && $elements[$k]) {
+      if ($k === $key) {
+        return $elements[$k];
+      }
+      else {
+        $element = _webform_date_restriction_get_element($elements[$k], $key);
+        if (!empty($element)) {
+          return $element;
+        }
+      }
+    }
+  }
+
+  return FALSE;
+}
