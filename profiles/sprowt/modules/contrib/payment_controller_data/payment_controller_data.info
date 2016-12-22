@@ -1,0 +1,14 @@
+name = Payment controller data
+description = Store payment's $method->controller_data in a serialized column.
+core = 7.x
+php = 5.6
+
+dependencies[] = payment
+
+
+; Information added by Drupal.org packaging script on 2016-12-19
+version = "7.x-1.0-rc2"
+core = "7.x"
+project = "payment_controller_data"
+datestamp = "1482165274"
+

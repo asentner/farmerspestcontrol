@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * Implements hook_schema_alter().
+ */
+function payment_controller_data_schema_alter(&$schema) {
+  $schema['payment_method']['fields']['controller_data'] = [
+    'description' => 'Serialized controller data',
+    'type' => 'text',
+    'serialize' => TRUE,
+    'not null' => TRUE,
+  ];
+}
+
+/**
+ * Implements hook_install().
+ */
+function payment_controller_data_install() {
+  if (db_field_exists('payment_method', 'controller_data')) {
+    return;
+  }
+  db_add_field('payment_method', 'controller_data', [
+    'description' => 'Serialized controller data',
+    'type' => 'text',
+    'serialize' => TRUE,
+  ]);
+  db_update('payment_method')->fields([
+    'controller_data' => serialize([]),
+  ])->execute();
+  db_change_field('payment_method', 'controller_data', 'controller_data', [
+    'description' => 'Serialized controller data',
+    'type' => 'text',
+    'serialize' => TRUE,
+    'not null' => TRUE,
+  ]);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function payment_controller_data_uninstall() {
+  if (!db_field_exists('payment_method', 'controller_data')) {
+    return;
+  }
+  db_drop_field('payment_method', 'controller_data');
+}
