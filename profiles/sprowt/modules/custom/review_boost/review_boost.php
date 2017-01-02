@@ -71,7 +71,7 @@ class ReviewBoost {
                 'sales' => '',
                 'branch' => '',
                 'service' => '',
-                'service_datae' => '',
+                'service_date' => '',
                 'service_date_formatted' => ''
             );
         }

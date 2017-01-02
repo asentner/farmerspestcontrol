@@ -70,8 +70,6 @@ function _review_boost_admin_import_csv_form_validate($form, &$form_state) {
         $skipped_columns = array();
         $data = array();
 
-        $queue = DrupalQueue::get('review_boost_email_worker');
-
         while(($line = fgetcsv($fp)) !== false) {
             foreach($line as $key => $column) {
                 if ($i != 0) {
@@ -107,7 +105,6 @@ function _review_boost_admin_import_csv_form_validate($form, &$form_state) {
 
             if (count($data)) {
                 $data[$i]['token'] = _review_boost_generate_token();
-                $queue->createItem(array('data' => $data[$i]));
             }
 
             $i++;
@@ -177,6 +174,7 @@ function _review_boost_admin_import_csv_form_cancel($form, &$form_state) {
 
 function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
     if (count($form_state['storage']['data'])) {
+      $queue = DrupalQueue::get('review_boost_email_worker');
         foreach($form_state['storage']['data'] as $data) {
             db_insert('review_boost_token')
                 ->fields(array(
@@ -194,6 +192,7 @@ function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
                     'email_sent' => 0,
                 ))
                 ->execute();
+            $queue->createItem(array('data' => $data));
         }
     }
     variable_del('_review_boost_temp_data');
