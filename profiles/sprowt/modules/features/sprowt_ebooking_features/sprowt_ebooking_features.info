@@ -15,6 +15,7 @@ dependencies[] = strongarm
 dependencies[] = webform
 dependencies[] = webform_calculation_components
 dependencies[] = webform_date_restriction
+dependencies[] = webform_features
 dependencies[] = webform_optionsmarkup
 dependencies[] = webform_paymethod_select
 dependencies[] = xautoload
