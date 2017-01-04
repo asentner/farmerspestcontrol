@@ -116,6 +116,7 @@ dependencies[] = admin_menu_toolbar
 dependencies[] = adminimal_admin_menu
 dependencies[] = devel
 dependencies[] = webform_features
+dependencies[] = touch_icons
 
 ; Custom Modules
 
