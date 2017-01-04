@@ -38,7 +38,6 @@ dependencies[] = pantheon_login
 ; Contrib Modules
 
 dependencies[] = webform
-dependencies[] = webform_phone
 dependencies[] = addtoany
 dependencies[] = block_class
 dependencies[] = block_shortcode
@@ -117,7 +116,6 @@ dependencies[] = admin_menu_toolbar
 dependencies[] = adminimal_admin_menu
 dependencies[] = devel
 dependencies[] = webform_features
-dependencies[] = phone
 
 ; Custom Modules
 
