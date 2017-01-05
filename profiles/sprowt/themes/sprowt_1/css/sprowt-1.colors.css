@@ -146,6 +146,23 @@ hr {
   .local-target-webform .node__title {
     color: #fff; }
 
+.block--views-localtarget-map-reviews h2 {
+  background-color: #216e82;
+  color: #fff; }
+
+.block--views-localtarget-map-reviews h3:before {
+  color: #80b840; }
+
+.block--views-localtarget-map-reviews .location-content {
+  background-color: #fff; }
+
+.block--views-localtarget-map-reviews .reviews-links {
+  background-color: #fff; }
+  .block--views-localtarget-map-reviews .reviews-links .field__item:before {
+    color: #216e82; }
+  .block--views-localtarget-map-reviews .reviews-links .field__item + .field__item {
+    border-top-color: #dddddd; }
+
 .block--views-locations-list {
   color: #80b840; }
   .block--views-locations-list a {
@@ -181,34 +198,44 @@ hr {
   .block-areas-map ul a::before {
     color: #80b840; }
 
-.block--views-packages-services .block__title {
+.block--views-packages-services .block__title,
+.block--views-packages-localtarget .block__title {
   background-color: #80b840;
   color: #fff; }
 
-.block--views-packages-services .view-content {
+.block--views-packages-services .view-content,
+.block--views-packages-localtarget .view-content {
   border-color: #f4f4f4; }
 
-.block--views-packages-services .views-row-odd {
+.block--views-packages-services .views-row-odd,
+.block--views-packages-localtarget .views-row-odd {
   background-color: #f4f4f4; }
 
-.block--views-packages-services .views-row-even {
+.block--views-packages-services .views-row-even,
+.block--views-packages-localtarget .views-row-even {
   background-color: white; }
 
-.block--views-packages-services .node__title a {
+.block--views-packages-services .node__title a,
+.block--views-packages-localtarget .node__title a {
   color: #80b840; }
-  .block--views-packages-services .node__title a:hover {
+  .block--views-packages-services .node__title a:hover,
+  .block--views-packages-localtarget .node__title a:hover {
     color: #216e82; }
 
-.block--views-packages-services .field--name-body .field__item .more-link {
+.block--views-packages-services .field--name-body .field__item .more-link,
+.block--views-packages-localtarget .field--name-body .field__item .more-link {
   background-color: #80b840;
   color: #fff; }
-  .block--views-packages-services .field--name-body .field__item .more-link:hover {
+  .block--views-packages-services .field--name-body .field__item .more-link:hover,
+  .block--views-packages-localtarget .field--name-body .field__item .more-link:hover {
     background-color: #216e82; }
 
-.block--views-packages-services.block--grid .view-content {
+.block--views-packages-services.block--grid .view-content,
+.block--views-packages-localtarget.block--grid .view-content {
   background-color: #f4f4f4; }
 
-.block--views-packages-services.block--grid .node {
+.block--views-packages-services.block--grid .node,
+.block--views-packages-localtarget.block--grid .node {
   background-color: transparent; }
 
 .block--views-team-list .node {

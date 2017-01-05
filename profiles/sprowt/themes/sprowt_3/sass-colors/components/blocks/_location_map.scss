@@ -1,0 +1,37 @@
+.block--views-localtarget-map-reviews {
+  $color-heading-bg: palette(secondary, base);
+  $color-content-bg: palette(white, pure);
+  $color-link-pointer: palette(secondary, base);
+  $color-link-border: palette(neutral, alto);
+  $color-icons: palette(primary, base);
+
+  h2 {
+    background-color: $color-heading-bg;
+    color: palette(white, pure);
+  }
+  h3 {
+    &:before {
+      color: $color-icons;
+    }
+  }
+  .location-content {
+    background-color: $color-content-bg;
+  }
+  .reviews-links {
+    background-color: $color-content-bg;
+    .field__item {
+      &:before {
+        color: $color-link-pointer;
+      }
+      + .field__item {
+        border-top-color: $color-link-border;
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    .location-wrap,
+    .reviews-wrap {
+      // box-shadow: 0 10px 10px rgba(0,0,0,0.2);
+    }
+  }
+}
