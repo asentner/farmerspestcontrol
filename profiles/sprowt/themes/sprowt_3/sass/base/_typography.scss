@@ -87,6 +87,15 @@ hr {
   border-bottom: 1px solid;
 }
 
+b,
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
 @include breakpoint($tab) {
 
   %p,
