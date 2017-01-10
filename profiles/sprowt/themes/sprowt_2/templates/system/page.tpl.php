@@ -1,3 +1,10 @@
+<?php
+$ebooking = false;
+if(!empty($node->field_ebooking) && $node->field_ebooking['und'][0]['value'] == 'yes') {
+  $ebooking = true;
+};
+?>
+
 <div class="l-page">
   <header class="l-header">
     <?php print render($page['header_first']); ?>
@@ -12,9 +19,11 @@
     <?php print render($page['preface_fourth']); ?>
   </div>
 
-  <div class="l-breadcrumb">
-    <?php print $breadcrumb; ?>
-  </div>
+  <?php if(!$ebooking): ?>
+    <div class="l-breadcrumb">
+      <?php print $breadcrumb; ?>
+    </div>
+  <?php endif; ?>
 
   <div class="l-main">
     <div class="l-content">
@@ -28,7 +37,9 @@
       <?php print $feed_icons; ?>
     </div>
 
-    <?php print render($page['sidebar']); ?>
+    <?php if(!$ebooking) {
+      print render($page['sidebar']);
+    }; ?>
   </div>
 
   <div class="l-postscript">

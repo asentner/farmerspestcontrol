@@ -17,6 +17,7 @@ stylesheets[print][] = css/sprowt-1.print.css
 ; Scripts
 ; ========================================
 scripts[] = js/sprowt-1.behaviors.js
+scripts[] = js/sprowt-1.ebooking.js
 
 ; ========================================
 ; Regions
