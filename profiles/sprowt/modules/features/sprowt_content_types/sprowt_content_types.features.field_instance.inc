@@ -2849,7 +2849,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'primary__800x400_',
         ),
         'type' => 'image',
         'weight' => 1,
