@@ -3996,7 +3996,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'location',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Or province.',
+    'description' => 'Or province. <b>Abbreviation only</b>.',
     'display' => array(
       'alt_teaser' => array(
         'label' => 'above',
@@ -4052,8 +4052,8 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'show_token_tree' => FALSE,
-        'size' => 60,
+        'show_token_tree' => 0,
+        'size' => 5,
       ),
       'type' => 'text_textfield',
       'weight' => 47,
@@ -8249,7 +8249,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Optional field to determine what state this market is in');
   t('Optional intro text for the packages block');
   t('Optional title for the packages block');
-  t('Or province.');
+  t('Or province. <b>Abbreviation only</b>.');
   t('Original price');
   t('Package');
   t('Package Intro');
