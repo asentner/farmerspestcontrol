@@ -8,7 +8,7 @@ $info['fields'] = array(
    'secondary' => t('Secondary Base'),
    'secondary_1' => t('Secondary Light'),
    'slide_overlay' => t('Slide Overlay'),
-   'ltp_map' => t('LTP location background'),
+   'ltp_map' => t('LTP Location Background'),
 );
 
 $info['schemes'] = array(

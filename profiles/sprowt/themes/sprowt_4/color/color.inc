@@ -9,6 +9,7 @@ $info['fields'] = array(
    'secondary_1' => t('Secondary Light'),
    'secondary_2' => t('Secondary Dark'),
    'slide_overlay' => t('Slide Overlay'),
+   'ltp_map' => t('LTP Location Background'),
 );
 
 $info['schemes'] = array(
@@ -21,6 +22,7 @@ $info['schemes'] = array(
          'secondary_1' => '#f5c533',
          'secondary_2' => '#c3950a',
          'slide_overlay' => '#151616',
+         'ltp_map' => '#f4f4f5',
      ),
    ),
 );

@@ -8,6 +8,7 @@ $info['fields'] = array(
    'secondary' => t('Secondary Base'),
    'secondary_1' => t('Secondary Light'),
    'slide_overlay' => t('Slide Overlay'),
+   'ltp_map' => t('LTP Location Background'),
 );
 
 $info['schemes'] = array(
@@ -19,11 +20,11 @@ $info['schemes'] = array(
          'secondary' => '#216e82',
          'secondary_1' => '#21768c',
          'slide_overlay' => '#216e83',
+         'ltp_map' => '#f4f4f5',
      ),
    ),
 );
 
-// $info['css'] = array( 'css/sprowt-2.styles.css', );
 $info['css'] = array( 'css/sprowt-2.colors.css', );
 
 $info['copy'] = array();
