@@ -1,0 +1,29 @@
+.node-ebooking .ebooking_summary {
+  @extend %ebooking-panel;
+  .webform-component-markup[class*="review"] {
+    @extend %ebooking-package;
+    > h3 {
+      color: palette(secondary, base);
+    }
+    .package {
+      @extend %ebooking-selected-package;
+      border-color: palette(secondary, base);
+      background-color: lighten(palette(secondary, base), 65);
+    }
+  }
+  .bullet-points {
+    p {
+      &:before {
+        color: palette(primary, base);
+      }
+    }
+  }
+  .amount-due {
+    background-color: #ecffe0;
+	  border-color: #72cf37;
+  }
+  .webform-component-markup[class*="tooltip"] {
+    background-color: palette(neutral, wild-sand);
+    border-color: palette(secondary, base);
+  }
+}

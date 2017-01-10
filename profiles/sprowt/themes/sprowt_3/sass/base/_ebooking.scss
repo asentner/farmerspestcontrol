@@ -1,0 +1,147 @@
+%ebooking-panel { // style for the ebooking panels
+  margin: 20px 0;
+  padding: 40px 20px 60px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: transform 1s;
+  text-align: center;
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.2);
+  &.active {
+    transform: translateX(0);
+  }
+  &.left {
+    transform: translateX(-150%);
+  }
+  &.right {
+    transform: translateX(150%);
+  }
+  > .fieldset-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  @include breakpoint($tab) {
+    margin: 20px;
+    padding: 55px 20px 85px;
+  }
+}
+
+%ebooking-panel-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  &:after {
+    content: '';
+    display: block;
+    width: 115px;
+    margin: 10px auto 40px;
+    border-top: 5px solid;
+  }
+  @include breakpoint($tab) {
+    font-size: 36px;
+  }
+}
+
+%ebooking-selected-package {
+  &:after {
+    @include faicon('\F00C');
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    font-size: 18px;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+  }
+}
+
+// package styling - this will likely change once we pull in packages as nodes
+%ebooking-package {
+  margin-top: 40px;
+  .form-radio {
+    display: none;
+  }
+  .package {
+    padding: 40px 20px;
+    position: relative;
+    cursor: pointer;
+    border: 3px solid;
+    &.selected {
+      &:after {
+        @extend %ebooking-selected-package;
+      }
+    }
+    .icon {
+      margin-bottom: 20px;
+    }
+    .content-wrap {
+      text-align: left;
+      font-size: 16px;
+    }
+    .title {
+      font-size: 19px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .price-wrapper {
+      @include flexbox;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+    .current-price {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .original-price {
+      text-decoration: line-through;
+    }
+    .body {
+      margin-bottom: 15px;
+    }
+    .bullet-points {
+      @include flexbox;
+      flex-direction: column;
+      font-size: 17px;
+      font-weight: 600;
+      span {
+        &:before {
+          @include faicon('\F00C');
+          padding-right: 5px;
+        }
+        + span {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    .package {
+      @include flexbox;
+      align-items: flex-start;
+      padding: 30px 55px 45px;
+      .icon {
+        margin-right: 20px;
+        span {
+          margin-bottom: 0;
+        }
+      }
+      .price-wrapper {
+        flex-direction: row;
+      }
+      .current-price {
+        margin-bottom: 0;
+        margin-right: 20px;
+      }
+      .bullet-points {
+        flex-direction: row;
+        span + span {
+          margin-top: 0;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+} // end package styling
