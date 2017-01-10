@@ -1,9 +1,9 @@
-.node-ebooking { 
+.node-ebooking {
   h1.node__title {
     color: palette(white, pure);
   }
   .l-main {
-    background-color: palette(secondary, base);
+    background-color: palette(neutral, cool-gray);
     color: palette(white, pure);
   }
   .form-item {
@@ -32,7 +32,7 @@
   }
   div[class*="if-business"] {
     background-color: palette(neutral, wild-sand);
-    border-color: palette(secondary, base);
+    border-color: palette(primary, base);
   }
   .validation-error {
     background-color: #feefef;
@@ -50,9 +50,9 @@
     }
   }
   .basic-form {
-    color: palette(secondary, light);
+    color: palette(primary, base);
     &:hover {
-      color: palette(secondary, base);
+      color: palette(primary, dark);
     }
   }
   // package styling - this will likely change once we pull in packages as nodes

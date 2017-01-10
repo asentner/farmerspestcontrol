@@ -6,6 +6,10 @@
     margin-bottom: 0;
     &.location-title {
       text-transform: uppercase;
+      .state:before {
+        content: ',';
+        margin-left: -3px;
+      }
     }
     &.reviews-title {
       font-style: italic;

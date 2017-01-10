@@ -1,9 +1,11 @@
-<?php
-  // dsm($content);
-?>
 <article<?php print $attributes; ?>>
   <div class="location-wrap">
-    <h2 class="location-title"><?php print(variable_get('site_name')); ?> - <?php print $title ?></h2>
+    <h2 class="location-title">
+      <?php print(variable_get('site_name')); ?> - <?php print $title ?>
+      <?php if(!empty($content['field_state'][0]['#markup'])): ?>
+        <span class="state"> <?php print $content['field_state'][0]['#markup']; ?> </span>
+      <?php endif; ?>
+    </h2>
     <div class="location-content">
       <div class="location-info">
         <h3 class="address-heading">Address</h3>

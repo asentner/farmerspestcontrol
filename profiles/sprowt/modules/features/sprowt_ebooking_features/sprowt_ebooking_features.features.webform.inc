@@ -578,8 +578,7 @@ package_3|<div class="package"><img class="icon"src="/sites/default/files/packag
         'value' => '',
         'extra' => array(
           'exclude' => array(
-            0 => 'month',
-            1 => 'year',
+            0 => 'year',
           ),
           'title_display' => 'none',
           'description_above' => 0,
