@@ -3,7 +3,7 @@
 }
 
 %ebooking-panel-title {
-  color: palette(secondary, base);
+  color: palette(primary, base);
   &:after {
     border-top-color: palette(neutral, alto);
   }
@@ -11,7 +11,7 @@
 
 %ebooking-selected-package {
   &:after {
-    background-color: palette(secondary, base);
+    background-color: palette(primary, base);
     color: palette(white, pure);
   }
 }
@@ -23,8 +23,7 @@
     background-color: palette(neutral, wild-sand);
     &:hover,
     &.selected {
-      border-color: palette(secondary, base);
-      background-color: lighten(palette(secondary, base), 65);
+      border-color: palette(primary, base);
     }
     &.selected {
       &:after {
@@ -32,7 +31,7 @@
       }
     }
     .current-price {
-      color: palette(secondary, base)
+      color: palette(primary, base)
     };
     .bullet-points {
       span {

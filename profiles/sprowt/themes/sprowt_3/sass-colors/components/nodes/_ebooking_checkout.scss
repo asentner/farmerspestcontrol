@@ -3,12 +3,12 @@
   .webform-component-markup[class*="review"] {
     @extend %ebooking-package;
     > h3 {
-      color: palette(secondary, base);
+      color: palette(primary, base);
     }
     .package {
       @extend %ebooking-selected-package;
-      border-color: palette(secondary, base);
-      background-color: lighten(palette(secondary, base), 65);
+      border-color: palette(primary, base);
+      background-color: palette(neutral, wild-sand);
     }
   }
   .bullet-points {
@@ -24,6 +24,6 @@
   }
   .webform-component-markup[class*="tooltip"] {
     background-color: palette(neutral, wild-sand);
-    border-color: palette(secondary, base);
+    border-color: palette(primary, base);
   }
 }
