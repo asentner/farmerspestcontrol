@@ -66,6 +66,7 @@ dependencies[] = google_authorship
 dependencies[] = honeypot
 dependencies[] = image_link_formatter
 dependencies[] = image_url_formatter
+dependencies[] = imagecache_actions
 dependencies[] = html_title
 dependencies[] = advanced_text_formatter
 dependencies[] = imce
