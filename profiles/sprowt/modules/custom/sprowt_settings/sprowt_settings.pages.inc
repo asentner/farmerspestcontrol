@@ -36,6 +36,16 @@ function sprowt_settings_admin()
         '#description' => t("Name of the company to display on the site."),
         '#required' => TRUE,
     );
+
+    $form['company_info']['sprowt_settings_webform_to_email'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Webform Email'),
+        '#default_value' => variable_get('sprowt_settings_webform_to_email'),
+        '#size' => 60,
+        '#maxlength' => 1000,
+        '#description' => t("Email typically used as the 'to' email in webforms."),
+    );
+
     /*
      * We no longer use site wide locations
      *

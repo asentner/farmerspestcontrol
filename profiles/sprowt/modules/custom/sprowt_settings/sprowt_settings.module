@@ -796,3 +796,67 @@ function _sprowt_settings_node_uuid_redirect($uuid, $op = '') {
         drupal_goto("node/$nid");
     }
 }
+
+/**
+ * Implements hook_token_info().
+ */
+function sprowt_settings_token_info() {
+    $shortcodes = array(
+        '[company-name]' => variable_get('sprowt_settings_company_name'),
+        '[phone-number]' => '<a href="tel:+1'.sprowt_settings_get_phone_number('$1$2$3').'">'.sprowt_settings_get_phone_number().'</a>',
+        '[phone-number nolink]' => sprowt_settings_get_phone_number(),
+        '[twitter]' => variable_get('sprowt_settings_twitter_handle'),
+        '[facebook]' => variable_get('sprowt_settings_facebook_url'),
+        '[linkedin]' => variable_get('sprowt_settings_linkedin_url'),
+        '[google+]' => variable_get('sprowt_settings_gplus_url'),
+        '[node-service]' => _sprowt_settings_node_service(),
+        '[current-year]' => date('Y'),
+    );
+
+    $types = array(
+        'sprowt' => array(
+            'name' => 'Sprowt',
+            'description' => 'Sprowt specific tokens',
+            'needs-data' => 'node'
+        ),
+        'sprowt_phone' => array(
+            'name' => 'Company Phone Number',
+            'description' => 'Phone Number',
+            'needs-data' => 'sprowt'
+        )
+    );
+
+
+    $tokens = array(
+        'sprowt' => array(
+            'company_name' => array(
+                'name' => 'Company Name',
+                'description' => 'Company Name',
+            ),
+            'sprowt_phone' => array(
+                'name' => 'Company Phone Number',
+                'description' => 'Phone Number',
+                'type' => 'sprowt_phone',
+            ),
+            'sprowt_webform_to_email' => array(
+                'name' => 'Webform Email',
+                'description' => 'Email typically used as the \'to\' email in webforms.',
+            ),
+        ),
+        'sprowt_phone' => array(
+            'text_only' => array(
+                'name' => 'Text Only',
+                'description' => 'Company Phone Number, text only. No link',
+            ),
+            'unformatted' => array(
+                'name' => 'Unformatted',
+                'description' => 'Company Phone Number, numbers only',
+            ),
+        ),
+    );
+
+    return array(
+        'types' => $types,
+        'tokens' => $tokens
+    );
+}
