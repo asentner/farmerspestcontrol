@@ -23,6 +23,7 @@ if(!db_table_exists('sprowt_progress')){
         'progress' => array('type'=> 'int', 'default' => '0'),
         'message' =>  array('type'=> 'text'),
         'actions' => array('type'=> 'int', 'default' => '0'),
+          'current_action' => array('type'=> 'int', 'default' => '0'),
         'complete' => array('type'=> 'int','not null' => true, 'default' => '0'),
       ),
       'primary key' => array('id')
@@ -42,13 +43,14 @@ if(!db_table_exists('sprowt_progress')){
 $progress = db_query("SELECT * FROM sprowt_progress")->fetchAssoc();
 
 
-function update_progress($function, $perc, $message, $actions, $id) {
+function update_progress($function, $perc, $message, $actions, $current, $id) {
     $updated = db_update('sprowt_progress') // Table name no longer needs {}
       ->fields(array(
         'function' => $function,
         'progress' => floor($perc * 100),
         'message' => $message,
         'actions' => $actions,
+        'current_action' => $current
       ))
       ->condition('id', $id, '=');
       
@@ -77,10 +79,10 @@ $i = 0;
 
 foreach($actions as $method => $message) {
     if(empty($i)) {
-        update_progress($method, 0 , $message, count($actions), $progress['id']);
+        update_progress($method, 0 , $message, count($actions), $i, $progress['id']);
     }
     else {
-        update_progress($method, $i/count($actions) , $message, count($actions), $progress['id']);
+        update_progress($method, $i/count($actions) , $message, count($actions), $i, $progress['id']);
     }
     $sb->$method();
     $i++;

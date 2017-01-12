@@ -20,6 +20,15 @@ Class SprowtBuilder {
             define('MAINTENANCE_MODE', "install");
         }
         chdir(DRUPAL_ROOT);
+
+        //hardcoded paths for sprowt sites
+        $paths = array(
+            '934b332a-a247-41eb-ae2e-09dfe144aed3' => 'contact',
+            '616bbe72-80a0-43ec-b5a3-838d2b60f1e5' => 'free-quote',
+            'b8f3a9e5-f431-4428-b5b2-9ce69f6b437c' => 'refer-friend'
+        );
+
+        $this->paths = $paths;
     }
     
     /**
@@ -169,6 +178,8 @@ Class SprowtBuilder {
      *
      */
     function addNodes(){
+        variable_set('sprowt_settings_paths', $this->paths);
+
         // drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
         $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprowt/sprowt_export.json");
         
@@ -276,7 +287,9 @@ Class SprowtBuilder {
     }
     
     function addNodeDefaultImages() {
+        $default_images = array();
         foreach($this->default_images as $file) {
+            $default_images[$file->filename] = $file;
             switch($file->filename) {
                 case 'service-placeholder.png':
                     $instance = field_info_instance('node', 'field_image', 'service');
@@ -335,7 +348,10 @@ Class SprowtBuilder {
     
     function node_import($nodes = array()) {
         require_once('includes/nodebuilder.php');
-        
+
+        $paths = $this->paths;
+
+
         foreach($nodes as $node){
             $type = $node['type'];
             
@@ -376,6 +392,13 @@ Class SprowtBuilder {
                 }
 
                 $n->webform = $node['webform'];
+            }
+
+            if(in_array($node['uuid'], array_keys($paths))) {
+                $n->path = array(
+                    'alias' => $paths[$node['uuid']],
+                    'pathauto' => false
+                );
             }
             
             if(!$loaded){

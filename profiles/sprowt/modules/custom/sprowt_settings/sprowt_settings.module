@@ -64,6 +64,23 @@ function sprowt_settings_menu()
     return $items;
 }
 
+function sprowt_settings_form_alter(&$form, &$form_state) {
+    if(!empty($form['#node_edit_form'])) {
+        $paths = variable_get('sprowt_settings_paths', array());
+        if(!empty($form['#node'])) {
+            $uuid = $form['#node']->uuid;
+
+            if(in_array($uuid, array_keys($paths))) {
+                $form['path']['pathauto']['#value'] = false;
+                $form['path']['pathauto']['#disabled'] = true;
+                $form['path']['alias']['#disabled'] = true;
+                $form['path']['alias']['#value'] = $paths[$uuid];
+                unset($form['path']['alias']['#states']);
+            }
+        }
+    }
+}
+
 /**
  * Implements hook_init().
  */
