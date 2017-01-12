@@ -14,7 +14,7 @@
         </div>
         <div class="field-wrap">
             <label for="{{:id}}-state">*State or Provence:</label>
-            <input type="text" class="state form-text" id="{{:id}}-state" value="{{:state}}">
+            <input type="text" class="state form-text" id="{{:id}}-state" value="{{:state}}" maxlength="2">
         </div>
         <div class="field-wrap">
             <label for="{{:id}}-zip">*Postal code:</label>
