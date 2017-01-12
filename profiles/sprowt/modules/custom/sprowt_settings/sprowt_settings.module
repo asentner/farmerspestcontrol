@@ -30,7 +30,21 @@ function sprowt_settings_menu()
         'type' => MENU_CALLBACK,
     );
     
-    
+    $items['node/uuid/%'] = array(
+        'page callback' => '_sprowt_settings_node_uuid_redirect',
+        'page arguments' => array(2),
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['node/uuid/%/%'] = array(
+        'page callback' => '_sprowt_settings_node_uuid_redirect',
+        'page arguments' => array(2, 3),
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+
     $items['admin/config/sprowt'] = array(
         'title' => 'Sprowt',
         'description' => 'Sprowt',
@@ -77,6 +91,17 @@ function sprowt_settings_form_alter(&$form, &$form_state) {
                 $form['path']['alias']['#value'] = $paths[$uuid];
                 unset($form['path']['alias']['#states']);
             }
+
+            $form['uuid_link'] = array(
+                '#type' => 'textfield',
+                '#title' => 'Universal Sprowt Alias',
+                '#description' => 'Alias which will work across all sprowt sites. Useful for backend link settings built into sprowt.',
+                '#value' => "node/uuid/$uuid",
+                '#attributes' => array(
+                    'readonly' => 'readonly'
+                ),
+                '#weight' => -1
+            );
         }
     }
 }
@@ -754,4 +779,20 @@ function _sprowt_settings_webform_options_markets() {
     }
     
     return $options;
+}
+
+function _sprowt_settings_node_uuid_redirect($uuid, $op = '') {
+    $array = entity_get_id_by_uuid('node', array($uuid));
+    if(empty($array)) {
+        return drupal_not_found();
+    }
+
+    $nid = $array[$uuid];
+
+    if(!empty($op)) {
+        drupal_goto("node/$nid/$op");
+    }
+    else {
+        drupal_goto("node/$nid");
+    }
 }
