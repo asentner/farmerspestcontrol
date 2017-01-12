@@ -3639,8 +3639,10 @@ li.addtoany {
     font-size: 1em;
     font-weight: 600;
     text-transform: uppercase; }
-  .block--views-services-front-services .field--name-field-image {
+  .block--views-services-front-services .field--name-field-icon {
     padding-bottom: 15px; }
+  .block--views-services-front-services .field--name-field-icon {
+    padding-bottom: 25px; }
   .block--views-services-front-services .field--name-body {
     display: none; }
   @media (min-width: 768px) {
@@ -3685,7 +3687,8 @@ li.addtoany {
       .block--views-services-front-services .node__title {
         font-size: 1.1em;
         font-weight: 700; }
-      .block--views-services-front-services .field--name-field-image {
+      .block--views-services-front-services .field--name-field-image,
+      .block--views-services-front-services .field--name-field-icon {
         padding-bottom: 30px; }
       .block--views-services-front-services .field--name-body {
         display: -webkit-box;
