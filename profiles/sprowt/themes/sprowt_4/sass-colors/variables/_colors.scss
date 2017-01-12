@@ -46,6 +46,7 @@ $COLORS: (
 $color-overlay: #151616;
 $color-title-default: #58595b;
 
+$color-map-bg: #f4f4f5; // unique color used so bg can be changed with color picker
 
 @function palette($color: primary, $tone: base) {
   // Return warning if color is invalid

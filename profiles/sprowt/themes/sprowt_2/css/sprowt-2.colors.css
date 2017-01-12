@@ -14,6 +14,29 @@
     background-color: transparent !important;
     color: blue !important; } }
 
+.node-ebooking.processed .ebooking_summary, .node-ebooking .ebooking_summary {
+  background-color: #fff; }
+
+.node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] h3 {
+  color: #e9b404; }
+  .node-ebooking.processed .webform-component-markup[class*="title"] h2:after, .node-ebooking.processed .webform-component-markup[class*="title"] h3:after {
+    border-top-color: #dddddd; }
+
+.node-ebooking.processed .webform-component-optionsmarkup .package.selected:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package:after {
+  background-color: #e9b404;
+  color: #fff; }
+
+.node-ebooking.processed .webform-component-optionsmarkup .package, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package {
+  border-color: #f4f4f4;
+  background-color: #f4f4f4; }
+  .node-ebooking.processed .webform-component-optionsmarkup .package:hover, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package:hover, .node-ebooking.processed .webform-component-optionsmarkup .package.selected, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package.selected {
+    border-color: #e9b404;
+    background-color: white; }
+  .node-ebooking.processed .webform-component-optionsmarkup .package .current-price, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .current-price {
+    color: #e9b404; }
+  .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points span:before, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points span:before {
+    color: #47b649; }
+
 .node--teaser .field--name-body .field__item > .more-link,
 .node--alt-teaser .field--name-body .field__item > .more-link {
   background-color: #47b649;
@@ -601,6 +624,71 @@ hr {
       .block--nav-utility .menu li:nth-child(1n) a[href^='tel:']:before {
         color: #47b649; } }
 
+.node-ebooking h1.node__title {
+  color: #fff; }
+
+.node-ebooking .l-main {
+  background-color: #e9b404;
+  color: #fff; }
+
+.node-ebooking .form-item label {
+  color: #000; }
+
+.node-ebooking .date-option .fieldset-legend:after {
+  color: #f00; }
+
+.node-ebooking.processed .panel {
+  background-color: #fff; }
+
+.node-ebooking.processed .step-number {
+  color: #47b649; }
+
+.node-ebooking.processed div[class*="if-business"] {
+  background-color: #f4f4f4;
+  border-color: #e9b404; }
+
+.node-ebooking.processed .validation-error {
+  background-color: #feefef;
+  border-color: #fe2a2a;
+  color: #2f2f2f; }
+  .node-ebooking.processed .validation-error span:before {
+    color: #fe2a2a; }
+
+.node-ebooking.processed .button.inactive {
+  background-color: #bebebe; }
+
+.node-ebooking.processed .basic-form {
+  color: #fdd244; }
+  .node-ebooking.processed .basic-form:hover {
+    color: #e9b404; }
+
+.node-ebooking.processed .ebooking_summary {
+  color: #000; }
+
+.node-ebooking.basic-form .webform-component-markup {
+  color: #000; }
+
+.node-ebooking.basic-form .panel-form {
+  color: #fff; }
+
+.node-ebooking .ebooking_summary .webform-component-markup[class*="review"] > h3 {
+  color: #e9b404; }
+
+.node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package {
+  border-color: #e9b404;
+  background-color: white; }
+
+.node-ebooking .ebooking_summary .bullet-points p:before {
+  color: #47b649; }
+
+.node-ebooking .ebooking_summary .amount-due {
+  background-color: #ecffe0;
+  border-color: #72cf37; }
+
+.node-ebooking .ebooking_summary .webform-component-markup[class*="tooltip"] {
+  background-color: #f4f4f4;
+  border-color: #e9b404; }
+
 .front .l-main {
   background-color: #47b649; }
   .front .l-main .node--page--full h1 {
@@ -636,3 +724,6 @@ hr {
 
 .l-region--postscript-first {
   background-color: #f4f4f4; }
+
+.l-region--preface-fourth {
+  background-color: #f4f4f5; }

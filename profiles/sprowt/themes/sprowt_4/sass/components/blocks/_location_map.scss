@@ -6,6 +6,10 @@
     margin-bottom: 0;
     &.location-title {
       text-transform: uppercase;
+      .state:before {
+        content: ',';
+        margin-left: -3px;
+      }
     }
     &.reviews-title {
       font-style: italic;
@@ -79,7 +83,7 @@
   @include breakpoint($tab) {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 50px 20px 0;
+    padding: 50px 20px;
     .location-content {
       @include flexbox;
       justify-content: space-between;

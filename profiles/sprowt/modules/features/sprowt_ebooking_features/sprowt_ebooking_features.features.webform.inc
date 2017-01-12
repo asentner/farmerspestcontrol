@@ -205,7 +205,7 @@ $webforms = array();
           'display_on' => 'form',
         ),
         'required' => 0,
-        'weight' => 38,
+        'weight' => 39,
         'machine_name' => 'ebooking_template__title_1',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template',
@@ -235,7 +235,7 @@ business|Business',
           'analysis' => TRUE,
         ),
         'required' => 1,
-        'weight' => 39,
+        'weight' => 40,
         'machine_name' => 'ebooking__fieldset_1',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template',
@@ -254,7 +254,7 @@ business|Business',
           'display_on' => 'form',
         ),
         'required' => 0,
-        'weight' => 40,
+        'weight' => 41,
         'machine_name' => 'ebooking__review',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template',
@@ -290,7 +290,7 @@ business|Business',
           'display_on' => 'form',
         ),
         'required' => 0,
-        'weight' => 38,
+        'weight' => 39,
         'machine_name' => 'ebooking_template__title_2',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_2',
@@ -322,7 +322,7 @@ sqf_4|3001-4000sqf',
           'analysis' => TRUE,
         ),
         'required' => 1,
-        'weight' => 39,
+        'weight' => 40,
         'machine_name' => 'ebooking__place',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_2',
@@ -356,7 +356,7 @@ sqf_4|3001-4000sqf',
           'excludezero' => 0,
         ),
         'required' => 0,
-        'weight' => 40,
+        'weight' => 41,
         'machine_name' => 'ebooking__option_2',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_2',
@@ -392,7 +392,7 @@ sqf_4|3001-4000sqf',
           'display_on' => 'form',
         ),
         'required' => 0,
-        'weight' => 38,
+        'weight' => 39,
         'machine_name' => 'ebooking_template__title_3',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_3',
@@ -424,7 +424,7 @@ package_3|<div class="package"><img class="icon"src="/sites/default/files/packag
           'attributes' => array(),
         ),
         'required' => 1,
-        'weight' => 39,
+        'weight' => 40,
         'machine_name' => 'ebooking_template__package',
         'html' => TRUE,
         'page_num' => 1,
@@ -459,7 +459,7 @@ package_3|<div class="package"><img class="icon"src="/sites/default/files/packag
           'excludezero' => 0,
         ),
         'required' => 0,
-        'weight' => 40,
+        'weight' => 41,
         'machine_name' => 'ebooking__time',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_3',
@@ -493,7 +493,7 @@ package_3|<div class="package"><img class="icon"src="/sites/default/files/packag
           'excludezero' => 0,
         ),
         'required' => 0,
-        'weight' => 41,
+        'weight' => 42,
         'machine_name' => 'ebooking__time_2',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_3',
@@ -529,7 +529,7 @@ package_3|<div class="package"><img class="icon"src="/sites/default/files/packag
           'display_on' => 'form',
         ),
         'required' => 0,
-        'weight' => 38,
+        'weight' => 39,
         'machine_name' => 'ebooking_template__title_4',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_4',
@@ -546,7 +546,7 @@ package_3|<div class="package"><img class="icon"src="/sites/default/files/packag
           'display_on' => 'form',
         ),
         'required' => 0,
-        'weight' => 39,
+        'weight' => 40,
         'machine_name' => 'ebooking_template__instructions_4',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_4',
@@ -566,7 +566,7 @@ package_3|<div class="package"><img class="icon"src="/sites/default/files/packag
           'description' => '',
         ),
         'required' => 0,
-        'weight' => 40,
+        'weight' => 41,
         'machine_name' => 'ebooking_template__option_1',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_4',
@@ -578,8 +578,7 @@ package_3|<div class="package"><img class="icon"src="/sites/default/files/packag
         'value' => '',
         'extra' => array(
           'exclude' => array(
-            0 => 'month',
-            1 => 'year',
+            0 => 'year',
           ),
           'title_display' => 'none',
           'description_above' => 0,
@@ -644,7 +643,7 @@ time_2|12pm-5pm',
           'description' => '',
         ),
         'required' => 0,
-        'weight' => 41,
+        'weight' => 42,
         'machine_name' => 'ebooking_template__option_2',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_4',
@@ -735,7 +734,7 @@ time_1_2|12pm-5pm',
           'excludezero' => 0,
         ),
         'required' => 1,
-        'weight' => 42,
+        'weight' => 43,
         'machine_name' => 'ebooking__date_2',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_4',
@@ -769,7 +768,7 @@ time_1_2|12pm-5pm',
           'excludezero' => 0,
         ),
         'required' => 1,
-        'weight' => 43,
+        'weight' => 44,
         'machine_name' => 'ebooking__date',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_4',
@@ -802,7 +801,7 @@ time_1_2|12pm-5pm',
           'attributes' => array(),
         ),
         'required' => 0,
-        'weight' => 44,
+        'weight' => 45,
         'machine_name' => 'ebooking__fieldset_5',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_4',
@@ -835,7 +834,7 @@ time_1_2|12pm-5pm',
           'attributes' => array(),
         ),
         'required' => 0,
-        'weight' => 45,
+        'weight' => 46,
         'machine_name' => 'ebooking__monthly_price',
         'page_num' => 1,
         'parent_machine_name' => 'ebooking_template__fieldset_4',
@@ -916,8 +915,6 @@ time_1_2|12pm-5pm',
 
 <p>Monthly price going foward: [submission:values:fieldset_4:monthly_price]</p>
 </div>
-
-<h3>Billing Info</h3>
 ',
         'extra' => array(
           'format' => 'full_html',
@@ -1073,7 +1070,6 @@ time_1_2|12pm-5pm',
         'type' => 'textfield',
         'value' => '',
         'extra' => array(
-          'description' => 'Area code and number only. No dashes or spaces.',
           'title_display' => 'before',
           'description_above' => 0,
           'private' => 0,
@@ -1085,6 +1081,7 @@ time_1_2|12pm-5pm',
           'field_suffix' => '',
           'disabled' => 0,
           'unique' => 0,
+          'description' => '',
           'placeholder' => '',
           'attributes' => array(),
           'analysis' => FALSE,
@@ -1094,6 +1091,225 @@ time_1_2|12pm-5pm',
         'machine_name' => 'ebooking_template__phone_number',
         'page_num' => 2,
         'parent_machine_name' => 'ebooking_template__customer_info',
+      ),
+      'ebooking_template__service_address' => array(
+        'form_key' => 'fieldset_6',
+        'name' => 'Service Address',
+        'type' => 'fieldset',
+        'value' => '',
+        'extra' => array(
+          'description_above' => 0,
+          'private' => 0,
+          'css_classes' => '',
+          'title_display' => 0,
+          'collapsible' => 0,
+          'collapsed' => 0,
+          'description' => '',
+        ),
+        'required' => 0,
+        'weight' => 31,
+        'machine_name' => 'ebooking_template__service_address',
+        'page_num' => 2,
+        'parent_machine_name' => 'ebooking_template__fieldset_5',
+      ),
+      'ebooking_template__address_1' => array(
+        'form_key' => 'address_1',
+        'name' => 'Address 1',
+        'type' => 'textfield',
+        'value' => '',
+        'extra' => array(
+          'title_display' => 'before',
+          'description_above' => 0,
+          'private' => 0,
+          'wrapper_classes' => '',
+          'css_classes' => '',
+          'width' => '',
+          'maxlength' => '',
+          'field_prefix' => '',
+          'field_suffix' => '',
+          'disabled' => 0,
+          'unique' => 0,
+          'description' => '',
+          'placeholder' => '',
+          'attributes' => array(),
+          'analysis' => FALSE,
+        ),
+        'required' => 1,
+        'weight' => 32,
+        'machine_name' => 'ebooking_template__address_1',
+        'page_num' => 2,
+        'parent_machine_name' => 'ebooking_template__service_address',
+      ),
+      'ebooking_template__address_2' => array(
+        'form_key' => 'address_2',
+        'name' => 'Address 2',
+        'type' => 'textfield',
+        'value' => '',
+        'extra' => array(
+          'title_display' => 'before',
+          'description_above' => 0,
+          'private' => 0,
+          'wrapper_classes' => '',
+          'css_classes' => '',
+          'width' => '',
+          'maxlength' => '',
+          'field_prefix' => '',
+          'field_suffix' => '',
+          'disabled' => 0,
+          'unique' => 0,
+          'description' => '',
+          'placeholder' => '',
+          'attributes' => array(),
+          'analysis' => FALSE,
+        ),
+        'required' => 0,
+        'weight' => 33,
+        'machine_name' => 'ebooking_template__address_2',
+        'page_num' => 2,
+        'parent_machine_name' => 'ebooking_template__service_address',
+      ),
+      'ebooking_template__city' => array(
+        'form_key' => 'city',
+        'name' => 'City',
+        'type' => 'textfield',
+        'value' => '',
+        'extra' => array(
+          'title_display' => 'before',
+          'description_above' => 0,
+          'private' => 0,
+          'wrapper_classes' => '',
+          'css_classes' => '',
+          'width' => '',
+          'maxlength' => '',
+          'field_prefix' => '',
+          'field_suffix' => '',
+          'disabled' => 0,
+          'unique' => 0,
+          'description' => '',
+          'placeholder' => '',
+          'attributes' => array(),
+          'analysis' => FALSE,
+        ),
+        'required' => 1,
+        'weight' => 34,
+        'machine_name' => 'ebooking_template__city',
+        'page_num' => 2,
+        'parent_machine_name' => 'ebooking_template__service_address',
+      ),
+      'ebooking_template__state' => array(
+        'form_key' => 'state',
+        'name' => 'State',
+        'type' => 'select',
+        'value' => '',
+        'extra' => array(
+          'items' => 'AL|Alabama
+AK|Alaska
+AS|American Samoa
+AZ|Arizona
+AR|Arkansas
+CA|California
+CO|Colorado
+CT|Connecticut
+DE|Delaware
+DC|District of Columbia
+FL|Florida
+GA|Georgia
+GU|Guam
+HI|Hawaii
+ID|Idaho
+IL|Illinois
+IN|Indiana
+IA|Iowa
+KS|Kansas
+KY|Kentucky
+LA|Louisiana
+ME|Maine
+MH|Marshall Islands
+MD|Maryland
+MA|Massachusetts
+MI|Michigan
+MN|Minnesota
+MS|Mississippi
+MO|Missouri
+MT|Montana
+NE|Nebraska
+NV|Nevada
+NH|New Hampshire
+NJ|New Jersey
+NM|New Mexico
+NY|New York
+NC|North Carolina
+ND|North Dakota
+MP|Northern Marianas Islands
+OH|Ohio
+OK|Oklahoma
+OR|Oregon
+PW|Palau
+PA|Pennsylvania
+PR|Puerto Rico
+RI|Rhode Island
+SC|South Carolina
+SD|South Dakota
+TN|Tennessee
+TX|Texas
+UT|Utah
+VT|Vermont
+VI|Virgin Islands
+VA|Virginia
+WA|Washington
+WV|West Virginia
+WI|Wisconsin
+WY|Wyoming
+',
+          'options_source' => 'united_states',
+          'multiple' => 0,
+          'title_display' => 'before',
+          'description_above' => 0,
+          'private' => 0,
+          'wrapper_classes' => '',
+          'css_classes' => '',
+          'aslist' => 1,
+          'empty_option' => 'State',
+          'optrand' => 0,
+          'other_option' => NULL,
+          'other_text' => 'Other...',
+          'description' => '',
+          'custom_keys' => FALSE,
+          'analysis' => TRUE,
+        ),
+        'required' => 1,
+        'weight' => 35,
+        'machine_name' => 'ebooking_template__state',
+        'page_num' => 2,
+        'parent_machine_name' => 'ebooking_template__service_address',
+      ),
+      'ebooking_template__zip_code' => array(
+        'form_key' => 'zip_code',
+        'name' => 'Zip Code',
+        'type' => 'textfield',
+        'value' => '',
+        'extra' => array(
+          'title_display' => 'before',
+          'description_above' => 0,
+          'private' => 0,
+          'wrapper_classes' => '',
+          'css_classes' => '',
+          'width' => '',
+          'maxlength' => '',
+          'field_prefix' => '',
+          'field_suffix' => '',
+          'disabled' => 0,
+          'unique' => 0,
+          'description' => '',
+          'placeholder' => '',
+          'attributes' => array(),
+          'analysis' => FALSE,
+        ),
+        'required' => 1,
+        'weight' => 36,
+        'machine_name' => 'ebooking_template__zip_code',
+        'page_num' => 2,
+        'parent_machine_name' => 'ebooking_template__service_address',
       ),
     ),
     'conditionals' => array(

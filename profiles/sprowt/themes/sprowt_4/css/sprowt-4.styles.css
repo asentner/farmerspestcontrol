@@ -2368,6 +2368,159 @@ a {
     display: inline-block;
     padding: 0; } }
 
+.node-ebooking.processed .panel, .node-ebooking .ebooking_summary {
+  margin: 20px 0;
+  padding: 40px 20px 60px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  text-align: center;
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.2); }
+  .node-ebooking.processed .active.panel, .node-ebooking .active.ebooking_summary {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  .node-ebooking.processed .left.panel, .node-ebooking .left.ebooking_summary {
+    -webkit-transform: translateX(-150%);
+            transform: translateX(-150%); }
+  .node-ebooking.processed .right.panel, .node-ebooking .right.ebooking_summary {
+    -webkit-transform: translateX(150%);
+            transform: translateX(150%); }
+  .node-ebooking.processed .panel > .fieldset-wrapper, .node-ebooking .ebooking_summary > .fieldset-wrapper {
+    max-width: 720px;
+    margin: 0 auto; }
+  @media (min-width: 768px) {
+    .node-ebooking.processed .panel, .node-ebooking .ebooking_summary {
+      margin: 20px;
+      padding: 55px 20px 85px; } }
+
+.node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] .block-areas-map .block__title, .block-areas-map .node-ebooking.processed .webform-component-markup[class*="title"] .block__title, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + h1, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + .field--name-field-display-title, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .node-ebooking.processed .webform-component-markup[class*="title"] .field-item, .node-ebooking.processed .webform-component-markup[class*="title"] h3, .node-ebooking.processed .webform-component-markup[class*="title"] .block--views-team-list .node__title, .block--views-team-list .node-ebooking.processed .webform-component-markup[class*="title"] .node__title, .node-ebooking.processed .webform-component-markup[class*="title"] .block--views-services-all .node__title, .block--views-services-all .node-ebooking.processed .webform-component-markup[class*="title"] .node__title, .node-ebooking.processed .webform-component-markup[class*="title"] .block-special-offers-intro .block__title, .block-special-offers-intro .node-ebooking.processed .webform-component-markup[class*="title"] .block__title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600; }
+  .node-ebooking.processed .webform-component-markup[class*="title"] h2:after, .node-ebooking.processed .webform-component-markup[class*="title"] .block-areas-map .block__title:after, .block-areas-map .node-ebooking.processed .webform-component-markup[class*="title"] .block__title:after, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + h1:after, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + .field--name-field-display-title:after, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + .field--name-field-seo-title .field-item:after, .field--name-field-intro + .field--name-field-seo-title .node-ebooking.processed .webform-component-markup[class*="title"] .field-item:after, .node-ebooking.processed .webform-component-markup[class*="title"] h3:after, .node-ebooking.processed .webform-component-markup[class*="title"] .block--views-team-list .node__title:after, .block--views-team-list .node-ebooking.processed .webform-component-markup[class*="title"] .node__title:after, .node-ebooking.processed .webform-component-markup[class*="title"] .block--views-services-all .node__title:after, .block--views-services-all .node-ebooking.processed .webform-component-markup[class*="title"] .node__title:after, .node-ebooking.processed .webform-component-markup[class*="title"] .block-special-offers-intro .block__title:after, .block-special-offers-intro .node-ebooking.processed .webform-component-markup[class*="title"] .block__title:after {
+    content: '';
+    display: block;
+    width: 115px;
+    margin: 10px auto 40px;
+    border-top: 5px solid; }
+  @media (min-width: 768px) {
+    .node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] .block-areas-map .block__title, .block-areas-map .node-ebooking.processed .webform-component-markup[class*="title"] .block__title, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + h1, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + .field--name-field-display-title, .node-ebooking.processed .webform-component-markup[class*="title"] .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .node-ebooking.processed .webform-component-markup[class*="title"] .field-item, .node-ebooking.processed .webform-component-markup[class*="title"] h3, .node-ebooking.processed .webform-component-markup[class*="title"] .block--views-team-list .node__title, .block--views-team-list .node-ebooking.processed .webform-component-markup[class*="title"] .node__title, .node-ebooking.processed .webform-component-markup[class*="title"] .block--views-services-all .node__title, .block--views-services-all .node-ebooking.processed .webform-component-markup[class*="title"] .node__title, .node-ebooking.processed .webform-component-markup[class*="title"] .block-special-offers-intro .block__title, .block-special-offers-intro .node-ebooking.processed .webform-component-markup[class*="title"] .block__title {
+      font-size: 36px; } }
+
+.node-ebooking.processed .webform-component-optionsmarkup .package.selected:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package:after {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  content: "";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  font-size: 18px;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%; }
+  .node-ebooking.processed .webform-component-optionsmarkup .package.selected:after > *, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package:after > * {
+    -ms-flex: 0 1 auto; }
+
+.node-ebooking.processed .webform-component-optionsmarkup, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] {
+  margin-top: 40px; }
+  .node-ebooking.processed .webform-component-optionsmarkup .form-radio, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .form-radio {
+    display: none; }
+  .node-ebooking.processed .webform-component-optionsmarkup .package, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package {
+    padding: 40px 20px;
+    position: relative;
+    cursor: pointer;
+    border: 3px solid; }
+    .node-ebooking.processed .webform-component-optionsmarkup .package .icon, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .icon {
+      margin-bottom: 20px; }
+    .node-ebooking.processed .webform-component-optionsmarkup .package .content-wrap, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .content-wrap {
+      text-align: left;
+      font-size: 16px; }
+    .node-ebooking.processed .webform-component-optionsmarkup .package .title, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .title {
+      font-size: 19px;
+      font-weight: bold;
+      margin-bottom: 15px; }
+    .node-ebooking.processed .webform-component-optionsmarkup .package .price-wrapper, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .price-wrapper {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      margin-bottom: 15px; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package .price-wrapper > *, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .price-wrapper > * {
+        -ms-flex: 0 1 auto; }
+    .node-ebooking.processed .webform-component-optionsmarkup .package .current-price, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .current-price {
+      font-weight: bold;
+      margin-bottom: 10px; }
+    .node-ebooking.processed .webform-component-optionsmarkup .package .original-price, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .original-price {
+      text-decoration: line-through; }
+    .node-ebooking.processed .webform-component-optionsmarkup .package .body, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .body {
+      margin-bottom: 15px; }
+    .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      font-size: 17px;
+      font-weight: 600; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points > *, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points > * {
+        -ms-flex: 0 1 auto; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points span:before, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points span:before {
+        font-family: "FontAwesome";
+        font-weight: normal;
+        content: "";
+        padding-right: 5px; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points span + span, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points span + span {
+        margin-top: 10px; }
+  @media (min-width: 768px) {
+    .node-ebooking.processed .webform-component-optionsmarkup .package, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: start;
+          -ms-flex-align: start;
+              align-items: flex-start;
+      padding: 30px 55px 45px; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package > *, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package > * {
+        -ms-flex: 0 1 auto; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package .icon, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .icon {
+        margin-right: 20px; }
+        .node-ebooking.processed .webform-component-optionsmarkup .package .icon span, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .icon span {
+          margin-bottom: 0; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package .price-wrapper, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .price-wrapper {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package .current-price, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .current-price {
+        margin-bottom: 0;
+        margin-right: 20px; }
+      .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row; }
+        .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points span + span, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points span + span {
+          margin-top: 0;
+          margin-left: 20px; } }
+
 .node--teaser .field--name-body .field__item > *,
 .node--alt-teaser .field--name-body .field__item > * {
   width: 100%; }
@@ -3074,6 +3227,9 @@ li.addtoany {
     margin-bottom: 0; }
     .block--views-localtarget-map-reviews h2.location-title, .block--views-localtarget-map-reviews .block-areas-map .location-title.block__title, .block-areas-map .block--views-localtarget-map-reviews .location-title.block__title, .block--views-localtarget-map-reviews .field--name-field-intro + h1.location-title, .block--views-localtarget-map-reviews .field--name-field-intro + .location-title.field--name-field-display-title, .block--views-localtarget-map-reviews .field--name-field-intro + .field--name-field-seo-title .location-title.field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-localtarget-map-reviews .location-title.field-item {
       text-transform: uppercase; }
+      .block--views-localtarget-map-reviews h2.location-title .state:before, .block--views-localtarget-map-reviews .block-areas-map .location-title.block__title .state:before, .block-areas-map .block--views-localtarget-map-reviews .location-title.block__title .state:before, .block--views-localtarget-map-reviews .field--name-field-intro + h1.location-title .state:before, .block--views-localtarget-map-reviews .field--name-field-intro + .location-title.field--name-field-display-title .state:before, .block--views-localtarget-map-reviews .field--name-field-intro + .field--name-field-seo-title .location-title.field-item .state:before, .field--name-field-intro + .field--name-field-seo-title .block--views-localtarget-map-reviews .location-title.field-item .state:before {
+        content: ',';
+        margin-left: -3px; }
     .block--views-localtarget-map-reviews h2.reviews-title, .block--views-localtarget-map-reviews .block-areas-map .reviews-title.block__title, .block-areas-map .block--views-localtarget-map-reviews .reviews-title.block__title, .block--views-localtarget-map-reviews .field--name-field-intro + h1.reviews-title, .block--views-localtarget-map-reviews .field--name-field-intro + .reviews-title.field--name-field-display-title, .block--views-localtarget-map-reviews .field--name-field-intro + .field--name-field-seo-title .reviews-title.field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-localtarget-map-reviews .reviews-title.field-item {
       font-style: italic; }
   .block--views-localtarget-map-reviews h3, .block--views-localtarget-map-reviews .block--views-team-list .node__title, .block--views-team-list .block--views-localtarget-map-reviews .node__title, .block--views-localtarget-map-reviews .block--views-services-all .node__title, .block--views-services-all .block--views-localtarget-map-reviews .node__title, .block--views-localtarget-map-reviews .block-special-offers-intro .block__title, .block-special-offers-intro .block--views-localtarget-map-reviews .block__title {
@@ -3131,7 +3287,7 @@ li.addtoany {
     .block--views-localtarget-map-reviews {
       max-width: 1040px;
       margin: 0 auto;
-      padding: 50px 20px 0; }
+      padding: 50px 20px; }
       .block--views-localtarget-map-reviews .location-content {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -4617,6 +4773,366 @@ li.addtoany {
         margin-left: 1em; }
       .block--nav-utility .menu li:nth-child(1n) a:before {
         display: none; } }
+
+.node-ebooking .l-main {
+  max-width: none;
+  margin: 0;
+  padding: 60px 20px; }
+
+.node-ebooking .l-content {
+  max-width: 950px;
+  overflow: hidden; }
+
+.node-ebooking .webform {
+  padding-top: 60px; }
+
+.node-ebooking .form-item label {
+  font-size: 19px; }
+
+.node-ebooking .webform-component .form-type-radio label {
+  font-size: 18px; }
+
+.node-ebooking select {
+  height: 40px; }
+
+@media (min-width: 768px) {
+  .node-ebooking h1.node__title, .node-ebooking .node__title.field--name-field-display-title {
+    font-size: 2.5em;
+    font-weight: 600;
+    max-width: 640px;
+    margin: 0 auto 25px;
+    line-height: 1.1;
+    text-align: center; }
+  .node-ebooking .l-main {
+    padding: 100px 20px 80px; }
+  .node-ebooking .field--name-body {
+    margin: 0 auto 90px;
+    max-width: 840px; } }
+
+.node-ebooking.processed .l-content {
+  margin-left: auto;
+  margin-right: auto; }
+  .node-ebooking.processed .l-content:after {
+    content: "";
+    display: block;
+    clear: both; }
+
+.node-ebooking.processed .webform-client-form > div {
+  position: relative; }
+
+.node-ebooking.processed .step-number {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 15px; }
+
+.node-ebooking.processed .webform-component-markup {
+  font-size: 19px;
+  font-weight: bold; }
+
+.node-ebooking.processed .webform-component-markup[class*="title"] {
+  margin: 0; }
+
+.node-ebooking.processed fieldset legend {
+  text-align: left;
+  font-weight: 600; }
+
+.node-ebooking.processed .date-option + .date-option {
+  margin-top: 20px; }
+
+.node-ebooking.processed .date-option .fieldset-legend:after {
+  content: '*';
+  padding-left: 3px;
+  font-weight: bold; }
+
+.node-ebooking.processed .date-option .fieldset-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .node-ebooking.processed .date-option .fieldset-wrapper > * {
+    -ms-flex: 0 1 auto; }
+  .node-ebooking.processed .date-option .fieldset-wrapper > div:nth-of-type(2) {
+    width: 30%;
+    margin-left: 3%; }
+    .node-ebooking.processed .date-option .fieldset-wrapper > div:nth-of-type(2) .form-item {
+      margin-top: 15px; }
+    .node-ebooking.processed .date-option .fieldset-wrapper > div:nth-of-type(2) select {
+      max-width: none; }
+  .node-ebooking.processed .date-option .fieldset-wrapper .webform-component-date {
+    width: 67%;
+    margin-top: 15px; }
+
+.node-ebooking.processed .date-option .webform-datepicker {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  .node-ebooking.processed .date-option .webform-datepicker > * {
+    -ms-flex: 0 1 auto; }
+  .node-ebooking.processed .date-option .webform-datepicker .form-item {
+    width: 47.5%;
+    margin: 0; }
+    .node-ebooking.processed .date-option .webform-datepicker .form-item + .form-item {
+      margin-left: 5%; }
+  .node-ebooking.processed .date-option .webform-datepicker .webform-calendar {
+    opacity: 0;
+    height: 0; }
+
+.node-ebooking.processed .webform-component.hidden {
+  display: none; }
+
+.node-ebooking.processed .webform-component-select label {
+  margin-bottom: 20px; }
+
+.node-ebooking.processed .webform-component-select select {
+  max-width: 200px;
+  margin: 0 auto; }
+
+.node-ebooking.processed div[class*="if-business"] {
+  position: absolute;
+  border: solid 4px;
+  bottom: 0;
+  left: 50%;
+  min-width: 90%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding: 15px;
+  font-size: 21px;
+  font-weight: 600; }
+  .node-ebooking.processed div[class*="if-business"] p {
+    line-height: 1.2; }
+  .node-ebooking.processed div[class*="if-business"] p + p {
+    margin-top: 10px; }
+
+.node-ebooking.processed .validation-error {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  min-width: 90%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding: 25px 15px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  border: 4px solid; }
+  .node-ebooking.processed .validation-error span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: left; }
+    .node-ebooking.processed .validation-error span > * {
+      -ms-flex: 0 1 auto; }
+    .node-ebooking.processed .validation-error span:before {
+      font-family: "FontAwesome";
+      font-weight: normal;
+      content: "";
+      padding-right: 25px;
+      font-size: 44px; }
+
+.node-ebooking.processed .button {
+  min-width: 180px;
+  margin-top: 30px; }
+
+.node-ebooking.processed .basic-form {
+  display: block;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 40px;
+  text-decoration: underline; }
+
+.node-ebooking.processed .form-actions {
+  text-align: center;
+  margin-top: 30px; }
+  .node-ebooking.processed .form-actions input {
+    min-width: 200px;
+    width: 100%;
+    margin: 0 auto; }
+    .node-ebooking.processed .form-actions input + input {
+      margin-top: 30px; }
+
+.node-ebooking.processed .webform-next {
+  display: none;
+  margin-left: auto;
+  margin-right: auto; }
+
+.node-ebooking.processed .panel-form {
+  display: none; }
+
+.node-ebooking.processed .ajax-progress-throbber {
+  display: none !important; }
+
+@media (min-width: 768px) {
+  .node-ebooking.processed .webform-component-markup[class*="title"] {
+    margin: 0; }
+  .node-ebooking.processed .webform-component-select label {
+    margin-bottom: 50px; }
+  .node-ebooking.processed .form-radios {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    .node-ebooking.processed .form-radios > * {
+      -ms-flex: 0 1 auto; }
+    .node-ebooking.processed .form-radios .form-item {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      .node-ebooking.processed .form-radios .form-item > * {
+        -ms-flex: 0 1 auto; }
+      .node-ebooking.processed .form-radios .form-item + .form-item {
+        margin-left: 15px; }
+      .node-ebooking.processed .form-radios .form-item label {
+        margin-bottom: 0;
+        margin-left: 5px; }
+  .node-ebooking.processed .button.button-prev, .node-ebooking.processed .button.inactive {
+    margin-right: 40px;
+    margin-top: 40px; }
+  .node-ebooking.processed .button.button-next {
+    margin-top: 40px; }
+  .node-ebooking.processed .validation-error {
+    top: 40px;
+    min-width: 60%;
+    padding: 30px;
+    font-size: 21px;
+    line-height: 44px; }
+  .node-ebooking.processed div[class*="if-business"] {
+    bottom: 10px;
+    min-width: 60%;
+    padding: 25px; }
+  .node-ebooking.processed .form-actions input {
+    width: auto; }
+    .node-ebooking.processed .form-actions input + input {
+      margin-left: 40px;
+      margin-top: 0; } }
+
+.node-ebooking.processed.basic-form .panel {
+  position: relative;
+  box-shadow: none;
+  padding: 40px 20px; }
+  .node-ebooking.processed.basic-form .panel.left, .node-ebooking.processed.basic-form .panel.right {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+
+.node-ebooking.processed.basic-form div[class*="if-business"] {
+  position: relative; }
+
+.node-ebooking.processed.basic-form .webform-next {
+  display: block; }
+
+.node-ebooking.processed.basic-form .button-prev,
+.node-ebooking.processed.basic-form .button-next,
+.node-ebooking.processed.basic-form .button.inactive,
+.node-ebooking.processed.basic-form .button-checkout,
+.node-ebooking.processed.basic-form .step-number,
+.node-ebooking.processed.basic-form .basic-form,
+.node-ebooking.processed.basic-form .validation-error {
+  display: none !important; }
+
+.node-ebooking.processed.basic-form .panel-form {
+  display: block;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 30px;
+  text-decoration: underline;
+  text-align: center; }
+
+.node-ebooking .ebooking_summary {
+  position: relative;
+  font-weight: normal; }
+  .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] h2:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .block-areas-map .block__title:after, .block-areas-map .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .block__title:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .field--name-field-intro + h1:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .field--name-field-intro + .field--name-field-display-title:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .field--name-field-intro + .field--name-field-seo-title .field-item:after, .field--name-field-intro + .field--name-field-seo-title .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .field-item:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] h3:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .block--views-team-list .node__title:after, .block--views-team-list .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .node__title:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .block--views-services-all .node__title:after, .block--views-services-all .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .node__title:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .block-special-offers-intro .block__title:after, .block-special-offers-intro .node-ebooking .ebooking_summary .webform-component-markup[class*="title"] .block__title:after {
+    margin-bottom: 20px; }
+  .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] {
+    margin-top: 0; }
+    .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] > h3, .node-ebooking .ebooking_summary .block--views-team-list .webform-component-markup[class*="review"] > .node__title, .block--views-team-list .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] > .node__title, .node-ebooking .ebooking_summary .block--views-services-all .webform-component-markup[class*="review"] > .node__title, .block--views-services-all .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] > .node__title, .node-ebooking .ebooking_summary .block-special-offers-intro .webform-component-markup[class*="review"] > .block__title, .block-special-offers-intro .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] > .block__title {
+      font-size: 21px;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 25px; }
+  .node-ebooking .ebooking_summary .bullet-points {
+    font-size: 17px;
+    font-weight: 600; }
+    .node-ebooking .ebooking_summary .bullet-points p {
+      line-height: 1.2; }
+      .node-ebooking .ebooking_summary .bullet-points p + p {
+        margin-top: 5px; }
+      .node-ebooking .ebooking_summary .bullet-points p:before {
+        font-family: "FontAwesome";
+        font-weight: normal;
+        content: "";
+        padding-right: 5px;
+        font-size: 24px; }
+  .node-ebooking .ebooking_summary .amount-due {
+    margin-top: 50px;
+    padding: 35px 20px;
+    border: solid 3px; }
+    .node-ebooking .ebooking_summary .amount-due p:first-of-type {
+      font-size: 21px; }
+    .node-ebooking .ebooking_summary .amount-due p:nth-of-type(2) {
+      font-size: 16px;
+      font-weight: 600;
+      font-style: italic;
+      margin-top: 10px; }
+    .node-ebooking .ebooking_summary .amount-due .tooltip-icon:after {
+      font-family: "FontAwesome";
+      font-weight: normal;
+      content: "";
+      cursor: pointer;
+      padding-left: 5px;
+      font-style: normal; }
+  .node-ebooking .ebooking_summary .webform-component-markup[class*="tooltip"] {
+    display: none;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    width: 90%;
+    max-width: 720px;
+    border: solid 4px;
+    padding: 25px;
+    margin-top: 0;
+    text-align: center; }
+  .node-ebooking .ebooking_summary .paymethod-select-wrapper {
+    text-align: left; }
+    .node-ebooking .ebooking_summary .paymethod-select-wrapper .fieldset-legend {
+      display: none; }
+  .node-ebooking .ebooking_summary fieldset[class*='customer-info'] {
+    text-align: left; }
+  @media (min-width: 768px) {
+    .node-ebooking .ebooking_summary fieldset[class*='customer-info'] .fieldset-wrapper,
+    .node-ebooking .ebooking_summary .paymethod-select-wrapper .fieldset-wrapper {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      margin-left: -10px; }
+      .node-ebooking .ebooking_summary fieldset[class*='customer-info'] .fieldset-wrapper > *,
+      .node-ebooking .ebooking_summary .paymethod-select-wrapper .fieldset-wrapper > * {
+        -ms-flex: 0 1 auto; }
+      .node-ebooking .ebooking_summary fieldset[class*='customer-info'] .fieldset-wrapper > .form-item,
+      .node-ebooking .ebooking_summary .paymethod-select-wrapper .fieldset-wrapper > .form-item {
+        -webkit-box-flex: 1;
+            -ms-flex: 1 0 50%;
+                flex: 1 0 50%;
+        width: 50%;
+        max-width: 50%;
+        padding-left: 10px; }
+    .node-ebooking .ebooking_summary fieldset.expiry-date {
+      width: 50%;
+      padding-left: 10px; } }
 
 .front .l-main {
   margin: 0 auto;

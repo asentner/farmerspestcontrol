@@ -1,0 +1,314 @@
+.node-ebooking {
+  .l-main {
+    padding: 60px 20px;
+  }
+  .l-content {
+    max-width: 950px;
+    overflow: hidden;
+  }
+  .webform {
+    padding-top: 60px;
+  }
+  .form-item {
+    label{
+      font-size: 19px;
+    }
+  }
+  .webform-component {
+    .form-type-radio {
+      label {
+        font-size: 18px;
+      }
+    }
+  }
+  select {
+    height: 40px;
+  }
+
+  @include breakpoint($tab) {
+    h1.node__title {
+      font-size: 2.5em;
+      font-weight: 600;
+      max-width: 640px;
+      margin: 0 auto 25px;
+      line-height: 1.1;
+      text-align: center;
+    }
+    .l-main {
+      padding: 100px 20px 80px;
+    }
+    .field--name-body {
+      margin: 0 auto 90px;
+      max-width: 840px;
+    }
+  }
+}
+
+.node-ebooking.processed {
+  .l-content {
+    @include clear;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .webform-client-form > div {
+    position: relative;
+  }
+  .panel {
+    @extend %ebooking-panel;
+  }
+  .step-number {
+    font-size: 18px;
+	  font-weight: 600;
+  	letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+  .webform-component-markup {
+    font-size: 19px;
+    font-weight: bold;
+  }
+  .webform-component-markup[class*="title"] {
+    margin: 0;
+    h2, h3 {
+      @extend %ebooking-panel-title;
+    }
+  }
+  fieldset {
+    legend {
+      text-align: left;
+      font-weight: 600;
+    }
+  }
+  // date picker styling
+  .date-option {
+    + .date-option {
+      margin-top: 20px;
+    }
+    .fieldset-legend {
+      &:after {
+        content: '*';
+        padding-left: 3px;
+        font-weight: bold;
+      }
+    }
+    .fieldset-wrapper {
+      @include flexbox;
+      > div:nth-of-type(2) {
+        width: 30%;
+        margin-left: 3%;
+        .form-item {
+          margin-top: 15px;
+        }
+        select {
+          max-width: none;
+        }
+      }
+      .webform-component-date {
+        width: 67%;
+        margin-top: 15px;
+      }
+    }
+    .webform-datepicker {
+      @include flexbox;
+      flex-wrap: wrap;
+      .form-item {
+        width: 47.5%;
+        margin: 0;
+        + .form-item {
+          margin-left: 5%;
+        }
+      }
+      .webform-calendar {
+        opacity: 0;
+        height: 0;
+      }
+    }
+  }
+  .webform-component {
+    &.hidden {
+      display: none;
+    }
+  }
+  .webform-component-select {
+    label {
+      margin-bottom: 20px;
+    }
+    select {
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  }
+  div[class*="if-business"] {
+    position: absolute;
+    border: solid 4px;
+    bottom: 0;
+    left: 50%;
+    min-width: 90%;
+    transform: translateX(-50%);
+    padding: 15px;
+    font-size: 21px;
+    font-weight: 600;
+    p {
+      line-height: 1.2;
+    }
+    p + p {
+      margin-top: 10px;
+    }
+  }
+  .validation-error {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    min-width: 90%;
+    transform: translateX(-50%);
+    padding: 25px 15px;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+    border: 4px solid;
+    span {
+      @include flexbox;
+      align-items: center;
+      text-align: left;
+      &:before {
+        @include faicon('\F06A');
+        padding-right: 25px;
+        font-size: 44px;
+      }
+    }
+  }
+  .button {
+    min-width: 180px;
+    margin-top: 30px;
+  }
+  .basic-form {
+    display: block;
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 40px;
+    text-decoration: underline;
+  }
+
+  .form-actions {
+    text-align: center;
+    margin-top: 30px;
+    input {
+      min-width: 200px;
+      width: 100%;
+      margin: 0 auto;
+      + input {
+        margin-top: 30px;
+      }
+    }
+  }
+  .webform-next {
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .panel-form {
+    display: none;
+  }
+  // package styling - this will likely change once we pull in packages as nodes
+  .webform-component-optionsmarkup {
+    @extend %ebooking-package;
+  }
+  // hide the ajax throbber
+  .ajax-progress-throbber {
+    display: none !important;
+  }
+
+  @include breakpoint($tab) {
+    .webform-component-markup[class*="title"] {
+      margin: 0;
+    }
+    .webform-component-select {
+      label {
+        margin-bottom: 50px;
+      }
+    }
+    .form-radios {
+      @include flexbox;
+      justify-content: center;
+      flex-wrap: wrap;
+      .form-item {
+        @include flexbox;
+        align-items: center;
+        + .form-item {
+          margin-left: 15px;
+        }
+        label {
+          margin-bottom: 0;
+          margin-left: 5px;
+        }
+      }
+    }
+    .button {
+      &.button-prev,
+      &.inactive {
+        margin-right: 40px;
+        margin-top: 40px;
+      }
+      &.button-next {
+        margin-top: 40px;
+      }
+    }
+    .validation-error {
+      top: 40px;
+      min-width: 60%;
+      padding: 30px;
+      font-size: 21px;
+      line-height: 44px;
+    }
+    div[class*="if-business"] {
+      bottom: 10px;
+      min-width: 60%;
+      // padding: 30px;
+      padding: 25px;
+    }
+    .form-actions {
+      input {
+        width: auto;
+        + input {
+          margin-left: 40px;
+          margin-top: 0;
+        }
+      }
+    }
+  } // end tablet
+}
+
+.node-ebooking.processed.basic-form {
+  .panel {
+    position: relative;
+    box-shadow: none;
+    padding: 40px 20px;
+    &.left,
+    &.right {
+      transform: translateX(0);
+    }
+  }
+  div[class*="if-business"] {
+    position: relative;
+  }
+  .webform-next {
+    display: block;
+  }
+  .button-prev,
+  .button-next,
+  .button.inactive,
+  .button-checkout,
+  .step-number,
+  .basic-form,
+  .validation-error {
+    display: none !important; // override JS
+  }
+  .panel-form {
+    display: block;
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 30px;
+    text-decoration: underline;
+    text-align: center;
+  }
+}

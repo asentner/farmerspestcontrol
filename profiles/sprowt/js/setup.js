@@ -1,5 +1,19 @@
 (function($){
-    
+
+    var qs = (function(a) {
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            var p=a[i].split('=', 2);
+            if (p.length == 1)
+                b[p[0]] = "";
+            else
+                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'));
+
     /**
      * Attaches the batch behavior to progress bars.
      */
@@ -26,10 +40,13 @@
             progress.setProgress(-1, "initialize");
             holder.append(progress.element);
             progress.startMonitoring('/profiles/sprowt/ajax_setup.php', 10);
-            
-            //var setup_url = '/profiles/sprowt/background_sprowt_build.php?XDEBUG_SESSION_START=1';
-            
-            var setup_url = '/profiles/sprowt/background_sprowt_build.php';
+
+            if(qs['debug'] == 1) {
+                var setup_url = '/profiles/sprowt/background_sprowt_build.php?XDEBUG_SESSION_START=1';
+            }
+            else {
+                var setup_url = '/profiles/sprowt/background_sprowt_build.php';
+            }
 
             var ajax_ops = {
                 url: setup_url,

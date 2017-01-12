@@ -39,6 +39,9 @@ $COLORS: (
   ),
 );
 
+$color-map-bg: #f4f4f5; // unique color used so bg can be changed with color picker
+
+
 @function palette($color: primary, $tone: base) {
   // Return warning if color is invalid
   @if not map-has-key($COLORS, $color) {
