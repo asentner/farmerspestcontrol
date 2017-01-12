@@ -3765,6 +3765,9 @@ li.addtoany {
   margin-left: auto;
   margin-right: auto; }
 
+.not-front .block--views-services-all div.more-link {
+  display: none; }
+
 .block--views-services-front-services {
   padding: 20px 20px 40px; }
   .block--views-services-front-services .view-content {

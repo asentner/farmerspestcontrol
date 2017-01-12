@@ -7,8 +7,12 @@
   $color-services-body: palette(neutral, gray);
   $color-title: palette(white, pure);
 
-  .block__content {
+
+  .view-content {
     background-color: $color-bg;
+    + .more-link a {
+      @include button-color();
+    }
   }
   .view-content {
     &:after {

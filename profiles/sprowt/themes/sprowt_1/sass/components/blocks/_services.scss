@@ -4,6 +4,15 @@
   }
 }
 
+.not-front {
+  .block--views-services-all {
+    div.more-link {
+      display: none;
+    }
+  }
+}
+
+
 
 // homepage service listing
 
@@ -11,6 +20,18 @@
   .block--views-services-all {
     .field--name-field-image {
       padding-bottom: 20px;
+    }
+    .view-content {
+      + .more-link {
+        text-align: center;
+        margin-top: 60px;
+        a {
+          @extend %button;
+          max-width: 225px;
+          width: 100%;
+          margin: 0 auto;
+        }
+      }
     }
     @include breakpoint($tab) {
       .field--name-field-image {

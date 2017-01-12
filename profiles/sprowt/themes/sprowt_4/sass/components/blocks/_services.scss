@@ -4,6 +4,13 @@
   }
 }
 
+.not-front {
+  .block--views-services-all {
+    div.more-link {
+      display: none;
+    }
+  }
+}
 
 // homepage service listing
 

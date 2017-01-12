@@ -274,8 +274,14 @@ hr {
   background-color: #fff;
   border-color: #eee; }
 
-.block--views-services-front-all-quaternary .block__content {
+.block--views-services-front-all-quaternary .view-content {
   background-color: #d32c26; }
+  .block--views-services-front-all-quaternary .view-content + .more-link a {
+    background-color: #d32c26;
+    color: #fff; }
+    .block--views-services-front-all-quaternary .view-content + .more-link a:hover, .block--views-services-front-all-quaternary .view-content + .more-link a:focus {
+      background-color: #b1241f;
+      color: #fff; }
 
 .block--views-services-front-all-quaternary .view-content:after {
   background-color: #000; }
