@@ -593,7 +593,7 @@ function sprowt_content_types_field_default_field_instances() {
           'trim_type' => 'chars',
         ),
         'type' => 'smart_trim_format',
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -613,7 +613,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 46,
+      'weight' => 47,
     ),
   );
 
@@ -650,7 +650,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -717,7 +717,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -737,6 +737,72 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 44,
+    ),
+  );
+
+  // Exported field_instance: 'node-benefit-field_icon'.
+  $field_instances['node-benefit-field_icon'] = array(
+    'bundle' => 'benefit',
+    'deleted' => 0,
+    'description' => 'Note: Icons are not used with all themes.',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 7,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'image_link_formatter',
+        'settings' => array(
+          'image_link' => 'field_link',
+          'image_style' => '',
+        ),
+        'type' => 'image_link_formatter',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_icon',
+    'label' => 'Icon',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 43,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 45,
     ),
   );
 
@@ -794,7 +860,7 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => 'focal_point_scale_and_crop_80x80',
         ),
         'type' => 'image_link_formatter',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -820,7 +886,7 @@ function sprowt_content_types_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 45,
+      'weight' => 46,
     ),
   );
 
@@ -856,7 +922,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_plain',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -891,7 +957,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 49,
+      'weight' => 50,
     ),
   );
 
@@ -930,7 +996,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -945,7 +1011,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 48,
+      'weight' => 49,
     ),
   );
 
@@ -984,7 +1050,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'node',
@@ -999,7 +1065,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 47,
+      'weight' => 48,
     ),
   );
 
@@ -6321,7 +6387,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
+          'image_link' => 'content',
           'image_style' => '',
         ),
         'type' => 'image',
@@ -8246,6 +8312,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Map code');
   t('Market');
   t('Marking this field as "Yes" adds extra markup and design to standout in the list of other packages.');
+  t('Note: Icons are not used with all themes.');
   t('Offer');
   t('Offer headline');
   t('Offer price');

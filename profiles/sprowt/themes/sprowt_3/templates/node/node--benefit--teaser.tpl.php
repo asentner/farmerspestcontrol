@@ -1,6 +1,12 @@
 <article<?php print $attributes; ?>>
   <div class="content-wrap">
-    <?php print render($content['field_image']); ?>
+    <?php if(!empty($content['field_icon']['#items'][0]['width'])) {
+      print render($content['field_icon']);
+    }
+    elseif(!empty($content['field_image'][0]['#item']['uri'])) {
+      print render($content['field_image']);
+    };
+  ?>
     <div<?php print $content_attributes; ?>>
         <?php
           if (isset($content['field_link'])):
@@ -15,7 +21,7 @@
         hide($content['comments']);
         hide($content['links']);
         hide($content['field_link']);
-        print render($content);
+        print render($content['body']);
       ?>
     </div>
   </div>

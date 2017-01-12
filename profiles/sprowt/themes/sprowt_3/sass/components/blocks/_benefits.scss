@@ -16,7 +16,8 @@
   .content-wrap {
     padding: 40px 20px;
   }
-  .field--name-field-image {
+  .field--name-field-image,
+  .field--name-field-icon {
     margin-bottom: 18px;
     a > img {
       @extend %image-hover;

@@ -2342,11 +2342,15 @@
     content: ""; }
 
 .block--list .field--name-field-image a > img, .block--views-affiliates-list img, .block--views-benefits-front .field--name-field-image a > img,
-.local-target-benefits .field--name-field-image a > img, .block--views-team-list .field--name-field-image img {
+.block--views-benefits-front .field--name-field-icon a > img,
+.local-target-benefits .field--name-field-image a > img,
+.local-target-benefits .field--name-field-icon a > img, .block--views-team-list .field--name-field-image img {
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out; }
   .block--list .field--name-field-image a > img:hover, .block--views-affiliates-list img:hover, .block--views-benefits-front .field--name-field-image a > img:hover,
-  .local-target-benefits .field--name-field-image a > img:hover, .block--views-team-list .field--name-field-image img:hover {
+  .block--views-benefits-front .field--name-field-icon a > img:hover,
+  .local-target-benefits .field--name-field-image a > img:hover,
+  .local-target-benefits .field--name-field-icon a > img:hover, .block--views-team-list .field--name-field-image img:hover {
     -webkit-transform: scale(0.95);
             transform: scale(0.95); }
 
@@ -3064,7 +3068,9 @@ li.addtoany {
   .local-target-benefits .content-wrap {
     padding: 40px 20px; }
   .block--views-benefits-front .field--name-field-image,
-  .local-target-benefits .field--name-field-image {
+  .block--views-benefits-front .field--name-field-icon,
+  .local-target-benefits .field--name-field-image,
+  .local-target-benefits .field--name-field-icon {
     margin-bottom: 18px; }
   .block--views-benefits-front .node__title,
   .local-target-benefits .node__title {
