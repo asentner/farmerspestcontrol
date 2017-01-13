@@ -3736,6 +3736,9 @@ li.addtoany {
   margin-left: auto;
   margin-right: auto; }
 
+.not-front .block--views-services-all div.more-link {
+  display: none; }
+
 .block--views-services-front-all {
   text-align: center; }
   .block--views-services-front-all .node {

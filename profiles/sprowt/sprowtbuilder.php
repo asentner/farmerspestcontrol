@@ -260,7 +260,6 @@ Class SprowtBuilder {
         variable_set('webform_default_from_address', $this->data['company_info']['webform_from_email']);
         variable_set('webform_default_from_name', $this->data['company_info']['webform_from_name']);
         variable_set('webform_email_replyto', false);
-
     }
     
     function addDefaultImages() {
@@ -748,6 +747,36 @@ Class SprowtBuilder {
         
         foreach($features as $feature) {
             features_revert_module($feature);
+        }
+
+        $this->afterRevert();
+    }
+
+    function afterRevert(){
+        // drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
+        $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprowt/sprowt_export.json");
+        $orig_nodes = json_decode($node_json,true);
+        $uuid_array = array();
+        foreach($orig_nodes as $node) {
+            $uuid_array[$node['nid']] = $node['uuid'];
+        }
+        $nid_array = entity_get_id_by_uuid('node', $uuid_array);
+
+        //special offers update
+        $redeem_nid = $nid_array['7ac2f749-f7d3-4db7-8b05-258588aba660'];
+        $link = array(
+            'url' => "node/$redeem_nid"
+        );
+
+        $instance = field_info_instance('node', 'field_button', 'special_offer');
+        $instance['default_value'] = array($link);
+        field_update_instance($instance);
+
+        $nids = db_query("SELECT nid FROM node WHERE type='special_offer'")->fetchCol();
+        foreach(node_load_multiple($nids) as $node) {
+            $NB = new NodeBuilder($node);
+            $NB->field_button = $link;
+            $NB->save();
         }
     }
 }

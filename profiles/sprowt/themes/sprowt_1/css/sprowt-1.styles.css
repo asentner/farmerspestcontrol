@@ -2374,7 +2374,7 @@ div.accordion .accordion-content {
 
 .button, .node--teaser .field--name-body .field__item > .more-link,
 .node--alt-teaser .field--name-body .field__item > .more-link, input[type=submit], .block--views-packages-services .field--name-body .field__item .more-link,
-.block--views-packages-localtarget .field--name-body .field__item .more-link {
+.block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a {
   display: block;
   font: inherit;
   font-size: 15px;
@@ -2388,18 +2388,18 @@ div.accordion .accordion-content {
   line-height: normal; }
   .button:hover, .node--teaser .field--name-body .field__item > .more-link:hover,
   .node--alt-teaser .field--name-body .field__item > .more-link:hover, input[type=submit]:hover, .block--views-packages-services .field--name-body .field__item .more-link:hover,
-  .block--views-packages-localtarget .field--name-body .field__item .more-link:hover {
+  .block--views-packages-localtarget .field--name-body .field__item .more-link:hover, .front .block--views-services-all .view-content + .more-link a:hover {
     cursor: pointer; }
   @media (min-width: 768px) {
     .button, .node--teaser .field--name-body .field__item > .more-link,
     .node--alt-teaser .field--name-body .field__item > .more-link, input[type=submit], .block--views-packages-services .field--name-body .field__item .more-link,
-    .block--views-packages-localtarget .field--name-body .field__item .more-link {
+    .block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a {
       display: inline-block; } }
 
 @media print {
   .button, .node--teaser .field--name-body .field__item > .more-link,
   .node--alt-teaser .field--name-body .field__item > .more-link, input[type=submit], .block--views-packages-services .field--name-body .field__item .more-link,
-  .block--views-packages-localtarget .field--name-body .field__item .more-link {
+  .block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a {
     display: inline-block;
     padding: 0; } }
 
@@ -3704,8 +3704,19 @@ li.addtoany {
   margin-left: auto;
   margin-right: auto; }
 
+.not-front .block--views-services-all div.more-link {
+  display: none; }
+
 .front .block--views-services-all .field--name-field-image {
   padding-bottom: 20px; }
+
+.front .block--views-services-all .view-content + .more-link {
+  text-align: center;
+  margin-top: 60px; }
+  .front .block--views-services-all .view-content + .more-link a {
+    max-width: 225px;
+    width: 100%;
+    margin: 0 auto; }
 
 @media (min-width: 768px) {
   .front .block--views-services-all .field--name-field-image {

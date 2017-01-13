@@ -4,6 +4,14 @@
   }
 }
 
+.not-front {
+  .block--views-services-all {
+    div.more-link {
+      display: none;
+    }
+  }
+}
+
 // homepage service intro
 
 .service-intro {
@@ -35,6 +43,14 @@
       left: 0;
       right: 0;
       opacity: 0.5;
+    }
+    + .more-link {
+      text-align: center;
+      a{
+        @extend %button;
+        max-width: 225px;
+        margin: 30px auto;
+      }
     }
   }
   .views-row {
@@ -95,7 +111,12 @@
   }
   @include breakpoint($desk) {
     $transition: .5s ease-in-out;
-    margin-bottom: 70px;
+    padding-bottom: 70px;
+    .view-content {
+      + .more-link a {
+        margin-bottom: 0;
+      }
+    }
     .views-row {
       width: 25%;
       &:before {
