@@ -75,9 +75,17 @@
       display: none;
     }
   }
-  fieldset[class*='customer-info'] {
+  fieldset[class*='customer-info'],
+  fieldset[class*='service-address'] {
     text-align: left;
+    .fieldset-wrapper select {
+      max-width: 100%;
+    }
   }
+  .form-actions {
+    margin-bottom: 0;
+  }
+
   @include breakpoint($tab) {
     fieldset[class*='customer-info'],
     .paymethod-select-wrapper { // customer info and stripe styling
@@ -90,6 +98,7 @@
           width: 50%;
           max-width: 50%;
           padding-left: 10px;
+          margin-bottom: 0;
         }
       }
     }
@@ -97,5 +106,26 @@
       width: 50%;
       padding-left: 10px;
     }
-  }
+    fieldset[class*='service-address'] {
+      .fieldset-wrapper {
+        @include flexbox;
+        flex-wrap: wrap;
+        margin-left: -10px;
+        > .form-item {
+          padding-left: 10px;
+          width: 100%;
+          margin-bottom: 0;
+        }
+        div[class*='state'],
+        div[class*='zip'] {
+          flex: 1 0 50%;
+          width: 50%;
+          max-width: 50%;
+        }
+        label {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  } // end tablet
 }

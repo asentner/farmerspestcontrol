@@ -25,8 +25,8 @@
         // Add link to view as a single page
         // $fieldsets.filter(':first').append('<a class="basic-form" href="#">Don’t like this form, fill out a single page now!</a>');
 
-        // add the 'checkout' button
-        $fieldsets.filter(':last').append('<a class="button button-checkout" href="#">Checkout</a>')
+        // add the 'Review' button
+        $fieldsets.filter(':last').append('<a class="button button-checkout" href="#">Review Purchase</a>')
 
         // make the first panel active
         $fieldsets.filter(':first').addClass('active');
@@ -43,11 +43,11 @@
           stepNumber++;
         });
 
+
         // add link to return to 'panel' form layout
         if($fieldsets.length) {
           $('.node--webform').append('<a class="panel-form" href="#">Take me back to the panels!</a>');
         };
-
 
         $target.addClass('processed');
       } // end panel 'build out'
@@ -211,7 +211,11 @@
       };
 
       // add tooltip icon to monthly price on the checkout page
-      $('.amount-due').find('p:last-of-type').append('<span class="tooltip-icon"></span>');
+      if(!($('.tooltip-icon').length)) {
+        $('.amount-due').find('p:last-of-type').append('<span class="tooltip-icon"></span>');
+      };
+
+      // make tool tip icons work
       $('.tooltip-icon').hover(
         function(){
           $(this).closest('.webform-component').siblings('[class*=tooltip]').show();
@@ -227,8 +231,21 @@
       //   $(this).closest('.webform-component').siblings('[class*=tooltip]').removeClass('mobile-touch');
       // });
 
+      // add step numver to Checkout page
+      // first extract the ebooking_summary fieldset number from the class
+      // http://stackoverflow.com/questions/7033334/how-to-extract-number-from-a-string-in-javascript
+      if ( $('fieldset.ebooking_summary').length && !($('fieldset.ebooking_summary').hasClass('step-numbers')) ) {
+        var finalStep = $('fieldset.ebooking_summary').attr('class').replace(/[^0-9\.]/g, '');
+        var finalStep = parseInt(finalStep, 10);
+        $('fieldset.ebooking_summary').prepend('<h3 class="step-number">Step ' + finalStep + ' of ' + finalStep + '</h3>');
+        $('fieldset.ebooking_summary').addClass('step-numbers')
+      };
 
-
+      // move the form-actions inside the the checkout panel
+      if( $('fieldset.ebooking_summary').length && !($('.form-actions').hasClass('moved')) ) {
+        $('.form-actions').detach().appendTo('fieldset.ebooking_summary > .fieldset-wrapper');
+        $('.form-actions').addClass('moved');
+      };
     }
   };
 
