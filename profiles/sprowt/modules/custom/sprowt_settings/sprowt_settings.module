@@ -849,8 +849,6 @@ function sprowt_settings_token_info() {
 
     $tokens = array(
         'sprowt' => array(
-            'name' => 'Sprowt',
-            'description' => 'Sprowt specific tokens',
             'company_name' => array(
                 'name' => 'Company Name',
                 'description' => 'Company Name',
@@ -877,9 +875,11 @@ function sprowt_settings_token_info() {
         ),
     );
     
-    $tokens['site']['sprowt'] = $tokens['sprowt'];
-    $tokens['site']['sprowt']['type'] = 'sprowt';
-
+    $tokens['site']['sprowt'] = array(
+      'name' => 'Sprowt',
+      'description' => 'Sprowt specific tokens',
+      'type' => 'sprowt'
+    );
     return array(
         'types' => $types,
         'tokens' => $tokens
