@@ -743,6 +743,11 @@ function sprowt_settings_webform_select_options_info() {
         'title' => t('Sprowt Markets'),
         'options callback' => '_sprowt_settings_webform_options_markets',
     );
+  
+  $items['market_states'] = array(
+    'title' => t('Sprowt Market States'),
+    'options callback' => '_sprowt_settings_webform_options_market_states',
+  );
     
     return $items;
 }
@@ -779,6 +784,21 @@ function _sprowt_settings_webform_options_markets() {
     }
     
     return $options;
+}
+
+function _sprowt_settings_webform_options_market_states() {
+  $options = array();
+  $states = db_query("
+    SELECT DISTINCT field_state_value
+    FROM field_data_field_state
+    ORDER BY field_state_value
+  ")->fetchCol();
+  
+  foreach($states as $state) {
+    $options[$state] = $state;
+  }
+  
+  return $options;
 }
 
 function _sprowt_settings_node_uuid_redirect($uuid, $op = '') {
@@ -829,6 +849,8 @@ function sprowt_settings_token_info() {
 
     $tokens = array(
         'sprowt' => array(
+            'name' => 'Sprowt',
+            'description' => 'Sprowt specific tokens',
             'company_name' => array(
                 'name' => 'Company Name',
                 'description' => 'Company Name',
@@ -854,9 +876,39 @@ function sprowt_settings_token_info() {
             ),
         ),
     );
+    
+    $tokens['site']['sprowt'] = $tokens['sprowt'];
+    $tokens['site']['sprowt']['type'] = 'sprowt';
 
     return array(
         'types' => $types,
         'tokens' => $tokens
     );
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function sprowt_settings_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  foreach($tokens as $name => $original) {
+    switch($name) {
+      case 'sprowt:company_name':
+        $replacements[$original] = variable_get('sprowt_settings_company_name', '');
+        break;
+      case 'sprowt:sprowt_phone':
+        $replacements[$original] = '<a href="tel:+1'.sprowt_settings_get_phone_number('$1$2$3').'">'.sprowt_settings_get_phone_number().'</a>';
+        break;
+      case 'sprowt:sprowt_phone:text_only':
+        $replacements[$original] = sprowt_settings_get_phone_number();
+        break;
+      case 'sprowt:sprowt_phone:unformatted':
+        $replacements[$original] = sprowt_settings_get_phone_number('$1$2$3');
+        break;
+      case 'sprowt:sprowt_webform_to_email':
+        $replacements[$original] = variable_get('sprowt_settings_webform_to_email', '');
+    }
+  }
+  
+  return $replacements;
 }
