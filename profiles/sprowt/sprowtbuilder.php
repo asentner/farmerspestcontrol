@@ -151,6 +151,8 @@ Class SprowtBuilder {
         if(!empty($this->data['company_info']['contact_email'])){
             variable_set('sprowt_settings_contact_email', $this->data['company_info']['contact_email']);
         }
+  
+        variable_set('sprowt_settings_webform_to_email', $this->data['company_info']['webform_to_email']);
     }
     
     function cleanPhone($phone) {
@@ -777,6 +779,24 @@ Class SprowtBuilder {
             $NB = new NodeBuilder($node);
             $NB->field_button = $link;
             $NB->save();
+        }
+        
+        //handle webforms
+        $nids = db_query("SELECT nid FROM node WHERE type='webform'")->fetchCol();
+        foreach(node_load_multiple($nids) as $node) {
+          if(in_array($node->uuid, array_keys($this->paths))) {
+            $node->path = array(
+              'alias' => $this->paths[$node->uuid],
+              'pathauto' => false
+            );
+          }
+          else {
+            $node->path = array(
+              'pathauto' => true
+            );
+          }
+          
+          node_save($node);
         }
     }
 }

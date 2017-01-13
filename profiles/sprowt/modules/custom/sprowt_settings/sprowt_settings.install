@@ -5,3 +5,13 @@ function sprowt_settings_install() {
     ->condition('name', 'sprowt_settings', '=')
     ->execute();
 }
+
+/**
+ * Fill in the webform to email if it exists
+ */
+function sprowt_settings_update_7100(){
+    $data = _sprowt_get_data();
+    if(!empty($data['company_info']['webform_to_email'])) {
+        variable_set('sprowt_settings_webform_to_email', $data['company_info']['webform_to_email']);
+    }
+}

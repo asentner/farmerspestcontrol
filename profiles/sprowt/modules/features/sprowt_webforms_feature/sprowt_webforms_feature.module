@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Webforms (Feature) feature.
+ */
+
+include_once 'sprowt_webforms_feature.features.inc';
