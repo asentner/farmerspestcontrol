@@ -56,5 +56,16 @@ Meet the Team',
     'machine_name' => 'profile',
   );
 
+  // Exported custom breadcrumb: service.
+  $custom_breadcrumbs['service'] = array(
+    'name' => 'Service',
+    'titles' => 'Our Services',
+    'paths' => '<our_pest_control_services>',
+    'visibility_php' => '',
+    'node_type' => 'service',
+    'language' => '',
+    'machine_name' => 'service',
+  );
+
   return $custom_breadcrumbs;
 }
