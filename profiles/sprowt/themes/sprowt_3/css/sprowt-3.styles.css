@@ -5081,8 +5081,14 @@ li.addtoany {
     text-align: left; }
     .node-ebooking .ebooking_summary .paymethod-select-wrapper .fieldset-legend {
       display: none; }
-  .node-ebooking .ebooking_summary fieldset[class*='customer-info'] {
+  .node-ebooking .ebooking_summary fieldset[class*='customer-info'],
+  .node-ebooking .ebooking_summary fieldset[class*='service-address'] {
     text-align: left; }
+    .node-ebooking .ebooking_summary fieldset[class*='customer-info'] .fieldset-wrapper select,
+    .node-ebooking .ebooking_summary fieldset[class*='service-address'] .fieldset-wrapper select {
+      max-width: 100%; }
+  .node-ebooking .ebooking_summary .form-actions {
+    margin-bottom: 0; }
   @media (min-width: 768px) {
     .node-ebooking .ebooking_summary fieldset[class*='customer-info'] .fieldset-wrapper,
     .node-ebooking .ebooking_summary .paymethod-select-wrapper .fieldset-wrapper {
@@ -5102,10 +5108,33 @@ li.addtoany {
                 flex: 1 0 50%;
         width: 50%;
         max-width: 50%;
-        padding-left: 10px; }
+        padding-left: 10px;
+        margin-bottom: 0; }
     .node-ebooking .ebooking_summary fieldset.expiry-date {
       width: 50%;
-      padding-left: 10px; } }
+      padding-left: 10px; }
+    .node-ebooking .ebooking_summary fieldset[class*='service-address'] .fieldset-wrapper {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      margin-left: -10px; }
+      .node-ebooking .ebooking_summary fieldset[class*='service-address'] .fieldset-wrapper > * {
+        -ms-flex: 0 1 auto; }
+      .node-ebooking .ebooking_summary fieldset[class*='service-address'] .fieldset-wrapper > .form-item {
+        padding-left: 10px;
+        width: 100%;
+        margin-bottom: 0; }
+      .node-ebooking .ebooking_summary fieldset[class*='service-address'] .fieldset-wrapper div[class*='state'],
+      .node-ebooking .ebooking_summary fieldset[class*='service-address'] .fieldset-wrapper div[class*='zip'] {
+        -webkit-box-flex: 1;
+            -ms-flex: 1 0 50%;
+                flex: 1 0 50%;
+        width: 50%;
+        max-width: 50%; }
+      .node-ebooking .ebooking_summary fieldset[class*='service-address'] .fieldset-wrapper label {
+        margin-bottom: 20px; } }
 
 .front .l-main {
   margin: 0 auto;
