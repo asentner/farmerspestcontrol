@@ -10,7 +10,7 @@
 function sprowt_webforms_feature_webform_defaults() {
 $webforms = array();
   $webforms['complete_this_form_and_receive_y'] = array(
-  'uid' => 0,
+  'uid' => 1,
   'title' => 'Complete this form and receive your discount!',
   'log' => '',
   'status' => 1,
@@ -26,7 +26,7 @@ $webforms = array();
   'rh_redirect' => NULL,
   'rh_redirect_response' => NULL,
   'uuid' => '7ac2f749-f7d3-4db7-8b05-258588aba660',
-  'revision_uid' => 0,
+  'revision_uid' => 1,
   'body' => array(),
   'field_ebooking' => array(
     'und' => array(
@@ -89,6 +89,9 @@ $webforms = array();
       'datatype' => 'xsd:dateTime',
       'callback' => 'date_iso8601',
     ),
+  ),
+  'path' => array(
+    'pathauto' => 1,
   ),
   'webform' => array(
     'confirmation' => '',
@@ -335,13 +338,12 @@ Option4|$100 Off Home Protection Premiere',
     ),
     'conditionals' => array(),
   ),
-  'name' => '',
-  'picture' => 0,
-  'data' => NULL,
-  'path' => NULL,
+  'name' => 'coalmarch',
+  'picture' => 2,
+  'data' => 'b:0;',
 );
   $webforms['get_a_free_no_obligation_estimat'] = array(
-  'uid' => 0,
+  'uid' => 1,
   'title' => 'Get a free, no obligation estimate today!',
   'log' => '',
   'status' => 1,
@@ -357,7 +359,7 @@ Option4|$100 Off Home Protection Premiere',
   'rh_redirect' => NULL,
   'rh_redirect_response' => NULL,
   'uuid' => '98a67a69-c000-437a-81b5-6dff7f17d3ed',
-  'revision_uid' => 0,
+  'revision_uid' => 1,
   'body' => array(
     'und' => array(
       0 => array(
@@ -429,6 +431,9 @@ Option4|$100 Off Home Protection Premiere',
       'datatype' => 'xsd:dateTime',
       'callback' => 'date_iso8601',
     ),
+  ),
+  'path' => array(
+    'pathauto' => 1,
   ),
   'webform' => array(
     'confirmation' => '',
@@ -644,13 +649,12 @@ Option4|$100 Off Home Protection Premiere',
     ),
     'conditionals' => array(),
   ),
-  'name' => '',
-  'picture' => 0,
-  'data' => NULL,
-  'path' => NULL,
+  'name' => 'coalmarch',
+  'picture' => 2,
+  'data' => 'b:0;',
 );
   $webforms['get_your_free_quote_today_'] = array(
-  'uid' => 0,
+  'uid' => 1,
   'title' => 'Get Your Free Quote Today!',
   'log' => '',
   'status' => 1,
@@ -666,7 +670,7 @@ Option4|$100 Off Home Protection Premiere',
   'rh_redirect' => NULL,
   'rh_redirect_response' => NULL,
   'uuid' => '616bbe72-80a0-43ec-b5a3-838d2b60f1e5',
-  'revision_uid' => 0,
+  'revision_uid' => 1,
   'body' => array(
     'und' => array(
       0 => array(
@@ -978,12 +982,12 @@ Option4|$100 Off Home Protection Premiere',
     ),
     'conditionals' => array(),
   ),
-  'name' => '',
-  'picture' => 0,
-  'data' => NULL,
+  'name' => 'coalmarch',
+  'picture' => 2,
+  'data' => 'b:0;',
 );
   $webforms['how_can_we_help_you_today_'] = array(
-  'uid' => 0,
+  'uid' => 1,
   'title' => 'How Can We Help You Today?',
   'log' => '',
   'status' => 1,
@@ -999,7 +1003,7 @@ Option4|$100 Off Home Protection Premiere',
   'rh_redirect' => NULL,
   'rh_redirect_response' => NULL,
   'uuid' => '934b332a-a247-41eb-ae2e-09dfe144aed3',
-  'revision_uid' => 0,
+  'revision_uid' => 1,
   'body' => array(
     'und' => array(
       0 => array(
@@ -1442,12 +1446,12 @@ option2|No',
     ),
     'conditionals' => array(),
   ),
-  'name' => '',
-  'picture' => 0,
-  'data' => NULL,
+  'name' => 'coalmarch',
+  'picture' => 2,
+  'data' => 'b:0;',
 );
   $webforms['landing_page_webform'] = array(
-  'uid' => 0,
+  'uid' => 1,
   'title' => 'Landing Page Webform',
   'log' => '',
   'status' => 1,
@@ -1463,7 +1467,7 @@ option2|No',
   'rh_redirect' => NULL,
   'rh_redirect_response' => NULL,
   'uuid' => '26f10b1f-a020-48df-adb0-b94f68cc2aff',
-  'revision_uid' => 0,
+  'revision_uid' => 1,
   'body' => array(),
   'field_ebooking' => array(
     'und' => array(
@@ -1527,6 +1531,9 @@ option2|No',
       'callback' => 'date_iso8601',
     ),
   ),
+  'path' => array(
+    'pathauto' => 1,
+  ),
   'webform' => array(
     'confirmation' => '',
     'confirmation_format' => NULL,
@@ -1566,13 +1573,12 @@ option2|No',
     'components' => array(),
     'conditionals' => array(),
   ),
-  'name' => '',
-  'picture' => 0,
-  'data' => NULL,
-  'path' => NULL,
+  'name' => 'coalmarch',
+  'picture' => 2,
+  'data' => 'b:0;',
 );
   $webforms['refer_a_friend_to_company_name_'] = array(
-  'uid' => 0,
+  'uid' => 1,
   'title' => 'Refer a Friend to [company-name]!',
   'log' => '',
   'status' => 1,
@@ -1588,7 +1594,7 @@ option2|No',
   'rh_redirect' => NULL,
   'rh_redirect_response' => NULL,
   'uuid' => 'b8f3a9e5-f431-4428-b5b2-9ce69f6b437c',
-  'revision_uid' => 0,
+  'revision_uid' => 1,
   'body' => array(
     'und' => array(
       0 => array(
@@ -1897,9 +1903,9 @@ option2|No',
     ),
     'conditionals' => array(),
   ),
-  'name' => '',
-  'picture' => 0,
-  'data' => NULL,
+  'name' => 'coalmarch',
+  'picture' => 2,
+  'data' => 'b:0;',
 );
 return $webforms;
 }
