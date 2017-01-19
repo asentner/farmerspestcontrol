@@ -6851,10 +6851,11 @@ function sprowt_content_types_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'alt_teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -7020,10 +7021,15 @@ function sprowt_content_types_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'alt_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
+        'label' => 'hidden',
+        'module' => 'image_url_formatter',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+          'url_type' => 0,
+        ),
+        'type' => 'image_url',
+        'weight' => 0,
       ),
       'default' => array(
         'label' => 'hidden',
