@@ -14,12 +14,12 @@ function sprowt_image_styles_features_image_default_styles() {
   $styles['affiliation_image'] = array(
     'label' => 'Affiliation',
     'effects' => array(
-      4 => array(
+      1 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 200,
           'height' => 200,
-          'upscale' => 1,
+          'upscale' => 0,
         ),
         'weight' => 1,
       ),
