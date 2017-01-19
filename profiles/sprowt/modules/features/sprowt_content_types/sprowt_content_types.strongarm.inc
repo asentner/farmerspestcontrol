@@ -413,7 +413,7 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
