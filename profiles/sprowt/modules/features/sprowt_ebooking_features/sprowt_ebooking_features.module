@@ -5,3 +5,7 @@
  */
 
 include_once 'sprowt_ebooking_features.features.inc';
+
+function sprowt_ebooking_features_theme_registry_alter(&$theme_registry) {
+    $theme_registry['template-file']['path'] = drupal_get_path('module', 'my_feature')."/templates/";
+}

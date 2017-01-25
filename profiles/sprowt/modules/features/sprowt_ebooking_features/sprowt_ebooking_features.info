@@ -1,6 +1,7 @@
 name = Sprowt eBooking (Features)
 description = Contains all initial settings and modules for ebooking.
 core = 7.x
+stylesheets[all][] = /css/
 package = Sprowt Features
 dependencies[] = ctools
 dependencies[] = features

@@ -14,12 +14,12 @@ function sprowt_image_styles_features_image_default_styles() {
   $styles['affiliation_image'] = array(
     'label' => 'Affiliation',
     'effects' => array(
-      1 => array(
+      4 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 200,
           'height' => 200,
-          'upscale' => 0,
+          'upscale' => 1,
         ),
         'weight' => 1,
       ),
@@ -130,6 +130,44 @@ function sprowt_image_styles_features_image_default_styles() {
         'data' => array(
           'width' => 470,
           'height' => 400,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: focal_point_scale_and_crop_500x325.
+  $styles['focal_point_scale_and_crop_500x325'] = array(
+    'label' => 'Focal Point Scale And Crop 500x325',
+    'effects' => array(
+      1 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 500,
+          'height' => 325,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: focal_point_scale_and_crop_600x475.
+  $styles['focal_point_scale_and_crop_600x475'] = array(
+    'label' => 'Focal Point Scale And Crop 600x475',
+    'effects' => array(
+      2 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 600,
+          'height' => 475,
           'focal_point_advanced' => array(
             'shift_x' => '',
             'shift_y' => '',
