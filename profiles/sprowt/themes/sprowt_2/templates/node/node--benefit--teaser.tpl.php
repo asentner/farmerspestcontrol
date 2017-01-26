@@ -12,7 +12,7 @@
         <a href="<?php print $link; ?>" class="read-more">Read More</a>
       <?php else: ?>
         <h2<?php print $title_attributes; ?>><?php print $title; ?></h2>
-        <?php print render($content); ?>
+            <?php echo $content['body'][0]['#markup'];?>
       <?php endif; ?>
   </div>
   <?php
