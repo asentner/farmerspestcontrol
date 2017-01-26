@@ -1,4 +1,5 @@
 name = Sprowt 5
+; description = Please provide a description for your theme.
 base theme = omega
 screenshot = screenshot.png
 engine = phptemplate
