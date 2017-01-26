@@ -1,0 +1,82 @@
+// homepage service intro
+.block--services-intro {
+  $color-text: palette(white, pure);
+  $color-emphasis: palette(secondary, base);
+
+  color: palette(white, pure);
+  h2, h3, h4 {
+    color: $color-text;
+    em {
+      color: $color-emphasis;
+    }
+  }
+  a {
+    color: $color-text;
+    &:hover,
+    &:after {
+      color: $color-emphasis;
+    }
+  }
+}
+
+// homepage services
+.block--views-services-front-4-secondary {
+  $color-title: palette(white, pure);
+  $color-title-hover: palette(secondary, base);
+  $color-body: palette(secondary, light);
+  $color-overlay: palette(neutral, siam);
+
+  color: $color-body;
+  .node {
+    background-color: $color-overlay;
+  }
+  .node__title a {
+    color: $color-title;
+    &:hover {
+      color: $color-title-hover;
+    }
+  }
+  @include breakpoint($desk) {
+    .node {
+      &:after {
+        background: linear-gradient(transparent 0%, transparent 10%, palette(primary, dark) 90%, palette(primary, dark) 100%);
+      }
+    }
+  }
+}
+
+
+// homepage service listing
+
+.front {
+  .block--views-services-all {
+    $color-border: palette(secondary, light);
+    $color-services-body: palette(white, pure);
+
+    $color-title: palette(white, pure);
+    $color-title-hover: palette(primary, base);
+
+
+    .view-content {
+      + .more-link {
+        a {
+          @include button-color;
+        }
+      }
+    }
+    .views-row {
+      border-color: $color-border;
+    }
+    .node__title {
+      a {
+        color: $color-title;
+        &:hover {
+          color: $color-title-hover;
+        }
+      }
+    }
+    .field--name-body {
+      color: $color-services-body;
+    }
+  }
+}

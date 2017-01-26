@@ -1,0 +1,107 @@
+.block--views-slideshow-front,
+.block--views-slideshow-localtarget {
+	$overlay-opacity: 0.3; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+
+	text-align: center;
+	.node--slide {
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.slide-image {
+		@include flexbox;
+		align-items: center;
+		position: relative;
+		min-height: 360px;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: $overlay-opacity;
+		}
+	}
+	.node__title {
+		line-height: 1.1;
+	}
+	.flexslider:hover .flex-direction-nav a {
+		opacity: 1;
+	}
+	.flexslider .slides {
+		width: 100%;
+	}
+	.flex-direction-nav a {
+		&:before {
+			@extend .fa;
+			content: "\f104";
+			font-size: 45px;
+		}
+		&.flex-next:before {
+			@extend .fa;
+			content: "\f105";
+			font-size: 45px;
+		}
+	}
+
+	.button {
+		margin: 20px auto 0;
+		max-width: 225px;
+		width: 100%;
+	}
+	.field--name-body {
+		margin-top: 20px;
+	}
+	.slide-content {
+		max-width: 800px;
+		margin: auto;
+		padding: 20px;
+		position: relative;
+		text-shadow: 0 4px 9.6px rgba(0, 0, 0, 0.14);
+	}
+	.field--name-body {
+		font-size: 1.15em;
+		a {
+			@extend %link-arrow-after;
+			text-transform: uppercase;
+			font-weight: bold;
+			&.button:after {
+				content: none;
+			}
+		}
+	}
+
+	@include breakpoint($tab) {
+		.slide-image {
+			min-height: 520px;
+		}
+		.slide-content {
+			padding-top: 115px;
+		}
+		.node__title {
+			font-size: 2.5em;
+		}
+	}
+	@include breakpoint($desk) {
+		$overlay-opacity: 0;
+
+		.slide-image {
+			align-items: flex-end;
+			min-height: 580px;
+			max-width: 1210px;
+			margin: 0 auto;
+			&:before {
+				opacity: $overlay-opacity;
+			}
+		}
+		.node__title {
+			font-size: 3.7em;
+		}
+		.slide-content {
+			margin: 0;
+			padding: 65px 20px;
+			text-align: left;
+		}
+	}
+}

@@ -1,0 +1,17 @@
+$color-table-border: #ddd;
+$color-table-heading-bg: palette(primary, dark);
+$color-table-heading-fg: #fff;
+$color-table-cell-bg: #fff;
+
+table {
+  background-color: $color-table-border;
+}
+
+th {
+  background-color: $color-table-heading-bg;
+  color: $color-table-heading-fg;
+}
+
+td {
+  background-color: $color-table-cell-bg;
+}

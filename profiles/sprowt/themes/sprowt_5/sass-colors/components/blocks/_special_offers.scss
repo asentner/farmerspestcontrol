@@ -1,0 +1,81 @@
+%special-offers-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-block-title: palette(black, base);
+  $color-offer-title: palette(primary, base);
+  $color-offer-body: palette(neutral, xanadu);
+
+  background-color: $color-bg;
+  border-color: $color-border;
+  .block__title {
+    color: $color-block-title;
+  }
+  .node__title {
+    color: $color-offer-title;
+  }
+  .node__content {
+    color: $color-offer-body;
+  }
+}
+
+.block--views-special-offers-sidebar {
+  @extend %special-offers-sidebar;
+}
+
+.block--views-special-offers-list {
+  .node {
+    border-color: palette(neutral, alto);
+  }
+}
+
+// homepage
+
+.block-special-offers-intro {
+  $color-block-title: palette(secondary, base);
+
+  .block__title {
+    // color: $color-block-title;
+  }
+}
+
+.block--views-special-offers-front-s4 {
+  $color-block-bg: palette(secondary, base);
+  $color-node-bg: palette(white, pure);
+  $color-link: palette(primary, base);
+  $color-link-hover: palette(primary, dark);
+  $color-banner-bg: palette(primary, base);
+  $color-banner-fg: palette(white, pure);
+
+  background-color: $color-block-bg;
+  .node {
+    background-color: $color-node-bg;
+    box-shadow: 0 11px 16.4px 1.6px rgba(1, 2, 2, 0.18);
+    &:after {
+      background-color: $color-banner-bg;
+      color: $color-banner-fg;
+      box-shadow: 0 2px 3.6px 0.4px rgba(1, 2, 2, 0.33);
+    }
+  }
+  .button {
+    background-color: transparent;
+    color: $color-link;
+    &:hover {
+      color: $color-link-hover;
+    }
+  }
+}
+
+.block--views-special-offers-front,
+.local-target-special-offer {
+  $color-bg: palette(white, pure);
+  $color-block-title: palette(secondary, base);
+  $color-border: palette(primary, base);
+
+  .block__title {
+    color: $color-block-title;
+  }
+  .node {
+    background-color: $color-bg;
+    border-color: $color-border;
+  }
+}

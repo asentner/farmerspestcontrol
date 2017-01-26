@@ -1,0 +1,102 @@
+%block--benefits {
+   padding: 20px;
+   text-align: center;
+   .block__title {
+     margin: 0 auto 40px;
+     max-width: 960px;
+     text-align: center;
+     font-size: 1.375em;
+     font-weight: 600;
+   }
+   .views-row {
+    max-width: 400px;
+    margin: 0 auto;
+    + .views-row {
+      margin-top: 40px;
+    }
+  }
+  .field--name-field-image {
+      margin-bottom: 20px;
+      a > img {
+        @extend %image-hover;
+      }
+      img {
+        max-width: 76px;
+        height: auto;
+      }
+   }
+  .field--name-field-icon {
+    margin-bottom: 20px;
+    a {
+      @extend %image-hover;
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      height: 76px;
+      width: 76px;
+      border-radius: 50%;
+      border: 2px solid;
+    }
+  }
+  .node__title {
+     font-size: 1.1em;
+     font-weight: 600;
+  }
+  @include breakpoint($tab) {
+    text-align: left;
+    .block__title {
+      font-size: 1.5em;
+    }
+    .node {
+      @include flexbox;
+    }
+    .node__content {
+      margin-left: 20px;
+    }
+  }
+  @include breakpoint($desk) {
+    .block__title {
+      font-size: 1.95em;
+    }
+  }
+}
+
+.block--views-benefits-front,
+.benefits-hero {
+  @extend %block--benefits;
+  @include breakpoint($desk) {
+    width: 50%;
+    .views-row {
+      margin-left: 75px;
+      + .views-row {
+        margin-top: 60px;
+      }
+    }
+  }
+}
+
+
+.block--sprowt-views-sprowt-views-lt-benefits,
+.local-target-benefits {
+  @extend %block--benefits;
+  padding: 40px 20px;
+  @include breakpoint($desk) {
+    padding: 60px 20px 75px;
+    .view-content {
+      @include flexbox;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+    .views-row {
+      width: percentage(1/3);
+      + .views-row {
+        margin-top: 0;
+        margin-left: 40px;
+      }
+    }
+    .node__content {
+      padding-top: 5px;
+    }
+  }
+}

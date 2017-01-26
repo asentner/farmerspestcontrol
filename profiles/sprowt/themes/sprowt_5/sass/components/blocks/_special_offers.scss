@@ -1,0 +1,171 @@
+%special-offers-sidebar {
+  padding: 25px 15px;
+  border: 5px dashed;
+  .block__title {
+    text-align: center;
+    font-size: 1.4em;
+    margin-bottom: 1em;
+  }
+  .node__title {
+    text-transform: uppercase;
+    font-size: 1.2em;
+  }
+  .node {
+    .field--name-field-button {
+      margin-top: 1.25em;
+    }
+  }
+  .button {
+    width: 100%;
+  }
+}
+
+.block--views-special-offers-sidebar {
+  @extend %special-offers-sidebar;
+}
+
+.block--views-special-offers-list {
+  .views-row {
+    + .views-row {
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
+  .node {
+    border: 3px dashed;
+    padding: 20px;
+    max-width: 600px;
+  }
+}
+
+// homepage
+
+.block-special-offers-intro {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px 20px 30px;
+  text-align: center;
+  .block__title {
+    @extend h3;
+    margin-bottom: 10px;
+  }
+  .button {
+    max-width: 235px;
+    margin: 5px auto 0;
+  }
+  @include breakpoint($tab) {
+    padding: 50px 20px 60px;
+  }
+  @include breakpoint($desk) {
+    margin-right: 40px;
+    padding: 90px 20px 110px 20px;
+    .block__title {
+      font-size: 1.85em;
+      margin-bottom: .5em;
+    }
+  }
+}
+
+%link-arrow-before {
+  position: relative;
+  &:before {
+    @include faicon('\F105');
+    position: absolute;
+    right: -20px;
+    padding-left: 20px;
+    font-weight: 600;
+    transition: 0.2s all;
+  }
+  &:hover:before {
+    right: -23px;
+  }
+}
+
+.block--views-special-offers-front-s4 {
+  padding: 30px 20px 40px;
+  .node {
+    padding: 30px 20px;
+  }
+  .node__title {
+    font-size: 1.25em;
+    margin-bottom: 1em;
+  }
+  .field--name-body {
+    line-height: 1.6;
+  }
+  .button {
+    @extend %link-arrow-after;
+    margin-top: 20px;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0;
+    text-align: left;
+  }
+  @include breakpoint($tab) {
+    padding: 50px 20px 60px;
+  }
+  @include breakpoint($desk) {
+    padding: 90px 20px 110px 60px;
+    .node {
+      padding: 50px 35px 45px;
+      max-width: 530px;
+      position: relative;
+      overflow: hidden;
+      &:after {
+        content: "Special";
+        display: block;
+        position: absolute;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 12px;
+        width: 200px;
+        top: 25px;
+        right: -48px;
+        transform: rotate(45deg);
+      }
+    }
+    .node__content {
+      max-width: 400px;
+    }
+  }
+}
+
+.block--views-special-offers-front,
+.local-target-special-offer {
+  padding: 0 20px 50px;
+  .block__title {
+    @extend h3;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 40px 0 30px;
+  }
+  .node {
+    border: 5px dashed;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .field--name-body {
+    font-size: 1em;
+  }
+  .button {
+    max-width: 220px;
+  }
+  @include breakpoint($tab) {
+    .block__title {
+      padding: 40px 0 10px;
+    }
+    .view-content {
+      @include flexbox;
+      justify-content: center;
+    }
+    .views-row {
+      @include flexbox;
+    }
+    .node {
+      max-width: 490px;
+      margin: 20px;
+    }
+  }
+}

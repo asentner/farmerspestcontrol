@@ -1,0 +1,16 @@
+%link-arrow-after {
+  position: relative;
+  line-height: inherit;
+  display: inline-block;
+  &:after {
+    @include faicon('\F105');
+    position: absolute;
+    right: -15px;
+    padding-left: 20px;
+    font-weight: 600;
+    transition: 0.2s right;
+  }
+  &:hover:after {
+    right: -18px;
+  }
+}

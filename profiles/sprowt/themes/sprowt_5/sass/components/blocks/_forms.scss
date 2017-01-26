@@ -1,0 +1,168 @@
+.block--form-sidebar {
+  $border-width: 2px;
+
+  border: $border-width solid;
+  padding: 30px 20px;
+  .block__title {
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .form-row {
+    @include breakpoint($tab) {
+      .fieldset-wrapper {
+        display: block;
+        > .form-item {
+          margin-bottom: 0;
+          + .form-item {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+  input {
+    width: 100%;
+  }
+  .form-actions {
+    margin: 1.5em auto 0;
+  }
+
+  @include breakpoint($tab) {
+    .block__title {
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  }
+}
+
+// local target page form
+
+.local-target-webform {
+  .block__content {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  .node__title {
+    text-align: center;
+  }
+  .field--name-body {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .form-item {
+    margin-top: 10px;
+  }
+  .form-actions {
+    text-align: center;
+    .form-submit {
+      min-width: 220px;
+      margin-top: 20px;
+    }
+  }
+}
+
+// front page form
+.block--webform-front {
+  display: none;
+  padding: 20px;
+  .block__content {
+    max-width: 1210px;
+    margin: 0 auto;
+  }
+  .webform-component-markup {
+    font-size: 1.25em;
+    text-align: center;
+  }
+  .webform-component-select,
+  input {
+    height: 40px;
+  }
+  .webform-submit {
+    margin: 0 auto;
+    border: 2px solid;
+    padding: 8px 30px;
+  }
+  @include breakpoint($tab) {
+    display: block;
+    padding: 0 20px 40px;
+    .webform-client-form {
+      > div {
+        @include flexbox;
+        flex-wrap: wrap;
+      }
+    }
+    .webform-component-textfield,
+    .webform-component-select,
+    .webform-component-email {
+      width: 50%;
+      padding: 0 10px;
+    }
+    .form-item {
+      margin-bottom: 0;
+    }
+    .webform-component-markup,
+    .form-actions {
+      width: 100%;
+    }
+    .form-actions {
+      margin-top: 1.5em;
+      margin-bottom: 0;
+      text-align: center;
+      input {
+        height: auto;
+      }
+    }
+  } // end tablet
+  @include breakpoint($desk) {
+    .webform-component-textfield,
+    .webform-component-select,
+    .webform-component-email {
+      width: 25%;
+    }
+  }
+  @include breakpoint($wide) {
+    padding: 30px 20px 35px;
+    max-width: 1210px;
+    margin: 0 auto;
+    .webform-client-form {
+      > div {
+        flex-wrap: nowrap;
+        align-items: center;
+        > * {
+          flex: 1 0 auto;
+        }
+      }
+    }
+    .form-item {
+      margin: 0
+    }
+    .webform-component-markup {
+      text-align: left;
+      width: auto;
+    }
+    .form-actions {
+      margin: 0;
+      margin-left: 30px;
+      text-align: right;
+      width: auto;
+      input {
+        padding: 8px 15px;
+      }
+    }
+    .webform-component-textfield,
+    .webform-component-select,
+    .webform-component-email {
+      padding: 0;
+      margin-left: 25px;
+    }
+    .webform-component-select {
+      max-width: 270px;
+    }
+    .webform-component-textfield,
+    .webform-component-email {
+      max-width: 150px;
+    }
+  }
+}

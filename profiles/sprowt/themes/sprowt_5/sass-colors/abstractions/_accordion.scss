@@ -1,0 +1,9 @@
+div.accordion {
+  .accordion-header {
+    background-color: palette(neutral, alabaster);
+    color: palette(primary, base);
+    &.open {
+      background-color: palette(neutral, alto);
+    }
+  }
+}

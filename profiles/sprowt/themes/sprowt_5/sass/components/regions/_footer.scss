@@ -1,0 +1,27 @@
+.l-footer-wrap {
+  padding-top: 20px;
+  padding-bottom: 70px; // make room for the sticky bottom menu at mobile
+  border-top: 6px solid;
+  @include breakpoint($tab) {
+    padding-bottom: 0;
+  }
+  @include breakpoint($desk) {
+    padding: 25px 0 75px;
+  }
+}
+
+.l-footer {
+  @include container;
+  @include flexbox;
+  flex-direction: column;
+  .l-region {
+    width: 100%;
+  }
+  @include breakpoint($desk) {
+    flex-direction: row;
+    align-items: center;
+    .l-region {
+      width: auto;
+    }
+  }
+}

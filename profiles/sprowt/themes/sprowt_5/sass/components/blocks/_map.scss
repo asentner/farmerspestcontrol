@@ -1,0 +1,71 @@
+.block-areas-map {
+  //starting styling of block
+  padding: 60px 20px;
+  text-align: center;
+  .block__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .block__title {
+    @extend h3;
+  }
+  .intro {
+    margin-bottom: 30px;
+  }
+  ul {
+    margin: 20px 0 15px;
+    padding: 0 20px;
+    text-align: left;
+    column-count: 2;
+    li {
+      padding-left: 10px;
+    }
+    a {
+      font-size: 1em;
+      font-weight: 600;
+      text-transform: uppercase;
+      position: relative;
+    }
+    a:before {
+      @include faicon("\f105");
+      font-weight: 600;
+      position: absolute;
+      left: -10px;
+    }
+  }
+  @include breakpoint($tab) {
+    ul {
+      @include flexbox;
+      justify-content: center;
+      padding: 0;
+      li {
+        width: auto;
+        padding: 0 20px;
+      }
+      a {
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    .block__title {
+      font-size: 1.85em;
+      margin-bottom: .5em;
+    }
+  }
+}
+
+// map styling
+
+.map-embed {
+  padding: 20px;
+  iframe {
+  	height: 50vh;
+  }
+  @include breakpoint($tab) {
+  	iframe {
+  		height: 350px;
+      width: 675px;
+  		margin: auto;
+  	}
+  }
+}

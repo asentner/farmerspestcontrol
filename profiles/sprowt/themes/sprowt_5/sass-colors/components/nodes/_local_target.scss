@@ -1,0 +1,37 @@
+.block--views-localtarget-value-prop {
+  $color-image-bg: palette(neutral, siam);
+	$color-text: palette(white, pure);
+  $color-link: palette(white, pure);
+  $color-link-hover: palette(secondary, base);
+  $color-link-arrow: palette(secondary, base);
+
+  .node {
+		background-color: $color-image-bg;
+  }
+	.slide-image-background {
+		&:before {
+			background-color: #151616; // this color is used as a color-module place holder
+		}
+	}
+  .field--name-field-display-title {
+    color: $color-text;
+  }
+  .field--name-field-intro {
+		color: $color-text;
+	}
+  a {
+    color: $color-link;
+    &:after {
+      color: $color-link-arrow;
+    }
+    &:hover {
+      color: $color-link-hover;
+    }
+  }
+}
+
+.node-type-localtarget {
+  .l-region--preface-third {
+    background-color: palette(neutral, siam);
+  }
+}

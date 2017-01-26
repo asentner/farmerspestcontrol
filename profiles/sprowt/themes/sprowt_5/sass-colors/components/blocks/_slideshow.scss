@@ -1,0 +1,40 @@
+.block--views-slideshow-front,
+.block--views-slideshow-localtarget {
+	$color-image-bg: palette(neutral, siam);
+	$color-text: palette(white, pure);
+	$color-link: palette(white, pure);
+	$color-link-hover: palette(secondary, base);
+	$color-link-icon: palette(secondary, base);
+
+	.node--slide {
+		background-color: $color-image-bg;
+	}
+	.slide-image {
+		&:before {
+			background-color: #151616; // this color is used as a color-module place holder
+		}
+	}
+	.node__title {
+		color: $color-text;
+	}
+	.flex-direction-nav a {
+		&:before {
+			color: rgba(white, .7);
+		}
+	}
+	.field--name-body {
+		color: $color-text;
+		a {
+			color: $color-link;
+			&:hover {
+				color: $color-link-hover;
+			}
+			&:after {
+				color: $color-link-icon;
+			}
+			&.button:hover {
+				color: $color-link;
+			}
+		}
+	}
+}

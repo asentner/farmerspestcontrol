@@ -1,0 +1,131 @@
+.node-ebooking .ebooking_summary {
+  @extend %ebooking-panel;
+  position: relative;
+  font-weight: normal;
+  .webform-component-markup[class*="title"] {
+    h2, h3 {
+      &:after {
+        margin-bottom: 20px;
+      }
+    }
+  }
+  .webform-component-markup[class*="review"] {
+    @extend %ebooking-package;
+    margin-top: 0;
+    > h3 {
+      font-size: 21px;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 25px;
+    }
+    .package {
+      @extend %ebooking-selected-package;
+    }
+  }
+  .bullet-points {
+    font-size: 17px;
+    font-weight: 600;
+    p {
+      line-height: 1.2;
+      + p {
+        margin-top: 5px;
+      }
+      &:before {
+        @include faicon('\F00C');
+        padding-right: 5px;
+        font-size: 24px;
+      }
+    }
+  }
+  .amount-due {
+    margin-top: 50px;
+    padding: 35px 20px;
+	  border: solid 3px;
+    p:first-of-type {
+      font-size: 21px;
+    }
+    p:nth-of-type(2) {
+      font-size: 16px;
+      font-weight: 600;
+      font-style: italic;
+      margin-top: 10px;
+    }
+    .tooltip-icon:after {
+      @include faicon('\F059');
+      cursor: pointer;
+      padding-left: 5px;
+      font-style: normal;
+    }
+  }
+  .webform-component-markup[class*="tooltip"] {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 720px;
+    border: solid 4px;
+    padding: 25px;
+    margin-top: 0;
+    text-align: center;
+  }
+  .paymethod-select-wrapper { // stripe styling
+    text-align: left;
+    .fieldset-legend {
+      display: none;
+    }
+  }
+  fieldset[class*='customer-info'],
+  fieldset[class*='service-address'] {
+    text-align: left;
+    .fieldset-wrapper select {
+      max-width: 100%;
+    }
+  }
+  .form-actions {
+    margin-bottom: 0;
+  }
+
+  @include breakpoint($tab) {
+    fieldset[class*='customer-info'],
+    .paymethod-select-wrapper { // customer info and stripe styling
+      .fieldset-wrapper {
+        @include flexbox;
+        flex-wrap: wrap;
+        margin-left: -10px;
+        > .form-item {
+          flex: 1 0 50%;
+          width: 50%;
+          max-width: 50%;
+          padding-left: 10px;
+          margin-bottom: 0;
+        }
+      }
+    }
+    fieldset.expiry-date {
+      width: 50%;
+      padding-left: 10px;
+    }
+    fieldset[class*='service-address'] {
+      .fieldset-wrapper {
+        @include flexbox;
+        flex-wrap: wrap;
+        margin-left: -10px;
+        > .form-item {
+          padding-left: 10px;
+          width: 100%;
+          margin-bottom: 0;
+        }
+        div[class*='state'],
+        div[class*='zip'] {
+          flex: 1 0 50%;
+          width: 50%;
+          max-width: 50%;
+        }
+        label {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  } // end tablet
+}

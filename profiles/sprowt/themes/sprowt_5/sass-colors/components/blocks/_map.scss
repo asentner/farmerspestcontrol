@@ -1,0 +1,31 @@
+.block-areas-map {
+  $color-bg: $color-front-map-bg;
+  $color-title: palette(white, pure);
+  $color-body: palette(white, base);
+  $color-map-link: palette(white, pure);
+  $color-map-link-hover: palette(secondary, base);
+  $color-map-arrow: palette(secondary, base);
+
+  //starting styling of block
+  background-color: $color-bg;
+  .block__title {
+    color: $color-title;
+  }
+  .block__content {
+    color: $color-body;
+    iframe {
+      box-shadow: 0 6px 12px 1px rgba(0, 0, 0, 0.35);
+    }
+  }
+  ul {
+    a {
+      color: $color-map-link;
+      &:hover {
+        color: $color-map-link-hover;
+      }
+    }
+    a::before {
+        color: $color-map-arrow;
+    }
+  }
+}

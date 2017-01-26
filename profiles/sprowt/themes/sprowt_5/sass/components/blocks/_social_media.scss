@@ -1,0 +1,37 @@
+.block--sprowt-settings-sprowt-social-media {
+  margin: 20px 0;
+  padding: 0 20px;
+  font-size: 26px;
+  .block__content {
+    ul {
+      @include flexbox;
+      justify-content: center;
+    }
+    li {
+      + li {
+        margin-left: 20px;
+      }
+    }
+    .fa-fw {
+      width: auto;
+    }
+    a {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      box-sizing: content-box;
+      line-height: normal;
+    }
+  }
+  .social-description {
+    display: none;
+  }
+  @include breakpoint($desk) {
+    margin: 0;
+    .block__content {
+      ul {
+        justify-content: flex-end;
+      }
+    }
+  }
+}

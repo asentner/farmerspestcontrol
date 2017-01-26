@@ -1,0 +1,5 @@
+.l-header {
+  @include breakpoint($nav) {
+    border-bottom-color: palette(secondary, base);
+  }
+}

@@ -1,0 +1,13 @@
+.l-region--postscript-first {
+ $color-bg: palette(neutral, wild-sand);
+
+ background-color: $color-bg;
+}
+
+.front .l-region--postscript-first {
+  background-color: palette(neutral, siam);
+}
+
+.front .l-region--postscript-second {
+  background-color: palette(white, pure);
+}

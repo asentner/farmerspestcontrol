@@ -1,0 +1,25 @@
+.benefits-hero,
+.local-target-benefits {
+   $color-bg: transparent;
+   $color-icon-border: palette(primary, base);
+   $color-title: palette(black, base);
+   $color-title-hover: palette(primary, base);
+
+   background-color: $color-bg;
+
+   .node__title {
+      color: $color-title;
+      a {
+        color: $color-title;
+        &:hover {
+          color: $color-title-hover;
+        }
+      }
+   }
+   .field--name-field-icon {
+      a {
+         border-color: $color-icon-border;
+         background-color: $color-icon-border;
+      }
+   }
+}

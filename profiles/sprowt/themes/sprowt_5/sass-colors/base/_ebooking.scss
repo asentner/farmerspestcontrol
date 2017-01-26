@@ -1,0 +1,45 @@
+%ebooking-panel { // style for ebooking panels
+  background-color: palette(white, pure);
+}
+
+%ebooking-panel-title {
+  color: palette(secondary, base);
+  &:after {
+    border-top-color: palette(neutral, alto);
+  }
+}
+
+%ebooking-selected-package {
+  &:after {
+    background-color: palette(secondary, base);
+    color: palette(white, pure);
+  }
+}
+
+// package styling - this will likely change once we pull in packages as nodes
+%ebooking-package {
+  .package {
+    border-color: palette(neutral, wild-sand);
+    background-color: palette(neutral, wild-sand);
+    &:hover,
+    &.selected {
+      border-color: palette(secondary, base);
+      background-color: lighten(palette(secondary, base), 65);
+    }
+    &.selected {
+      &:after {
+        @extend %ebooking-selected-package;
+      }
+    }
+    .current-price {
+      color: palette(secondary, base)
+    };
+    .bullet-points {
+      span {
+        &:before {
+          color: palette(primary, base);
+        }
+      }
+    }
+  }
+} // end package styling

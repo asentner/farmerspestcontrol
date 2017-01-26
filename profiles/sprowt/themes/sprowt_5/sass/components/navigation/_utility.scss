@@ -1,0 +1,90 @@
+.block--nav-utility {
+  display: none;
+  padding: 10px 0;
+  font-weight: 600;
+  .menu-block-wrapper {
+    a {
+      padding: 10px 20px;
+    }
+  }
+  .menu {
+    text-align: center;
+    li {
+      + li {
+        margin-top: 1px;
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    display: block;
+    .menu {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      li {
+        + li {
+          margin-top: 0;
+        }
+        a {
+          @include flexbox;
+          align-items: center;
+          text-transform: uppercase;
+        }
+        a:before {
+          display: inline-block;
+          margin-right: 15px;
+          font-size: 32px;
+        }
+        &:nth-child(1) {
+          a:before {
+            @include faicon($fa-var-mobile);
+          }
+        }
+        &:nth-child(3) {
+          a:before {
+            @include faicon($fa-var-dollar);
+          }
+        }
+        &:nth-child(2) {
+          a:before {
+            @include faicon($fa-var-lock);
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($nav) {
+    padding: 15px 20px;
+    .menu-block-wrapper {
+      a {
+        border-radius: 10px;
+        text-transform: uppercase;
+        padding: 7px 20px;
+        font-weight: bold;
+        &[href^='tel:'] {
+          padding: 0;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .menu {
+      li {
+        + li {
+          margin-left: 1.5em;
+        }
+        &:nth-child(1n) {
+          a {
+            font-size: 1.05em;
+            font-weight: 600;
+          }
+          a:before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($wide) {
+    padding: 0 20px;
+  }
+}

@@ -1,0 +1,39 @@
+.l-header {
+  z-index: 100;
+  @include breakpoint($nav) {
+    border-bottom: 6px solid;
+  }
+}
+.l-region--header-first {
+  @include flexbox;
+  flex-direction: column;
+  @include breakpoint($nav) {
+    @include container;
+    @include clear;
+    display: block;
+    .block--logo-block-logo {
+      float: left;
+    }
+    .block--nav-utility,
+    .block--nav-main {
+      float: right;
+    }
+  }
+  @include breakpoint($wide) {
+    @include flexbox;
+    flex-direction: row;
+    align-items: center;
+    min-height: 120px;
+    padding: 10px 0;
+    .block--nav-utility,
+    .block--nav-main {
+      flex: 1 0 auto;
+    }
+    .block--nav-utility {
+      order: 2;
+    }
+    .block--nav-main {
+      order: 1;
+    }
+  }
+}

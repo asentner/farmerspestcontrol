@@ -1,0 +1,48 @@
+.block--views-localtarget-map-reviews {
+  $color-heading-bg: palette(secondary, base);
+  $color-map-bg: palette(white, pure);
+  $color-reviews-bg: palette(primary, base);
+  $color-reviews-fg: palette(white, pure);
+  $color-link-pointer: palette(secondary, base);
+  $color-link-border: palette(primary, dark);
+  $color-icons: palette(secondary, base);
+
+  .view-content {
+    box-shadow: 0 9px 7.4px 0.6px rgba(13, 14, 13, 0.13);
+  }
+  h2 {
+    background-color: $color-heading-bg;
+    color: palette(white, pure);
+  }
+  h3 {
+    &:before {
+      color: $color-icons;
+    }
+  }
+  .location-content {
+    background-color: $color-map-bg;
+  }
+  .reviews-links {
+    background-color: $color-reviews-bg;
+    a {
+      color: $color-reviews-fg;
+      &:hover {
+        color: $color-link-pointer;
+      }
+    }
+    .field__item {
+      &:before {
+        color: $color-link-pointer;
+      }
+      + .field__item {
+        border-top-color: $color-link-border;
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    .location-wrap,
+    .reviews-wrap {
+      // box-shadow: 0 10px 10px rgba(0,0,0,0.2);
+    }
+  }
+}

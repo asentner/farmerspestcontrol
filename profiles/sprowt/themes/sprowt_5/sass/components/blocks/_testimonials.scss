@@ -1,0 +1,152 @@
+%block--testimonials-sidebar {
+  $border-width: 2px;
+
+  border: $border-width solid;
+  padding: 30px 20px;
+  .block__title {
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .fa-star {
+    font-size: 1.2em;
+  }
+  .node--testimonial {
+    .field--name-body {
+      font-style: italic;
+      padding: 0 15px;
+      margin-bottom: 1.6em;
+      p {
+        line-height: 1.6em;
+        &:before,
+        &:after {
+          content: '"';
+        }
+      }
+    }
+  }
+  .field--title,
+  .field--name-field-market {
+    font-style: normal;
+    font-size: 0.8em;
+    padding-left: 25px;
+  }
+  @include breakpoint($tab) {
+    padding: 30px 20px 50px;
+  }
+}
+
+.block--testimonials-sidebar {
+  @extend %block--testimonials-sidebar;
+}
+
+.block--views-testimonials-random {
+  @extend %block--testimonials-sidebar;
+}
+
+// Front page testimonial
+
+%block--testimonials-front {
+  position: relative;
+  padding: 30px 20px 40px;
+  border-top: 6px solid;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  .block__title {
+    font-size: 1.375em;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .node--testimonial [itemprop="reviewRating"] {
+    margin-bottom: .5em;
+  }
+  .fa-star {
+    font-size: 18px;
+    + .fa-star {
+      margin-left: 5px;
+    }
+  }
+  .node--testimonial {
+    .field--name-body {
+      max-width: 460px;
+      margin: 0 auto 25px;
+      font-size: 1.05em;
+      line-height: 1.65;
+      font-style: italic;
+    }
+  }
+  .field--title {
+    font-size: .95em;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .field--market {
+    margin-left: -3px;
+  }
+  @include breakpoint($desk) {
+    .block__title {
+      font-size: 1.75em;
+    }
+  }
+}
+
+.block--views-testimonials-front-alt-teaser {
+  @extend %block--testimonials-front;
+}
+
+.local-target-testimonial {
+  @extend %block--testimonials-front;
+  .block__title {
+    margin-bottom: 10px;
+  }
+  .node--testimonial {
+    .field--name-body {
+      margin-bottom: 15px;
+    }
+  }
+  .field--title,
+  .field--name-field-market {
+    display: inline-block;
+  }
+  .field--name-field-market {
+    font-size: .95em;
+    font-style: normal;
+    font-weight: 600;
+    .field__item:before {
+      content: ',';
+      margin-left: -3px;
+      margin-right: 3px;
+    }
+  }
+}
+
+
+// not used
+.block--views-testimonials-front {
+  .block__content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .field--name-body {
+    font-size: 0.8em;
+    p {
+      &:before,
+      &:after {
+        content: '"';
+      }
+    }
+  }
+  .field--title,
+  .field--name-field-market {
+    font-size: 15px;
+  }
+  @include breakpoint($tab) {
+    .field--name-body {
+      font-size: 1em;
+    }
+  }
+}

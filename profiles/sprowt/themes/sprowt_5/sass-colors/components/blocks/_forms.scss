@@ -1,0 +1,73 @@
+.block--form-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, wild-sand);
+  $color-title: palette(black, base);
+  $color-text: palette(neutral, xanadu);
+
+  border-color: $color-border;
+  background-color: $color-bg;
+  color: $color-text;
+  .block__title {
+    color: $color-title;
+  }
+  label {
+    color: $color-text;
+  }
+}
+
+// local target page form
+.local-target-webform {
+  $color-bg: palette(neutral, cool-gray);
+  $color-title: palette(white, pure);
+  $color-body: palette(white, base);
+
+  background-color: $color-bg;
+  .block__content {
+    color: $color-body;
+  }
+  .node__title {
+    color: $color-title;
+  }
+}
+
+// front page form
+.block--webform-front {
+  $color-markup: palette(primary, dark);
+  $color-input-bg: palette(neutral, concrete);
+  $color-input-fg: palette(neutral, abbey);
+
+  $color-button-bg: palette(white, pure);
+  $color-button-fg: palette(primary, base);
+  $color-button-hover-bg: palette(primary, base);
+  $color-button-hover-fg: palette(white, pure);
+  $color-button-border: palette(primary, base);
+
+  .webform-component-markup {
+    color: $color-markup;
+  }
+  .form-item {
+    input,
+    select {
+      background-color: $color-input-bg;
+    }
+    input::-webkit-input-placeholder {
+      color: $color-input-fg;
+    }
+    input::-moz-placeholder {
+      color: $color-input-fg;
+    }
+    input:-ms-input-placeholder {
+      color: $color-input-fg;
+    }
+    input:-moz-placeholder {
+      color: $color-input-fg;
+    }
+    select {
+      color: $color-input-fg;
+    }
+  }
+  .webform-submit {
+    @include button-color($color-button-bg, $color-button-fg, $color-button-hover-bg, $color-button-hover-fg);
+    border-color: $color-button-border !important; // override base styling
+  }
+}

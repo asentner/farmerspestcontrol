@@ -1,0 +1,9 @@
+.front .l-region--preface-third {
+  @include breakpoint($desk) {
+    @include flexbox;
+    align-items: center;
+    > .block{
+      width: 50%;
+    }
+  }
+}

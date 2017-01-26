@@ -1,0 +1,28 @@
+.block--views-basic-page-image {
+  display: none;
+  @include breakpoint($desk) {
+    display: block;
+    width: 50%;
+    text-align: right;
+  }
+}
+
+.block--views-basic-page-body {
+  margin-top: 20px;
+  text-align: center;
+  .view-content {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .button {
+    max-width: 235px;
+    margin: 0 auto;
+  }
+  @include breakpoint($desk) {
+    width: 100%;
+    margin-top: 75px;
+    .button {
+      width: 100%;
+    }
+  }
+}

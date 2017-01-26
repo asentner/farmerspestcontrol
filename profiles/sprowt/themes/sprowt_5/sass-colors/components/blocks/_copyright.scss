@@ -1,0 +1,9 @@
+.block--sprowt-settings-sprowt-copyright {
+  color: palette(neutral, xanadu);
+  a {
+    color: palette(neutral, xanadu);
+    &:hover {
+      color: palette(primary, dark);
+    }
+  }
+}

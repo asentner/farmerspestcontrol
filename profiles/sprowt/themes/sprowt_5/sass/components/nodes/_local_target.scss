@@ -1,0 +1,118 @@
+.block--views-localtarget-value-prop {
+	$overlay-opacity: 0.3; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+
+  .node {
+    background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+  }
+	.slide-image-background {
+		@include flexbox;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		min-height: 360px;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: $overlay-opacity;
+		}
+	}
+  .field--name-field-display-title {
+		line-height: 1.1;
+    margin-bottom: 0;
+		font-weight: 700;
+  }
+  .field--name-field-intro {
+		margin-top: 20px;
+    margin-top: 10px;
+		p {
+			line-height: 1.38;
+		}
+		a {
+			@extend %link-arrow-after;
+			font-weight: 700;
+			font-size: 16px;
+			text-transform: uppercase;
+			margin-top: 25px;
+		}
+	}
+  .node__content {
+    max-width: 800px;
+		margin: auto;
+		padding: 20px;
+		position: relative;
+    text-align: center;
+  }
+	.slide-content {
+		text-shadow: 0 4px 9.6px rgba(0, 0, 0, 0.14);
+		height: 100%;
+	}
+  @include breakpoint($tab) {
+		.slide-image-background {
+			min-height: 520px;
+		}
+		.field--name-field-display-title {
+			font-size: 3.0em;
+		}
+		.field--name-field-intro {
+			a {
+				font-size: 18px;
+			}
+		}
+	}
+	@include breakpoint($desk) {
+		$overlay-opacity: 0;
+
+		.field--name-field-display-title {
+			font-size: 3.65em;
+		}
+		.field--name-field-intro {
+			font-size: 1.3em;
+		}
+		.slide-image-background {
+			min-height: 580px;
+			&:before {
+				opacity: $overlay-opacity;
+			}
+		}
+	}
+}
+
+.node-type-localtarget {
+  .l-wrap--preface-third {
+    position: relative;
+    .l-background--preface-third {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.5;
+    }
+    .l-region--preface-third {
+      padding: 40px 20px;
+    }
+  }
+	@include breakpoint($tab) {
+		.l-region--preface-third {
+			padding: 80px 20px 70px;
+		}
+	}
+	@include breakpoint($desk) {
+		.l-region--preface-third {
+			padding: 110px 20px 100px;
+		}
+		.l-main {
+			margin-top: 4em;
+			margin-bottom: 3.5em;
+		}
+	}
+}

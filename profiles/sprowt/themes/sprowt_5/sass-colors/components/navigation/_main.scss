@@ -1,0 +1,160 @@
+.block--nav-main {
+
+  $color-toggle-bg: palette(secondary, base);
+  $color-toggle-fg: palette(white, pure);
+
+  $color-link-bg: palette(neutral, limed-spruce);
+  $color-link-fg: palette(white, pure);
+  $color-link-border: palette(neutral, river-bed);
+
+  $color-child-bg: palette(neutral, outer-space);
+
+  $color-link-arrow: palette(primary, base);
+
+  .menu-block-wrapper {
+    a, .nolink {
+      background-color: $color-link-bg;
+      color: $color-link-fg;
+      &.open {
+        background-color: $color-child-bg;
+      }
+    }
+    > .menu > li {
+      border-bottom-color: $color-link-border;
+    }
+    .active,
+    .active-trail {
+      color: $color-link-arrow;
+    }
+  }
+  &.menu-processed {
+    .expanded,
+    .leaf {
+      .menu {
+        a, .nolink {
+          background-color: $color-child-bg;
+        }
+      }
+    }
+    .menu-child-toggle {
+      background-color: $color-child-bg;
+      &:after {
+        color: $color-link-arrow;
+      }
+    }
+  }
+
+  @include breakpoint($tab) {
+    $color-toggle-fg: palette(neutral, gray-chateau);
+
+    background-color: $color-link-bg;
+    &.menu-processed {
+      .block__title {
+        background-color: $color-link-bg;
+        &:after {
+          color: $color-toggle-fg;
+          border-color: $color-link-border;
+        }
+      }
+    }
+  }
+  @include breakpoint($nav) {
+    $color-link-bg: palette(white, pure);
+    $color-link-bg-hover: palette(white, pure);
+    $color-link-fg: palette(neutral, dove-gray);
+    $color-link-fg-hover: palette(primary, base);
+    $color-link-drop: palette(primary, base);
+    $color-link-drop-hover: palette(primary, dark);
+
+    $color-child-border: palette(white, pure); // color of top border of 2nd level menu
+
+    $color-child-bg: $color-link-bg;
+    $color-child-bg-hover: $color-link-bg-hover;
+    $color-child-fg: $color-link-fg;
+    $color-child-fg-hover: $color-link-fg-hover;
+
+    $color-third-bg: $color-link-bg;
+    $color-third-bg-hover: $color-link-bg-hover;
+    $color-third-fg: $color-link-fg;
+    $color-third-fg-hover: $color-link-fg-hover;
+    $color-third-border: $color-child-border;
+
+    background-color: transparent;
+    .menu-block-wrapper {
+      a {
+        background-color: $color-link-bg;
+        color: $color-link-fg;
+      }
+      > .menu { // first level
+        > li {
+          background-color: $color-link-bg;
+        }
+        > li.expanded > a {
+          &:after {
+            color: $color-link-drop;
+          }
+        }
+        > li:hover > a {
+          background-color: $color-link-bg-hover;
+          color: $color-link-fg-hover;
+          &:after {
+            color: $color-link-drop-hover;
+          }
+        }
+        > li.active > a,
+        > li.active-trail > a {
+          color: $color-link-fg-hover;
+          &:hover {
+            color: $color-link-fg-hover;
+          }
+        }
+      }
+      > .menu > li:hover > .menu { // second level
+        border-top-color: $color-child-border;
+        background-color: $color-link-bg;
+        > li > a {
+          background-color: $color-child-bg;
+          color: $color-child-fg;
+          &:hover,
+          &.active,
+          &.active-trail {
+            background-color: $color-child-bg-hover;
+            color: $color-child-fg-hover;
+          }
+        }
+        > li > .nolink {
+          background-color: $color-child-bg;
+          color: $color-child-fg;
+          &:hover {
+            background-color: $color-child-bg-hover;
+            color: $color-child-fg-hover;
+          }
+        }
+        > li:hover > a,
+        > li:hover > .nolink {
+          background-color: $color-child-bg-hover;
+          color: $color-child-fg-hover;
+        }
+      }
+      > .menu > li > .menu > li:hover > .menu { // third level
+        background-color: $color-link-bg;
+        > li > a {
+          background-color: $color-third-bg;
+          color: $color-third-fg;
+          &:hover,
+          &.active {
+            background-color: $color-third-bg-hover;
+            color: $color-third-fg-hover;
+          }
+        }
+        > li > .nolink {
+          background-color: $color-third-bg;
+          color: $color-third-fg;
+        }
+      }
+      > .menu > li > .menu > li.first:hover > .menu {
+        border-top-color: $color-third-border;
+      }
+    }
+  }
+}

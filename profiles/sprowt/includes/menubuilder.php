@@ -36,6 +36,7 @@ class MenuBuilder {
             'plid',
             'router_path',
             'options',
+            'hidden'
         );
         
         foreach($tree as $data) {

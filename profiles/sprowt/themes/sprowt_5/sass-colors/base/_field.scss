@@ -1,0 +1,10 @@
+.field__item {
+  .node--teaser .field--name-body &,
+  .node--alt-teaser .field--name-body & {
+
+    > .more-link {
+      @extend %button;
+      @include button-color();
+    }
+  }
+}

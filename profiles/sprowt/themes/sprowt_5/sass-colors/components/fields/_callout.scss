@@ -1,0 +1,17 @@
+.field--name-field-call-out {
+  $color-callout-bg: palette(primary, base);
+  $color-callout-fg: palette(white, pure);
+  $color-button-bg: palette(white, pure);
+  $color-button-fg: palette(primary, base);
+  $color-button-hover-bg: palette(primary, dark);
+  $color-button-hover-fg: palette(white, pure);
+
+  background-color: $color-callout-bg;
+  color: $color-callout-fg;
+  h1, h2, h3, h4, h5 {
+    color: $color-callout-fg;
+  }
+  .button {
+    @include button-color($color-button-bg, $color-button-fg, $color-button-hover-bg, $color-button-hover-fg);
+  }
+}
