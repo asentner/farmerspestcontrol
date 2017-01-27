@@ -26,17 +26,22 @@
       }
    }
   .field--name-field-icon {
-    margin-bottom: 20px;
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    height: 76px;
+    width: 76px;
+    min-width: 76px;
+    border: 2px solid;
+    border-radius: 50%;
+    .field__item {
+      @include flexbox;
+    }
     a {
       @extend %image-hover;
-      @include flexbox;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-      height: 76px;
-      width: 76px;
-      border-radius: 50%;
-      border: 2px solid;
+      height: 100%;
+      width: 100%;
     }
   }
   .node__title {
