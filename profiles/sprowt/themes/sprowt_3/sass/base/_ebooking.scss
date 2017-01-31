@@ -16,6 +16,10 @@
   &.right {
     transform: translateX(150%);
   }
+  &.initialize {
+    transform: translateX(150%);
+    transition: transform 0s;
+  }
   > .fieldset-wrapper {
     max-width: 720px;
     margin: 0 auto;
@@ -61,6 +65,11 @@
 // package styling - this will likely change once we pull in packages as nodes
 %ebooking-package {
   margin-top: 40px;
+  .form-radios {
+    .form-item + .form-item {
+      margin-left: 0;
+    }
+  }
   .form-radio {
     display: none;
   }

@@ -2389,6 +2389,13 @@ a {
   .node-ebooking.processed .right.panel, .node-ebooking .right.ebooking_summary {
     -webkit-transform: translateX(150%);
             transform: translateX(150%); }
+  .node-ebooking.processed .initialize.panel, .node-ebooking .initialize.ebooking_summary {
+    -webkit-transform: translateX(150%);
+            transform: translateX(150%);
+    -webkit-transition: -webkit-transform 0s;
+    transition: -webkit-transform 0s;
+    transition: transform 0s;
+    transition: transform 0s, -webkit-transform 0s; }
   .node-ebooking.processed .panel > .fieldset-wrapper, .node-ebooking .ebooking_summary > .fieldset-wrapper {
     max-width: 720px;
     margin: 0 auto; }
@@ -2436,6 +2443,8 @@ a {
 
 .node-ebooking.processed .webform-component-optionsmarkup, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] {
   margin-top: 40px; }
+  .node-ebooking.processed .webform-component-optionsmarkup .form-radios .form-item + .form-item, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .form-radios .form-item + .form-item {
+    margin-left: 0; }
   .node-ebooking.processed .webform-component-optionsmarkup .form-radio, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .form-radio {
     display: none; }
   .node-ebooking.processed .webform-component-optionsmarkup .package, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package {
