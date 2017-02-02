@@ -10,7 +10,7 @@
 
         // add 'previous' buttons
         $fieldsets.not(':first').each(function(){
-          $(this).addClass('right');
+          $(this).addClass('initialize');
           $(this).append('<a class="button button-prev" href="#">Previous Step</a>');
         });
 
@@ -84,6 +84,7 @@
           if($(this).parent('fieldset').hasClass('active') && validation == true) {
             $(this).parent('fieldset').removeClass('active').addClass('left');
             $(this).parent('fieldset').next('.panel').removeClass('right').addClass('active');
+            $(this).parent('fieldset').next('.panel').removeClass('initialize');
             $(this).siblings('.validation-error').hide();
             panelScroll(750);
           }

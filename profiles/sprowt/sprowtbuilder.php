@@ -637,7 +637,7 @@ Class SprowtBuilder {
         }
         
         if(!empty($t_market->tid)){
-            $node->field_market->set($t_market->tid);
+            $node->field_market = array($t_market->tid);
         }
         
         if(!empty($t_service->name) && !empty($t_market->name)){

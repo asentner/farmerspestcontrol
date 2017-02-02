@@ -135,8 +135,8 @@ hr {
       .benefits-hero .node__title a:hover,
       .local-target-benefits .node__title a:hover {
         color: #239343; }
-  .benefits-hero .field--name-field-icon a,
-  .local-target-benefits .field--name-field-icon a {
+  .benefits-hero .field--name-field-icon,
+  .local-target-benefits .field--name-field-icon {
     border-color: #239343;
     background-color: #239343; }
 

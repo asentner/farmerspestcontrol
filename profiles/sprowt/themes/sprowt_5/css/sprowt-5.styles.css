@@ -2444,6 +2444,13 @@ div.accordion .accordion-content {
   .node-ebooking.processed .right.panel, .node-ebooking .right.ebooking_summary {
     -webkit-transform: translateX(150%);
             transform: translateX(150%); }
+  .node-ebooking.processed .initialize.panel, .node-ebooking .initialize.ebooking_summary {
+    -webkit-transform: translateX(150%);
+            transform: translateX(150%);
+    -webkit-transition: -webkit-transform 0s;
+    transition: -webkit-transform 0s;
+    transition: transform 0s;
+    transition: transform 0s, -webkit-transform 0s; }
   .node-ebooking.processed .panel > .fieldset-wrapper, .node-ebooking .ebooking_summary > .fieldset-wrapper {
     max-width: 720px;
     margin: 0 auto; }
@@ -2497,6 +2504,8 @@ div.accordion .accordion-content {
 
 .node-ebooking.processed .webform-component-optionsmarkup, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] {
   margin-top: 40px; }
+  .node-ebooking.processed .webform-component-optionsmarkup .form-radios .form-item + .form-item, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .form-radios .form-item + .form-item {
+    margin-left: 0; }
   .node-ebooking.processed .webform-component-optionsmarkup .form-radio, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .form-radio {
     display: none; }
   .node-ebooking.processed .webform-component-optionsmarkup .package, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package {
@@ -3156,28 +3165,40 @@ li.addtoany {
   .block--views-benefits-front .field--name-field-icon,
   .benefits-hero .field--name-field-icon, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-icon,
   .local-target-benefits .field--name-field-icon {
-    margin-bottom: 20px; }
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0 auto 20px;
+    height: 76px;
+    width: 76px;
+    min-width: 76px;
+    border: 2px solid;
+    border-radius: 50%; }
+    .block--views-benefits-front .field--name-field-icon > *,
+    .benefits-hero .field--name-field-icon > *, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-icon > *,
+    .local-target-benefits .field--name-field-icon > * {
+      -ms-flex: 0 1 auto; }
+    .block--views-benefits-front .field--name-field-icon .field__item,
+    .benefits-hero .field--name-field-icon .field__item, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-icon .field__item,
+    .local-target-benefits .field--name-field-icon .field__item {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex; }
+      .block--views-benefits-front .field--name-field-icon .field__item > *,
+      .benefits-hero .field--name-field-icon .field__item > *, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-icon .field__item > *,
+      .local-target-benefits .field--name-field-icon .field__item > * {
+        -ms-flex: 0 1 auto; }
     .block--views-benefits-front .field--name-field-icon a,
     .benefits-hero .field--name-field-icon a, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-icon a,
     .local-target-benefits .field--name-field-icon a {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-pack: center;
-          -ms-flex-pack: center;
-              justify-content: center;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      margin: 0 auto;
-      height: 76px;
-      width: 76px;
-      border-radius: 50%;
-      border: 2px solid; }
-      .block--views-benefits-front .field--name-field-icon a > *,
-      .benefits-hero .field--name-field-icon a > *, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-icon a > *,
-      .local-target-benefits .field--name-field-icon a > * {
-        -ms-flex: 0 1 auto; }
+      height: 100%;
+      width: 100%; }
   .block--views-benefits-front .node__title,
   .benefits-hero .node__title, .block--sprowt-views-sprowt-views-lt-benefits .node__title,
   .local-target-benefits .node__title {
