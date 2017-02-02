@@ -113,3 +113,21 @@ function sprowt_block_cta_preprocess_block(&$variables) {
     $variables['content'] = _sprowt_block_cta_shortcode($variables['content']);
   }
 }
+
+/**
+ * Implements hook_contextual_links_view_alter().
+ */
+function sprowt_block_cta_contextual_links_view_alter(&$element, $items) {
+    if(!empty($element['#element']['#block'])) {
+        $block = $element['#element']['#block'];
+        $delta = $block->delta;
+
+        if(strpos($delta, 'sprowt_block_cta_') !== false) {
+            $nid = str_replace('sprowt_block_cta_', '', $delta);
+            $element['#links']['cta-edit'] = array(
+                'title' => 'Edit CTA Node',
+                'href' => url("/node/$nid/edit", array('absolute' => TRUE)),
+            );
+        }
+    }
+}
