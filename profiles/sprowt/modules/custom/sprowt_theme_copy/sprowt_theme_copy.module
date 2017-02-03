@@ -355,6 +355,7 @@ function sprowt_theme_copy_theme_settings_submit($form, &$form_state) {
         $image = file_move($image, 'public://');
         $image->status = FILE_STATUS_PERMANENT;
         file_save($image);
+        file_usage_add($image, 'sprowt_theme_copy_background_image', 'theme', $image->fid);
         if(!empty($style)) {
             $derivative_uri = image_style_path($style, $image->uri);
             $success = file_exists($derivative_uri) || image_style_create_derivative(image_style_load($style), $image->uri, $derivative_uri);

@@ -35,3 +35,15 @@ function sprowt_theme_copy_update_7100(){
         }
     }
 }
+
+/**
+ * Add usage for image
+ */
+function sprowt_theme_copy_update_7101(){
+  $image = theme_get_setting('sprowt_background_image');
+  if(!empty($image)) {
+    if($image = file_load($image)) {
+      file_usage_add($image, 'sprowt_theme_copy_background_image', 'theme', $image->fid);
+    }
+  }
+}
