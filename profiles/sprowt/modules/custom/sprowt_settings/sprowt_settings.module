@@ -668,12 +668,32 @@ function _sprowt_settings_get_main_menu_nodes() {
     foreach($nodes as $node) {
         $nodes_array[$node['uuid']] = $node;
     }
-    $menu = json_decode(file_get_contents($path . '/main-menu_link_export.json'),true);
+
+    $data = _sprowt_get_data();
+
+    $sprowt_path = drupal_get_path('profile', 'sprowt');
+    $theme_path = drupal_get_path('theme', $data['branding']['theme']);
+    $filename = 'main-menu_link_export.json';
+    if(file_exists("$theme_path/$filename")) {
+        $json = file_get_contents("$theme_path/$filename");
+        $menu = json_decode($json, true);
+    }
+    else if(file_exists("$sprowt_path/$filename")) {
+        $json = file_get_contents("$sprowt_path/$filename");
+        $menu = json_decode($json, true);
+    }
+
+    if(empty($menu)) {
+        return false;
+    }
+
     $return = array();
     foreach($menu['menu_links'] as $m) {
         $nid = str_replace('node/','', $m['link_path']);
         $uuid = $menu['uuid_map'][$nid];
-        $return[] = $nodes_array[$uuid];
+        if(!empty($nodes_array[$uuid])) {
+            $return[] = $nodes_array[$uuid];
+        }
     }
 
     return $return;
