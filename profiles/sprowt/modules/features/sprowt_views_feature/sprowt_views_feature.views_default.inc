@@ -1543,7 +1543,6 @@ function sprowt_views_feature_views_default_views() {
   /* Display: All services */
   $handler = $view->new_display('block', 'All services', 'all');
   $handler->display->display_options['defaults']['use_more'] = FALSE;
-  $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_always'] = TRUE;
