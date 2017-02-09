@@ -27,4 +27,5 @@ features[views_view][] = special_offers
 features[views_view][] = team
 features[views_view][] = team_list_sort
 features[views_view][] = testimonials
+features[views_view][] = uploaded_items
 features_exclude[dependencies][weight] = weight
