@@ -49,7 +49,7 @@ function sprowt_content_types_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_profile';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-xmlsitemap';
   $export['additional_settings__active_tab_profile'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -174,9 +174,30 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_blog';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_blog'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_faq';
   $strongarm->value = 1;
   $export['diff_enable_revisions_page_node_faq'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_landing_page';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_landing_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_localtarget';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_localtarget'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -195,9 +216,37 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_package';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_package'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_page';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_profile';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_profile'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_region';
   $strongarm->value = 1;
   $export['diff_enable_revisions_page_node_region'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_service';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_service'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -216,9 +265,30 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_blog';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_blog'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_show_preview_changes_node_faq';
   $strongarm->value = 1;
   $export['diff_show_preview_changes_node_faq'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_landing_page';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_landing_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_localtarget';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_localtarget'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -237,9 +307,37 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_package';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_package'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_page';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_profile';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_profile'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_show_preview_changes_node_region';
   $strongarm->value = 1;
   $export['diff_show_preview_changes_node_region'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_service';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_service'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -258,9 +356,30 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_blog';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_blog'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_view_mode_preview_node_faq';
   $strongarm->value = 'full';
   $export['diff_view_mode_preview_node_faq'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_landing_page';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_landing_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_localtarget';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_localtarget'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -279,9 +398,37 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_package';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_package'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_page';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_profile';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_profile'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_view_mode_preview_node_region';
   $strongarm->value = 'full';
   $export['diff_view_mode_preview_node_region'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_service';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_service'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -3092,12 +3239,38 @@ example.org';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_engines_custom_urls';
+  $strongarm->value = '';
+  $export['xmlsitemap_engines_custom_urls'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_engines_engines';
+  $strongarm->value = array(
+    0 => 'google',
+  );
+  $export['xmlsitemap_engines_engines'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_affiliation';
   $strongarm->value = array(
     'status' => '0',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_affiliation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_article';
+  $strongarm->value = array(
+    'status' => '1',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_article'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -3114,7 +3287,7 @@ example.org';
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_blog';
   $strongarm->value = array(
-    'status' => '0',
+    'status' => '1',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_blog'] = $strongarm;
@@ -3154,7 +3327,7 @@ example.org';
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_landing_page';
   $strongarm->value = array(
-    'status' => '0',
+    'status' => '1',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_landing_page'] = $strongarm;
@@ -3164,7 +3337,7 @@ example.org';
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_localtarget';
   $strongarm->value = array(
-    'status' => '0',
+    'status' => '1',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_localtarget'] = $strongarm;
@@ -3194,7 +3367,7 @@ example.org';
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_package';
   $strongarm->value = array(
-    'status' => '0',
+    'status' => '1',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_package'] = $strongarm;
@@ -3204,7 +3377,7 @@ example.org';
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_page';
   $strongarm->value = array(
-    'status' => '0',
+    'status' => '1',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_page'] = $strongarm;
@@ -3214,7 +3387,7 @@ example.org';
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_profile';
   $strongarm->value = array(
-    'status' => '0',
+    'status' => '1',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_profile'] = $strongarm;
@@ -3234,7 +3407,7 @@ example.org';
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_service';
   $strongarm->value = array(
-    'status' => '0',
+    'status' => '1',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_service'] = $strongarm;
@@ -3274,7 +3447,7 @@ example.org';
   $strongarm->api_version = 1;
   $strongarm->name = 'xmlsitemap_settings_node_webform';
   $strongarm->value = array(
-    'status' => '0',
+    'status' => '1',
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_webform'] = $strongarm;
