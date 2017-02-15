@@ -120,6 +120,7 @@ dependencies[] = adminimal_admin_menu
 dependencies[] = devel
 dependencies[] = webform_features
 dependencies[] = touch_icons
+dependencies[] = environment_indicator
 
 ; Custom Modules
 

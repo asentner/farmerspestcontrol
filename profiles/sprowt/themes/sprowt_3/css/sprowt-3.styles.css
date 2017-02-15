@@ -3846,7 +3846,9 @@ li.addtoany {
     margin-bottom: 10px; }
   .block--views-services-front-all-quaternary .field--name-body {
     font-size: 0.95em;
-    padding-bottom: 25px; }
+    padding-bottom: 25px;
+    padding-left: 10px;
+    padding-right: 10px; }
   .block--views-services-front-all-quaternary .read-more {
     text-transform: uppercase;
     font-size: 0.95em;
