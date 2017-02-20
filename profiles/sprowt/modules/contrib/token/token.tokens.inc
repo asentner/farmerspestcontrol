@@ -358,16 +358,6 @@ function token_token_info() {
     'dynamic' => TRUE,
   );
 
-  // Site tokens.
-  $info['tokens']['site']['logo'] = array(
-    'name' => t('Site logo'),
-    'description' => t('The image showing the site logo.'),
-  );
-  $info['tokens']['site']['logo-url'] = array(
-    'name' => t('Site logo URL'),
-    'description' => t('URL to the image showing the site logo.'),
-  );
-
   return $info;
 }
 
@@ -905,34 +895,6 @@ function token_tokens($type, $tokens, array $data = array(), array $options = ar
     }
   }
 
-  // Site tokens.
-  if ($type == 'site') {
-    foreach ($tokens as $name => $original) {
-      switch ($name) {
-        case 'logo':
-          // Use a logo; but only if we have one to use.
-          $replacements[$original] = '';
-          if ($uri = theme_get_setting('logo')) {
-            $replacements[$original] = theme('image', array('path' => $uri));
-          }
-          break;
-
-        case 'logo-url':
-          $replacements[$original] = '';
-          if ($uri = theme_get_setting('logo')) {
-            $replacements[$original] = $uri;
-          }
-          break;
-      }
-
-      // [site:logo-url:*] chained tokens.
-      if ($url_tokens = token_find_with_prefix($tokens, 'logo-url')) {
-        $uri = theme_get_setting('logo');
-        $replacements += token_generate('url', $url_tokens, array('path' => $uri), $options);
-      }
-    }
-  }
-
   // If $type is a token type, $data[$type] is empty but $data[$entity_type] is
   // not, re-run token replacements.
   if (empty($data[$type]) && ($entity_type = token_get_entity_mapping('token', $type)) && $entity_type != $type && !empty($data[$entity_type]) && empty($options['recursive'])) {
@@ -1430,7 +1392,6 @@ function field_token_info_alter(&$info) {
  */
 function field_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
-  $sanitize = !empty($options['sanitize']);
   $langcode = isset($options['language']) ? $options['language']->language : NULL;
 
   // Entity tokens.
@@ -1475,7 +1436,7 @@ function field_tokens($type, $tokens, array $data = array(), array $options = ar
 /**
  * Pre-render callback for field output used with tokens.
  */
-function token_pre_render_field_token(&$elements) {
+function token_pre_render_field_token($elements) {
   // Remove the field theme hook, attachments, and JavaScript states.
   unset($elements['#theme']);
   unset($elements['#states']);
