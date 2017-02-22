@@ -15,6 +15,5 @@ features[webform][] = complete_this_form_and_receive_y
 features[webform][] = get_a_free_no_obligation_estimat
 features[webform][] = get_your_free_quote_today_
 features[webform][] = how_can_we_help_you_today_
-features[webform][] = landing_page_webform
 features[webform][] = refer_a_friend_to_company_name_
 project path = profiles/sprowt/modules/features
