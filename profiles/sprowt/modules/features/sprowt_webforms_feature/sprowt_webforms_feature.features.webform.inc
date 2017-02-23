@@ -285,10 +285,7 @@ $webforms = array();
         'type' => 'select',
         'value' => '',
         'extra' => array(
-          'items' => 'Option1|$20 Off Bed Bug Control
-Option2|$50 Off Home Protection Plan
-Option3|$80 Off Home Protection Plus
-Option4|$100 Off Home Protection Premiere',
+          'items' => 'Option1| ',
           'multiple' => 0,
           'title_display' => 'before',
           'description_above' => 0,
@@ -675,8 +672,6 @@ Option4|$100 Off Home Protection Premiere',
     'und' => array(
       0 => array(
         'value' => '<p>Thank you for your interest in [company-name]! To get your free quote, simply fill out this form and one of our friendly team members will follow up with you shortly. If you need immediate assistance, please give us a call at [phone-number]&nbsp;to speak with one of our customer service representatives. We look forward to hearing from you!</p>
-
-<p>&nbsp;</p>
 ',
         'summary' => '',
         'format' => 'filtered_html',
