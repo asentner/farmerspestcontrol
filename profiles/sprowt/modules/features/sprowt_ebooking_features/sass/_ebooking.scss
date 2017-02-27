@@ -156,6 +156,19 @@
     p + p {
       margin-top: 10px;
     }
+    .close-popup {
+      position: absolute;
+      right: 0;
+      top: -5px;
+      padding: 10px;
+      font-size: 0;
+      cursor: pointer;
+      &:after {
+        font-family: 'FontAwesome';
+        content: '\F00D';
+        font-size: 21px;
+      }
+    }
   }
   .validation-error {
     position: absolute;
@@ -260,7 +273,7 @@
       min-width: 60%;
       padding: 30px;
       font-size: 21px;
-      line-height: 44px;
+      line-height: 29px;
     }
     div[class*="if-business"] {
       bottom: 10px;
@@ -271,7 +284,8 @@
     .form-actions {
       input {
         width: auto;
-        + input {
+        + input,
+        + .button {
           margin-left: 40px;
           margin-top: 0;
         }

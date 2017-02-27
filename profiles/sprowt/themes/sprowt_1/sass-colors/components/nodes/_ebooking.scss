@@ -1,27 +1,47 @@
-.node-ebooking { 
-  h1.node__title {
-    color: palette(white, pure);
+%ebooking-panel-title {
+  color: palette(secondary, base);
+}
+
+%ebooking-selected-package {
+  &:after {
+    background-color: palette(secondary, base);
   }
+}
+
+// package styling - this will likely change once we pull in packages as nodes
+%ebooking-package {
+  .package {
+    &:hover,
+    &.selected {
+      border-color: palette(secondary, base);
+      background-color: lighten(palette(secondary, base), 65);
+    }
+    &.selected {
+      &:after {
+        @extend %ebooking-selected-package;
+      }
+    }
+    .current-price {
+      color: palette(secondary, base)
+    };
+    .bullet-points {
+      span {
+        &:before {
+          color: palette(primary, base);
+        }
+      }
+    }
+  }
+} // end package styling
+
+
+.node-ebooking {
   .l-main {
     background-color: palette(secondary, base);
-    color: palette(white, pure);
-  }
-  .form-item {
-    label {
-      color: palette(black, pure);
-    }
-  }
-  .date-option {
-    .fieldset-legend:after {
-      color: #f00;
-    }
   }
 }
 
 .node-ebooking.processed {
-  .panel {
-    background-color: palette(white, pure);
-  }
   .step-number {
     color: palette(primary, base);
   }
@@ -31,23 +51,7 @@
     }
   }
   div[class*="if-business"] {
-    background-color: palette(neutral, wild-sand);
     border-color: palette(secondary, base);
-  }
-  .validation-error {
-    background-color: #feefef;
-    border-color: #fe2a2a;
-    color: #2f2f2f;
-    span {
-      &:before {
-        color: #fe2a2a;
-      }
-    }
-  }
-  .button {
-    &.inactive {
-      background-color: #bebebe;
-    }
   }
   .basic-form {
     color: palette(secondary, light);
@@ -59,17 +63,29 @@
   .webform-component-optionsmarkup {
     @extend %ebooking-package;
   }
-  .ebooking_summary {
-    @extend %ebooking-panel;
-    color: palette(black, pure);
-  }
 }
 
-.node-ebooking.basic-form {
-  .webform-component-markup {
-    color: palette(black, pure);
+// ebooking checkout page
+.node-ebooking .ebooking_summary {
+  .webform-component-markup[class*="review"] {
+    @extend %ebooking-package;
+    > h3 {
+      color: palette(secondary, base);
+    }
+    .package {
+      @extend %ebooking-selected-package;
+      border-color: palette(secondary, base);
+      background-color: lighten(palette(secondary, base), 65);
+    }
   }
-  .panel-form {
-    color: palette(white, pure);
+  .bullet-points {
+    p {
+      &:before {
+        color: palette(primary, base);
+      }
+    }
+  }
+  .webform-component-markup[class*="tooltip"] {
+    border-color: palette(secondary, base);
   }
 }

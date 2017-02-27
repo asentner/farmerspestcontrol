@@ -68,6 +68,20 @@
     padding: 25px;
     margin-top: 0;
     text-align: center;
+    .close-tooltip {
+      position: absolute;
+      right: 0;
+      top: -5px;
+      padding: 10px;
+      font-size: 0;
+      cursor: pointer;
+      &:after {
+        font-family: 'FontAwesome';
+        content: '\F00D';
+        font-size: 21px;
+        font-weight: bold;
+      }
+    }
   }
   .paymethod-select-wrapper { // stripe styling
     text-align: left;

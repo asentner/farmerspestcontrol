@@ -22,3 +22,5 @@ features[webform][] = ebooking_template
 features_exclude[variable][diff_enable_revisions_page_node_webform] = diff_enable_revisions_page_node_webform
 features_exclude[variable][diff_show_preview_changes_node_webform] = diff_show_preview_changes_node_webform
 features_exclude[variable][diff_view_mode_preview_node_webform] = diff_view_mode_preview_node_webform
+stylesheets[all][] = css/sprowt_ebooking.css
+scripts[] = js/sprowt_ebooking.js
