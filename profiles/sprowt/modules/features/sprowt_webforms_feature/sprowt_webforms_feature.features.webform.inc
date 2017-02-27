@@ -95,7 +95,7 @@ $webforms = array();
   ),
   'webform' => array(
     'confirmation' => '',
-    'confirmation_format' => NULL,
+    'confirmation_format' => 'filtered_html',
     'redirect_url' => '<confirmation>',
     'status' => 1,
     'block' => 0,
@@ -103,7 +103,7 @@ $webforms = array();
     'auto_save' => 0,
     'submit_notice' => 1,
     'confidential' => 0,
-    'submit_text' => '',
+    'submit_text' => 'Contact Us',
     'submit_limit' => -1,
     'submit_interval' => -1,
     'total_submit_limit' => -1,
@@ -120,7 +120,7 @@ $webforms = array();
     'preview_prev_button_label' => '',
     'preview_title' => '',
     'preview_message' => '',
-    'preview_message_format' => NULL,
+    'preview_message_format' => 'filtered_html',
     'preview_excluded_components' => array(),
     'machine_name' => 'complete_this_form_and_receive_y',
     'record_exists' => TRUE,
@@ -285,10 +285,7 @@ $webforms = array();
         'type' => 'select',
         'value' => '',
         'extra' => array(
-          'items' => 'Option1|$20 Off Bed Bug Control
-Option2|$50 Off Home Protection Plan
-Option3|$80 Off Home Protection Plus
-Option4|$100 Off Home Protection Premiere',
+          'items' => 'Option1| ',
           'multiple' => 0,
           'title_display' => 'before',
           'description_above' => 0,
@@ -445,7 +442,7 @@ Option4|$100 Off Home Protection Premiere',
     'auto_save' => 0,
     'submit_notice' => 1,
     'confidential' => 0,
-    'submit_text' => '',
+    'submit_text' => 'Contact Us',
     'submit_limit' => -1,
     'submit_interval' => -1,
     'total_submit_limit' => -1,
@@ -675,8 +672,6 @@ Option4|$100 Off Home Protection Premiere',
     'und' => array(
       0 => array(
         'value' => '<p>Thank you for your interest in [company-name]! To get your free quote, simply fill out this form and one of our friendly team members will follow up with you shortly. If you need immediate assistance, please give us a call at [phone-number]&nbsp;to speak with one of our customer service representatives. We look forward to hearing from you!</p>
-
-<p>&nbsp;</p>
 ',
         'summary' => '',
         'format' => 'filtered_html',
@@ -758,7 +753,7 @@ Option4|$100 Off Home Protection Premiere',
     'auto_save' => 0,
     'submit_notice' => 1,
     'confidential' => 0,
-    'submit_text' => 'Send the form!',
+    'submit_text' => 'Contact Us',
     'submit_limit' => -1,
     'submit_interval' => -1,
     'total_submit_limit' => -1,
@@ -1007,7 +1002,7 @@ Option4|$100 Off Home Protection Premiere',
   'body' => array(
     'und' => array(
       0 => array(
-        'value' => '<p>If you have any questions about our services, or if you would like to contact us to request a service, please fill out the form below and we&#39;ll get back to you as soon as possible! If you need immediate assistance, please give us a call at (360) 464-4316. We look forward to hearing from you!</p>
+        'value' => '<p>If you have any questions about our services, or if you would like to contact us to request a service, please fill out the form below and we&#39;ll get back to you as soon as possible! If you need immediate assistance, please give us a call at [phone-number]. We look forward to hearing from you!</p>
 ',
         'summary' => '',
         'format' => 'filtered_html',
@@ -1089,7 +1084,7 @@ Option4|$100 Off Home Protection Premiere',
     'auto_save' => 0,
     'submit_notice' => 1,
     'confidential' => 0,
-    'submit_text' => '',
+    'submit_text' => 'Contact Us',
     'submit_limit' => -1,
     'submit_interval' => -1,
     'total_submit_limit' => -1,
@@ -1450,133 +1445,6 @@ option2|No',
   'picture' => 2,
   'data' => 'b:0;',
 );
-  $webforms['landing_page_webform'] = array(
-  'uid' => 1,
-  'title' => 'Landing Page Webform',
-  'log' => '',
-  'status' => 1,
-  'comment' => 0,
-  'promote' => 0,
-  'sticky' => 0,
-  'vuuid' => '861d700d-f5a4-45a6-95a6-b177dc5a4013',
-  'type' => 'webform',
-  'language' => 'und',
-  'tnid' => 0,
-  'translate' => 0,
-  'rh_action' => NULL,
-  'rh_redirect' => NULL,
-  'rh_redirect_response' => NULL,
-  'uuid' => '26f10b1f-a020-48df-adb0-b94f68cc2aff',
-  'revision_uid' => 1,
-  'body' => array(),
-  'field_ebooking' => array(
-    'und' => array(
-      0 => array(
-        'value' => 'no',
-      ),
-    ),
-  ),
-  'rdf_mapping' => array(
-    'rdftype' => array(
-      0 => 'sioc:Item',
-      1 => 'foaf:Document',
-    ),
-    'title' => array(
-      'predicates' => array(
-        0 => 'dc:title',
-      ),
-    ),
-    'created' => array(
-      'predicates' => array(
-        0 => 'dc:date',
-        1 => 'dc:created',
-      ),
-      'datatype' => 'xsd:dateTime',
-      'callback' => 'date_iso8601',
-    ),
-    'changed' => array(
-      'predicates' => array(
-        0 => 'dc:modified',
-      ),
-      'datatype' => 'xsd:dateTime',
-      'callback' => 'date_iso8601',
-    ),
-    'body' => array(
-      'predicates' => array(
-        0 => 'content:encoded',
-      ),
-    ),
-    'uid' => array(
-      'predicates' => array(
-        0 => 'sioc:has_creator',
-      ),
-      'type' => 'rel',
-    ),
-    'name' => array(
-      'predicates' => array(
-        0 => 'foaf:name',
-      ),
-    ),
-    'comment_count' => array(
-      'predicates' => array(
-        0 => 'sioc:num_replies',
-      ),
-      'datatype' => 'xsd:integer',
-    ),
-    'last_activity' => array(
-      'predicates' => array(
-        0 => 'sioc:last_activity_date',
-      ),
-      'datatype' => 'xsd:dateTime',
-      'callback' => 'date_iso8601',
-    ),
-  ),
-  'path' => array(
-    'pathauto' => 1,
-  ),
-  'webform' => array(
-    'confirmation' => '',
-    'confirmation_format' => NULL,
-    'redirect_url' => '<confirmation>',
-    'status' => 1,
-    'block' => 0,
-    'allow_draft' => 0,
-    'auto_save' => 0,
-    'submit_notice' => 1,
-    'confidential' => 0,
-    'submit_text' => '',
-    'submit_limit' => -1,
-    'submit_interval' => -1,
-    'total_submit_limit' => -1,
-    'total_submit_interval' => -1,
-    'progressbar_bar' => 1,
-    'progressbar_page_number' => 0,
-    'progressbar_percent' => 0,
-    'progressbar_pagebreak_labels' => 1,
-    'progressbar_include_confirmation' => 1,
-    'progressbar_label_first' => 'Start',
-    'progressbar_label_confirmation' => 'Complete',
-    'preview' => 0,
-    'preview_next_button_label' => '',
-    'preview_prev_button_label' => '',
-    'preview_title' => '',
-    'preview_message' => '',
-    'preview_message_format' => NULL,
-    'preview_excluded_components' => array(),
-    'machine_name' => 'landing_page_webform',
-    'record_exists' => TRUE,
-    'roles' => array(
-      0 => 1,
-      1 => 2,
-    ),
-    'emails' => array(),
-    'components' => array(),
-    'conditionals' => array(),
-  ),
-  'name' => 'coalmarch',
-  'picture' => 2,
-  'data' => 'b:0;',
-);
   $webforms['refer_a_friend_to_company_name_'] = array(
   'uid' => 1,
   'title' => 'Refer a Friend to [company-name]!',
@@ -1598,7 +1466,7 @@ option2|No',
   'body' => array(
     'und' => array(
       0 => array(
-        'value' => '<p>For every friend or neighbor that you refer to us for our All Season pest control package, we will give you BOTH $60 towards your service! We thank you for being a loyal customer and appreciate your business!</p>
+        'value' => '<p>If you&rsquo;re a happy customer, help spread the love by referring your family and friends. We appreciate your support and thank you for being a loyal [company-name]&nbsp;customer!</p>
 ',
         'summary' => '',
         'format' => 'filtered_html',
@@ -1680,7 +1548,7 @@ option2|No',
     'auto_save' => 0,
     'submit_notice' => 1,
     'confidential' => 0,
-    'submit_text' => '',
+    'submit_text' => 'Contact Us',
     'submit_limit' => -1,
     'submit_interval' => -1,
     'total_submit_limit' => -1,
