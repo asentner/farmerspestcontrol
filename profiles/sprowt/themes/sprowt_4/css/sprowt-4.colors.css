@@ -15,29 +15,6 @@ a {
     background-color: transparent !important;
     color: blue !important; } }
 
-.node-ebooking.processed .ebooking_summary, .node-ebooking .ebooking_summary {
-  background-color: #fff; }
-
-.node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] h3 {
-  color: #f3ba0d; }
-  .node-ebooking.processed .webform-component-markup[class*="title"] h2:after, .node-ebooking.processed .webform-component-markup[class*="title"] h3:after {
-    border-top-color: #dddddd; }
-
-.node-ebooking.processed .webform-component-optionsmarkup .package.selected:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package:after {
-  background-color: #f3ba0d;
-  color: #fff; }
-
-.node-ebooking.processed .webform-component-optionsmarkup .package, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package {
-  border-color: #f4f4f4;
-  background-color: #f4f4f4; }
-  .node-ebooking.processed .webform-component-optionsmarkup .package:hover, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package:hover, .node-ebooking.processed .webform-component-optionsmarkup .package.selected, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package.selected {
-    border-color: #f3ba0d;
-    background-color: white; }
-  .node-ebooking.processed .webform-component-optionsmarkup .package .current-price, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .current-price {
-    color: #f3ba0d; }
-  .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points span:before, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points span:before {
-    color: #3da244; }
-
 .node--teaser .field--name-body .field__item > .more-link,
 .node--alt-teaser .field--name-body .field__item > .more-link {
   background-color: #3da244;
@@ -584,6 +561,29 @@ hr {
         color: #333333; }
         .block--nav-utility .menu-block-wrapper a[href^='tel:']:hover {
           color: #3da244; } }
+
+.node-ebooking.processed .ebooking_summary, .node-ebooking .ebooking_summary {
+  background-color: #fff; }
+
+.node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] h3 {
+  color: #f3ba0d; }
+  .node-ebooking.processed .webform-component-markup[class*="title"] h2:after, .node-ebooking.processed .webform-component-markup[class*="title"] h3:after {
+    border-top-color: #dddddd; }
+
+.node-ebooking.processed .webform-component-optionsmarkup .package.selected:after, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package:after {
+  background-color: #f3ba0d;
+  color: #fff; }
+
+.node-ebooking.processed .webform-component-optionsmarkup .package, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package {
+  border-color: #f4f4f4;
+  background-color: #f4f4f4; }
+  .node-ebooking.processed .webform-component-optionsmarkup .package:hover, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package:hover, .node-ebooking.processed .webform-component-optionsmarkup .package.selected, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package.selected {
+    border-color: #f3ba0d;
+    background-color: white; }
+  .node-ebooking.processed .webform-component-optionsmarkup .package .current-price, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .current-price {
+    color: #f3ba0d; }
+  .node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points span:before, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points span:before {
+    color: #3da244; }
 
 .node-ebooking h1.node__title {
   color: #fff; }
