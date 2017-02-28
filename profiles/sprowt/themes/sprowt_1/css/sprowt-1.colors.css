@@ -529,9 +529,6 @@ hr {
 .node-ebooking.processed .webform-component-optionsmarkup .package .current-price, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .current-price {
   color: #216e82; }
 
-.node-ebooking.processed .webform-component-optionsmarkup .package .bullet-points span:before, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .package .bullet-points span:before {
-  color: #80b840; }
-
 .node-ebooking .l-main {
   background-color: #216e82; }
 
@@ -540,6 +537,8 @@ hr {
 
 .node-ebooking.processed div[class*="if-business"] {
   border-color: #216e82; }
+  .node-ebooking.processed div[class*="if-business"] .close-popup {
+    color: #216e82; }
 
 .node-ebooking.processed .basic-form {
   color: #21768c; }
@@ -553,11 +552,10 @@ hr {
   border-color: #216e82;
   background-color: #f3fafc; }
 
-.node-ebooking .ebooking_summary .bullet-points p:before {
-  color: #80b840; }
-
 .node-ebooking .ebooking_summary .webform-component-markup[class*="tooltip"] {
   border-color: #216e82; }
+  .node-ebooking .ebooking_summary .webform-component-markup[class*="tooltip"] .close-tooltip {
+    color: #216e82; }
 
 .front .l-main {
   background-color: #216e82; }

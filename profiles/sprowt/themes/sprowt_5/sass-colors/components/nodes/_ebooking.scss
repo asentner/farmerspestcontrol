@@ -23,13 +23,6 @@
     }
     .current-price {
       color: palette(secondary, base)
-    };
-    .bullet-points {
-      span {
-        &:before {
-          color: palette(primary, base);
-        }
-      }
     }
   }
 } // end package styling
@@ -52,6 +45,9 @@
   }
   div[class*="if-business"] {
     border-color: palette(secondary, base);
+    .close-popup {
+      color: palette(secondary, base);
+    }
   }
   .basic-form {
     color: palette(secondary, light);
@@ -79,11 +75,10 @@
       background-color: lighten(palette(secondary, base), 65);
     }
   }
-  .bullet-points {
-    p {
-      &:before {
-        color: palette(primary, base);
-      }
+  .webform-component-markup[class*="tooltip"] {
+    border-color: palette(secondary, base);
+    .close-tooltip {
+      color: palette(secondary, base);
     }
   }
 }

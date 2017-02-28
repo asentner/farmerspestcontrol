@@ -1,26 +1,16 @@
-%ebooking-panel { // style for ebooking panels
-  background-color: palette(white, pure);
-}
-
 %ebooking-panel-title {
   color: palette(secondary, base);
-  &:after {
-    border-top-color: palette(neutral, alto);
-  }
 }
 
 %ebooking-selected-package {
   &:after {
     background-color: palette(secondary, base);
-    color: palette(white, pure);
   }
 }
 
 // package styling - this will likely change once we pull in packages as nodes
 %ebooking-package {
   .package {
-    border-color: palette(neutral, wild-sand);
-    background-color: palette(neutral, wild-sand);
     &:hover,
     &.selected {
       border-color: palette(secondary, base);
@@ -34,41 +24,17 @@
     .current-price {
       color: palette(secondary, base)
     };
-    .bullet-points {
-      span {
-        &:before {
-          color: palette(primary, base);
-        }
-      }
-    }
   }
 } // end package styling
 
 
 .node-ebooking {
-  h1.node__title {
-    color: palette(white, pure);
-  }
   .l-main {
     background-color: palette(secondary, base);
-    color: palette(white, pure);
-  }
-  .form-item {
-    label {
-      color: palette(black, pure);
-    }
-  }
-  .date-option {
-    .fieldset-legend:after {
-      color: #f00;
-    }
   }
 }
 
 .node-ebooking.processed {
-  .panel {
-    background-color: palette(white, pure);
-  }
   .step-number {
     color: palette(primary, base);
   }
@@ -78,22 +44,9 @@
     }
   }
   div[class*="if-business"] {
-    background-color: palette(neutral, wild-sand);
     border-color: palette(secondary, base);
-  }
-  .validation-error {
-    background-color: #feefef;
-    border-color: #fe2a2a;
-    color: #2f2f2f;
-    span {
-      &:before {
-        color: #fe2a2a;
-      }
-    }
-  }
-  .button {
-    &.inactive {
-      background-color: #bebebe;
+    .close-popup {
+      color: palette(secondary, base);
     }
   }
   .basic-form {
@@ -106,24 +59,10 @@
   .webform-component-optionsmarkup {
     @extend %ebooking-package;
   }
-  .ebooking_summary {
-    @extend %ebooking-panel;
-    color: palette(black, pure);
-  }
-}
-
-.node-ebooking.basic-form {
-  .webform-component-markup {
-    color: palette(black, pure);
-  }
-  .panel-form {
-    color: palette(white, pure);
-  }
 }
 
 // ebooking checkout page
 .node-ebooking .ebooking_summary {
-  @extend %ebooking-panel;
   .webform-component-markup[class*="review"] {
     @extend %ebooking-package;
     > h3 {
@@ -135,19 +74,10 @@
       background-color: lighten(palette(secondary, base), 65);
     }
   }
-  .bullet-points {
-    p {
-      &:before {
-        color: palette(primary, base);
-      }
-    }
-  }
-  .amount-due {
-    background-color: #ecffe0;
-	  border-color: #72cf37;
-  }
   .webform-component-markup[class*="tooltip"] {
-    background-color: palette(neutral, wild-sand);
     border-color: palette(secondary, base);
+    .close-tooltip {
+      color: palette(secondary, base);
+    }
   }
 }

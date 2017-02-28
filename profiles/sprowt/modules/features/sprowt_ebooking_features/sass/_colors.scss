@@ -29,6 +29,13 @@
         @extend %ebooking-selected-package-colors;
       }
     }
+    .bullet-points {
+      span {
+        &:before {
+          color: #3da244;
+        }
+      }
+    }
   }
 } // end package styling
 
@@ -106,6 +113,13 @@
     .package {
       @extend %ebooking-selected-package-colors;
       border-color: palette(black, pure);
+    }
+  }
+  .bullet-points {
+    p {
+      &:before {
+        color: #3da244;
+      }
     }
   }
   .amount-due {
