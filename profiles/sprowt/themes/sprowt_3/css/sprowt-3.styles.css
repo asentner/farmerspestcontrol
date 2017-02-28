@@ -4578,6 +4578,11 @@ li.addtoany {
         margin-right: .5em;
         font-size: 16px; } }
 
+@media (min-width: 768px) {
+  .node-ebooking .l-main {
+    max-width: 1210px;
+    margin: 0 auto; } }
+
 .front .l-main {
   margin: 0 auto;
   padding: 0;

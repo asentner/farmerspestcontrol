@@ -1,0 +1,8 @@
+.node-ebooking {
+  @include breakpoint($tab) {
+    .l-main {
+      max-width: $container;
+      margin: 0 auto;
+    }
+  }
+}
