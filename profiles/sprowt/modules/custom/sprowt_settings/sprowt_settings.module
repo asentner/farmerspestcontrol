@@ -376,9 +376,20 @@ function sprowt_settings_tokens_alter(&$replacements, $context)
     if ($context['type'] == 'node' && !empty($context['data']['node'])) {
         $node = $context['data']['node'];
 
-        // Alter the [node:title] token
-        if (isset($context['tokens']['title'])) {
-            $replacements[$context['tokens']['title']] = _sprowt_settings_shortcode_replace($replacements[$context['tokens']['title']]);
+        $tokens_replace = array(
+          'title',
+          'summary',
+          'body'
+        );
+        foreach($tokens_replace as $token) {
+          if (isset($context['tokens'][$token])) {
+            $replacements[$context['tokens'][$token]] = _sprowt_settings_shortcode_replace($replacements[$context['tokens'][$token]]);
+          }
+        }
+        foreach($context['tokens'] as $key => $code) {
+          if(strpos($key, 'field_') !== false) {
+            $replacements[$code] = _sprowt_settings_shortcode_replace($replacements[$code]);
+          }
         }
     }
 }
