@@ -86,7 +86,8 @@ dependencies[] = module_filter
 dependencies[] = multiblock
 dependencies[] = multiple_node_menu
 dependencies[] = node_export
-dependencies[] = node_clone
+dependencies[] = clone
+; ^ a.k.a. node_clone
 dependencies[] = optimizely
 dependencies[] = rabbit_hole
 dependencies[] = rh_node
