@@ -55,9 +55,10 @@ if(!empty($node->field_ebooking) && $node->field_ebooking['und'][0]['value'] == 
   <div class="l-footer-wrap">
     <footer class="l-footer">
       <?php print render($page['footer_first']); ?>
+      <?php print render($page['footer_second']); ?>
       <?php print render($page['footer_third']); ?>
     </footer>
   </div>
 
-  <?php print render($page['footer_second']); ?>
+
 </div>
