@@ -87,7 +87,6 @@ dependencies[] = multiblock
 dependencies[] = multiple_node_menu
 dependencies[] = node_export
 dependencies[] = clone
-; ^ a.k.a. node_clone
 dependencies[] = optimizely
 dependencies[] = rabbit_hole
 dependencies[] = rh_node
@@ -122,6 +121,7 @@ dependencies[] = adminimal_admin_menu
 dependencies[] = devel
 dependencies[] = webform_features
 dependencies[] = touch_icons
+dependencies[] = color_field
 dependencies[] = environment_indicator
 
 ; Custom Modules
