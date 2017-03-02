@@ -14,7 +14,6 @@ features[views_view][] = basic_page
 features[views_view][] = benefits
 features[views_view][] = blog
 features[views_view][] = call_out
-features[views_view][] = content_edited
 features[views_view][] = faqs
 features[views_view][] = gallery
 features[views_view][] = localtarget

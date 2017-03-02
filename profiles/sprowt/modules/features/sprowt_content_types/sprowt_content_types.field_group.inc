@@ -124,8 +124,7 @@ function sprowt_content_types_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_content_edited',
-      2 => 'title',
+      1 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -459,11 +458,10 @@ function sprowt_content_types_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_content_edited',
-      2 => 'field_image',
-      3 => 'field_market',
+      1 => 'field_image',
+      2 => 'field_market',
+      3 => 'field_state',
       4 => 'title',
-      5 => 'field_state',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -562,16 +560,15 @@ function sprowt_content_types_field_group_info() {
     'children' => array(
       0 => 'body',
       1 => 'field_button',
-      2 => 'field_content_edited',
-      3 => 'field_expiration_date',
-      4 => 'field_image',
+      2 => 'field_expiration_date',
+      3 => 'field_image',
+      4 => 'field_offer_headline',
       5 => 'field_offer_price',
-      6 => 'field_original_price',
-      7 => 'field_package',
-      8 => 'field_services',
-      9 => 'field_offer_headline',
+      6 => 'field_offer_subheadline',
+      7 => 'field_original_price',
+      8 => 'field_package',
+      9 => 'field_services',
       10 => 'title',
-      11 => 'field_offer_subheadline',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
