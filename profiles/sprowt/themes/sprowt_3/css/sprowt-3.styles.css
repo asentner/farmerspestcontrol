@@ -3001,7 +3001,8 @@ li.addtoany {
                 flex-direction: column;
         -webkit-box-pack: justify;
             -ms-flex-pack: justify;
-                justify-content: space-between; }
+                justify-content: space-between;
+        width: 100%; }
         .block--views-benefits-front .node > *,
         .local-target-benefits .node > * {
           -ms-flex: 0 1 auto; } }
@@ -3711,7 +3712,8 @@ li.addtoany {
       .block--views-services-front-all-quaternary .view-content + .more-link a {
         margin-bottom: 0; }
       .block--views-services-front-all-quaternary .views-row {
-        width: 25%; }
+        width: 25%;
+        overflow: hidden; }
         .block--views-services-front-all-quaternary .views-row:before {
           width: 125px; }
         .block--views-services-front-all-quaternary .views-row:after {

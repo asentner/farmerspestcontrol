@@ -5,8 +5,6 @@ $info = array();
 $info['fields'] = array(
    'primary' => t('Primary Base'),
    'primary_1' => t('Primary Dark'),
-  //  'secondary' => t('Secondary Base'),
-  //  'secondary_1' => t('Secondary Light'),
    'slide_overlay' => t('Slide Overlay'),
    'ltp_map' => t('LTP Location Background'),
 );
@@ -17,8 +15,6 @@ $info['schemes'] = array(
      'colors' => array(
          'primary' => '#d32c26',
          'primary_1' => '#b1241f',
-        //  'secondary' => '#216e82',
-        //  'secondary_1' => '#21768c',
          'slide_overlay' => '#151616',
          'ltp_map' => '#f4f4f5',
      ),

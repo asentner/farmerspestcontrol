@@ -82,6 +82,7 @@
         @include flexbox;
         flex-direction: column;
         justify-content: space-between;
+        width: 100%; // IE fix
       }
    }
    @include breakpoint($desk) {

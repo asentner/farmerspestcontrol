@@ -154,7 +154,7 @@ hr {
     color: #fff; }
 
 .block--views-localtarget-map-reviews h2 {
-  background-color: #216e82;
+  background-color: #d32c26;
   color: #fff; }
 
 .block--views-localtarget-map-reviews h3:before {
@@ -166,7 +166,7 @@ hr {
 .block--views-localtarget-map-reviews .reviews-links {
   background-color: #fff; }
   .block--views-localtarget-map-reviews .reviews-links .field__item:before {
-    color: #216e82; }
+    color: #d32c26; }
   .block--views-localtarget-map-reviews .reviews-links .field__item + .field__item {
     border-top-color: #dddddd; }
 
@@ -227,7 +227,7 @@ hr {
   color: #d32c26; }
   .block--views-packages-services .node__title a:hover,
   .block--views-packages-localtarget .node__title a:hover {
-    color: #216e82; }
+    color: #b1241f; }
 
 .block--views-packages-services .field--name-body .field__item .more-link,
 .block--views-packages-localtarget .field--name-body .field__item .more-link {
@@ -235,7 +235,7 @@ hr {
   color: #fff; }
   .block--views-packages-services .field--name-body .field__item .more-link:hover,
   .block--views-packages-localtarget .field--name-body .field__item .more-link:hover {
-    background-color: #216e82; }
+    background-color: #b1241f; }
 
 .block--views-packages-services.block--grid .view-content,
 .block--views-packages-localtarget.block--grid .view-content {

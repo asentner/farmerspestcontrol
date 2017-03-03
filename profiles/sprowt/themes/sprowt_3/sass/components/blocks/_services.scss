@@ -121,6 +121,7 @@
     }
     .views-row {
       width: 25%;
+      overflow: hidden;
       &:before {
         width: 125px;
       }

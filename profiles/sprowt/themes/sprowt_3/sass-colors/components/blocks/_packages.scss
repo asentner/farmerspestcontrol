@@ -6,11 +6,11 @@
   $color-row-even-bg: lighten($color-row-odd-bg, 10);
 
   $color-node-title: palette(primary, base);
-  $color-node-title-hover: palette(secondary, base);
+  $color-node-title-hover: palette(primary, dark);
 
   $color-button-bg: palette(primary, base);
   $color-button-fg: palette(white, pure);
-  $color-button-hover: palette(secondary, base);
+  $color-button-hover: palette(primary, dark);
 
   .block__title {
     background-color: $color-title-bg;
