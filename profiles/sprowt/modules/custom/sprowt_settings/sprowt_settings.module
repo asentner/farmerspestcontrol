@@ -911,6 +911,14 @@ function sprowt_settings_token_info() {
       'description' => 'Sprowt specific tokens',
       'type' => 'sprowt'
     );
+    $tokens['site']['logo'] = array(
+      'name' => t('Site logo'),
+      'description' => t('The image showing the site logo.'),
+    );
+    $tokens['site']['logo-url'] = array(
+      'name' => t('Site logo URL'),
+      'description' => t('URL to the image showing the site logo.'),
+    );
     return array(
         'types' => $types,
         'tokens' => $tokens
@@ -938,6 +946,35 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
         break;
       case 'sprowt:sprowt_webform_to_email':
         $replacements[$original] = variable_get('sprowt_settings_webform_to_email', '');
+    }
+  }
+  
+  
+  // Site tokens.
+  if ($type == 'site') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'logo':
+           // Use a logo; but only if we have one to use.
+            $replacements[$original] = '';
+           if ($uri = theme_get_setting('logo')) {
+              $replacements[$original] = theme('image', array('path' => $uri));
+           }
+          break;
+
+        case 'logo-url':
+          $replacements[$original] = '';
+          if ($uri = theme_get_setting('logo')) {
+            $replacements[$original] = $uri;
+          }
+         break;
+     }
+
+     // [site:logo-url:*] chained tokens.
+      if ($url_tokens = token_find_with_prefix($tokens, 'logo-url')) {
+        $uri = theme_get_setting('logo');
+        $replacements += token_generate('url', $url_tokens, array('path' => $uri), $options);
+      }
     }
   }
   
