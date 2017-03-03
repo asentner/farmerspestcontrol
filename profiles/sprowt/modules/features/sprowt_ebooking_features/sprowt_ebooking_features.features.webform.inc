@@ -140,25 +140,73 @@ $webforms = array();
     'emails' => array(
       0 => array(
         'email' => 'ebooking_template__email',
-        'subject' => 'default',
+        'subject' => 'Your upcoming appointment with [site:sprowt:company_name]',
         'from_name' => 'default',
-        'from_address' => 'default',
-        'template' => 'default',
+        'from_address' => '[site:sprowt:sprowt_webform_to_email]',
+        'template' => 'Thank you for scheduling an appointment with us. One of our customer service representatives will be in touch soon to confirm your appointment details.
+
+Service Details:
+[submission:values:fieldset_3: package]
+Preferred Date/Time #1: [submission:values:fieldset_4:option_1:date] / [submission:values:fieldset_4:option_1:time]
+Preferred Date/Time #2: [submission:values:fieldset_4:option_2:date_2] / [submission:values:fieldset_4:option_2:time_2]
+Total Charged: [submission:values:fieldset_4:total]
+Total Monthly Recurring: [submission:values:fieldset_4:monthly_price]
+
+Customer Contact Information:
+[submission:values:summary_4:customer_info:first_name] [submission:values:summary_4:customer_info:last_name]
+[submission:values:summary_4:customer_info:phone_number]
+[submission:values:summary_4:fieldset_6:address_1]
+[submission:values:summary_4:fieldset_6:city]
+[submission:values:summary_4:fieldset_6:state], [submission:values:summary_4:fieldset_6:zip_code]
+
+If you have any immediate questions, please feel free to reach out to us. As a reminder, a [site:sprowt:company_name] team member will be reaching out shortly. We greatly appreciate your business and look forward to servicing your home!
+
+[site:sprowt:company_name]
+[site:sprowt:sprowt_phone]',
         'excluded_components' => array(
-          0 => 25,
-          1 => 34,
-          2 => 1,
-          3 => 24,
-          4 => 15,
-          5 => 14,
-          6 => 17,
-          7 => 38,
-          8 => 39,
-          9 => 16,
-          10 => 19,
-          11 => 21,
-          12 => 37,
-          13 => 22,
+          0 => 1,
+          1 => 2,
+          2 => 3,
+          3 => 4,
+          4 => 5,
+          5 => 6,
+          6 => 7,
+          7 => 8,
+          8 => 9,
+          9 => 10,
+          10 => 11,
+          11 => 12,
+          12 => 13,
+          13 => 14,
+          14 => 15,
+          15 => 16,
+          16 => 17,
+          17 => 18,
+          18 => 19,
+          19 => 20,
+          20 => 21,
+          21 => 22,
+          22 => 23,
+          23 => 24,
+          24 => 25,
+          25 => 26,
+          26 => 27,
+          27 => 28,
+          28 => 29,
+          29 => 30,
+          30 => 31,
+          31 => 32,
+          32 => 33,
+          33 => 34,
+          34 => 35,
+          35 => 36,
+          36 => 37,
+          37 => 38,
+          38 => 39,
+          39 => 40,
+          40 => 41,
+          41 => 42,
+          42 => 43,
         ),
         'html' => 0,
         'attachments' => 0,
@@ -167,6 +215,40 @@ $webforms = array();
         'status' => 1,
         'components_machine_names' => array(
           'email' => TRUE,
+          'subject' => FALSE,
+          'from_name' => FALSE,
+          'from_address' => FALSE,
+        ),
+      ),
+      1 => array(
+        'email' => '[site:sprowt:sprowt_webform_to_email]',
+        'subject' => 'Form submission from: eBooking',
+        'from_name' => 'default',
+        'from_address' => 'default',
+        'template' => 'You\'ve received an online submission for an appointment. Please review the details and contact that customer immediately. 
+
+Service Details:
+[submission:values:fieldset_3: package]
+Preferred Date/Time #1: [submission:values:fieldset_4:option_1:date] / [submission:values:fieldset_4:option_1:time]
+Preferred Date/Time #2: [submission:values:fieldset_4:option_2:date_2] / [submission:values:fieldset_4:option_2:time_2]
+Total Charged: [submission:values:fieldset_4:total]
+Total Monthly Recurring: [submission:values:fieldset_4:monthly_price]
+
+Customer Contact Information:
+[submission:values:summary_4:customer_info:first_name] [submission:values:summary_4:customer_info:last_name]
+[submission:values:summary_4:customer_info:email]
+[submission:values:summary_4:customer_info:phone_number]
+[submission:values:summary_4:fieldset_6:address_1]
+[submission:values:summary_4:fieldset_6:city]
+[submission:values:summary_4:fieldset_6:state], [submission:values:summary_4:fieldset_6:zip_code]',
+        'excluded_components' => array(),
+        'html' => 0,
+        'attachments' => 0,
+        'exclude_empty' => 0,
+        'extra' => FALSE,
+        'status' => 1,
+        'components_machine_names' => array(
+          'email' => FALSE,
           'subject' => FALSE,
           'from_name' => FALSE,
           'from_address' => FALSE,
