@@ -21,7 +21,8 @@
     font-size: 21px;
     font-weight: 600;
   }
-  .field--name-field-image {
+  .field--name-field-image,
+  .field--name-field-icon {
     @include flexbox;
     align-items: center;
     flex: 0 1 65px;

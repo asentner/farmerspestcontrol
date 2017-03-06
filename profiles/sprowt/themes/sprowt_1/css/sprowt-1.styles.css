@@ -2482,11 +2482,15 @@ input[type=text], input[type=email], input[type=password], textarea, select {
         margin-left: 1em; } }
 
 .block--list .field--name-field-image img, .block--views-affiliates-list img, .benefits-hero .field--name-field-image a > img,
-.local-target-benefits .field--name-field-image a > img, .block--views-team-list .field--name-field-image img {
+.benefits-hero .field--name-field-icon a > img,
+.local-target-benefits .field--name-field-image a > img,
+.local-target-benefits .field--name-field-icon a > img, .block--views-team-list .field--name-field-image img {
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out; }
   .block--list .field--name-field-image img:hover, .block--views-affiliates-list img:hover, .benefits-hero .field--name-field-image a > img:hover,
-  .local-target-benefits .field--name-field-image a > img:hover, .block--views-team-list .field--name-field-image img:hover {
+  .benefits-hero .field--name-field-icon a > img:hover,
+  .local-target-benefits .field--name-field-image a > img:hover,
+  .local-target-benefits .field--name-field-icon a > img:hover, .block--views-team-list .field--name-field-image img:hover {
     -webkit-transform: scale(0.95);
             transform: scale(0.95); }
 
@@ -2914,10 +2918,14 @@ li.addtoany {
     font-size: 1.325em;
     font-weight: 600; }
   .benefits-hero .field--name-field-image,
-  .local-target-benefits .field--name-field-image {
+  .benefits-hero .field--name-field-icon,
+  .local-target-benefits .field--name-field-image,
+  .local-target-benefits .field--name-field-icon {
     margin-bottom: 20px; }
     .benefits-hero .field--name-field-image img,
-    .local-target-benefits .field--name-field-image img {
+    .benefits-hero .field--name-field-icon img,
+    .local-target-benefits .field--name-field-image img,
+    .local-target-benefits .field--name-field-icon img {
       border-radius: 50%;
       border: 2px solid; }
   @media (min-width: 768px) {
