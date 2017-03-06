@@ -1,5 +1,6 @@
 .block--views-slideshow-front,
 .block--views-slideshow-localtarget {
+	$overlay-opacity: 0.25; //opacity percentage as a decimal (0 - 1), use zero for no overlay;
 	$color-image-bg: palette(black, base);
 	$color-text: palette(white, pure);
 
@@ -8,10 +9,12 @@
 	}
 	.slide-image {
 		&:before {
+			opacity:$overlay-opacity;
 			background-color: $color-overlay; // this color is used as a color-module place holder
 		}
 	}
 	.node__title {
+		text-shadow: 2px 4px 6px rgba(0,0,0,1);
 		color: $color-text;
 	}
 	.flex-direction-nav a {
@@ -20,6 +23,7 @@
 		}
 	}
 	.field--name-body {
+		text-shadow:2px 2px 6px rgba(0,0,0,1);
 		color: $color-text;
 	}
 }

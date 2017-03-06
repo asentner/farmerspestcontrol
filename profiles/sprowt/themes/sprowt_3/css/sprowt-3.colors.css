@@ -5,6 +5,10 @@ a {
   -webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; }
 
+.button, .node--teaser .field--name-body .field__item > .more-link,
+.node--alt-teaser .field--name-body .field__item > .more-link, input[type=submit] {
+  text-shadow: none; }
+
 .button {
   background-color: #d32c26;
   color: #fff; }
@@ -300,10 +304,12 @@ hr {
 
 .block--views-slideshow-front .slide-image:before,
 .block--views-slideshow-localtarget .slide-image:before {
+  opacity: 0.25;
   background-color: #151616; }
 
 .block--views-slideshow-front .node__title,
 .block--views-slideshow-localtarget .node__title {
+  text-shadow: 2px 4px 6px black;
   color: #fff; }
 
 .block--views-slideshow-front .flex-direction-nav a:before,
@@ -312,6 +318,7 @@ hr {
 
 .block--views-slideshow-front .field--name-body,
 .block--views-slideshow-localtarget .field--name-body {
+  text-shadow: 2px 2px 6px black;
   color: #fff; }
 
 .block--sprowt-settings-sprowt-social-media .block__content a {
@@ -610,12 +617,15 @@ hr {
   background-color: #373d38; }
 
 .block--views-localtarget-value-prop .slide-image-background:before {
-  background-color: #151616; }
+  background-color: #151616;
+  opacity: 0.25; }
 
 .block--views-localtarget-value-prop .field--name-field-display-title {
+  text-shadow: 2px 4px 6px black;
   color: #fff; }
 
 .block--views-localtarget-value-prop .field--name-field-intro {
+  text-shadow: 2px 2px 6px black;
   color: #fff; }
 
 .node--profile--full .field--name-field-image img {
