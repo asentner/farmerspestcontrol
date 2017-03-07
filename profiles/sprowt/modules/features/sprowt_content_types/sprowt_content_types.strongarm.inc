@@ -2443,7 +2443,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__package';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__package'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2471,7 +2471,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__service';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__service'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2485,7 +2485,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__special_offer';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__special_offer'] = $strongarm;
 
   $strongarm = new stdClass();
