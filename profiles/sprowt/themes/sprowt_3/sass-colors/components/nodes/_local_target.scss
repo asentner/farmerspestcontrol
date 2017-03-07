@@ -1,5 +1,4 @@
 .block--views-localtarget-value-prop {
-	$overlay-opacity:0.25; //opacity percentage as a decimal (0-1), use zero for no overlay.
 	$color-image-bg: palette(black, base);
 	$color-text: palette(white, pure);
 
@@ -9,7 +8,6 @@
 	.slide-image-background {
 		&:before {
 			background-color: $color-overlay; // this color is used as a color-module place holder
-			opacity:$overlay-opacity;
 		}
 	}
   .field--name-field-display-title {

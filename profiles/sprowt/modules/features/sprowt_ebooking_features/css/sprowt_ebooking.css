@@ -2398,7 +2398,10 @@
     -ms-flex: 0 1 auto; }
 
 .node-ebooking.processed .webform-component-optionsmarkup, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] {
-  margin-top: 40px; }
+  margin-top: 40px;
+  width: 100%; }
+  .node-ebooking.processed .webform-component-optionsmarkup label, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] label {
+    width: 100%; }
   .node-ebooking.processed .webform-component-optionsmarkup .form-radios .form-item + .form-item, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .form-radios .form-item + .form-item {
     margin-left: 0; }
   .node-ebooking.processed .webform-component-optionsmarkup .form-radio, .node-ebooking .ebooking_summary .webform-component-markup[class*="review"] .form-radio {

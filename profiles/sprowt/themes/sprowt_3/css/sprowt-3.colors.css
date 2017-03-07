@@ -304,7 +304,6 @@ hr {
 
 .block--views-slideshow-front .slide-image:before,
 .block--views-slideshow-localtarget .slide-image:before {
-  opacity: 0.25;
   background-color: #151616; }
 
 .block--views-slideshow-front .node__title,
@@ -617,8 +616,7 @@ hr {
   background-color: #373d38; }
 
 .block--views-localtarget-value-prop .slide-image-background:before {
-  background-color: #151616;
-  opacity: 0.25; }
+  background-color: #151616; }
 
 .block--views-localtarget-value-prop .field--name-field-display-title {
   text-shadow: 2px 4px 6px black;

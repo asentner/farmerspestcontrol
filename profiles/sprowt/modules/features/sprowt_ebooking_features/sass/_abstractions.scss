@@ -65,6 +65,10 @@
 // package styling - this will likely change once we pull in packages as nodes
 %ebooking-package {
   margin-top: 40px;
+  width: 100%;
+  label {
+    width: 100%;
+  }
   .form-radios {
     .form-item + .form-item {
       margin-left: 0;
