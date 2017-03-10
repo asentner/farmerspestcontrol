@@ -1,0 +1,119 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function webform_zipcode_restriction_menu() {
+    $items = array();
+    $items["webform_zipcode_restriction_autocomplete/%/%"] = array(
+        'page callback' => '_webform_zipcode_restriction_autocomplete',
+        'page arguments' => array(1,2),
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+}
+
+/**
+ * Implements hook_webform_component_info().
+ */
+function webform_zipcode_restriction_webform_component_info() {
+    $components = array();
+    $components['zipcode'] = array(
+        'label' => t('Zipcode'),
+        'description' => t('A zipcode field'),
+        'features' => array(
+            'email_name' => TRUE,
+            'spam_analysis' => TRUE,
+            'placeholder' => TRUE,
+            'conditional_action_set' => TRUE,
+        ),
+        'file' => 'zip.inc',
+    );
+    return $components;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function webform_zipcode_restriction_form_webform_component_edit_form_alter(&$form, &$form_state, $form_id) {
+    if ($form['type']['#value'] == 'zipcode') {
+        $form['#validate'][] = '_webform_zipcode_componenet_form_validate';
+    }
+}
+
+function _webform_zipcode_componenet_form_validate(&$form, &$form_state) {
+    $values = &$form_state['values'];
+    $extra = &$values['extra'];
+    $format = $extra['format'];
+    $format_valid = true;
+    if(!preg_match('/^[A0\-\s]+$/', $format)) {
+        form_set_error('extra][format', t('Format is invalid.'));
+        $format_valid = false;
+    }
+    $restrictions = $extra['restrictions'];
+    $r_array = explode("\n", str_replace("\r", '', $restrictions));
+    $new_val = array();
+    $r_error = false;
+    foreach($r_array as $r) {
+        if(!empty($r)) {
+            $r = trim($r);
+            $new_val[] = trim($r);
+            if($format_valid && !$r_error) {
+                if (!_webform_zipcode_restriction_validate_format($format, $r)) {
+                    form_set_error('extra][restrictions', t('One of the restrictions is invalid.'));
+                    $r_error = true;
+                }
+            }
+        }
+    }
+    $extra['restrictions'] = implode("\n", $new_val);
+}
+
+function webform_zipcode_restriction_validate_zipcode($element, &$form_state) {
+    $comp = $element['#webform_component'];
+    if ($element['#value'] !== '') {
+        $format = $comp['extra']['format'];
+        if(!_webform_zipcode_restriction_validate_format($format, $element['#value'])){
+            form_error($element, t('%name is invalid.', array('%name' => $element['#title'])));
+        }
+        $rests = $comp['extra']['restrictions'];
+        if(!empty($rests)) {
+            $rests = explode("\n", $rests);
+            $r_error = true;
+            foreach($rests as $r) {
+                if($element['#value'] == $r && !$r_error){
+                    $r_error = false;
+                }
+            }
+            if($r_error) {
+                form_error($element, t($comp['extra']['restriction_error_message']));
+            }
+        }
+    }
+}
+
+function _webform_zipcode_restriction_validate_format($format, $value) {
+    $preg_format = str_replace('A', '[A-Za-z]',
+        str_replace('0', '\d',
+            str_replace('-', '\-',
+                str_replace(' ','\s',$format)
+            )
+        )
+    );
+    $pattern = "/$preg_format/";
+    return preg_match($pattern, $value);
+}
+
+function _webform_zipcode_restriction_autocomplete($nid, $cid) {
+    $node = node_load($nid);
+    $components = $node->webform['components'];
+    $comp = $components[$cid];
+    $rests = $comp['extra']['restrictions'];
+    $rests = explode("\n", $rests);
+    $return = array();
+    foreach ($rests as $r) {
+        $return[$r] = check_plain($r);
+    }
+    
+    drupal_json_output($return);
+}

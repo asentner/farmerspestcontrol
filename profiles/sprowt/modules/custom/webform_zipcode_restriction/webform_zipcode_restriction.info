@@ -1,0 +1,6 @@
+name = Webform Zipcode Restriction
+description = Adds zipcode validation to a textfield
+core = 7.x
+package = Webform
+
+dependencies[] = 'webform'
