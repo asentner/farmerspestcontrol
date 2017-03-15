@@ -7,5 +7,102 @@
 include_once 'sprowt_ebooking_features.features.inc';
 
 function sprowt_ebooking_features_theme_registry_alter(&$theme_registry) {
-    $theme_registry['template-file']['path'] = drupal_get_path('module', 'my_feature')."/templates/";
+    //$theme_registry['template-file']['path'] = drupal_get_path('module', 'my_feature')."/templates/";
+}
+
+function sprowt_ebooking_features_preprocess_html(&$variables) {
+    if($node = menu_get_object()) {
+        sprowt_require_class('nodebuilder');
+        $Node = new NodeBuilder($node);
+        if(!empty($node->field_ebooking) && $Node->field_ebooking->value() == 'yes') {
+            $variables['classes_array'][] = 'node-ebooking';
+        }
+    }
+
+    $page = $variables['page'];
+    foreach($page as $region) {
+        if(is_array($region)) {
+            foreach($region as $id => $block) {
+                if(strpos($id, 'webform') !== false) {
+                    $nid = str_replace('webform_client-block-', '', $id);
+                    if($node = node_load($nid)) {
+                        sprowt_require_class('nodebuilder');
+                        $Node = new NodeBuilder($node);
+                        if(!empty($node->field_ebooking) && $Node->field_ebooking->value() == 'yes') {
+                            if(!in_array('has-ebooking', $variables['classes_array'])) {
+                                $variables['classes_array'][] = 'has-ebooking';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function sprowt_ebooking_features_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_ebooking_features');
+    drupal_add_js($path . '/js/sprowt_ebooking.js', array(
+        'type' => 'file',
+        'scope' => 'header',
+        'weight' => 10
+    ));
+    drupal_add_css($path . '/css/sprowt_ebooking.css');
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function sprowt_ebooking_features_form_alter(&$form, &$form_state, $form_id) {
+    if(strpos($form_id, 'webform_client_form') !== false) {
+        sprowt_require_class('nodebuilder');
+        $node = $form['#node'];
+        $Node = new NodeBuilder($node);
+        if(!empty($node->field_ebooking) && $Node->field_ebooking->value() == 'yes') {
+            //ebooking form
+            $submit = $form['#submit'];
+
+            $form['#submit'] = array_merge(array(
+                '_sprowt_ebooking_features_form_submit'
+            ), $submit);
+        }
+    }
+}
+
+/**
+ * Submit function to fix payment processing error on ebooking multipage forms
+ *
+ * @param $form
+ * @param $form_state
+ */
+function _sprowt_ebooking_features_form_submit($form, &$form_state) {
+    $submit_op = !empty($form['actions']['submit']['#value']) ? $form['actions']['submit']['#value'] : t('Submit');
+    $token = _sprowt_ebooking_features_get_item($form_state['values'], 'payment');
+    //Testing for payment token. If it exists then payment went through. So go ahead and submit.
+    if(!empty($token) && preg_match('/tok_.*\:.*/', $token)) {
+        $form_state['values']['op'] = $submit_op;
+    }
+}
+
+/**
+ * Utility function to get a specific element in a render/form array.
+ */
+function _sprowt_ebooking_features_get_item($array, $key) {
+    foreach ($array as $k => $value) {
+        if (isset($array[$k]) && $array[$k]) {
+            if ($k === $key) {
+                return $array[$k];
+            }
+            else {
+                if(is_array($array[$k])) {
+                    $element = _sprowt_ebooking_features_get_item($array[$k], $key);
+                    if (!empty($element)) {
+                        return $element;
+                    }
+                }
+            }
+        }
+    }
+
+    return FALSE;
 }
