@@ -123,6 +123,8 @@ dependencies[] = webform_features
 dependencies[] = touch_icons
 dependencies[] = color_field
 dependencies[] = environment_indicator
+dependencies[] = bean
+dependencies[] = bean_admin_ui
 
 ; Custom Modules
 
