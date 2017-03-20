@@ -18,7 +18,7 @@ function sprowt_ebooking_features_preprocess_html(&$variables) {
             $variables['classes_array'][] = 'node-ebooking';
         }
     }
-
+    
     $page = $variables['page'];
     foreach($page as $region) {
         if(is_array($region)) {
@@ -50,6 +50,23 @@ function sprowt_ebooking_features_preprocess_page(&$variables) {
     drupal_add_css($path . '/css/sprowt_ebooking.css');
 }
 
+function sprowt_ebooking_features_preprocess_node(&$variables) {
+    $ebooking = false;
+    if($node = $variables['node']) {
+        sprowt_require_class('nodebuilder');
+        $Node = new NodeBuilder($node);
+        if(!empty($node->field_ebooking) && $Node->field_ebooking->value() == 'yes') {
+            if(!in_array('has-ebooking', $variables['classes_array'])) {
+                $ebooking = true;
+            }
+        }
+    }
+    
+    if($ebooking) {
+        drupal_add_library('system', 'drupal.ajax');
+    }
+}
+
 /**
  * Implements hook_form_alter().
  */
@@ -61,7 +78,7 @@ function sprowt_ebooking_features_form_alter(&$form, &$form_state, $form_id) {
         if(!empty($node->field_ebooking) && $Node->field_ebooking->value() == 'yes') {
             //ebooking form
             $submit = $form['#submit'];
-
+            
             $form['#submit'] = array_merge(array(
                 '_sprowt_ebooking_features_form_submit'
             ), $submit);
@@ -103,6 +120,6 @@ function _sprowt_ebooking_features_get_item($array, $key) {
             }
         }
     }
-
+    
     return FALSE;
 }
