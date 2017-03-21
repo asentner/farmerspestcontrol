@@ -35,6 +35,12 @@ function sprowt_package_comparison_theme($existing, $type, $theme, $path) {
        'template' => 'node--package-comparison--teaser',
        'path' => drupal_get_path('module', 'sprowt_package_comparison') . '/templates',
       );
+      $theme['node__package_comparison'] = array(
+        'render element' => 'content',
+        'base hook' => 'node',
+        'template' => 'node--package-comparison',
+        'path' => drupal_get_path('module', 'sprowt_package_comparison') . '/templates',
+       );
   return $theme;
 }
 
