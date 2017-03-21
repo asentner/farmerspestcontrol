@@ -1,0 +1,92 @@
+.block--views-package-comparison-hero {
+	$color-text: palette(white, pure);
+
+
+	.slide-image-background {
+		&:before {
+			background-color: palette(black, pure);
+		}
+	}
+  .field--name-field-display-title {
+    color: $color-text;
+  }
+  .field--name-field-intro {
+		color: $color-text;
+	}
+}
+
+%package-comparison {
+  .field--name-field-packages {
+    > .field__items > .field__item {
+      background-color: palette(white, pure);
+    }
+    header {
+      background-color: palette(neutral, abbey);
+      color: palette(white, pure);
+      .node__title {
+        color: palette(white, pure);
+      }
+      a {
+        color: palette(white, pure);
+      }
+    }
+  }
+  .feature {
+    &:before {
+      color: #c82127;
+    }
+  }
+  .banner-wrap {
+    &:before {
+      background-color: #212121;
+    }
+  }
+}
+
+.bean-package-comparison {
+	@extend %package-comparison;
+  .field--name-field-packages {
+    .node {
+      border-color: palette(neutral, alto);
+    }
+  }
+}
+
+.node-type-package-comparison {
+  @extend %package-comparison;
+  .l-main {
+    background-color: #ededed;
+  }
+}
+
+// comparison table
+.node--package-comparison--teaser,
+.bean-package-comparison-table {
+  table {
+    background-color: transparent;
+    th, td {
+      background-color: palette(white, pure);
+      border-color: #ededed;
+      color: palette(neutral, abbey);
+    }
+    thead {
+      tr:nth-child(2) td { // price per month row
+        background-color: #f5f5f5;
+      }
+    }
+  }
+  .fa-check {
+    color: #93af39;
+  }
+  .fa-times {
+    color: #c82127;
+  }
+  .package-buttons {
+    td {
+      background-color: #f5f5f5;
+      &:first-child() {
+        background-color: transparent;
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Package Comparison (Features) feature.
+ */
+
+include_once 'sprowt_package_comparison.features.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_package_comparison_theme($existing, $type, $theme, $path) {
+  $theme = array();
+  $theme['bean__package_comparison_table'] = array(
+    'render element' => 'content',
+    'base hook' => 'bean',
+    'template' => 'bean--package-comparison-table',
+    'path' => drupal_get_path('module', 'sprowt_package_comparison') . '/templates',
+    );
+   $theme['node__package__alt_teaser'] = array(
+     'render element' => 'content',
+     'base hook' => 'node',
+     'template' => 'node--package--alt-teaser',
+     'path' => drupal_get_path('module', 'sprowt_package_comparison') . '/templates',
+    );
+    $theme['node__package_comparison__alt_teaser'] = array(
+      'render element' => 'content',
+      'base hook' => 'node',
+      'template' => 'node--package-comparison--alt-teaser',
+      'path' => drupal_get_path('module', 'sprowt_package_comparison') . '/templates',
+     );
+     $theme['node__package_comparison__teaser'] = array(
+       'render element' => 'content',
+       'base hook' => 'node',
+       'template' => 'node--package-comparison--teaser',
+       'path' => drupal_get_path('module', 'sprowt_package_comparison') . '/templates',
+      );
+  return $theme;
+}
+
+function sprowt_package_comparison_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_package_comparison');
+    drupal_add_js($path . '/js/sprowt_package_comparison.js', array(
+        'type' => 'file',
+        'scope' => 'header',
+        'weight' => 10
+    ));
+    drupal_add_css($path . '/css/sprowt_package_comparison.css');
+}

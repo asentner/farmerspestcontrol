@@ -626,6 +626,20 @@ hr {
   text-shadow: 2px 2px 6px black;
   color: #fff; }
 
+.block--views-package-comparison-hero .node {
+  background-color: #373d38; }
+
+.block--views-package-comparison-hero .slide-image-background:before {
+  background-color: #151616; }
+
+.node-type-package-comparison .field--name-field-packages header,
+.bean-package-comparison .field--name-field-packages header {
+  background-color: #d32c26; }
+
+.node--package-comparison--teaser table thead th[scope=col],
+.bean-package-comparison-table table thead th[scope=col] {
+  color: #d32c26; }
+
 .node--profile--full .field--name-field-image img {
   background-color: #fff;
   border-color: #eee; }

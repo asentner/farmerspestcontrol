@@ -1,0 +1,182 @@
+%package-comparison {
+	.field-collection-container {
+		border-bottom: 0;
+	}
+	.field--name-field-packages {
+		position: relative;
+		margin-bottom: 40px;
+		> .field__items > .field__item {
+			max-width: 340px;
+			margin: 90px auto 0;
+		}
+		.field-collection-view {
+			@include flexbox;
+			border-bottom: 0;
+			padding: 0;
+			margin: 0;
+			height: 100%;
+			.field__item {
+				height: 100%;
+			}
+			.content {
+				@include flexbox;
+				height: 100%;
+			}
+		}
+		.highlighted {
+			height: 100%;
+			.node {
+				box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+			}
+			.banner-wrap {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				&::before {
+					content: 'BEST VALUE';
+					position: absolute;
+					transform: rotate(45deg);
+					right: -48px;
+					top: 20px;
+					font-size: 14px;
+					font-weight: bold;
+					width: 175px;
+					padding: 10px;
+					text-align: center;
+				}
+			}
+		}
+		.field--name-field-package {
+			@include flexbox;
+		}
+		.node {
+			margin: 0 auto;
+			text-align: center;
+			height: 100%;
+			&:hover {
+				box-shadow: 0 15px 34.6px 3.4px rgba(14, 15, 15, 0.5);
+			}
+		}
+		.node__content {
+			@include flexbox;
+			flex-direction: column;
+			height: 100%;
+		}
+		header {
+			padding: 0 20px 40px;
+			position: relative;
+		}
+		.field--name-field-icon {
+			img {
+				margin-top: -70px;
+        position: relative;
+        z-index: 50;
+			}
+		}
+		.node__title {
+			margin-top: 0;
+			font-weight: 600;
+			font-size: 1.2em;
+			letter-spacing: 1.4px;
+			text-transform: uppercase;
+			position: relative;
+			z-index: 5;
+		}
+		.field--name-field-starting-price {
+			font-size: 1.5em;
+			font-weight: bold;
+			padding-top: 5px;
+		}
+		.field--name-field-initial-fee {
+			padding-top: 10px;
+			font-style: italic;
+			max-width: 250px;
+			margin: 0 auto;
+		}
+		.content-wrap {
+			@include flexbox;
+			flex-direction: column;
+			justify-content: space-between;
+			flex: 1 0 auto;
+			padding: 30px 25px;
+		}
+		.field--name-body {
+			display: block;
+			font-size: .95em;
+			text-align: left;
+			margin-bottom: 0;
+			p {
+				line-height: 1.5;
+			}
+		}
+		.feature-list {
+			padding-top: 10px;
+			column-count: 2;
+			text-align: left;
+		}
+		.feature {
+			display: block;
+			position: relative;
+			font-size: .95em;
+			font-weight: bold;
+			padding-top: 10px;
+			padding-left: 15px;
+			&:before {
+				@include faicon('\F005');
+				position: absolute;
+				left: 0;
+				font-size: 13px;
+			}
+		}
+		.button {
+			margin: 40px auto 0;
+			max-width: 275px;
+			width: 100%;
+		}
+	}
+
+	@include breakpoint($tab) {
+		.field--name-field-packages {
+			margin-bottom: 60px;
+			> .field__items {
+				@include flexbox;
+				justify-content: center;
+				> .field__item {
+					margin-left: 10px;
+          margin-right: 10px;
+				}
+			}
+			.banner-wrap {
+				display: none;
+			}
+		}
+	}
+
+	@include breakpoint(1200px) {
+		.field--name-field-packages {
+			> .field__items {
+				> .field__item {
+					margin-left: 30px;
+          margin-right: 30px;
+				}
+			}
+			.banner-wrap {
+				display: block;
+			}
+		}
+	}
+
+}
+
+.bean-package-comparison {
+	@extend %package-comparison;
+  .field--name-field-packages {
+    .node {
+      border: 1px solid;
+      border-top: 0;
+    }
+  }
+}
