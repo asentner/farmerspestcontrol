@@ -14,7 +14,7 @@ function pantheon_redirect_boot(){
                         ($_SERVER['PANTHEON_ENVIRONMENT'] === 'live') &&
                         // Check if Drupal or WordPress is running via command line
                         (php_sapi_name() != "cli")) {
-                        if (strpos($_SERVER['HTTP_HOST'], 'pantheonsite.io') !== false) {
+                        if (strpos($_SERVER['HTTP_HOST'], 'pantheonsite.io') === false) {
                             header('HTTP/1.0 301 Moved Permanently');
                             header('Location: ' . $base_url . $_SERVER['REQUEST_URI']);
                             exit();
@@ -28,7 +28,7 @@ function pantheon_redirect_boot(){
                 ($_SERVER['PANTHEON_ENVIRONMENT'] === 'live') &&
                 // Check if Drupal or WordPress is running via command line
                 (php_sapi_name() != "cli")) {
-                if (strpos($_SERVER['HTTP_HOST'], 'pantheonsite.io') !== false) {
+                if (strpos($_SERVER['HTTP_HOST'], 'pantheonsite.io') === false) {
                     header('HTTP/1.0 301 Moved Permanently');
                     header('Location: ' . $base_url . $_SERVER['REQUEST_URI']);
                     exit();
