@@ -1,0 +1,39 @@
+.block--views-package-comparison-hero {
+  $color-image-bg: $color-overlay;
+
+  .node {
+		background-color: $color-image-bg;
+  }
+	.slide-image-background {
+		&:before {
+      background-color: $color-overlay; // this color is used as a color-module place holder
+		}
+	}
+}
+
+.node-type-package-comparison,
+.bean-package-comparison {
+  .field--name-field-packages {
+    header {
+      background-color: palette(primary, base);
+    }
+  }
+}
+
+// comparison table
+.node--package-comparison--teaser,
+.bean-package-comparison-table {
+  table {
+    thead {
+      th[scope=col] {
+        color: palette(primary, base);
+      }
+    }
+  }
+}
+
+.block--views-package-comparison-cta {
+  .button {
+    @include button-color($bg:palette(secondary, base), $bg-hover:palette(secondary, light));
+  }
+}

@@ -13,7 +13,7 @@ function sprowt_5_breadcrumb($variables) {
     $breadcrumb = array();
   }
   else if ($node = menu_get_object()) {
-    if ($node->type == 'localtarget') {
+    if ($node->type == 'localtarget' || $node->type == 'package_comparison') {
       $breadcrumb = array();
     }
     else {
