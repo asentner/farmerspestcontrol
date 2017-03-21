@@ -16,6 +16,25 @@
             $('input[type="radio"]').prop('checked', false);
             $('select').prop('selectedIndex',0);
           };
+
+          if($summaryPage.length) {
+              if(typeof Drupal.ajax != 'undefined') {
+                  /**
+                   * Override webformStripeCheckout
+                   */
+                  Drupal.ajax.prototype.commands.webformStripeCheckout = function (ajax, data, status) {
+                      var $form = $(ajax.form[0]);
+                      var $email = $form.find('.form-email').first();
+                      StripeCheckout.open($.extend(data.params, {
+                          email: $email.val(),
+                          token: function (token) {
+                              $('.webform-stripe-token', ajax.form.context).val(token.id + ':' + token.email);
+                              ajax.form[0].submit();
+                          }
+                      }));
+                  };
+              }
+          }
         });
 
         // add 'previous' buttons and 'intialize' class to panels

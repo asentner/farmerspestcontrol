@@ -242,7 +242,12 @@ class ReviewBoost {
     function translateValues($str, $addtl = array()) {
         $this->addTokenValues($addtl);
 
-        foreach($this->tokens as $t => $value) {
+        $tokens = $this->tokens;
+        $street = $tokens['%street'];
+        unset($tokens['%street']);
+        $tokens['%street'] = $street;
+
+        foreach($tokens as $t => $value) {
             $str = str_replace($t, $value , $str);
         }
 

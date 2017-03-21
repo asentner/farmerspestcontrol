@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * Install file for module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function webform_zipcode_restriction_install() {
+    $t = get_t();
+    drupal_set_message($t("Webform Zipcode Restriction Installed!"));
+}
