@@ -2404,7 +2404,7 @@
   .bean-package-comparison .field--name-field-packages .field--name-field-icon, .node-type-package-comparison .field--name-field-packages .field--name-field-icon {
     margin-bottom: 10px; }
     .bean-package-comparison .field--name-field-packages .field--name-field-icon img, .node-type-package-comparison .field--name-field-packages .field--name-field-icon img {
-      margin-top: -70px;
+      margin-top: -60px;
       position: relative;
       z-index: 50;
       max-width: 135px;
