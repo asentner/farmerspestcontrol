@@ -17,9 +17,6 @@
 
 %package-comparison {
   .field--name-field-packages {
-    > .field__items > .field__item {
-      background-color: palette(white, pure);
-    }
     header {
       background-color: palette(neutral, abbey);
       color: palette(white, pure);
@@ -30,6 +27,9 @@
         color: palette(white, pure);
       }
     }
+		.content-wrap {
+			background-color: palette(white, pure);
+		}
   }
   .feature {
     &:before {

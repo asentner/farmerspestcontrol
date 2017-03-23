@@ -70,11 +70,14 @@
 			position: relative;
 		}
 		.field--name-field-icon {
+			margin-bottom: 10px;
 			img {
 				margin-top: -70px;
         position: relative;
         z-index: 50;
-				max-width: 160px;
+				max-width: 135px;
+				max-height: 135px;
+				width: auto;
 			}
 		}
 		.node__title {
@@ -145,13 +148,22 @@
 			> .field__items {
 				@include flexbox;
 				justify-content: center;
+				margin-left: -10px;
+      	margin-right: -10px;
 				> .field__item {
 					margin-left: 10px;
           margin-right: 10px;
+					flex: 1 0 0;
+        	width: 100%; // IE fix
 				}
 			}
 			.banner-wrap {
 				display: none;
+			}
+		}
+		.field--name-field-package {
+			> .field__items {
+				width: 100%; // IE fix
 			}
 		}
 	}
@@ -159,6 +171,8 @@
 	@include breakpoint(1200px) {
 		.field--name-field-packages {
 			> .field__items {
+				margin-left: -30px;
+				margin-right: -30px;
 				> .field__item {
 					margin-left: 30px;
           margin-right: 30px;
