@@ -14,6 +14,8 @@
 
           if (!($summaryPage.length)) {
             $('input[type="radio"]').prop('checked', false);
+            // re-select the selected package so that auto selecting the package will work
+            $('.package.selected').parent().siblings('.form-radio').prop('checked', true);
             $('select').prop('selectedIndex',0);
           };
 
