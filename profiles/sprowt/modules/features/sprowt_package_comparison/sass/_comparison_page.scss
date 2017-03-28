@@ -175,6 +175,11 @@
 				}
 			}
 		}
+		tbody {
+			td {
+				vertical-align: middle;
+			}
+		}
 		th, td {
 			text-align: center;
 			border: solid 2px;
@@ -183,6 +188,7 @@
 			text-align: right;
 			font-weight: 600;
 			padding-right: 40px;
+			line-height: 1.25em;
 		}
 		.package-buttons {
 			td {

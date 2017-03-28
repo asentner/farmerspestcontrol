@@ -22,8 +22,7 @@
       <thead>
         <tr>
           <th scope="row" rowspan="2">
-            <span class="select-package">Select the package that best suits your needs</span>
-            <span class="questions">Have questions, <a href="/contact">we can help!</a></span>
+            <span class="select-package">Select the package that best suits your needs.</span>
           </th>
           <?php
             foreach ($packages as $package) {

@@ -2402,7 +2402,7 @@
     padding: 0 20px 40px;
     position: relative; }
   .bean-package-comparison .field--name-field-packages .field--name-field-icon, .node-type-package-comparison .field--name-field-packages .field--name-field-icon {
-    margin-bottom: 10px; }
+    margin-bottom: 20px; }
     .bean-package-comparison .field--name-field-packages .field--name-field-icon img, .node-type-package-comparison .field--name-field-packages .field--name-field-icon img {
       margin-top: -60px;
       position: relative;
@@ -2674,6 +2674,9 @@
           font-size: .75em;
           font-weight: 400;
           font-style: italic; }
+    .node--package-comparison--teaser table tbody td,
+    .bean-package-comparison-table table tbody td {
+      vertical-align: middle; }
     .node--package-comparison--teaser table th, .node--package-comparison--teaser table td,
     .bean-package-comparison-table table th,
     .bean-package-comparison-table table td {
@@ -2683,7 +2686,8 @@
     .bean-package-comparison-table table .row-heading {
       text-align: right;
       font-weight: 600;
-      padding-right: 40px; }
+      padding-right: 40px;
+      line-height: 1.25em; }
     .node--package-comparison--teaser table .package-buttons td,
     .bean-package-comparison-table table .package-buttons td {
       padding: 20px;
