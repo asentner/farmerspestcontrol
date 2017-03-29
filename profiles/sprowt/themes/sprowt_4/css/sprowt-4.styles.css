@@ -2453,6 +2453,9 @@ input[type=text], input[type=email], input[type=password], textarea, select {
     -webkit-transform: scale(0.95);
             transform: scale(0.95); }
 
+.hidden {
+  display: none; }
+
 *, *:before, *:after {
   box-sizing: border-box; }
 

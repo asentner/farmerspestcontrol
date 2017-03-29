@@ -2476,6 +2476,9 @@ input[type=text], input[type=email], input[type=password], textarea, select {
       .form-row .fieldset-wrapper > .form-item + .form-item {
         margin-left: 1em; } }
 
+.hidden {
+  display: none; }
+
 *, *:before, *:after {
   box-sizing: border-box; }
 
