@@ -366,14 +366,21 @@ hr {
     .block--views-slideshow-localtarget .field--name-body a.button:hover {
       color: #fff; }
 
-.block--views-special-offers-sidebar {
+.block--views-special-offers-sidebar,
+.block--views-special-offers-related-2 {
   background-color: #fff;
   border-color: #f4f4f4; }
-  .block--views-special-offers-sidebar .block__title {
+  .block--views-special-offers-sidebar .block__title,
+  .block--views-special-offers-related-2 .block__title {
     color: #373d38; }
-  .block--views-special-offers-sidebar .node__title {
+  .block--views-special-offers-sidebar .views-row,
+  .block--views-special-offers-related-2 .views-row {
+    border-color: #f4f4f4; }
+  .block--views-special-offers-sidebar .node__title,
+  .block--views-special-offers-related-2 .node__title {
     color: #239343; }
-  .block--views-special-offers-sidebar .node__content {
+  .block--views-special-offers-sidebar .node__content,
+  .block--views-special-offers-related-2 .node__content {
     color: #707972; }
 
 .block--views-special-offers-list .node {

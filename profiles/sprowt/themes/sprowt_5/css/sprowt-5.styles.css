@@ -4180,6 +4180,27 @@ li.addtoany {
   .block--views-special-offers-sidebar .button {
     width: 100%; }
 
+.block--views-special-offers-related-2 .block__title {
+  text-align: center;
+  font-size: 1.4em;
+  margin-bottom: .75em; }
+
+.block--views-special-offers-related-2 .views-row {
+  padding: 25px 15px;
+  border: 5px dashed; }
+  .block--views-special-offers-related-2 .views-row + .views-row {
+    margin-top: 25px; }
+
+.block--views-special-offers-related-2 .node__title {
+  text-transform: uppercase;
+  font-size: 1.2em; }
+
+.block--views-special-offers-related-2 .node .field--name-field-button {
+  margin-top: 1.25em; }
+
+.block--views-special-offers-related-2 .button {
+  width: 100%; }
+
 .block--views-special-offers-list .views-row + .views-row {
   border-top: 0;
   padding-top: 0; }

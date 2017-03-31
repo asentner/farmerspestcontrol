@@ -24,6 +24,33 @@
   @extend %special-offers-sidebar;
 }
 
+.block--views-special-offers-related-2 {
+  .block__title {
+    text-align: center;
+    font-size: 1.4em;
+    margin-bottom: .75em;
+  }
+  .views-row {
+    padding: 25px 15px;
+    border: 5px dashed;
+    + .views-row {
+      margin-top: 25px;
+    }
+  }
+  .node__title {
+    text-transform: uppercase;
+    font-size: 1.2em;
+  }
+  .node {
+    .field--name-field-button {
+      margin-top: 1.25em;
+    }
+  }
+  .button {
+    width: 100%;
+  }
+}
+
 .block--views-special-offers-list {
   .views-row {
     + .views-row {

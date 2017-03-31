@@ -10,6 +10,9 @@
   .block__title {
     color: $color-block-title;
   }
+  .views-row {
+  border-color: $color-border;
+}
   .node__title {
     color: $color-offer-title;
   }
@@ -18,7 +21,8 @@
   }
 }
 
-.block--views-special-offers-sidebar {
+.block--views-special-offers-sidebar,
+.block--views-special-offers-related-2 {
   @extend %special-offers-sidebar;
 }
 

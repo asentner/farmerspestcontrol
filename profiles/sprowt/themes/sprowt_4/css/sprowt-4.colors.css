@@ -309,14 +309,21 @@ hr {
   .block--sprowt-settings-sprowt-social-media .block__content a:hover {
     color: #245927; }
 
-.block--views-special-offers-sidebar, .block-shortcode--views-special_offers-ltp_s4 {
+.block--views-special-offers-sidebar,
+.block--views-special-offers-related-2, .block-shortcode--views-special_offers-ltp_s4 {
   background-color: #fff;
   border-color: #f4f4f4; }
-  .block--views-special-offers-sidebar .block__title, .block-shortcode--views-special_offers-ltp_s4 .block__title {
+  .block--views-special-offers-sidebar .block__title,
+  .block--views-special-offers-related-2 .block__title, .block-shortcode--views-special_offers-ltp_s4 .block__title {
     color: #58595b; }
-  .block--views-special-offers-sidebar .node__title, .block-shortcode--views-special_offers-ltp_s4 .node__title {
+  .block--views-special-offers-sidebar .views-row,
+  .block--views-special-offers-related-2 .views-row, .block-shortcode--views-special_offers-ltp_s4 .views-row {
+    border-color: #f4f4f4; }
+  .block--views-special-offers-sidebar .node__title,
+  .block--views-special-offers-related-2 .node__title, .block-shortcode--views-special_offers-ltp_s4 .node__title {
     color: #3da244; }
-  .block--views-special-offers-sidebar .node__content, .block-shortcode--views-special_offers-ltp_s4 .node__content {
+  .block--views-special-offers-sidebar .node__content,
+  .block--views-special-offers-related-2 .node__content, .block-shortcode--views-special_offers-ltp_s4 .node__content {
     color: #707972; }
 
 .block-shortcode--views-special_offers-ltp_s4 .block__title {

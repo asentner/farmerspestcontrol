@@ -325,14 +325,26 @@ hr {
   .block--sprowt-settings-sprowt-social-media .block__content a:hover {
     background-color: #d32c26; }
 
-.block--views-special-offers-sidebar {
+.block--views-special-offers-sidebar,
+.block--views-special-offers-related-s4,
+.block--views-special-offers-related-2 {
   background-color: #fff;
   border-color: #f4f4f4; }
-  .block--views-special-offers-sidebar .block__title {
+  .block--views-special-offers-sidebar .block__title,
+  .block--views-special-offers-related-s4 .block__title,
+  .block--views-special-offers-related-2 .block__title {
     color: #212121; }
-  .block--views-special-offers-sidebar .node__title {
+  .block--views-special-offers-sidebar .views-row,
+  .block--views-special-offers-related-s4 .views-row,
+  .block--views-special-offers-related-2 .views-row {
+    border-color: #f4f4f4; }
+  .block--views-special-offers-sidebar .node__title,
+  .block--views-special-offers-related-s4 .node__title,
+  .block--views-special-offers-related-2 .node__title {
     color: #d32c26; }
-  .block--views-special-offers-sidebar .node__content {
+  .block--views-special-offers-sidebar .node__content,
+  .block--views-special-offers-related-s4 .node__content,
+  .block--views-special-offers-related-2 .node__content {
     color: #707972; }
 
 .block--views-special-offers-list .node {
