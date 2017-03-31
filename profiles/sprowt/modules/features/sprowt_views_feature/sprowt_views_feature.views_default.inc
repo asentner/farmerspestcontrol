@@ -989,7 +989,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_street_address']['label'] = 'Address';
   $handler->display->display_options['fields']['field_street_address']['element_type'] = 'h3';
   $handler->display->display_options['fields']['field_street_address']['element_label_colon'] = FALSE;
-  /* Field: Content: Call tracking number */
+  /* Field: Content: Phone number */
   $handler->display->display_options['fields']['field_phone_number']['id'] = 'field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['table'] = 'field_data_field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['field'] = 'field_phone_number';
@@ -1808,9 +1808,9 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Draggableviews: Weight */
+  /* Sort criterion: Weight: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'draggableviews_structure';
+  $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1830,12 +1830,10 @@ function sprowt_views_feature_views_default_views() {
   /* Display: All Offers */
   $handler = $view->new_display('block', 'All Offers', 'list');
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Draggableviews: Weight */
+  /* Sort criterion: Weight: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'draggableviews_structure';
+  $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['draggableviews_setting_view'] = 'special_offer_list_sort:page';
-  $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
 
   /* Display: Sidebar Offers */
   $handler = $view->new_display('block', 'Sidebar Offers', 'sidebar');
@@ -1999,6 +1997,7 @@ function sprowt_views_feature_views_default_views() {
   /* Display: Related (secondary teaser) */
   $handler = $view->new_display('block', 'Related (secondary teaser)', 'related_s4');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Special Offers';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
@@ -2016,6 +2015,51 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['random']['id'] = 'random';
   $handler->display->display_options['sorts']['random']['table'] = 'views';
   $handler->display->display_options['sorts']['random']['field'] = 'random';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Has taxonomy term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['anyall'] = '+';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['limit'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
+    'services' => 'services',
+  );
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['not'] = TRUE;
+
+  /* Display: Related (secondary teaser - 2 offers) */
+  $handler = $view->new_display('block', 'Related (secondary teaser - 2 offers)', 'related_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Special Offers';
+  $handler->display->display_options['display_description'] = 'Does not use random, shows 2 offers';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'secondary_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Has taxonomy term ID */
   $handler->display->display_options['arguments']['tid']['id'] = 'tid';
