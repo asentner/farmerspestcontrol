@@ -2520,9 +2520,9 @@
     text-align: center; }
   .node-ebooking .l-main {
     padding: 100px 20px 80px; }
-  .node-ebooking .field--name-body {
-    margin: 0 auto 90px;
-    max-width: 840px; } }
+    .node-ebooking .l-main .field--name-body {
+      margin: 0 auto 90px;
+      max-width: 840px; } }
 
 .node-ebooking.processed .l-content {
   margin-left: auto;
