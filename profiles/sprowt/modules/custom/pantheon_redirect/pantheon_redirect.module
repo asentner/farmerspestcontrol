@@ -72,7 +72,9 @@ function pantheon_redirect_settings_form() {
     );
     
     $form['#validate'][] = 'pantheon_redirect_settings_form_validate';
-    return system_settings_form($form);
+    $form = system_settings_form($form);
+    $form['#submit'][] = 'pantheon_redirect_settings_form_submit';
+    return $form;
 }
 
 function pantheon_redirect_settings_form_validate(&$form, &$form_state) {
@@ -81,4 +83,8 @@ function pantheon_redirect_settings_form_validate(&$form, &$form_state) {
     if(!empty($url) && strpos($url, 'http:') !== 0 && strpos($url, 'https:') !== 0) {
         form_error($form['pantheon_redirect_base_url'], t('Please use a valid URL that begins with http or https'));
     }
+}
+
+function pantheon_redirect_settings_form_submit(&$form, &$form_state) {
+    cache_clear_all();
 }
