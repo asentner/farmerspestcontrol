@@ -4918,9 +4918,13 @@ li.addtoany {
     max-width: 1210px; }
     .front .l-content > * {
       -ms-flex: 0 1 auto; }
+  .front .block--system-main {
+    width: 100%; }
   .front h1.node__title, .front .node__title.field--name-field-display-title {
     font-size: 1.95em;
-    max-width: 900px; }
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto; }
   .front .node--page--full {
     padding-bottom: 45px; } }
 
