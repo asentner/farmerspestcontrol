@@ -173,31 +173,57 @@ function _review_boost_admin_import_csv_form_cancel($form, &$form_state) {
 }
 
 function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
+    $queued = 0;
     if (count($form_state['storage']['data'])) {
       $queue = DrupalQueue::get('review_boost_email_worker');
         foreach($form_state['storage']['data'] as $data) {
-            db_insert('review_boost_token')
-                ->fields(array(
-                    'token' => $data['token'],
-                    'customer_id' => $data['customer_id'],
-                    'first_name' => $data['customer_first_name'],
-                    'last_name' => $data['customer_last_name'],
-                    'email' => $data['customer_email'],
-                    'tech' => $data['technician'],
-                    'sales' => $data['sales'],
-                    'branch' => $data['branch'],
-                    'service' => $data['service'],
-                    'service_date' => $data['service_date'] instanceof DateTime ? $data['service_date']->getTimestamp() : time(),
-                    'creation_date' => time(),
-                    'email_sent' => 0,
-                ))
-                ->execute();
-            $queue->createItem(array('data' => $data));
+            if(_review_boost_admin_import_csv_validate_data($data)) {
+                db_insert('review_boost_token')
+                    ->fields(array(
+                        'token' => $data['token'],
+                        'customer_id' => $data['customer_id'],
+                        'first_name' => $data['customer_first_name'],
+                        'last_name' => $data['customer_last_name'],
+                        'email' => $data['customer_email'],
+                        'tech' => $data['technician'],
+                        'sales' => $data['sales'],
+                        'branch' => $data['branch'],
+                        'service' => $data['service'],
+                        'service_date' => $data['service_date'] instanceof DateTime ? $data['service_date']->getTimestamp() : time(),
+                        'creation_date' => time(),
+                        'email_sent' => 0,
+                    ))
+                    ->execute();
+                $queue->createItem(array('data' => $data));
+                $queued++;
+            }
         }
     }
     variable_del('_review_boost_temp_data');
-    drupal_set_message('CSV Import Completed!');
+    drupal_set_message(t('CSV Import Completed! %d emails queued!', array(
+        '%d' => $queued
+    )));
     $form_state['redirect'] = array('admin/survey/import-csv');
+}
+
+function _review_boost_admin_import_csv_validate_data($data) {
+    $email = $data['customer_email'];
+
+    if(empty($data['customer_email'])) {
+        return false;
+    }
+
+    $emails = db_query("
+        SELECT email
+        FROM review_boost_token
+    ")->fetchCol();
+
+    if(in_array($email, $emails)) {
+        drupal_set_message(sprintf('Review boost email already sent to %s!', $email), 'error');
+        return false;
+    }
+
+    return true;
 }
 
 /**
