@@ -153,6 +153,20 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_page';
+  $strongarm->value = 0;
+  $export['comment_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_webform';
+  $strongarm->value = '0';
+  $export['comment_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_affiliation';
   $strongarm->value = 1;
   $export['diff_enable_revisions_page_node_affiliation'] = $strongarm;
@@ -2366,7 +2380,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__affiliation';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__affiliation'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2394,21 +2408,21 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__cta';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__cta'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__faq';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__faq'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__gallery_image';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__gallery_image'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2429,14 +2443,14 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__location';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__location'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__market';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__market'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2457,14 +2471,14 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__profile';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__profile'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__region';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__region'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2478,7 +2492,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__slide';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__slide'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -2492,7 +2506,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__testimonial';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['metatag_enable_node__testimonial'] = $strongarm;
 
   $strongarm = new stdClass();

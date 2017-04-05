@@ -6442,7 +6442,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'special_offer',
     'default_value' => array(
       0 => array(
-        'url' => 'node/44',
+        'url' => 'free-quote',
       ),
     ),
     'deleted' => 0,
