@@ -42,7 +42,7 @@ function _webform_theme_zipcode() {
     return array(
         'webform_display_zipcode' => array(
             'render element' => 'element',
-            'file' => 'zip.inc',
+            //'file' => 'zip.inc',
         ),
     );
 }
