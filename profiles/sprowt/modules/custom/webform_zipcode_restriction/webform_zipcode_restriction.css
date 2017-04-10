@@ -1,0 +1,12 @@
+/* Animated throbber */
+html.js .form-autocomplete {
+    background-image: url('/misc/throbber-inactive.png');
+    background-position: 100% center;
+    /* LTR */
+    background-repeat: no-repeat;
+}
+
+html.js .throbbing {
+    background-image: url('/misc/throbber-active.gif');
+    /* LTR */
+}

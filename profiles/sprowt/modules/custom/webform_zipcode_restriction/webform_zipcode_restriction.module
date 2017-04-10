@@ -11,6 +11,8 @@ function webform_zipcode_restriction_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    
+    return $items;
 }
 
 /**
@@ -81,7 +83,7 @@ function webform_zipcode_restriction_validate_zipcode($element, &$form_state) {
             $rests = explode("\n", $rests);
             $r_error = true;
             foreach($rests as $r) {
-                if($element['#value'] == $r && !$r_error){
+                if($element['#value'] == $r && $r_error){
                     $r_error = false;
                 }
             }
@@ -104,12 +106,16 @@ function _webform_zipcode_restriction_validate_format($format, $value) {
     return preg_match($pattern, $value);
 }
 
-function _webform_zipcode_restriction_autocomplete($nid, $cid) {
+function _webform_zipcode_restriction_autocomplete($nid, $cid, $str = '') {
     $node = node_load($nid);
     $components = $node->webform['components'];
     $comp = $components[$cid];
     $rests = $comp['extra']['restrictions'];
     $rests = explode("\n", $rests);
+    $rests = array_filter($rests, function($v, $k) use($str){
+        return strpos($v, $str) === 0;
+    });
+    
     $return = array();
     foreach ($rests as $r) {
         $return[$r] = check_plain($r);

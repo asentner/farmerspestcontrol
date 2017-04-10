@@ -192,6 +192,7 @@ function _webform_render_zipcode($component, $value = NULL, $filter = TRUE, $sub
     
     $rests = $component['extra']['restrictions'];
     if(!empty($rests)){
+        drupal_add_css(drupal_get_path('module', 'webform_zipcode_restriction') . '/webform_zipcode_restriction.css');
         $element['#autocomplete_path'] = "webform_zipcode_restriction_autocomplete/{$component['nid']}/{$component['cid']}";
     }
     
