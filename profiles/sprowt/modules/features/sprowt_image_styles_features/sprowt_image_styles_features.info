@@ -12,6 +12,7 @@ features[image][] = focal_point_scale_and_crop_250x250
 features[image][] = focal_point_scale_and_crop_470x400
 features[image][] = focal_point_scale_and_crop_500x325
 features[image][] = focal_point_scale_and_crop_600x475
+features[image][] = focal_point_scale_and_crop_800x600
 features[image][] = focal_point_scale_and_crop_80x80
 features[image][] = fresh_light_service
 features[image][] = markets
