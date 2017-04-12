@@ -627,15 +627,6 @@ function sprowt_user_settings_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create gallery_image content'.
-  $permissions['create gallery_image content'] = array(
-    'name' => 'create gallery_image content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create landing_page content'.
   $permissions['create landing_page content'] = array(
     'name' => 'create landing_page content',
@@ -847,15 +838,6 @@ function sprowt_user_settings_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any gallery_image content'.
-  $permissions['delete any gallery_image content'] = array(
-    'name' => 'delete any gallery_image content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any landing_page content'.
   $permissions['delete any landing_page content'] = array(
     'name' => 'delete any landing_page content',
@@ -1019,15 +1001,6 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'delete own faq content'.
   $permissions['delete own faq content'] = array(
     'name' => 'delete own faq content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own gallery_image content'.
-  $permissions['delete own gallery_image content'] = array(
-    'name' => 'delete own gallery_image content',
     'roles' => array(
       'client' => 'client',
     ),
@@ -1285,15 +1258,6 @@ function sprowt_user_settings_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any gallery_image content'.
-  $permissions['edit any gallery_image content'] = array(
-    'name' => 'edit any gallery_image content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any landing_page content'.
   $permissions['edit any landing_page content'] = array(
     'name' => 'edit any landing_page content',
@@ -1470,15 +1434,6 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'edit own faq content'.
   $permissions['edit own faq content'] = array(
     'name' => 'edit own faq content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own gallery_image content'.
-  $permissions['edit own gallery_image content'] = array(
-    'name' => 'edit own gallery_image content',
     'roles' => array(
       'client' => 'client',
     ),
