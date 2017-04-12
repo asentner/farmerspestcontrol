@@ -64,14 +64,6 @@ function sprowt_content_types_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
-    'gallery_image' => array(
-      'name' => t('Gallery image'),
-      'base' => 'node_content',
-      'description' => t('Show off your work by adding <em>gallery images</em> to your gallery.'),
-      'has_title' => '1',
-      'title_label' => t('Caption'),
-      'help' => '',
-    ),
     'landing_page' => array(
       'name' => t('Landing page'),
       'base' => 'node_content',
@@ -230,14 +222,6 @@ function sprowt_content_types_weight_features_default_settings() {
   $settings['faqs'] = array(
     'enabled' => 0,
     'range' => 20,
-    'menu_weight' => 0,
-    'default' => 0,
-    'sync_translations' => 0,
-  );
-
-  $settings['gallery_image'] = array(
-    'enabled' => 1,
-    'range' => 100,
     'menu_weight' => 0,
     'default' => 0,
     'sync_translations' => 0,
