@@ -22,7 +22,7 @@ function sprowt_image_galleries_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Galleries';
+  $handler->display->display_options['title'] = '<none>';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -53,17 +53,13 @@ function sprowt_image_galleries_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'p';
+  $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'gallery_link';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
   /* Sort criterion: Weight: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -71,10 +67,15 @@ function sprowt_image_galleries_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'image_gallery' => 'image_gallery',
   );
+  /* Filter criterion: Content: Published or admin */
+  $handler->display->display_options['filters']['status_extra']['id'] = 'status_extra';
+  $handler->display->display_options['filters']['status_extra']['table'] = 'node';
+  $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
 
-  /* Display: List of All Galleries */
-  $handler = $view->new_display('page', 'List of All Galleries', 'page');
-  $handler->display->display_options['path'] = 'galleries';
+  /* Display: List of all Galleries */
+  $handler = $view->new_display('block', 'List of all Galleries', 'gallery_list');
+  $handler->display->display_options['display_description'] = 'List of all Galleries';
+  $handler->display->display_options['block_description'] = 'Gallery List';
   $export['galleries'] = $view;
 
   return $export;
