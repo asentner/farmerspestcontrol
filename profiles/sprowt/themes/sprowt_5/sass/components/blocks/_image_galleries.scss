@@ -1,0 +1,24 @@
+// gallery of all galleries
+
+.block--views-galleries-gallery-list{
+  .view-content{
+    @include flexbox;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    .views-row{
+      margin-bottom: 3.5%;
+      position: relative;
+      .gallery_link{
+        position: absolute;
+        bottom: 6px;
+        width: 100%;
+        background-color: rgba(#000, 0.4);
+        padding: 2% 3%;
+        a{
+          color: white;
+        }
+      }
+    }
+  }
+}
