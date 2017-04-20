@@ -282,12 +282,12 @@ function sprowt_settings_admin()
 
     $form['sprowt_settings_social']['sprowt_settings_social_instagram'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Instragram'),
+        '#title' => t('Instagram'),
     );
 
     $form['sprowt_settings_social']['sprowt_settings_social_instagram']['sprowt_settings_instagram_handle'] = array(
         '#type' => 'textfield',
-        '#title' => t('Company Instragram Handle'),
+        '#title' => t('Company Instagram Handle'),
         '#default_value' => variable_get('sprowt_settings_instagram_handle'),
         '#size' => 60,
         '#maxlength' => 255,
