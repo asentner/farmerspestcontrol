@@ -23,6 +23,18 @@
     </a>
   </li>
   <?php endif; ?>
+    <?php if ($instagram= variable_get('sprowt_settings_instagram_handle', FALSE)) : ?>
+        <li>
+            <a class="instagram" href="http://www.instagram.com/<?php print $instagram; ?> " target="_blank">
+                <i class="fa fa-fw fa-instagram"></i>
+                <span class="social-description social-description-instagram">
+        <?php
+        print variable_get('sprowt_settings_instagram_description', FALSE) ? variable_get('sprowt_settings_instagram_description', FALSE) : "Twitter";
+        ?>
+      </span>
+            </a>
+        </li>
+    <?php endif; ?>
   <?php if ($gplus = variable_get('sprowt_settings_gplus_url', FALSE)) : ?>
   <li>
     <a class="gplus" href="<?php print $gplus; ?> " target="_blank">

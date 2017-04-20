@@ -280,6 +280,29 @@ function sprowt_settings_admin()
         '#description' => t("Descriptive text for LinkedIn link. Ex. 'Connect with us'"),
     );
 
+    $form['sprowt_settings_social']['sprowt_settings_social_instagram'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Instragram'),
+    );
+
+    $form['sprowt_settings_social']['sprowt_settings_social_instagram']['sprowt_settings_instagram_handle'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Company Instragram Handle'),
+        '#default_value' => variable_get('sprowt_settings_instagram_handle'),
+        '#size' => 60,
+        '#maxlength' => 255,
+        '#description' => t("Company instagram handle (do not include the @)."),
+    );
+
+    $form['sprowt_settings_social']['sprowt_settings_social_instagram']['sprowt_settings_instagram_description'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Link Description'),
+        '#default_value' => variable_get('sprowt_settings_instagram_description'),
+        '#size' => 60,
+        '#maxlength' => 255,
+        '#description' => t("Descriptive text for Instagram link. Ex. 'Follow us'"),
+    );
+
     $form['sprowt_settings_reviews'] = array(
         '#type' => 'fieldset',
         '#title' => t('Review Sites Settings'),
