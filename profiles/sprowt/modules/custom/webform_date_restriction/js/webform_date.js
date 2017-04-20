@@ -10,7 +10,7 @@
 
     var wdtrd = {
         init: function(id, rests){
-            var $el = $('label[for="' + id + '"]').closest('.form-item');
+            var $el = $('.'+id);
             this.rests = rests;
             this.id = id;
             this.$el = $el;
@@ -299,28 +299,30 @@
     Drupal.behaviors.webformDateRestrictionDate = {
         attach: function (context, settings) {
             var datefields = settings.webform_date_restriction_date;
-            $.each(datefields, function(id, rests){
+            $.each(datefields, function(i, v){
+                var id = v.id;
+                var rests = v.rests;
                 var jObj = Object.create(wdtrd);
                 jObj.init(id, rests);
                 if(jObj.$el.find('.webform-calendar').length) {
                     jObj.updateCal();
                 }
 
-                jObj.$month.once().change(function(){
+                jObj.$month.change(function(){
                     jObj.init(id, rests);
                 });
 
-                jObj.$day.once().change(function(){
+                jObj.$day.change(function(){
                     jObj.init(id, rests);
                 });
 
                 if(jObj.$year.is('select')) {
-                    jObj.$year.once().change(function(){
+                    jObj.$year.change(function(){
                         jObj.init(id, rests);
                     });
                 }
                 else {
-                    jObj.$year.once().keyup(function(){
+                    jObj.$year.keyup(function(){
                         jObj.init(id, rests);
                     });
                 }

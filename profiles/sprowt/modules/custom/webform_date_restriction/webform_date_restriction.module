@@ -106,10 +106,18 @@ function webform_date_restriction_preprocess_webform_date(&$variables) {
     }
     $rests['phpval'] = $phpvals;
   }
-  
+
+    $nested_level = $element['#parents'][0] == 'submitted' ? 1 : 0;
+    $parents = str_replace('_', '-', implode('--', array_slice($element['#parents'], $nested_level)));
+    $class = 'webform-component--' . $parents;
+
+
   drupal_add_js(array(
     'webform_date_restriction_date' => array(
-      $element['#id'] => $rests,
+      array(
+          'id' => $class,
+          'rests' => $rests
+      )
     ),
   ),
         array('type' => 'setting')
