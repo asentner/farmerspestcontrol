@@ -1,16 +1,17 @@
 .node--image-gallery{
   .node__title{
+    text-align:center;
     margin-bottom:5%;
   }
   .field--name-field-gallery-images{
     .field-items{
       @include flexbox;
-      justify-content: space-around;
+
       flex-wrap:wrap;
       .field-item{
         display:flex;
         flex-direction:column;
-        margin-bottom:5%;
+        margin: 1.5%;
       }
     }
   }

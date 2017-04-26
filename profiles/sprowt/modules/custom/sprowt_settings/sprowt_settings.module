@@ -232,6 +232,7 @@ function _sprowt_settings_shortcode_replace($string)
         '[facebook]' => variable_get('sprowt_settings_facebook_url'),
         '[linkedin]' => variable_get('sprowt_settings_linkedin_url'),
         '[google+]' => variable_get('sprowt_settings_gplus_url'),
+        '[instagram]' => variable_get('sprowt_settings_instagram_url'),
         '[node-service]' => _sprowt_settings_node_service(),
         '[current-year]' => date('Y'),
     );
