@@ -15,11 +15,11 @@ $info['schemes'] = array(
    'default' => array(
      'title' => t('Default'),
      'colors' => array(
-         'primary' => '#80b840',
-         'primary_1' => '#6fab34',
-         'secondary' => '#216e82',
-         'secondary_1' => '#21768c',
-         'slide_overlay' => '#216e83',
+         'primary' => '#47b649',
+         'primary_1' => '#3a933b',
+         'secondary' => '#e9b404',
+         'secondary_1' => '#fdd244',
+         'slide_overlay' => '#151616',
          'ltp_map' => '#f4f4f5',
      ),
    ),
