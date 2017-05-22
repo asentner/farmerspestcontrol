@@ -232,7 +232,29 @@
               scrollTop: $("#panel").offset().top - 50
             }, 1000);
         };
+        pageView();
       };
+
+      function pageView() {
+        if($('.ebooking_summary').length > 0) {
+          var $active = $('.ebooking_summary');
+        }
+        else {
+            var $active = $('.panel.active');
+        }
+        if(typeof $active != 'undefined') {
+            var obj = {
+                'event': 'ebooking_panel_view',
+                'panelViewed': $active.find('.step-number').text(),
+                'panelTitle': $active.find('h2').first().text()
+            }
+            if (typeof window.dataLayer == 'undefined') {
+                window.dataLayer = [];
+            }
+            window.dataLayer.push(obj);
+        }
+      }
+
 
       // add tooltip icon to monthly price on the checkout page
       if(!($('.tooltip-icon').length)) {
@@ -342,7 +364,8 @@
         return regex.test(email);
       };
 
-
+      //initial pageView;
+      pageView();
 
     }
   };
