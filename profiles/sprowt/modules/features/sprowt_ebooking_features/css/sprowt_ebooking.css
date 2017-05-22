@@ -2330,7 +2330,6 @@
   position: absolute;
   left: 0;
   right: 0;
-  -webkit-transition: -webkit-transform 1s;
   transition: -webkit-transform 1s;
   transition: transform 1s;
   transition: transform 1s, -webkit-transform 1s;
@@ -2348,7 +2347,6 @@
   .node-ebooking.processed .initialize.panel, .node-ebooking .initialize.ebooking_summary {
     -webkit-transform: translateX(150%);
             transform: translateX(150%);
-    -webkit-transition: -webkit-transform 0s;
     transition: -webkit-transform 0s;
     transition: transform 0s;
     transition: transform 0s, -webkit-transform 0s; }
@@ -2523,6 +2521,26 @@
     .node-ebooking .l-main .field--name-body {
       margin: 0 auto 90px;
       max-width: 840px; } }
+
+.node-ebooking.processed input:-moz-ui-invalid:not(output),
+.node-ebooking.processed select:-moz-ui-invalid:not(output),
+.node-ebooking.processed textarea:-moz-ui-invalid:not(output) {
+  box-shadow: none; }
+
+.node-ebooking.processed .error input,
+.node-ebooking.processed .error select,
+.node-ebooking.processed .error textarea {
+  box-shadow: 0 0 5px red; }
+  .node-ebooking.processed .error input:-moz-ui-invalid:not(output),
+  .node-ebooking.processed .error select:-moz-ui-invalid:not(output),
+  .node-ebooking.processed .error textarea:-moz-ui-invalid:not(output) {
+    box-shadow: 0 0 5px red; }
+
+.node-ebooking.processed .error input[type="radio"] {
+  box-shadow: 0 0 6px 1px red;
+  border-radius: 100px; }
+  .node-ebooking.processed .error input[type="radio"]:-moz-ui-invalid:not(output) {
+    box-shadow: 0 0 6px 1px red; }
 
 .node-ebooking.processed .l-content {
   margin-left: auto;

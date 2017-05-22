@@ -47,6 +47,31 @@
 }
 
 .node-ebooking.processed {
+  input,
+  select,
+  textarea {
+    &:-moz-ui-invalid:not(output) {
+      box-shadow: none;
+    }
+  }
+
+  .error {
+    input,
+    select,
+    textarea {
+      box-shadow: 0 0 5px red;
+      &:-moz-ui-invalid:not(output) {
+        box-shadow: 0 0 5px red;
+      }
+    }
+    input[type="radio"] {
+      box-shadow: 0 0 6px 1px red;
+      border-radius: 100px;
+      &:-moz-ui-invalid:not(output) {
+        box-shadow: 0 0 6px 1px red;
+      }
+    }
+  }
   .l-content {
     @include clear;
     margin-left: auto;

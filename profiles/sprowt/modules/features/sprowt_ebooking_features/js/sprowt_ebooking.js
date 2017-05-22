@@ -129,15 +129,19 @@
         // make the validation error dissapear when a user makes a selection (not just 'next step')
         $('input:radio').change(function(){
           $(this).parents('.fieldset-wrapper').siblings('.validation-error').hide();
+            $(this).closest('.webform-component').removeClass('error');
         });
         $('select').change(function(){
           $(this).parents('.fieldset-wrapper').siblings('.validation-error').hide();
+            $(this).closest('.webform-component').removeClass('error');
         });
         $('input:text').change(function(){
           $(this).parents('.fieldset-wrapper').siblings('.validation-error').hide();
+            $(this).closest('.webform-component').removeClass('error');
         });
         $('input').filter('[type=email]').change(function(){
           $(this).parents('.fieldset-wrapper').siblings('.validation-error').hide();
+            $(this).closest('.webform-component').removeClass('error');
         });
 
         // prevent default action of inactive previous button on first panel
@@ -302,24 +306,29 @@
           if($(this).filter('.webform-component-radios').find('input:required').length
               && ($(this).find('input:checked').length < 1)) {
             validation = false;
+            $(this).addClass('error');
           }
           // required select boxes - if a select box is required and the first option is selected, validation = false
           else if($(this).find('select:required').find('option:first').filter(':selected').length > 0) {
             validation = false;
+              $(this).addClass('error');
           }
           // required 'options with markup' - similar to radio buttons
           else if($(this).filter('.webform-component-optionsmarkup').find('.form-required').length > 0
               &&  ($(this).find('input:checked').length < 1)) {
             validation = false;
+              $(this).addClass('error');
           }
           // required exmail input fields
           else if($(this).find('input:required').filter('[type=email]').length > 0
               && !(isEmail($(this).find('input:required').filter('[type=email]').val())) ) {
             validation = false;
+              $(this).addClass('error');
           }
           // required inputs other than email fields
           else if($(this).find('input:required').length > 0 && $(this).find('input:required').val().length < 1) {
             validation = false;
+              $(this).addClass('error');
           }
         });
         return validation;
