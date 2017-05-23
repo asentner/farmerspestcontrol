@@ -2601,7 +2601,8 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
+      flex-wrap: wrap;
+  position: relative; }
   .node-ebooking.processed .date-option .webform-datepicker > * {
     -ms-flex: 0 1 auto; }
   .node-ebooking.processed .date-option .webform-datepicker .form-item {
@@ -2612,7 +2613,8 @@
   .node-ebooking.processed .date-option .webform-datepicker .webform-calendar {
     opacity: 0;
     height: 0;
-    padding: 0; }
+    position: absolute;
+    bottom: 0; }
 
 .node-ebooking.processed .webform-component.hidden {
   display: none; }

@@ -138,6 +138,7 @@
     .webform-datepicker {
       @include flexbox;
       flex-wrap: wrap;
+      position: relative;
       .form-item {
         width: 47.5%;
         margin: 0;
@@ -148,7 +149,8 @@
       .webform-calendar {
         opacity: 0;
         height: 0;
-        padding: 0;
+        position: absolute;
+        bottom: 0;
       }
     }
   }
