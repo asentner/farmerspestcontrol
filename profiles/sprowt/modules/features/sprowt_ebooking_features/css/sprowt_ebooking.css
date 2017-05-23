@@ -2588,7 +2588,7 @@
   .node-ebooking.processed .date-option .fieldset-wrapper > div:nth-of-type(2) {
     width: 30%;
     margin-left: 3%; }
-    .node-ebooking.processed .date-option .fieldset-wrapper > div:nth-of-type(2) .form-item {
+    .node-ebooking.processed .date-option .fieldset-wrapper > div:nth-of-type(2) .form-item, .node-ebooking.processed .date-option .fieldset-wrapper > div:nth-of-type(2).form-item {
       margin-top: 15px; }
     .node-ebooking.processed .date-option .fieldset-wrapper > div:nth-of-type(2) select {
       max-width: none; }
@@ -2611,7 +2611,8 @@
       margin-left: 5%; }
   .node-ebooking.processed .date-option .webform-datepicker .webform-calendar {
     opacity: 0;
-    height: 0; }
+    height: 0;
+    padding: 0; }
 
 .node-ebooking.processed .webform-component.hidden {
   display: none; }
