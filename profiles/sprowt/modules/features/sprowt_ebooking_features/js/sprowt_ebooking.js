@@ -365,6 +365,23 @@
 
     // clear form elements on load (so when you return from the summary page, it resets the form)
     $(document).ready(function () {
+        var $target = $('.node-ebooking').not('.page-node-edit');
+        if($target.length > 0) {
+            //console.log(window.dataLayer);
+            //initial pageView
+            pageView();
+            $(document).on('click', '.button-next', function(e){
+                if($('.validation-error').is(':hidden')) {
+                    pageView();
+                }
+            });
+            $(document).on('click', '.button-prev',function(e){
+                if($('.validation-error').is(':hidden')) {
+                    pageView();
+                }
+            });
+        }
+
         var $summaryPage = $('[value="Page break"]');
 
         if (!($summaryPage.length)) {
