@@ -84,6 +84,13 @@ function sprowt_ebooking_features_form_alter(&$form, &$form_state, $form_id) {
             ), $submit);
         }
     }
+    
+    $ebooking_gtms = variable_get('sprowt_ebooking_gtm_urls', array());
+    foreach ($ebooking_gtms as $nid => $values) {
+        if($form_id == 'webform_client_form_' . $nid) {
+            drupal_add_js(array('ebooking_gtm_urls_' . $nid => $values), 'setting');
+        }
+    }
 }
 
 /**
@@ -122,4 +129,101 @@ function _sprowt_ebooking_features_get_item($array, $key) {
     }
     
     return FALSE;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function sprowt_ebooking_features_menu() {
+    $items = array();
+    
+    
+    $items['node/%webform_menu/webform/ebooking'] = array(
+        'title' => 'Ebooking Tag Manager',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_sprowt_ebooking_features_gtm', 1),
+        'access callback' => '_sprowt_ebooking_features_webform_access',
+        'access arguments' => array(1),
+        'weight' => 11,
+        'type' => MENU_LOCAL_TASK,
+    );
+    
+    return $items;
+}
+
+function _sprowt_ebooking_features_gtm($form, $form_state, $node) {
+    $webform_state = array(
+        'build_info' => array(
+            'args' => array($node)
+        ),
+    );
+    $webform = drupal_build_form('webform_client_form_' . $node->nid, $webform_state);
+    $submitted = $webform['submitted'];
+    
+    $form['into'] = array(
+        '#type' => 'markup',
+        '#markup' => '<h2>GTM URLs</h2><p>Set the urls used in the custom virtual events for GTM for each page.</p>'
+    );
+    
+    $ebooking_gtms = variable_get('sprowt_ebooking_gtm_urls', array());
+    $values = !empty($ebooking_gtms[$node->nid]) ? $ebooking_gtms[$node->nid] : array();
+    
+    $pages = array();
+    foreach($submitted as $key => $value) {
+        if(strpos($key, '#') !== 0) {
+            $pages[] = $key;
+            $form[$key] = array(
+                '#type' => 'textfield',
+                '#title' => $key,
+                '#description' => 'Use the form key to match to the fieldset',
+                '#default_value' => !empty($values[$key]) ? $values[$key] : ''
+            );
+        }
+    }
+    
+    $form['payment'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Payment',
+        '#description' => 'This gets fired when the payment modal pops up',
+        '#default_value' => !empty($values['payment']) ? $values['payment'] : ''
+    );
+    
+    $pages[] = 'payment';
+    
+    $form['actions'] = array(
+        'submit' => array(
+            '#type' => 'submit',
+            '#value' => 'Submit'
+        ),
+    );
+    $form['#node'] = $node;
+    $form['#pages'] = $pages;
+    $form['#submit'] = array('_sprowt_ebooking_features_gtm_submit');
+    
+    return $form;
+}
+
+function _sprowt_ebooking_features_gtm_submit($form, $form_state) {
+    $node = $form['#node'];
+    $pages = $form['#pages'];
+    $values = array();
+    foreach($pages as $key) {
+        $values[$key] = $form_state['values'][$key];
+    }
+    
+    $ebooking_gtms = variable_get('sprowt_ebooking_gtm_urls', array());
+    
+    $ebooking_gtms[$node->nid] = $values;
+    
+    variable_set('sprowt_ebooking_gtm_urls', $ebooking_gtms);
+}
+
+function _sprowt_ebooking_features_webform_access($node, $account = NULL) {
+    global $user;
+    $account = isset($account) ? $account : $user;
+    $access = webform_node_update_access($node, $account);
+    
+    $ebooking = !empty($node->field_ebooking[LANGUAGE_NONE][0]['value']);
+    
+    return $access && $ebooking;
 }

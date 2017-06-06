@@ -1,5 +1,53 @@
 (function ($) {
 
+    function empty(val) {
+        return typeof val === 'undefined'
+            || val === null
+            || val === 0
+            || val === false
+            || JSON.stringify(val) === '[]'
+            || JSON.stringify(val) === '{}'
+    }
+
+    function pageView() {
+        if($('.ebooking_summary').length > 0) {
+            var $active = $('.ebooking_summary');
+        }
+        else {
+            var $active = $('.panel.active');
+        }
+        if(typeof $active != 'undefined') {
+
+            var $form = $active.closest('form');
+            var nid = $form.attr('id').replace('webform-client-form-', '');
+            var title = $active.find('h2').first().text();
+
+            if(!empty(Drupal.settings['ebooking_gtm_urls_' + nid])) {
+                $.each(Drupal.settings['ebooking_gtm_urls_' + nid], function (k,v) {
+                    var key = k.replace('_', '-');
+                    var classes = $active.attr('class').split(' ');
+                    $.each(classes, function(i, c){
+                        if(c === 'webform-component--' + key) {
+                            title = v;
+                        }
+                    });
+                });
+            }
+            var obj = {
+                'event': 'ebooking_panel_view',
+                'panelViewed': $active.find('.step-number').text(),
+                'panelTitle': $active.find('h2').first().text(),
+                'ebooking_virtual_event_url': title
+            }
+            if (typeof window.dataLayer == 'undefined') {
+                window.dataLayer = [];
+            }
+            window.dataLayer.push(obj);
+        }
+
+        //console.log(window.dataLayer);
+    }
+
   Drupal.behaviors.sprowtEbooking = {
     attach: function (context, settings) {
       var $target = $('.node-ebooking').not('.page-node-edit');
@@ -7,37 +55,6 @@
 
       // add previous, next, etc buttons and validation error message
       if ($target.length && !($target.hasClass('processed'))) {
-
-        // clear form elements on load (so when you return from the summary page, it resets the form)
-        $(document).ready(function () {
-          var $summaryPage = $('[value="Page break"]');
-
-          if (!($summaryPage.length)) {
-            $('input[type="radio"]').prop('checked', false);
-            // re-select the selected package so that auto selecting the package will work
-            $('.package.selected').parent().siblings('.form-radio').prop('checked', true);
-            $('select').prop('selectedIndex',0);
-          };
-
-          if($summaryPage.length) {
-              if(typeof Drupal.ajax != 'undefined') {
-                  /**
-                   * Override webformStripeCheckout
-                   */
-                  Drupal.ajax.prototype.commands.webformStripeCheckout = function (ajax, data, status) {
-                      var $form = $(ajax.form[0]);
-                      var $email = $form.find('.form-email').first();
-                      StripeCheckout.open($.extend(data.params, {
-                          email: $email.val(),
-                          token: function (token) {
-                              $('.webform-stripe-token', ajax.form.context).val(token.id + ':' + token.email);
-                              ajax.form[0].submit();
-                          }
-                      }));
-                  };
-              }
-          }
-        });
 
         // add 'previous' buttons and 'intialize' class to panels
         $fieldsets.not(':first').each(function(){
@@ -232,28 +249,7 @@
               scrollTop: $("#panel").offset().top - 50
             }, 1000);
         };
-        pageView();
       };
-
-      function pageView() {
-        if($('.ebooking_summary').length > 0) {
-          var $active = $('.ebooking_summary');
-        }
-        else {
-            var $active = $('.panel.active');
-        }
-        if(typeof $active != 'undefined') {
-            var obj = {
-                'event': 'ebooking_panel_view',
-                'panelViewed': $active.find('.step-number').text(),
-                'panelTitle': $active.find('h2').first().text()
-            }
-            if (typeof window.dataLayer == 'undefined') {
-                window.dataLayer = [];
-            }
-            window.dataLayer.push(obj);
-        }
-      }
 
 
       // add tooltip icon to monthly price on the checkout page
@@ -364,10 +360,64 @@
         return regex.test(email);
       };
 
-      //initial pageView;
-      pageView();
-
     }
   };
+
+    // clear form elements on load (so when you return from the summary page, it resets the form)
+    $(document).ready(function () {
+        var $summaryPage = $('[value="Page break"]');
+
+        if (!($summaryPage.length)) {
+            $('input[type="radio"]').prop('checked', false);
+            // re-select the selected package so that auto selecting the package will work
+            $('.package.selected').parent().siblings('.form-radio').prop('checked', true);
+            $('select').prop('selectedIndex',0);
+        };
+
+        if($summaryPage.length) {
+            if(typeof Drupal.ajax != 'undefined') {
+                /**
+                 * Override webformStripeCheckout
+                 */
+                Drupal.ajax.prototype.commands.webformStripeCheckout = function (ajax, data, status) {
+                    var $form = $(ajax.form[0]);
+                    var $email = $form.find('.form-email').first();
+
+                    if($('.node-ebooking').length > 0) {
+                        var nid = $form.attr('id').replace('webform-client-form-', '');
+                        var title = 'payment';
+
+                        if (!empty(Drupal.settings['ebooking_gtm_urls_' + nid])) {
+                            $.each(Drupal.settings['ebooking_gtm_urls_' + nid], function (k, v) {
+                                if(k === 'payment') {
+                                    title = v;
+                                }
+                            });
+                        }
+
+                        var obj = {
+                            'event': 'ebooking_panel_view',
+                            'ebooking_virtual_event_url': title
+                        }
+
+                        if (typeof window.dataLayer == 'undefined') {
+                            window.dataLayer = [];
+                        }
+                        window.dataLayer.push(obj);
+
+                        //console.log(window.dataLayer);
+                    }
+
+                    StripeCheckout.open($.extend(data.params, {
+                        email: $email.val(),
+                        token: function (token) {
+                            $('.webform-stripe-token', ajax.form.context).val(token.id + ':' + token.email);
+                            ajax.form[0].submit();
+                        }
+                    }));
+                };
+            }
+        }
+    });
 
 })(jQuery);
