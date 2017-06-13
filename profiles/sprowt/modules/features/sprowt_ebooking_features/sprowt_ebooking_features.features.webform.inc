@@ -10,7 +10,7 @@
 function sprowt_ebooking_features_webform_defaults() {
 $webforms = array();
   $webforms['ebooking_template'] = array(
-  'uid' => 0,
+  'uid' => 1,
   'title' => 'eBooking template',
   'log' => '',
   'status' => 0,
@@ -26,15 +26,25 @@ $webforms = array();
   'rh_redirect' => NULL,
   'rh_redirect_response' => NULL,
   'uuid' => '639bbf2b-a27b-405a-94a0-5364b31c98e4',
-  'revision_uid' => 0,
+  'revision_uid' => 1,
   'field_ebooking' => array(
     'und' => array(
       0 => array(
-        'value' => 'yes',
+        'value' => 'no',
       ),
     ),
   ),
   'body' => array(),
+  'metatags' => array(
+    'und' => array(
+      'og:type' => array(
+        'value' => '',
+      ),
+      'twitter:card' => array(
+        'value' => '',
+      ),
+    ),
+  ),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -1619,9 +1629,9 @@ WY|Wyoming
       ),
     ),
   ),
-  'name' => '',
-  'picture' => 0,
-  'data' => NULL,
+  'name' => 'coalmarch',
+  'picture' => 2,
+  'data' => 'b:0;',
 );
 return $webforms;
 }
