@@ -606,98 +606,100 @@ function _sprowt_taxonomy_engine_build_node($type = '', $properties = array()) {
  * @return void
  */
 function sprowt_taxonomy_engine_node_update($node) {
-	$allowable_node_types = array('region', 'service', 'market', 'localtarget');
-	if (in_array($node->type, $allowable_node_types) && $node->original->status != $node->status) {
-		$entities = array_values(entity_uuid_load('node', array('c1c20802-54d4-49c2-ad31-61784e121b9f','2b054fc1-1268-405d-9d93-9829b7c4a20c')));
-		foreach($entities as $e){
-			switch($e->uuid){
-				case 'c1c20802-54d4-49c2-ad31-61784e121b9f':
-					$services = _sprowt_taxonomy_engine_add_menu_info($e);
-					break;
-				case '2b054fc1-1268-405d-9d93-9829b7c4a20c':
-					$service_areas = _sprowt_taxonomy_engine_add_menu_info($e);
-					break;
-			}
-		}
-		
-		// Act on the unpublishing of an article.
-		if ($node->status == 0) {
-			$node->menu['enabled'] = 0;
-			menu_node_save($node);
-		}
-		// Act on the publishing of an article.
-		if ($node->status == 1 && empty($node->menu['enabled'])) {
-			$region_count = db_query("SELECT count(nid) FROM {node} WHERE type = 'region' AND status = 1")->fetchField();
-			switch($node->type){
-				case 'region':
-					if(!empty($region_count) && $region_count > 1){
-						$node->menu = array(
-							'link_title' => $node->title,
-							'menu_name' => 'main-menu',
-							'plid' => $service_areas->menu['mlid'],
-							'enabled' => 1,
-							'description' => $node->title,
-						);
-					}
-					break;
-				case 'market':
-					if(!empty($region_count) && $region_count > 1){
-						$region = _sprowt_taxonomy_engine_get_market_parent_region($node->nid);
-						if(!empty($region->nid)){
-							if(empty($region->menu['mlid'])){
-								$region->menu = array(
-									'link_title' => $region->title,
-									'menu_name' => 'main-menu',
-									'plid' => $service_areas->menu['mlid'],
-									'enabled' => 1,
-									'description' => $node->title,
-								);
-								menu_node_save($region);
-							}
-							$node->menu = array(
-								'link_title' => $node->title,
-								'menu_name' => 'main-menu',
-								'plid' => $region->menu['mlid'],
-								'enabled' => 1,
-								'description' => $node->title,
-							);
-						}
-					}
-					else {
-						$node->menu = array(
-							'link_title' => $node->title,
-							'menu_name' => 'main-menu',
-							'plid' => $service_areas->menu['mlid'],
-							'enabled' => 1,
-							'description' => $node->title,
-						);
-					}
-					break;
-				case 'service':
-					$node->menu = array(
-						'link_title' => $node->title,
-						'menu_name' => 'main-menu',
-						'plid' => $services->menu['mlid'],
-						'enabled' => 1,
-						'description' => $node->title,
-					);
-					break;
-				case 'localtarget':
-					$market =  _sprowt_taxonomy_engine_get_localtarget_parent_market($node->nid);
-					if(!empty($market->menu['mlid'])){
-						$node->menu = array(
-							'link_title' => $node->title,
-							'menu_name' => 'main-menu',
-							'plid' => $market->menu['mlid'],
-							'enabled' => 1,
-							'description' => $node->title,
-						);
-					}
-					break;
-			}
-			menu_node_save($node);
-		}
-	}
+    
+    //This WAs the menu update
+//	$allowable_node_types = array('region', 'service', 'market', 'localtarget');
+//	if (in_array($node->type, $allowable_node_types) && $node->original->status != $node->status) {
+//		$entities = array_values(entity_uuid_load('node', array('c1c20802-54d4-49c2-ad31-61784e121b9f','2b054fc1-1268-405d-9d93-9829b7c4a20c')));
+//		foreach($entities as $e){
+//			switch($e->uuid){
+//				case 'c1c20802-54d4-49c2-ad31-61784e121b9f':
+//					$services = _sprowt_taxonomy_engine_add_menu_info($e);
+//					break;
+//				case '2b054fc1-1268-405d-9d93-9829b7c4a20c':
+//					$service_areas = _sprowt_taxonomy_engine_add_menu_info($e);
+//					break;
+//			}
+//		}
+//
+//		// Act on the unpublishing of an article.
+//		if ($node->status == 0) {
+//			$node->menu['enabled'] = 0;
+//			menu_node_save($node);
+//		}
+//		// Act on the publishing of an article.
+//		if ($node->status == 1 && empty($node->menu['enabled'])) {
+//			$region_count = db_query("SELECT count(nid) FROM {node} WHERE type = 'region' AND status = 1")->fetchField();
+//			switch($node->type){
+//				case 'region':
+//					if(!empty($region_count) && $region_count > 1){
+//						$node->menu = array(
+//							'link_title' => $node->title,
+//							'menu_name' => 'main-menu',
+//							'plid' => $service_areas->menu['mlid'],
+//							'enabled' => 1,
+//							'description' => $node->title,
+//						);
+//					}
+//					break;
+//				case 'market':
+//					if(!empty($region_count) && $region_count > 1){
+//						$region = _sprowt_taxonomy_engine_get_market_parent_region($node->nid);
+//						if(!empty($region->nid)){
+//							if(empty($region->menu['mlid'])){
+//								$region->menu = array(
+//									'link_title' => $region->title,
+//									'menu_name' => 'main-menu',
+//									'plid' => $service_areas->menu['mlid'],
+//									'enabled' => 1,
+//									'description' => $node->title,
+//								);
+//								menu_node_save($region);
+//							}
+//							$node->menu = array(
+//								'link_title' => $node->title,
+//								'menu_name' => 'main-menu',
+//								'plid' => $region->menu['mlid'],
+//								'enabled' => 1,
+//								'description' => $node->title,
+//							);
+//						}
+//					}
+//					else {
+//						$node->menu = array(
+//							'link_title' => $node->title,
+//							'menu_name' => 'main-menu',
+//							'plid' => $service_areas->menu['mlid'],
+//							'enabled' => 1,
+//							'description' => $node->title,
+//						);
+//					}
+//					break;
+//				case 'service':
+//					$node->menu = array(
+//						'link_title' => $node->title,
+//						'menu_name' => 'main-menu',
+//						'plid' => $services->menu['mlid'],
+//						'enabled' => 1,
+//						'description' => $node->title,
+//					);
+//					break;
+//				case 'localtarget':
+//					$market =  _sprowt_taxonomy_engine_get_localtarget_parent_market($node->nid);
+//					if(!empty($market->menu['mlid'])){
+//						$node->menu = array(
+//							'link_title' => $node->title,
+//							'menu_name' => 'main-menu',
+//							'plid' => $market->menu['mlid'],
+//							'enabled' => 1,
+//							'description' => $node->title,
+//						);
+//					}
+//					break;
+//			}
+//			menu_node_save($node);
+//		}
+//	}
 }
 
 /**
