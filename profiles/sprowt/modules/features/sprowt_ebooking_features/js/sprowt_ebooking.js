@@ -382,16 +382,25 @@
             });
         }
 
-        var $summaryPage = $('[value="Page break"]');
 
-        if (!($summaryPage.length)) {
+        var summaryPage = false;
+        var $num = $('input[name="details[page_num]"]');
+        var $count = $('input[name="details[page_count]"]');
+
+        if($target.length > 0 && $num.length > 0 && $count.length > 0) {
+            if($num.val() == $count.val()) {
+                summaryPage = true;
+            }
+        }
+
+        if (!(summaryPage) && $target.length > 0) {
             $('input[type="radio"]').prop('checked', false);
             // re-select the selected package so that auto selecting the package will work
             $('.package.selected').parent().siblings('.form-radio').prop('checked', true);
             $('select').prop('selectedIndex',0);
         };
 
-        if($summaryPage.length) {
+        if(summaryPage) {
             if(typeof Drupal.ajax != 'undefined') {
                 /**
                  * Override webformStripeCheckout
