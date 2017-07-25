@@ -428,6 +428,7 @@ function _webform_stripe_form_webform_component_edit_form_alter(&$form, &$form_s
   // the form state to _webform_edit_webform_stripe().
   if ($form['type']['#value'] === 'webform_stripe') {
     $component = $form_state['build_info']['args'][1];
+    webform_component_include('select');
 
     // Add ajax handler to amount component field.
     $form['amount']['amount_value_component']['#ajax'] = array(
@@ -738,8 +739,9 @@ function _webform_stripe_form_webform_client_form_alter(&$form, &$form_state) {
         // Add class to form to help Drupal.ajax.prototype.beforeSubmit().
         $form['#attributes']['class'][] = 'webform-stripe-form';
 
-        // Add submit callback.
-        $form['#submit'][] = '_webform_stripe_process_token';
+        // Replace Webform's submit callback with our own.
+        $key = array_search('webform_client_form_submit', $form['#submit']);
+        $form['#submit'][$key] = '_webform_stripe_process_token';
 
         // Creating; set default submit button text and attach ajax.
         if (empty($form['#submission'])) {
@@ -924,6 +926,14 @@ function _webform_stripe_process_checkout_settings($component, $data) {
       break;
   }
 
+  // Allow modules to alter Stripe Checkout settings.
+  $context = array(
+    'node' => $node,
+    'component' => $component,
+    'data' => $data,
+  );
+  drupal_alter('webform_stripe_checkout_settings', $settings, $context);
+
   // Prepare for Javascript.
   foreach ($settings as $key => $setting) {
     // Ensure boolean values have correct type.
@@ -973,6 +983,7 @@ function _webform_stripe_process_dynamic_value($type, $component, $data) {
       // For descriptions, if the value is still empty, grab it from the select
       // option's value.
       if (empty($value) && $type === 'description_value') {
+        webform_component_include('select');
         $options = _webform_select_options($dynamic_component);
         $value = $options[$key];
       }
@@ -1047,23 +1058,21 @@ function _webform_stripe_process_token(&$form, &$form_state) {
         'currency' => $settings['currency'],
       );
     }
+
+    // Update submission data.
+    $form_state['values']['submitted'][$component['cid']] = serialize($value);
+
+    // Charge was successful, so continue with saving the submission.
+    webform_client_form_submit($form, $form_state);
   }
 
   // Transaction failed.
   catch(\Stripe\Error\Base $e) {
-    drupal_set_message(t('The payment was unsuccessful.'), 'error');
-    watchdog('webform_stripe', 'Payment was unsuccessful with message: %message', array(
+    drupal_set_message(t('The payment was unsuccessful: %message', array(
       '%message' => $e->getMessage(),
-    ), WATCHDOG_ERROR, l(t('view'), "node/{$component['nid']}/webform"));
+    )), 'error');
+    $form_state['rebuild'] = TRUE;
   }
-
-  // Update submission data.
-  db_query("UPDATE {webform_submitted_data} SET data = :value WHERE nid = :nid AND sid = :sid AND cid = :cid", array(
-    ':value' => serialize($value),
-    ':nid' => $component['nid'],
-    ':sid' => $sid,
-    ':cid' => $component['cid'],
-  ));
 }
 
 /**

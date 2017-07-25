@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Hooks and public functions for Logo Block
+ * Hooks and public functions for Logo Block.
  */
 
 /**
@@ -12,6 +12,18 @@ function logo_block_theme() {
   return array(
     'logo_block_wrapper' => array(
       'render element' => 'element',
+      'file' => 'logo_block.theme.inc',
+    ),
+    'logo_block_image_style' => array(
+      'variables' => array(
+        'style_name' => NULL,
+        'path' => NULL,
+        'width' => NULL,
+        'height' => NULL,
+        'alt' => '',
+        'title' => NULL,
+        'attributes' => array(),
+      ),
       'file' => 'logo_block.theme.inc',
     ),
   );
@@ -25,6 +37,7 @@ function logo_block_block_info() {
     'info' => t('Logo Block'),
     'cache' => DRUPAL_NO_CACHE,
   );
+
   return $blocks;
 }
 
@@ -41,7 +54,8 @@ function logo_block_block_configure($delta = '') {
       '#description' => t('The path for this link. This can be an internal Drupal path such as %add-node or an external URL such as %drupal. Enter %front to link to the front page. If this field is left empty, no link will be created for the image.', array(
         '%front' => '<front>',
         '%add-node' => 'node/add',
-        '%drupal' => 'http://drupal.org')),
+        '%drupal' => 'http://drupal.org',
+      )),
     );
     $image_styles = image_styles();
     $formatted_styles = array();
@@ -57,6 +71,7 @@ function logo_block_block_configure($delta = '') {
       '#description' => t('Select an optional image style to use for the rendering of the logo.'),
     );
   }
+
   return $form;
 }
 
@@ -90,7 +105,6 @@ function logo_block_block_save($delta = '', $edit = array()) {
 function logo_block_block_view($delta = '') {
   $block = array();
   if ($delta === 'logo') {
-    $logo_path = '';
     $default_logo = theme_get_setting('default_logo');
     if ($default_logo) {
       $logo_path = logo_block_get_default_logo_path();
@@ -98,7 +112,7 @@ function logo_block_block_view($delta = '') {
     else {
       $logo_path = theme_get_setting('logo_path');
     }
-    if ($logo_path) {
+    if (!empty($logo_path)) {
       $site_name = variable_get('site_name', '');
       $block['content'] = array(
         '#path' => $logo_path,
@@ -107,20 +121,19 @@ function logo_block_block_view($delta = '') {
         '#theme' => 'image',
         '#theme_wrappers' => array('logo_block_wrapper'),
       );
-      if (!$default_logo) {
-        $image_style = variable_get('logo_block_style', '_none');
-        if ($image_style !== '_none') {
-          $block['content']['#style_name'] = $image_style;
-          $block['content']['#theme'] = 'image_style';
-          $block['content']['#width'] = '';
-          $block['content']['#height'] = '';
-        }
+      $image_style = variable_get('logo_block_style', '_none');
+      if ($image_style !== '_none') {
+        $block['content']['#style_name'] = $image_style;
+        $block['content']['#theme'] = 'logo_block_image_style';
+        $block['content']['#width'] = '';
+        $block['content']['#height'] = '';
       }
     }
     else {
       $block['content'] = NULL;
     }
   }
+
   return $block;
 }
 
@@ -138,5 +151,6 @@ function logo_block_get_default_logo_path($theme = NULL) {
   else {
     $logo_path = 'misc/druplicon.png';
   }
+
   return $logo_path;
 }
