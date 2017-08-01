@@ -80,6 +80,11 @@ function review_boost_schema() {
                     'not null' => TRUE,
                     'default' => 0,
                 ),
+                'hash' => array(
+                    'type' => 'varchar',
+                    'length' => 255,
+                    'default' => '',
+                ),
             ),
             'indexes' => array(
                 'token' => array('token'),
@@ -176,4 +181,25 @@ function review_boost_update_7101() {
     }
 
     db_update('review_boost_token')->fields(array('email_sent' => 1))->execute();
+}
+
+/**
+ * Add hash field
+ */
+
+function review_boost_update_7102() {
+    $field = array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+    );
+    
+    db_add_field('review_boost_token', 'hash', $field);
+    
+    $rows = db_query("SELECT * FROM review_boost_token")->fetchAll(PDO::FETCH_ASSOC);
+    
+    foreach($rows as $row) {
+        $hash = _review_boost_hash_data_row($row);
+        db_update('review_boost_token')->fields(array('hash' => $hash))->condition('tid', $row['tid'])->execute();
+    }
 }

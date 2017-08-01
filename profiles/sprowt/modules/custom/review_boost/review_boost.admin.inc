@@ -177,23 +177,28 @@ function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
     if (count($form_state['storage']['data'])) {
       $queue = DrupalQueue::get('review_boost_email_worker');
         foreach($form_state['storage']['data'] as $data) {
-            if(_review_boost_admin_import_csv_validate_data($data)) {
+            $row = array(
+                'token' => $data['token'],
+                'customer_id' => $data['customer_id'],
+                'first_name' => $data['customer_first_name'],
+                'last_name' => $data['customer_last_name'],
+                'email' => $data['customer_email'],
+                'tech' => $data['technician'],
+                'sales' => $data['sales'],
+                'branch' => $data['branch'],
+                'service' => $data['service'],
+                'service_date' => $data['service_date'] instanceof DateTime ? $data['service_date']->getTimestamp() : time(),
+                'creation_date' => time(),
+                'email_sent' => 0,
+            );
+            if(_review_boost_admin_import_csv_validate_data($row)) {
+                $hash = _review_boost_hash_data_row($row);
+                $row['hash'] = $hash;
                 db_insert('review_boost_token')
-                    ->fields(array(
-                        'token' => $data['token'],
-                        'customer_id' => $data['customer_id'],
-                        'first_name' => $data['customer_first_name'],
-                        'last_name' => $data['customer_last_name'],
-                        'email' => $data['customer_email'],
-                        'tech' => $data['technician'],
-                        'sales' => $data['sales'],
-                        'branch' => $data['branch'],
-                        'service' => $data['service'],
-                        'service_date' => $data['service_date'] instanceof DateTime ? $data['service_date']->getTimestamp() : time(),
-                        'creation_date' => time(),
-                        'email_sent' => 0,
-                    ))
+                    ->fields($row)
                     ->execute();
+    
+                _review_boost_get_hashes($hash);
                 $queue->createItem(array('data' => $data));
                 $queued++;
             }
@@ -207,23 +212,63 @@ function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
 }
 
 function _review_boost_admin_import_csv_validate_data($data) {
-    $email = $data['customer_email'];
-
-    if(empty($data['customer_email'])) {
+    if(empty($data['email'])) {
+        drupal_set_message('Email empty for customer with customer_id of ' . $data['customer_id'], 'error');
         return false;
     }
+    
+    
+    $hashes = _review_boost_get_hashes();
+    $hash = _review_boost_hash_data_row($data);
 
-    $emails = db_query("
-        SELECT email
-        FROM review_boost_token
-    ")->fetchCol();
-
-    if(in_array($email, $emails)) {
-        drupal_set_message(sprintf('Review boost email already sent to %s!', $email), 'error');
+    if(in_array($hash, $hashes)) {
+        drupal_set_message('Review boost email already sent to/queued for customer with customer_id of ' . $data['customer_id'] . '!', 'error');
         return false;
     }
 
     return true;
+}
+
+function _review_boost_hash_data_row($data) {
+    $row = array(
+        'email' => _review_boost_clean_for_hash($data['email']),
+        'tech' => _review_boost_clean_for_hash($data['tech']),
+        'sales' => _review_boost_clean_for_hash($data['sales']),
+        'branch' => _review_boost_clean_for_hash($data['branch']),
+        'service' => _review_boost_clean_for_hash($data['service']),
+        'service_date' => _review_boost_clean_for_hash($data['service_date'])
+    );
+    
+    $json = json_encode($row);
+    return md5($json);
+}
+
+function _review_boost_clean_for_hash($item) {
+    $return = strtolower(trim($item));
+    if(empty($return)) {
+        $return = 'NULL';
+    }
+    return $return;
+}
+
+function _review_boost_get_hashes($add = '', $reset = false) {
+    $hashes = &drupal_static(__FUNCTION__);
+    if($reset) {
+        $hashes = &drupal_static(__FUNCTION__, null, true);
+    }
+    
+    if(!isset($hashes)) {
+        $hashes = db_query("
+            SELECT hash
+            FROM review_boost_token
+        ")->fetchCol();
+    }
+    
+    if(!empty($add)) {
+        $hashes[] = $add;
+    }
+    
+    return $hashes;
 }
 
 /**
