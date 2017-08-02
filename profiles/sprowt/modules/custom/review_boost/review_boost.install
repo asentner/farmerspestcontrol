@@ -188,6 +188,7 @@ function review_boost_update_7101() {
  */
 
 function review_boost_update_7102() {
+    require_once drupal_get_path('module', 'review_boost') . '/review_boost.admin.inc';
     $field = array(
         'type' => 'varchar',
         'length' => 255,
