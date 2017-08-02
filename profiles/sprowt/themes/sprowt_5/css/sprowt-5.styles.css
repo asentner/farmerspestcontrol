@@ -2345,14 +2345,12 @@
     right: -15px;
     padding-left: 20px;
     font-weight: 600;
-    -webkit-transition: 0.2s right;
     transition: 0.2s right; }
   .block--services-intro a:hover:after, .block--views-slideshow-front .field--name-body a:hover:after,
   .block--views-slideshow-localtarget .field--name-body a:hover:after, .block--views-special-offers-front-s4 .button:hover:after, .block--views-localtarget-value-prop .field--name-field-intro a:hover:after {
     right: -18px; }
 
 a {
-  -webkit-transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
   transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
   transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out, transform .2s ease-in-out;
   transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out, transform .2s ease-in-out, -webkit-transform .2s ease-in-out; }
@@ -2370,7 +2368,6 @@ div.accordion .accordion-header {
   font-size: 1em;
   line-height: 1.4;
   position: relative;
-  -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s; }
   div.accordion .accordion-header > * {
     -ms-flex: 0 1 auto; }
@@ -2381,7 +2378,6 @@ div.accordion .accordion-header {
     position: absolute;
     left: 15px;
     font-weight: 700;
-    -webkit-transition: -webkit-transform 0.2s;
     transition: -webkit-transform 0.2s;
     transition: transform 0.2s;
     transition: transform 0.2s, -webkit-transform 0.2s; }
@@ -2447,6 +2443,12 @@ div.accordion .accordion-content {
 .flex-control-nav {
   display: none; }
 
+.flexslider:hover .flex-direction-nav .flex-prev {
+  left: -8px; }
+
+.flexslider:hover .flex-direction-nav .flex-next {
+  right: 5px; }
+
 input[type=text], input[type=email], input[type=password], textarea, select {
   border: 1px solid;
   width: 100%;
@@ -2506,7 +2508,6 @@ input[type=text], input[type=email], input[type=password], textarea, select {
 .local-target-benefits .field--name-field-image a > img, .block--views-benefits-front .field--name-field-icon a,
 .benefits-hero .field--name-field-icon a, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-icon a,
 .local-target-benefits .field--name-field-icon a, .block--logo-block-logo img, .block--logo img, .block--views-team-list .field--name-field-image img {
-  -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out; }
   .block--list .field--name-field-image img:hover, .block--views-affiliates-list img:hover, .block--views-benefits-front .field--name-field-image a > img:hover,
   .benefits-hero .field--name-field-image a > img:hover, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-image a > img:hover,
@@ -3303,6 +3304,30 @@ li.addtoany {
       .block--webform-front .webform-component-email {
         max-width: 150px; } }
 
+.block--views-galleries-gallery-list .view-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap; }
+  .block--views-galleries-gallery-list .view-content > * {
+    -ms-flex: 0 1 auto; }
+  .block--views-galleries-gallery-list .view-content .views-row {
+    margin: 1.5%;
+    position: relative; }
+    .block--views-galleries-gallery-list .view-content .views-row .gallery_link {
+      position: absolute;
+      bottom: 6px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4); }
+      .block--views-galleries-gallery-list .view-content .views-row .gallery_link a {
+        display: block;
+        padding: 2% 4%;
+        color: white; }
+
 .block--views-localtarget-map-reviews {
   padding: 40px 20px;
   text-align: center; }
@@ -3653,7 +3678,6 @@ li.addtoany {
     padding: 0 20px;
     text-align: left;
     -webkit-column-count: 2;
-       -moz-column-count: 2;
             column-count: 2; }
     .block-areas-map ul li {
       padding-left: 10px; }
@@ -3958,7 +3982,6 @@ li.addtoany {
       z-index: 2;
       -webkit-transform: translateY(100%);
               transform: translateY(100%);
-      -webkit-transition: -webkit-transform .35s ease-in-out;
       transition: -webkit-transform .35s ease-in-out;
       transition: transform .35s ease-in-out;
       transition: transform .35s ease-in-out, -webkit-transform .35s ease-in-out; }
@@ -3980,7 +4003,6 @@ li.addtoany {
     top: 50%;
     -webkit-transform: translate3d(-50%, -50%, 0);
             transform: translate3d(-50%, -50%, 0);
-    -webkit-transition: -webkit-transform .35s ease-in-out;
     transition: -webkit-transform .35s ease-in-out;
     transition: transform .35s ease-in-out;
     transition: transform .35s ease-in-out, -webkit-transform .35s ease-in-out; }
@@ -3989,7 +4011,6 @@ li.addtoany {
     font-size: 1.5em; }
   .block--views-services-front-4-secondary .node__content {
     opacity: 0;
-    -webkit-transition: all .35s ease-in-out;
     transition: all .35s ease-in-out;
     position: absolute;
     top: 170px;
@@ -4080,7 +4101,7 @@ li.addtoany {
   .block--views-slideshow-localtarget .slide-content {
     max-width: 800px;
     margin: auto;
-    padding: 20px;
+    padding: 20px 25px;
     position: relative;
     text-shadow: 0 4px 9.6px rgba(0, 0, 0, 0.14); }
   .block--views-slideshow-front .field--name-body,
@@ -4436,6 +4457,28 @@ li.addtoany {
 .node--full .field--name-field-image {
   margin: 1em 0; }
 
+.node--image-gallery .node__title {
+  text-align: center;
+  margin-bottom: 5%; }
+
+.node--image-gallery .field--name-field-gallery-images .field-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  .node--image-gallery .field--name-field-gallery-images .field-items > * {
+    -ms-flex: 0 1 auto; }
+  .node--image-gallery .field--name-field-gallery-images .field-items .field-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 1.5%; }
+
 .field--name-field-intro {
   font-size: 1.05em; }
   .field--name-field-intro p {
@@ -4542,7 +4585,6 @@ li.addtoany {
 
 @media (min-width: 768px) {
   .block--nav-main {
-    -webkit-transition: -webkit-transform .5s;
     transition: -webkit-transform .5s;
     transition: transform .5s;
     transition: transform .5s, -webkit-transform .5s;
@@ -4576,7 +4618,6 @@ li.addtoany {
 
 @media (min-width: 1030px) {
   .block--nav-main {
-    -webkit-transition: -webkit-transform .5s;
     transition: -webkit-transform .5s;
     transition: transform .5s;
     transition: transform .5s, -webkit-transform .5s;

@@ -2,7 +2,6 @@
   background-color: #d32c26; }
 
 a {
-  -webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; }
 
 .button, .node--teaser .field--name-body .field__item > .more-link,

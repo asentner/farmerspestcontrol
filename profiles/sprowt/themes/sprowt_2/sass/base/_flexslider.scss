@@ -22,3 +22,14 @@
 		font-size: 45px;
 	}
 }
+.flexslider:hover{
+	.flex-direction-nav{
+		.flex-prev{
+			left:-8px;
+		}
+		.flex-next{
+			right:5px;
+		}
+	}
+}
+

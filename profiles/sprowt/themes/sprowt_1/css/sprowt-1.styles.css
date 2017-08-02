@@ -2332,7 +2332,6 @@
   clip: auto; }
 
 a {
-  -webkit-transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
   transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
   transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out, transform .2s ease-in-out;
   transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, opacity .2s ease-in-out, transform .2s ease-in-out, -webkit-transform .2s ease-in-out; }
@@ -2350,7 +2349,6 @@ div.accordion .accordion-header {
   font-size: 1em;
   line-height: 1.4;
   position: relative;
-  -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s; }
   div.accordion .accordion-header > * {
     -ms-flex: 0 1 auto; }
@@ -2361,7 +2359,6 @@ div.accordion .accordion-header {
     position: absolute;
     left: 15px;
     font-weight: 700;
-    -webkit-transition: -webkit-transform 0.2s;
     transition: -webkit-transform 0.2s;
     transition: transform 0.2s;
     transition: transform 0.2s, -webkit-transform 0.2s; }
@@ -2427,6 +2424,12 @@ div.accordion .accordion-content {
 .flex-control-nav {
   display: none; }
 
+.flexslider:hover .flex-direction-nav .flex-prev {
+  left: -8px; }
+
+.flexslider:hover .flex-direction-nav .flex-next {
+  right: 5px; }
+
 input[type=text], input[type=email], input[type=password], textarea, select {
   border: 1px solid;
   width: 100%;
@@ -2485,7 +2488,6 @@ input[type=text], input[type=email], input[type=password], textarea, select {
 .benefits-hero .field--name-field-icon a > img,
 .local-target-benefits .field--name-field-image a > img,
 .local-target-benefits .field--name-field-icon a > img, .block--views-team-list .field--name-field-image img {
-  -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out; }
   .block--list .field--name-field-image img:hover, .block--views-affiliates-list img:hover, .benefits-hero .field--name-field-image a > img:hover,
   .benefits-hero .field--name-field-icon a > img:hover,
@@ -3068,6 +3070,30 @@ li.addtoany {
     min-width: 220px;
     margin-top: 20px; }
 
+.block--views-galleries-gallery-list .view-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap; }
+  .block--views-galleries-gallery-list .view-content > * {
+    -ms-flex: 0 1 auto; }
+  .block--views-galleries-gallery-list .view-content .views-row {
+    margin: 1.5%;
+    position: relative; }
+    .block--views-galleries-gallery-list .view-content .views-row .gallery_link {
+      position: absolute;
+      bottom: 6px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4); }
+      .block--views-galleries-gallery-list .view-content .views-row .gallery_link a {
+        display: block;
+        padding: 2% 4%;
+        color: white; }
+
 .block--views-localtarget-map-reviews {
   padding: 40px 20px;
   text-align: center; }
@@ -3640,7 +3666,7 @@ li.addtoany {
   .block--views-slideshow-localtarget .slide-content {
     max-width: 800px;
     margin: auto;
-    padding: 80px 20px 30px;
+    padding: 80px 25px 30px;
     position: relative; }
   .block--views-slideshow-front .field--name-body,
   .block--views-slideshow-localtarget .field--name-body {
@@ -3872,6 +3898,28 @@ li.addtoany {
 .node--full .field--name-field-image {
   margin: 1em 0; }
 
+.node--image-gallery .node__title {
+  text-align: center;
+  margin-bottom: 5%; }
+
+.node--image-gallery .field--name-field-gallery-images .field-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  .node--image-gallery .field--name-field-gallery-images .field-items > * {
+    -ms-flex: 0 1 auto; }
+  .node--image-gallery .field--name-field-gallery-images .field-items .field-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 1.5%; }
+
 .field--name-field-intro {
   font-size: 1.05em; }
   .field--name-field-intro p {
@@ -3975,7 +4023,6 @@ li.addtoany {
 
 @media (min-width: 768px) {
   .block--nav-main {
-    -webkit-transition: -webkit-transform .5s;
     transition: -webkit-transform .5s;
     transition: transform .5s;
     transition: transform .5s, -webkit-transform .5s;
@@ -4009,7 +4056,6 @@ li.addtoany {
 
 @media (min-width: 1030px) {
   .block--nav-main {
-    -webkit-transition: -webkit-transform .5s;
     transition: -webkit-transform .5s;
     transition: transform .5s;
     transition: transform .5s, -webkit-transform .5s;

@@ -5,7 +5,6 @@ div.accordion .accordion-header {
     background-color: #dddddd; }
 
 a {
-  -webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; }
 
 .button {
@@ -313,7 +312,6 @@ hr {
       color: #f5c505; }
   @media (min-width: 1024px) {
     .block--views-services-front-4-secondary .node:after {
-      background: -webkit-linear-gradient(transparent 0%, transparent 10%, #00591d 90%, #00591d 100%);
       background: linear-gradient(transparent 0%, transparent 10%, #00591d 90%, #00591d 100%); } }
 
 .front .block--views-services-all .view-content + .more-link a {

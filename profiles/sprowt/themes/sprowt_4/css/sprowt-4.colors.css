@@ -1,5 +1,4 @@
 a {
-  -webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; }
 
 .button {
@@ -646,7 +645,6 @@ hr {
   background-color: #f3ba0d; }
 
 .node-type-localtarget .l-region--preface-third {
-  background-image: -webkit-linear-gradient(top, #f3ba0d 50%, #fff 50%);
   background-image: linear-gradient(to bottom, #f3ba0d 50%, #fff 50%); }
 
 .node-type-localtarget .l-region--preface-fourth {
