@@ -4424,12 +4424,6 @@ li.addtoany {
     font-weight: 600; }
     .block--nav-mobile-utility .menu a > * {
       -ms-flex: 0 1 auto; }
-    .block--nav-mobile-utility .menu a[href^='tel:']:before {
-      font-family: "FontAwesome";
-      font-weight: normal;
-      content: "";
-      padding-right: 10px;
-      font-size: 1.25em; }
 
 @media (min-width: 768px) {
   .block--nav-mobile-utility {
@@ -4473,11 +4467,20 @@ li.addtoany {
         -webkit-box-pack: center;
             -ms-flex-pack: center;
                 justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         width: 100%;
         padding: 15px 5px;
         font-weight: 600; }
         .block--nav-utility-footer .menu li a > * {
           -ms-flex: 0 1 auto; }
+        .block--nav-utility-footer .menu li a[href^='tel:']:before {
+          font-family: "FontAwesome";
+          font-weight: normal;
+          content: "";
+          padding-right: 10px;
+          font-size: 1.25em; }
   @media (min-width: 768px) {
     .block--nav-utility-footer {
       display: none; } }

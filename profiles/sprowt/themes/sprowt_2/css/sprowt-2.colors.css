@@ -536,25 +536,25 @@ hr {
       background-color: #47b649;
       color: #eee; } }
 
-.block--nav-mobile-utility .menu li.first {
+.block--nav-mobile-utility .menu li:nth-of-type(odd) {
   background-color: #3a4648; }
 
-.block--nav-mobile-utility .menu li.last {
-  background-color: #47b649; }
-
-.block--nav-mobile-utility .menu a {
-  color: #fff; }
-  .block--nav-mobile-utility .menu a[href^='tel:']:before {
-    color: #47b649; }
-
-.block--nav-utility-footer .menu li:nth-of-type(odd) {
-  background-color: #3a4648; }
-
-.block--nav-utility-footer .menu li:nth-of-type(even) {
+.block--nav-mobile-utility .menu li:nth-of-type(even) {
   background-color: #516164; }
 
-.block--nav-utility-footer .menu li a {
+.block--nav-mobile-utility .menu li a {
   color: #fff; }
+
+.block--nav-utility-footer .menu li.first {
+  background-color: #3a4648; }
+
+.block--nav-utility-footer .menu li.last {
+  background-color: #47b649; }
+
+.block--nav-utility-footer .menu a {
+  color: #fff; }
+  .block--nav-utility-footer .menu a[href^='tel:']:before {
+    color: #47b649; }
 
 .block--nav-submenu {
   background-color: #fff; }

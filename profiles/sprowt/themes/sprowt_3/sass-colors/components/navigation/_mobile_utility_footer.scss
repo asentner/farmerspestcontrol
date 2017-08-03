@@ -1,19 +1,26 @@
 .block--nav-utility-footer {
-  $color-bg-odd: palette(black, pure);
-  $color-bg-even: lighten($color-bg-odd, 10);
   $color-fg: palette(white, pure);
+  $color-bg-left: palette(black, pure);
+  $color-bg-right: palette(primary, base);
 
   .menu {
     li {
-      &:nth-of-type(odd) {
-        background-color: $color-bg-odd;
+      &.first {
+        background-color: $color-bg-left;
       }
-      &:nth-of-type(even) {
-        background-color: $color-bg-even;
+      &.last {
+        background-color: $color-bg-right;
       }
-      a {
-        color: $color-fg;
+    }
+    a {
+      color: $color-fg;
+      &[href^='tel:'] {
+        &:before {
+          color: $color-bg-right;
+        }
       }
     }
   }
 }
+
+
