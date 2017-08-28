@@ -18,10 +18,20 @@
             }
 
             $.each(utm, function(key, $field){
+                //$field.closest('div').show();
                 if($field.length > 0) {
                     var params = new URLSearchParams(window.location.search);
                     if(null !== params.get(key)) {
                         $field.val(params.get(key));
+                    }
+
+                    var hash = window.location.hash;
+                    var re = new RegExp('[#&]'+ key + '=([^&]+)');
+                    if(re.test(hash)) {
+                        var matches = re.exec(hash);
+                        if(typeof matches[1] != 'undefined') {
+                            $field.val(matches[1]);
+                        }
                     }
                 }
             });
