@@ -1,0 +1,13 @@
+{
+  "username" : "mquattrochi",
+  "password" : "$S$DthNmnPWOhv563FltElczlYlQzfMAqD9y91RZ//vkbnw9pX3MB.u",
+  "encrypted" : true,
+  "email" : "mquattrochi@coalmarch.com",
+  "first_name" : "Michael",
+  "last_name" : "Quattrochi",
+  "image" : "/profiles/sprowt/images/coalmarch/mquattrochi.jpg",
+  "position" : "Web Developer",
+  "google_plus_id" : "",
+  "Description" : "",
+  "roles": ["administrator"]
+}
