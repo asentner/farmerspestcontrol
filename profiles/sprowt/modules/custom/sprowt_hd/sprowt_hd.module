@@ -65,28 +65,7 @@ function _sprowt_hd_submit($form, &$form_state)
 
     $apiUrl = 'https://api.calltrackingmetrics.com/api/v1/formreactor/' . $form_reactor_data['form_reactor_id'];
     
-    $raw_values = $form_state['values']['submitted'];
-    $webform = $form['#node']->webform;
-    $componenents = $webform['components'];
-    $values = array();
-    foreach($raw_values as $cid => $v) {
-        if(!empty($componenents[$cid]['form_key'])) {
-            $values[$componenents[$cid]['form_key']] = $v;
-        }
-        else {
-            $values[$cid] = $v;
-        }
-        if(is_array($v)) {
-            foreach($v as $cid => $val) {
-                if(!empty($componenents[$cid]['form_key'])) {
-                    $values[$componenents[$cid]['form_key']] = $val;
-                }
-                else {
-                    $values[$cid] = $val;
-                }
-            }
-        }
-    }
+    $values = _sprowt_hd_extract_values_from_form_state($form, $form_state);
     
 
     // Check to see if the submission has a phone number
@@ -150,4 +129,36 @@ function _sprowt_hd_submit($form, &$form_state)
             }
         }
     }
+}
+
+function _sprowt_hd_extract_values_from_form_state($form, $form_state) {
+    $raw_values = $form_state['values']['submitted'];
+    $webform = $form['#node']->webform;
+    $webform_componenents = $webform['components'];
+    $components = array();
+    foreach($webform_componenents as $cid => $v) {
+        $components[$cid] = $v['form_key'];
+    }
+
+    return _sprowt_hd_extract_values_using_webform_components($components, $raw_values);
+}
+
+function _sprowt_hd_extract_values_using_webform_components($components, $raw_values) {
+    $values = array();
+    foreach($raw_values as $cid => $v) {
+        if(!empty($components[$cid])) {
+            $values[$components[$cid]] = $v;
+        }
+        else {
+            if(is_array($v)) {
+                $more_values = _sprowt_hd_extract_values_using_webform_components($components, $v);
+                $values = array_merge($values, $more_values);
+            }
+            else {
+                $values[$cid] = $v;
+            }
+        }
+    }
+
+    return $values;
 }
