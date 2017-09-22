@@ -458,3 +458,10 @@ function sprowt_update_7004() {
 function sprowt_update_7005() {
     db_delete('system')->condition('name','fe_block')->execute();
 }
+
+/**
+ * update registry to accomodate html_title location
+ */
+function sprowt_update_7006() {
+  registry_rebuild();
+}

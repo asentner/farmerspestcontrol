@@ -1,0 +1,7 @@
+name = HTML title
+description = Enables limited HTML markup in node titles. Now maintained by Us!
+core = 7.x
+version = "7.x-1.4"
+; Views Handlers
+files[] = views/handlers/html_title_handler_field_node_title.inc
+package = Coalmarch
