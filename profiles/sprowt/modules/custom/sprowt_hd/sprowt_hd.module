@@ -3,6 +3,111 @@
  * Drupal 7 implementation of the Sprowt HD module
  */
 
+
+
+if(!module_exists('sprowt_settings')) {
+    /**
+     * Implements hook_menu_alter().
+     */
+    function sprowt_hd_menu_alter(&$items) {
+        $items['admin/config/sprowt'] = array(
+            'title' => 'Sprowt',
+            'description' => 'Sprowt',
+            'page callback' => '_sprowt_admin_menu_block',
+            'access arguments' => array('administer site configuration'),
+            'file' => 'sprowt_settings.pages.inc',
+            'position' => 'left',
+        );
+    
+        $items['admin/config/sprowt/speedlead-settings'] = array(
+            'title' => 'SpeedLead Settings',
+            'description' => 'SpeedLead settings',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('sprowt_hd_settings_admin'),
+            'access arguments' => array('administer site configuration'),
+            'type' => MENU_NORMAL_ITEM,
+            'weight' => -50
+        );
+    }
+    
+    function _sprowt_admin_menu_block(){
+        $item = menu_get_item();
+        if ($content = system_admin_menu_block($item)) {
+            $output = theme('admin_block_content', array('content' => $content));
+        }
+        else {
+            $output = t('You do not have any administrative items.');
+        }
+        return $output;
+    }
+    
+    function sprowt_hd_settings_admin() {
+        $form = array();
+    
+        $form['sprowt_settings'] = array(
+            '#type' => 'vertical_tabs'
+        );
+    
+        $form['sprowt_ctm'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Call Tracking Metrics Integration'),
+            '#collapsible' => true,
+            '#collapsed' => false,
+            '#group' => 'sprowt_settings'
+        );
+    
+        $form['sprowt_ctm']['sprowt_ctm_account_id'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Account ID'),
+            '#default_value' => variable_get('sprowt_ctm_account_id'),
+            '#size' => 10,
+            '#maxlength' => 6,
+            '#description' => t("CTM Account ID for the customer. Entering the account number will automatically generate the tracking code for you. Leave blank to disable tracking code."),
+        );
+    
+        $form['sprowt_ctm']['sprowt_ctm_access_key'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Access Key'),
+            '#default_value' => variable_get('sprowt_ctm_access_key'),
+            '#size' => 60,
+            '#maxlength' => 128,
+            '#description' => t("API credentials required for Sprowt HD to work. The access key can be found under account settings in CTM."),
+        );
+    
+        $form['sprowt_ctm']['sprowt_ctm_secret_key'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Secret Key'),
+            '#default_value' => variable_get('sprowt_ctm_secret_key'),
+            '#size' => 60,
+            '#maxlength' => 128,
+            '#description' => t("API credentials required for Sprowt HD to work. The secret key can be found under account settings in CTM."),
+        );
+    
+        return system_settings_form($form);
+    }
+    
+    
+    /**
+     * Implements hook_init().
+     */
+    function sprowt_hd_init()
+    {
+        drupal_add_js(array(
+            'sprowt' => array(
+                'ctmAccountId' => variable_get('sprowt_ctm_account_id'),
+            )
+        ), 'setting');
+    }
+    
+    /**
+     * Implements hook_preprocess_HOOK().
+     */
+    function sprowt_hd_preprocess_page(&$variables) {
+        drupal_add_js(drupal_get_path('module', 'sprowt_hd') . '/js/ctm.js');
+    }
+}
+
+
 /**
  * Implements hook_menu().
  */
