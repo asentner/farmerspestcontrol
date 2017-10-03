@@ -8,7 +8,6 @@ dependencies[] = filter
 dependencies[] = list
 dependencies[] = options
 dependencies[] = securepages
-dependencies[] = sprowt_content_types
 dependencies[] = strongarm
 dependencies[] = webform
 dependencies[] = webform_calculation_components
