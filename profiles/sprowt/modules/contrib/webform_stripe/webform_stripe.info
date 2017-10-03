@@ -5,9 +5,9 @@ core = 7.x
 dependencies[] = libraries
 dependencies[] = webform (>= 4.x)
 
-; Information added by Drupal.org packaging script on 2017-07-24
-version = "7.x-1.6"
+; Information added by Drupal.org packaging script on 2017-09-22
+version = "7.x-1.7"
 core = "7.x"
 project = "webform_stripe"
-datestamp = "1500930074"
+datestamp = "1506105254"
 
