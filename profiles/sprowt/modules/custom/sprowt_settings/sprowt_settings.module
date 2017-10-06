@@ -383,12 +383,12 @@ function sprowt_settings_tokens_alter(&$replacements, $context)
           'body'
         );
         foreach($tokens_replace as $token) {
-          if (isset($context['tokens'][$token])) {
+          if (isset($context['tokens'][$token]) && isset($replacements[$context['tokens'][$token]])) {
             $replacements[$context['tokens'][$token]] = _sprowt_settings_shortcode_replace($replacements[$context['tokens'][$token]]);
           }
         }
         foreach($context['tokens'] as $key => $code) {
-          if(strpos($key, 'field_') !== false) {
+          if(strpos($key, 'field_') !== false && isset($replacements[$code])) {
             $replacements[$code] = _sprowt_settings_shortcode_replace($replacements[$code]);
           }
         }
