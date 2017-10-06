@@ -7,6 +7,7 @@
     <li>customer_first_name</li>
     <li>customer_last_name</li>
     <li>customer_email</li>
+    <li>customer_phone</li>
     <li>technician</li>
     <li>sales</li>
     <li>branch</li>
@@ -23,3 +24,4 @@
 <p><strong>Step 4:</strong> Whenever a survey is completed, the business owner will receive an email with a copy of it. They can reach out to the customer if the survey was not positive, or just keep it for their records.</p>
 
 <?php print drupal_render($form); ?>
+<?php echo drupal_render(drupal_get_form('_review_boost_admin_send_surveys_form')); ?>

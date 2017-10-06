@@ -1,0 +1,10 @@
+{
+    "name": "review_boost/review_boost",
+    "description": "Dependencies for Review Boost module.",
+    "require": {
+        "twilio/sdk": "^5.13"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    }
+}

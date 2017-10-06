@@ -1,6 +1,8 @@
 <?php
 
 require_once drupal_get_path('module', 'system') . '/system.admin.inc';
+require_once drupal_get_path('module','review_boost') . '/review_boost_sms.php';
+require_once drupal_get_path('module','review_boost') . '/review_boost_customer.php';
 
 function _review_boost_admin_menu_block_page() {
     $item = menu_get_item();
@@ -36,6 +38,7 @@ function _review_boost_admin_import_csv_form($form, $form_state) {
         )
     );
 
+
     return $form;
 }
 
@@ -60,6 +63,7 @@ function _review_boost_admin_import_csv_form_validate($form, &$form_state) {
             'customer_first_name',
             'customer_last_name',
             'customer_email',
+            'customer_phone',
             'technician',
             'sales',
             'branch',
@@ -172,57 +176,144 @@ function _review_boost_admin_import_csv_form_cancel($form, &$form_state) {
     $form_state['redirect'] = array('admin/survey/import-csv');
 }
 
+/**
+ * @param $form
+ * @param $form_state
+ *
+ *Adds CSV to Database and queue email/text to be sent
+ */
 function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
-    $queued = 0;
-    if (count($form_state['storage']['data'])) {
-      $queue = DrupalQueue::get('review_boost_email_worker');
-        foreach($form_state['storage']['data'] as $data) {
-            $row = array(
-                'token' => $data['token'],
-                'customer_id' => $data['customer_id'],
-                'first_name' => $data['customer_first_name'],
-                'last_name' => $data['customer_last_name'],
-                'email' => $data['customer_email'],
-                'tech' => $data['technician'],
-                'sales' => $data['sales'],
-                'branch' => $data['branch'],
-                'service' => $data['service'],
-                'service_date' => $data['service_date'] instanceof DateTime ? $data['service_date']->getTimestamp() : time(),
-                'creation_date' => time(),
-                'email_sent' => 0,
-            );
-            if(_review_boost_admin_import_csv_validate_data($row)) {
-                $hash = _review_boost_hash_data_row($row);
-                $row['hash'] = $hash;
-                db_insert('review_boost_token')
-                    ->fields($row)
-                    ->execute();
-    
-                _review_boost_get_hashes($hash);
-                $queue->createItem(array('data' => $data));
-                $queued++;
-            }
+  $queuedEmails = 0;
+  $queuedPhones = 0;
+  $allErrors = array();
+  if (count($form_state['storage']['data'])) {
+    $queue = DrupalQueue::get('review_boost_email_worker');
+    $smsQueue = DrupalQueue::get('review_boost_sms_worker');
+
+    foreach ($form_state['storage']['data'] as $data) {
+      $customer = new ReviewBoostCustomer();
+      $sms = new ReviewBoostSMS();
+      $row = [
+        'token' => $data['token'],
+        'customer_id' => $data['customer_id'],
+        'first_name' => $data['customer_first_name'],
+        'last_name' => $data['customer_last_name'],
+        'email' => $data['customer_email'],
+        'customer_phone' => $data['customer_phone'],
+        'tech' => $data['technician'],
+        'sales' => $data['sales'],
+        'branch' => $data['branch'],
+        'service' => $data['service'],
+        'service_date' => $data['service_date'] instanceof DateTime ? $data['service_date']->getTimestamp() : time(),
+        'creation_date' => time(),
+        'email_sent' => 0,
+      ];
+
+      //Format Phone
+      $formattedPhone = $sms->validatePhone($data['customer_phone']);
+      $row['customer_phone'] = $formattedPhone;
+      $data['customer_phone'] = $formattedPhone;
+
+
+
+      //if no existing hash move on with survey sending
+      if (_review_boost_admin_import_csv_validate_data($row)) {
+
+        //Run customer validation
+        if($customer->getCustomerByPhone($row['customer_phone']) || $customer->getCustomerByEmail($row['email'])){
+          //check customers opt-out status and set errors
+          $SMSOptOutStatus = $customer->getCustomerByPhone($row['customer_phone'])['sms_optout'];
+          $emailOptOutStatus = $customer->getCustomerByEmail($row['email'])['email_optout'];
+          $customer->setErrors($row['customer_id'],$emailOptOutStatus,$SMSOptOutStatus);
+        }else{
+          //customer does not exist, add to database
+          db_insert('review_boost_customer')
+            ->fields(_review_boost_admin_insert_customer($row))
+            ->execute();
         }
+
+        $errors = $customer->getErrors();
+        array_push($allErrors,$errors);
+
+        $hash = _review_boost_hash_data_row($row);
+        $row['hash'] = $hash;
+
+        //Add current row to token table
+        db_insert('review_boost_token')
+          ->fields($row)
+          ->execute();
+
+        _review_boost_get_hashes($hash);
+
+       //Send sms if both email and phone exists
+        if(!empty($data['customer_phone']) && !empty($data['customer_email'])){
+          //send text iff customer hasn't opted out
+          if(empty($errors['optout_sms'])){
+            $smsQueue->createItem(['data' => $data]);
+            $queuedPhones++;
+          }
+        }
+        //Send email if email exists, but not phone
+        elseif(!empty($data['customer_email']) && empty($data['customer_phone'])){
+          //send email iff customer hasn't opted out
+          if(empty($errors['optout_email'])){
+            $queue->createItem(['data' => $data]);
+            $queuedEmails++;
+          }
+        }
+        //Send sms if phone, but not email
+        elseif(!empty($data['customer_phone'] && empty($data['customer_email']))){
+          //send text iff customer hasn't opted out
+          if(empty($errors['optout_sms'])){
+            $smsQueue->createItem(['data' => $data]);
+            $queuedPhones++;
+          }
+        }
+      }
     }
+
+
     variable_del('_review_boost_temp_data');
-    drupal_set_message(t('CSV Import Completed! %d emails queued!', array(
-        '%d' => $queued
-    )));
-    $form_state['redirect'] = array('admin/survey/import-csv');
+    drupal_set_message('CSV Import Completed!');
+    drupal_set_message(t('%d emails queued!', [
+      '%d' => $queuedEmails
+    ]));
+    drupal_set_message(t('%d phone numbers queued!', [
+      '%d' => $queuedPhones
+    ]));
+    $form_state['redirect'] = ['admin/survey/import-csv'];
+  }
+}
+function _review_boost_admin_send_surveys_form($form, &$form_state){
+  $form['send_surveys'] = array(
+    '#value' => 'Send Surveys',
+    '#type' => 'submit',
+  );
+  return $form;
+}
+function _review_boost_admin_send_surveys_form_submit($form, &$form_state){
+  drupal_cron_run();
+  drupal_set_message(t('Surveys have been sent!'));
 }
 
+/**
+ * @param $data
+ * Array containing a single row of data from the imported csv
+ *
+ * @return bool
+ * Returns true if row passes validation, false otherwise
+ */
 function _review_boost_admin_import_csv_validate_data($data) {
-    if(empty($data['email'])) {
-        drupal_set_message('Email empty for customer with customer_id of ' . $data['customer_id'], 'error');
+    if(empty($data['email']) && empty($data['customer_phone'])){
+        drupal_set_message('Please enter a phone number or email for customer with customer_id of '. $data['customer_id'],'error');
         return false;
     }
-    
-    
+
     $hashes = _review_boost_get_hashes();
     $hash = _review_boost_hash_data_row($data);
 
     if(in_array($hash, $hashes)) {
-        drupal_set_message('Review boost email already sent to/queued for customer with customer_id of ' . $data['customer_id'] . '!', 'error');
+        drupal_set_message('Review boost email/text already sent to/queued for customer with customer_id of ' . $data['customer_id'] . '!', 'error');
         return false;
     }
 
@@ -230,14 +321,16 @@ function _review_boost_admin_import_csv_validate_data($data) {
 }
 
 function _review_boost_hash_data_row($data) {
-    $row = array(
-        'email' => _review_boost_clean_for_hash($data['email']),
-        'tech' => _review_boost_clean_for_hash($data['tech']),
-        'sales' => _review_boost_clean_for_hash($data['sales']),
-        'branch' => _review_boost_clean_for_hash($data['branch']),
-        'service' => _review_boost_clean_for_hash($data['service']),
-        'service_date' => _review_boost_clean_for_hash($data['service_date'])
-    );
+  $sms = new ReviewBoostSMS();
+  $row = array(
+    'email' => _review_boost_clean_for_hash($data['email']),
+    'tech' => _review_boost_clean_for_hash($data['tech']),
+    'sales' => _review_boost_clean_for_hash($data['sales']),
+    'branch' => _review_boost_clean_for_hash($data['branch']),
+    'service' => _review_boost_clean_for_hash($data['service']),
+    'service_date' => _review_boost_clean_for_hash($data['service_date']),
+    'customer_phone' => $sms->validatePhone($data['customer_phone'])
+  );
     
     $json = json_encode($row);
     return md5($json);
@@ -295,6 +388,7 @@ function _review_boost_admin_sample_csv(){
         'customer_first_name',
         'customer_last_name',
         'customer_email',
+        'customer_phone',
         'technician',
         'sales',
         'branch',
@@ -307,6 +401,7 @@ function _review_boost_admin_sample_csv(){
         'First',
         'Last',
         'email@example.com',
+        'Phone',
         'TECHNICIAN NAME/ID',
         'SALES PERSON NAME/ID',
         'BRANCH NAME/ID',
@@ -711,6 +806,20 @@ function _review_boost_admin_survey_results(){
     ));
 }
 
+/**
+ * @param $row
+ *
+ * @return array
+ * returns array of a row of data to insert into the review_boost_customer table
+ */
+function _review_boost_admin_insert_customer($row){
+  $customer_info = array(
+    'customer_phone' => $row['customer_phone'],
+    'email' => $row['email'],
+
+  );
+  return $customer_info;
+}
 function _review_boost_get_totals(){
 
     $sent = db_query("
@@ -891,6 +1000,7 @@ function _review_boost_admin_survey_result($token) {
         t.first_name as 'Customer First Name',
         t.last_name as 'Customer Last Name',
         t.email as 'Customer Email',
+        t.customer_phone as 'Customer Phone',
         t.tech as 'Technician',
         t.sales as 'Sales',
         t.branch as 'Branch',
@@ -964,6 +1074,7 @@ function _review_boost_admin_results_csv(){
         t.first_name as 'Customer First Name',
         t.last_name as 'Customer Last Name',
         t.email as 'Customer Email',
+        t.customer_phone as 'Customer Phone',
         t.tech as 'Technician',
         t.sales as 'Sales',
         t.branch as 'Branch',
