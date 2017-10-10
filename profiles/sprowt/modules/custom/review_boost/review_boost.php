@@ -1,5 +1,5 @@
 <?php
-
+require_once drupal_get_path('module','review_boost') . '/review_boost_sms.php';
 class ReviewBoost {
     private $tokens = array();
     private $token_desciptions = array();
@@ -67,6 +67,7 @@ class ReviewBoost {
                 'first_name' => '',
                 'last_name' => '',
                 'email' => '',
+                'customer_phone' => '',
                 'tech' => '',
                 'sales' => '',
                 'branch' => '',
@@ -112,6 +113,10 @@ class ReviewBoost {
             '%customer_email' => array(
                 'value' => $data['email'],
                 'description' => 'Customer email from the imported CSV'
+            ),
+            '%customer_phone' => array(
+                'value' => $data['customer_phone'],
+                'description' => 'Customer phone number from imported CSV'
             ),
             '%technician' => array(
                 'value' => $data['tech'],
@@ -239,15 +244,31 @@ class ReviewBoost {
         $this->token_desciptions = array_merge($this->token_desciptions, $array);
     }
 
-    function translateValues($str, $addtl = array()) {
+  /**
+   * @param $str
+   * @param array $addtl
+   * @param bool $isSMS
+   *
+   * Maps tokens to a customers data based on csv, allows for additional token mapping,
+   * and shortens url for SMS.
+   * @return mixed
+   */
+    function translateValues($str, $addtl = array(), $isSMS=FALSE) {
         $this->addTokenValues($addtl);
-
         $tokens = $this->tokens;
+
         $street = $tokens['%street'];
         unset($tokens['%street']);
         $tokens['%street'] = $street;
 
         foreach($tokens as $t => $value) {
+
+          if($isSMS===TRUE){
+            $sms = new ReviewBoostSMS($this->formToken);
+            if($t === '%survey_link'){
+              $value = $sms->shortenURL($value);
+            }
+          }
             $str = str_replace($t, $value , $str);
         }
 
@@ -300,6 +321,7 @@ class ReviewBoost {
             '%customer_first_name',
             '%customer_last_name',
             '%customer_email',
+            '%customer_phone',
             '%technician',
             '%sales',
             '%branch',
@@ -496,4 +518,6 @@ class ReviewBoost {
     function getThreshold() {
         return variable_get('review_boost_threshold', 4);
     }
+
+
 }
