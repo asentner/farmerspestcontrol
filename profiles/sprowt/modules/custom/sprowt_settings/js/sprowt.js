@@ -14,7 +14,8 @@
                 utm_source: $('#edit-submitted-utm-source'),
                 utm_medium: $('#edit-submitted-utm-medium'),
                 utm_campaign: $('#edit-submitted-utm-campaign'),
-                utm_content: $('#edit-submitted-utm-content')
+                utm_content: $('#edit-submitted-utm-content'),
+                utm_term: $('#edit-submitted-utm-term')
             }
 
             $.each(utm, function(key, $field){
