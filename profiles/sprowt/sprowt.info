@@ -131,6 +131,14 @@ dependencies[] = multiupload_filefield_widget
 dependencies[] = multiupload_imagefield_widget
 dependencies[] = cacheexclude
 dependencies[] = menu_attributes
+dependencies[] = insert
+dependencies[] = filefield_sources
+dependencies[] = context
+dependencies[] = context_ui
+dependencies[] = paragraphs
+dependencies[] = iframe
+dependencies[] = quicktabs
+
 
 
 ; Custom Modules
