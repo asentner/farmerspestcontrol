@@ -34,12 +34,16 @@ class ReviewBoostSMS {
   //Default Twilio template.
   public function sendSMS($customerPhone){
 
-    $client = new Client($this->account_id, $this->auth_token);
-    $messages = $client->messages->create($customerPhone, array(
+    $msgContent = array(
       'From' => $this->twilio_admin_phone,
-      'mediaUrl' => $this->fetchImageURI('twilio_image'),
       'Body' => $this->getTokenizedMsg(),
-    ));
+    );
+    if(!empty($this->fetchImageURI('twilio_image'))){
+      $msgContent['mediaUrl'] = $this->fetchImageURI('twilio_image');
+    };
+
+    $client = new Client($this->account_id, $this->auth_token);
+    $messages = $client->messages->create($customerPhone, $msgContent);
   }
 
   public function sendReply($phone,$msg){
@@ -110,7 +114,6 @@ class ReviewBoostSMS {
    * Returns url of an image
    */
   public function fetchImageURI($imgVarName){
-
     if(!empty(variable_get($imgVarName))){
       $img_id = variable_get($imgVarName);
       $img = file_load($img_id);

@@ -69,7 +69,7 @@ function _review_boost_sms_admin_form($form, &$form_state){
     '#title'  => t("Upload Image"),
     '#descripion' => t("Upload an image to be sent to customers."),
     '#size' => "2 MB", //todo change this to something smaller or incorporate auto resizing if too big
-    '#default_value' => variable_get('twilio_image'),
+    '#default_value' => variable_get('twilio_image',''),
     '#upload_location'    => "public://review_boost/",
     "#upload_validators"  => array("file_validate_extensions" => array("png gif jpg")),
   );
@@ -104,7 +104,7 @@ function _review_boost_sms_admin_form_validate($form, &$form_state){
 }
 
 function _review_boost_sms_admin_form_submit($form, &$form_state){
-
+$form = $form_state['values'];
   //save default values to access later.
   variable_set('twilio_admin_phone',$form_state['values']['twilio_phone']);
   variable_set('twilio_admin_message',$form_state['values']['twilio_message']);
@@ -113,11 +113,16 @@ function _review_boost_sms_admin_form_submit($form, &$form_state){
 
   //logic for saving the image
   $file = file_load($form_state['values']['twilio_mms_image']);
-  $file->status = FILE_STATUS_PERMANENT;
-  $file_saved = file_save($file);
-  variable_set('twilio_image',$file_saved->fid); //save fid of image to variable so image is not added twice
-  file_usage_add($file_saved, 'review_boost_sms_admin_form', 'twilio_mms_image', $file_saved->fid);
-  $form_state['rebuild'] = TRUE;
+  if($file === false){
+    variable_set('twilio_image','');
+  }else{
+    $file->status = FILE_STATUS_PERMANENT;
+    $file_saved = file_save($file);
+    variable_set('twilio_image',$file_saved->fid); //save fid of image to variable so image is not added twice
+    file_usage_add($file_saved, 'review_boost_sms_admin_form', 'twilio_mms_image', $file_saved->fid);
+    $form_state['rebuild'] = TRUE;
+  }
+
   drupal_set_message(t('Form configuration saved!'));
 }
 
