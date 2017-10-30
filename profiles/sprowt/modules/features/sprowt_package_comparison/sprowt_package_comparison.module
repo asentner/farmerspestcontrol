@@ -53,3 +53,12 @@ function sprowt_package_comparison_preprocess_page(&$variables) {
     ));
     drupal_add_css($path . '/css/sprowt_package_comparison.css');
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function sprowt_package_comparison_form_alter(&$form, &$form_state, $form_id) {
+    if($form_id == 'package_node_form') {
+        drupal_add_js(drupal_get_path('module', 'sprowt_package_comparison') . '/js/package_node_edit.js');
+    }
+}

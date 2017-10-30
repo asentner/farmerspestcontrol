@@ -15,7 +15,7 @@
     $color = $content['field_package_colors'][0]['#markup'];
   };
 
-  $link_title = 'Learn More';
+  $link_title = '';
   if(!empty($content['field_block_link']['#items'][0]['title'])) {
     $link_title = $content['field_block_link']['#items'][0]['title'];
   }
@@ -57,9 +57,9 @@
           </div>
         <?php endif; ?>
 
-        <?php if(!empty($content['field_package_colors'][0]['#markup'])): ?>
+        <?php if(!empty($content['field_package_colors'][0]['#markup']) && !empty($link_title)): ?>
           <a class="button overridden" href="<?php print $node_url; ?>" style="background-color: <?php print $color ?>"><?php print $link_title ?></a>
-        <?php else: ?>
+        <?php elseif(!empty($link_title)): ?>
           <a class="button" href="<?php print $node_url; ?>"><?php print $link_title ?></a>
         <?php endif; ?>
       </div>

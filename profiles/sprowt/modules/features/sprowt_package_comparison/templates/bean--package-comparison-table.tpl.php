@@ -79,7 +79,7 @@
             foreach ($packages as $package) {
               $package_id = $package->field_package['und'][0]['target_id'];
               $button_url = drupal_get_path_alias('node/'.$package_id);
-              $button_title = 'Learn More';
+              $button_title = '';
               if(!empty($package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'])
                 && $package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'] != '[node:url]') {
                 $button_url = $package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'];
@@ -87,7 +87,12 @@
               if(!empty($package->field_package['und'][0]['entity']->field_table_link['und'][0]['title'])) {
                 $button_title = $package->field_package['und'][0]['entity']->field_table_link['und'][0]['title'];
               };
-              print('<td><a class="button" href="'.$button_url.'">'.$button_title.'</a></td>');
+              if(!empty($button_title)) {
+                  print('<td><a class="button" href="' . $button_url . '">' . $button_title . '</a></td>');
+              }
+              else {
+                  print '<td></td>';
+              }
             };
           ?>
         </tr>
