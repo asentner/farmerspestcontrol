@@ -1,0 +1,13 @@
+.node--video-background{
+  .content-wrap{
+    .content{
+      background-color: rgba(palette(black, pure), .4);
+      .node__title{
+        color: palette(white, pure);
+      }
+      .field--name-field-subtitle{
+        color: palette(white, pure);
+      }
+    }
+  }
+}

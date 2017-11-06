@@ -138,6 +138,8 @@ dependencies[] = context_ui
 dependencies[] = paragraphs
 dependencies[] = iframe
 dependencies[] = quicktabs
+dependencies[] = image_resize_filter
+dependencies[] = save_edit
 
 
 

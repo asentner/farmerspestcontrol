@@ -1,0 +1,46 @@
+$tab: 768px;
+$nav: 1030px;
+$utility: 710px;
+$desk: 1024px;
+$wide: 1200px;
+
+$container: 1210px;
+$sidebar: 275px;
+$content: 920px;
+
+
+// neutral names should come from [name that color](http://chir.ag/projects/name-that-color/)
+$COLORS: (
+  black: (
+    base: #373d38,
+    pure: #000,
+  ),
+  white: (
+    base: #eee,
+    pure: #fff,
+  ),
+  neutral: (
+    wild-sand: #f4f4f4,
+    abbey: #58595b,
+    alto: #dddddd,
+  ),
+);
+
+@function palette($color: primary, $tone: base) {
+  // Return warning if color is invalid
+  @if not map-has-key($COLORS, $color) {
+    @warn "There is no color '#{$color}'";
+    @return null;
+  }
+
+  // Grab color tones for given color
+  $color-tones: map-get($COLORS, $color);
+  // Return warning if color tone is invalid
+  @if not map-has-key($color-tones, $tone) {
+    @warn "There is no '#{$tone}' tone of the color '#{$color}'";
+    @return null;
+  }
+
+  // Return the proper shade
+  @return map-get($color-tones, $tone);
+}

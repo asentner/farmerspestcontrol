@@ -1,0 +1,47 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Video Background feature.
+ */
+
+include_once 'sprowt_video_background.features.inc';
+
+function sprowt_video_background_theme($existing, $type, $theme, $path) {
+  $theme = array();
+  $theme['node__video_background'] = array(
+    'render element' => 'content',
+    'base hook' => 'node',
+    'template' => 'node--video-background',
+    'path' => drupal_get_path('module', 'sprowt_video_background') . '/templates',
+    );
+  return $theme;
+}
+
+function sprowt_video_background_preprocess_node(&$variables) {
+  //image preprocess
+  $content = $variables['content'];
+
+  if(!empty($content['field_image'][0])) {
+    $image = $content['field_image'][0];
+    $image_uri = $image['#item']['uri'];
+    $image_url = '';
+    if(!empty($image['#image_style'])) {
+        $image_url = image_style_url($image['#image_style'], $image_uri);
+    }
+    else {
+        $image_url = file_create_url($image_uri);
+    }
+    $variables['image_url_field_image'] = $image_url;
+  }
+
+}
+
+function sprowt_video_background_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_video_background');
+    drupal_add_js($path . '/js/sprowt-video-background.js', array(
+        'type' => 'file',
+        'scope' => 'header',
+        'weight' => 10
+    ));
+    drupal_add_css($path . '/css/sprowt_video_background.css');
+}

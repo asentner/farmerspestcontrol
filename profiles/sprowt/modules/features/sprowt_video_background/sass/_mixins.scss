@@ -1,0 +1,20 @@
+@mixin faicon($icon) {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  content: $icon;
+}
+
+@mixin flexbox {
+  display: flex;
+  > * {
+    -ms-flex: 0 1 auto;
+  }
+}
+
+@mixin clear {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
