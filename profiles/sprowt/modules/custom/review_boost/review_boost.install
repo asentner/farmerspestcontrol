@@ -181,9 +181,62 @@ function review_boost_schema() {
         ),
         'primary key' => array('id'),
       ),
+      'review_boost_undelivered' => array(
+        'fields' => array(
+          'id' => array(
+            'type' => 'serial',
+            'unsigned' => true,
+            'not null' => true,
+          ),
+          'phone' =>array(
+            'type' => 'varchar',
+            'length' => 22,
+            'not null' => true,
+            'default' => '',
+          ),
+          'error_code' => array(
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => true,
+          ),
+          'reviewed' => array(
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => true,
+            'default' => 0,
+          ),
+        ),
+        'indexes' => array(
+          'undelivered_phone' => array('phone')
+        ),
+        'primary key' => array('id'),
+      )
     );
 
     return $schema;
+}
+
+/**
+ * Add developer role to database
+ */
+function review_boost_update_7107(){
+  $dev_role = new stdClass();
+  $dev_role->name = 'developer';
+  $dev_role->weight = 4;
+  user_role_save($dev_role);
+  user_role_grant_permissions($dev_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_dev_role', $dev_role->rid);
+}
+
+/**
+ * Add undelivered table to database
+ */
+function review_boost_update_7106(){
+  $schema = review_boost_schema();
+  if(!db_table_exists('review_boost_undelivered')){
+    db_create_table('review_boost_undelivered',$schema['review_boost_undelivered']);
+  }
 }
 
 /**

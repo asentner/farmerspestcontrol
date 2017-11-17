@@ -519,5 +519,34 @@ class ReviewBoost {
         return variable_get('review_boost_threshold', 4);
     }
 
+    //todo determine if we are going to be using tokens in the title
+    function skipSurveyQuestions($skip = TRUE){
+      if($skip){
+        $title = variable_get('review_boost_skip_questions_title','We hope you enjoyed your service!');
+        $content_val = variable_get('review_boost_skip_questions_content');
+        if (empty($content_val['value'])) {
+          $content_val = ['value' => _review_boost_skip_survey_questions_content()];
+        }
+        $content = $content_val['value'];
+
+        if (function_exists('_sprowt_settings_shortcode_replace')) {
+          $content = _sprowt_settings_shortcode_replace($content);
+        }
+        elseif (function_exists('_leadbuilder_settings_shortcode_replace')) {
+          $content = _leadbuilder_settings_shortcode_replace($content);
+        }
+
+        return array(
+          'title' => $title,
+          'content' => $content
+        );
+      }
+      return FALSE;
+    }
+
+    function getSkipSurveyStatus(){
+      return variable_get('review_boost_skip_survey_questions_checkbox');
+    }
+
 
 }

@@ -13,25 +13,30 @@ class ReviewBoostCustomer {
           $customer_phone_exists,
           $customer_email_exists,
           $errors = array();
+
   public function __construct(){
 
   }
 
   /**
    * @param $email
-   * Updates the table review_boost_customer, sets email_optout to TRUE based on email and prints message to screen.
+   * @param $optoutStatus
+   *
+   * @return bool
+   *
+   * Updates the table review_boost_customer. Sets email_optout to the desired boolean (1 or 0)
    */
-  function updateEmailOptOut($email){
+  function updateEmailOptOut($email,$optoutStatus){
     $query = db_query("UPDATE {review_boost_customer} SET email_optout = :optout WHERE email = :email",
       array(
-        ':optout' => 1,
+        ':optout' => $optoutStatus,
         ':email' => $email
       ));
 
     if($query){
-      drupal_set_message(t('Updated successfully!'));
+      return TRUE;
     }else{
-      drupal_set_message(t('Something went wrong.'));
+      return FALSE;
     }
   }
 
@@ -40,6 +45,8 @@ class ReviewBoostCustomer {
    * @param $optoutStatus
    *
    * @return bool
+   *
+   * Updates the table review_boost_customer. Sets sms_optout to the desired boolean (1 or 0)
    */
   function updateSMSOptStatus($phone,$optoutStatus){
     $query = db_query("UPDATE {review_boost_customer} SET sms_optout = :optout WHERE customer_phone = :phone",
@@ -56,6 +63,14 @@ class ReviewBoostCustomer {
     }
   }
 
+  /**
+   * @param $phone
+   *
+   * @return array, bool
+   *
+   * Selects a customers phone and returns either an associative array containing the customers phone and sms_optout status, or false
+   * if no customer is found.
+   */
   function getCustomerByPhone($phone){
     $result = db_query("SELECT distinct(customer_phone), sms_optout FROM {review_boost_customer}
           WHERE customer_phone = :phone",
@@ -68,6 +83,14 @@ class ReviewBoostCustomer {
     return false;
   }
 
+  /**
+   * @param $email
+   *
+   * @return array, bool
+   *
+   * Selects a customer by email and returns either an associative array containing the customers email and email_opt status, or false
+   * if no customer is found.
+   */
   function getCustomerByEmail($email){
     $result = db_query("SELECT distinct(email), email_optout FROM {review_boost_customer}
           WHERE email = :email",
@@ -149,7 +172,6 @@ class ReviewBoostCustomer {
    * @return bool
    * returns private bool $sms_optout_status
    *
-   *
    */
   function getSMSOptOutStatus(){
     return $this->sms_optout_status;
@@ -183,8 +205,52 @@ class ReviewBoostCustomer {
 
   /**
    * @return array
+   *
+   * Returns an array of errors associated with a customers opt-out status
    */
   function getErrors(){
     return $this->errors;
+  }
+
+  /**
+   * @return bool|\Exception
+   *
+   * Deletes all rows from review_boost_token table
+   */
+  function deleteAllTokens(){
+    $txn = db_transaction();
+    $result = FALSE;
+    try{
+      $query = db_query('TRUNCATE TABLE {review_boost_token}');
+      if($query){
+        $result = TRUE;
+      }
+    }catch(Exception $e){
+      $txn->rollback();
+      watchdog_exception('review_boost_error',$e);
+      $result = $e;
+    }
+    return $result;
+  }
+
+  /**
+   * @return bool|\Exception
+   *
+   * Deletes all customers from review_boost_customers table
+   */
+  function deleteAllCustomers() {
+    $txn = db_transaction();
+    $result = FALSE;
+    try {
+      $query = db_query('TRUNCATE TABLE {review_boost_customer}');
+      if($query){
+        $result = TRUE;
+      }
+    } catch (Exception $e) {
+      $txn->rollback();
+      watchdog_exception('review_boost_error', $e);
+      $result = $e;
+    }
+    return $result;
   }
 }

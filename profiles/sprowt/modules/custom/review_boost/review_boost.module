@@ -130,11 +130,46 @@ function review_boost_menu() {
     'access callback' => '_review_boost_admin_access',
     'file' => 'review_boost_sms.admin.inc',
   ];
-  $items['sms/optout'] = [
-    'page callback' => '_review_boost_sms_optout',
+  $items['sms/response'] = [
+    'page callback' => '_review_boost_sms_response',
     'access arguments' => TRUE,
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+  ];
+  $items['sms/callback'] = [
+    'page callback' => '_review_boost_sms_callback',
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+  $items['admin/survey/advanced'] = [
+    'title' => 'Developer Tools',
+    'description' => 'Clear Queue, Customers, and Tokens.',
+    'access callback' => '_review_boost_developer_admin_access',
+  ];
+  $items['admin/survey/advanced/clear-tokens'] = [
+    'title' => 'Clear All Tokens',
+    'description' => 'Deletes ALL DATA the token table.',
+    'page callback' => '_review_boost_admin_clear_tokens',
+    'access callback' => '_review_boost_developer_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+  $items['admin/survey/advanced/clear-customers'] = [
+    'title' => 'Clear All Customers',
+    'description' => 'Deletes ALL DATA from the customers table',
+    'page callback' => '_review_boost_admin_clear_customers',
+    'access callback' => '_review_boost_developer_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+  $items['admin/survey/advanced/clear-message-queue'] = [
+    'title' => 'Clear All Queued',
+    'description' => 'Deletes all queued SMS/Email messages',
+    'page callback' => '_review_boost_admin_clear_message_queue',
+    'access callback' => '_review_boost_developer_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
   ];
 
 
@@ -146,7 +181,7 @@ function review_boost_menu() {
  */
 function review_boost_theme($existing, $type, $theme, $path) {
   $template_path = drupal_get_path('module', 'review_boost') . '/templates';
-
+  $sms_template_path = drupal_get_path('module','review_boost').'templates/sms';
   return [
     'review_boost_questionnaire' => [
       'variables' => [
@@ -261,6 +296,10 @@ function review_boost_theme($existing, $type, $theme, $path) {
       'template' => 'review_boost_admin_import_csv_confirm',
       'path' => $template_path,
     ],
+    'review_boost_skipped_survey_questions_default' => [
+      'template' => 'review_boost_skip_survey_questions_default',
+      'path' => $template_path,
+    ],
   ];
 }
 
@@ -271,6 +310,10 @@ function review_boost_permission() {
   return [
     'administer_review_boost' => [
       'title' => t('Administer Review Boost'),
+    ],
+    'developer_review_boost' => [
+      'title' => t('Developer Administer Review Boost'),
+      'description' =>t('Enables advanced developer options.')
     ],
   ];
 }
@@ -416,6 +459,11 @@ function _review_boost_questionnaire_anon() {
 }
 
 function _review_boost_questionnaire($token) {
+  $RB = new ReviewBoost();
+
+  if($RB->getSkipSurveyStatus()){
+    return _review_boost_skip_survey_questions($token);
+  }
   // Query for the token id to see if it's valid and to pass to the form
   $result = db_query('SELECT tid FROM {review_boost_token} WHERE token = :token', [
     'token' => $token,
@@ -563,16 +611,59 @@ function _review_boost_questionnaire_complete_default($high = FALSE) {
   ]);
 }
 
+/**
+ * @param $token
+ *
+ * @return bool|string
+ *
+ * Function is called if 'Skip Survey Status' = true. It then translates token values
+ * and returns the review boost complete theme (the template that would normally be called if a user
+ * leaves a 'high' review.
+ */
+function _review_boost_skip_survey_questions($token){
+
+  $RB = new ReviewBoost($token);
+
+  if($RB->getSkipSurveyStatus()){
+    $skip = $RB->skipSurveyQuestions();
+    $title = $RB->translateValues($skip['title']);
+    $content = $RB->translateValues($skip['content']);
+
+    return theme('review_boost_complete', [
+      'title' => $title,
+      'content' => $content,
+    ]);
+  }
+  return false;
+}
+
+/**
+ * @return string
+ *
+ * Provides default content for the page the user sees when the option 'skip survey content' is selected.
+ */
+function _review_boost_skip_survey_questions_content(){
+  $RB = new ReviewBoost();
+
+  return theme('review_boost_skipped_survey_questions_default',[
+    'gplus_url' => variable_get('sprowt_settings_gplus_url', variable_get('coal_admin_gplus_url', FALSE)),
+    'bbb_url' => variable_get('sprowt_settings_bbb_url', variable_get('coal_admin_bbb_url', FALSE)),
+    'company_email' => $RB->getEmail(),
+    'signoff' => $RB->companySignoff(),
+  ]);
+}
+
 function _review_boost_questionnaire_complete($token) {
   $result = db_query('SELECT t.token,r.* FROM review_boost_token t RIGHT JOIN review_boost_result r ON r.tid = t.tid WHERE t.token = :token', [
     'token' => $token,
   ])->fetchAssoc();
 
+  $RB = new ReviewBoost($token);
   if (!$result) {
     return MENU_NOT_FOUND;
   }
 
-  $RB = new ReviewBoost($token);
+
   $high = $result['service_rating'] >= $RB->getThreshold();
 
   if ($high) {
@@ -629,6 +720,17 @@ function _review_boost_admin_access() {
   return ($logged_in && $administer_survey);
 }
 
+function _review_boost_developer_admin_access(){
+  global $user;
+
+  $logged_in = $user->uid;
+
+  $developer_permissions = user_access('developer_review_boost');
+
+
+  return ($logged_in && $developer_permissions);
+}
+
 function _review_boost_get_options() {
   return [
     1 => 1,
@@ -675,7 +777,7 @@ function _review_boost_rand_words($count = 1, $clean = TRUE) {
 }
 
 //todo add validation criteria based on twilio api id for incoming requests.
-function _review_boost_sms_optout() {
+function _review_boost_sms_response() {
   $opt_out_keywords = array('optout','stop','opt out','opt-out','cancel');
   $opt_in_keywords = array('optin','opt-in','opt in','start');
   $sms = new ReviewBoostSMS();
@@ -690,12 +792,12 @@ function _review_boost_sms_optout() {
   //todo check if customer has already opted out or not.
   if(in_array($formattedMsg,$opt_out_keywords)){
     $customer->updateSMSOptStatus($formattedPhone,1); //optout
-    $sms->sendReply($customer_phone,'You have successfully opted-out of sms survey\'s! Reply opt-in to opt back in.');
+    $sms->sendReply($customer_phone,'You have successfully opted-out of sms surveys! Reply opt-in to opt back in.');
   }
   elseif(in_array($formattedMsg,$opt_in_keywords)){
     $customer->updateSMSOptStatus($formattedPhone,0);
-    $sms->sendReply($customer_phone,'You have successfully opted back in to sms survey\'s!');
+    $sms->sendReply($customer_phone,'You have successfully opted back in to sms surveys!');
   }else{
-    $sms->sendReply($customer_phone,'To opt-out, reply with opt-out, to opt back in, reply opt-in');
+    $sms->sendReply($customer_phone,variable_get('twilio_admin_auto_response'));
   }
 }

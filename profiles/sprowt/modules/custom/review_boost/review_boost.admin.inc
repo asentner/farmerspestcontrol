@@ -16,6 +16,10 @@ function _review_boost_admin_menu_block_page() {
 }
 
 function _review_boost_admin_import_csv() {
+  global $conf;
+  $conf['preprocess_js'] = false; //disable js aggregation for this page
+  drupal_page_is_cacheable(false); //disable caching for this page
+  drupal_add_js(drupal_get_path('module','review_boost') . '/js/review_boost.js');
     return theme('review_boost_admin_import_csv', array(
         'form' => drupal_get_form('_review_boost_admin_import_csv_form'),
     ));
@@ -531,6 +535,7 @@ function _review_boost_admin_form($form, &$form_state){
         )
     );
 
+    //Setup thank you high form fields and global variablees
     $ty_high = array();
 
     $ty_high['review_boost_thank_you_high_title'] = array(
@@ -567,6 +572,8 @@ function _review_boost_admin_form($form, &$form_state){
         )
     );
 
+
+    //Setup thank you low form fields and global variables
     $ty_low = array();
 
     $ty_low['review_boost_thank_you_low_title'] = array(
@@ -601,6 +608,49 @@ function _review_boost_admin_form($form, &$form_state){
             '#type' => 'markup',
             '#markup' => _review_boost_generate_token_help($extra_tokens)
         )
+    );
+
+    //Setup form fields and global variables for when a company wants a customer to skip the survey questions.
+    $skip_questions = array();
+
+    $skip_questions['review_boost_skip_questions'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Skip Survey Questions?'),
+      '#description' => t('Check to have a customer skip the customer survey questions and go straight to leaving you a review.'),
+      '#default_value' => variable_get('review_boost_skip_survey_questions_checkbox')
+    );
+
+    $skip_questions['review_boost_skip_questions_title'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title'),
+      '#default_value' => variable_get('review_boost_skip_questions_title','We hope you enjoyed your service!')
+    );
+
+    $content_val = variable_get('review_boost_skip_questions_content');
+    if(empty($content_val) || $content_val['value'] === ""){
+      $content_val = array(
+        'format' => 'full_html',
+        'value' => _review_boost_skip_survey_questions_content()
+      );
+    }
+
+    $skip_questions['review_boost_skip_questions_content'] = array(
+      '#type' => 'text_format',
+      '#title' => t('Content'),
+      '#format' => $content_val['format'],
+      '#default_value' => $content_val['value']
+    );
+
+    $skip_questions['tokens'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Available Tokens',
+      '#description' => 'Can be used in Title and Content',
+      '#collapsible' => true,
+      '#collapsed' => true,
+      'token_markup' => array(
+        '#type' => 'markup',
+        '#markup' => _review_boost_generate_token_help($extra_tokens)
+      )
     );
 
     $form['review_boost_settings_email'] = array(
@@ -647,6 +697,12 @@ function _review_boost_admin_form($form, &$form_state){
         '#type' => 'fieldset',
         '#title' => 'Thank You Page (low rating)',
         $ty_low
+    );
+
+    $form['skip_survey_questions'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Skipped Survey Questions',
+      $skip_questions
     );
 
     $form['#validate'][] = '_review_boost_admin_form_validate';
@@ -699,6 +755,9 @@ function _review_boost_admin_form_submit(&$from, &$form_state) {
         variable_del('review_boost_admin_body');
         unset($values['review_boost_admin_body']);
     }
+
+  //set new checkbox value to variable
+  variable_set('review_boost_skip_survey_questions_checkbox', $form_state['values']['review_boost_skip_questions']);
 }
 
 function _review_boost_admin_survey_results(){
@@ -1008,8 +1067,7 @@ function _review_boost_admin_survey_result($token) {
         t.service_date as 'Service Date'
         FROM review_boost_token t
         LEFT JOIN review_boost_result r on t.tid = r.tid
-        WHERE t.token = :token
-        AND r.tid IS NOT NULL";
+        WHERE t.token = :token";
 
     $args = array(
         ':token' => $token,
@@ -1187,4 +1245,45 @@ function _review_boost_admin_review_form_submit(&$form, &$form_state) {
 
     variable_set('review_boost_review_links', $links);
     cache_clear_all();
+}
+
+function _review_boost_admin_clear_message_queue(){
+  $smsQueue = DrupalQueue::get('review_boost_sms_worker');
+  $emailQueue = DrupalQueue::get('review_boost_email_worker');
+  $msg = 'All Queued SMS and Email Messages have been removed from the queue.';
+  try{
+    $smsQueue->deleteQueue();
+    $emailQueue->deleteQueue();
+  }catch(Exception $e){
+    watchdog_exception('review_boost_error', $e);
+    $msg = 'Error clearing queue!';
+  }
+  drupal_set_message($msg);
+  drupal_goto('/admin/survey/advanced');
+}
+
+function _review_boost_admin_clear_tokens(){
+  $customer = new ReviewBoostCustomer();
+  $clear = $customer->deleteAllTokens();
+  if($clear === true){
+    drupal_set_message('All customer tokens have been deleted!');
+    drupal_goto('/admin/survey/advanced');
+  }else{
+    drupal_set_message('<h3>Error clearing tokens!</h3><br>'. '<p>'.$clear.'</p>','error');
+    drupal_goto('/admin/survey/advanced');
+  }
+
+}
+
+function _review_boost_admin_clear_customers(){
+  $customer = new ReviewBoostCustomer();
+  $clear = $customer->deleteAllCustomers();
+  if($clear === true){
+    drupal_set_message('All customers have been deleted!');
+    drupal_goto('/admin/survey/advanced');
+  }else{
+    drupal_set_message('<h3>Error clearing customers!</h3><br>'. '<p>'.$clear.'</p>','error');
+    drupal_goto('/admin/survey/advanced');
+  }
+
 }
