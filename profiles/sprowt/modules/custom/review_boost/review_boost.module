@@ -778,26 +778,35 @@ function _review_boost_rand_words($count = 1, $clean = TRUE) {
 
 //todo add validation criteria based on twilio api id for incoming requests.
 function _review_boost_sms_response() {
-  $opt_out_keywords = array('optout','stop','opt out','opt-out','cancel');
-  $opt_in_keywords = array('optin','opt-in','opt in','start');
-  $sms = new ReviewBoostSMS();
+  $auth_id = $_REQUEST['AccountSid'];
+  //only process if account sID's match
+  if($auth_id === variable_get('twilio_admin_account_id')){
+    $opt_out_keywords = array('optout','stop','opt out','opt-out','cancel');
+    $opt_in_keywords = array('optin','opt-in','opt in','start');
+    $sms = new ReviewBoostSMS();
 
 
-  $customer_phone = $_REQUEST['From'];
-  $formattedPhone = ltrim($customer_phone, '+1');
-  $customer_msg = trim($_REQUEST['Body']);
-  $formattedMsg = strtolower($customer_msg);
-  $customer = new ReviewBoostCustomer();
+    $customer_phone = $_REQUEST['From'];
 
-  //todo check if customer has already opted out or not.
-  if(in_array($formattedMsg,$opt_out_keywords)){
-    $customer->updateSMSOptStatus($formattedPhone,1); //optout
-    $sms->sendReply($customer_phone,'You have successfully opted-out of sms surveys! Reply opt-in to opt back in.');
-  }
-  elseif(in_array($formattedMsg,$opt_in_keywords)){
-    $customer->updateSMSOptStatus($formattedPhone,0);
-    $sms->sendReply($customer_phone,'You have successfully opted back in to sms surveys!');
+    $formattedPhone = ltrim($customer_phone, '+1');
+    $customer_msg = trim($_REQUEST['Body']);
+    $formattedMsg = strtolower($customer_msg);
+    $customer = new ReviewBoostCustomer();
+
+    //todo check if customer has already opted out or not.
+    if(in_array($formattedMsg,$opt_out_keywords)){
+      $customer->updateSMSOptStatus($formattedPhone,1); //optout
+      $sms->sendReply($customer_phone,'You have successfully opted-out of sms surveys! Reply opt-in to opt back in.');
+    }
+    elseif(in_array($formattedMsg,$opt_in_keywords)){
+      $customer->updateSMSOptStatus($formattedPhone,0);
+      $sms->sendReply($customer_phone,'You have successfully opted back in to sms surveys!');
+    }else{
+      $sms->sendReply($customer_phone,variable_get('twilio_admin_auto_response'));
+    }
   }else{
-    $sms->sendReply($customer_phone,variable_get('twilio_admin_auto_response'));
+    watchdog('review_boost_sms','Error processing response for phone: %phone. Twilio Account sID does not match.',array(
+      '%phone'=>$_REQUEST['From']
+    ));
   }
 }
