@@ -2,4 +2,4 @@ name = Views Ajax Reset Button Fix
 description = Fixes the reset button on ajax enabled views
 core = 7.x
 version = 7.x-1.0
-project = Views
+package = Views

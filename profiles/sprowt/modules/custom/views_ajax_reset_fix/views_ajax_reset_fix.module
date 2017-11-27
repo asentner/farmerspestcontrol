@@ -8,11 +8,11 @@ function views_ajax_reset_fix_form_views_exposed_form_alter(&$form, &$form_state
     $form['reset']['#attributes'] = !empty($form['reset']['#attributes']) ? $form['reset']['#attributes'] : array();
     $form['reset']['#attributes']['class'] = !empty($form['reset']['#attributes']['class']) ? $form['reset']['#attributes']['class'] : array();
     $form['reset']['#attributes']['class'][] = 'views-ajax-reset-fix-button';
-  
+
     $form['submit']['#attributes'] = !empty($form['submit']['#attributes']) ? $form['submit']['#attributes'] : array();
     $form['submit']['#attributes']['class'] = !empty($form['submit']['#attributes']['class']) ? $form['submit']['#attributes']['class'] : array();
     $form['submit']['#attributes']['class'][] = 'views-ajax-reset-fix-button-submit';
-    
+
     $form['#attached']['js'][] = drupal_get_path('module', 'views_ajax_reset_fix') . '/views_ajax_reset_fix.js';
   }
 }
