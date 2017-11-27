@@ -21,6 +21,10 @@ function _webform_defaults_webform_stripe() {
       'amount_plan' => '',
       'amount_plan_component' => '',
       'amount_plan_mapping' => array(),
+      'amount_plan_qty_type' => 'value',
+      'amount_plan_qty_value' => 1,
+      'amount_plan_qty_component' => '',
+      'amount_plan_qty_mapping' => array(),
       'description_type' => 'value',
       'description_value' => '',
       'description_value_component' => '',
@@ -39,19 +43,26 @@ function _webform_defaults_webform_stripe() {
  * Gets Stripe plans.
  */
 function _webform_stripe_get_plans($test_mode) {
-  $plans = array();
-  $secret_key = $test_mode ? variable_get('webform_stripe_test_secret_key', '') : variable_get('webform_stripe_live_secret_key', '');
+  $plans = &drupal_static('webform_stripe_plans');
 
-  // Load list of Stripe plans.
-  if (($library = webform_stripe_load_library()) && $library['loaded'] && !empty($secret_key)) {
-    \Stripe\Stripe::setApiKey($secret_key);
-    try {
-      foreach (\Stripe\Plan::all()->data as $plan) {
-        $plans[$plan->id] = $plan->name;
+  if (!isset($plans)) {
+    $secret_key = $test_mode ? variable_get('webform_stripe_test_secret_key', '') : variable_get('webform_stripe_live_secret_key', '');
+
+    // Load list of Stripe plans.
+    if (($library = webform_stripe_load_library()) && $library['loaded'] && !empty($secret_key)) {
+      \Stripe\Stripe::setApiKey($secret_key);
+      try {
+        foreach (\Stripe\Plan::all()->data as $plan) {
+          $plans[$plan->id] = array(
+            'id' => $plan->id,
+            'name' => $plan->name,
+            'amount' => $plan->amount,
+          );
+        }
       }
-    }
-    catch(\Stripe\Error\Base $e) {
+      catch(\Stripe\Error\Base $e) {
 
+      }
     }
   }
 
@@ -104,8 +115,8 @@ function _webform_edit_webform_stripe($component) {
   );
   $form['amount']['amount_type'] = array(
     '#type' => 'radios',
-    '#title' => t('Amount type'),
-    '#description' => t('Choose "amount" for a one-time charge, or "subscription" for a recurring charge. Choose "fixed" to manually set the amount/plan, or "dynamic" to determine it from another component on this form.'),
+    '#title' => t('Amount'),
+    '#description' => t('Choose "amount" for a one-time charge, or "subscription" for a recurring charge. Choose "fixed" to manually set the amount or subscription plan, or "dynamic" to determine it from another component on this form.'),
     '#options' => array(
       'value' => t('Fixed amount'),
       'value_component' => t('Dynamic amount'),
@@ -177,8 +188,10 @@ function _webform_edit_webform_stripe($component) {
     '#size' => 10,
     '#states' => array(
       'visible' => array(
-        array(':input[name="extra[amount_type]"]' => array('value' => 'value')),
-        array(':input[name="extra[amount_type]"]' => array('value' => 'value_component')),
+        ':input[name="extra[amount_type]"]' => array(
+          array('value' => 'value'),
+          array('value' => 'value_component')
+        ),
       ),
     ),
   );
@@ -233,6 +246,93 @@ function _webform_edit_webform_stripe($component) {
     ),
   );
 
+  // Plan quantity.
+  $form['amount']['amount_plan_qty_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Subscription quantity'),
+    '#description' => t('The quantity of the subscription plan to which the customer should be subscribed.'),
+    '#options' => array(
+      'value' => t('Fixed quantity'),
+      'component' => t('Dynamic quantity'),
+    ),
+    '#default_value' => $component['extra']['amount_plan_qty_type'],
+    '#states' => array(
+      'visible' => array(
+        ':input[name="extra[amount_type]"]' => array(
+          array('value' => 'plan'),
+          array('value' => 'plan_component')
+        ),
+      ),
+    ),
+  );
+
+  // Fixed plan quantity.
+  $form['amount']['amount_plan_qty_value'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fixed subscription quantity'),
+    '#description' => t('The fixed quantity of the subscription plan to which the customer should be subscribed.'),
+    '#default_value' => $component['extra']['amount_plan_qty_value'],
+    '#size' => 10,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="extra[amount_type]"]' => array(
+          array('value' => 'plan'),
+          array('value' => 'plan_component')
+        ),
+        ':input[name="extra[amount_plan_qty_type]"]' => array('value' => 'value'),
+      ),
+    ),
+  );
+
+  // Dynamic plan quantity, which can be determined by a textfield, number, or
+  // select component.
+  $plan_qty_components = array();
+  foreach ($node->webform['components'] as $other_component) {
+    if (in_array($other_component['type'], array('textfield', 'number', 'select'))) {
+      if ($other_component['type'] === 'select' && $other_component['extra']['multiple']) {
+        continue;
+      }
+      $plan_qty_components[$other_component['cid']] = $other_component['name'];
+    }
+  }
+  $form['amount']['amount_plan_qty_component'] = array(
+    '#type' => 'select',
+    '#title' => t('Dynamic subscription quantity'),
+    '#description' => t("Sets the component which will determine the subscription quantity. Eligible components include: Textfield, Number, Select options (not multiple)."),
+    '#options' => $plan_qty_components,
+    '#empty_option' => '- ' . t('Select a component') . ' -',
+    '#default_value' => $component['extra']['amount_plan_qty_component'],
+    '#states' => array(
+      'visible' => array(
+        ':input[name="extra[amount_type]"]' => array(
+          array('value' => 'plan'),
+          array('value' => 'plan_component')
+        ),
+        ':input[name="extra[amount_plan_qty_type]"]' => array('value' => 'component'),
+      ),
+    ),
+  );
+
+  // Map select components to fixed plan quantities. The ajax handler is added
+  // in webform_stripe_form_webform_component_edit_form_alter().
+  $form['amount']['amount_plan_qty_mapping'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Subscription quantity options'),
+    '#description' => t('Select the subscription quantity for each option.'),
+    '#tree' => TRUE,
+    '#states' => array(
+      'visible' => array(
+        'visible' => array(
+          ':input[name="extra[amount_type]"]' => array(
+            array('value' => 'plan'),
+            array('value' => 'plan_component')
+          ),
+          ':input[name="extra[amount_plan_qty_type]"]' => array('value' => 'component'),
+        ),
+      ),
+    ),
+  );
+
   // Description type.
   $form['description'] = array(
     '#type' => 'fieldset',
@@ -245,7 +345,7 @@ function _webform_edit_webform_stripe($component) {
   );
   $form['description']['description_type'] = array(
     '#type' => 'radios',
-    '#title' => t('Description type'),
+    '#title' => t('Description'),
     '#description' => t('Choose "fixed" to manually set the description, "dynamic" to determine it from another component on this form, or "subscription plan" to use the description of the selected plan.'),
     '#options' => array(
       'value' => t('Fixed description'),
@@ -318,7 +418,7 @@ function _webform_edit_webform_stripe($component) {
   );
   $form['email']['email_type'] = array(
     '#type' => 'radios',
-    '#title' => t('Email type'),
+    '#title' => t('Email address'),
     '#options' => array(
       'user' => t('Use email address of logged-in user'),
       'component' => t('Dynamic email address'),
@@ -359,7 +459,7 @@ function _webform_edit_webform_stripe($component) {
   );
   $form['image']['image_type'] = array(
     '#type' => 'radios',
-    '#title' => t('Image type'),
+    '#title' => t('Image'),
     '#options' => array(
       'default' => t('Default image'),
       'file' => t('Custom image upload'),
@@ -451,7 +551,7 @@ function _webform_stripe_form_webform_component_edit_form_alter(&$form, &$form_s
             '#type' => 'textfield',
             '#field_suffix' => check_plain($value),
             '#size' => 10,
-            '#default_value' => isset($component['extra']['amount_value_mapping'][$key]) ? $component['extra']['amount_value_mapping'][$key] : '',
+            '#default_value' => isset($component['extra']['amount_value_mapping'][$key]) ? $component['extra']['amount_value_mapping'][$key] : $key,
           );
         }
       }
@@ -472,7 +572,14 @@ function _webform_stripe_form_webform_component_edit_form_alter(&$form, &$form_s
     ));
 
     // Set plan options and update description.
-    $form['amount']['amount_plan']['#options'] = _webform_stripe_get_plans($test_mode);
+    $plan_options = array();
+    foreach (_webform_stripe_get_plans($test_mode) as $plan) {
+      $plan_options[$plan['id']] = t('@name (@id)', array(
+        '@name' => $plan['name'],
+        '@id' => $plan['id'],
+      ));
+    }
+    $form['amount']['amount_plan']['#options'] = $plan_options;
     $form['amount']['amount_plan']['#description'] .= ' ' . $plan_message;
 
     // Add ajax handler to plan component field.
@@ -493,11 +600,38 @@ function _webform_stripe_form_webform_component_edit_form_alter(&$form, &$form_s
       foreach ($options as $key => $value) {
         $form['amount']['amount_plan_mapping'][$key] = array(
           '#type' => 'select',
-          '#options' => _webform_stripe_get_plans($test_mode),
+          '#options' => $plan_options,
           '#empty_option' => '- ' . t('Select a plan') . ' -',
           '#field_suffix' => check_plain($value),
           '#default_value' => isset($component['extra']['amount_plan_mapping'][$key]) ? $component['extra']['amount_plan_mapping'][$key] : '',
         );
+      }
+    }
+
+    // Add ajax handler to plan quantity component field.
+    $form['amount']['amount_plan_qty_component']['#ajax'] = array(
+      'callback' => '_webform_edit_webform_stripe_amount_ajax_callback',
+      'wrapper' => 'webform-stripe-amount',
+    );
+
+    // Get the selected plan quantity component and add its options to the
+    // mapping fieldset. Otherwise, hide the mapping fieldset by converting it
+    // to a container.
+    $form['amount']['amount_plan_qty_mapping']['#type'] = 'container';
+    $cid = isset($form_state['values']['extra']['amount_plan_qty_component']) ? $form_state['values']['extra']['amount_plan_qty_component'] : $component['extra']['amount_plan_qty_component'];
+    if (!empty($cid) && isset($form['#node']->webform['components'][$cid])) {
+      $dynamic_component = $form['#node']->webform['components'][$cid];
+      if ($dynamic_component['type'] === 'select') {
+        $form['amount']['amount_plan_qty_mapping']['#type'] = 'fieldset';
+        $options = _webform_select_options($form['#node']->webform['components'][$cid]);
+        foreach ($options as $key => $value) {
+          $form['amount']['amount_plan_qty_mapping'][$key] = array(
+            '#type' => 'textfield',
+            '#field_suffix' => check_plain($value),
+            '#size' => 10,
+            '#default_value' => isset($component['extra']['amount_plan_qty_mapping'][$key]) ? $component['extra']['amount_plan_qty_mapping'][$key] : $key,
+          );
+        }
       }
     }
 
@@ -579,26 +713,31 @@ function _webform_edit_webform_stripe_validate($form, &$form_state) {
 
     // Ensure amount is greater than Stripe's minimum charge amount.
     // https://support.stripe.com/questions/what-is-the-minimum-amount-i-can-charge-with-stripe
-    $settings = webform_stripe_checkout_settings();
-    $minimum = array(
-      'USD' => 50,
-      'CAD' => 50,
-      'GBP' => 30,
-      'EUR' => 50,
-      'DKK' => 2.5,
-      'NOK' => 3,
-      'SEK' => 3,
-      'CHF' => 50,
-      'AUD' => 50,
-      'JPY' => 50,
-      'MXN' => 10,
-      'SGD' => 50,
-    );
-    if (array_key_exists($settings['currency'], $minimum) && ($form_state['values']['extra']['amount_value'] * $form_state['values']['extra']['amount_value_multiplier']) < $minimum[$settings['currency']]) {
-      form_set_error('extra][amount_value', t('The minimum amount for %currency is %minimum (cents).', array(
-        '%currency' => $settings['currency'],
-        '%minimum' => $minimum[$settings['currency']],
-      )));
+    else {
+      $settings = webform_stripe_checkout_settings();
+      $minimum = array(
+        'USD' => 50,
+        'CAD' => 50,
+        'GBP' => 30,
+        'EUR' => 50,
+        'DKK' => 2.5,
+        'NOK' => 3,
+        'SEK' => 3,
+        'CHF' => 50,
+        'AUD' => 50,
+        'JPY' => 50,
+        'MXN' => 10,
+        'SGD' => 50,
+      );
+      if (
+        array_key_exists($settings['currency'], $minimum)
+        && ($form_state['values']['extra']['amount_value'] * $form_state['values']['extra']['amount_value_multiplier']) < $minimum[$settings['currency']]
+      ) {
+        form_set_error('extra][amount_value', t('The minimum amount for %currency is %minimum (cents).', array(
+          '%currency' => $settings['currency'],
+          '%minimum' => $minimum[$settings['currency']],
+        )));
+      }
     }
   }
 
@@ -637,11 +776,34 @@ function _webform_edit_webform_stripe_validate($form, &$form_state) {
       form_set_error('extra][amount_plan_component', t('Select a component to use for the subscription plan.'));
     }
 
-    // All amount mappings must be set.
+    // All plan mappings must be set.
     if (!empty($form_state['values']['extra']['amount_plan_mapping'])) {
       foreach ($form_state['values']['extra']['amount_plan_mapping'] as $key => $value) {
         if (empty($value)) {
           form_set_error('extra][amount_plan_mapping', t('Select a subscription plan for each component option.'));
+          break;
+        }
+      }
+    }
+  }
+
+  // Fixed plan quantity is required if fixed plan quantity type is chosen.
+  if ($form_state['values']['extra']['amount_plan_qty_type'] === 'value' && empty($form_state['values']['extra']['amount_plan_qty_value'])) {
+    form_set_error('extra][amount_plan_qty_type', t('Select a subscription quantity.'));
+  }
+
+  // Component plan quantity.
+  if ($form_state['values']['extra']['amount_plan_qty_type'] === 'component') {
+    // Component field is required.
+    if (empty($form_state['values']['extra']['amount_plan_qty_component'])) {
+      form_set_error('extra][amount_plan_qty_component', t('Select a component to use for the subscription quantity.'));
+    }
+
+    // All plan quantity mappings must be set.
+    if (!empty($form_state['values']['extra']['amount_plan_qty_mapping'])) {
+      foreach ($form_state['values']['extra']['amount_plan_qty_mapping'] as $key => $value) {
+        if (empty($value)) {
+          form_set_error('extra][amount_plan_qty_mapping', t('Select a subscription quantity for each component option.'));
           break;
         }
       }
@@ -838,17 +1000,11 @@ function _webform_stripe_process_checkout_settings($component, $data, $state) {
     // Fixed amount.
     case 'value':
       $settings['amount'] = $component['extra']['amount_value'];
-      if (!empty($component['extra']['amount_value_multiplier'])) {
-        $settings['amount'] *= $component['extra']['amount_value_multiplier'];
-      }
       break;
 
     // Dynamic amount.
     case 'value_component':
       $settings['amount'] = _webform_stripe_process_dynamic_value('amount_value', $component, $data);
-      if (!empty($component['extra']['amount_value_multiplier'])) {
-        $settings['amount'] *= $component['extra']['amount_value_multiplier'];
-      }
       break;
 
     // Fixed plan.
@@ -860,6 +1016,33 @@ function _webform_stripe_process_checkout_settings($component, $data, $state) {
     case 'plan_component':
       $settings['plan'] = _webform_stripe_process_dynamic_value('amount_plan', $component, $data);
       break;
+  }
+
+  // Multiply amount (i.e. convert from pennies to dollars). This is not needed
+  // for plans because the amount is pulled in from Stripe.
+  if (!empty($settings['amount']) && !empty($component['extra']['amount_value_multiplier'])) {
+    $settings['amount'] *= $component['extra']['amount_value_multiplier'];
+  }
+
+  // Determine plan quantity and amount.
+  if (!empty($settings['plan'])) {
+    switch ($component['extra']['amount_plan_qty_type']) {
+      // Fixed quantity.
+      case 'value':
+        $settings['plan_quantity'] = $component['extra']['amount_plan_qty_value'];
+        break;
+
+      // Dynamic quantity.
+      case 'component':
+        $settings['plan_quantity'] = _webform_stripe_process_dynamic_value('amount_plan_qty', $component, $data);
+        break;
+    }
+
+    // Multiply amount by quantity.
+    $plans = _webform_stripe_get_plans($component['extra']['test_mode']);
+    if (array_key_exists($settings['plan'], $plans)) {
+      $settings['amount'] = $plans[$settings['plan']]['amount'] * $settings['plan_quantity'];
+    }
   }
 
   // Determine description.
@@ -878,7 +1061,7 @@ function _webform_stripe_process_checkout_settings($component, $data, $state) {
     case 'plan':
       $plans = _webform_stripe_get_plans($component['extra']['test_mode']);
       if (!empty($settings['plan']) && array_key_exists($settings['plan'], $plans)) {
-        $settings['description'] = $plans[$settings['plan']];
+        $settings['description'] = $plans[$settings['plan']]['name'];
       }
       break;
   }
@@ -983,11 +1166,19 @@ function _webform_stripe_process_dynamic_value($type, $component, $data) {
   // Find value in data, either from form_key or cid.
   $value = isset($data[$dynamic_component['form_key']]) ? $data[$dynamic_component['form_key']] : (isset($data[$dynamic_component['cid']]) ? $data[$dynamic_component['cid']] : NULL);
 
-  // For selects, grab the key and find the mapped amount.
+  // Select component.
   if ($value !== NULL && $dynamic_component['type'] === 'select') {
     $key = _webform_submit_select($dynamic_component, $value);
-    if (!is_array($value) && array_key_exists($key, $component['extra']["{$type}_mapping"])) {
-      $value = $component['extra']["{$type}_mapping"][$key];
+    if (!is_array($value)) {
+      // Translate value from option/amount map.
+      if (array_key_exists($key, $component['extra']["{$type}_mapping"])) {
+        $value = $component['extra']["{$type}_mapping"][$key];
+      }
+      // Otherwise, use submitted value (aka, support for "Select or Other"
+      // fields or newly added but not yet mapped options).
+      else {
+        $value = $key;
+      }
 
       // For descriptions, if the value is still empty, grab it from the select
       // option's value.
@@ -1037,14 +1228,16 @@ function _webform_stripe_process_token(&$form, &$form_state) {
         'email' => $email,
       ));
       $subscription = $customer->subscriptions->create(array(
-        'plan' => $settings['plan'],
         'source' => $token,
+        'plan' => $settings['plan'],
+        'quantity' => $settings['plan_quantity'],
       ));
       $value = array(
         'test' => $component['extra']['test_mode'],
         'customer' => $customer->id,
         'subscription' => $subscription->id,
         'plan' => $settings['plan'],
+        'quantity' => $settings['plan_quantity'],
       );
     }
 
