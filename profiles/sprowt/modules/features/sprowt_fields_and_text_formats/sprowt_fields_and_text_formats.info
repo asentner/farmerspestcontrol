@@ -3,7 +3,6 @@ description = Base feature for base fields and text formats
 core = 7.x
 package = Sprowt Features
 version = 7.x-1.0
-project = sprowt_fields_and_text_formats
 dependencies[] = block_shortcode
 dependencies[] = ckeditor
 dependencies[] = color_field

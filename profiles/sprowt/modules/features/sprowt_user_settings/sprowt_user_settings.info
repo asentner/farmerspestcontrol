@@ -3,7 +3,6 @@ description = Feature containing settings related to user
 core = 7.x
 package = Sprowt Features
 version = 7.x-1.0
-project = sprowt_user_settings
 dependencies[] = dashboard
 dependencies[] = features
 dependencies[] = filter

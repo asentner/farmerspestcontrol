@@ -3,7 +3,6 @@ description = Content types included with sprowt sites
 core = 7.x
 package = Sprowt Features
 version = 7.x-1.0
-project = sprowt_content_types
 dependencies[] = field_group
 dependencies[] = metatag
 dependencies[] = smart_trim
