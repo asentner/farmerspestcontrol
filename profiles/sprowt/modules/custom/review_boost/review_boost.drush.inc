@@ -78,15 +78,22 @@ function drush_review_boost_result_generate($count) {
             'first_name' => ucwords($name[0]),
             'last_name' => ucwords($name[1]),
             'email' => $name[0] . "@" . $name[1] . ".com",
+            'customer_phone' => generateRandomPhone(),
             'tech' => $technicians[rand(0,4)],
             'sales' => $sales[rand(0,4)],
             'branch' => $branches[rand(0,4)],
             'service' => $services[rand(0,4)],
             'service_date' => $randDate->getTimestamp(),
             'creation_date' => time(),
+            'email_sent' => rand(0,1),
+            'text_sent' => rand(0,1)
         );
-
-
+        $customer_info['hash'] = generateHash($customer_info);
+        if($customer_info['email_sent'] === 0){
+          $customer_info['text_sent'] = 1;
+        }elseif($customer_info['email_sent'] === 1){
+          $customer_info['text_sent'] = 0;
+        }
         $tid = db_insert('review_boost_token')
             ->fields($customer_info)
             ->execute();
@@ -100,6 +107,28 @@ function drush_review_boost_result_generate($count) {
             ))
             ->execute();
     }
+}
+//hash the data
+function generateHash($data) {
+  $row = array(
+    'email' => $data['email'],
+    'tech' => $data['tech'],
+    'sales' => $data['sales'],
+    'branch' => $data['branch'],
+    'service' => $data['service'],
+    'service_date' => $data['service_date'],
+    'customer_phone' => $data['customer_phone']
+  );
+
+  $json = json_encode($row);
+  return md5($json);
+}
+//Generate random invalid phone based on 555 prefix
+function generateRandomPhone(){
+  $prefix = 555;
+  $areaCode = rand(100,999);
+  $lineNum = rand(1000,9999);
+  return $areaCode . $prefix . $lineNum;
 }
 
 function drush_review_boost_result_generate_delete() {

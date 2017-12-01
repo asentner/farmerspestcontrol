@@ -46,6 +46,7 @@ function _review_boost_admin_import_csv_form($form, $form_state) {
     return $form;
 }
 
+
 function _review_boost_admin_import_csv_form_validate($form, &$form_state) {
     $file = file_save_upload('csv_file', array(
         'file_validate_extensions' => array('csv'),
@@ -58,6 +59,11 @@ function _review_boost_admin_import_csv_form_validate($form, &$form_state) {
         form_set_error('There was a problem uploading the file, please try again!');
         return;
     }
+
+    //remove BOM.
+    $csv_str = file_get_contents($form_state['storage']['csv_file']->destination);
+    $csv_str = str_replace("\xEF\xBB\xBF",'', $csv_str);
+    file_put_contents($form_state['storage']['csv_file']->destination, $csv_str);
 
     if (($fp = fopen($form_state['storage']['csv_file']->destination, 'r')) !== false) {
 
@@ -79,6 +85,7 @@ function _review_boost_admin_import_csv_form_validate($form, &$form_state) {
         $data = array();
 
         while(($line = fgetcsv($fp)) !== false) {
+
             foreach($line as $key => $column) {
                 if ($i != 0) {
                     if (empty($columns[$key])) {

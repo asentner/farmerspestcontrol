@@ -1,4 +1,3 @@
 customer_id,customer_first_name,customer_last_name,customer_phone,customer_email,technician,sales,branch,service,service_date
 3,michael,quattrochi,2565412181,,yes,no,TPC,spider control,10/13/17
 4,test,customer ,,mquattrochi@coalmarch.com,yes,no,TPC,pest control,09/19/17
-6,mike,chochi,(256) 600-1605,,yes,no,TPC,pest control,09/29/17
