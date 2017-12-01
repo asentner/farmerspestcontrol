@@ -3,7 +3,6 @@ description = Menu Settings Specific to Base Theme (copy of Fresh Light)
 core = 7.x
 package = Sprowt Features
 version = 7.x-1.0
-project = sprowt_menu_settings
 dependencies[] = menu
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2

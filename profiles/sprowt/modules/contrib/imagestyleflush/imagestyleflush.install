@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for imagestyleflush.
+ */
+
+/**
+ * A new permission has been defined. Give it to all roles that currently
+ * have the 'administer image styles' permission.
+ */
+function imagestyleflush_update_7000() {
+  $rids = db_select('role_permission', 'rp')
+    ->fields('rp', array('rid'))
+    ->condition('permission', 'administer image styles')
+    ->execute()
+    ->fetchCol();
+
+  foreach ($rids as $rid) {
+    user_role_grant_permissions($rid, array('flush image styles'));
+  }
+}

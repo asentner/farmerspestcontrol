@@ -3,7 +3,6 @@ description = Database based Views on sprowt sites
 core = 7.x
 package = Sprowt Features
 version = 7.x-1.0
-project = sprowt_views_feature
 dependencies[] = ctools
 dependencies[] = flexslider_views
 dependencies[] = views
