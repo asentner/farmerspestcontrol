@@ -1,0 +1,13 @@
+name = Sprowt Consolidated Dashboard
+description = Provides a consolidated dashboard interface using iframes and an alternate login screen.
+core = 7.x
+version = "7.x-1.0"
+package = Sprowt
+
+dependencies[] = sprowt_dashboard_feature
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = iframe
+dependencies[] = strongarm
+dependencies[] = text
+dependencies[] = views

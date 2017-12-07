@@ -1,0 +1,251 @@
+<?php
+
+/**
+ * Implements hook_menu_alter().
+ */
+function sprowt_login_menu_alter(&$items) {
+    $items['sprowt'] = array(
+        'title' => 'Log In',
+        'page callback' => '_sprowt_login_login_page',
+        'access callback' => TRUE
+    );
+    
+    $items['user']['page callback'] = '_sprowt_login_user_redirect';
+
+    $items['dashboard'] = array(
+        'title' => 'Dashboards',
+        'page callback' => '_sprowt_login_dashboards',
+        'access arguments' => array('view sprowt dashboard')
+    );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function sprowt_login_permission() {
+    return array(
+        'view sprowt dashboard' => array(
+            'title' => 'View Dashboard',
+            'description' => 'This will allow the user to view the Sprowt Dashboard top navigation and Dashboard page.'
+        ),
+    );
+}
+
+function _sprowt_login_user_redirect() {
+    global $user;
+    
+    if(!empty($user->uid)) {
+        module_load_include('module', 'user', 'user.pages');
+        return user_page();
+    }
+
+    $query = drupal_get_query_parameters();
+    if(!empty($_GET['destination'])) {
+        unset($_GET['destination']);
+    }
+    
+    return drupal_goto('sprowt', array(
+        'query' => $query
+    ));
+}
+
+function _sprowt_login_login_page() {
+    global $user;
+    
+    if(!empty($user->uid)) {
+        return drupal_goto('user', array(
+            'query' => drupal_get_query_parameters()
+        ));
+    }
+    
+    return drupal_get_form('user_login_block');
+}
+
+function _sprowt_login_get_dashboard_nodes() {
+    $dashboards = views_get_view_result('dashboards', 'tabs');
+
+    $nodes = array();
+    foreach($dashboards as $dash) {
+        $nodes[] = node_load($dash->nid);
+    }
+
+    return $nodes;
+}
+
+function _sprowt_login_dashboards() {
+
+    return theme('sprowt_dashboards', array(
+        'nodes' => _sprowt_login_get_dashboard_nodes()
+    ));
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_login_theme($existing, $type, $theme, $path) {
+    return array(
+        'sprowt_login_page' => array(
+            'base hook' => 'page',
+            'template' => 'sprowt-login-page',
+            'path' => $path . '/templates'
+        ),
+        'sprowt_dashboard_navbar' => array(
+            'template' => 'sprowt-dashboard-navbar',
+            'path' => $path . '/templates',
+            'variables' => array(
+                'logo' => null,
+                'nav_links' => null
+            ),
+        ),
+        'sprowt_dashboards' => array(
+            'template' => 'sprowt-dashboards',
+            'path' => $path . '/templates',
+            'variables' => array(
+                'nodes' => array()
+            ),
+        ),
+        'page__sprowt_dashboard' => array(
+            'base hook' => 'page',
+            'template' => 'page--sprowt-dashboard',
+            'path' => $path . '/templates'
+        ),
+        'node__sprowt_dashboard' => array(
+            'base hook' => 'node',
+            'template' => 'node--sprowt-dashboard',
+            'path' => $path . '/templates'
+        ),
+    );
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function sprowt_login_theme_registry_alter(&$theme_registry)
+{
+    ksort($theme_registry);
+    $something = 'something';
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_login_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_login');
+    if(current_path() == 'sprowt') {
+        $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'], array('sprowt_login_page'));
+        $variables['coalmarch_logo_stacked'] = $path . '/images/stacked-logo.png';
+        drupal_add_css($path . '/css/sprowt_login.css');
+    }
+
+    if(current_path() == 'dashboard') {
+        $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'], array('page__sprowt_dashboard'));
+        drupal_add_js($path . '/js/dashboards.js');
+    }
+}
+
+
+function _sprowt_login_valid_path_by_user($path, $user) {
+    $original_user = $GLOBALS['user'];
+    $GLOBALS['user'] = $user;
+    $router_items = &drupal_static('menu_get_item', true);
+    unset($router_items[$path]);
+    $result = drupal_valid_path($path, TRUE);
+    $GLOBALS['user'] = $original_user;
+
+    return $result;
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function sprowt_login_page_build(&$page) {
+
+    $path = drupal_get_path('module', 'sprowt_login');
+    if(user_access('view sprowt dashboard')) {
+
+        $gotoFront = (
+            drupal_is_front_page()
+            || !_sprowt_login_valid_path_by_user(current_path(), drupal_anonymous_user())
+        );
+
+        $navbar = theme('sprowt_dashboard_navbar', array(
+            'logo' => '/' . $path . '/images/inline-logo.png',
+            'nav_links' => array(
+                array(
+                    'title' => 'Administer Site',
+                    'url' => '<front>',
+                ),
+                array(
+                    'title' => 'Dashboards',
+                    'url' => 'dashboard',
+                ),
+                array(
+                    'title' => 'Logout',
+                    'url' => 'user/logout',
+                    'url_attr' => array(
+                        'query' => array(
+                            'destination' => $gotoFront ? '<front>' : current_path()
+                        ),
+                    ),
+                ),
+                // commented out for now. When we have a support page, we'll put it in.
+//                array(
+//                    'title' => 'Get Support',
+//                    'url' => 'http://www.google.com',
+//                    'attr' => array(
+//                        'target' => '_blank',
+//                        'class' => 'button'
+//                    ),
+//                ),
+            ),
+        ));
+        
+        if(empty($page['page_top'])) {
+            $page['page_top'] = array();
+        }
+        
+        $page['page_top'] = array_merge(array(
+            'sprowt_dashboard_navbar' => array(
+                '#markup' => $navbar,
+                '#attached' => array(
+                    'css' => array(
+                        $path . '/css/sprowt_login.css' => array('every_page' => TRUE),
+                    ),
+                    'js' => array(
+                        $path . '/js/dashboard_nav.js' => array('every_page' => TRUE)
+                    )
+                )
+            ),
+        ), $page['page_top']);
+    }
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function sprowt_login_user_login(&$edit, $account)
+{
+    if ((empty($_GET['destination']) || $_GET['destination'] == 'sprowt')
+        && (!isset($_POST['form_id']) || $_POST['form_id'] != 'user_pass_reset'))
+    {
+        $_GET['destination'] = 'dashboard';
+        $edit['redirect'] = 'dashboard';
+    }
+}
+
+function _sprowt_login_create_sprowt_company_alias() {
+    $company_name = variable_get('sprowt_settings_company_name',
+        variable_get('leadbuilder_settings_company_name')
+    );
+    if(!empty($company_name)) {
+        $company_name_alias = trim(preg_replace('/[^a-z0-9-]+/', '-', strtolower($company_name)), '-');
+        $current_alias = drupal_get_normal_path($company_name_alias);
+        if($current_alias == $company_name_alias) {
+            $path = array(
+                'alias' => $company_name_alias,
+                'source' => 'sprowt'
+            );
+            path_save($path);
+        }
+    }
+}

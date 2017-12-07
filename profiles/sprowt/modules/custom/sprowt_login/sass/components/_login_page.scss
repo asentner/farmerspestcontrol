@@ -1,0 +1,183 @@
+//colors
+$black: #181818;
+$darkgray: #272f33;
+$ltgray: #b8b8b8;
+$mdgray: #a1a1a1;
+$white: #fff;
+$white-base: #f3d791;
+$yellow: #febd1e;
+
+$second: #141414;
+$first: #323232;
+
+$google: #181818;
+
+//font
+$montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
+
+.not-logged-in.page-sprowt {
+    background: -moz-radial-gradient(center, ellipse cover, $first 0%, $second 100%);
+    background: -webkit-radial-gradient(center, ellipse cover, $first 0%, $second 100%);
+    background: radial-gradient(ellipse at center, $first 0%, $second 100%);
+    *{
+        font-family: $montserrat;
+    }
+    .l-page{
+        background: url('../images/watermark.png') no-repeat;
+        background-position: left -515px center;
+        background-size: contain;
+        .l-main{
+            padding: 200px 20px 50px;
+            margin: 0;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .l-content{
+                text-align: center;
+                .block-wrap {
+                    background: #202020;
+                    background: -webkit-linear-gradient(135deg, #2c2c2c 50%, #202020 50%) repeat scroll 0 0;
+                    background: -moz-linear-gradient(135deg, #2c2c2c 50%, #202020 50%) repeat scroll 0 0;
+                    background: linear-gradient(135deg, #2c2c2c 50%, #202020 50%) repeat scroll 0 0;
+                    box-shadow: 0 20px 15.4px 0.6px rgba($black, 0.2);
+                    padding: 20px 30px;
+                }
+
+                .logo img{
+                    width: 200px;
+                    height: auto;
+                }
+
+                .logo {
+                    margin-bottom: 30px;
+                }
+
+                h2, p{
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 1.56;
+                    text-align: center;
+                    color: $white-base;
+                }
+                h2{
+                    margin-top: 0;
+                }
+
+                .google_button{
+                    max-height: 80px;
+                    text-transform: none;
+                    font-size: 18px;
+                    font-weight: 500;
+                    line-height: 1.4;
+                    text-align: center;
+                    color: $white;
+                    padding: 15px 25px;
+                    border-radius: 5px;
+                    background-color: $google;
+                    box-shadow: 0 7px 15.4px 0.6px rgba($black, 0.6);
+                    span{
+                        color: $yellow;
+                    }
+                }
+                .form-item{
+                    margin-bottom: 10px;
+                    margin-top: 1.15em;
+                }
+                label{
+                    color: $ltgray;
+                    text-align: left;
+                    margin: 0 auto 5px;
+                    font-weight: 500;
+                    span{
+                        color: $yellow;
+                    }
+                }
+                input{
+                    padding: 15px;
+                    margin: 0 auto;
+                    border-radius: 5px;
+                    box-shadow: 0 7px 15.4px 0.6px rgba($black, 0.6);
+                }
+                .description{
+                    padding-top: 5px;
+                    text-align: left;
+                    margin: 0 auto;
+                    color: $mdgray;
+                }
+                ul{
+                    line-height: 0.75;
+                    li a{
+                        color: $white-base;
+                        text-transform: uppercase;
+                        font-weight: 500;
+                        font-size: 14px;
+                    }
+                }
+                #edit-actions{
+                    margin-top: 1.15em;
+                    margin-bottom: 0;
+                }
+                .form-submit{
+                    max-height: 80px;
+                    font-size: 18px;
+                    font-weight: 500;
+                    line-height: 1.4;
+                    text-align: center;
+                    color: $white;
+                    padding: 15px 50px;
+                    border-radius: 5px;
+                    background-color: $yellow;
+                    box-shadow: 0 7px 15.4px 0.6px rgba($black, 0.6);
+                }
+            }
+        }
+    }
+    @include breakpoint($tab){
+        .l-page{
+            .l-main{
+                padding: 0 70px;
+                .l-content{
+                    max-width: 600px;
+
+                    .block-wrap {
+                        padding: 40px;
+                    }
+
+                    h2, p{
+                        font-size: 18px;
+                        text-transform: uppercase;
+                    }
+                    .logo img{
+                        width: 229px;
+                    }
+                    .google_button{
+                        padding: 15px 62px;
+                        width: 435px;
+                    }
+                    label{
+                        max-width: 335px;
+                    }
+                    input{
+                        width: 335px;
+                    }
+                    .description{
+                        max-width: 335px;
+                    }
+                    .form-submit{
+                        width: 335px;
+                    }
+                }
+            }
+        }
+    }
+    @include breakpoint($desk){
+        .l-page{
+            .l-main{
+                padding: 0 20px;
+                .l-content{
+                }
+            }
+        }
+    }
+}

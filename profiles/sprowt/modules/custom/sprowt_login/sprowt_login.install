@@ -1,0 +1,6 @@
+<?php
+
+function sprowt_login_install() {
+    features_revert_module('sprowt_dashboard_feature');
+    _sprowt_login_create_sprowt_company_alias();
+}

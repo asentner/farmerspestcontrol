@@ -1,0 +1,66 @@
+//colors
+$black: #181818;
+$mdblack: #262626;
+$white: #fff;
+$white-base: #f3d791;
+$yellow: #febd1e;
+$ltyellow: #ffe7b2;
+$gray: #35312e;
+$ltgray:#f0f0f0;
+
+//font
+$montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
+
+#dashboards {
+  #tab-links {
+    position: relative;
+    z-index: 1;
+    background: $yellow;
+    ul {
+      padding: 10px 20px;
+      max-width: 1210px;
+      margin: 0 auto;
+      @include flexbox;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      li {
+        padding: 0 10px;
+        a {
+          color: $black;
+          font-size: 16px;
+          font-weight: 600;
+          &:hover{
+            color: $white;
+          }
+        }
+      }
+    }
+
+    @include breakpoint($tab){
+      ul{
+        li{
+          padding: 0 25px;
+          a{
+            font-size: 17px;
+          }
+        }
+      }
+    }
+  }
+
+  .not-found {
+    h1, h2 {
+      padding: 10px 20px;
+      max-width: 1210px;
+      text-align: center;
+      margin: 200px auto;
+    }
+  }
+}
+
+.dashboard-page {
+  .messages {
+    margin: 0;
+  }
+}

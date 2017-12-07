@@ -1,0 +1,130 @@
+//colors
+$black: #181818;
+$mdblack: #262626;
+$white: #fff;
+$white-base: #f3d791;
+$yellow: #febd1e;
+$ltyellow: #ffe7b2;
+$gray: #35312e;
+$ltgray:#f0f0f0;
+
+//font
+$montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
+
+#sprowt-dashboard-nav {
+  background: linear-gradient(to right, $black, $mdblack);
+  border-bottom: 2px solid rgba($ltyellow, .6);
+  box-shadow: -10px 0 15.4px 0.6px rgba($black, 0.83);
+  position: relative;
+  z-index: 105;
+  padding: 0 20px;
+  *{
+    font-family: $montserrat;
+    &.fa {
+      font-family: FontAwesome;
+    }
+  }
+
+  .interior {
+    max-width: 1210px;
+    height: 110px;
+    margin: 0 auto;
+    @include flexbox;
+    justify-content: space-between;
+    padding-top: 30px;
+  }
+
+  .fa-bars {
+    color: $white;
+    font-size: 26px;
+    padding: 10px;
+  }
+
+
+  .sprowt-dashboard-nav {
+    position: relative;
+  }
+
+  ul {
+    @include flexbox;
+    flex-direction: column;
+    align-items: flex-end;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 88;
+    li {
+      padding: 5px 10px;
+      width: 185px;
+      text-align: right;
+      background: $mdblack;
+      a {
+        font-size: 17px;
+        line-height: 1.65;
+        color: $ltgray;
+        &:hover{
+          color: $white-base;
+        }
+        &.button{
+          text-transform: none;
+          font-weight: 400;
+          background: transparent;
+          border: solid 1px $yellow;
+          border-radius: 10px;
+          box-shadow: -10px 0 15.4px 0.6px rgba(26, 31, 34, 0.32);
+          color: $white;
+          margin-bottom: 5px;
+          &:hover{
+            color: $white-base;
+          }
+        }
+      }
+    }
+    li:first-child, li:last-child {
+      border-left: none;
+    }
+  }
+
+  @include breakpoint($tab) {
+    .sprowt-dashboard-nav-mobile-toggle {
+      display: none;
+    }
+
+    ul {
+      display: flex !important; //override js
+      align-items: center;
+      flex-direction: row;
+      position: static;
+      li{
+        display: block;
+        background: transparent;
+        text-align: center;
+        width: auto;
+        padding: 0 10px;
+        border-left: 1px solid $gray;
+        a{
+          font-size: 16px;
+          &.button{
+            padding: 10px 20px;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  @include breakpoint($desk){
+    ul{
+      li{
+        padding: 0 15px;
+        a{
+          font-size: 17px;
+          &.button{
+            padding: 10px 30px;
+          }
+        }
+      }
+    }
+  }
+}
