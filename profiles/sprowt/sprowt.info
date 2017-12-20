@@ -140,6 +140,8 @@ dependencies[] = iframe
 dependencies[] = quicktabs
 dependencies[] = image_resize_filter
 dependencies[] = save_edit
+dependencies[] = breakpoints
+dependencies[] = context_breakpoint
 
 
 
