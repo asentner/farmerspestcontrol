@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * sprowt_fields_and_text_formats.features.taxonomy.inc
+ * sprowt_solution_finder.features.taxonomy.inc
  */
 
 /**
  * Implements hook_taxonomy_default_vocabularies().
  */
-function sprowt_fields_and_text_formats_taxonomy_default_vocabularies() {
+function sprowt_solution_finder_taxonomy_default_vocabularies() {
   return array(
     'concerns' => array(
       'name' => 'Concerns',
