@@ -8,6 +8,7 @@ dependencies[] = field_group
 dependencies[] = list
 dependencies[] = options
 dependencies[] = paragraphs
+dependencies[] = sprowt_concerns
 dependencies[] = sprowt_fields_and_text_formats
 dependencies[] = strongarm
 dependencies[] = taxonomy

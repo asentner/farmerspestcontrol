@@ -23,9 +23,9 @@ function sprowt_solution_finder_field_group_info() {
     'label' => 'Categories',
     'weight' => '0',
     'children' => array(
-      0 => 'field_package',
-      1 => 'field_concerns',
-      2 => 'field_is_default',
+      0 => 'field_is_default',
+      1 => 'field_package',
+      2 => 'field_concerns',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -53,8 +53,8 @@ function sprowt_solution_finder_field_group_info() {
     'weight' => '1',
     'children' => array(
       0 => 'body',
-      1 => 'title',
-      2 => 'field_content',
+      1 => 'field_content',
+      2 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Concerns feature.
+ */
+
+include_once 'sprowt_concerns.features.inc';
