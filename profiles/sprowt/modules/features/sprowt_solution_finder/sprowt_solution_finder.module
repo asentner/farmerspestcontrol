@@ -137,8 +137,25 @@ function sprowt_solution_finder_preprocess_field(&$variables)
                 } else {
                     $style = explode(';', $style);
                 }
+                
+                if($svg->hasAttribute('viewBox')) {
+                    $viewbox = $svg->getAttribute('viewBox');
+                    $viewbox = explode(' ', $viewbox);
+                    if(count($viewbox) == 1) {
+                        $viewbox = array_pop($viewbox);
+                        $viewbox = explode(',', $viewbox);
+                    }
+                    
+                    if(count($viewbox) == 4) {
+                        $width = $viewbox[2];
+                        $height = $viewbox[3];
+                        $svg->setAttribute('width', $width);
+                        $svg->setAttribute('height', $height);
+                    }
+                }
 
                 $style[] = 'min-width:5px';
+                $style[] = 'height: auto';
                 $style = implode(';', $style) . ';';
 
                 $svg->setAttribute('style', $style);
@@ -176,7 +193,7 @@ function _sprowt_solution_finder_find_solution() {
 
 
     //grab all published solutions to filter.
-    $soluton_nids = db_query("
+    $solution_nids = db_query("
         SELECT nid
         FROM node
         WHERE type = 'solution'
@@ -184,7 +201,7 @@ function _sprowt_solution_finder_find_solution() {
         ORDER BY created ASC
     ")->fetchCol();
 
-    $solutions = node_load_multiple($soluton_nids);
+    $solutions = node_load_multiple($solution_nids);
 
     //convert to entity_metadata_wrappers
     $foundSolutions = array();
