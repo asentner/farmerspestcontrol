@@ -5,7 +5,7 @@
 }
 
 .solution-finder-form {
-  .terms-wrapper {
+  .concerns-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -14,7 +14,7 @@
     }
   }
 
-  .term-wrap {
+  .concern-wrap {
     display: flex;
     margin-bottom: 15px;
     > * {
@@ -66,7 +66,7 @@
 
 @include breakpoint(560px) {
   .solution-finder-form {
-    .term-wrap {
+    .concern-wrap {
       width: 230px;
       margin-right: 10px;
     }
@@ -98,7 +98,7 @@
 
 @include breakpoint(1000px) {
   .solution-finder-form {
-    .term-wrap {
+    .concern-wrap {
       width: 300px;
     }
   }

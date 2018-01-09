@@ -23,12 +23,16 @@
             });
 
             var $checks = $$('input[type="checkbox"]');
-
+            var hiddenChecked = false;
             $checks.each(function(){
                 var $this = $(this);
                 var $label = $(this).closest('label');
+                var $wrap = $(this).closest('.concerns-wrapper');
                 if(this.checked) {
                     $label.addClass('checked');
+                    if($wrap.attr('id') == 'hidden') {
+                        hiddenChecked = true;
+                    }
                 }
                 else {
                     $label.removeClass('checked');
@@ -42,6 +46,10 @@
                     }
                 });
             });
+
+            if(hiddenChecked) {
+              $button.trigger('click');
+            }
         });
     });
 })(jQuery)

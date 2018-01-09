@@ -1,44 +1,44 @@
 <?php
-    $shown_terms = array();
-    $hidden_terms = array();
+    $shown_concerns = array();
+    $hidden_concerns = array();
 
-    foreach($terms as $term) {
+    foreach($concerns as $concern) {
         if($shown) {
-            $shown_terms[] = $term;
+            $shown_concerns[] = $concern;
             --$shown;
         }
         else {
-            $hidden_terms[] = $term;
+            $hidden_concerns[] = $concern;
         }
     }
 ?>
 <form id="<?php print $form_id; ?>" class="solution-finder-form" action="/solution-finder">
-    <div id="shown" class="terms-wrapper">
-        <?php foreach($shown_terms as $term): ?>
-            <div class="term-wrap">
-                <label for="term-<?php print $term['tid']; ?>">
-                    <input type="checkbox" name="concerns[]" id="term-<?php print $term['tid']; ?>" value="<?php print $term['tid']; ?>">
-                    <?php print render($term['icon']); ?>
-                    <div class="name"><?php print $term['name']; ?></div>
+    <div id="shown" class="concerns-wrapper">
+        <?php foreach($shown_concerns as $concern): ?>
+            <div class="concern-wrap">
+                <label for="concern-<?php print $concern['nid']; ?>">
+                    <input type="checkbox" name="concerns[]" id="concern-<?php print $concern['nid']; ?>" value="<?php print $concern['nid']; ?>">
+                    <?php print render($concern['icon']); ?>
+                    <div class="name"><?php print $concern['name']; ?></div>
                 </label>
             </div>
         <?php endforeach; ?>
     </div>
-    <?php if (!empty($hidden_terms)): ?>
-        <div id="hidden" class="terms-wrapper" style="display:none;">
-            <?php foreach($hidden_terms as $term): ?>
-                <div class="term-wrap">
-                    <label for="term-<?php print $term['tid']; ?>">
-                        <input type="checkbox" name="concerns[]" id="term-<?php print $term['tid']; ?>" value="<?php print $term['tid']; ?>">
-                        <?php print render($term['icon']); ?>
-                        <div class="name"><?php print $term['name']; ?></div>
+    <?php if (!empty($hidden_concerns)): ?>
+        <div id="hidden" class="concerns-wrapper" style="display:none;">
+            <?php foreach($hidden_concerns as $concern): ?>
+                <div class="concern-wrap">
+                    <label for="concern-<?php print $concern['nid']; ?>">
+                        <input type="checkbox" name="concerns[]" id="concern-<?php print $concern['nid']; ?>" value="<?php print $concern['nid']; ?>">
+                        <?php print render($concern['icon']); ?>
+                        <div class="name"><?php print $concern['name']; ?></div>
                     </label>
                 </div>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
     <div class="actions">
-        <?php if (!empty($hidden_terms)): ?>
+        <?php if (!empty($hidden_concerns)): ?>
             <a href="#" class="show-hide-button button">More Options</a>
         <?php endif; ?>
         <input type="submit" class="submit-button button" value="Get My Solution">

@@ -2329,7 +2329,7 @@
   max-width: 1000px;
   margin: 0 auto; }
 
-.solution-finder-form .terms-wrapper {
+.solution-finder-form .concerns-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2338,17 +2338,17 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center; }
-  .solution-finder-form .terms-wrapper > * {
+  .solution-finder-form .concerns-wrapper > * {
     -ms-flex: 0 1 auto; }
 
-.solution-finder-form .term-wrap {
+.solution-finder-form .concern-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 15px; }
-  .solution-finder-form .term-wrap > * {
+  .solution-finder-form .concern-wrap > * {
     -ms-flex: 0 1 auto; }
-  .solution-finder-form .term-wrap label {
+  .solution-finder-form .concern-wrap label {
     padding: 10px 40px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2361,15 +2361,15 @@
     cursor: pointer;
     position: relative;
     width: 100%; }
-    .solution-finder-form .term-wrap label > * {
+    .solution-finder-form .concern-wrap label > * {
       -ms-flex: 0 1 auto; }
-    .solution-finder-form .term-wrap label img, .solution-finder-form .term-wrap label svg {
+    .solution-finder-form .concern-wrap label img, .solution-finder-form .concern-wrap label svg {
       max-height: 45px; }
-    .solution-finder-form .term-wrap label .field--name-field-icon-file {
+    .solution-finder-form .concern-wrap label .field--name-field-icon-file {
       margin-right: 10px; }
-    .solution-finder-form .term-wrap label:hover, .solution-finder-form .term-wrap label.checked {
+    .solution-finder-form .concern-wrap label:hover, .solution-finder-form .concern-wrap label.checked {
       box-shadow: 0px 11px 15.5px 2.5px rgba(85, 85, 85, 0.36); }
-    .solution-finder-form .term-wrap label input {
+    .solution-finder-form .concern-wrap label input {
       position: absolute;
       left: -9999;
       top: -9999;
@@ -2382,7 +2382,7 @@
     margin-top: 15px; }
 
 @media (min-width: 560px) {
-  .solution-finder-form .term-wrap {
+  .solution-finder-form .concern-wrap {
     width: 230px;
     margin-right: 10px; } }
 
@@ -2413,5 +2413,5 @@
         margin-top: 0; } }
 
 @media (min-width: 1000px) {
-  .solution-finder-form .term-wrap {
+  .solution-finder-form .concern-wrap {
     width: 300px; } }

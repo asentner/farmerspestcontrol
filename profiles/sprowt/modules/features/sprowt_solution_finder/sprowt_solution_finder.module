@@ -30,7 +30,7 @@ function sprowt_solution_finder_theme($existing, $type, $theme, $path)
     return array(
         'sprowt_solution_finder_block' => array(
             'variables' => array(
-                'terms' => array(),
+                'concerns' => array(),
                 'shown' => null,
                 'form_id' => ''
             ),
@@ -62,22 +62,29 @@ function sprowt_solution_finder_block_view($delta = '')
     $block = array();
     switch ($delta) {
         case 'solution_finder':
-            $vocab = taxonomy_vocabulary_machine_name_load('concerns');
-            $tree = taxonomy_get_tree($vocab->vid, 0, null, true);
+            $concern_nids = db_query("
+                SELECT n.nid
+                FROM node n
+                LEFT JOIN weight_weights w on w.entity_type = 'node' AND w.entity_id = n.nid
+                WHERE type = 'concern'
+                AND status = 1
+                ORDER BY w.weight ASC
+            ")->fetchCol();
+            $concerns = node_load_multiple($concern_nids);
 
-            $terms = array();
-            foreach($tree as $branch) {
-                $term = array(
-                    'tid' => $branch->tid,
-                    'name' => $branch->name,
-                    'icon' => field_view_field('taxonomy_term', $branch, 'field_icon_file', array(
+            $arrays = array();
+            foreach($concerns as $concern) {
+                $array = array(
+                    'nid' => $concern->nid,
+                    'name' => $concern->title,
+                    'icon' => field_view_field('node', $concern, 'field_icon_file', array(
                         'label' => 'hidden'
                     ))
                 );
-                $terms[] = $term;
+                $arrays[] = $array;
             }
             
-            if(empty($terms)) {
+            if(empty($arrays)) {
                 return array();
             }
 
@@ -85,7 +92,7 @@ function sprowt_solution_finder_block_view($delta = '')
 
             $block['content'] = array(
                 '#markup' => theme('sprowt_solution_finder_block', array(
-                    'terms' => $terms,
+                    'concerns' => $arrays,
                     'shown' => 6,
                     'form_id' => $id
                 )),
