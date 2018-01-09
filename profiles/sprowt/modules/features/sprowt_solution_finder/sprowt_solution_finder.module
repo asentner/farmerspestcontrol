@@ -192,20 +192,20 @@ function _sprowt_solution_finder_find_solution() {
         $foundSolutions[] = entity_metadata_wrapper('node', $node);
     }
 
-    $termsToTids = function($terms) {
-        $tids = array();
-        foreach($terms as $term) {
-            $tids[] = $term->tid;
+    $concernsToNids = function($concerns) {
+        $nids = array();
+        foreach($concerns as $concern) {
+            $nids[] = $concern->nid;
         }
-        return $tids;
+        return $nids;
     };
 
     //find solutions with all of the concerns
     foreach($concerns as $concern) {
         foreach($foundSolutions as $key => $sol) {
-            $tids = $termsToTids($sol->field_concerns->value());
+            $nids = $concernsToNids($sol->field_concerns->value());
 
-            if(!in_array($concern, $tids)) {
+            if(!in_array($concern, $nids)) {
                 unset($foundSolutions[$key]);
             }
         }
@@ -216,16 +216,16 @@ function _sprowt_solution_finder_find_solution() {
         //find most specific solution
         $foundSolutions = array_values($foundSolutions);
         $first = $foundSolutions[0];
-        $tids = $termsToTids($first->field_concerns->value());
-        $lowScore = count($tids);
+        $nids = $concernsToNids($first->field_concerns->value());
+        $lowScore = count($nids);
         $prevKey = 0;
 
 
         foreach($foundSolutions as $key => $sol) {
-            $tids = $termsToTids($sol->field_concerns->value());
+            $nids = $concernsToNids($sol->field_concerns->value());
 
-            if(count($tids) <= $lowScore) {
-                $lowScore = count($tids);
+            if(count($nids) <= $lowScore) {
+                $lowScore = count($nids);
                 if($key != 0) {
                     unset($foundSolutions[$prevKey]);
                 }
