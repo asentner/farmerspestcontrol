@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Paragraphs feature.
+ */
+
+include_once 'sprowt_paragraphs.features.inc';

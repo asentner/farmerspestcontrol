@@ -33,3 +33,17 @@ function sprowt_solution_finder_node_info() {
   drupal_alter('node_info', $items);
   return $items;
 }
+
+/**
+ * Implements hook_paragraphs_info().
+ */
+function sprowt_solution_finder_paragraphs_info() {
+  $items = array(
+    'plan_information' => array(
+      'name' => 'Plan Information',
+      'bundle' => 'plan_information',
+      'locked' => '1',
+    ),
+  );
+  return $items;
+}

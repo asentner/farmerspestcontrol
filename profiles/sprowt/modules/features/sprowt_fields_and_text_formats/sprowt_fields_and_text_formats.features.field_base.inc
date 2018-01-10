@@ -54,6 +54,67 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'type' => 'file',
   );
 
+  // Exported field_base: 'field_block_reference'.
+  $field_bases['field_block_reference'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_block_reference',
+    'indexes' => array(
+      'moddelta' => array(
+        0 => 'moddelta',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'blockreference',
+    'settings' => array(
+      'referenceable_modules' => array(),
+    ),
+    'translatable' => 0,
+    'type' => 'blockreference',
+  );
+
+  // Exported field_base: 'field_body'.
+  $field_bases['field_body'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_body',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_body_text'.
+  $field_bases['field_body_text'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_body_text',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_button'.
   $field_bases['field_button'] = array(
     'active' => 1,
@@ -154,21 +215,6 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
-  );
-
-  // Exported field_base: 'field_content'.
-  $field_bases['field_content'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_content',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'paragraphs',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'paragraphs',
   );
 
   // Exported field_base: 'field_description'.
@@ -324,6 +370,27 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_header'.
+  $field_bases['field_header'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_header',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_icon'.
   $field_bases['field_icon'] = array(
     'active' => 1,
@@ -369,6 +436,28 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'type' => 'file',
   );
 
+  // Exported field_base: 'field_icons'.
+  $field_bases['field_icons'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_icons',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
   // Exported field_base: 'field_image'.
   $field_bases['field_image'] = array(
     'active' => 1,
@@ -389,6 +478,43 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'image',
+  );
+
+  // Exported field_base: 'field_image_insert'.
+  $field_bases['field_image_insert'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_image_insert',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
+  // Exported field_base: 'field_images'.
+  $field_bases['field_images'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_images',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'paragraphs',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'paragraphs',
   );
 
   // Exported field_base: 'field_intro'.
