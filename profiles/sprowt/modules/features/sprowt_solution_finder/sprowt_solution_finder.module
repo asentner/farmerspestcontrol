@@ -37,6 +37,14 @@ function sprowt_solution_finder_theme($existing, $type, $theme, $path)
             'path' => $path . '/theme',
             'template' =>  'sprowt-solution-finder-block'
         ),
+        'sprowt_solution_finder_concern_modals' => array(
+            'variables' => array(
+                'concerns' => array(),
+                'scmId' => null
+            ),
+            'path' => $path . '/theme',
+            'template' =>  'sprowt-solution-concern-modals'
+        ),
     );
 }
 
@@ -221,4 +229,121 @@ function _sprowt_solution_finder_find_default_solution_nid() {
     $nids = entity_get_id_by_uuid('node', array('934b332a-a247-41eb-ae2e-09dfe144aed3'));
 
     return array_shift($nids);
+}
+
+/**
+ * Implements hook_sprowt_shortcode_replace_alter().
+ */
+function sprowt_solution_finder_sprowt_shortcode_replace_alter(&$shortcodes)
+{
+    $concern_nids = !empty($_GET['concerns']) ? $_GET['concerns'] : array();
+
+    if(empty($concern_nids)) {
+        $solution = menu_get_object();
+        if ($solution && $solution->type = 'solution') {
+            $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
+            $concern_nids = array();
+            foreach ($solution_concerns as $array) {
+                $concern_nids[] = $array['target_id'];
+            }
+        }
+    }
+
+    $concernNames = array();
+
+    if (!empty($concern_nids)) {
+        $concerns = node_load_multiple($concern_nids);
+
+        foreach ($concerns as $node) {
+            $concernNames[] = $node->title;
+        }
+    }
+    else {
+        $concerns = array();
+    }
+
+    $all = false;
+    $single = false;
+
+    $solution = menu_get_object();
+    if($solution && $solution->type = 'solution') {
+        $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
+        if(count($solution_concerns) == 1) {
+            $single = true;
+        }
+
+        if(count($solution_concerns) == count($concernNames)) {
+            $all = true;
+        }
+    }
+
+    $text = '';
+
+    if(!empty($concernNames)) {
+        if ($single) {
+            $text = $concernNames[0];
+        } elseif ($all) {
+            $last = array_pop($concernNames);
+
+            $text = implode(', ', $concernNames);
+            $text .= ', and ' . $last;
+        } else {
+            $text = implode(', ', $concernNames);
+            $text .= ', and More';
+        }
+    }
+
+    if(!empty($text)) {
+        $text = "<span class=\"concern-names\">$text</span>";
+    }
+
+    $shortcodes['[solution-concern-names]'] = $text;
+}
+
+/**
+ * Implements hook_sprowt_shortcode_replace().
+ */
+function sprowt_solution_finder_sprowt_shortcode_replace($string)
+{
+    if(strpos($string, '[solution-concern-modals]') === false) {
+        return $string;
+    }
+
+    $concern_nids = !empty($_GET['concerns']) ? $_GET['concerns'] : array();
+
+    if(empty($concern_nids)) {
+        $solution = menu_get_object();
+        if ($solution && $solution->type = 'solution') {
+            $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
+            $concern_nids = array();
+            foreach ($solution_concerns as $array) {
+                $concern_nids[] = $array['target_id'];
+            }
+        }
+    }
+
+    if (!empty($concern_nids)) {
+        $concerns = node_load_multiple($concern_nids);
+    }
+    else {
+        $concerns = array();
+    }
+
+
+    if(!empty($concerns)) {
+        $scmID = drupal_html_id('scm');
+        $text = theme('sprowt_solution_finder_concern_modals', array(
+            'concerns' => array_values($concerns),
+            'scmID' => $scmID
+        ));
+
+        $path = drupal_get_path('module', 'sprowt_solution_finder');
+        drupal_add_js($path . '/js/solution-concern-modals.js');
+        drupal_add_css($path . '/css/solution_finder.css');
+    }
+    else {
+        $text = '';
+    }
+
+    return str_replace('[solution-concern-modals]', $text, $string);
 }

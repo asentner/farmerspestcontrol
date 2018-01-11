@@ -237,6 +237,9 @@ function _sprowt_settings_shortcode_replace($string)
         '[current-year]' => date('Y'),
     );
 
+    //you can add other shortcodes via HOOK_sprowt_shortcode_replace_alter(&$shortcodes)
+    drupal_alter('sprowt_shortcode_replace', $shortcodes);
+
     foreach ($shortcodes as $code => $value) {
         $string = str_replace($code, $value, $string);
     }
@@ -309,6 +312,19 @@ function _sprowt_settings_shortcode_replace($string)
                 $html = '<div class="media_embed map-embed"><iframe src="' . $link . '"></iframe></div>';
                 $string = str_replace($m[1], $html, $string);
             }
+        }
+    }
+
+    $hook = 'sprowt_shortcode_replace';
+
+    // this allows for custom shortcode replacement functionality
+    foreach (module_implements($hook) as $module) {
+        $function = $module . '_' . $hook;
+        // will call all modules implementing hook_hook_name
+        // and can pass each argument as reference determined
+        // by the function declaration
+        if(function_exists($function)) {
+            $string = $function($string);
         }
     }
 

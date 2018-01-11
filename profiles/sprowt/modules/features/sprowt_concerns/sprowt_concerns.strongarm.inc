@@ -36,7 +36,11 @@ function sprowt_concerns_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__concern';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'modal' => array(
+        'custom_settings' => TRUE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(

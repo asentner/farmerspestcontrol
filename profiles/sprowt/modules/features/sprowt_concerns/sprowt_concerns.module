@@ -5,3 +5,48 @@
  */
 
 include_once 'sprowt_concerns.features.inc';
+
+/**
+ * Implements hook_entity_view_mode_info().
+ */
+function sprowt_concerns_entity_view_mode_info()
+{
+    $view_modes = array(
+        'node' => array(
+            'modal' => array(
+                'label' => t('Modal')
+            ),
+        )
+    );
+
+    return $view_modes;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_concerns_theme($existing, $type, $theme, $path)
+{
+    $items = array();
+
+    $items['node__concern__modal'] = array(
+        'render element' => 'content',
+        'base hook' => 'node',
+        'template' => 'node--concern--modal',
+        'path' => $path . '/templates',
+    );
+
+    $items['field__field_concern_treatment__modal'] = array(
+        'base hook' => 'field',
+        'template' => 'field--field-concern-treatment--modal',
+        'path' => $path . '/templates',
+    );
+
+    $items['field__field_concern_steps__modal'] = array(
+        'base hook' => 'field',
+        'template' => 'field--field-concern-steps--modal',
+        'path' => $path . '/templates',
+    );
+
+    return $items;
+}
