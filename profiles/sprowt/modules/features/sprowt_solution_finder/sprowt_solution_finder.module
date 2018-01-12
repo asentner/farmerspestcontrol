@@ -266,7 +266,7 @@ function sprowt_solution_finder_sprowt_shortcode_replace_alter(&$shortcodes)
     $single = false;
 
     $solution = menu_get_object();
-    if($solution && $solution->type = 'solution') {
+    if($solution && $solution->type == 'solution') {
         $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
         if(count($solution_concerns) == 1) {
             $single = true;
@@ -313,7 +313,7 @@ function sprowt_solution_finder_sprowt_shortcode_replace($string)
 
     if(empty($concern_nids)) {
         $solution = menu_get_object();
-        if ($solution && $solution->type = 'solution') {
+        if ($solution && $solution->type == 'solution') {
             $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
             $concern_nids = array();
             foreach ($solution_concerns as $array) {
