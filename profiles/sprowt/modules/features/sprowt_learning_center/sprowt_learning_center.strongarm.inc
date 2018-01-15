@@ -70,23 +70,29 @@ function sprowt_learning_center_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'modal' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '5',
+          'weight' => '10',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '9',
         ),
         'rabbit_hole' => array(
-          'weight' => '1',
+          'weight' => '7',
         ),
         'xmlsitemap' => array(
-          'weight' => '2',
+          'weight' => '8',
+        ),
+        'redirect' => array(
+          'weight' => '11',
         ),
       ),
       'display' => array(),
@@ -130,7 +136,7 @@ function sprowt_learning_center_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_issue';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_issue'] = $strongarm;
 
   $strongarm = new stdClass();
