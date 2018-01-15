@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Learning Center feature.
+ */
+
+include_once 'sprowt_learning_center.features.inc';
