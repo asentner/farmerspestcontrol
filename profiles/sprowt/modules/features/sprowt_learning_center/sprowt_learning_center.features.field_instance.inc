@@ -518,7 +518,7 @@ function sprowt_learning_center_field_default_field_instances() {
     'bundle' => 'issue',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'This field is used as the table header for the identifiers for this issue.',
     'display' => array(
       'alt_teaser' => array(
         'label' => 'above',
@@ -717,6 +717,7 @@ function sprowt_learning_center_field_default_field_instances() {
   t('Image');
   t('Indentificaiton title');
   t('Label');
+  t('This field is used as the table header for the identifiers for this issue.');
 
   return $field_instances;
 }
