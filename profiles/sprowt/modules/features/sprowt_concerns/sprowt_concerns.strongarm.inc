@@ -40,6 +40,9 @@ function sprowt_concerns_strongarm() {
       'modal' => array(
         'custom_settings' => TRUE,
       ),
+      'tertiary_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

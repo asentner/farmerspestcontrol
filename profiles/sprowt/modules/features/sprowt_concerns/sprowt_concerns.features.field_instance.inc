@@ -21,7 +21,7 @@ function sprowt_concerns_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -55,7 +55,7 @@ function sprowt_concerns_field_default_field_instances() {
           'trim_length' => 600,
         ),
         'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'tertiary_teaser' => array(
         'label' => 'above',
@@ -96,7 +96,7 @@ function sprowt_concerns_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'above',
@@ -128,7 +128,7 @@ function sprowt_concerns_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'tertiary_teaser' => array(
         'label' => 'above',
@@ -168,7 +168,7 @@ function sprowt_concerns_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'above',
@@ -200,7 +200,7 @@ function sprowt_concerns_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'tertiary_teaser' => array(
         'label' => 'above',
@@ -236,9 +236,10 @@ function sprowt_concerns_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'alt_teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'file',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'file_default',
         'weight' => 0,
       ),
       'default' => array(
@@ -268,9 +269,10 @@ function sprowt_concerns_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'file',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'file_default',
         'weight' => 0,
       ),
       'tertiary_teaser' => array(

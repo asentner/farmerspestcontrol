@@ -11,10 +11,17 @@ include_once 'sprowt_learning_center.features.inc';
  */
 function sprowt_learning_center_theme() {
   return array(
-    'views-view--learning-center' => array(
-      'variables' => array('view' => NULL, 'options' => NULL, 'row' => NULL),
-      'template' => 'views_view_unformatted__learning_center__learning_list',
-      'path' => drupal_get_path('module', 'sprowt_learning_center'),
+    'views_view_unformatted__learning_center__learning_list' => array (
+        'template' => 'views-view-unformatted--learning-center--learning-list',
+        'path' => drupal_get_path('module', 'sprowt_learning_center') . '/templates',
+        'variables' =>
+            array (
+                'view' => NULL,
+                'options' => NULL,
+                'rows' => NULL,
+                'title' => NULL,
+            ),
+        'base hook' => 'views_view_unformatted',
     ),
   );
 }

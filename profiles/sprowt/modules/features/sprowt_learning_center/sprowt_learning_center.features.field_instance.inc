@@ -10,6 +10,167 @@
 function sprowt_learning_center_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'bean-cta_learning_center-field_body_text'.
+  $field_instances['bean-cta_learning_center-field_body_text'] = array(
+    'bundle' => 'cta_learning_center',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_body_text',
+    'label' => 'Body',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'bean-cta_learning_center-field_button'.
+  $field_instances['bean-cta_learning_center-field_button'] = array(
+    'bundle' => 'cta_learning_center',
+    'default_value' => array(
+      0 => array(
+        'title' => '',
+        'url' => 'learning-center',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_button',
+    'label' => 'Button URL',
+    'required' => 0,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => 'button',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => 'default',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'rel_remove' => 'default',
+      'title' => 'value',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => 'View All',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'bean-cta_learning_center-field_concerns'.
+  $field_instances['bean-cta_learning_center-field_concerns'] = array(
+    'bundle' => 'cta_learning_center',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => 0,
+          'use_content_language' => 1,
+          'view_mode' => 'teaser',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_concerns',
+    'label' => 'Concerns',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'bean-cta_learning_center-field_display_title'.
+  $field_instances['bean-cta_learning_center-field_display_title'] = array(
+    'bundle' => 'cta_learning_center',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_display_title',
+    'label' => 'Display title',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance:
   // 'field_collection_item-field_issue_identifications-field_identification_description'.
   $field_instances['field_collection_item-field_issue_identifications-field_identification_description'] = array(
@@ -547,7 +708,9 @@ function sprowt_learning_center_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
+  t('Button URL');
   t('Concern(s)');
+  t('Concerns');
   t('Description');
   t('Display title');
   t('Identifications');
