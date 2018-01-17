@@ -569,7 +569,7 @@ function sprowt_solution_finder_field_default_field_instances() {
     'label' => 'Body',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -596,7 +596,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -621,7 +621,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'show_token_tree' => 0,
       ),
       'type' => 'text_textarea',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -637,7 +637,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -837,7 +837,7 @@ function sprowt_solution_finder_field_default_field_instances() {
     'label' => 'Intro',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -863,7 +863,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'inline',
@@ -930,7 +930,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -971,13 +971,55 @@ function sprowt_solution_finder_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
   // Exported field_instance:
   // 'paragraphs_item-plan_information-field_plan_features'.
   $field_instances['paragraphs_item-plan_information-field_plan_features'] = array(
+    'bundle' => 'plan_information',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_plan_features',
+    'label' => 'Plan Features',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'paragraphs_item-plan_information-field_plan_features_header'.
+  $field_instances['paragraphs_item-plan_information-field_plan_features_header'] = array(
     'bundle' => 'plan_information',
     'default_value' => NULL,
     'deleted' => 0,
@@ -998,8 +1040,8 @@ function sprowt_solution_finder_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'paragraphs_item',
-    'field_name' => 'field_plan_features',
-    'label' => 'Plan Features',
+    'field_name' => 'field_plan_features_header',
+    'label' => 'Plan Features Header',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1034,6 +1076,7 @@ function sprowt_solution_finder_field_default_field_instances() {
   t('Link');
   t('Package');
   t('Plan Features');
+  t('Plan Features Header');
   t('URL used for the Learn More link in the header. Can also be a hash fragment.');
 
   return $field_instances;

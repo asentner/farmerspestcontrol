@@ -21,7 +21,7 @@ function sprowt_solution_finder_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Advanced',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field_custom_class',
       1 => 'field_label',
