@@ -10,6 +10,78 @@
 function sprowt_content_types_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'field_collection_item-field_q_and_a-field_faq_answer'.
+  $field_instances['field_collection_item-field_q_and_a-field_faq_answer'] = array(
+    'bundle' => 'field_q_and_a',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_faq_answer',
+    'label' => 'Answer',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_q_and_a-field_faq_question'.
+  $field_instances['field_collection_item-field_q_and_a-field_faq_question'] = array(
+    'bundle' => 'field_q_and_a',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_faq_question',
+    'label' => 'Question',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-affiliation-body'.
   $field_instances['node-affiliation-body'] = array(
     'bundle' => 'affiliation',
@@ -144,7 +216,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image_link_formatter',
         'settings' => array(
           'image_link' => 'field_link',
-          'image_style' => 'affiliation_image',
+          'image_style' => '',
         ),
         'type' => 'image_link_formatter',
         'weight' => 0,
@@ -179,6 +251,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
@@ -406,6 +502,30 @@ function sprowt_content_types_field_default_field_instances() {
     'widget' => array(
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -487,22 +607,10 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'smart_trim',
-        'settings' => array(
-          'more_link' => 1,
-          'more_text' => 'Read more',
-          'summary_handler' => 'full',
-          'trim_length' => 200,
-          'trim_link' => FALSE,
-          'trim_options' => array(
-            'text' => 0,
-          ),
-          'trim_preserve_tags' => '',
-          'trim_suffix' => '...',
-          'trim_type' => 'chars',
-        ),
-        'type' => 'smart_trim_format',
-        'weight' => 2,
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -541,7 +649,7 @@ function sprowt_content_types_field_default_field_instances() {
           'trim_type' => 'chars',
         ),
         'type' => 'smart_trim_format',
-        'weight' => 2,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -574,20 +682,9 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'smart_trim',
-        'settings' => array(
-          'more_link' => FALSE,
-          'more_text' => 'Read more',
-          'summary_handler' => 'full',
-          'trim_length' => 300,
-          'trim_link' => FALSE,
-          'trim_options' => array(),
-          'trim_preserve_tags' => '',
-          'trim_suffix' => '...',
-          'trim_type' => 'chars',
-        ),
-        'type' => 'smart_trim_format',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -613,7 +710,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -643,9 +740,13 @@ function sprowt_content_types_field_default_field_instances() {
     'description' => 'Note: Icons are not used with all themes.',
     'display' => array(
       'alt_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
         'weight' => 0,
       ),
       'default' => array(
@@ -666,12 +767,12 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'image_link_formatter',
+        'module' => 'image',
         'settings' => array(
           'image_link' => 'field_link',
           'image_style' => '',
         ),
-        'type' => 'image_link_formatter',
+        'type' => 'image',
         'weight' => 0,
       ),
     ),
@@ -681,9 +782,9 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 43,
+      'default_image' => 0,
       'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
@@ -694,6 +795,68 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => 0,
+        'insert_class' => '',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -710,13 +873,9 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => 'content',
-          'image_style' => 'large',
-        ),
-        'type' => 'image',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -750,13 +909,9 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'image_link_formatter',
-        'settings' => array(
-          'image_link' => 'field_link',
-          'image_style' => 'focal_point_scale_and_crop_80x80',
-        ),
-        'type' => 'image_link_formatter',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -765,7 +920,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 4,
+      'default_image' => 3,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -778,6 +933,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
@@ -797,7 +976,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'default' => array(
         'label' => 'above',
@@ -818,7 +997,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_plain',
-        'weight' => 3,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -868,7 +1047,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'default' => array(
         'label' => 'above',
@@ -892,7 +1071,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -922,7 +1101,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'default' => array(
         'label' => 'above',
@@ -946,7 +1125,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -978,9 +1157,9 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(
           'more_link' => 0,
           'more_text' => 'Read more',
-          'summary_handler' => 'full',
-          'trim_length' => 220,
-          'trim_link' => FALSE,
+          'summary_handler' => 'ignore',
+          'trim_length' => 200,
+          'trim_link' => 0,
           'trim_options' => array(
             'text' => 'text',
           ),
@@ -989,14 +1168,14 @@ function sprowt_content_types_field_default_field_instances() {
           'trim_type' => 'chars',
         ),
         'type' => 'smart_trim_format',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 3,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -1048,7 +1227,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 45,
+      'weight' => 56,
     ),
   );
 
@@ -1062,14 +1241,14 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 8,
       ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -1087,7 +1266,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 9,
       ),
     ),
     'entity_type' => 'node',
@@ -1105,10 +1284,34 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'file',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 46,
+      'weight' => 58,
     ),
   );
 
@@ -1123,7 +1326,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -1140,7 +1343,7 @@ function sprowt_content_types_field_default_field_instances() {
           'trim_type' => 'chars',
         ),
         'type' => 'smart_trim_format',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -1158,7 +1361,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -1177,7 +1380,7 @@ function sprowt_content_types_field_default_field_instances() {
         'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
-      'weight' => 49,
+      'weight' => 61,
     ),
   );
 
@@ -1192,7 +1395,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'medium',
+          'image_style' => '',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -1205,7 +1408,7 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => 'primary__800x400_',
         ),
         'type' => 'image',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -1240,7 +1443,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
-      'default_image' => 0,
+      'default_image' => 75,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -1253,11 +1456,171 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => 0,
+        'insert_class' => '',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 44,
+      'weight' => 55,
+    ),
+  );
+
+  // Exported field_instance: 'node-blog-field_image_insert'.
+  $field_instances['node-blog-field_image_insert'] = array(
+    'bundle' => 'blog',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_image_insert',
+    'label' => 'Image Insert',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 1,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'multiupload_imagefield_widget',
+      'settings' => array(
+        'insert' => 1,
+        'insert_absolute' => 0,
+        'insert_class' => '',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
+        ),
+        'insert_width' => '',
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_miw',
+      'weight' => 57,
     ),
   );
 
@@ -1272,13 +1635,13 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 6,
       ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -1296,7 +1659,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -1311,7 +1674,82 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 48,
+      'weight' => 60,
+    ),
+  );
+
+  // Exported field_instance: 'node-blog-field_post_date'.
+  $field_instances['node-blog-field_post_date'] = array(
+    'bundle' => 'blog',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'standard_text',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 1,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'standard_text',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_post_date',
+    'label' => 'Post Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 52,
     ),
   );
 
@@ -1326,13 +1764,13 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 9,
       ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 9,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -1350,7 +1788,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -1365,7 +1803,60 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 47,
+      'weight' => 59,
+    ),
+  );
+
+  // Exported field_instance: 'node-blog-field_subtitle'.
+  $field_instances['node-blog-field_subtitle'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subtitle',
+    'label' => 'Subtitle',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 54,
     ),
   );
 
@@ -1493,7 +1984,69 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 44,
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'node-faq-field_q_and_a'.
+  $field_instances['node-faq-field_q_and_a'] = array(
+    'bundle' => 'faq',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => '',
+          'delete' => '',
+          'description' => 1,
+          'edit' => '',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_q_and_a',
+    'label' => 'Q and A',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 7,
     ),
   );
 
@@ -1675,6 +2228,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -2342,6 +2919,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -2418,6 +3019,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
@@ -3718,6 +4343,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
@@ -3887,6 +4536,15 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'smart_trim_format',
         'weight' => 1,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 800,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
@@ -3946,6 +4604,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 4,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -4007,6 +4671,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_display_title',
@@ -4064,6 +4734,13 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 3,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_highlight',
@@ -4115,6 +4792,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'image',
         'weight' => 2,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_highlight_icon',
@@ -4135,6 +4818,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -4187,6 +4894,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'image',
         'weight' => 0,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_icon',
@@ -4196,7 +4909,7 @@ function sprowt_content_types_field_default_field_instances() {
       'alt_field' => 0,
       'default_image' => 13,
       'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
@@ -4207,6 +4920,68 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => 0,
+        'insert_class' => '',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -4259,6 +5034,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_image',
@@ -4279,6 +5060,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
@@ -4325,6 +5130,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -4384,6 +5195,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 6,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_services',
@@ -4419,7 +5236,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4461,7 +5278,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 56,
+      'weight' => 57,
     ),
   );
 
@@ -4482,7 +5299,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4519,10 +5336,34 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'file',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 57,
+      'weight' => 59,
     ),
   );
 
@@ -4531,7 +5372,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'page',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'This is your H1 for a basic page',
     'display' => array(
       'alt_teaser' => array(
         'label' => 'above',
@@ -4578,11 +5419,11 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 52,
+      'weight' => 53,
     ),
   );
 
@@ -4606,7 +5447,7 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => 'primary__800x400_',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4650,11 +5491,133 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 55,
+      'weight' => 56,
+    ),
+  );
+
+  // Exported field_instance: 'node-page-field_image_insert'.
+  $field_instances['node-page-field_image_insert'] = array(
+    'bundle' => 'page',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_image_insert',
+    'label' => 'Image Insert',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 1,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'multiupload_imagefield_widget',
+      'settings' => array(
+        'insert' => 1,
+        'insert_absolute' => 0,
+        'insert_class' => '',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
+        ),
+        'insert_width' => '',
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_miw',
+      'weight' => 58,
     ),
   );
 
@@ -4676,7 +5639,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -4714,7 +5677,7 @@ function sprowt_content_types_field_default_field_instances() {
         'show_token_tree' => FALSE,
       ),
       'type' => 'text_textarea',
-      'weight' => 53,
+      'weight' => 55,
     ),
   );
 
@@ -4732,24 +5695,17 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 8,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
-      ),
-      'sidebar' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4770,7 +5726,60 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 52,
+    ),
+  );
+
+  // Exported field_instance: 'node-page-field_subtitle'.
+  $field_instances['node-page-field_subtitle'] = array(
+    'bundle' => 'page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subtitle',
+    'label' => 'Subtitle',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -4911,6 +5920,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
@@ -5109,6 +6142,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -5182,21 +6239,8 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'smart_trim',
-        'settings' => array(
-          'more_link' => 1,
-          'more_text' => 'Learn More',
-          'summary_handler' => 'full',
-          'trim_length' => 200,
-          'trim_link' => 0,
-          'trim_options' => array(
-            'text' => 'text',
-          ),
-          'trim_preserve_tags' => '',
-          'trim_suffix' => '...',
-          'trim_type' => 'chars',
-        ),
-        'type' => 'smart_trim_format',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 2,
       ),
       'default' => array(
@@ -5353,7 +6397,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -5393,7 +6437,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -5425,7 +6469,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 8,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -5468,25 +6512,27 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'quaternary_teaser' => array(
-        'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => 'content',
-          'image_style' => 'scale_60x60',
-        ),
-        'type' => 'image',
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
@@ -5494,25 +6540,13 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 1,
+        'weight' => 0,
       ),
-      'sidebar' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'teaser' => array(
+      'tertiary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
-      ),
-      'tertiary_teaser' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -5520,10 +6554,10 @@ function sprowt_content_types_field_default_field_instances() {
     'label' => 'Icon',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 4,
+      'alt_field' => 1,
+      'default_image' => 0,
       'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
+      'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
@@ -5534,6 +6568,68 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => 0,
+        'insert_class' => '',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -5550,13 +6646,9 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => 'content',
-          'image_style' => 'focal_point_scale_and_crop_185x150',
-        ),
-        'type' => 'image',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -5596,13 +6688,9 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => 'content',
-          'image_style' => 'service',
-        ),
-        'type' => 'image',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -5621,7 +6709,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 6,
+      'default_image' => 5,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -5634,6 +6722,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'focal_point_preview',
         'progress_indicator' => 'throbber',
       ),
@@ -5685,7 +6797,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 5,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -5757,7 +6869,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -5829,7 +6941,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 7,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -5875,7 +6987,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'quaternary_teaser' => array(
         'label' => 'hidden',
@@ -5899,7 +7011,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 6,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -5939,10 +7051,35 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
+        'module' => 'advanced_text_formatter',
+        'settings' => array(
+          'allowed_html' => array(
+            0 => 'a',
+            1 => 'b',
+            2 => 'br',
+            3 => 'dd',
+            4 => 'dl',
+            5 => 'dt',
+            6 => 'em',
+            7 => 'i',
+            8 => 'li',
+            9 => 'ol',
+            10 => 'p',
+            11 => 'strong',
+            12 => 'u',
+            13 => 'ul',
+          ),
+          'autop' => 0,
+          'ellipsis' => 1,
+          'filter' => 'input',
+          'format' => 'plain_text',
+          'token_replace' => 0,
+          'trim_length' => 600,
+          'use_summary' => 0,
+          'word_boundary' => 1,
+        ),
+        'type' => 'advanced_text',
+        'weight' => 2,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -5960,11 +7097,9 @@ function sprowt_content_types_field_default_field_instances() {
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(
-          'trim_length' => 220,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -5984,7 +7119,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 45,
+      'weight' => 46,
     ),
   );
 
@@ -6023,7 +7158,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -6038,7 +7173,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_plain_text',
-      'weight' => 48,
+      'weight' => 49,
     ),
   );
 
@@ -6062,7 +7197,7 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -6111,11 +7246,35 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 44,
+      'weight' => 45,
     ),
   );
 
@@ -6154,7 +7313,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -6169,7 +7328,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 46,
+      'weight' => 47,
     ),
   );
 
@@ -6208,7 +7367,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -6223,7 +7382,61 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 47,
+      'weight' => 48,
+    ),
+  );
+
+  // Exported field_instance: 'node-slide-field_subtitle'.
+  $field_instances['node-slide-field_subtitle'] = array(
+    'bundle' => 'slide',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subtitle',
+    'label' => 'Subtitle',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 44,
     ),
   );
 
@@ -6250,22 +7463,9 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
-        'module' => 'smart_trim',
-        'settings' => array(
-          'more_link' => 0,
-          'more_text' => 'Read more',
-          'summary_handler' => 'full',
-          'trim_length' => 300,
-          'trim_link' => 0,
-          'trim_options' => array(
-            'text' => 'text',
-          ),
-          'trim_preserve_tags' => '',
-          'trim_suffix' => '...',
-          'trim_type' => 'chars',
-        ),
-        'type' => 'smart_trim_format',
-        'weight' => 2,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6310,7 +7510,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'special_offer',
     'default_value' => array(
       0 => array(
-        'url' => 'free-quote',
+        'url' => 'node/',
       ),
     ),
     'deleted' => 0,
@@ -6414,10 +7614,18 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 2,
       ),
       'secondary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
+        'label' => 'hidden',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'standard_numeric',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 0,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6547,6 +7755,30 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => FALSE,
+        'insert_class' => '',
+        'insert_default' => array(
+          0 => 'auto',
+        ),
+        'insert_styles' => array(
+          0 => 'auto',
+        ),
+        'insert_width' => '',
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -6580,7 +7812,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6638,7 +7870,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6710,7 +7942,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6768,7 +8000,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6838,7 +8070,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -6892,7 +8124,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6960,7 +8192,7 @@ function sprowt_content_types_field_default_field_instances() {
           'trim_length' => 220,
         ),
         'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -7024,7 +8256,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
@@ -7159,6 +8391,7 @@ function sprowt_content_types_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Add a CTA to your service');
   t('Add title and intro text for packages');
+  t('Answer');
   t('Attachments');
   t('Background color');
   t('Body');
@@ -7177,6 +8410,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Highlight icon');
   t('Icon');
   t('Image');
+  t('Image Insert');
   t('Include suite number if applicable.');
   t('Input as a hex value. (e.g. #ffffff)');
   t('Intro');
@@ -7204,7 +8438,10 @@ function sprowt_content_types_field_default_field_instances() {
   t('Packages Title');
   t('Phone number');
   t('Position');
+  t('Post Date');
   t('Postal code');
+  t('Q and A');
+  t('Question');
   t('Redemption Button - Default URL goes to the Redeem offers form');
   t('Region');
   t('SEO title');
@@ -7216,9 +8453,11 @@ function sprowt_content_types_field_default_field_instances() {
   t('Special offer');
   t('State');
   t('Street address');
+  t('Subtitle');
   t('Tags');
   t('The new price for this product, based on this offer. The difference (savings) will be calculated dynamically.');
   t('The original price, before applying the special offer.');
+  t('This is your H1 for a basic page');
   t('This will be the main headline (H1) on the page, overlaid with the hero image.');
   t('Upload an image to go with this article.');
   t('Use this to describe the local area. This sets the page apart from other LocalTarget pages in other service areas.');
