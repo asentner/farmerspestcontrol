@@ -195,6 +195,47 @@ function sprowt_paragraphs_field_default_field_instances() {
         'show_token_tree' => 0,
       ),
       'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-body-field_call_out'.
+  $field_instances['paragraphs_item-body-field_call_out'] = array(
+    'bundle' => 'body',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_call_out',
+    'label' => 'Call Out',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
       'weight' => 3,
     ),
   );
@@ -276,7 +317,7 @@ function sprowt_paragraphs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -317,7 +358,7 @@ function sprowt_paragraphs_field_default_field_instances() {
         'show_token_tree' => 0,
       ),
       'type' => 'text_textarea',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -857,6 +898,48 @@ function sprowt_paragraphs_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'paragraphs_item-linked_image-field_paragraph_label'.
+  $field_instances['paragraphs_item-linked_image-field_paragraph_label'] = array(
+    'bundle' => 'linked_image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_paragraph_label',
+    'label' => 'Paragraph Label',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
   // Exported field_instance: 'paragraphs_item-paragraphs-field_content'.
   $field_instances['paragraphs_item-paragraphs-field_content'] = array(
     'bundle' => 'paragraphs',
@@ -1020,6 +1103,7 @@ function sprowt_paragraphs_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Block Reference');
   t('Body');
+  t('Call Out');
   t('Content');
   t('Custom Class');
   t('Custom class applied to paragraph');
@@ -1029,6 +1113,7 @@ function sprowt_paragraphs_field_default_field_instances() {
   t('Intro');
   t('Label');
   t('Link');
+  t('Paragraph Label');
   t('Paragraph label');
 
   return $field_instances;

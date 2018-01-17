@@ -27,7 +27,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -74,7 +74,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -95,7 +95,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -158,7 +158,7 @@ function sprowt_solution_finder_field_default_field_instances() {
           'view_mode' => 'full',
         ),
         'type' => 'paragraphs_view',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -211,7 +211,143 @@ function sprowt_solution_finder_field_default_field_instances() {
       'module' => 'paragraphs',
       'settings' => array(),
       'type' => 'paragraphs_embed',
-      'weight' => 10,
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-solution-field_hero_image'.
+  $field_instances['node-solution-field_hero_image'] = array(
+    'bundle' => 'solution',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'image_url_formatter',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'solution_hero',
+          'url_type' => 1,
+        ),
+        'type' => 'image_url',
+        'weight' => 0,
+      ),
+      'quaternary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_hero_image',
+    'label' => 'Hero Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => 0,
+        'insert_class' => '',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
+        ),
+        'insert_width' => '',
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 9,
     ),
   );
 
@@ -236,7 +372,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -281,6 +417,71 @@ function sprowt_solution_finder_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-solution-field_learn_more_link'.
+  $field_instances['node-solution-field_learn_more_link'] = array(
+    'bundle' => 'solution',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'URL used for the Learn More link in the header. Can also be a hash fragment.',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'quaternary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_learn_more_link',
+    'label' => 'Learn More Link',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-solution-field_package'.
   $field_instances['node-solution-field_package'] = array(
     'bundle' => 'solution',
@@ -298,7 +499,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -383,6 +584,47 @@ function sprowt_solution_finder_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'paragraphs_item-plan_information-field_call_out'.
+  $field_instances['paragraphs_item-plan_information-field_call_out'] = array(
+    'bundle' => 'plan_information',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_call_out',
+    'label' => 'Call Out',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance:
   // 'paragraphs_item-plan_information-field_custom_class'.
   $field_instances['paragraphs_item-plan_information-field_custom_class'] = array(
@@ -395,7 +637,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -621,7 +863,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'inline',
@@ -688,7 +930,7 @@ function sprowt_solution_finder_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -729,7 +971,7 @@ function sprowt_solution_finder_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -742,11 +984,11 @@ function sprowt_solution_finder_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 4,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -778,17 +1020,21 @@ function sprowt_solution_finder_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
+  t('Call Out');
   t('Concerns');
   t('Content');
   t('Custom Class');
   t('Header');
+  t('Hero Image');
   t('Icon');
   t('Intro');
   t('Is Default?');
   t('Label');
+  t('Learn More Link');
   t('Link');
   t('Package');
   t('Plan Features');
+  t('URL used for the Learn More link in the header. Can also be a hash fragment.');
 
   return $field_instances;
 }

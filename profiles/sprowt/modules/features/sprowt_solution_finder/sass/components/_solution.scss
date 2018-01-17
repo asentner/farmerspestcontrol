@@ -1,0 +1,155 @@
+body.node-type-solution {
+    &.admin-menu.adminimal-menu::before {
+        background-color: #333;
+        min-height: 60px;
+    }
+    .tabs {
+        display: block;
+        width: 100%;
+        background-color: #333;
+        //margin-top: -32px;
+        border-bottom: none;
+        //position: fixed;
+        z-index: 999;
+        margin-bottom: 0;
+        li {
+            float: none;
+            margin-right: 0;
+        }
+        li.active a {
+            background-color: #454545;
+        }
+        a {
+            background-color: #333;
+            color: white;
+            font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif;
+            &:hover {
+                background-color: #333;
+                color: white;
+                text-decoration: underline;
+            }
+        }
+    }
+    .action-links {
+        //position: fixed;
+        right: 20px;
+        //margin-top: -26px;
+        z-index: 999;
+        margin-top: 0;
+        a {
+            display: block;
+            background-color: #333;
+            padding: 0.3em 0.8em;
+            color: white;
+            font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif;
+            &:hover {
+                color: white;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .l-main {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .solution--full--header {
+        @include flexbox;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        background-position: center;
+        .interior {
+            padding: 20px;
+            text-align: center;
+            text-shadow: 0 0 3px rgba(black, .35);
+        }
+
+        .pre-title {
+            color: white;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            color: white;
+            margin: 0;
+            margin-bottom: 15px;
+        }
+
+        .post-title, .post-title a {
+            color: white;
+            opacity: .8;
+            font-style: italic;
+        }
+
+        .post-title {
+            .learn-more {
+                font-style: italic;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+        }
+
+        .post-title a {
+            font-style: normal;
+            &:after {
+                font-family: FontAwesome;
+                content: $fa-var-arrow-circle-o-down;
+                font-size: 42px;
+            }
+            &:hover {
+                color: white;
+                opacity: 1;
+            }
+        }
+
+    }
+
+
+    @include breakpoint(768px) {
+        .tabs {
+            position: fixed;
+            margin-top: -32px;
+            li {
+                float: left;
+                margin-right: 1em;
+            }
+        }
+
+        .action-links {
+            position: fixed;
+            margin-top: -26px;
+            a {
+                padding: 0;
+            }
+        }
+
+        .solution--full--header {
+            .interior {
+                padding: 70px 30px 65px;
+            }
+
+            h1 {
+                margin-bottom: 22px;
+                font-size: 71px;
+            }
+        }
+
+        .pre-title {
+            font-size: 30.5px;
+            margin-bottom: 15px;
+        }
+
+        .post-title {
+            .learn-more {
+                font-size: 21.1px;
+            }
+        }
+
+    }
+}

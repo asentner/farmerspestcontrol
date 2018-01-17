@@ -17,6 +17,34 @@ function sprowt_solution_finder_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function sprowt_solution_finder_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: solution_hero.
+  $styles['solution_hero'] = array(
+    'label' => 'Solution Hero (1600x342)',
+    'effects' => array(
+      1 => array(
+        'name' => 'focal_point_scale_and_crop',
+        'data' => array(
+          'width' => 1600,
+          'height' => 342,
+          'focal_point_advanced' => array(
+            'shift_x' => '',
+            'shift_y' => '',
+          ),
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function sprowt_solution_finder_node_info() {

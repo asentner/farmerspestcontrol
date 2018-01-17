@@ -45,7 +45,35 @@ function sprowt_solution_finder_theme($existing, $type, $theme, $path)
             'path' => $path . '/theme',
             'template' =>  'sprowt-solution-concern-modals'
         ),
+        'node__solution__full' => array (
+            'template' => 'node--solution--full',
+            'path' => $path . '/theme',
+            'base hook' => 'node',
+        ),
+        'field__field_hero_image__solution' => array (
+            'template' => 'field--field-hero-image--solution',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+        'field__field_learn_more_link__solution' => array (
+            'template' => 'field--field-learn-more-link--solution',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+        'page__node__solution' => array (
+            'template' => 'page--node--solution',
+            'path' => $path . '/theme',
+            'base hook' => 'page',
+        ),
     );
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function sprowt_solution_finder_theme_registry_alter(&$theme_registry) {
+    ksort($theme_registry);
+    $something = 'something';
 }
 
 /**
@@ -237,10 +265,9 @@ function _sprowt_solution_finder_find_default_solution_nid() {
 function sprowt_solution_finder_sprowt_shortcode_replace_alter(&$shortcodes)
 {
     $concern_nids = !empty($_GET['concerns']) ? $_GET['concerns'] : array();
-
+    $solution = menu_get_object();
     if(empty($concern_nids)) {
-        $solution = menu_get_object();
-        if ($solution && $solution->type = 'solution') {
+        if ($solution && $solution->type == 'solution') {
             $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
             $concern_nids = array();
             foreach ($solution_concerns as $array) {
@@ -264,9 +291,8 @@ function sprowt_solution_finder_sprowt_shortcode_replace_alter(&$shortcodes)
 
     $all = false;
     $single = false;
-
-    $solution = menu_get_object();
-    if($solution && $solution->type = 'solution') {
+    
+    if($solution && $solution->type == 'solution') {
         $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
         if(count($solution_concerns) == 1) {
             $single = true;
@@ -275,6 +301,7 @@ function sprowt_solution_finder_sprowt_shortcode_replace_alter(&$shortcodes)
         if(count($solution_concerns) == count($concernNames)) {
             $all = true;
         }
+        $shortcodes['[solution-title]'] = $solution->title;
     }
 
     $text = '';
@@ -313,7 +340,7 @@ function sprowt_solution_finder_sprowt_shortcode_replace($string)
 
     if(empty($concern_nids)) {
         $solution = menu_get_object();
-        if ($solution && $solution->type = 'solution') {
+        if ($solution && $solution->type == 'solution') {
             $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
             $concern_nids = array();
             foreach ($solution_concerns as $array) {
@@ -346,4 +373,13 @@ function sprowt_solution_finder_sprowt_shortcode_replace($string)
     }
 
     return str_replace('[solution-concern-modals]', $text, $string);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_solution_finder_preprocess_node(&$variables) {
+    if($variables['view_mode'] == 'full' && $variables['node']->type == 'solution') {
+        drupal_add_css(drupal_get_path('module', 'sprowt_solution_finder') . '/css/solution_finder.css');
+    }
 }

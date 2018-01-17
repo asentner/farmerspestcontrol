@@ -185,7 +185,7 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
   // Exported field_base: 'field_concerns'.
   $field_bases['field_concerns'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 5,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_concerns',
@@ -205,7 +205,9 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
           ),
         ),
         'sort' => array(
-          'type' => 'none',
+          'direction' => 'ASC',
+          'property' => 'title',
+          'type' => 'property',
         ),
         'target_bundles' => array(
           'concern' => 'concern',
