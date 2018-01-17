@@ -10,8 +10,8 @@
 function sprowt_learning_center_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'bean-cta_learning_center-field_body_text'.
-  $field_instances['bean-cta_learning_center-field_body_text'] = array(
+  // Exported field_instance: 'bean-cta_learning_center-field_bean_title'.
+  $field_instances['bean-cta_learning_center-field_bean_title'] = array(
     'bundle' => 'cta_learning_center',
     'default_value' => NULL,
     'deleted' => 0,
@@ -23,6 +23,65 @@ function sprowt_learning_center_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_bean_title',
+    'label' => 'Bean Title',
+    'required' => FALSE,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => FALSE,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'bean-cta_learning_center-field_body_text'.
+  $field_instances['bean-cta_learning_center-field_body_text'] = array(
+    'bundle' => 'cta_learning_center',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'advanced_text_formatter',
+        'settings' => array(
+          'allowed_html' => array(
+            0 => 'a',
+            1 => 'b',
+            2 => 'br',
+            3 => 'dd',
+            4 => 'dl',
+            5 => 'dt',
+            6 => 'em',
+            7 => 'i',
+            8 => 'li',
+            9 => 'ol',
+            10 => 'p',
+            11 => 'strong',
+            12 => 'u',
+            13 => 'ul',
+          ),
+          'autop' => 0,
+          'ellipsis' => 1,
+          'filter' => 'input',
+          'format' => 'plain_text',
+          'token_replace' => 0,
+          'trim_length' => 600,
+          'use_summary' => 0,
+          'word_boundary' => 1,
+        ),
+        'type' => 'advanced_text',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'bean',
@@ -62,7 +121,7 @@ function sprowt_learning_center_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'bean',
@@ -114,10 +173,10 @@ function sprowt_learning_center_field_default_field_instances() {
         'settings' => array(
           'links' => 0,
           'use_content_language' => 1,
-          'view_mode' => 'teaser',
+          'view_mode' => 'alt_teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 2,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'bean',
@@ -129,45 +188,10 @@ function sprowt_learning_center_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
+      'module' => 'multiple_selects',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'bean-cta_learning_center-field_display_title'.
-  $field_instances['bean-cta_learning_center-field_display_title'] = array(
-    'bundle' => 'cta_learning_center',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'bean',
-    'field_name' => 'field_display_title',
-    'label' => 'Display title',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'show_token_tree' => 0,
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
+      'type' => 'multiple_selects',
+      'weight' => 5,
     ),
   );
 
@@ -707,6 +731,7 @@ function sprowt_learning_center_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Bean Title');
   t('Body');
   t('Button URL');
   t('Concern(s)');
