@@ -65,6 +65,16 @@ function sprowt_solution_finder_theme($existing, $type, $theme, $path)
             'path' => $path . '/theme',
             'base hook' => 'page',
         ),
+        'field__field_plan_features_header' => array (
+            'template' => 'field--field-plan-features-header',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+        'paragraphs_item__plan_information' => array (
+            'template' => 'paragraphs-item--plan-information',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
     );
 }
 
