@@ -201,41 +201,6 @@ function sprowt_bean_types_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'bean-fqa_embed-field_faq_embed'.
-  $field_instances['bean-fqa_embed-field_faq_embed'] = array(
-    'bundle' => 'fqa_embed',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'entityreference',
-        'settings' => array(
-          'links' => 0,
-          'use_content_language' => 1,
-          'view_mode' => 'teaser',
-        ),
-        'type' => 'entityreference_entity_view',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'bean',
-    'field_name' => 'field_faq_embed',
-    'label' => 'FAQ',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'multiple_selects',
-      'settings' => array(),
-      'type' => 'multiple_selects',
-      'weight' => 2,
-    ),
-  );
-
   // Exported field_instance: 'bean-generic_bean-field_body_text'.
   $field_instances['bean-generic_bean-field_body_text'] = array(
     'bundle' => 'generic_bean',
