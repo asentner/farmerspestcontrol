@@ -18,6 +18,11 @@ function sprowt_paragraphs_theme($existing, $type, $theme, $path)
             'path' => $path . '/theme',
             'base hook' => 'field',
         ),
+        'field__field_content' => array (
+            'template' => 'field--field-content',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
     );
 }
 
@@ -35,6 +40,42 @@ function sprowt_paragraphs_preprocess_entity(&$variables)
                 $variables['classes_array'] = $new_classes_array;
                 $variables['attributes_array']['class'] = $new_classes_array;
             }
+        }
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_paragraphs_preprocess_field(&$variables)
+{
+    $element = $variables['element'];
+
+    if($element['#field_name'] == 'field_content') {
+        $items = $variables['items'];
+        $variables['items_classes_array'] = array();
+        foreach($items as $delta => $item) {
+            $classes = array(
+                'field__item'
+            );
+            $classes[] = ($delta + 1) % 2 ? 'odd' : 'even';
+            foreach($item['entity']['paragraphs_item'] as $paragraph) {
+                $custom_class = field_get_items('paragraphs_item', $paragraph['#entity'], 'field_custom_class');
+                if (!empty($custom_class)) {
+                    foreach ($custom_class as $class) {
+                        $custom_class_array = explode(' ', $class['value']);
+                        foreach ($custom_class_array as $class) {
+                            $classes[] = trim($class) . "--wrap";
+                        }
+                    }
+                }
+
+                $bundle = $paragraph['#bundle'];
+                $wrap_class = 'paragraphs-item-' . drupal_clean_css_identifier($bundle);
+                $classes[] = $wrap_class . '--wrap';
+            }
+
+            $variables['items_classes_array'][$delta] = $classes;
         }
     }
 }

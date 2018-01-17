@@ -1,0 +1,192 @@
+.plan-info-concerns {
+  padding: 20px 30px;
+  .paragraphs-item-plan-information {
+    .header {
+      margin-bottom: 30px;
+      h2 {
+        margin: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .field--name-field-icon-file {
+      text-align: center;
+      margin: 0 auto 10px;
+      width: 117px;
+    }
+
+    .header-intro {
+      text-align: center;
+    }
+
+    .field--name-field-intro {
+      font-style: italic;
+      font-weight: 600;
+      font-size: 16px;
+      .concern-names {
+        color: #cb0108;
+      }
+    }
+
+    .body-content {
+      font-size: 14px;
+      h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .field--name-field-body-text {
+      + .features {
+        margin-top: 15px;
+      }
+    }
+
+    .field--name-field-plan-features {
+      .field__item {
+        position: relative;
+        padding-left: 20px;
+        font-weight: 600;
+        &:before {
+          display: inline-block;
+          content: $fa-var-check;
+          font-family: FontAwesome;
+          color: #cb0108;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+        + .field__item {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  .paragraphs-item-body {
+    box-shadow: 0.6px 7px 21px 0 rgba(0, 0, 0, 0.16);
+    border: solid 5px #e0e0e0;
+    margin-top: 30px;
+    .content > .field {
+      padding-left: 20px;
+      padding-right: 20px;
+      &:first-child {
+        padding-top: 20px;
+      }
+      &:last-child {
+        padding-bottom: 20px;
+      }
+    }
+
+    .field--name-field-header {
+      text-align: center;
+      padding-bottom: 20px;
+      background-color: #43261d;
+      color: white;
+      font-size: 22px;
+      text-transform: uppercase;
+    }
+
+    .field--name-field-intro {
+      font-size: 14px;
+      font-weight: 600;
+      padding-top: 20px;
+      margin: 0;
+    }
+
+    .scm-links {
+      margin-top: 30px;
+      a {
+        display: block;
+        padding: 10px 0;
+        font-weight: 600;
+        font-size: 17px;
+        &:after {
+          margin-left: 5px;
+          display: inline-block;
+          font-family: FontAwesome;
+          content: $fa-var-long-arrow-right;
+          color: #cb0108;
+          font-weight: normal;
+        }
+      }
+      li {
+        + li {
+          border-top: 2px solid #e6e6e6;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(635px) {
+    .paragraphs-item-plan-information {
+      .header {
+        @include flexbox;
+        align-items: center;
+      }
+
+      .field--name-field-icon-file {
+        text-align: left;
+        margin: 0;
+        margin-right: 27px;
+      }
+
+      .header-intro {
+        text-align: left;
+      }
+
+      .body-content {
+        @include flexbox;
+        justify-content: space-between;
+      }
+
+      .field--name-field-body-text {
+        width: 309px;
+        + .features {
+          margin-top: 0;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(768px) {
+    padding: 42px 30px;
+    .paragraphs-item-plan-information {
+      .field--name-field-intro {
+        font-size: 17px;
+      }
+      .field--name-field-header {
+        font-size: 31px;
+      }
+    }
+  }
+
+  @include breakpoint(900px) {
+    max-width: 1147px;
+    margin: 0 auto;
+    .field--name-field-content {
+      > .field__items {
+        @include flexbox;
+        justify-content: center;
+        > .field__item {
+          + .field__item {
+            margin-left: 32px
+          }
+        }
+      }
+    }
+
+    .paragraphs-item-plan-information--wrap {
+      width: percentage(635/1147);
+    }
+
+    .paragraphs-item-body--wrap {
+      margin-top: -75px;
+      width: percentage(468/1147);
+      .paragraphs-item-body {
+        margin-top: 0;
+      }
+    }
+  }
+}

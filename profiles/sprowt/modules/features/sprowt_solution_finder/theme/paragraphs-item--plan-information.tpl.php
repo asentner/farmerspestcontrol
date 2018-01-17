@@ -36,7 +36,7 @@
           </div>
       </div>
       <div class="body-content">
-          <?php print render($content['body_text']); ?>
+          <?php print render($content['field_body_text']); ?>
           <?php if(!empty($field_plan_features_header) || !empty($field_plan_features)): ?>
               <div class="features">
                   <?php print render($content['field_plan_features_header']); ?>
