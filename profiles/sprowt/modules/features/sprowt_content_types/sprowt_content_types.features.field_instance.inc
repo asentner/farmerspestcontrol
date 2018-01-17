@@ -10,78 +10,6 @@
 function sprowt_content_types_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance:
-  // 'field_collection_item-field_q_and_a-field_faq_answer'.
-  $field_instances['field_collection_item-field_q_and_a-field_faq_answer'] = array(
-    'bundle' => 'field_q_and_a',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_faq_answer',
-    'label' => 'Answer',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-        'show_token_tree' => 0,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_q_and_a-field_faq_question'.
-  $field_instances['field_collection_item-field_q_and_a-field_faq_question'] = array(
-    'bundle' => 'field_q_and_a',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_faq_question',
-    'label' => 'Question',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 3,
-        'show_token_tree' => 0,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-affiliation-body'.
   $field_instances['node-affiliation-body'] = array(
     'bundle' => 'affiliation',
@@ -1985,68 +1913,6 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'type' => 'text_textarea_with_summary',
       'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-faq-field_q_and_a'.
-  $field_instances['node-faq-field_q_and_a'] = array(
-    'bundle' => 'faq',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'alt_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'field_collection',
-        'settings' => array(
-          'add' => 'Add',
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_view',
-        'weight' => 1,
-      ),
-      'secondary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'field_collection',
-        'settings' => array(
-          'add' => '',
-          'delete' => '',
-          'description' => 1,
-          'edit' => '',
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_view',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_q_and_a',
-    'label' => 'Q and A',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 7,
     ),
   );
 
@@ -8391,7 +8257,6 @@ function sprowt_content_types_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Add a CTA to your service');
   t('Add title and intro text for packages');
-  t('Answer');
   t('Attachments');
   t('Background color');
   t('Body');
@@ -8440,8 +8305,6 @@ function sprowt_content_types_field_default_field_instances() {
   t('Position');
   t('Post Date');
   t('Postal code');
-  t('Q and A');
-  t('Question');
   t('Redemption Button - Default URL goes to the Redeem offers form');
   t('Region');
   t('SEO title');
