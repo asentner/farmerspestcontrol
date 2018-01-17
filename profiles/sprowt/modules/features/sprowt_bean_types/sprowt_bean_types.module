@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Bean Types feature.
+ */
+
+include_once 'sprowt_bean_types.features.inc';
