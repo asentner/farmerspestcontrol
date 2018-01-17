@@ -451,12 +451,12 @@ function sprowt_content_types_strongarm() {
         'label' => 'Secondary teaser',
         'custom settings' => 1,
       ),
-      'tertiary_teaser' => array(
-        'label' => 'Tertiary Teaser',
-        'custom settings' => 1,
-      ),
       'quaternary_teaser' => array(
         'label' => 'Quaternary Teaser',
+        'custom settings' => 1,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'Tertiary Teaser',
         'custom settings' => 1,
       ),
     ),
@@ -628,6 +628,9 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'modal' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -635,7 +638,7 @@ function sprowt_content_types_strongarm() {
           'weight' => '40',
         ),
         'title' => array(
-          'weight' => '43',
+          'weight' => '53',
         ),
         'path' => array(
           'weight' => '30',
@@ -647,7 +650,22 @@ function sprowt_content_types_strongarm() {
           'weight' => '30',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'flippy_pager' => array(
+          'default' => array(
+            'weight' => '8',
+            'visible' => FALSE,
+          ),
+          'teaser' => array(
+            'weight' => '2',
+            'visible' => FALSE,
+          ),
+          'alt_teaser' => array(
+            'weight' => '3',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__blog'] = $strongarm;
@@ -754,23 +772,26 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'modal' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '6',
         ),
         'title' => array(
-          'weight' => '43',
-        ),
-        'path' => array(
-          'weight' => '30',
-        ),
-        'rabbit_hole' => array(
           'weight' => '0',
         ),
+        'path' => array(
+          'weight' => '5',
+        ),
+        'rabbit_hole' => array(
+          'weight' => '2',
+        ),
         'xmlsitemap' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
@@ -1064,7 +1085,7 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
@@ -1136,19 +1157,19 @@ function sprowt_content_types_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '3',
         ),
         'title' => array(
           'weight' => '51',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '2',
         ),
         'rabbit_hole' => array(
-          'weight' => '0',
+          'weight' => '4',
         ),
         'xmlsitemap' => array(
-          'weight' => '30',
+          'weight' => '1',
         ),
       ),
       'display' => array(),
