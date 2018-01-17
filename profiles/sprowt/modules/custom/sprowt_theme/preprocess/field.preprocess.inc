@@ -13,4 +13,5 @@ function sprowt_theme_preprocess_field(&$variables) {
     $parent = &$element['#object'];
 
     $variables['theme_hook_suggestions'][] = 'field__' . $element['#field_name'] . '__' . $element['#entity_type'];
+    $variables['theme_hook_suggestions'][] = 'field__' . $element['#field_name'] . '__' . $element['#entity_type'] . '__' . $element['#bundle'];
 }
