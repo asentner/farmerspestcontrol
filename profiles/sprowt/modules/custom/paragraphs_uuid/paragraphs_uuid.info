@@ -1,0 +1,8 @@
+name = Paragraphs UUID
+description = Paragraphs UUID (Modified from sandbox module found here: https://www.drupal.org/project/2369177/git-instructions). For adding UUID support ot paragraphs.
+core = 7.x
+
+dependencies[] = paragraphs
+dependencies[] = uuid
+
+files[] = controllers/UUIDParagraphsItemEntity.inc

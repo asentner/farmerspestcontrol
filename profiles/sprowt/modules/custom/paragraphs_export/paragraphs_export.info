@@ -1,0 +1,7 @@
+name = Paragraphs Export
+description = For exporting paragraphs in nodes with node_export
+package = Node export
+core = 7.x
+
+dependencies[] = paragraphs_uuid
+dependencies[] = node_export
