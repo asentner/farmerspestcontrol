@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function image_annotator_field_schema($field) {
+  return array(
+    'columns' => array(
+      'value' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+      ),
+    ),
+  );
+}
