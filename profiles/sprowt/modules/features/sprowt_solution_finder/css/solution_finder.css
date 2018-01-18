@@ -2880,6 +2880,288 @@ img.mfp-img {
   .scm-modal-container .scm-modal {
     padding: 60px 130px 80px; } }
 
+.plan-details {
+  padding: 30px 20px;
+  background-color: #cb0108;
+  text-align: center; }
+  .plan-details > .content > h2 {
+    font-size: 22.5px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: white; }
+  .plan-details > .content > .field--name-field-intro {
+    font-size: 36px;
+    font-style: italic;
+    color: white;
+    margin-bottom: 30px; }
+    .plan-details > .content > .field--name-field-intro p {
+      margin: 0;
+      line-height: 1; }
+  .plan-details .paragraphs-item-body {
+    background: white;
+    padding: 30px 20px; }
+    .plan-details .paragraphs-item-body .field--name-field-header {
+      font-size: 13.5px;
+      text-transform: uppercase;
+      margin-bottom: 15px; }
+    .plan-details .paragraphs-item-body .field--name-field-intro {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 30px; }
+      .plan-details .paragraphs-item-body .field--name-field-intro .starting-at, .plan-details .paragraphs-item-body .field--name-field-intro strong {
+        font-size: 27px;
+        margin-bottom: 20px; }
+      .plan-details .paragraphs-item-body .field--name-field-intro p {
+        margin: 0; }
+    .plan-details .paragraphs-item-body .field--name-field-body-text {
+      line-height: 1.74;
+      font-size: 14.25px;
+      margin-bottom: 48px; }
+    .plan-details .paragraphs-item-body .field--name-field-call-out {
+      padding: 0;
+      margin: 0;
+      background: none;
+      font-weight: bold;
+      font-size: 27px;
+      color: inherit; }
+      .plan-details .paragraphs-item-body .field--name-field-call-out em {
+        font-weight: 600;
+        font-size: 15.75px;
+        font-style: italic; }
+      .plan-details .paragraphs-item-body .field--name-field-call-out p {
+        margin: 0;
+        line-height: 1; }
+  .plan-details .paragraphs-item-plan-information {
+    background-color: #ffffff;
+    box-shadow: 2.1px 23.9px 48.1px 5.9px rgba(0, 0, 0, 0.55);
+    border: solid 5px #b2b2b2;
+    margin-top: 92px; }
+    .plan-details .paragraphs-item-plan-information .content > .field {
+      padding-left: 20px;
+      padding-right: 20px; }
+      .plan-details .paragraphs-item-plan-information .content > .field:first-child {
+        padding-top: 20px; }
+      .plan-details .paragraphs-item-plan-information .content > .field:last-child {
+        padding-bottom: 20px; }
+    .plan-details .paragraphs-item-plan-information .header {
+      padding: 62px 20px 20px;
+      background-color: #43261d;
+      color: white;
+      position: relative; }
+      .plan-details .paragraphs-item-plan-information .header h2 {
+        font-size: 13.5px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        color: white; }
+    .plan-details .paragraphs-item-plan-information .field--name-field-icon-file {
+      width: 119px;
+      top: -63px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      position: absolute; }
+    .plan-details .paragraphs-item-plan-information .field--name-field-intro {
+      font-size: 27px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-intro p {
+        margin: 0;
+        line-height: 1; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-intro em {
+        font-size: 11.25px; }
+    .plan-details .paragraphs-item-plan-information .body-content {
+      padding: 20px; }
+    .plan-details .paragraphs-item-plan-information .field--name-field-body-text {
+      font-weight: bold;
+      font-size: 18px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-body-text p {
+        margin: 0;
+        line-height: 1; }
+    .plan-details .paragraphs-item-plan-information .field--name-field-plan-features-header {
+      font-size: 14.25px;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: 30px;
+      margin-top: 10px; }
+    .plan-details .paragraphs-item-plan-information .field--name-field-plan-features {
+      margin-bottom: 27px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-plan-features .field__items {
+        text-align: left;
+        display: inline-block; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-plan-features .field__item {
+        padding-left: 25px;
+        position: relative;
+        font-size: 15.75px;
+        font-weight: bold; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-plan-features .field__item:before {
+          font-family: FontAwesome;
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          font-weight: normal;
+          color: #cb0108; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-plan-features .field__item + .field__item {
+          margin-top: 15px; }
+    .plan-details .paragraphs-item-plan-information .field--name-field-call-out {
+      margin: 0;
+      padding: 0;
+      background: none;
+      color: inherit;
+      font-size: 27px;
+      font-weight: bold; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-call-out p {
+        line-height: 1;
+        margin: 0; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-call-out em {
+        font-size: 15.75px;
+        font-weight: 600; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        font-size: 21px;
+        margin-top: 10px;
+        line-height: 1.25; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong > * {
+          -ms-flex: 0 1 auto; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:before, .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:after {
+          font-family: FontAwesome;
+          content: "  ";
+          font-size: 13.5px;
+          display: block; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:before {
+          margin: 0 10px; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:after {
+          margin: 0 10px; }
+    .plan-details .paragraphs-item-plan-information .field--name-field-link {
+      margin-top: 30px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-link.field.field--type-link-field {
+        padding: 0; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-link a {
+        display: block;
+        padding: 20px;
+        background: #e0e0e0;
+        color: #c80108;
+        padding-left: 17.84452%;
+        padding-right: 17.84452%;
+        position: relative;
+        font-size: 15.75px;
+        font-weight: 600; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-link a:before {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          width: 30px;
+          height: 30px;
+          background: white;
+          border-radius: 1000px;
+          font-family: FontAwesome;
+          font-weight: normal;
+          content: "";
+          -webkit-transform: scaleX(-1) translateY(-50%);
+                  transform: scaleX(-1) translateY(-50%);
+          position: absolute;
+          top: 50%;
+          left: 7.24382%;
+          font-size: 22.5px; }
+          .plan-details .paragraphs-item-plan-information .field--name-field-link a:before > * {
+            -ms-flex: 0 1 auto; }
+  @media (min-width: 572px) {
+    .plan-details {
+      padding-top: 84px;
+      padding-bottom: 60px; }
+      .plan-details > .content > h2 {
+        font-size: 30px; }
+      .plan-details > .content > .field--name-field-intro {
+        font-size: 48px;
+        margin-bottom: 80px; }
+      .plan-details .paragraphs-item-body--wrap,
+      .plan-details .paragraphs-item-plan-information--wrap {
+        width: 572px;
+        margin: 0 auto; }
+      .plan-details .paragraphs-item-body {
+        padding: 83px 30px 107px; }
+        .plan-details .paragraphs-item-body .field--name-field-header {
+          font-size: 18px;
+          margin-bottom: 18px; }
+        .plan-details .paragraphs-item-body .field--name-field-intro {
+          font-size: 24px;
+          margin-bottom: 30px; }
+          .plan-details .paragraphs-item-body .field--name-field-intro .starting-at, .plan-details .paragraphs-item-body .field--name-field-intro strong {
+            font-size: 36px;
+            margin-bottom: 20px; }
+        .plan-details .paragraphs-item-body .field--name-field-body-text {
+          margin-bottom: 48px;
+          font-size: 19px; }
+        .plan-details .paragraphs-item-body .field--name-field-call-out {
+          font-size: 36px; }
+          .plan-details .paragraphs-item-body .field--name-field-call-out em {
+            font-size: 21px; }
+      .plan-details .paragraphs-item-plan-information .header h2 {
+        font-size: 18px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-intro {
+        font-size: 36px; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-intro em {
+          display: block;
+          margin-top: 10px;
+          font-size: 15px; }
+      .plan-details .paragraphs-item-plan-information .body-content {
+        padding: 33px 30px 20px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-body-text {
+        font-size: 24px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-plan-features-header {
+        font-size: 19px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-plan-features .field__item {
+        font-size: 21px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-call-out {
+        font-size: 36px;
+        margin-bottom: 42px; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-call-out em {
+          font-size: 21px; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong {
+          font-size: 28px; }
+          .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:before, .plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:after {
+            font-size: 18px; }
+      .plan-details .paragraphs-item-plan-information .field--name-field-link a {
+        padding-right: 30px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        font-size: 21px;
+        text-align: left; }
+        .plan-details .paragraphs-item-plan-information .field--name-field-link a:before {
+          width: 46px;
+          height: 46px;
+          font-size: 30px; } }
+  @media (min-width: 1200px) {
+    .plan-details .field--name-field-content > .field__items {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center; }
+      .plan-details .field--name-field-content > .field__items > * {
+        -ms-flex: 0 1 auto; }
+    .plan-details .field--name-field-content .paragraphs-item-plan-information {
+      margin-top: 0; }
+    .plan-details .paragraphs-item-plan-information--wrap {
+      margin-left: 56px; } }
+
 .plan-info-concerns {
   padding: 20px 30px; }
   .plan-info-concerns .paragraphs-item-plan-information .header {

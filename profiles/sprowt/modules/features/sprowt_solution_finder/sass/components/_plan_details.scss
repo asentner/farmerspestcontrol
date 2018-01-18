@@ -1,0 +1,397 @@
+//font sizes
+$weHaveTheRightPlan: 30px;
+$forYourFamilyAndHome: 48px;
+$oneTimeService: 18px;
+$startingAt250: 36px;
+$notInterested: 24px;
+$bodyText: 19px;
+$callNumber: $startingAt250;
+$forServiceToday: 21px;
+$healthyHome: $oneTimeService;
+$startingAt50: $startingAt250;
+$initialFee: 15px;
+$orderHealthyHome: $notInterested;
+$yearAroundProtection: $bodyText;
+$features: 21px;
+$sameDayService: 28px;
+$sameDayStars: 18px;
+$couponLink: 21px;
+$couponIcon: 30px;
+
+
+.plan-details {
+  padding: 30px 20px;
+  background-color: #cb0108;
+  text-align: center;
+  > .content {
+    > h2 {
+      font-size: $weHaveTheRightPlan * .75;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      color: white;
+    }
+    > .field--name-field-intro {
+      font-size: $forYourFamilyAndHome * .75;
+      font-style: italic;
+      color: white;
+      margin-bottom: 30px;
+      p {
+        margin: 0;
+        line-height: 1;
+      }
+    }
+  }
+
+  .paragraphs-item-body {
+    background: white;
+    padding: 30px 20px;
+     .field--name-field-header {
+       font-size: $oneTimeService * .75;
+       text-transform: uppercase;
+       margin-bottom: 15px;
+    }
+
+    .field--name-field-intro {
+      font-size: $notInterested * .75;
+      font-weight: bold;
+      margin-bottom: 30px;
+      .starting-at, strong {
+        font-size: $startingAt250 * .75;
+        margin-bottom: 20px;
+      }
+      p {
+        margin: 0;
+      }
+    }
+
+    .field--name-field-body-text {
+      line-height: 1.74;
+      font-size: $bodyText * .75;
+      margin-bottom: 48px;
+    }
+
+    .field--name-field-call-out {
+      padding: 0;
+      margin: 0;
+      background: none;
+      font-weight: bold;
+      font-size: $callNumber * .75;
+      color: inherit;
+      em {
+        font-weight: 600;
+        font-size: $forServiceToday * .75;
+        font-style: italic;
+      }
+      p {
+        margin: 0;
+        line-height: 1;
+      }
+    }
+  }
+
+  .paragraphs-item-plan-information {
+    background-color: #ffffff;
+    box-shadow: 2.1px 23.9px 48.1px 5.9px rgba(0, 0, 0, 0.55);
+    border: solid 5px #b2b2b2;
+    margin-top: 30px + 62;
+    .content > .field {
+      padding-left: 20px;
+      padding-right: 20px;
+      &:first-child {
+        padding-top: 20px;
+      }
+      &:last-child {
+        padding-bottom: 20px;
+      }
+    }
+
+    .header {
+      padding: 62px 20px 20px;
+      background-color: #43261d;
+      color: white;
+      position: relative;
+      h2 {
+        font-size: $healthyHome * .75;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        color: white;
+      }
+    }
+
+    .field--name-field-icon-file {
+      width: 119px;
+      top: -63px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      position: absolute;
+    }
+
+    .field--name-field-intro {
+      font-size: $startingAt50 * .75;
+      p {
+        margin: 0;
+        line-height: 1;
+      }
+      em {
+        font-size: $initialFee *.75;
+      }
+    }
+
+    .body-content {
+      padding: 20px;
+    }
+
+    .field--name-field-body-text {
+      font-weight: bold;
+      font-size: $orderHealthyHome * .75;
+      p {
+        margin: 0;
+        line-height: 1;
+      }
+    }
+
+    .field--name-field-plan-features-header {
+      font-size: $yearAroundProtection * .75;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: 30px;
+      margin-top: 10px;
+    }
+
+    .field--name-field-plan-features {
+      margin-bottom: 27px;
+      .field__items {
+        text-align: left;
+        display: inline-block;
+      }
+
+      .field__item {
+        padding-left: 25px;
+        position: relative;
+        font-size: $features * .75;
+        font-weight: bold;
+        &:before {
+          font-family: FontAwesome;
+          content: $fa-var-check-circle-o;
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          font-weight: normal;
+          color: #cb0108;
+        }
+        +.field__item {
+          margin-top: 15px;
+        }
+      }
+    }
+
+    .field--name-field-call-out {
+      margin: 0;
+      padding: 0;
+      background: none;
+      color: inherit;
+      font-size: $callNumber * .75;
+      font-weight: bold;
+      p {
+        line-height: 1;
+        margin: 0;
+      }
+      em {
+        font-size: $forServiceToday * .75;
+        font-weight: 600;
+      }
+      strong {
+        @include flexbox;
+        align-items: center;
+        justify-content: center;
+        font-size: $sameDayService * .75;
+        margin-top: 10px;
+        line-height: 1.25;
+        &:before, &:after {
+          font-family: FontAwesome;
+          content: "#{$fa-var-star} #{$fa-var-star} #{$fa-var-star}";
+          font-size: $sameDayStars * .75;
+          display: block;
+        }
+        &:before {
+          //margin-bottom: 5px;
+          margin: 0 10px;
+        }
+        &:after {
+          //margin-top: 5px;
+          margin: 0 10px;
+        }
+      }
+    }
+
+    .field--name-field-link {
+      margin-top: 30px;
+      &.field.field--type-link-field {
+        padding: 0;
+      }
+      a {
+        display: block;
+        padding: 20px;
+        background: #e0e0e0;
+        color: #c80108;
+        padding-left: percentage(101/566);
+        padding-right: percentage(101/566);
+        position: relative;
+        font-size: $couponLink * .75;
+        font-weight: 600;
+        &:before {
+          @include flexbox;
+          align-items: center;
+          justify-content: center;
+          //width: 46px;
+          //height: 46px;
+          width: 30px;
+          height: 30px;
+          background: white;
+          border-radius: 1000px;
+          font-family: FontAwesome;
+          font-weight: normal;
+          content: $fa-var-tag;
+          transform: scaleX(-1) translateY(-50%);
+          position: absolute;
+          top: 50%;
+          left: percentage(41/566);
+          font-size: $couponIcon * .75;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(572px) {
+    padding-top: 84px;
+    padding-bottom: 60px;
+    > .content {
+      > h2 {
+        font-size: $weHaveTheRightPlan;
+      }
+      > .field--name-field-intro {
+        font-size: $forYourFamilyAndHome;
+        margin-bottom: 80px;
+      }
+    }
+
+    .paragraphs-item-body--wrap,
+    .paragraphs-item-plan-information--wrap {
+      width: 572px;
+      margin: 0 auto;
+    }
+
+    .paragraphs-item-body {
+      padding: 83px 30px 107px;
+      .field--name-field-header {
+        font-size: $oneTimeService;
+        margin-bottom: 18px;
+      }
+
+      .field--name-field-intro {
+        font-size: $notInterested;
+        margin-bottom: 30px;
+        .starting-at, strong {
+          font-size: $startingAt250;
+          margin-bottom: 20px;
+        }
+      }
+
+      .field--name-field-body-text {
+        margin-bottom: 48px;
+        font-size: $bodyText;
+      }
+
+      .field--name-field-call-out {
+        font-size: $callNumber;
+        em {
+          font-size: $forServiceToday;
+        }
+      }
+    }
+
+    .paragraphs-item-plan-information {
+      .header {
+        h2 {
+          font-size: $healthyHome;
+        }
+      }
+
+      .field--name-field-intro {
+        font-size: $startingAt50;
+        em {
+          display: block;
+          margin-top: 10px;
+          font-size: $initialFee;
+        }
+      }
+
+      .body-content {
+        padding: 33px 30px 20px;
+      }
+
+      .field--name-field-body-text {
+        font-size: $orderHealthyHome;
+      }
+
+      .field--name-field-plan-features-header {
+        font-size: $yearAroundProtection;
+      }
+
+      .field--name-field-plan-features {
+        .field__item {
+          font-size: $features;
+        }
+      }
+
+      .field--name-field-call-out {
+        font-size: $callNumber;
+        margin-bottom: 42px;
+        em {
+          font-size: $forServiceToday;
+        }
+        strong {
+          font-size: $sameDayService;
+          &:before, &:after {
+            font-size: $sameDayStars;
+          }
+        }
+      }
+
+      .field--name-field-link {
+        a {
+          padding-right: 30px;
+          padding-top: 25px;
+          padding-bottom: 25px;
+          font-size: $couponLink;
+          text-align: left;
+          &:before {
+            width: 46px;
+            height: 46px;
+            font-size: $couponIcon;
+          }
+        }
+      }
+    }
+  }
+
+  @include breakpoint(1200px) {
+    .field--name-field-content {
+      > .field__items {
+        @include flexbox;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .paragraphs-item-plan-information {
+        margin-top: 0;
+      }
+    }
+
+    .paragraphs-item-plan-information--wrap {
+      margin-left: 56px;
+    }
+  }
+}
