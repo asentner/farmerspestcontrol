@@ -401,11 +401,80 @@ function sprowt_learning_center_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-issue-field_identification_title'.
+  $field_instances['node-issue-field_identification_title'] = array(
+    'bundle' => 'issue',
+    'default_value' => array(
+      0 => array(
+        'value' => 'Pest Identification:',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'This is the header for the table.',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
+      ),
+      'quaternary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_identification_title',
+    'label' => 'Identification Title',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-issue-field_image'.
   $field_instances['node-issue-field_image'] = array(
     'bundle' => 'issue',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Insert image into body and align to the right.',
     'display' => array(
       'alt_teaser' => array(
         'label' => 'above',
@@ -489,7 +558,7 @@ function sprowt_learning_center_field_default_field_instances() {
             'search_all_fields' => 1,
           ),
         ),
-        'insert' => 0,
+        'insert' => 1,
         'insert_absolute' => 0,
         'insert_class' => '',
         'insert_default' => 'auto',
@@ -524,6 +593,7 @@ function sprowt_learning_center_field_default_field_instances() {
           'image_service' => 0,
           'image_service_primary' => 0,
           'image_slideshow_homepage' => 0,
+          'image_solution_hero' => 0,
           'image_special_offers_slideshow' => 0,
           'image_thumbnail' => 0,
           'link' => 0,
@@ -534,71 +604,6 @@ function sprowt_learning_center_field_default_field_instances() {
       ),
       'type' => 'image_image',
       'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'node-issue-field_indentificaiton_title'.
-  $field_instances['node-issue-field_indentificaiton_title'] = array(
-    'bundle' => 'issue',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'This field is used as the table header for the identifiers for this issue.',
-    'display' => array(
-      'alt_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_plain',
-        'weight' => 3,
-      ),
-      'quaternary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'secondary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'tertiary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_indentificaiton_title',
-    'label' => 'Indentificaiton title',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'show_token_tree' => 0,
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
     ),
   );
 
@@ -738,11 +743,12 @@ function sprowt_learning_center_field_default_field_instances() {
   t('Concerns');
   t('Description');
   t('Display title');
+  t('Identification Title');
   t('Identifications');
   t('Image');
-  t('Indentificaiton title');
+  t('Insert image into body and align to the right.');
   t('Label');
-  t('This field is used as the table header for the identifiers for this issue.');
+  t('This is the header for the table.');
 
   return $field_instances;
 }
