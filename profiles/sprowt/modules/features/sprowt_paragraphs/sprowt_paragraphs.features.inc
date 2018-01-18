@@ -18,6 +18,11 @@ function sprowt_paragraphs_ctools_plugin_api($module = NULL, $api = NULL) {
  */
 function sprowt_paragraphs_paragraphs_info() {
   $items = array(
+    'annotated_image' => array(
+      'name' => 'Annotated Image',
+      'bundle' => 'annotated_image',
+      'locked' => '1',
+    ),
     'block_embed' => array(
       'name' => 'Block Embed',
       'bundle' => 'block_embed',

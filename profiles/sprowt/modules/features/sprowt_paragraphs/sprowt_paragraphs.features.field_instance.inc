@@ -11,6 +11,265 @@ function sprowt_paragraphs_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_annotations-field_annotation_description'.
+  $field_instances['field_collection_item-field_annotations-field_annotation_description'] = array(
+    'bundle' => 'field_annotations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_annotation_description',
+    'label' => 'Description',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_annotations-field_annotation_label'.
+  $field_instances['field_collection_item-field_annotations-field_annotation_label'] = array(
+    'bundle' => 'field_annotations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_annotation_label',
+    'label' => 'Label',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_annotations-field_annotation_placement'.
+  $field_instances['field_collection_item-field_annotations-field_annotation_placement'] = array(
+    'bundle' => 'field_annotations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'image_annotator',
+        'settings' => array(),
+        'type' => 'image_annotator',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_annotation_placement',
+    'label' => 'Annotation Placement',
+    'required' => 0,
+    'settings' => array(
+      'image_field' => 'field_image_annotated',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'image_annotator',
+      'settings' => array(),
+      'type' => 'image_annotator_pointer_draggable',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'paragraphs_item-annotated_image-field_annotations'.
+  $field_instances['paragraphs_item-annotated_image-field_annotations'] = array(
+    'bundle' => 'annotated_image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_annotations',
+    'label' => 'Annotations',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'paragraphs_item-annotated_image-field_image_annotated'.
+  $field_instances['paragraphs_item-annotated_image-field_image_annotated'] = array(
+    'bundle' => 'annotated_image',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'annotated_image',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_image_annotated',
+    'label' => 'Annotated Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'insert' => 0,
+        'insert_absolute' => 0,
+        'insert_class' => '',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_annotated_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_solution_hero' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
+        ),
+        'insert_width' => '',
+        'preview_image_style' => 'annotated_image',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'paragraphs_item-block_embed-field_block_reference'.
   $field_instances['paragraphs_item-block_embed-field_block_reference'] = array(
     'bundle' => 'block_embed',
@@ -1183,12 +1442,16 @@ function sprowt_paragraphs_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Annotated Image');
+  t('Annotation Placement');
+  t('Annotations');
   t('Block Reference');
   t('Body');
   t('Call Out');
   t('Content');
   t('Custom Class');
   t('Custom class applied to paragraph');
+  t('Description');
   t('Header');
   t('Image');
   t('Images');
