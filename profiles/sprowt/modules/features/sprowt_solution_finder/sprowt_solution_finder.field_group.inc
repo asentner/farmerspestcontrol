@@ -50,7 +50,7 @@ function sprowt_solution_finder_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Categories',
-    'weight' => '0',
+    'weight' => '1',
     'children' => array(
       0 => 'field_concerns',
       1 => 'field_is_default',
@@ -79,13 +79,12 @@ function sprowt_solution_finder_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Content',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'body',
       1 => 'field_content',
       2 => 'field_hero_image',
-      3 => 'title',
-      4 => 'field_learn_more_link',
+      3 => 'field_learn_more_link',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
