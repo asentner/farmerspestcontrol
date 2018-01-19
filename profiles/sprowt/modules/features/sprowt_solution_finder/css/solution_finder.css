@@ -2832,12 +2832,47 @@ img.mfp-img {
 .my-mfp-slide-bottom.mfp-removing.mfp-bg {
   opacity: 0; }
 
+.scm-modal-container .mfp-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0; }
+  .scm-modal-container .mfp-container > * {
+    -ms-flex: 0 1 auto; }
+  .scm-modal-container .mfp-container:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
 .scm-modal-container .mfp-content {
-  max-width: 800px; }
+  max-width: 800px;
+  height: 100vh;
+  max-height: 900px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  .scm-modal-container .mfp-content > * {
+    -ms-flex: 0 1 auto; }
 
 .scm-modal-container .scm-modal {
   padding: 30px;
-  background: white; }
+  background: white;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  overflow: auto; }
   .scm-modal-container .scm-modal .field label {
     font-size: 1.25rem;
     margin-bottom: 15px; }
@@ -2855,10 +2890,9 @@ img.mfp-img {
   margin-bottom: 15px; }
 
 .scm-modal-container .controls {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex; }
@@ -2869,8 +2903,8 @@ img.mfp-img {
     margin: 0; }
 
 @media (min-width: 768px) {
-  .scm-modal-container .mfp-content {
-    margin: 20px; }
+  .scm-modal-container .mfp-container {
+    padding: 20px; }
   .scm-modal-container .scm-modal {
     padding: 50px 80px; } }
 
