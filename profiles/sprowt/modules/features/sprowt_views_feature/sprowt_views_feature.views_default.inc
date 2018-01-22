@@ -128,7 +128,7 @@ function sprowt_views_feature_views_default_views() {
   /* Display: Front Page Image */
   $handler = $view->new_display('block', 'Front Page Image', 'image');
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Image */
+  /* Field: Field: Image */
   $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
@@ -221,6 +221,10 @@ function sprowt_views_feature_views_default_views() {
 
   /* Display: Front page benefits */
   $handler = $view->new_display('block', 'Front page benefits', 'front');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -492,6 +496,30 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
   $handler->display->display_options['arguments']['tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['block_description'] = 'Related articles (LocalTarget)';
+
+  /* Display: Blog Call Out */
+  $handler = $view->new_display('block', 'Blog Call Out', 'blog_call_out');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'alt_teaser';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h2 class="view-title">Related Pest Control News</h2>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['block_description'] = 'Blog Call Out';
   $export['blog'] = $view;
 
   $view = new view();
@@ -515,7 +543,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Call Out */
+  /* Field: Field: Call Out */
   $handler->display->display_options['fields']['field_call_out']['id'] = 'field_call_out';
   $handler->display->display_options['fields']['field_call_out']['table'] = 'field_data_field_call_out';
   $handler->display->display_options['fields']['field_call_out']['field'] = 'field_call_out';
@@ -593,7 +621,7 @@ function sprowt_views_feature_views_default_views() {
     'blog' => 'blog',
     'localtarget' => 'localtarget',
   );
-  /* Filter criterion: Content: Call Out (field_call_out) */
+  /* Filter criterion: Field: Call Out (field_call_out) */
   $handler->display->display_options['filters']['field_call_out_value']['id'] = 'field_call_out_value';
   $handler->display->display_options['filters']['field_call_out_value']['table'] = 'field_data_field_call_out';
   $handler->display->display_options['filters']['field_call_out_value']['field'] = 'field_call_out_value';
@@ -854,14 +882,14 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Display title */
+  /* Field: Field: Display title */
   $handler->display->display_options['fields']['field_display_title']['id'] = 'field_display_title';
   $handler->display->display_options['fields']['field_display_title']['table'] = 'field_data_field_display_title';
   $handler->display->display_options['fields']['field_display_title']['field'] = 'field_display_title';
   $handler->display->display_options['fields']['field_display_title']['label'] = '';
   $handler->display->display_options['fields']['field_display_title']['element_class'] = 'field--name-field-display-title';
   $handler->display->display_options['fields']['field_display_title']['element_label_colon'] = FALSE;
-  /* Field: Content: Intro */
+  /* Field: Field: Intro */
   $handler->display->display_options['fields']['field_intro']['id'] = 'field_intro';
   $handler->display->display_options['fields']['field_intro']['table'] = 'field_data_field_intro';
   $handler->display->display_options['fields']['field_intro']['field'] = 'field_intro';
@@ -899,7 +927,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_street_address']['label'] = 'Address';
   $handler->display->display_options['fields']['field_street_address']['element_type'] = 'h3';
   $handler->display->display_options['fields']['field_street_address']['element_label_colon'] = FALSE;
-  /* Field: Content: Call tracking number */
+  /* Field: Content: Phone number */
   $handler->display->display_options['fields']['field_phone_number']['id'] = 'field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['table'] = 'field_data_field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['field'] = 'field_phone_number';
@@ -1064,6 +1092,50 @@ function sprowt_views_feature_views_default_views() {
   /* Display: All locations */
   $handler = $view->new_display('block', 'All locations', 'list');
   $handler->display->display_options['block_description'] = 'List of locations';
+
+  /* Display: All locations (w/ header) */
+  $handler = $view->new_display('block', 'All locations (w/ header)', 'locations_list');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'tablet desktop';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h3>Contact Our Office Today</h3>
+<p>Tell us how we can help you get back to being bug-free! If you are interested in a free pest inspection, please use this form so we can serve you better!</p>
+<p>If you have a pest emergency or just want to hear a friendly voice please contact our main office at 919-926-9527.</p>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Weight: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['block_description'] = 'List of locations (w/header)';
+
+  /* Display: Main Location (w/ header) */
+  $handler = $view->new_display('block', 'Main Location (w/ header)', 'main_location');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'mobile';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h3>Contact Our Office Today</h3>
+<p>Tell us how we can help you get back to being bug-free! If you are interested in a free pest inspection, please use this form so we can serve you better!</p>
+<p>If you have a pest emergency or just want to hear a friendly voice please contact our main office at 919-926-9527.</p>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Weight: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['block_description'] = 'Main Location (w/header)';
   $export['locations'] = $view;
 
   $view = new view();
@@ -1157,34 +1229,6 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  /* Contextual filter: Content: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
-  $handler->display->display_options['arguments']['nid']['not'] = TRUE;
-  /* Contextual filter: Content: Has taxonomy term ID */
-  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
-  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
-  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['term_page'] = FALSE;
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = TRUE;
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['anyall'] = '+';
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
-    'service_areas' => 'service_areas',
-  );
-  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
-  $handler->display->display_options['arguments']['tid']['reduce_duplicates'] = TRUE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -1223,6 +1267,27 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['block_description'] = 'Related packages (Services sidebar)';
+
+  /* Display: Package Comparison (tertiary) */
+  $handler = $view->new_display('block', 'Package Comparison (tertiary)', 'package_comparison');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'tertiary_teaser';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Weight: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['block_description'] = 'Package Comparison (tertiary)';
   $export['packages'] = $view;
 
   $view = new view();
@@ -1273,6 +1338,8 @@ function sprowt_views_feature_views_default_views() {
 
   /* Display: All services */
   $handler = $view->new_display('block', 'All services', 'all');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'tablet desktop';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
@@ -1507,6 +1574,53 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['filters']['promote']['field'] = 'promote';
   $handler->display->display_options['filters']['promote']['value'] = '1';
   $handler->display->display_options['block_description'] = 'Front Page Services (4, secondary)';
+
+  /* Display: Mobile: Front Page Services */
+  $handler = $view->new_display('block', 'Mobile: Front Page Services', 'all_mobile');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'mobile';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'View All Services';
+  $handler->display->display_options['defaults']['link_display'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['link_url'] = 'node/uuid/c1c20802-54d4-49c2-ad31-61784e121b9f';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'alt_teaser';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'service' => 'service',
+  );
+  /* Filter criterion: Content: Promoted to front page */
+  $handler->display->display_options['filters']['promote']['id'] = 'promote';
+  $handler->display->display_options['filters']['promote']['table'] = 'node';
+  $handler->display->display_options['filters']['promote']['field'] = 'promote';
+  $handler->display->display_options['filters']['promote']['value'] = '1';
+  $handler->display->display_options['block_description'] = 'Mobile: Front Page Services';
   $export['services'] = $view;
 
   $view = new view();
@@ -1770,6 +1884,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '2';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Global: Random */
   $handler->display->display_options['sorts']['random']['id'] = 'random';
@@ -1952,6 +2067,72 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['nid']['not'] = TRUE;
+
+  /* Display: Desktop: Homepage (w/ header) */
+  $handler = $view->new_display('block', 'Desktop: Homepage (w/ header)', 'front2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'tablet desktop';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'secondary_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Save some money today!</h2>
+<p>We know that choosing a pest control service is an important decision. Let us make it easy for you to get started with us with these exclusive special offers!</p>
+<p><a href="/">View All Savings</a></p>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Weight: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['block_description'] = 'Desktop: Special offers (homepage w/ header)';
+
+  /* Display: Mobile: Homepage (w/ header) */
+  $handler = $view->new_display('block', 'Mobile: Homepage (w/ header)', 'front3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'mobile';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'secondary_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Save some money today!</h2>
+<p>We know that choosing a pest control service is an important decision. Let us make it easy for you to get started with us with these exclusive special offers!</p>
+<p><a href="/">View All Savings</a></p>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Weight: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['block_description'] = 'Mobile: Special offers (homepage w/ header)';
   $export['special_offers'] = $view;
 
   $view = new view();
@@ -2252,6 +2433,156 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['filters']['promote']['table'] = 'node';
   $handler->display->display_options['filters']['promote']['field'] = 'promote';
   $handler->display->display_options['filters']['promote']['value'] = '1';
+
+  /* Display: Desktop: Front page testimonial (w/ title & header) */
+  $handler = $view->new_display('block', 'Desktop: Front page testimonial (w/ title & header)', 'front_testimonial_three');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Testimonials';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'desktop';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'View All Of Our Customer Reviews';
+  $handler->display->display_options['defaults']['link_display'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['link_url'] = '<front>';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Read what our clients are saying</h2>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'testimonial' => 'testimonial',
+  );
+  /* Filter criterion: Content: Promoted to front page */
+  $handler->display->display_options['filters']['promote']['id'] = 'promote';
+  $handler->display->display_options['filters']['promote']['table'] = 'node';
+  $handler->display->display_options['filters']['promote']['field'] = 'promote';
+  $handler->display->display_options['filters']['promote']['value'] = '1';
+  $handler->display->display_options['block_description'] = 'Desktop: Front page testimonial (w/ title & header)';
+
+  /* Display: Mobile: Front page testimonial (w/ title & header) */
+  $handler = $view->new_display('block', 'Mobile: Front page testimonial (w/ title & header)', 'front_testimonial_one');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Testimonials';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'mobile';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'View All Of Our Customer Reviews';
+  $handler->display->display_options['defaults']['link_display'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['link_url'] = '<front>';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Read what our clients are saying</h2>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'testimonial' => 'testimonial',
+  );
+  /* Filter criterion: Content: Promoted to front page */
+  $handler->display->display_options['filters']['promote']['id'] = 'promote';
+  $handler->display->display_options['filters']['promote']['table'] = 'node';
+  $handler->display->display_options['filters']['promote']['field'] = 'promote';
+  $handler->display->display_options['filters']['promote']['value'] = '1';
+  $handler->display->display_options['block_description'] = 'Mobile: Front page testimonial (w/ title & header)';
+
+  /* Display: Tablet: Front page testimonial (w/ title & header) */
+  $handler = $view->new_display('block', 'Tablet: Front page testimonial (w/ title & header)', 'front_testimonial_two');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Testimonials';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'tablet';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'View All Of Our Customer Reviews';
+  $handler->display->display_options['defaults']['link_display'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['link_url'] = '<front>';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Read what our clients are saying</h2>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'testimonial' => 'testimonial',
+  );
+  /* Filter criterion: Content: Promoted to front page */
+  $handler->display->display_options['filters']['promote']['id'] = 'promote';
+  $handler->display->display_options['filters']['promote']['table'] = 'node';
+  $handler->display->display_options['filters']['promote']['field'] = 'promote';
+  $handler->display->display_options['filters']['promote']['value'] = '1';
+  $handler->display->display_options['block_description'] = 'Tablet: Front page testimonial (w/ title & header)';
   $export['testimonials'] = $view;
 
   $view = new view();

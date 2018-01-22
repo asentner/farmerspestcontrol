@@ -150,7 +150,7 @@ function sprowt_package_comparison_views_default_views() {
   $handler->display->display_options['row_options']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Call Out */
+  /* Field: Field: Call Out */
   $handler->display->display_options['fields']['field_call_out']['id'] = 'field_call_out';
   $handler->display->display_options['fields']['field_call_out']['table'] = 'field_data_field_call_out';
   $handler->display->display_options['fields']['field_call_out']['field'] = 'field_call_out';
