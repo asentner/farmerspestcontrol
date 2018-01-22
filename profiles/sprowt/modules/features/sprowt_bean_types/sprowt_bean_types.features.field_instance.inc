@@ -345,7 +345,7 @@ function sprowt_bean_types_field_default_field_instances() {
             'search_all_fields' => 0,
           ),
         ),
-        'insert' => 0,
+        'insert' => 1,
         'insert_absolute' => 0,
         'insert_class' => '',
         'insert_default' => 'auto',
@@ -354,6 +354,7 @@ function sprowt_bean_types_field_default_field_instances() {
           'icon_link' => 0,
           'image' => 0,
           'image_affiliation_image' => 0,
+          'image_annotated_image' => 0,
           'image_benefits' => 0,
           'image_benefits__front_page_' => 0,
           'image_flexslider_full' => 0,
@@ -380,6 +381,7 @@ function sprowt_bean_types_field_default_field_instances() {
           'image_service' => 0,
           'image_service_primary' => 0,
           'image_slideshow_homepage' => 0,
+          'image_solution_hero' => 0,
           'image_special_offers_slideshow' => 0,
           'image_thumbnail' => 0,
           'link' => 0,
@@ -1113,7 +1115,6 @@ function sprowt_bean_types_field_default_field_instances() {
   t('Button URL');
   t('Call Out Text');
   t('Display title');
-  t('FAQ');
   t('H1 Title');
   t('Image');
   t('Image Insert');

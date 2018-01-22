@@ -80,6 +80,8 @@ function sprowt_bean_types_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',
