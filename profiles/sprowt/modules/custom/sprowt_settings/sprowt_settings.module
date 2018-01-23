@@ -347,6 +347,24 @@ function _sprowt_settings_node_service()
     }
 }
 
+function _sprowt_settings_can_replace() {
+    $current_path = current_path();
+    $current_alias = drupal_get_path_alias($current_path);
+    
+    $yes = !path_is_admin($current_path);
+    
+    $paths = array(
+        'node/*/*'
+    );
+    
+    foreach($paths as $path) {
+        $yes = $yes && !drupal_match_path($current_path, $path);
+        $yes = $yes && !drupal_match_path($current_alias, $path);
+    }
+    
+    return $yes;
+}
+
 function sprowt_settings_preprocess_page(&$variables)
 {
 
@@ -355,7 +373,7 @@ function sprowt_settings_preprocess_page(&$variables)
 // implements hook_preprocess_block()
 function sprowt_settings_preprocess_block(&$variables)
 {
-    if (!path_is_admin(current_path())) {
+    if (_sprowt_settings_can_replace()) {
         if (!empty($variables['elements']['#block']->subject)) {
             $variables['elements']['#block']->subject = _sprowt_settings_shortcode_replace($variables['elements']['#block']->subject);
         }
@@ -366,7 +384,7 @@ function sprowt_settings_preprocess_block(&$variables)
 // implements hook_preprocess_node()
 function sprowt_settings_preprocess_node(&$variables)
 {
-    if (!path_is_admin(current_path())) {
+    if (_sprowt_settings_can_replace()) {
         if (!empty($variables['title'])) {
             $variables['title'] = _sprowt_settings_shortcode_replace($variables['title']);
         }

@@ -8,11 +8,30 @@ include_once 'sprowt_fields_and_text_formats.features.inc';
 
 
 /**
+ * Implements hook_theme().
+ */
+function sprowt_fields_and_text_formats_theme($existing, $type, $theme, $path) {
+    return array(
+        'field__field_image_annotated' => array (
+            'template' => 'field--field-image-annotated',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+        'field_collection_item__field_annotations' => array (
+            'template' => 'field-collection-item--field-annotations',
+            'path' => $path . '/theme',
+            'base hook' => 'field_collection_item',
+        ),
+    );
+}
+
+/**
  * Implements hook_preprocess_HOOK().
  */
 function sprowt_fields_and_text_formats_preprocess_field(&$variables)
 {
     $element = &$variables['element'];
+    $parent = $element['#object'];
     if($element['#field_name'] == 'field_icon_file') {
         $items = &$variables['items'];
         foreach($items as &$item) {
@@ -73,6 +92,82 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
                 '#type' => 'markup',
                 '#markup' => $html
             );
+        }
+    }
+    
+    if($element['#field_name'] == 'field_annotations') {
+        $item_attributes_array = (!empty($variables['item_attributes_array'])) ?
+            $variables['item_attributes_array'] : array();
+        
+        foreach($variables['items'] as $delta => $item) {
+            $attributes_array = (!empty($item_attributes_array[$delta])) ?
+                $item_attributes_array[$delta] : array();
+            $parent_id = entity_id($element['#entity_type'], $parent);
+            $id = "{$element['#entity_type']}--{$element['#bundle']}--$parent_id--annotation--$delta";
+            $id = drupal_html_id($id);
+            $attributes_array['id'] = $id;
+            $item_attributes_array[$delta] = $attributes_array;
+        }
+    
+        $variables['item_attributes_array'] = $item_attributes_array;
+    }
+    
+    if($element['#field_name'] == 'field_image_annotated') {
+        drupal_add_css(drupal_get_path('module', 'sprowt_fields_and_text_formats') . '/css/annotated-image.css');
+        $annotations = field_get_items($element['#entity_type'], $parent, 'field_annotations');
+        $variables['pointers'] = array();
+        if(!empty($annotations)) {
+            foreach ($annotations as $delta => $annotation) {
+                $parent_id = entity_id($element['#entity_type'], $parent);
+                $id = "{$element['#entity_type']}--{$element['#bundle']}--$parent_id--annotation--$delta";
+                $collection = entity_load('field_collection_item', array($annotation['value']));
+                $collection = reset($collection);
+                $placement = field_get_items('field_collection_item', $collection, 'field_annotation_placement');
+                $placement = !empty($placement[0]['value']) ? $placement[0]['value'] : '';
+                if(!empty($placement)) {
+                    $placement = json_decode($placement, TRUE);
+                    $placement['annotation_id'] = drupal_html_class($id);
+                    $placement['annotation_delta'] = $delta;
+                    $placement['top'] = floatval($placement['y']) * 100;
+                    $placement['left'] = floatval($placement['x']) * 100;
+                    $variables['pointers'][] = $placement;
+                }
+            }
+        }
+    
+        $item_attributes_array = (!empty($variables['item_attributes_array'])) ?
+            $variables['item_attributes_array'] : array();
+    
+        foreach($variables['items'] as $delta => $item) {
+            $attributes_array = (!empty($item_attributes_array[$delta])) ?
+                $item_attributes_array[$delta] : array();
+            
+            $style = array();
+            $file = $item['#item'];
+            
+            $style[] = 'width:' . $file['width'] . 'px';
+            $style[] = 'height:auto';
+            
+            $attributes_array['style'] = implode(';', $style);
+            $item_attributes_array[$delta] = $attributes_array;
+        }
+    
+        $variables['item_attributes_array'] = $item_attributes_array;
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_fields_and_text_formats_preprocess_entity(&$variables) {
+    if($variables['entity_type'] == 'field_collection_item') {
+        $elements = $variables['elements'];
+        if($elements['#bundle'] == 'field_annotations') {
+            /**
+             * @var $collection \FieldCollectionItemEntity
+             */
+            $collection = $elements['#entity'];
+            $variables['delta'] = $collection->delta();
         }
     }
 }
