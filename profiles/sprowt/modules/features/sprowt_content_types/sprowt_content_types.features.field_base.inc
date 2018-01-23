@@ -10,6 +10,29 @@
 function sprowt_content_types_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_address_label'.
+  $field_bases['field_address_label'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_address_label',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_hero_image'.
   $field_bases['field_hero_image'] = array(
     'active' => 1,
@@ -79,6 +102,48 @@ function sprowt_content_types_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_hours'.
+  $field_bases['field_hours'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_hours',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_hours_label'.
+  $field_bases['field_hours_label'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_hours_label',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_map_code'.
   $field_bases['field_map_code'] = array(
     'active' => 1,
@@ -114,6 +179,8 @@ function sprowt_content_types_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -135,6 +202,31 @@ function sprowt_content_types_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_phone_label'.
+  $field_bases['field_phone_label'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_phone_label',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -214,6 +306,8 @@ function sprowt_content_types_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',

@@ -985,6 +985,9 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'modal' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

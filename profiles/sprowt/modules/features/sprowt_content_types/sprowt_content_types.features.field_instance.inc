@@ -3330,6 +3330,69 @@ function sprowt_content_types_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-location-field_address_label'.
+  $field_instances['node-location-field_address_label'] = array(
+    'bundle' => 'location',
+    'default_value' => array(
+      0 => array(
+        'value' => 'Address',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_address_label',
+    'label' => 'LTP Address Label',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 45,
+    ),
+  );
+
   // Exported field_instance: 'node-location-field_button'.
   $field_instances['node-location-field_button'] = array(
     'bundle' => 'location',
@@ -3347,13 +3410,13 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 14,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3429,7 +3492,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 12,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3467,7 +3530,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 50,
+      'weight' => 54,
     ),
   );
 
@@ -3495,7 +3558,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 13,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3533,7 +3596,129 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
+      'weight' => 55,
+    ),
+  );
+
+  // Exported field_instance: 'node-location-field_hours'.
+  $field_instances['node-location-field_hours'] = array(
+    'bundle' => 'location',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_hours',
+    'label' => 'Hours',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
       'weight' => 53,
+    ),
+  );
+
+  // Exported field_instance: 'node-location-field_hours_label'.
+  $field_instances['node-location-field_hours_label'] = array(
+    'bundle' => 'location',
+    'default_value' => array(
+      0 => array(
+        'value' => 'Hours',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_hours_label',
+    'label' => 'LTP Hours Label',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 52,
     ),
   );
 
@@ -3559,10 +3744,11 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 2,
       ),
       'secondary_teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 4,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3602,7 +3788,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 47,
     ),
   );
 
@@ -3627,10 +3813,11 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 9,
       ),
       'secondary_teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3690,7 +3877,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 11,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3728,6 +3915,69 @@ function sprowt_content_types_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-location-field_phone_label'.
+  $field_instances['node-location-field_phone_label'] = array(
+    'bundle' => 'location',
+    'default_value' => array(
+      0 => array(
+        'value' => 'Contact Us Today',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_phone_label',
+    'label' => 'LTP Phone Label',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 50,
+    ),
+  );
+
   // Exported field_instance: 'node-location-field_phone_number'.
   $field_instances['node-location-field_phone_number'] = array(
     'bundle' => 'location',
@@ -3750,10 +4000,13 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'secondary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'label' => 'hidden',
+        'module' => 'telephone',
+        'settings' => array(
+          'title' => '',
+        ),
+        'type' => 'telephone_link',
+        'weight' => 1,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3793,7 +4046,7 @@ function sprowt_content_types_field_default_field_instances() {
         'placeholder' => '',
       ),
       'type' => 'telephone_default',
-      'weight' => 49,
+      'weight' => 51,
     ),
   );
 
@@ -3819,10 +4072,11 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 4,
       ),
       'secondary_teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 6,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -3862,7 +4116,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 48,
+      'weight' => 49,
     ),
   );
 
@@ -3890,7 +4144,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3964,10 +4218,11 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 3,
       ),
       'secondary_teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 5,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -4007,7 +4262,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 5,
       ),
       'type' => 'text_textfield',
-      'weight' => 47,
+      'weight' => 48,
     ),
   );
 
@@ -4033,10 +4288,11 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 1,
       ),
       'secondary_teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 3,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -4076,7 +4332,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 45,
+      'weight' => 46,
     ),
   );
 
@@ -8273,12 +8529,16 @@ function sprowt_content_types_field_default_field_instances() {
   t('Hero Image');
   t('Highlight');
   t('Highlight icon');
+  t('Hours');
   t('Icon');
   t('Image');
   t('Image Insert');
   t('Include suite number if applicable.');
   t('Input as a hex value. (e.g. #ffffff)');
   t('Intro');
+  t('LTP Address Label');
+  t('LTP Hours Label');
+  t('LTP Phone Label');
   t('Leave this field blank to default to the end of the current month, which will dynamically update each month.');
   t('Link');
   t('Link to the page this benefit will point to');
