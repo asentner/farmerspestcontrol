@@ -927,7 +927,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_street_address']['label'] = 'Address';
   $handler->display->display_options['fields']['field_street_address']['element_type'] = 'h3';
   $handler->display->display_options['fields']['field_street_address']['element_label_colon'] = FALSE;
-  /* Field: Content: Phone number */
+  /* Field: Content: Call tracking number */
   $handler->display->display_options['fields']['field_phone_number']['id'] = 'field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['table'] = 'field_data_field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['field'] = 'field_phone_number';
@@ -1039,6 +1039,50 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['block_description'] = 'Local Target Title (H2)';
+
+  /* Display: LocalTarget Local Content Block */
+  $handler = $view->new_display('block', 'LocalTarget Local Content Block', 'ltp_local');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'quaternary_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Field: Display title */
+  $handler->display->display_options['fields']['field_display_title']['id'] = 'field_display_title';
+  $handler->display->display_options['fields']['field_display_title']['table'] = 'field_data_field_display_title';
+  $handler->display->display_options['fields']['field_display_title']['field'] = 'field_display_title';
+  $handler->display->display_options['fields']['field_display_title']['label'] = '';
+  $handler->display->display_options['fields']['field_display_title']['element_class'] = 'field--name-field-display-title';
+  $handler->display->display_options['fields']['field_display_title']['element_label_colon'] = FALSE;
+  /* Field: Field: Intro */
+  $handler->display->display_options['fields']['field_intro']['id'] = 'field_intro';
+  $handler->display->display_options['fields']['field_intro']['table'] = 'field_data_field_intro';
+  $handler->display->display_options['fields']['field_intro']['field'] = 'field_intro';
+  $handler->display->display_options['fields']['field_intro']['label'] = '';
+  $handler->display->display_options['fields']['field_intro']['element_class'] = 'field--name-field-intro';
+  $handler->display->display_options['fields']['field_intro']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'localtarget' => 'localtarget',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['block_description'] = 'LocalTarget Local Content Block';
   $export['localtarget'] = $view;
 
   $view = new view();
@@ -1136,6 +1180,51 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['block_description'] = 'Main Location (w/header)';
+
+  /* Display: LTP Location & Map */
+  $handler = $view->new_display('block', 'LTP Location & Map', 'ltp_location_map');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'secondary_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Has taxonomy term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['anyall'] = '+';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
+    'markets' => 'markets',
+  );
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'location' => 'location',
+  );
+  $handler->display->display_options['block_description'] = 'LTP Location & Map';
   $export['locations'] = $view;
 
   $view = new view();
