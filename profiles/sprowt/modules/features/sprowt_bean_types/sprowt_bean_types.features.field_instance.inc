@@ -236,6 +236,40 @@ function sprowt_bean_types_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'bean-faq_bean-field_faq_service_reference'.
+  $field_instances['bean-faq_bean-field_faq_service_reference'] = array(
+    'bundle' => 'faq_bean',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If you want this FAQ to automatically appear on a LTP page, reference that page.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_faq_service_reference',
+    'label' => 'Service reference',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'multiple_selects',
+      'settings' => array(),
+      'type' => 'multiple_selects',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'bean-faq_bean-field_faqs'.
   $field_instances['bean-faq_bean-field_faqs'] = array(
     'bundle' => 'faq_bean',
@@ -1207,9 +1241,11 @@ function sprowt_bean_types_field_default_field_instances() {
   t('Display title');
   t('FAQs');
   t('H1 Title');
+  t('If you want this FAQ to automatically appear on a LTP page, reference that page.');
   t('Image');
   t('Image Insert');
   t('Linked Images');
+  t('Service reference');
 
   return $field_instances;
 }
