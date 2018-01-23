@@ -26,8 +26,10 @@ function sprowt_concerns_field_group_info() {
       0 => 'body',
       1 => 'field_icon_file',
       2 => 'field_concern_steps',
-      3 => 'title',
-      4 => 'field_concern_treatment',
+      3 => 'field_concern_treatment',
+      4 => 'field_intro',
+      5 => 'field_call_out',
+      6 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
