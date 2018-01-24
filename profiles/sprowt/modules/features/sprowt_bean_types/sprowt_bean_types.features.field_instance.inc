@@ -1227,6 +1227,106 @@ function sprowt_bean_types_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'bean-sesonal-field_body_text'.
+  $field_instances['bean-sesonal-field_body_text'] = array(
+    'bundle' => 'sesonal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_body_text',
+    'label' => 'Body',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'bean-sesonal-field_concerns'.
+  $field_instances['bean-sesonal-field_concerns'] = array(
+    'bundle' => 'sesonal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => 0,
+          'use_content_language' => 1,
+          'view_mode' => 'alt_teaser',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_concerns',
+    'label' => 'Concerns',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'multiple_selects',
+      'settings' => array(),
+      'type' => 'multiple_selects',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'bean-sesonal-field_ltp_reference'.
+  $field_instances['bean-sesonal-field_ltp_reference'] = array(
+    'bundle' => 'sesonal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_ltp_reference',
+    'label' => 'LTP Reference',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'multiple_selects',
+      'settings' => array(),
+      'type' => 'multiple_selects',
+      'weight' => 4,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Bean Title');
@@ -1234,12 +1334,14 @@ function sprowt_bean_types_field_default_field_instances() {
   t('Body');
   t('Button URL');
   t('Call Out Text');
+  t('Concerns');
   t('Display title');
   t('FAQs');
   t('H1 Title');
   t('If you want this FAQ to automatically appear on a LTP page, reference that page.');
   t('Image');
   t('Image Insert');
+  t('LTP Reference');
   t('Linked Images');
   t('Service reference');
 
