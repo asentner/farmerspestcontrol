@@ -1275,7 +1275,7 @@ function sprowt_bean_types_field_default_field_instances() {
         'settings' => array(
           'links' => 0,
           'use_content_language' => 1,
-          'view_mode' => 'alt_teaser',
+          'view_mode' => 'secondary_teaser',
         ),
         'type' => 'entityreference_entity_view',
         'weight' => 3,
