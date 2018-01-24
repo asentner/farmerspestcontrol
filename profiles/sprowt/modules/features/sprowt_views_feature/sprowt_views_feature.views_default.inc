@@ -927,7 +927,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_street_address']['label'] = 'Address';
   $handler->display->display_options['fields']['field_street_address']['element_type'] = 'h3';
   $handler->display->display_options['fields']['field_street_address']['element_label_colon'] = FALSE;
-  /* Field: Content: Call tracking number */
+  /* Field: Content: Phone number */
   $handler->display->display_options['fields']['field_phone_number']['id'] = 'field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['table'] = 'field_data_field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['field'] = 'field_phone_number';
@@ -1378,6 +1378,58 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['block_description'] = 'Package Comparison (tertiary)';
   $export['packages'] = $view;
+
+  $view = new view();
+  $view->name = 'referenced_faq_blocks';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'bean';
+  $view->human_name = 'Referenced FAQ Blocks';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Frequently Asked Questions:';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'entity';
+  $handler->display->display_options['row_options']['view_mode'] = 'default';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['id'] = 'field_faq_service_reference_target_id';
+  $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['table'] = 'field_data_field_faq_service_reference';
+  $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['field'] = 'field_faq_service_reference_target_id';
+  /* Field: Block: Internal, numeric block ID */
+  $handler->display->display_options['fields']['bid']['id'] = 'bid';
+  $handler->display->display_options['fields']['bid']['table'] = 'bean';
+  $handler->display->display_options['fields']['bid']['field'] = 'bid';
+  /* Contextual filter: Block: Service reference (field_faq_service_reference) */
+  $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['id'] = 'field_faq_service_reference_target_id';
+  $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['table'] = 'field_data_field_faq_service_reference';
+  $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['field'] = 'field_faq_service_reference_target_id';
+  $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Block: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'bean';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'faq_bean' => 'faq_bean',
+  );
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'faq_block');
+  $export['referenced_faq_blocks'] = $view;
 
   $view = new view();
   $view->name = 'services';
