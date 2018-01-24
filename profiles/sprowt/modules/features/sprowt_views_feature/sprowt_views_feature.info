@@ -19,6 +19,7 @@ features[views_view][] = localtarget
 features[views_view][] = locations
 features[views_view][] = markets
 features[views_view][] = packages
+features[views_view][] = ref_seas_blocks
 features[views_view][] = referenced_faq_blocks
 features[views_view][] = services
 features[views_view][] = slideshow
