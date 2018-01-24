@@ -79,13 +79,3 @@ function sprowt_paragraphs_preprocess_field(&$variables)
         }
     }
 }
-
-/**
- * Implements hook_form_alter().
- */
-function sprowt_paragraphs_form_alter(&$form, &$form_state, $form_id)
-{
-    if($form['#node_edit_form']) {
-        drupal_add_js(drupal_get_path('module', 'sprowt_paragraphs') . '/js/image_annotator_fix.js');
-    }
-}
