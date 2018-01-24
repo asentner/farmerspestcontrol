@@ -103,7 +103,7 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
             $attributes_array = (!empty($item_attributes_array[$delta])) ?
                 $item_attributes_array[$delta] : array();
             $parent_id = entity_id($element['#entity_type'], $parent);
-            $id = "{$element['#entity_type']}--{$element['#bundle']}--$parent_id--annotation--$delta";
+            $id = "{$element['#entity_type']}-{$element['#bundle']}-$parent_id-annotation-$delta";
             $id = drupal_html_id($id);
             $attributes_array['id'] = $id;
             $item_attributes_array[$delta] = $attributes_array;
@@ -114,12 +114,13 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
     
     if($element['#field_name'] == 'field_image_annotated') {
         drupal_add_css(drupal_get_path('module', 'sprowt_fields_and_text_formats') . '/css/annotated-image.css');
+        drupal_add_js(drupal_get_path('module', 'sprowt_fields_and_text_formats') . '/js/image-annotated.js');
         $annotations = field_get_items($element['#entity_type'], $parent, 'field_annotations');
         $variables['pointers'] = array();
         if(!empty($annotations)) {
             foreach ($annotations as $delta => $annotation) {
                 $parent_id = entity_id($element['#entity_type'], $parent);
-                $id = "{$element['#entity_type']}--{$element['#bundle']}--$parent_id--annotation--$delta";
+                $id = "{$element['#entity_type']}-{$element['#bundle']}-$parent_id-annotation-$delta";
                 $collection = entity_load('field_collection_item', array($annotation['value']));
                 $collection = reset($collection);
                 $placement = field_get_items('field_collection_item', $collection, 'field_annotation_placement');
@@ -144,9 +145,21 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
             
             $style = array();
             $file = $item['#item'];
-            
-            $style[] = 'width:' . $file['width'] . 'px';
-            $style[] = 'height:auto';
+
+            $uri = $file['uri'];
+            if(!empty($item['#image_style'])) {
+                $uri = image_style_path($item['#image_style'], $uri);
+            }
+
+            $path = drupal_realpath($uri);
+
+
+            $info = image_get_info($path);
+
+            if(!empty($info['width'])) {
+                $style[] = 'width:' . $info['width'] . 'px';
+                $style[] = 'height:auto';
+            }
             
             $attributes_array['style'] = implode(';', $style);
             $item_attributes_array[$delta] = $attributes_array;
