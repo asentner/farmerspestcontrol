@@ -2324,6 +2324,86 @@
   overflow: visible;
   clip: auto; }
 
+.solution-annotated-image {
+  padding: 30px 20px;
+  text-align: center; }
+  .solution-annotated-image .paragraphs-items-field-content {
+    text-align: left; }
+  .solution-annotated-image .pointer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-weight: bold;
+    color: white;
+    background: #c82127;
+    border: solid 3px #e0e0e0;
+    border-radius: 1000px;
+    padding: 0 0 2px;
+    text-indent: -1px;
+    font-size: 16px;
+    height: 30px;
+    width: 30px;
+    cursor: default; }
+    .solution-annotated-image .pointer > * {
+      -ms-flex: 0 1 auto; }
+  .solution-annotated-image .field-collection-item-field-annotations {
+    position: relative;
+    padding-left: 25px; }
+    .solution-annotated-image .field-collection-item-field-annotations .delta-id {
+      position: absolute;
+      width: 20px;
+      text-align: right;
+      left: 0;
+      top: 0;
+      font-weight: bold; }
+      .solution-annotated-image .field-collection-item-field-annotations .delta-id:after {
+        display: inline;
+        content: "."; }
+  .solution-annotated-image .field--name-field-annotation-label {
+    font-weight: bold;
+    margin-bottom: 10px; }
+  .solution-annotated-image .field--name-field-annotations {
+    margin: 30px auto 0;
+    max-width: 764px; }
+    .solution-annotated-image .field--name-field-annotations > .field__items .field__item + .field__item {
+      margin-top: 20px; }
+  .solution-annotated-image .field--name-field-image-annotated {
+    margin-top: 20px; }
+    .solution-annotated-image .field--name-field-image-annotated .field__item {
+      width: 100% !important;
+      max-width: 764px;
+      margin: 0 auto;
+      border: solid 3px #e0e0e0; }
+  @media (min-width: 768px) {
+    .solution-annotated-image {
+      padding: 47px 30px 65px; }
+      .solution-annotated-image .pointer {
+        font-size: 21px;
+        height: 51px;
+        width: 51px; }
+      .solution-annotated-image .paragraphs-item-annotated-image > .content {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        margin-top: 50px; }
+        .solution-annotated-image .paragraphs-item-annotated-image > .content > * {
+          -ms-flex: 0 1 auto; }
+      .solution-annotated-image .field--name-field-annotations {
+        margin: 0;
+        margin-left: 26px;
+        width: 415px; }
+      .solution-annotated-image .field--name-field-image-annotated {
+        margin: 0; } }
+
 .block--sprowt-solution-finder-solution-finder {
   padding: 30px;
   max-width: 1000px;
@@ -2933,7 +3013,8 @@ img.mfp-img {
       line-height: 1; }
   .plan-details .paragraphs-item-body {
     background: white;
-    padding: 30px 20px; }
+    padding: 30px 20px;
+    margin-top: 30px; }
     .plan-details .paragraphs-item-body .field--name-field-header {
       font-size: 13.5px;
       text-transform: uppercase;
@@ -3193,8 +3274,10 @@ img.mfp-img {
         -ms-flex: 0 1 auto; }
     .plan-details .field--name-field-content .paragraphs-item-plan-information {
       margin-top: 0; }
-    .plan-details .paragraphs-item-plan-information--wrap {
-      margin-left: 56px; } }
+    .plan-details .field--name-field-content > .field__items > .field__item {
+      margin: 0; }
+      .plan-details .field--name-field-content > .field__items > .field__item + .field__item {
+        margin-left: 56px; } }
 
 .plan-info-concerns {
   padding: 20px 30px; }

@@ -10,6 +10,78 @@
 function sprowt_solution_finder_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-concern-field_include_in_solution_finder'.
+  $field_instances['node-concern-field_include_in_solution_finder'] = array(
+    'bundle' => 'concern',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Check to include this concern in the solution finder',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+      'modal' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'quaternary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_include_in_solution_finder',
+    'label' => 'Include In Solution Finder',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 0,
+    ),
+  );
+
   // Exported field_instance: 'node-solution-body'.
   $field_instances['node-solution-body'] = array(
     'bundle' => 'solution',
@@ -1063,12 +1135,14 @@ function sprowt_solution_finder_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Call Out');
+  t('Check to include this concern in the solution finder');
   t('Concerns');
   t('Content');
   t('Custom Class');
   t('Header');
   t('Hero Image');
   t('Icon');
+  t('Include In Solution Finder');
   t('Intro');
   t('Is Default?');
   t('Label');

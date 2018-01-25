@@ -1,0 +1,95 @@
+.solution-annotated-image {
+  padding: 30px 20px;
+  text-align: center;
+  .paragraphs-items-field-content {
+    text-align: left;
+  }
+
+  .pointer {
+    @include flexbox;
+    align-items: center;
+    justify-content: center;
+    //font-size: 21px;
+    font-weight: bold;
+    color: white;
+    background: #c82127;
+    border: solid 3px #e0e0e0;
+    border-radius: 1000px;
+    padding: 0 0 2px;
+    text-indent: -1px;
+    //height: 51px;
+    //width: 51px;
+    font-size: 16px;
+    height: 30px;
+    width: 30px;
+    cursor: default;
+  }
+
+  .field-collection-item-field-annotations {
+    position: relative;
+    padding-left: 25px;
+    .delta-id {
+      position: absolute;
+      width: 20px;
+      text-align: right;
+      left: 0;
+      top: 0;
+      font-weight: bold;
+      &:after {
+        display: inline;
+        content: ".";
+      }
+    }
+  }
+
+  .field--name-field-annotation-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .field--name-field-annotations {
+    margin: 30px auto 0;
+    max-width: 764px;
+    > .field__items .field__item {
+      + .field__item {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .field--name-field-image-annotated {
+    margin-top: 20px;
+    .field__item {
+      width: 100% !important; //override inline style
+      max-width: 764px;
+      margin: 0 auto;
+      border: solid 3px #e0e0e0;
+    }
+  }
+
+  @include breakpoint(768px) {
+    padding: 47px 30px 65px;
+
+    .pointer {
+      font-size: 21px;
+      height: 51px;
+      width: 51px;
+    }
+
+    .paragraphs-item-annotated-image > .content {
+      @include flexbox;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    .field--name-field-annotations {
+      margin: 0;
+      margin-left: 26px;
+      width: 415px;
+    }
+
+    .field--name-field-image-annotated {
+      margin: 0;
+    }
+  }
+}
