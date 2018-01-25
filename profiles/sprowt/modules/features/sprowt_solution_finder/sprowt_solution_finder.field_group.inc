@@ -55,6 +55,7 @@ function sprowt_solution_finder_field_group_info() {
       0 => 'field_concerns',
       1 => 'field_is_default',
       2 => 'field_package',
+      3 => 'field_testimonial_ref',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -81,10 +82,9 @@ function sprowt_solution_finder_field_group_info() {
     'label' => 'Content',
     'weight' => '2',
     'children' => array(
-      0 => 'body',
-      1 => 'field_content',
-      2 => 'field_hero_image',
-      3 => 'field_learn_more_link',
+      0 => 'field_content',
+      1 => 'field_hero_image',
+      2 => 'field_learn_more_link',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

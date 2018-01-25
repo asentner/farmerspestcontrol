@@ -100,6 +100,7 @@ features[field_base][] = field_state
 features[field_base][] = field_street_address
 features[field_base][] = field_table_cells
 features[field_base][] = field_tags
+features[field_base][] = field_testimonial_ref
 features[filter][] = filtered_html
 features[filter][] = full_html
 features[filter][] = no_wysiwyg
