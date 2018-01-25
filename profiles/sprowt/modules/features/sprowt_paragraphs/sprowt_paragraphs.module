@@ -18,10 +18,45 @@ function sprowt_paragraphs_theme($existing, $type, $theme, $path)
             'path' => $path . '/theme',
             'base hook' => 'field',
         ),
+        'field__field_header__paragraphs_item__table' => array (
+            'template' => 'field--field-header--paragraphs-item--table',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
         'field__field_content' => array (
             'template' => 'field--field-content',
             'path' => $path . '/theme',
             'base hook' => 'field',
+        ),
+        'field_no_wrap' => array (
+            'template' => 'field-no-wrap',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+        'paragraphs_item' => array (
+            'template' => 'paragraphs-item',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
+        'paragraphs_item__table' => array (
+            'template' => 'paragraphs-item--table',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
+        'paragraphs_item__table_cell' => array (
+            'template' => 'paragraphs-item--table-cell',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
+        'paragraphs_item__table_row' => array (
+            'template' => 'paragraphs-item--table-row',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
+        'paragraphs_items_no_wrap' => array (
+            'template' => 'paragraphs-items-no-wrap',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_items',
         ),
     );
 }
@@ -41,6 +76,28 @@ function sprowt_paragraphs_preprocess_entity(&$variables)
                 $variables['attributes_array']['class'] = $new_classes_array;
             }
         }
+
+        if($variables['elements']['#bundle'] == 'table_cell') {
+            $para = entity_metadata_wrapper('paragraphs_item', $variables['elements']['#entity']);
+            $rowspan = $para->field_cell_rowspan->value();
+            $colspan = $para->field_cell_colspan->value();
+            $variables['header_cell'] = ($variables['paragraphs_item']->hostEntity()->field_name == 'field_header_row');
+            if(!isset($variables['attributes_array'])) {
+                $variables['attributes_array'] = array();
+            }
+            if(!empty($rowspan)) {
+                $variables['attributes_array']['rowspan'] = $rowspan;
+            }
+            if(!empty($colspan)) {
+                $variables['attributes_array']['colspan'] = $colspan;
+            }
+        }
+
+        if($variables['elements']['#bundle'] == 'table_row' || $variables['elements']['#bundle'] == 'table_cell') {
+            $para = $variables['elements']['#entity'];
+            $delta = $para->delta();
+            $variables['classes_array'][] = (($delta + 1) % 2) ? 'odd' : 'even';
+        }
     }
 }
 
@@ -50,6 +107,16 @@ function sprowt_paragraphs_preprocess_entity(&$variables)
 function sprowt_paragraphs_preprocess_field(&$variables)
 {
     $element = $variables['element'];
+
+    $no_wrap = array(
+        'field_table_cells',
+        'field_header_row',
+        'field_body_rows'
+    );
+
+    if(in_array($element['#field_name'], $no_wrap)) {
+        $variables['theme_hook_suggestions'][] = 'field_no_wrap';
+    }
 
     if($element['#field_name'] == 'field_content') {
         $items = $variables['items'];
@@ -77,5 +144,21 @@ function sprowt_paragraphs_preprocess_field(&$variables)
 
             $variables['items_classes_array'][$delta] = $classes;
         }
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_paragraphs_preprocess_paragraphs_items(&$variables)
+{
+    $no_wrap = array(
+        'field_table_cells',
+        'field_header_row',
+        'field_body_rows'
+    );
+
+    if(in_array($variables['field_name'], $no_wrap)) {
+        $variables['theme_hook_suggestions'][] = 'paragraphs_items_no_wrap';
     }
 }
