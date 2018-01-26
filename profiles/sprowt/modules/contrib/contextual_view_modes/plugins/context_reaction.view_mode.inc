@@ -27,11 +27,6 @@ class context_reaction_view_mode extends context_reaction {
     // Create a VT group for supported entity types.
     $form['entity_types'] = array(
       '#type' => 'vertical_tabs',
-      '#attached' => array(
-        'js' => array(
-          'vertical-tabs' => drupal_get_path('module', 'vertical_tabs_example') . '/vertical_tabs_example.js',
-        ),
-      ),
     );
 
     // For each entity type create a settings group.

@@ -48,6 +48,21 @@ function sprowt_paragraphs_paragraphs_info() {
       'bundle' => 'paragraphs',
       'locked' => '1',
     ),
+    'table' => array(
+      'name' => 'Table',
+      'bundle' => 'table',
+      'locked' => '1',
+    ),
+    'table_cell' => array(
+      'name' => 'Table Cell',
+      'bundle' => 'table_cell',
+      'locked' => '1',
+    ),
+    'table_row' => array(
+      'name' => 'Table Row',
+      'bundle' => 'table_row',
+      'locked' => '1',
+    ),
   );
   return $items;
 }

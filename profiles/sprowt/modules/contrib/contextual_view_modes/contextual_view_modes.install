@@ -14,43 +14,9 @@ function contextual_view_modes_update_7101(&$sandbox) {
 }
 
 /**
- * Please back up your database before running as this does some pretty shady stuff.
+ * Legacy function. No longer needed.
  */
 function contextual_view_modes_update_7102(&$sandbox) {
-
-  if (!module_exists('cvm_field')) {
-    if (!module_enable(array('cvm_field'))) {
-      drupal_set_message(t('could not enable cvm_module'), 'error');
-      throw new Exception("Could Not Enable cvm_field Module");
-    }
-  }
-
-  // CVM field moved to sub module. We need to fix that for existing content.
-  db_update('field_config')
-  ->fields(array(
-    'module' => 'cvm_field',
-    'type' => 'cvm_field_cvm',
-    ))
-  ->condition('field_name', 'field_cvm_cvm')
-  ->execute();
-
-  $instances = db_select('field_config_instance', 'fci')
-    ->fields("fci")
-    ->condition('field_name', 'field_cvm_cvm')
-    ->execute();
-
-  while ($result = $instances->fetchAssoc()) {
-    $data = unserialize($result['data']);
-    $data['widget']['type'] = "cvm_field_picker";
-    $data['widget']['module'] = 'cvm_field';
-
-    db_update('field_config_instance')
-      ->fields(array(
-        'data' => serialize($data)
-      ))
-      ->condition('id', $result['id'])
-      ->execute();
-  }
 
 }
 
@@ -102,7 +68,7 @@ function contextual_view_modes_update_7200(&$sandbox) {
       $vars[$o->entity_id] = array();
     }
 
-    // Create the entry
+    // Create the entry.
     $vars[$o->entity_id][$o->delta] = array(
       'context_name' => $o->field_cvm_cvm_context,
       'view_mode' => $o->field_cvm_cvm_view_mode,
@@ -123,12 +89,12 @@ function contextual_view_modes_update_7200(&$sandbox) {
 
   // And the field config.
   db_delete("field_config")
-  ->condition("module", "cvm_field")
-  ->execute();
+    ->condition("module", "cvm_field")
+    ->execute();
 
   db_delete("field_config_instance")
-  ->condition("field_name", "field_cvm_cvm")
-  ->execute();
+    ->condition("field_name", "field_cvm_cvm")
+    ->execute();
 
   // Convert the global settings to the new format.
   // ----------------------------------------------
