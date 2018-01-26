@@ -1,0 +1,7 @@
+name = Field Collection Export
+description = For exporting field collections in nodes with node_export
+package = Node export
+core = 7.x
+
+files[] = FieldCollectionExportEntity.inc
+dependencies[] = node_export

@@ -25,6 +25,9 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
         foreach($items as $paragraphs_item) {
           $original_item = clone $paragraphs_item;
           paragraphs_export_file_field_import($paragraphs_item, $original_item, 'paragraphs_item');
+          if(function_exists('field_collection_export_import_field_collection')) {
+              field_collection_export_import_field_collection($paragraphs_item, $original_item, 'paragraphs_item');
+          }
           paragraphs_export_import_paragraphs($paragraphs_item, $original_item);
           $existing = variable_get('node_export_existing', 'new');
           $paragraphs_item->item_id = null;
@@ -33,15 +36,15 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
             case 'new':
               $paragraphs_item->is_new = TRUE;
               unset($paragraphs_item->uuid);
-              entity_save( 'paragraphs_item', $paragraphs_item);
+              $paragraphs_item->save(true);
               break;
             case 'revision':
-              entity_uuid_save('paragraphs_item', $paragraphs_item);
+                _paragraphs_export_entity_uuid_save('paragraphs_item', $paragraphs_item);
               break;
             case 'skip':
               break;
           }
-          
+
           
           if(!empty($paragraphs_item->item_id)) {
             $element->{$field_name}[$lang][] = array(
@@ -84,6 +87,9 @@ function paragraphs_export_extract_paragraphs(&$element, $original, $element_typ
         foreach($element->paragraph_fields[$field_name][$lang] as &$entity) {
           $original_entity = $entity;
           paragraphs_export_file_field_export($entity, $original_entity, 'paragraphs_item');
+            if(function_exists('field_collection_export_extract_field_collection')) {
+                field_collection_export_extract_field_collection($entity, $original_entity, 'paragraphs_item');
+            }
           paragraphs_export_extract_paragraphs($entity, $original_entity, 'paragraphs_item');
         }
       }
@@ -262,4 +268,45 @@ function paragraphs_export_file_field_import(&$entity, $original_entity, $type) 
       }
     }
   }
+}
+
+/**
+ * copy of entity_uuid_save
+ */
+function _paragraphs_export_entity_uuid_save($entity_type, $entity) {
+    // This function, and this function only, depends on the entity module.
+    if (!module_exists('entity')) {
+        throw new UuidEntityException(t('Calling %function requires the Entity API module (!link).', array('%function' => __FUNCTION__, '!link' => 'http://drupal.org/project/entity')));
+    }
+
+    $info = entity_get_info($entity_type);
+    $uuid_key = $info['entity keys']['uuid'];
+    if (empty($entity->{$uuid_key}) || !uuid_is_valid($entity->{$uuid_key})) {
+        watchdog('Entity UUID', 'Attempted to save an entity with an invalid UUID', array(), WATCHDOG_ERROR);
+        return FALSE;
+    }
+
+    // Falling back on the variable node_options_[type] is not something an API
+    // function should take care of. With normal (non UUID) nodes this is dealt
+    // with in the form submit handler, i.e. not in node_save().
+    // But since using entity_uuid_save() usually means you're trying to manage
+    // entities remotely we do respect this variable here to make it work as the
+    // node form, but only if we explicitly haven't set $node->revision already.
+    if ($entity_type == 'node' && !isset($entity->revision) && in_array('revision', variable_get('node_options_' . $entity->type, array()))) {
+        $entity->revision = 1;
+    }
+
+    entity_make_entity_local($entity_type, $entity);
+
+    // Save the entity.
+    $result = $entity->save(true);
+
+    $hook = 'entity_uuid_save';
+    foreach (module_implements($hook) as $module) {
+        $function = $module . '_' . $hook;
+        if (function_exists($function)) {
+            $function($entity, $entity_type);
+        }
+    }
+    return $result;
 }

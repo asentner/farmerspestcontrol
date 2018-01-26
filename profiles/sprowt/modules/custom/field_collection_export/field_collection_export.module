@@ -1,0 +1,165 @@
+<?php
+
+/**
+ * Implements hook_node_export_node_alter().
+ */
+function field_collection_export_node_export_node_alter(&$node, $original_node) {
+    field_collection_export_extract_field_collection($node, $original_node, 'node');
+}
+
+
+/**
+ * Implements hook_node_export_node_import_alter().
+ */
+function field_collection_export_node_export_node_import_alter(&$node, $original_node, $save) {
+    field_collection_export_import_field_collection($node, $original_node);
+}
+
+function field_collection_export_import_field_collection(&$element, $original, $entity_type = 'node') {
+    if(!empty($original->fc_fields)) {
+        $fc_fields = $original->fc_fields;
+        foreach ($fc_fields as $field_name => $array) {
+            foreach($array as $lang => $items) {
+                $element->{$field_name}[$lang] = array();
+                foreach($items as $field_collection_item) {
+                    $original_item = clone $field_collection_item;
+                    node_export_file_field_import($field_collection_item, $original_item);
+                    if(function_exists('paragraphs_export_import_paragraphs')) {
+                        paragraphs_export_import_paragraphs($field_collection_item, $original_item);
+                    }
+                    field_collection_export_import_field_collection($field_collection_item, $original_item, 'field_collection_item');
+                    $existing = variable_get('node_export_existing', 'new');
+                    $field_collection_item->item_id = null;
+                    $field_collection_item->revision_id = null;
+                    $exists = entity_uuid_load('field_collection_item', array($field_collection_item->uuid));
+                    if(empty($exists)) {
+                        $field_collection_item->is_new = true;
+                        $field_collection_item->setHostEntity($entity_type, $element, $lang, false);
+                    }
+                    else {
+                        $field_collection_item->is_new = true;
+                        $field_collection_item->setHostEntity($entity_type, $element, $lang, false);
+                        unset($field_collection_item->is_new);
+                    }
+                    switch ($existing) {
+                        case 'new':
+                            $field_collection_item->is_new = TRUE;
+                            unset($field_collection_item->uuid);
+                            $field_collection_item->save(true);
+                            break;
+                        case 'revision':
+                            _field_collection_export_entity_uuid_save('field_collection_item', $field_collection_item);
+                            break;
+                        case 'skip':
+                            break;
+                    }
+
+
+                    if(!empty($field_collection_item->item_id)) {
+                        $element->{$field_name}[$lang][] = array(
+                            'value' => $field_collection_item->item_id,
+                            'revision_id' => $field_collection_item->revision_id
+                        );
+                    }
+                }
+            }
+        }
+    }
+}
+
+function field_collection_export_extract_field_collection(&$element, $original, $element_type) {
+    if($element_type == 'node') {
+        $bundle = $original->type;
+    }
+    else {
+        $bundle = $original->bundle;
+    }
+    $instances = field_info_instances($element_type, $bundle);
+    $fc_fields = array();
+    foreach($instances as $field_name => $instance) {
+        if($instance['widget']['module'] == 'field_collection') {
+            $fc_fields[$field_name] = $instance;
+        }
+    }
+    if(!empty($fc_fields)) {
+        $element->fc_fields = array();
+        foreach ($fc_fields as $field_name => $instance) {
+            $element->fc_fields[$field_name] = array();
+
+            foreach ($element->{$field_name} as $lang => &$items) {
+                $fc_ids = array();
+                foreach($items as $key => &$item) {
+                    $fc_ids[] = $item['value'];
+                    unset($items[$key]);
+                }
+                $element->fc_fields[$field_name][$lang] = entity_load('field_collection_item', $fc_ids);
+                foreach($element->fc_fields[$field_name][$lang] as &$entity) {
+                    $original_entity = $entity;
+                    node_export_file_field_export($entity, $original_entity);
+                    if(function_exists('paragraphs_export_extract_paragraphs')) {
+                        paragraphs_export_extract_paragraphs($entity, $original_entity, 'field_collection_item');
+                    }
+                    field_collection_export_extract_field_collection($entity, $original_entity, 'field_collection_item');
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function field_collection_export_entity_info_alter(&$entity_info) {
+    $entity_info['field_collection_item']['entity class'] = 'FieldCollectionExportEntity';
+}
+
+/**
+ * Implements hook_entity_load().
+ */
+function field_collection_export_entity_load($entities, $type)
+{
+    foreach ($entities as $entity) {
+        $entity->entity_type = $type;
+    }
+}
+
+/**
+ * copy of entity_uuid_save
+ */
+function _field_collection_export_entity_uuid_save($entity_type, $entity) {
+    // This function, and this function only, depends on the entity module.
+    if (!module_exists('entity')) {
+        throw new UuidEntityException(t('Calling %function requires the Entity API module (!link).', array('%function' => __FUNCTION__, '!link' => 'http://drupal.org/project/entity')));
+    }
+
+    $info = entity_get_info($entity_type);
+    $uuid_key = $info['entity keys']['uuid'];
+    if (empty($entity->{$uuid_key}) || !uuid_is_valid($entity->{$uuid_key})) {
+        watchdog('Entity UUID', 'Attempted to save an entity with an invalid UUID', array(), WATCHDOG_ERROR);
+        return FALSE;
+    }
+
+    // Falling back on the variable node_options_[type] is not something an API
+    // function should take care of. With normal (non UUID) nodes this is dealt
+    // with in the form submit handler, i.e. not in node_save().
+    // But since using entity_uuid_save() usually means you're trying to manage
+    // entities remotely we do respect this variable here to make it work as the
+    // node form, but only if we explicitly haven't set $node->revision already.
+    if ($entity_type == 'node' && !isset($entity->revision) && in_array('revision', variable_get('node_options_' . $entity->type, array()))) {
+        $entity->revision = 1;
+    }
+
+    entity_make_entity_local($entity_type, $entity);
+
+    // Save the entity.
+    $result = $entity->save(true);
+
+    $hook = 'entity_uuid_save';
+    foreach (module_implements($hook) as $module) {
+        $function = $module . '_' . $hook;
+        if (function_exists($function)) {
+            $function($entity, $entity_type);
+        }
+    }
+    return $result;
+}
