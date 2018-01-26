@@ -36,6 +36,10 @@ function contextual_view_modes_entity_view_mode_alter(&$view_mode, $context) {
   $static = &drupal_static(__FUNCTION__, FALSE);
   if (!$static) {
     module_invoke_all('context_page_condition');
+    // Also fire node conditions if this is a node entity.
+    if (isset($context['entity_type']) && $context['entity_type'] == 'node') {
+      context_node_condition($context['entity'], 'view');
+    }
     $static = TRUE;
   }
 
