@@ -62,6 +62,7 @@ features[variable][] = node_options_solution
 features[variable][] = node_preview_solution
 features[variable][] = node_submitted_solution
 features[variable][] = xmlsitemap_settings_node_solution
+features[views_view][] = solution_finder
 features_exclude[field_base][field_concerns] = field_concerns
 features_exclude[field_base][field_content] = field_content
 features_exclude[field_base][field_icon_file] = field_icon_file

@@ -121,6 +121,13 @@ function sprowt_paragraphs_preprocess_field(&$variables)
     if($element['#field_name'] == 'field_content') {
         $items = $variables['items'];
         $variables['items_classes_array'] = array();
+        
+        $parent = $element['#object'];
+        
+        $variables['classes_array'][] = "parent--{$element['#entity_type']}--{$element['#bundle']}";
+        $variables['field_items_class'] = "parent--{$element['#entity_type']}--{$element['#bundle']}--field-items";
+        
+        
         foreach($items as $delta => $item) {
             $classes = array(
                 'field__item'

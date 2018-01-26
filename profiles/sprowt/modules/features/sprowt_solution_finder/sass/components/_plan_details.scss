@@ -19,10 +19,11 @@ $couponLink: 21px;
 $couponIcon: 30px;
 
 
-.plan-details {
+.entity-paragraphs-item.plan-details {
   padding: 30px 20px;
   background-color: #cb0108;
   text-align: center;
+  max-width: 100%;
   > .content {
     > h2 {
       font-size: $weHaveTheRightPlan * .75;

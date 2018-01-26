@@ -50,7 +50,7 @@
   <?php if (!$label_hidden): ?>
     <div class="field__label"<?php print $title_attributes; ?>><?php print $label ?>:&nbsp;</div>
   <?php endif; ?>
-  <div class="field__items"<?php print $content_attributes; ?>>
+  <div class="field__items <?php print $field_items_class; ?>"<?php print $content_attributes; ?>>
     <?php foreach ($items as $delta => $item): ?>
         <?php
             $classes = implode(' ', $items_classes_array[$delta]);
