@@ -46,19 +46,4 @@
  * @ingroup themeable
  */
 ?>
-
-<div class="<?php print $classes; ?>"<?php print $attributes; ?>>
-  <?php if (!$label_hidden): ?>
-    <div class="field__label"<?php print $title_attributes; ?>><?php print $label ?>:&nbsp;</div>
-  <?php endif; ?>
-  <div class="field__items"<?php print $content_attributes; ?>>
-    <?php foreach ($items as $delta => $item): ?>
-      <div class="field__item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
-          <?php print render($item); ?>
-          <?php foreach($pointers as $pointer): ?>
-            <a href="#" class="pointer" data-annotation-id="<?php print $pointer['annotation_id']; ?>" style="top: <?php print $pointer['top'] . '%'; ?>; left: <?php print $pointer['left'] . '%'; ?>;"><?php print $pointer['annotation_delta'] + 1; ?></a>
-          <?php endforeach; ?>
-      </div>
-    <?php endforeach; ?>
-  </div>
-</div>
+<?php foreach ($items as $delta => $item): ?><?php print render($item); ?><?php endforeach; ?>

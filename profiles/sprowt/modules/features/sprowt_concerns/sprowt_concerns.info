@@ -30,5 +30,7 @@ features[variable][] = menu_parent_concern
 features[variable][] = node_options_concern
 features[variable][] = node_preview_concern
 features[variable][] = node_submitted_concern
+features[variable][] = weight_default_concern
+features[variable][] = weight_enabled_concern
 features[variable][] = xmlsitemap_settings_node_concern
 project path = profiles/sprowt/modules/features

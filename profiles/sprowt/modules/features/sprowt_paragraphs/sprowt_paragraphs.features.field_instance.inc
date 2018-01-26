@@ -278,7 +278,7 @@ function sprowt_paragraphs_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'blockreference',
         'settings' => array(
           'show_empty_blocks' => FALSE,
@@ -290,7 +290,7 @@ function sprowt_paragraphs_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'paragraphs_item',
@@ -344,16 +344,15 @@ function sprowt_paragraphs_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 2,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'paragraphs_item',
@@ -385,15 +384,15 @@ function sprowt_paragraphs_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'paragraphs_editor_preview' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 0,
       ),
     ),
@@ -470,7 +469,7 @@ function sprowt_paragraphs_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 3,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -510,7 +509,7 @@ function sprowt_paragraphs_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -580,6 +579,60 @@ function sprowt_paragraphs_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'paragraphs_item-body-field_image_insert'.
+  $field_instances['paragraphs_item-body-field_image_insert'] = array(
+    'bundle' => 'body',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_image_insert',
+    'label' => 'Image Insert',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 1,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'multiupload_imagefield_widget',
+      'settings' => array(
+        'insert' => 1,
+        'insert_absolute' => 0,
+        'insert_class' => 'inserted-image',
+        'insert_default' => 'auto',
+        'insert_styles' => array(
+          '<all>' => '<all>',
+        ),
+        'insert_width' => '',
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_miw',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'paragraphs_item-body-field_intro'.
   $field_instances['paragraphs_item-body-field_intro'] = array(
     'bundle' => 'body',
@@ -632,7 +685,7 @@ function sprowt_paragraphs_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'inline',
@@ -1440,26 +1493,494 @@ function sprowt_paragraphs_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'paragraphs_item-table-field_body_rows'.
+  $field_instances['paragraphs_item-table-field_body_rows'] = array(
+    'bundle' => 'table',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 2,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_body_rows',
+    'label' => 'Body Rows',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'button',
+      'allowed_bundles' => array(
+        'annotated_image' => -1,
+        'block_embed' => -1,
+        'body' => -1,
+        'faq' => -1,
+        'image_break' => -1,
+        'linked_image' => -1,
+        'paragraphs' => -1,
+        'plan_information' => -1,
+        'table' => -1,
+        'table_cell' => -1,
+        'table_row' => 'table_row',
+      ),
+      'bundle_weights' => array(
+        'annotated_image' => 2,
+        'block_embed' => 3,
+        'body' => 4,
+        'faq' => 5,
+        'image_break' => 6,
+        'linked_image' => 7,
+        'paragraphs' => 8,
+        'plan_information' => 9,
+        'table' => 10,
+        'table_cell' => 11,
+        'table_row' => 12,
+      ),
+      'default_edit_mode' => 'open',
+      'title' => 'Row',
+      'title_multiple' => 'Rows',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-table-field_custom_class'.
+  $field_instances['paragraphs_item-table-field_custom_class'] = array(
+    'bundle' => 'table',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_custom_class',
+    'label' => 'Custom Class',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-table-field_header'.
+  $field_instances['paragraphs_item-table-field_header'] = array(
+    'bundle' => 'table',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_header',
+    'label' => 'Header',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-table-field_header_row'.
+  $field_instances['paragraphs_item-table-field_header_row'] = array(
+    'bundle' => 'table',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_header_row',
+    'label' => 'Header Row',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'button',
+      'allowed_bundles' => array(
+        'annotated_image' => -1,
+        'block_embed' => -1,
+        'body' => -1,
+        'faq' => -1,
+        'image_break' => -1,
+        'linked_image' => -1,
+        'paragraphs' => -1,
+        'plan_information' => -1,
+        'table' => -1,
+        'table_cell' => -1,
+        'table_row' => 'table_row',
+      ),
+      'bundle_weights' => array(
+        'annotated_image' => 2,
+        'block_embed' => 3,
+        'body' => 4,
+        'faq' => 5,
+        'image_break' => 6,
+        'linked_image' => 7,
+        'paragraphs' => 8,
+        'plan_information' => 9,
+        'table' => 10,
+        'table_cell' => 11,
+        'table_row' => 12,
+      ),
+      'default_edit_mode' => 'open',
+      'title' => 'Header Row',
+      'title_multiple' => 'Header Rows',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-table-field_label'.
+  $field_instances['paragraphs_item-table-field_label'] = array(
+    'bundle' => 'table',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_label',
+    'label' => 'Label',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-table_cell-field_cell_colspan'.
+  $field_instances['paragraphs_item-table_cell-field_cell_colspan'] = array(
+    'bundle' => 'table_cell',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Allows a single table cell to span the width of more than one cell or column.
+
+Read more: https://html.com/tables/rowspan-colspan/#ixzz558l5KY3Z',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_cell_colspan',
+    'label' => 'Cell Colspan',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-table_cell-field_cell_content'.
+  $field_instances['paragraphs_item-table_cell-field_cell_content'] = array(
+    'bundle' => 'table_cell',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_cell_content',
+    'label' => 'Cell Content',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+        'show_token_tree' => 0,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-table_cell-field_cell_rowspan'.
+  $field_instances['paragraphs_item-table_cell-field_cell_rowspan'] = array(
+    'bundle' => 'table_cell',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Allows a single table cell to span the height of more than one cell or row.
+
+Read more: https://html.com/tables/rowspan-colspan/#ixzz558lFr9QJ',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_cell_rowspan',
+    'label' => 'Cell Rowspan',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-table_row-field_table_cells'.
+  $field_instances['paragraphs_item-table_row-field_table_cells'] = array(
+    'bundle' => 'table_row',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 0,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_table_cells',
+    'label' => 'Table Cells',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'button',
+      'allowed_bundles' => array(
+        'annotated_image' => -1,
+        'block_embed' => -1,
+        'body' => -1,
+        'faq' => -1,
+        'image_break' => -1,
+        'linked_image' => -1,
+        'paragraphs' => -1,
+        'plan_information' => -1,
+        'table' => -1,
+        'table_cell' => 'table_cell',
+        'table_row' => -1,
+      ),
+      'bundle_weights' => array(
+        'annotated_image' => 2,
+        'block_embed' => 3,
+        'body' => 4,
+        'faq' => 5,
+        'image_break' => 6,
+        'linked_image' => 7,
+        'paragraphs' => 8,
+        'plan_information' => 9,
+        'table' => 21,
+        'table_cell' => 10,
+        'table_row' => 11,
+      ),
+      'default_edit_mode' => 'preview',
+      'title' => 'cell',
+      'title_multiple' => 'cells',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
+      'weight' => 1,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
+  t('Allows a single table cell to span the height of more than one cell or row.
+
+Read more: https://html.com/tables/rowspan-colspan/#ixzz558lFr9QJ');
+  t('Allows a single table cell to span the width of more than one cell or column.
+
+Read more: https://html.com/tables/rowspan-colspan/#ixzz558l5KY3Z');
   t('Annotated Image');
   t('Annotation Placement');
   t('Annotations');
   t('Block Reference');
   t('Body');
+  t('Body Rows');
   t('Call Out');
+  t('Cell Colspan');
+  t('Cell Content');
+  t('Cell Rowspan');
   t('Content');
   t('Custom Class');
   t('Custom class applied to paragraph');
   t('Description');
   t('Header');
+  t('Header Row');
   t('Image');
+  t('Image Insert');
   t('Images');
   t('Intro');
   t('Label');
   t('Link');
   t('Paragraph Label');
   t('Paragraph label');
+  t('Table Cells');
 
   return $field_instances;
 }

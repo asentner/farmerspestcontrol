@@ -45,6 +45,7 @@ $couponIcon: 30px;
   .paragraphs-item-body {
     background: white;
     padding: 30px 20px;
+    margin-top: 30px;
      .field--name-field-header {
        font-size: $oneTimeService * .75;
        text-transform: uppercase;
@@ -390,8 +391,11 @@ $couponIcon: 30px;
       }
     }
 
-    .paragraphs-item-plan-information--wrap {
-      margin-left: 56px;
+    .field--name-field-content > .field__items > .field__item {
+      margin: 0;
+      + .field__item {
+        margin-left: 56px;
+      }
     }
   }
 }
