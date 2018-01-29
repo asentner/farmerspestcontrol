@@ -183,7 +183,7 @@ function sprowt_concerns_field_default_field_instances() {
         'weight' => 4,
       ),
       'modal' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -254,7 +254,7 @@ function sprowt_concerns_field_default_field_instances() {
         'weight' => 5,
       ),
       'modal' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',

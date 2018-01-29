@@ -14,16 +14,6 @@
             ?>
             <div class="scm-modal" id="<?php print $scmID; ?>--<?php print $concern->nid; ?>">
                 <?php print drupal_render($node_view); ?>
-                <?php /*if(!$onlyOne): ?>
-                    <div class="prev-next">
-                        <?php if(!$first): ?>
-                            <a href="#" class="scm-prev">Previous</a>
-                        <?php endif; ?>
-                        <?php if(!$last): ?>
-                            <a href="#" class="scm-next">Next</a>
-                        <?php endif; ?>
-                    </div>
-                <?php endif;*/?>
             </div>
         <?php endforeach;?>
     </div>
