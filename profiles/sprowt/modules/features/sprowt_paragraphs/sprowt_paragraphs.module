@@ -67,6 +67,7 @@ function sprowt_paragraphs_theme($existing, $type, $theme, $path)
 function sprowt_paragraphs_preprocess_entity(&$variables)
 {
     if ($variables['entity_type'] == 'paragraphs_item') {
+        drupal_add_css(drupal_get_path('module', 'sprowt_paragraphs') . '/css/paragraphs.css');
         $custom_class = field_get_items('paragraphs_item', $variables['elements']['#entity'], 'field_custom_class');
         if(!empty($custom_class)) {
             foreach($custom_class as $class) {

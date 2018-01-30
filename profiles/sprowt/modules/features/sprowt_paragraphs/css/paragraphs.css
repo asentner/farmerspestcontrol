@@ -1,0 +1,7 @@
+.paragraphs-item-table table {
+  max-width: 100%;
+}
+
+.paragraphs-item-table > .content {
+  overflow-x: auto;
+}
