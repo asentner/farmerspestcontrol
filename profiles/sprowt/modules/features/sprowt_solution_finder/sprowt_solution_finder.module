@@ -321,12 +321,18 @@ function sprowt_solution_finder_sprowt_shortcode_replace_alter(&$shortcodes)
     if(!empty($concernNames)) {
         if ($single) {
             $text = $concernNames[0];
-        } elseif ($all) {
+        }
+        elseif ($all) {
             $last = array_pop($concernNames);
 
             $text = implode(', ', $concernNames);
             $text .= ', and ' . $last;
-        } else {
+        }
+        elseif (count($concernNames) == 1) {
+            $text = implode(', ', $concernNames);
+            $text .= ' and More';
+        }
+        else {
             $text = implode(', ', $concernNames);
             $text .= ', and More';
         }
