@@ -14,6 +14,7 @@ function sprowt_install_tasks($install_state) {
   $tasks = array (
     'sprowt_setup_tables' => array(),
     'sprowt_configure' => array(),
+    'sprowt_module_preinstall' => array(),
     'sprowt_install_features' => array(),
     'sprowt_company_info' => array(
       'display_name' => t('Company Info'),

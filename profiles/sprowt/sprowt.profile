@@ -55,6 +55,7 @@ function sprowt_install_tasks_alter(&$tasks, $install_state) {
         'sprowt_social', //sprowt
         'sprowt_review', //sprowt
         'sprowt_integrations', //sprowt
+        'sprowt_module_preinstall', //sprowt
         'install_profile_modules',
         'install_import_locales',
         'sprowt_install_features', //sprowt
@@ -292,6 +293,23 @@ function _sprowt_get_features(){
 }
 
 /**
+ * Some pre-install stuff
+ */
+function sprowt_module_preinstall() {
+    //set this to false so that the batch module install doesn't break
+    //we'll rebuild the features at the end when we revert them all
+    variable_set('features_rebuild_on_module_install', false);
+
+    //merge features and modules that are being installed
+    $features = _sprowt_get_features();
+    $modules = variable_get('install_profile_modules', array());
+
+    $modules = array_merge($modules, $features);
+
+    variable_set('install_profile_modules', $modules);
+}
+
+/**
  * Function for installing features and other modules
  */
 
@@ -300,10 +318,6 @@ function sprowt_install_features(){
 
 
     variable_set('features_rebuild_on_module_install', true);
-
-//    foreach($features as $feature){
-//        module_enable(array($feature));
-//    }
 
     //disabling comment module
 

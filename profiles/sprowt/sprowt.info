@@ -5,7 +5,9 @@ version = VERSION
 core = 7.x
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;   WHEN ADDING FEATURES, ALSO ADD THEM TO THE FEATURES.INFO FILE!!!          ;;;;
+;;;;   DO NOT PUT FEATURES IN HERE!!!                                            ;;;;
+;;;;                                                                             ;;;;
+;;;;   Use the features.info file instead                                        ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -163,25 +165,6 @@ dependencies[] = sprowt_taxonomy_engine
 dependencies[] = sprowt_theme
 dependencies[] = sprowt_theme_copy
 dependencies[] = sprowt_views
-
-
-; Features
-
-dependencies[] = sprowt_taxonomy
-dependencies[] = sprowt_fields_and_text_formats
-dependencies[] = sprowt_content_types
-dependencies[] = sprowt_views_feature
-dependencies[] = sprowt_user_settings
-dependencies[] = sprowt_menu_settings
-dependencies[] = sprowt_social_sharing
-dependencies[] = sprowt_breadcrumbs
-dependencies[] = sprowt_social_sharing
-dependencies[] = sprowt_security_features
-dependencies[] = sprowt_flippy_settings
-dependencies[] = sprowt_image_styles_features
-dependencies[] = sprowt_content_authoring_features
-dependencies[] = sprowt_webforms_feature
-dependencies[] = sprowt_paragraphs
 
 ; Add in the .profile
 
