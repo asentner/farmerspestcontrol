@@ -300,9 +300,16 @@ function sprowt_install_features(){
 
     $features = _sprowt_get_features();
 
-    foreach($features as $feature){
-        module_enable(array($feature));
+    try {
+        module_enable($features);
     }
+    catch (Exception $e) {
+        drupal_set_message('Enabling features created an error. Please wipe and try again: ' . $e->getMessage(), 'error');
+    }
+
+//    foreach($features as $feature){
+//        module_enable(array($feature));
+//    }
 
     //disabling comment module
 
