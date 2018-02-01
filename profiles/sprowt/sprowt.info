@@ -164,6 +164,7 @@ dependencies[] = sprowt_settings
 dependencies[] = sprowt_taxonomy_engine
 dependencies[] = sprowt_theme
 dependencies[] = sprowt_theme_copy
+dependencies[] = sprowt_views
 
 ; Add in the .profile
 
