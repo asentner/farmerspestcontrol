@@ -71,5 +71,7 @@
   }
   
   _sprowt_save_to_table('integrations', $fields);
-  
+
+    //set this to false to so that module install doesn't break
+     variable_set('features_rebuild_on_module_install', false);
  }

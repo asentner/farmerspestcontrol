@@ -298,14 +298,8 @@ function _sprowt_get_features(){
 function sprowt_install_features(){
 
 
-    $features = _sprowt_get_features();
 
-    try {
-        module_enable($features);
-    }
-    catch (Exception $e) {
-        drupal_set_message('Enabling features created an error. Please wipe and try again: ' . $e->getMessage(), 'error');
-    }
+    variable_set('features_rebuild_on_module_install', true);
 
 //    foreach($features as $feature){
 //        module_enable(array($feature));
