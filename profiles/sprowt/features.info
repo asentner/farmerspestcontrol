@@ -16,4 +16,5 @@ features[] = sprowt_image_styles_features
 features[] = sprowt_content_authoring_features
 features[] = sprowt_webforms_feature
 features[] = sprowt_paragraphs
+features[] = sprowt_views
 ;features[] = sprowt_ebooking_features

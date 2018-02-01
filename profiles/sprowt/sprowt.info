@@ -4,6 +4,13 @@ description = Install Sprowt with pre-configured integration for the Pantheon Pl
 version = VERSION
 core = 7.x
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;   DO NOT PUT FEATURES IN HERE!!! IT WILL BREAK INSTALLATION ON PANTHEON!!!  ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
 ; core modules
 
 dependencies[] = block
@@ -155,7 +162,6 @@ dependencies[] = sprowt_settings
 dependencies[] = sprowt_taxonomy_engine
 dependencies[] = sprowt_theme
 dependencies[] = sprowt_theme_copy
-dependencies[] = sprowt_views
 
 ; Add in the .profile
 
