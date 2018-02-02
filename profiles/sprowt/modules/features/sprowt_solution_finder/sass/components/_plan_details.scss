@@ -30,12 +30,14 @@ $couponIcon: 30px;
       text-transform: uppercase;
       margin-bottom: 15px;
       color: white;
+      font-weight: 600;
     }
     > .field--name-field-intro {
       font-size: $forYourFamilyAndHome * .75;
       font-style: italic;
       color: white;
       margin-bottom: 30px;
+      font-weight: 600;
       p {
         margin: 0;
         line-height: 1;

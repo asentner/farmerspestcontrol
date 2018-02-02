@@ -4,6 +4,15 @@ description = Install Sprowt with pre-configured integration for the Pantheon Pl
 version = VERSION
 core = 7.x
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;   DO NOT PUT FEATURES IN HERE!!!                                            ;;;;
+;;;;                                                                             ;;;;
+;;;;   Use the features.info file instead                                        ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
 ; core modules
 
 dependencies[] = block

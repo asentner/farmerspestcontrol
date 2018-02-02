@@ -71,5 +71,4 @@
   }
   
   _sprowt_save_to_table('integrations', $fields);
-  
  }

@@ -25,3 +25,46 @@ function sprowt_learning_center_theme() {
     ),
   );
 }
+
+/**
+ * Implements hook_cb_identifier_list().
+ */
+function sprowt_learning_center_cb_identifier_list()
+{
+    $identifiers['<concern>'] = t('Corresponds to the first concern tagged on the node on the field, field_referenced_concern');
+
+    return $identifiers;
+}
+
+/**
+ * Implements hook_cb_identifier_values().
+ */
+function sprowt_learning_center_cb_identifier_values($identifier, $obj)
+{
+    $crumb_items = array();
+
+    if($identifier != '<concern>') {
+        return NULL;
+    }
+
+    $node = menu_get_object();
+
+    if(empty($node) || empty($node->field_referenced_concern)) {
+        return $crumb_items;
+    }
+
+    $n = entity_metadata_wrapper('node', $node);
+    $concerns = $n->field_referenced_concern->value();
+
+    $concern = array_shift($concerns);
+
+    $path = drupal_get_path_alias('node/' . $concern->nid);
+    $crumb_item = array(
+        'crumb' => l($concern->title, $path),
+        'title' => $concern->title,
+        'href' => $path
+    );
+    $crumb_items[] = $crumb_item;
+
+    return $crumb_items;
+}
