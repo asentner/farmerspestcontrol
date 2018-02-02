@@ -57,35 +57,70 @@ function _sprowt_theme_breadcrumb() {
   return $breadcrumb;
 }
 
-/*
- * TODO: Determine if we need this
- *
- *
-function sprowt_theme_preprocess_image(&$variables) {
-  $image = _sprowt_theme_get_dimens_from_path($variables['path']);
-  $variables['height'] = $image['height'];
-  $variables['width'] = $image['width'];
-
-  $new = explode('?', $variables['path']);
-  $new = $new[0];
-  $variables['path'] = $new;
+/**
+ * Implements hook_theme().
+ */
+function sprowt_theme_theme($existing, $type, $theme, $path) {
+    return array(
+        'localbusiness_structured_data' => array(
+            'variables' => array(
+                'name' => null,
+                'image' => null
+            ),
+        ),
+        'itemreviewed_structured_data' => array(
+            'variables' => array(
+                'localbusiness_structured_data' => null
+            ),
+        ),
+    );
 }
 
-function _sprowt_theme_get_dimens_from_path($path) {
-  $replacement = (isset($_SERVER['HTTPS'])) ? '/https:\/\//' : ('/http:\/\/' . $_SERVER['SERVER_NAME'] . '\/sites\/(\w+)\/files\//');
-
-  $new = preg_replace($replacement, 'public://', $path);
-  $new = explode('?', $new);
-  $new = $new[0];
-
-  $image = image_get_info($new);
-
-  $output = array(
-    'height' => $image['height'],
-    'width' => $image['width'],
-  );
-  
-  return $output;
-
+/**
+ * Made this a function to reduce overhead
+ *
+ * @param $variables
+ */
+function theme_localbusiness_structured_data($variables) {
+    $output = '';
+    $output .= "\n<meta itemprop=\"name\" content=\"{$variables['name']}\">\n";
+    $output .= "<meta itemprop=\"image\" content=\"{$variables['image']}\">\n";
+    
+    return $output;
 }
-*/
+
+/**
+ * Made this a function to reduce overhead
+ *
+ * @param $variables
+ */
+function theme_itemreviewed_structured_data($variables) {
+    $output = '';
+    
+    $output .= "<span itemprop=\"itemReviewed\" itemscope itemtype=\"http://schema.org/LocalBusiness\">";
+    $output .= theme('localbusiness_structured_data', array(
+        'name' => $variables['name'],
+        'image' => $variables['image']
+    ));
+    $output .= '</span>';
+    
+    return $output;
+}
+
+function template_preprocess_localbusiness_structured_data(&$variables) {
+    $variables['name'] = variable_get('site_name');
+    $variables['image'] = theme_get_setting('logo');
+}
+
+function template_preprocess_itemreviewed_structured_data(&$variables) {
+    $variables['name'] = variable_get('site_name');
+    $variables['image'] = theme_get_setting('logo');
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function sprowt_theme_preprocess(&$variables, $hook) {
+    $variables['itemreviewed_structured_data'] = theme('itemreviewed_structured_data');
+    $variables['localbusiness_structured_data'] = theme('localbusiness_structured_data');
+}
