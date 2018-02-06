@@ -1,0 +1,29 @@
+<?php
+
+function paragraphs_disable_schema() {
+    $schema = array();
+    $schema['paragraphs_disable'] = array(
+        'description' => 'Paragraph items indicated to be disabled',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Disable id',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'item_id' => array(
+                'description' => 'Paragraph item id',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+        ),
+        'unique keys' => array(
+            'item_id' => array('item_id')
+        ),
+        'primary key' => array('id')
+    );
+    
+    return $schema;
+}
