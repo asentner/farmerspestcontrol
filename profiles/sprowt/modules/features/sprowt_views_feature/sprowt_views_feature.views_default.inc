@@ -1380,11 +1380,32 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['view_mode'] = 'tertiary_teaser';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Services (field_services) */
+  $handler->display->display_options['relationships']['field_services_tid']['id'] = 'field_services_tid';
+  $handler->display->display_options['relationships']['field_services_tid']['table'] = 'field_data_field_services';
+  $handler->display->display_options['relationships']['field_services_tid']['field'] = 'field_services_tid';
+  /* Relationship: Taxonomy term: Content using Service */
+  $handler->display->display_options['relationships']['reverse_field_service_node']['id'] = 'reverse_field_service_node';
+  $handler->display->display_options['relationships']['reverse_field_service_node']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['relationships']['reverse_field_service_node']['field'] = 'reverse_field_service_node';
+  $handler->display->display_options['relationships']['reverse_field_service_node']['relationship'] = 'field_services_tid';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Weight: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'reverse_field_service_node';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['block_description'] = 'Package Comparison (tertiary)';
   $export['packages'] = $view;
 
@@ -2023,7 +2044,8 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['links'] = FALSE;
@@ -2292,9 +2314,9 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<h2>Save some money today!</h2>
+  $handler->display->display_options['header']['area']['content'] = '<h2>Save money today!</h2>
 <p>We know that choosing a pest control service is an important decision. Let us make it easy for you to get started with us with these exclusive special offers!</p>
-<p><a href="/">View All Savings</a></p>';
+<p><a href="/special-offers">View All Savings</a></p>';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Weight: Weight */
@@ -2643,12 +2665,11 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'desktop';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
-  $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_always'] = TRUE;
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'View All Of Our Customer Reviews';
+  $handler->display->display_options['use_more_text'] = 'View All Of Our Customer Testimonials';
   $handler->display->display_options['defaults']['link_display'] = FALSE;
   $handler->display->display_options['link_display'] = 'custom_url';
   $handler->display->display_options['link_url'] = '<front>';
