@@ -38,7 +38,7 @@ function paragraphs_disable_paragraph_is_disabled($entity) {
  * @return mixed
  */
 function paragraphs_disable_disable($entity) {
-    if(!paragraphs_disable_get_disabled($entity)) {
+    if(!paragraphs_disable_paragraph_is_disabled($entity)) {
         $id =  db_insert('paragraphs_disable')
             ->fields(array(
                 'item_id' => $entity->item_id
@@ -57,7 +57,7 @@ function paragraphs_disable_disable($entity) {
  * @return mixed
  */
 function paragraphs_disable_enable($entity) {
-    if(paragraphs_disable_get_disabled($entity)) {
+    if(paragraphs_disable_paragraph_is_disabled($entity)) {
         db_delete('paragraphs_disable')
             ->condition('item_id', $entity-> item_id)
             ->execute();
