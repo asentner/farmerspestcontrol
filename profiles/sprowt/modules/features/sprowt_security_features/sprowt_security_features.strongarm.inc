@@ -14,7 +14,7 @@ function sprowt_security_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'honeypot_element_name';
-  $strongarm->value = 'url';
+  $strongarm->value = 'email';
   $export['honeypot_element_name'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -56,7 +56,7 @@ function sprowt_security_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'honeypot_time_limit';
-  $strongarm->value = '5';
+  $strongarm->value = '15';
   $export['honeypot_time_limit'] = $strongarm;
 
   $strongarm = new stdClass();

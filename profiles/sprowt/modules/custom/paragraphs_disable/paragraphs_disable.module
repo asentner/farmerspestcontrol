@@ -1,0 +1,265 @@
+<?php
+
+
+/**
+ * Gets a list of all summaries in the database
+ * @param bool $reset
+ *
+ * @return array|mixed
+ */
+function paragraphs_disable_get_disabled($reset = false) {
+    $disabled = &drupal_static(__FUNCTION__, NULL, $reset);
+    if(!isset($disabled)) {
+        $disabled = db_query("
+            SELECT item_id
+            FROM paragraphs_disable
+        ")->fetchCol();
+    }
+    return $disabled;
+}
+
+/**
+ * Determines whether an entity is disabled
+ * @param $entity
+ *
+ * @return bool
+ */
+function paragraphs_disable_paragraph_is_disabled($entity) {
+    $disabled = paragraphs_disable_get_disabled();
+    $is_disabled =  in_array($entity->item_id, $disabled);
+    
+    return $is_disabled;
+}
+
+/**
+ * Disable a paragraph
+ * @param $entity
+ *
+ * @return mixed
+ */
+function paragraphs_disable_disable($entity) {
+    if(!paragraphs_disable_get_disabled($entity)) {
+        $id =  db_insert('paragraphs_disable')
+            ->fields(array(
+                'item_id' => $entity->item_id
+            ))
+            ->execute();
+        $entity->is_disabled = 1;
+        paragraphs_disable_get_disabled(TRUE);
+        return $entity;
+    }
+}
+
+/**
+ * Enable a paragraph
+ * @param $entity
+ *
+ * @return mixed
+ */
+function paragraphs_disable_enable($entity) {
+    if(paragraphs_disable_get_disabled($entity)) {
+        db_delete('paragraphs_disable')
+            ->condition('item_id', $entity-> item_id)
+            ->execute();
+        $entity->is_disabled = 0;
+        paragraphs_disable_get_disabled(TRUE);
+        return $entity;
+    }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function paragraphs_disable_entity_update($entity, $type) {
+    if($type == 'paragraphs_item') {
+        if($entity->is_disabled) {
+            $entity = paragraphs_disable_disable($entity);
+        }
+        else {
+            $entity = paragraphs_disable_enable($entity);
+        }
+    }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function paragraphs_disable_entity_insert($entity, $type) {
+    if($type == 'paragraphs_item') {
+        if($entity->is_disabled) {
+            $entity = paragraphs_disable_disable($entity);
+        }
+    }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function paragraphs_disable_entity_delete($entity, $type) {
+    if($type == 'paragraphs_item') {
+        $entity = paragraphs_disable_enable($entity);
+    }
+}
+
+/**
+ * Implements hook_entity_load().
+ */
+function paragraphs_disable_entity_load($entities, $type) {
+    foreach ($entities as $entity) {
+        if($type == 'paragraphs_item') {
+            $entity->is_disabled = paragraphs_disable_paragraph_is_disabled($entity);
+        }
+    }
+}
+
+/**
+ * Alter paragraph widget form
+ *
+ * @param $element
+ * @param $form_state
+ * @param $context
+ */
+function paragraphs_disable_paragraphs_field_widget_form_alter(&$element, &$form_state, $context) {
+    $entity = $element['#entity'];
+    $parents = $element['#parents'];
+    $instance = field_info_instance($element['#entity_type'], $element['#field_name'], $element['#bundle']);
+    $default_edit_mode = isset($instance['settings']['default_edit_mode']) ? $instance['settings']['default_edit_mode'] : PARAGRAPHS_DEFAULT_EDIT_MODE;
+    
+    if($entity->is_disabled) {
+        $skip_disabling = [
+            'paragraph_bundle_title',
+            'paragraph_bundle_preview',
+            'actions',
+            '_weight'
+        ];
+        foreach($element as $key => &$field) {
+            if(strpos($key, '#') !== 0 && !in_array($key, $skip_disabling)) {
+                $field['#access'] = false;
+            }
+        }
+        foreach($element['actions'] as $key => $button) {
+            if(strpos($key, '#') !== 0) {
+                unset($element['actions'][$key]);
+            }
+        }
+    
+        if($default_edit_mode === 'preview') {
+            $element['paragraph_bundle_preview'] = array(
+                '#type' => 'container',
+            );
+            $preview = $entity->view('paragraphs_editor_preview');
+            $element['paragraph_bundle_preview']['preview'] = $preview;
+        }
+    
+        $element['actions']['enable_info'] = [
+            '#type' => 'markup',
+            '#markup' => '<p>This paragraph is <strong>Disabled</strong>.</p>',
+        ];
+        
+        $element['actions']['enable_button'] = [
+            '#delta'                   => $element['#delta'],
+            '#name'                    => implode('_', $parents) . '_enable_button',
+            '#type'                    => 'submit',
+            '#value'                   => t('Enable'),
+            '#validate'                => [],
+            '#submit'                  => ['_paragraphs_disable_widget_submit'],
+            '#limit_validation_errors' => [],
+            '#ajax'                    => [
+                'path'   => 'paragraphs/edit/ajax',
+                'effect' => 'fade',
+            ],
+            '#weight'                  => 1001,
+            '#is_disable_button' => false,
+        ];
+    }
+    else {
+        $element['actions']['disable_button'] = [
+            '#delta'                   => $element['#delta'],
+            '#name'                    => implode('_', $parents) . '_disable_button',
+            '#type'                    => 'submit',
+            '#value'                   => t('Disable'),
+            '#validate'                => [],
+            '#submit'                  => ['_paragraphs_disable_widget_submit'],
+            '#limit_validation_errors' => [],
+            '#ajax'                    => [
+                'path'   => 'paragraphs/edit/ajax',
+                'effect' => 'fade',
+            ],
+            '#weight'                  => 1001,
+            '#is_disable_button' => true,
+        ];
+    }
+}
+
+
+/**
+ * This is almost a direct copy of paragraphs_edit_submit
+ *
+ * @param $form
+ * @param $form_state
+ */
+function _paragraphs_disable_widget_submit($form, &$form_state) {
+    $button = $form_state['triggering_element'];
+    $delta = $button['#delta'];
+    
+    // Where in the form we'll find the parent element.
+    $address = array_slice($button['#array_parents'], 0, -3);
+    
+    // Go one level up in the form, to the widgets container.
+    $parent_element = drupal_array_get_nested_value($form, $address);
+    $field_name = $parent_element['#field_name'];
+    $langcode = $parent_element['#language'];
+    $parents = $parent_element['#field_parents'];
+    
+    $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
+    
+    //These two sections are what's different from paragraphs_edit_submit
+    if (isset($field_state['entity'][$delta])) {
+        $field_state['entity'][$delta]->is_disabled = !empty($button['#is_disable_button']);
+    }
+    
+    if($field_state['entity'][$delta]->is_disabled) {
+        $field_state['entity'][$delta]->being_edited = false;
+    }
+    
+    // Fix the weights. Field UI lets the weights be in a range of
+    // (-1 * item_count) to (item_count). This means that when we remove one,
+    // the range shrinks; weights outside of that range then get set to
+    // the first item in the select by the browser, floating them to the top.
+    // We use a brute force method because we lost weights on both ends
+    // and if the user has moved things around, we have to cascade because
+    // if I have items weight weights 3 and 4, and I change 4 to 3 but leave
+    // the 3, the order of the two 3s now is undefined and may not match what
+    // the user had selected.
+    $input = drupal_array_get_nested_value($form_state['input'], $address);
+    // Sort by weight,
+    // but first remove garbage values to ensure proper '_weight' sorting
+    unset($input['add_more']);
+    uasort($input, '_field_sort_items_helper');
+    
+    // Reweight everything in the correct order.
+    $weight = -1 * $field_state['items_count'] + 1;
+    foreach ($input as $key => $item) {
+        if ($item) {
+            $input[$key]['_weight'] = $weight++;
+        }
+    }
+    
+    drupal_array_set_nested_value($form_state['input'], $address, $input);
+    field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
+    
+    $form_state['rebuild'] = TRUE;
+}
+
+
+/**
+ * Implements hook_paragraphs_item_access().
+ */
+function paragraphs_disable_paragraphs_item_access($entity, $op, $account) {
+    $path = current_path();
+    if(!path_is_admin($path)) {
+        if($entity->is_disabled) {
+            return PARAGRAPHS_ITEM_ACCESS_DENY;
+        }
+    }
+}

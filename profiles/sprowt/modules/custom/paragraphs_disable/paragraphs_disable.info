@@ -1,0 +1,5 @@
+name = "Paragraphs Disable"
+description = "Allows you to disable individual paragraphs."
+version = "7.x-1.0"
+core = "7.x"
+package = Coalmarch

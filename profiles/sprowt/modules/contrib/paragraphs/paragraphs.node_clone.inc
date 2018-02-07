@@ -58,6 +58,10 @@ function paragraphs_clone_items($entity_type, &$entity, $field_name, $language =
   unset($entity->{$field_name}[$language]);
 
   foreach ($old_items as $old_item) {
+    if (!isset($old_item->bundle)) {
+      continue;
+    }
+
     list( , , $bundle) = entity_extract_ids('paragraphs_item', $old_item);
 
     /* @var $new_item ParagraphsItemEntity */
