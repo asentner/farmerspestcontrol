@@ -1,0 +1,235 @@
+<?php
+
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function video_modal_field_formatter_info() {
+  return array(
+    'video_embed_modal' => array(
+      'label' => t('Video Modal'),
+      'field types' => array('video_embed_field'),
+      'settings' => array(
+        'thumbnail_image_field' => null,
+        'image_style' => null
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function video_modal_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $elements = array();
+  
+  if ($display['type'] == 'video_embed_modal') {
+    $instances = field_info_instances($instance['entity_type'], $instance['bundle']);
+    $images_fields = array(
+      '' => '- none -'
+    );
+
+    $modules = array(
+        'multiupload_imagefield_widget',
+        'image'
+    );
+
+    foreach($instances as $inst) {
+      if(in_array($inst['widget']['module'], $modules)) {
+        $images_fields[$inst['field_name']] = $inst['label'];
+      }
+    }
+  
+    $elements['thumbnail_image_field'] = array(
+      '#type' => 'select',
+      '#title' => t('Thumbnail Image Field'),
+      '#options' => $images_fields,
+      '#default_value' => $settings['thumbnail_image_field'],
+      '#description' => t('The thumbnail image. If not specified the thumbnail from the service will be used.'),
+    );
+    
+    $styles = image_styles();
+    ksort($styles);
+    
+    $style_opts = array(
+      '' => '- none -'
+    );
+    foreach($styles as $style_machine_name => $style) {
+      $style_opts[$style_machine_name] = $style['label'];
+    }
+    $elements['image_style'] = array(
+      '#type' => 'select',
+      '#title' => t('Thumbnail Image Style'),
+      '#options' => $style_opts,
+      '#default_value' => $settings['image_style'],
+      '#description' => t('The image style used on the thumbnail.'),
+    );
+    
+  }
+  
+  return $elements;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function video_modal_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $output = array();
+  
+  
+  if ($display['type'] == 'video_embed_modal') {
+    if(!empty($settings['thumbnail_image_field'])) {
+      $instances = field_info_instances($instance['entity_type'], $instance['bundle']);
+      $images_fields = [
+        '' => '- none -'
+      ];
+
+        $modules = array(
+            'multiupload_imagefield_widget',
+            'image'
+        );
+
+      foreach ($instances as $inst) {
+          if(in_array($inst['widget']['module'], $modules)) {
+          $images_fields[$inst['field_name']] = $inst['label'];
+        }
+      }
+      
+      $output[] = 'Thumbnail Field: ' . $images_fields[$settings['thumbnail_image_field']];
+    }
+    else {
+      $output[] = 'Thumbnail Field: - none -';
+    }
+    
+    if(!empty($settings['image_style'])) {
+      $styles = image_styles();
+      ksort($styles);
+  
+      $style_opts = [
+        '' => '- none -'
+      ];
+      foreach ($styles as $style_machine_name => $style) {
+        $style_opts[$style_machine_name] = $style['label'];
+      }
+      $output[] = 'Image Style: ' . $style_opts[$settings['image_style']];
+    }
+    else {
+      $output[] = 'Image Style: - none -';
+    }
+  }
+  
+  return implode('<br>', $output);
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function video_modal_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+  
+  switch ($display['type']) {
+    case 'video_embed_modal':
+      $module_path = drupal_get_path('module', 'video_modal');
+      drupal_add_js($module_path . '/js/magnific.js');
+      drupal_add_js($module_path . '/js/video_modal.js');
+      drupal_add_css($module_path . '/css/video_modal.css');
+      
+      // Prevent displaying useless markup if we don't have any values.
+      if (empty($items)) {
+        return $element;
+      }
+      
+      $classes = array(
+        'video-modal'
+      );
+      foreach($items as $delta => $item) {
+        if (!empty($settings['image_style'])) {
+          $classes[] = 'video-modal--' . $settings['image_style'];
+          if (!empty($settings['thumbnail_image_field'])) {
+            $field_view = field_view_field($entity_type, $entity, $settings['thumbnail_image_field'], [
+              'label' => 'hidden',
+              'settings' => array(
+                'image_style' => $settings['image_style']
+              )
+            ]);
+
+            if(empty($field_view)) {
+                $uri = $item['thumbnail_path'];
+                $style = image_style_load($settings['image_style']);
+                $path = image_style_path($style['name'], $uri);
+                if (!file_exists($path)) {
+                    image_style_create_derivative($style, $uri, $path);
+                }
+
+                $image_html = theme_image(array(
+                    'attributes' => array(),
+                    'path' => $path
+                ));
+                $classes[] = 'video-modal--' . $settings['image_style'] . '--service-thumbnail';
+            }
+            else {
+
+                $classes[] = 'video-modal--' . $settings['image_style'] . '--' . drupal_html_class($settings['thumbnail_image_field']);
+
+                $image_html = render($field_view);
+            }
+          }
+          else {
+              $uri = $item['thumbnail_path'];
+              $style = image_style_load($settings['image_style']);
+              $path = image_style_path($style['name'], $uri);
+              if (!file_exists($path)) {
+                  image_style_create_derivative($style, $uri, $path);
+              }
+
+              $image_html = theme_image(array(
+                  'attributes' => array(),
+                  'path' => $path
+              ));
+              $classes[] = 'video-modal--' . $settings['image_style'] . '--service-thumbnail';
+          }
+        }
+        else {
+          if (!empty($settings['thumbnail_image_field'])) {
+            $field_view = field_view_field($entity_type, $entity, $settings['thumbnail_image_field'], [
+              'label' => 'hidden'
+            ]);
+  
+            $image_html = render($field_view);
+            $classes[] = 'video-modal--' . drupal_html_class($settings['thumbnail_image_field']);
+          }
+          else {
+            $uri = $item['thumbnail_path'];
+            $image_html = theme_image(array(
+              'attributes' => array(),
+              'path' => $uri
+            ));
+            $classes[] = 'video-modal--service-thumbnail';
+          }
+        }
+        
+        $classes[] = 'video-modal-' . $delta;
+        
+        $element[$delta] = array(
+          '#theme' => 'link',
+          '#path' => $item['video_url'],
+          '#options' => array(
+            'html' => true,
+            'attributes' => array(
+              'class' => $classes,
+            ),
+          ),
+          '#text' => $image_html . '<span class="play-button"><i class="fa fa-play-circle-o"></i><span>Play Video</span></span>'
+        );
+      }
+  
+  
+      break;
+  }
+  return $element;
+}

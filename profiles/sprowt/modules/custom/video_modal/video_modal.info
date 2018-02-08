@@ -1,0 +1,5 @@
+name = Video Modal
+description = Extends the video embed field to include a custom thumbnail and modal view mode.
+core = 7.x
+version = 7.x-1.0
+package = Coalmarch
