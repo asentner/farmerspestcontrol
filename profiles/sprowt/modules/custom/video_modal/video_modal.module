@@ -199,9 +199,19 @@ function video_modal_field_formatter_view($entity_type, $entity, $field, $instan
             $field_view = field_view_field($entity_type, $entity, $settings['thumbnail_image_field'], [
               'label' => 'hidden'
             ]);
-  
-            $image_html = render($field_view);
-            $classes[] = 'video-modal--' . drupal_html_class($settings['thumbnail_image_field']);
+
+              if(empty($field_view)) {
+                  $uri = $item['thumbnail_path'];
+                  $image_html = theme_image(array(
+                      'attributes' => array(),
+                      'path' => $uri
+                  ));
+                  $classes[] = 'video-modal--service-thumbnail';
+              }
+              else {
+                  $image_html = render($field_view);
+                  $classes[] = 'video-modal--' . drupal_html_class($settings['thumbnail_image_field']);
+              }
           }
           else {
             $uri = $item['thumbnail_path'];
