@@ -5,3 +5,7 @@
 .paragraphs-item-table > .content {
   overflow-x: auto;
 }
+
+.node--page > div > .paragraphs-items-field-content {
+  margin-top: 30px;
+}

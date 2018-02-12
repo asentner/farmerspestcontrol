@@ -848,7 +848,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 3,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -5489,6 +5489,83 @@ function sprowt_content_types_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-page-field_content'.
+  $field_instances['node-page-field_content'] = array(
+    'bundle' => 'page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 9,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_content',
+    'label' => 'Paragraphs Content',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'button',
+      'allowed_bundles' => array(
+        'annotated_image' => -1,
+        'block_embed' => -1,
+        'body' => -1,
+        'image_break' => -1,
+        'linked_image' => -1,
+        'paragraphs' => -1,
+        'table' => -1,
+        'table_cell' => -1,
+        'table_row' => -1,
+      ),
+      'bundle_weights' => array(
+        'annotated_image' => 2,
+        'block_embed' => 3,
+        'body' => 4,
+        'image_break' => 5,
+        'linked_image' => 6,
+        'paragraphs' => 7,
+        'table' => 8,
+        'table_cell' => 9,
+        'table_row' => 10,
+      ),
+      'default_edit_mode' => 'preview',
+      'title' => 'Paragraph',
+      'title_multiple' => 'Paragraphs',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
+      'weight' => 60,
+    ),
+  );
+
   // Exported field_instance: 'node-page-field_display_title'.
   $field_instances['node-page-field_display_title'] = array(
     'bundle' => 'page',
@@ -6677,7 +6754,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
-      'default_image' => 0,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
@@ -6831,7 +6908,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 5,
+      'default_image' => 6,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -8561,6 +8638,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Package Intro');
   t('Packages Intro');
   t('Packages Title');
+  t('Paragraphs Content');
   t('Phone number');
   t('Position');
   t('Post Date');
