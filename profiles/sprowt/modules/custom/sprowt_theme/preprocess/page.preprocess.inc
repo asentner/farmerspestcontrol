@@ -8,7 +8,7 @@ function sprowt_theme_preprocess_page(&$variables) {
 	}
 	*/
 
-	drupal_add_css(drupal_get_path('module', 'sprowt_theme') . '/css/gloabl.css');
+	drupal_add_css(drupal_get_path('module', 'sprowt_theme') . '/css/global.css');
 	
 	if (!empty($variables['node']) && !empty($variables['node']->type)) {
 		$variables['theme_hook_suggestions'][] = 'page__node__' . $variables['node']->type;
