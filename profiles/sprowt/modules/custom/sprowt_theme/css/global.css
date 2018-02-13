@@ -1,0 +1,11 @@
+.captcha {
+  margin: 20px 0;
+}
+
+.captcha .fieldset-legend {
+  display: none;
+}
+
+.captcha .fieldset-description {
+  display: none;
+}
