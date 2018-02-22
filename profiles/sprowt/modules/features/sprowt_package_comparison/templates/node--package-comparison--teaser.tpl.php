@@ -14,6 +14,16 @@
     $ebooking_button = '<a class="button" href="'.$ebooking_link_url.'">'.$ebooking_link_title.'</a>';
   };
 
+
+  //reorganize tagged features by term weight
+    $tagged_features = array();
+    foreach ($node->field_features['und'] as $feature) {
+        $term = taxonomy_term_load($feature['tid']);
+        $tagged_features[$term->weight] = $feature;
+    }
+
+    ksort($tagged_features);
+
 ?>
 
 <div<?php print $attributes; ?>>
@@ -53,7 +63,7 @@
       <tbody>
         <?php
           // build feature comparison rows
-          foreach ($node->field_features['und'] as $feature) {
+          foreach ($tagged_features as $feature) {
             print('<tr><td class="row-heading">'.$feature['taxonomy_term']->name.'</td>');
             // loop through each package to see if it has this feature selected
             $feature_tid = $feature['tid'];
