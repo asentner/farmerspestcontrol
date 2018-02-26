@@ -26,8 +26,8 @@
   </div>
 
   <?php if (isset($field_phone_number[0]['value'])): ?>
-    <div class="field-phone-number" itemprop="telephone">
-      <a href="tel:<?php print $field_phone_number[0]['value']; ?>" class="ctm-no-swap"><?php print $field_phone_number[0]['value']; ?></a>
+    <div class="field-phone-number ctm-no-swap" itemprop="telephone">
+      <a href="tel:<?php print $field_phone_number[0]['value']; ?>"><?php print $field_phone_number[0]['value']; ?></a>
     </div>
   <?php endif; ?>
 
