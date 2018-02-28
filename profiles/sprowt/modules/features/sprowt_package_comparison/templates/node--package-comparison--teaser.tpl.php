@@ -19,7 +19,11 @@
     $tagged_features = array();
     foreach ($node->field_features['und'] as $feature) {
         $term = taxonomy_term_load($feature['tid']);
-        $tagged_features[$term->weight] = $feature;
+        $weight = $term->weight;
+        while(!empty($tagged_features[$weight])) {
+            $weight += 0.0001;
+        }
+        $tagged_features[$weight] = $feature;
     }
 
     ksort($tagged_features);
