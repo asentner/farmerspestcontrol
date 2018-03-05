@@ -11,7 +11,7 @@ class NodeBuilderException extends EntityMetadataWrapperException {
 Building a better nodebuilder by taking advantage of the entity api wrapper classes
  */
 
-class NodeBuilder extends EntityDrupalWrapper {
+class ForgelyNodeBuilder extends EntityDrupalWrapper {
 
     public $node_info;
 
@@ -49,7 +49,7 @@ class NodeBuilder extends EntityDrupalWrapper {
     }
 }
 
-class ForgelyNode extends NodeBuilder {
+class ForgelyNode extends ForgelyNodeBuilder {
 
     private $uuid;
     private $feed;
