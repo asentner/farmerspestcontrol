@@ -1,0 +1,6 @@
+<?php
+
+function opportunities_feature_install() {
+//    db_drop_table('field_data_field_location');
+//    db_drop_table('field_revision_field_location');
+}

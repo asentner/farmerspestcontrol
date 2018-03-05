@@ -81,13 +81,6 @@ function opportunities_feature_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '[counter] Results';
-  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
-  $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -128,7 +121,7 @@ function opportunities_feature_views_default_views() {
   $handler->display->display_options['fields']['field_benefits']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_benefits']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_benefits']['field_api_classes'] = TRUE;
-  /* Field: Content: Rendered Node */
+  /* Field: Content: Rendered Content */
   $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
   $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
@@ -148,10 +141,6 @@ function opportunities_feature_views_default_views() {
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 1;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Weight (field_weight) */
-  $handler->display->display_options['sorts']['field_weight_value']['id'] = 'field_weight_value';
-  $handler->display->display_options['sorts']['field_weight_value']['table'] = 'field_data_field_weight';
-  $handler->display->display_options['sorts']['field_weight_value']['field'] = 'field_weight_value';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -199,23 +188,6 @@ function opportunities_feature_views_default_views() {
     'body' => 'body',
     'field_benefits' => 'field_benefits',
   );
-  /* Filter criterion: Content: Category (field_category) */
-  $handler->display->display_options['filters']['field_category_tid']['id'] = 'field_category_tid';
-  $handler->display->display_options['filters']['field_category_tid']['table'] = 'field_data_field_category';
-  $handler->display->display_options['filters']['field_category_tid']['field'] = 'field_category_tid';
-  $handler->display->display_options['filters']['field_category_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_category_tid']['expose']['operator_id'] = 'field_category_tid_op';
-  $handler->display->display_options['filters']['field_category_tid']['expose']['label'] = 'Category';
-  $handler->display->display_options['filters']['field_category_tid']['expose']['operator'] = 'field_category_tid_op';
-  $handler->display->display_options['filters']['field_category_tid']['expose']['identifier'] = 'field_category_tid';
-  $handler->display->display_options['filters']['field_category_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
-  $handler->display->display_options['filters']['field_category_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_category_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_category_tid']['vocabulary'] = 'opportunity_categories';
 
   /* Display: Featured */
   $handler = $view->new_display('block', 'Featured', 'front');
@@ -287,7 +259,7 @@ function opportunities_feature_views_default_views() {
   $handler->display->display_options['fields']['field_benefits']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_benefits']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_benefits']['field_api_classes'] = TRUE;
-  /* Field: Content: Rendered Node */
+  /* Field: Content: Rendered Content */
   $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
   $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
@@ -312,7 +284,7 @@ function opportunities_feature_views_default_views() {
   $handler->display->display_options['sorts']['promote']['table'] = 'node';
   $handler->display->display_options['sorts']['promote']['field'] = 'promote';
   $handler->display->display_options['sorts']['promote']['order'] = 'DESC';
-  /* Sort criterion: Content: Weight (field_weight) */
+  /* Sort criterion: Broken/missing handler */
   $handler->display->display_options['sorts']['field_weight_value']['id'] = 'field_weight_value';
   $handler->display->display_options['sorts']['field_weight_value']['table'] = 'field_data_field_weight';
   $handler->display->display_options['sorts']['field_weight_value']['field'] = 'field_weight_value';
