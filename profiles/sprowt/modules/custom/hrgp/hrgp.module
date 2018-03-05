@@ -1,0 +1,221 @@
+<?php
+
+require_once drupal_get_path('module', 'hrgp') . '/hrgp_api.php';
+
+
+/**
+ * Implements hook_menu_alter().
+ */
+function hrgp_menu_alter(&$items)
+{
+    $items['admin/config/services/hrgp'] = array(
+        'title' => t('HRGP settings'),
+        'description' => t('HRGP settings'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_hrgp_api_settings_form'),
+        'access arguments' => array('administer hrgp')
+    );
+
+    $items['admin/config/services/hrgp/api-test'] = array(
+        'title' => t('HRGP Api Test'),
+        'description' => t('HRGP Api Test'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_hrgp_api_test_form'),
+        'access arguments' => array('administer hrgp'),
+        'type' => MENU_LOCAL_ACTION
+    );
+
+    $items['ajax/hrgp'] = array(
+        'title' => 'HRGP Ajax Data',
+        'page callback' => '_hrgp_ajax',
+        'access callback' => true,
+        'type' => MENU_CALLBACK
+    );
+
+
+    unset($items['admin/config/services/forgely']);
+
+    unset($items['admin/config/services/forgely/api-test']);
+
+    unset($items['webhook/forgely']);
+
+    unset($items['ajax/forgely']);
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+function hrgp_permission()
+{
+    return array(
+        'administer hrgp' => array(
+            'title' => t('Administer HRGP'),
+            'description' => t('Administer HRGP integration settings')
+        ),
+    );
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function hrgp_cron_queue_info()
+{
+    return array(
+        'hrgp_sync_jobs' => array(
+            'worker callback' => '_hrgp_sync_jobs',
+            'time' => 60
+        ),
+        'hrgp_clean_jobs' => array(
+            'worker callback' => '_hrgp_clean_jobs',
+            'time' => 60
+        ),
+    );
+}
+
+
+function _hrgp_sync_jobs($data) {
+    $api = new HrgpApi();
+    $api->syncData($data);
+}
+
+function _hrgp_clean_jobs() {
+    $api = new HrgpApi();
+    $data = $api->getData();
+
+    if(empty($data['success'])) {
+        watchdog('Hrgp', 'There was an error getting HRGP Data: <pre>' . print_r($data, TRUE) . '</pre>', array(), WATCHDOG_ERROR);
+        return;
+    }
+
+    $data = $data['data'];
+    $current = array();
+    foreach($data as $job) {
+        $current[] = $job['jobId'];
+    }
+
+
+    $map = db_query("
+            SELECT i.field_external_id_value, i.entity_id
+            FROM field_data_field_external_id i
+            LEFT JOIN field_data_field_do_not_delete d on d.entity_id = i.entity_id
+                                                      AND d.entity_type = i.entity_type
+                                                      AND d.bundle = i.bundle
+            WHERE d.field_do_not_delete_value != 1
+            OR d.field_do_not_delete_value IS NULL
+        ")->fetchAllKeyed();
+
+
+    $delete = array();
+    foreach($map as $uuid => $nid) {
+        if(!in_array($uuid, $current)) {
+            $delete[] = $nid;
+        }
+    }
+
+    if(!empty($delete)) {
+        node_delete_multiple($delete);
+        watchdog('Hrgp', count($delete) . ' nodes cleaned');
+    }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function hrgp_cron()
+{
+    $api = new HrgpApi();
+    if(!empty($api->getXmlUrl()) || !empty($api->getOrgName())) {
+        $items = db_query("
+            SELECT *
+            FROM queue
+            WHERE name = 'hrgp_sync_jobs'
+        ")->fetchAll();
+        if (empty($items)) {
+            $data = $api->getData();
+            if (!empty($data['success'])) {
+                $queue = DrupalQueue::get('hrgp_sync_jobs');
+                $chunks = array_chunk($data['data'], 30);
+                foreach ($chunks as $chunk) {
+                    $queue->createItem($chunk);
+                }
+                watchdog('Hrgp', 'Queued ' . count($data['data']) . ' Jobs');
+
+                $delete_queue = DrupalQueue::get('hrgp_clean_jobs');
+                $delete_queue->createItem(null);
+            }
+            else {
+                watchdog('Hrgp', 'There was an error getting HRGP Data: <pre>' . print_r($data, TRUE) . '</pre>', array(), WATCHDOG_ERROR);
+            }
+        }
+    }
+}
+
+/**
+ * hrgp settings form
+ */
+function _hrgp_api_settings_form($form, &$form_state) {
+    
+    $methods = array(
+        'soap_api' => 'Api',
+        'xml_url' => 'URL'
+    );
+    
+    $form['hrgp_api_method'] = array(
+        '#type' => 'radios',
+        '#title' => t('Method'),
+        '#description' => t('The method the feed is brought in. If you choose URL, you should fill in the XML URL field. If you choose API, you should fill in the Organization Name.'),
+        '#options' => $methods,
+        '#default_value' => variable_get('hrgp_api_method', 'xml_url')
+    );
+    
+    $form['hrgp_api_url'] = array(
+        '#type'=> 'textfield',
+        '#title' => t('XML URL'),
+        '#description' => t('This URL is the hrgp xml URL.'),
+        '#default_value' => variable_get('hrgp_api_url')
+    );
+    
+    $form['hrgp_api_orgname'] = array(
+        '#type'=> 'textfield',
+        '#title' => t('Organization Name'),
+        '#description' => t('The organization name. This MUST be identical to the “Company Name” in Options > Company Information in HRGP.'),
+        '#default_value' => variable_get('hrgp_api_orgname')
+    );
+
+
+    $form = system_settings_form($form);
+
+    return $form;
+}
+
+function _hrgp_api_test_form($form, &$form_state) {
+    $form = array();
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Get API Results'
+    );
+    $form['api_results'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div id="api-results"></div>'
+    );
+
+    $form['#attached']['js'] = array(drupal_get_path('module', 'hrgp') . '/js/hrgp_test.js');
+
+    return $form;
+}
+
+function _hrgp_ajax(){
+    $api = new HrgpApi();
+    $data = $api->getDataRaw();
+
+    if(function_exists('krumo')) {
+        $return = krumo($data);
+    }
+    else {
+        $return = '<pre>' . print_r($data, true) . '</pre>';
+    }
+
+    echo $return;
+}

@@ -1,0 +1,8 @@
+name = Forgely
+description = Integrate with Forgely
+core = 7.x
+package = Coalmarch
+version = "7.x-1.0"
+
+dependencies[] = opportunities_feature
+dependencies[] = forgely_api

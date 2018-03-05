@@ -1,0 +1,7 @@
+name = Hire and Retain Good People Opportunities
+description = Integrate with HRGP instead of Forgely.
+core = 7.x
+package = Coalmarch
+version = "7.x-1.0"
+
+dependencies[] = forgely

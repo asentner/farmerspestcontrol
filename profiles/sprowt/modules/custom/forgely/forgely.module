@@ -1,0 +1,480 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function forgely_menu()
+{
+    $items = array();
+    
+    $items['admin/config/google-hire'] = array(
+        'title' => t('Google Hire settings'),
+        'description' => t('Google Hire settings'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_forgely_google_hire_settings_form'),
+        'access arguments' => array('administer forgely')
+    );
+
+    return $items;
+}
+
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function forgely_cron_queue_info()
+{
+    return array(
+        'forgely_sync_jobs' => array(
+            'worker callback' => '_forgely_sync_jobs',
+            'time' => 60
+        ),
+        'forgely_clean_jobs' => array(
+            'worker callback' => '_forgely_clean_jobs',
+            'time' => 60
+        ),
+    );
+}
+
+
+function _forgely_sync_jobs($data) {
+    //don't run if hrgp enabled
+    if(module_exists('hrgp')) {
+        return;
+    }
+    $api = new ForgelyApi();
+    $api->syncData($data);
+}
+
+function _forgely_clean_jobs() {
+    //don't run if hrgp enabled
+    if(module_exists('hrgp')) {
+        return;
+    }
+    $api = new ForgelyApi();
+    $data = $api->getData();
+    
+    if(empty($data['success'])) {
+        watchdog('Forgely', 'There was an error getting Forgely Data: <pre>' . print_r($data, TRUE) . '</pre>', array(), WATCHDOG_ERROR);
+        return;
+    }
+    
+    $data = $data['data'];
+    $current = array();
+    foreach($data as $job) {
+        $current[] = $job['jobId'];
+    }
+    
+    
+    $map = db_query("
+            SELECT i.field_external_id_value, i.entity_id
+            FROM field_data_field_external_id i
+            LEFT JOIN field_data_field_do_not_delete d on d.entity_id = i.entity_id
+                                                      AND d.entity_type = i.entity_type
+                                                      AND d.bundle = i.bundle
+            WHERE d.field_do_not_delete_value != 1
+            OR d.field_do_not_delete_value IS NULL
+        ")->fetchAllKeyed();
+    
+    
+    $delete = array();
+    foreach($map as $uuid => $nid) {
+        if(!in_array($uuid, $current)) {
+            $delete[] = $nid;
+        }
+    }
+    
+    if(!empty($delete)) {
+        node_delete_multiple($delete);
+        watchdog('Forgely', count($delete) . ' nodes cleaned');
+    }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function forgely_cron()
+{
+    //don't run if hrgp enabled
+    if(module_exists('hrgp')) {
+        return;
+    }
+
+
+    $api = new ForgelyApi();
+    if(!empty($api->getAccessKey()) && !empty($api->getSecretKey())) {
+        $items = db_query("
+            SELECT *
+            FROM queue
+            WHERE name = 'forgely_sync_jobs'
+        ")->fetchAll();
+        if (empty($items)) {
+            $data = $api->getData();
+            if (!empty($data['success'])) {
+                $queue = DrupalQueue::get('forgely_sync_jobs');
+                $chunks = array_chunk($data['data'], 30);
+                foreach ($chunks as $chunk) {
+                    $queue->createItem($chunk);
+                }
+                watchdog('Forgely', 'Queued ' . count($data['data']) . ' Jobs');
+                
+                $delete_queue = DrupalQueue::get('forgely_clean_jobs');
+                $delete_queue->createItem(null);
+            }
+            else {
+                watchdog('Forgely', 'There was an error getting Forgely Data: <pre>' . print_r($data, TRUE) . '</pre>', array(), WATCHDOG_ERROR);
+            }
+        }
+    }
+}
+
+/**
+ * forgely settings form
+ */
+function _forgely_api_settings_form($form, &$form_state) {
+  
+  $form['forgely_base_url'] = array(
+    '#type'=> 'textfield',
+    '#title' => t('Webhook URL'),
+    '#description' => t('This URL is tthe forgely URL. Normally this isn\'t changed.'),
+    '#default_value' => variable_get('forgely_base_url','https://forge.ly')
+  );
+
+    $form['forgely_webhook_url'] = array(
+        '#type'=> 'textfield',
+        '#title' => t('Webhook URL'),
+        '#description' => t('This URL should be added here. It will allow the site to make incremental changes as the jobs are changed in forgely.'),
+        '#attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        '#default_value' => FORGELY_WEBHOOK_URL
+    );
+
+    $api = array();
+    $api['forgely_access_key'] = array(
+        '#title' => t('Access Key'),
+        '#type' => 'textfield',
+        '#default_value' => variable_get('forgely_access_key', '')
+    );
+    $api['forgely_secret_key'] = array(
+        '#title' => t('Secret Key'),
+        '#type' => 'textfield',
+        '#default_value' => variable_get('forgely_secret_key', '')
+    );
+    $form['api_settings'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Api Settings'),
+        '#description' => 'These values can be generated <a target="_blank" href="'.variable_get('forgely_base_url','https://forge.ly').'/settings#sprowt">here</a> in your forgely app.',
+        'api' => $api
+    );
+
+    $form = system_settings_form($form);
+
+    return $form;
+}
+
+function _forgely_api_test_form($form, &$form_state) {
+    $form = array();
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Get API Results'
+    );
+    $form['api_results'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div id="api-results"></div>'
+    );
+
+    $form['#attached']['js'] = array(drupal_get_path('module', 'forgely') . '/js/forgely_test.js');
+
+    return $form;
+}
+
+function _forgely_ajax(){
+    $api = new ForgelyApi();
+    $data = $api->getData();
+
+    if(function_exists('krumo')) {
+        $return = krumo($data);
+    }
+    else {
+        $return = '<pre>' . print_r($data, true) . '</pre>';
+    }
+
+    echo $return;
+}
+
+function _forgely_google_hire_settings_form($form, &$form_state) {
+    $form['company_info'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Company Info',
+    );
+    
+    $form['company_info']['google_hire_company_name'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Company Name',
+        '#default_value' => variable_get('google_hire_company_name', variable_get('site_name', ''))
+    );
+    
+    $form['company_info']['google_hire_company_website'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Company Website',
+        '#default_value' => variable_get('google_hire_company_website', $GLOBALS['base_url'])
+    );
+    
+    $form = system_settings_form($form);
+    
+    return $form;
+}
+
+
+function _forgely_get_category_names($add = array()) {
+    $current_term_names = &drupal_static(__FUNCTION__);
+    if(!isset($current_term_names)) {
+        $v = taxonomy_vocabulary_machine_name_load('opportunity_categories');
+
+        $current_terms = taxonomy_get_tree($v->vid);
+        foreach ($current_terms as $c) {
+            $current_term_names[$c->name] = $c->tid;
+        }
+    }
+
+    if(!empty($add)) {
+        $current_term_names = array_merge($current_term_names, $add);
+    }
+
+    return $current_term_names;
+}
+
+function _forgely_get_employment_types($add = array()) {
+    $current_term_names = &drupal_static(__FUNCTION__);
+    if(!isset($current_term_names)) {
+        $v = taxonomy_vocabulary_machine_name_load('employment_types');
+        
+        $current_terms = taxonomy_get_tree($v->vid);
+        foreach ($current_terms as $c) {
+            $term = taxonomy_term_load($c->tid);
+            $current_term_names[$term->field_machine_name[LANGUAGE_NONE][0]['value']] = $term->tid;
+        }
+    }
+    
+    if(!empty($add)) {
+        $current_term_names = array_merge($current_term_names, $add);
+    }
+    
+    return $current_term_names;
+}
+
+function _forgely_uuid_map($add = array(), $reset = false) {
+    $map = &drupal_static(__FUNCTION__);
+
+    if(!isset($map) || $reset) {
+        $map = db_query("
+            SELECT field_external_id_value, entity_id
+            FROM field_data_field_external_id
+        ")->fetchAllKeyed();
+    }
+
+    if(!empty($add)) {
+        $map = array_merge($map, $add);
+    }
+
+    return $map;
+}
+
+function forgely_forgely_webhook(&$return) {
+   if(!empty($_POST['json']) && !empty($_POST['base_url'])){
+       if($_POST['base_url'] == variable_get('forgely_base_url','https://forge.ly')) {
+           $data = json_decode($_POST['json'], TRUE);
+           $access_key = !empty($data['api_access_key']) ? $data['api_access_key'] : FALSE;
+    
+           if ($access_key && $access_key == variable_get('forgely_access_key', '')) {
+               $queue = DrupalQueue::get('forgely_sync_jobs');
+               $chunks = array_chunk($data['data'], 30);
+               foreach ($chunks as $chunk) {
+                   $queue->createItem($chunk);
+               }
+               watchdog('Forgely', 'Queued ' . count($data['data']) . ' Jobs');
+               drupal_cron_run();
+               _forgely_clean_jobs();
+           }
+       }
+   };
+   watchdog('Forgely Webhook', 'New webhook post: <pre>!hook</pre>', array(
+       '!hook' => print_r($_POST, true)
+   ), WATCHDOG_INFO);
+}
+
+function _forgely_generate_jobs() {
+    $enabled = module_exists('devel_generate');
+    $values = array(
+        'values' => array()
+    );
+    $values['values']['kill_content'] = true;
+    $values['values']['title_length'] = 6;
+    $values['values']['num_nodes'] = 20;
+    $values['values']['max_comments'] = 0;
+    $values['values']['node_types'] = array('opportunity' => 'opportunity');
+
+    if(!$enabled) {
+        module_enable(array('devel_generate'));
+    }
+    $path = drupal_get_path('module', 'devel_generate');
+    require_once($path .'/devel_generate.inc');
+    devel_generate_content($values);
+
+    if(!$enabled) {
+        module_disable(array('devel_generate'));
+    }
+
+    $nids = db_query("
+        SELECT nid
+        FROM node
+        WHERE type = 'opportunity'
+    ")->fetchCol();
+
+    foreach(node_load_multiple($nids) as $node) {
+        if(!empty($node->field_application_link[LANGUAGE_NONE][0]['url'])) {
+            $node->field_application_link[LANGUAGE_NONE][0] = array('url' => $node->field_application_link[LANGUAGE_NONE][0]['url']);
+            node_save($node);
+        }
+    }
+    drupal_set_message('20 opportunities created');
+}
+
+function _forgely_build_schema_org_array($node) {
+    if(empty($node) || $node->type != 'opportunity') {
+        return false;
+    }
+    
+    $posting = new NodeBuilder($node);
+    
+    $schema = array(
+        '@context' => 'http://schema.org/',
+        '@type' => 'JobPosting',
+        'title' => $node->title
+    );
+    
+    $created = new DateTime();
+    $created->setTimestamp($node->created);
+    
+    $created->setTimezone(new DateTimeZone(_forgely_default_timezone()));
+    
+    $body = $posting->body->value();
+    
+    $schema['datePosted'] = $created->format('Y-m-d');
+    $schema['description'] = $body['value'];
+    
+    $company_name = variable_get('google_hire_company_name', variable_get('site_name', ''));
+    $company_site = variable_get('google_hire_company_website');
+    
+    
+    $schema['hiringOrganization'] = array(
+        '@type' => 'Organization',
+        'name' => $company_name
+    );
+    
+    if(!empty($company_site)) {
+        $schema['hiringOrganization']['sameAs'] = $company_site;
+    }
+    
+    $id = $posting->field_external_id->value();
+    
+    if(empty($id)) {
+        $id = $node->nid;
+    }
+    
+    $schema['identifier'] = array(
+        '@type' => 'PropertyValue',
+        'name' => $company_name,
+        'value' => $id
+    );
+    
+    $location = $posting->field_location->value();
+    
+    $schema['jobLocation'] = array(
+        '@type' => 'Place',
+        'address' => array(
+            '@type' => 'PostalAddress',
+            'streetAddress' => $location['street'],
+            'addressLocality' => $location['city'],
+            'addressRegion' => $location['province'],
+            'postalCode' => $location['postal_code'],
+            'addressCountry' => $location['country_name']
+        )
+    );
+    
+    
+    $salary_range_from = $posting->field_salary_range_from->value();
+    $salary_range_to = $posting->field_salary_range_to->value();
+    $salary_range_unit = $posting->field_salary_range_unit->value();
+    
+    if(!empty($salary_range_from)
+        && !empty($salary_range_to)
+        && !empty($salary_range_unit)
+    ) {
+        $schema['baseSalary'] = array(
+            '@type' => 'MonetaryAmount',
+            'currency' => 'USD',
+            'value' => array(
+                '@type' => 'QuantitativeValue',
+                'unitText' => $salary_range_unit
+            )
+        );
+        
+        if($salary_range_to == $salary_range_from) {
+            $schema['baseSalary']['value']['value'] = $salary_range_from;
+        }
+        else {
+            $schema['baseSalary']['value']['minValue'] = $salary_range_from;
+            $schema['baseSalary']['value']['maxValue'] = $salary_range_to;
+        }
+    }
+    
+    $employmentTypes = $posting->field_employment_types->value();
+    if(!empty($employmentTypes)) {
+        $types = array();
+        foreach($employmentTypes as $type) {
+            $types[] = $type->field_machine_name[LANGUAGE_NONE][0]['value'];
+        }
+        
+        if(count($types) == 1) {
+            $types = array_pop($types);
+        }
+        
+        $schema['employmentType'] = $types;
+    }
+    
+    return $schema;
+    
+}
+
+function _forgely_default_timezone($check_user = true) {
+    if(function_exists('date_default_timezone'))  {
+        return date_default_timezone($check_user);
+    }
+    
+    global $user;
+    if ($check_user && variable_get('configurable_timezones', 1) && !empty($user->timezone)) {
+        return $user->timezone;
+    }
+    else {
+        $default = variable_get('date_default_timezone', '');
+        return empty($default) ? 'UTC' : $default;
+    }
+    
+}
+
+function forgely_preprocess_page(&$vars) {
+    
+    if(!empty($vars['node']) && $vars['node']->type == 'opportunity') {
+        $node = $vars['node'];
+        $schema = _forgely_build_schema_org_array($node);
+        $markup = '<script type="application/ld+json">';
+        $markup .= json_encode($schema, JSON_PRETTY_PRINT);
+        $markup .= '</script>';
+        $vars['page']['content']['schema'] = array(
+            '#markup' => $markup
+        );
+    }
+}

@@ -1,0 +1,5 @@
+<?php
+
+function hrgp_install() {
+    db_delete('queue')->condition('name', array('forgely_sync_jobs', 'forgely_clean_jobs'), 'IN')->execute();
+}

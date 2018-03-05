@@ -1,0 +1,145 @@
+<?php
+
+define('FORGELY_WEBHOOK_URL', $GLOBALS['base_url'] . '/webhook/forgely');
+
+require_once drupal_get_path('module', 'forgely_api') . '/forgely_api.php';
+
+/**
+ * Implements hook_menu().
+ */
+function forgely_api_menu()
+{
+    $items = array();
+    
+    $items['admin/config/services/forgely'] = array(
+        'title' => t('Forgely settings'),
+        'description' => t('Forgely settings'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_forgely_api_settings_form'),
+        'access arguments' => array('administer forgely')
+    );
+    
+    $items['admin/config/services/forgely/api-test'] = array(
+        'title' => t('Forgely Api Test'),
+        'description' => t('Forgely Api Test'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_forgely_api_test_form'),
+        'access arguments' => array('administer forgely'),
+        'type' => MENU_LOCAL_ACTION
+    );
+    
+    $items['webhook/forgely'] = array(
+        'title' => 'Forgely Webhook URL',
+        'page callback' => '_forgely_webhook_bin',
+        'access callback' => true,
+        'type' => MENU_CALLBACK
+    );
+    
+    $items['ajax/forgely'] = array(
+        'title' => 'Forgely Ajax Data',
+        'page callback' => '_forgely_ajax',
+        'access callback' => true,
+        'type' => MENU_CALLBACK
+    );
+    
+    return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function forgely_api_permission()
+{
+    return array(
+        'administer forgely' => array(
+            'title' => t('Administer Forgely'),
+            'description' => t('Administer Forgely integration settings')
+        ),
+    );
+}
+/**
+ * forgely settings form
+ */
+function _forgely_api_settings_form($form, &$form_state) {
+    
+    $form['forgely_base_url'] = array(
+        '#type'=> 'textfield',
+        '#title' => t('Webhook URL'),
+        '#description' => t('This URL is tthe forgely URL. Normally this isn\'t changed.'),
+        '#default_value' => variable_get('forgely_base_url','https://forge.ly')
+    );
+    
+    $form['forgely_webhook_url'] = array(
+        '#type'=> 'textfield',
+        '#title' => t('Webhook URL'),
+        '#description' => t('This URL should be added here. It will allow the site to make incremental changes as the jobs are changed in forgely.'),
+        '#attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        '#default_value' => FORGELY_WEBHOOK_URL
+    );
+    
+    $api = array();
+    $api['forgely_access_key'] = array(
+        '#title' => t('Access Key'),
+        '#type' => 'textfield',
+        '#default_value' => variable_get('forgely_access_key', '')
+    );
+    $api['forgely_secret_key'] = array(
+        '#title' => t('Secret Key'),
+        '#type' => 'textfield',
+        '#default_value' => variable_get('forgely_secret_key', '')
+    );
+    $form['api_settings'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Api Settings'),
+        '#description' => 'These values can be generated <a target="_blank" href="'.variable_get('forgely_base_url','https://forge.ly').'/settings#sprowt">here</a> in your forgely app.',
+        'api' => $api
+    );
+    
+    $form = system_settings_form($form);
+    
+    return $form;
+}
+
+function _forgely_api_test_form($form, &$form_state) {
+    $form = array();
+    
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Get API Results'
+    );
+    $form['api_results'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div id="api-results"></div>'
+    );
+    
+    $form['#attached']['js'] = array(drupal_get_path('module', 'forgely_api') . '/js/forgely_test.js');
+    
+    return $form;
+}
+
+function _forgely_ajax(){
+    $api = new ForgelyApi();
+    $data = $api->getData();
+    
+    if(function_exists('krumo')) {
+        $return = krumo($data);
+    }
+    else {
+        $return = '<pre>' . print_r($data, true) . '</pre>';
+    }
+    
+    echo $return;
+}
+
+function _forgely_webhook_bin() {
+    $return = null;
+    
+    foreach (module_implements('forgely_webhook') as $module) {
+        $function = $module . '_forgely_webhook';
+        $function($return);
+    }
+    
+    drupal_json_output($return);
+}

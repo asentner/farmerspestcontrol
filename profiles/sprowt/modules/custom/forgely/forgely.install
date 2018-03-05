@@ -1,0 +1,142 @@
+<?php
+
+function forgely_install() {
+    module_enable(array('opportunities_feature'));
+    features_revert_module('opportunities_feature');
+    forgely_update_7100();
+    forgely_update_7102();
+}
+
+/**
+ * Add categories
+ */
+function forgely_update_7100() {
+    module_enable(array('opportunities_feature'));
+    features_revert_module('opportunities_feature');
+    $v = taxonomy_vocabulary_machine_name_load('opportunity_categories');
+
+    $current_term_names = _forgely_get_category_names();
+
+    $term_names = array(
+        'General',
+        'Sales',
+        'Management',
+        'Service Tech'
+    );
+
+    foreach($term_names as $name) {
+        if(empty($term_names[$name])) {
+            $term = new stdClass();
+            $term->name = $name;
+            $term->vid = $v->vid;
+            taxonomy_term_save($term);
+        }
+    }
+}
+
+/**
+ * revert feature
+ */
+function forgely_update_7101() {
+    features_revert_module('opportunities_feature');
+//    $api = new ForgelyApi();
+//    $items = db_query("
+//            SELECT *
+//            FROM queue
+//            WHERE name = 'forgely_sync_jobs'
+//        ")->fetchAll();
+//    if (empty($items)) {
+//        $data = $api->getData();
+//        if (!empty($data['success'])) {
+//            $queue = DrupalQueue::get('forgely_sync_jobs');
+//            $chunks = array_chunk($data['data'], 30);
+//            foreach ($chunks as $chunk) {
+//                $queue->createItem($chunk);
+//            }
+//            watchdog('Forgely', 'Queued ' . count($data['data']) . ' Jobs');
+//
+//            $delete_queue = DrupalQueue::get('forgely_clean_jobs');
+//            $delete_queue->createItem(null);
+//        }
+//        else {
+//            watchdog('Forgely', 'There was an error getting Forgely Data: <pre>' . print_r($data, TRUE) . '</pre>', array(), WATCHDOG_ERROR);
+//        }
+//    }
+}
+
+/**
+ * add employment types
+ */
+function forgely_update_7102() {
+    module_load_include('inc', 'features', 'features.export');
+    $status = features_get_storage('opportunities_feature');
+    if($status == 1 || $status == 2) {
+        features_revert_module('opportunities_feature');
+    }
+    
+    $types = array(
+        'FULL_TIME' => 'Full Time',
+        'PART_TIME' => 'Part Time',
+        'CONTRACTOR' => 'Contractor',
+        'TEMPORARY' => 'Temporary',
+        'INTERN' => 'Intern',
+        'VOLUNTEER' => 'Volunteer',
+        'PER_DIEM' => 'Per Diem',
+        'OTHER' => 'Other'
+    );
+    
+    
+    $vocab = taxonomy_vocabulary_machine_name_load('employment_types');
+    
+    $terms = taxonomy_get_tree($vocab->vid, 0, NULL, true);
+    
+    $termNames = array();
+    foreach($terms as $term) {
+        $termNames[$term->name] = $term;
+    }
+    
+    foreach($types as $machine_name => $name) {
+        if(in_array($name, array_keys($termNames))) {
+            $term = $termNames[$name];
+        }
+        else {
+            $term = new stdClass();
+            $term->vid = $vocab->vid;
+        }
+        
+        $term->name = $name;
+        $term->field_machine_name = array(
+            LANGUAGE_NONE => array(
+                array(
+                    'value' => $machine_name
+                ),
+            ),
+        );
+        
+        taxonomy_term_save($term);
+    }
+    
+}
+
+/**
+ * clear job sync queue and re-sync
+ */
+function forgely_update_7103() {
+//    db_delete('queue')->condition('name', array('forgely_sync_jobs', 'forgely_clean_jobs'), 'IN')->execute();
+//    $api = new ForgelyApi();
+//    $data = $api->getData();
+//    if (!empty($data['success'])) {
+//        $queue = DrupalQueue::get('forgely_sync_jobs');
+//        $chunks = array_chunk($data['data'], 30);
+//        foreach ($chunks as $chunk) {
+//            $queue->createItem($chunk);
+//        }
+//        watchdog('Forgely', 'Queued ' . count($data['data']) . ' Jobs');
+//
+//        $delete_queue = DrupalQueue::get('forgely_clean_jobs');
+//        $delete_queue->createItem(null);
+//    }
+//    else {
+//        watchdog('Forgely', 'There was an error getting Forgely Data: <pre>' . print_r($data, TRUE) . '</pre>', array(), WATCHDOG_ERROR);
+//    }
+}
