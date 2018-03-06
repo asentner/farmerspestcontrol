@@ -44,7 +44,43 @@
 
     }
   };
-  
+
+  Drupal.behaviors.scrollStickyMobileMenu = {
+    attach: function (context, settings) {
+      var menu = $('.block--nav-mobile-utility .menu');
+      var didScroll;
+      var lastScrollTop = 0;
+      var navbarHeight = menu.outerHeight(true);
+
+      $(window).scroll(function(e) {
+          didScroll = true;
+      });
+
+      setInterval(function() {
+          if (didScroll) {
+              hasScrolled();
+              didScroll = false;
+          }
+      }, 0);
+
+      function hasScrolled() {
+        var st = $(this).scrollTop();
+
+        if (st > lastScrollTop && st > navbarHeight) {
+          // Scroll Down
+          menu.removeClass('visible').addClass('hidden');
+        }
+        else {
+          // Scroll Up
+          if(st + $(window).height() < $(document).height()) {
+          menu.removeClass('hidden').addClass('visible');
+          }
+        }
+        lastScrollTop = st;
+      }
+    }
+  };
+
 Drupal.behaviors.sprowtAccordions = {
     attach: function (context, settings) {
       // find div's with class = accordion and turn them in to accordions

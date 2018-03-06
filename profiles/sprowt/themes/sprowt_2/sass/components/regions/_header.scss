@@ -1,11 +1,12 @@
 .l-header {
   z-index: 100;
+  margin-top: 80px;
   @include breakpoint($tab) {
     @include flexbox;
     flex-direction: column;
+    margin-top: 0;
   }
 }
-
 
 .l-region--header-second {
   @include flexbox;
@@ -20,5 +21,12 @@
     justify-content: space-between;
     order: 0;
     width: 100%;
+  }
+}
+
+// if logged in remove margin top
+.logged-in {
+  .l-header {
+    margin-top: 0;
   }
 }

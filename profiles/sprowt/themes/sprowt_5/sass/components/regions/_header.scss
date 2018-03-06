@@ -1,5 +1,9 @@
 .l-header {
   z-index: 100;
+  margin-top: 80px;
+  @include breakpoint($tab) {
+    margin-top: 0;
+  }
   @include breakpoint($nav) {
     border-bottom: 6px solid;
   }
@@ -35,5 +39,12 @@
     .block--nav-main {
       order: 1;
     }
+  }
+}
+
+// if logged in remove margin top
+.logged-in {
+  .l-header {
+    margin-top: 0;
   }
 }

@@ -1,5 +1,9 @@
 .l-header {
   z-index: 100;
+  margin-top: 80px;
+  @include breakpoint($tab) {
+    margin-top: 0;
+  }
 }
 .l-region--header-first {
   @include flexbox;
@@ -15,5 +19,12 @@
     .block--nav-main {
       float: right;
     }
+  }
+}
+
+// if logged in remove margin top
+.logged-in {
+  .l-header {
+    margin-top: 0;
   }
 }
