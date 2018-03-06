@@ -1,6 +1,6 @@
 .l-header {
   z-index: 100;
-  margin-top: 80px;
+  margin-top: 55px;
   @include breakpoint($tab) {
     @include flexbox;
     flex-direction: column;

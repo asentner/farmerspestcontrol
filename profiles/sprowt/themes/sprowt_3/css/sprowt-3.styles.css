@@ -4316,7 +4316,6 @@ li.addtoany {
   top: 0px;
   z-index: 100;
   width: 100%;
-  min-height: 80px;
   transition: transform 0.4s ease-in-out; }
   .block--nav-mobile-utility .menu > * {
     -ms-flex: 0 1 auto; }
@@ -4648,7 +4647,7 @@ li.addtoany {
   margin: 0 auto;
   width: 100%;
   z-index: 100;
-  margin-top: 80px; }
+  margin-top: 55px; }
   @media (min-width: 768px) {
     .l-header {
       margin-top: 0; } }
