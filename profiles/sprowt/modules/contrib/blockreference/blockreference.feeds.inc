@@ -41,28 +41,26 @@ function blockreference_feeds_processor_targets_alter(&$targets, $entity_type, $
 function blockreference_feeds_set_target($source, $entity, $target, $value) {
   // Assume that the passed in value could really be any number of values.
   $values = array_filter((array) $value);
-
   // Don't do anything if we weren't given any data.
   if (!$value) {
     return;
   }
-
   list($target, $match_key) = explode(':', $target, 2);
-
   // Set the language of the field depending on the mapping.
-  $language = isset($mapping['language']) ? $mapping['language'] : LANGUAGE_NONE;
-
+  $language = isset($match_key['language']) ? $match_key['language'] : LANGUAGE_NONE;
   // Iterate over all values.
   $items = array();
   foreach ($values as $value) {
     @list($module, $delta) = explode(':', $value);
     if ($module && $delta) {
-      $exists = db_query('SELECT bid FROM {block} WHERE module = ? AND delta = ?', array($module, $delta))->fetchField();
+      $exists = db_query('SELECT bid FROM {block} WHERE module = ? AND delta = ?', array(
+        $module,
+        $delta,
+      ))->fetchField();
       if ($exists) {
         $items[$language][]['moddelta'] = $value;
       }
     }
   }
-
   $entity->$target = $items;
 }

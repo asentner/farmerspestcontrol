@@ -7,6 +7,8 @@ function blockreference_field_info() {
   return array(
     'blockreference' => array(
       'label' => t('Block reference'),
+      'property_type' => 'block_moddelta',
+      'property_callbacks' => array('blockreference_field_entity_property_callback'),
       'description' => t('This field stores the ID of a related block as an integer value.'),
       'settings' => array(
         'referenceable_modules' => array(),
@@ -15,6 +17,30 @@ function blockreference_field_info() {
       'default_formatter' => 'blockreference_default',
     ),
   );
+}
+
+/**
+ * Callback to setup Entity API's field properties.
+ */
+function blockreference_field_entity_property_callback(&$info, $entity_type, $field, $instance, $field_type) {
+  $property = &$info[$entity_type]['bundles'][$instance['bundle']]['properties'][$field['field_name']];
+  // Define a data structure
+  $property['getter callback'] = 'entity_metadata_field_verbatim_get';
+  $property['setter callback'] = 'entity_metadata_field_verbatim_set';
+  $property['property info'] = blockreference_field_item_property_info();
+  unset($property['query callback']);
+}
+
+/**
+ * Defines info for the properties of the link-field item data structure.
+ */
+function blockreference_field_item_property_info() {
+  $properties['moddelta'] = array(
+    'type' => 'text',
+    'label' => t('The module & delta of the block.'),
+    'setter callback' => 'entity_property_verbatim_set',
+  );
+  return $properties;
 }
 
 /**
@@ -51,29 +77,32 @@ function blockreference_field_formatter_info() {
     'field types' => array('blockreference'),
     'settings' => array('show_empty_blocks' => FALSE),
   );
-
   return array(
     'blockreference_default' => array(
-      'label' => t('Default (title and content)'),
-      'description' => t('Display the title and content of a block.'),
-    ) + $base,
+        'label' => t('Default (title and content)'),
+        'description' => t('Display the title and content of a block.'),
+      ) + $base,
     'blockreference_without_title' => array(
-      'label' => t('Content only'),
-      'description' => t('Display the content of a block.  Do not display the title.'),
-    ) + $base,
+        'label' => t('Content only'),
+        'description' => t('Display the content of a block.  Do not display the title.'),
+      ) + $base,
     'blockreference_title' => array(
-      'label' => t('Title only'),
-      'description' => t('Display the title of a block.  Do not display the content.'),
-    ) + $base,
+        'label' => t('Title only'),
+        'description' => t('Display the title of a block.  Do not display the content.'),
+      ) + $base,
     'blockreference_plain' => array(
-      'label' => t('Info'),
-      'description' => t('Display the info text of a block.'),
-    ) + $base,
+        'label' => t('Info'),
+        'description' => t('Display the info text of a block.'),
+      ) + $base,
     'blockreference_config_link' => array(
       'label' => t('Link to configuration'),
       'description' => t('Link to configure the block'),
       'field types' => array('blockreference'),
-      'settings' => array('label' => 'default', 'custom_label' => '', 'destination' => 1),
+      'settings' => array(
+        'label' => 'default',
+        'custom_label' => '',
+        'destination' => 1,
+      ),
     ),
   );
 }
@@ -84,18 +113,14 @@ function blockreference_field_formatter_info() {
 function blockreference_field_formatter_settings_summary($field, $instance, $view_mode) {
   $display = $instance['display'][$view_mode];
   $settings = $display['settings'];
-
   $summary = array();
-
-  if ($display['type'] == 'blockreference_config_link') {
+  if ($display['type'] === 'blockreference_config_link') {
     $summary[] = t('Label: @label', array('@label' => $settings['label']));
     $summary[] = $settings['destination'] ? t('with <code>?destination</code>') : t('no <code>?destination</code>');
   }
-
   if (isset($settings['show_empty_blocks'])) {
     $summary[] = $settings['show_empty_blocks'] ? t('Show empty blocks') : t('Hide empty blocks (by pre-rendering)');
   }
-
   return implode('<br>', $summary);
 }
 
@@ -106,12 +131,17 @@ function blockreference_field_formatter_settings_form($field, $instance, $view_m
   $display = $instance['display'][$view_mode];
   $settings = $display['settings'];
   $element = array();
-
   if ($display['type'] == 'blockreference_config_link') {
     $element['label'] = array(
       '#type' => 'select',
       '#title' => t('Label'),
-      '#options' => drupal_map_assoc(array('default', 'custom', 'info', 'config', 'rendered')),
+      '#options' => drupal_map_assoc(array(
+        'default',
+        'custom',
+        'info',
+        'config',
+        'rendered',
+      )),
       '#default_value' => $settings['label'],
       '#attributes' => array('class' => array('blockreference-label-type')),
     );
@@ -126,25 +156,21 @@ function blockreference_field_formatter_settings_form($field, $instance, $view_m
         ),
       ),
     );
-
     $element['destination'] = array(
       '#type' => 'checkbox',
       '#title' => t('Remember location?'),
       '#default_value' => $settings['destination'],
       '#description' => t('If checked, will append a ?destination to the URL, to come back after saving.'),
     );
-
     return $element;
   }
-
   if (isset($settings['show_empty_blocks'])) {
     $element['show_empty_blocks'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show empty blocks?'),
       '#default_value' => $settings['show_empty_blocks'],
-      '#description' => t("Hiding empty blocks (usually a good thing) will move up the rendering process and check its output. If the render moment is important, don't do this.")
+      '#description' => t("Hiding empty blocks (usually a good thing) will move up the rendering process and check its output. If the render moment is important, don't do this."),
     );
-
     return $element;
   }
 }
@@ -169,7 +195,6 @@ function blockreference_field_formatter_view($entity_type, $entity, $field, $ins
       '#theme' => 'blockreference_formatter_' . $formatter,
       '#element' => $vars,
     );
-
     // To hide potentially empty/broken/missing block references, pre-render it immediately and check the output.
     if (!$display['settings']['show_empty_blocks']) {
       $html = trim(render($element[$delta]));
@@ -210,7 +235,6 @@ function blockreference_field_widget_info() {
 function blockreference_field_widget_info_alter(&$info) {
   $info['options_select']['field types'][] = 'blockreference';
   $info['options_buttons']['field types'][] = 'blockreference';
-
   if (module_exists('multiple_selects')) {
     $info['multiple_selects']['field types'][] = 'blockreference';
   }
@@ -227,7 +251,6 @@ function blockreference_field_instance_settings_form($field, $instance) {
     '#default_value' => _blockreference_get_block_modules_from_field($instance),
     '#description' => t('If no modules are selected, blocks from all modules will be available.'),
   );
-
   return $form;
 }
 
@@ -245,7 +268,6 @@ function blockreference_field_widget_settings_form($field, $instance) {
       ),
       '#default_value' => _blockreference_get_ac_match_method_from_field($instance),
     );
-
     return $form;
   }
 }
@@ -260,14 +282,12 @@ function blockreference_field_widget_form(&$form, &$form_state, $field, $instanc
       if (!empty($element['#entity'])) {
         list($eid) = entity_extract_ids($instance['entity_type'], $element['#entity']);
       }
-
       $ac_string = '';
       if (!empty($items[$delta])) {
         $item = $items[$delta];
         list($module, $delta) = explode(':', $item['moddelta']);
         $ac_string = _blockreference_block_string(_blockreference_block($module, $delta));
       }
-
       $element += array(
         '#type' => 'textfield',
         '#default_value' => $ac_string,
@@ -280,6 +300,5 @@ function blockreference_field_widget_form(&$form, &$form_state, $field, $instanc
       $element = array('moddelta' => $element);
       break;
   }
-
   return $element;
 }
