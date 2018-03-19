@@ -258,7 +258,7 @@ function _paragraphs_disable_widget_submit($form, &$form_state) {
 function paragraphs_disable_paragraphs_item_access($entity, $op, $account) {
     $path = current_path();
     if(!path_is_admin($path)) {
-        if($entity->is_disabled) {
+        if(!empty($entity->is_disabled)) {
             return PARAGRAPHS_ITEM_ACCESS_DENY;
         }
     }
