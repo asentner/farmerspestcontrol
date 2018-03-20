@@ -9,7 +9,7 @@ function sprowt_login_menu_alter(&$items) {
         'page callback' => '_sprowt_login_login_page',
         'access callback' => TRUE
     );
-    
+
     $items['user']['page callback'] = '_sprowt_login_user_redirect';
 
     $items['dashboard'] = array(
@@ -33,7 +33,7 @@ function sprowt_login_permission() {
 
 function _sprowt_login_user_redirect() {
     global $user;
-    
+
     if(!empty($user->uid)) {
         module_load_include('module', 'user', 'user.pages');
         return user_page();
@@ -43,7 +43,7 @@ function _sprowt_login_user_redirect() {
     if(!empty($_GET['destination'])) {
         unset($_GET['destination']);
     }
-    
+
     return drupal_goto('sprowt', array(
         'query' => $query
     ));
@@ -51,13 +51,13 @@ function _sprowt_login_user_redirect() {
 
 function _sprowt_login_login_page() {
     global $user;
-    
+
     if(!empty($user->uid)) {
         return drupal_goto('user', array(
             'query' => drupal_get_query_parameters()
         ));
     }
-    
+
     return drupal_get_form('user_login_block');
 }
 
@@ -122,8 +122,8 @@ function sprowt_login_theme($existing, $type, $theme, $path) {
  */
 function sprowt_login_theme_registry_alter(&$theme_registry)
 {
-    ksort($theme_registry);
-    $something = 'something';
+//    ksort($theme_registry);
+//    $something = 'something';
 }
 
 /**
@@ -148,9 +148,11 @@ function _sprowt_login_valid_path_by_user($path, $user) {
     $original_user = $GLOBALS['user'];
     $GLOBALS['user'] = $user;
     $router_items = &drupal_static('menu_get_item', true);
+    $item = $router_items[$path];
     unset($router_items[$path]);
     $result = drupal_valid_path($path, TRUE);
     $GLOBALS['user'] = $original_user;
+    $router_items[$path] = $item;
 
     return $result;
 }
@@ -199,11 +201,11 @@ function sprowt_login_page_build(&$page) {
 //                ),
             ),
         ));
-        
+
         if(empty($page['page_top'])) {
             $page['page_top'] = array();
         }
-        
+
         $page['page_top'] = array_merge(array(
             'sprowt_dashboard_navbar' => array(
                 '#markup' => $navbar,
