@@ -1,0 +1,49 @@
+.mobile{
+  display: block;
+  @include breakpoint($tab){
+    display: none;
+  }
+  @include breakpoint($desk){
+    display: none;
+  }
+}
+
+.tablet{
+  display: none;
+  @include breakpoint($tab){
+    display: block
+  }
+  @include breakpoint($desk){
+    display: none;
+  }
+}
+
+.desktop{
+  display: none;
+  @include breakpoint($tab){
+    display: none;
+  }
+  @include breakpoint($desk){
+    display: block;
+  }
+}
+
+.tablet.desktop{
+  display: none;
+  @include breakpoint($tab){
+    display: block;
+  }
+  @include breakpoint($desk){
+    display: block;
+  }
+}
+
+.mobile.tablet{
+  display: block;
+  @include breakpoint($tab){
+    display: block;
+  }
+  @include breakpoint($desk){
+    display: none;
+  }
+}
