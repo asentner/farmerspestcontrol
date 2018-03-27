@@ -6,9 +6,7 @@
 
 include_once 'sprowt_custom_colors.features.inc';
 
-require_once drupal_get_path('module', 'sprowt_custom_colors') . '/vendor/autoload.php';
-
-use Mexitek\PHPColors\Color;
+require_once drupal_get_path('module', 'sprowt_custom_colors') . '/Color.php';
 
 /**
  * Implements hook_theme().
@@ -494,7 +492,7 @@ function sprowt_custom_colors_set_colors($primary = null, $secondary = null, $te
             case 'Primary Dark':
                 if(!empty($primary)) {
                     $hex = $primary;
-                    $color = new Color($hex);
+                    $color = new \Mexitek\PHPColors\Color($hex);
                     $Term->field_hex = array(
                         'rgb' => '#' . $color->darken()
                     );
@@ -510,7 +508,7 @@ function sprowt_custom_colors_set_colors($primary = null, $secondary = null, $te
             case 'Secondary Dark':
                 if(!empty($secondary)) {
                     $hex = $secondary;
-                    $color = new Color($hex);
+                    $color = new \Mexitek\PHPColors\Color($hex);
                     $Term->field_hex = array(
                         'rgb' => '#' . $color->darken()
                     );
@@ -526,7 +524,7 @@ function sprowt_custom_colors_set_colors($primary = null, $secondary = null, $te
             case 'Header Secondary':
                 if(!empty($secondary)) {
                     $hex = $secondary;
-                    $color = new Color($hex);
+                    $color = new \Mexitek\PHPColors\Color($hex);
                     $Term->field_hex = array(
                         'rgb' => '#' . $color->mix('#ffffff', 25)
                     );
