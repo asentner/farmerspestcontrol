@@ -1,0 +1,36 @@
+name = Landing Page Theme
+description = Please provide a description for your theme.
+base theme = sprowt_starter
+screenshot = screenshot.png
+engine = phptemplate
+core = 7.x
+
+; ========================================
+; Stylesheets
+; ========================================
+stylesheets[all][] = css/landing-page.reset.css
+stylesheets[all][] = css/landing-page.styles.css
+stylesheets[all][] = css/landing-page.styles-override.css
+
+; ========================================
+; Scripts
+; ========================================
+scripts[] = js/landing-page.behaviors.js
+
+; ========================================
+; Regions
+; ========================================
+regions[header_first] = Header first
+regions[header_second] = Header second
+regions[header_third] = Header third
+regions[preface_first] = Preface first
+regions[preface_second] = Preface second
+regions[preface_third] = Preface third
+regions[content] = Content
+regions[sidebar] = Sidebar
+regions[postscript_first] = Postscript first
+regions[postscript_second] = Postscript second
+regions[postscript_third] = Postscript third
+regions[footer_first] = Footer first
+regions[footer_second] = Footer second
+regions[footer_third] = Footer third

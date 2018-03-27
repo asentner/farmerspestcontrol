@@ -1,3 +1,6 @@
+$fa-font-path: "//netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts" !default; // for referencing Bootstrap CDN font files directly
+@import "../.npm/node_modules/font-awesome/scss/font-awesome";
+
 #region-market-selector {
     ul, li {
         list-style: none;
@@ -163,6 +166,76 @@ input.error {
         .button {
             float: right;
             margin-top: 15px;
+        }
+    }
+}
+
+#sprowt-starter-choose-page {
+    img {
+        width: 320px;
+        max-width: 100%;
+        cursor: zoom-in;
+    }
+    .form-type-radios {
+        overflow: hidden;
+        position: relative;
+        h2 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .form-item {
+            + .form-item {
+                margin-top: 20px;
+            }
+        }
+        input {
+            position: absolute;
+            left: -9999px;
+        }
+        label {
+            display: block;
+            padding: 30px;
+            cursor: pointer;
+            position: relative;
+            border: 4px solid transparent;
+        }
+        input:checked {
+            + label {
+                background: #eee;
+                border: 4px solid #333;
+                position: relative;
+                &:before {
+                    width: 20px;
+                    height: 20px;
+                    font-size: 20px;
+                    font-family: FontAwesome;
+                    content: $fa-var-check-circle;
+                    color: black;
+                    position: absolute;
+                    top: -15px;
+                    right: -12px;
+                    background: white;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+}
+
+#sprowt-is-starter {
+    > div {
+        display: flex;
+        justify-content: center;
+        > * {
+            -ms-flex: 0 1 auto;
+        }
+        input {
+            text-align: center;
+            margin: 0;
+            width: 40%;
+            + input {
+                margin-left: 20px;
+            }
         }
     }
 }

@@ -1,0 +1,538 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Custom Colors feature.
+ */
+
+include_once 'sprowt_custom_colors.features.inc';
+
+require_once drupal_get_path('module', 'sprowt_custom_colors') . '/vendor/autoload.php';
+
+use Mexitek\PHPColors\Color;
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_custom_colors_theme($existing, $type, $theme, $path)
+{
+    return array(
+        'paragraphs_items__field_colors' => array(
+            'template' => 'paragraphs-items-field-colors',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_items',
+        ),
+        'paragraphs_items__field_lp_package_colors' => array(
+            'template' => 'paragraphs-items-field-colors-lp-packages',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_items',
+        ),
+    );
+}
+
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_custom_colors_preprocess_node(&$variables)
+{
+    //add a more specific class
+    $variables['classes_array'][] = 'node--' . $variables['node']->type . '--' . $variables['node']->nid;
+}
+
+
+/**
+ * Implements hook_entity_load().
+ */
+function sprowt_custom_colors_entity_load($entities, $type)
+{
+    foreach($entities as $entity) {
+        $entity_id = entity_id($type, $entity);
+        $bundle = sprowt_custom_colors_get_entity_bundle($type, $entity);
+        switch($type) {
+            case 'taxonomy_vocabulary':
+                break;
+            case 'paragraphs_item':
+                $label = field_get_items('paragraphs_item', $entity, 'field_label');
+                if(!empty($label)) {
+                    $label = $label[0]['value'];
+                    $id = drupal_html_id($label);
+                }
+                else {
+                    $id = drupal_html_id("paragraphs-item--$bundle--$entity_id");
+                }
+                break;
+            default:
+                $id = drupal_html_id("$type--$bundle--$entity_id");
+                break;
+        }
+        if(!empty($id)) {
+            $entity->html_unique_id = $id;
+        }
+    }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function sprowt_custom_colors_preprocess(&$variables, $hook)
+{
+    if(!empty($variables[$hook])
+        && is_object($variables[$hook])
+        && !empty($variables[$hook]->html_unique_id)
+    ) {
+        $variables['classes_array'][] = $variables[$hook]->html_unique_id;
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_custom_colors_preprocess_paragraphs_item(&$variables)
+{
+    $item = $variables['paragraphs_item'];
+    $variables['attributes_array']['id'] = $item->html_unique_id;
+    $current_path = current_path();
+    if($variables['elements']['#bundle'] == 'colors' && !path_is_admin($current_path)) {
+
+        $parent = $item->hostEntity();
+        $parentType = $item->hostEntityType();
+        switch($parentType) {
+            case 'node':
+                $page_node = menu_get_object();
+                if($page_node && $page_node->nid == $parent->nid) {
+                    $wrapper = '.page-node-' . $parent->nid;
+                }
+                else {
+                    $wrapper = ".{$parent->html_unique_id}";
+                }
+                break;
+            case 'paragraphs_item':
+                $wrapper = '#' . $parent->html_unique_id;
+                break;
+            default:
+                $wrapper = ".{$parent->html_unique_id}";
+        }
+
+        if($item->field_name == 'field_lp_package_colors') {
+            $wrapper .= " .field--name-field-lp-packages > .field__items > .field__item";
+        }
+
+        _sprowt_custom_colors_apply_styling($wrapper, $item);
+    }
+}
+
+function _sprowt_custom_colors_apply_styling($wrapperSelector, $paragraphs_item) {
+    $wrapper = $wrapperSelector;
+    $item = $paragraphs_item;
+    $stylesWrap = array();
+    $styles = array();
+    $instances = field_info_instances('paragraphs_item', $item->bundle);
+    $border = array(
+        'size' => null,
+        'style' => null,
+        'color' => null
+    );
+    foreach ($instances as $field_name => $instance) {
+        $field_items = field_get_items('paragraphs_item', $item, $field_name);
+
+        if($field_name == 'field_box_shadow' && !empty($field_items)) {
+            $shadows = array();
+            foreach($field_items as $field_item) {
+                $fc_item = field_collection_item_load($field_item['value']);
+                $inset = field_get_items('field_collection_item', $fc_item, 'field_shadow_inset');
+                $offsetX = field_get_items('field_collection_item', $fc_item, 'field_shadow_offset_x');
+                $offsetY = field_get_items('field_collection_item', $fc_item, 'field_shadow_offset_y');
+                $blur = field_get_items('field_collection_item', $fc_item, 'field_shadow_blur_radius');
+                $spread = field_get_items('field_collection_item', $fc_item, 'field_shadow_spread_radius');
+                $color = field_get_items('field_collection_item', $fc_item, 'field_shadow_color');
+
+                if(!empty($color)) {
+                    $shadow = array();
+                    if(!empty($inset) && !empty($inset[0]['value'])) {
+                        $shadow[] = 'inset';
+                    }
+
+                    if(!empty($offsetX) && !empty($offsetX[0]['value'])) {
+                        $shadow[] = $offsetX[0]['value'] . 'px';
+                    }
+                    else {
+                        $shadow[] = '0';
+                    }
+
+                    if(!empty($offsetY) && !empty($offsetY[0]['value'])) {
+                        $shadow[] = $offsetY[0]['value'] . 'px';
+                    }
+                    else {
+                        $shadow[] = '0';
+                    }
+
+                    if(!empty($blur) && !empty($blur[0]['value'])) {
+                        $shadow[] = $blur[0]['value'] . 'px';
+                    }
+                    else {
+                        $shadow[] = '0';
+                    }
+
+                    if(!empty($spread) && !empty($spread[0]['value'])) {
+                        $shadow[] = $spread[0]['value'] . 'px';
+                    }
+
+                    $term = taxonomy_term_load($color[0]['tid']);
+                    $hex = field_get_items('taxonomy_term', $term, 'field_color_text_value');
+                    if(!empty($hex)) {
+                        $hex = $hex[0]['value'];
+                    }
+                    else {
+                        $hex = field_get_items('taxonomy_term', $term, 'field_hex');
+                        if(!empty($hex)) {
+                            $hex = $hex[0]['rgb'];
+                        }
+                    }
+
+                    $shadow[] = $hex;
+
+                    $shadows[] = implode(' ', $shadow);
+                }
+            }
+
+            $styles[] = 'box-shadow: ' . implode(', ', $shadows);
+        }
+
+        if(!empty($field_items)) {
+            foreach($field_items as $field_item) {
+                if(!empty($field_item['tid'])) {
+                    $term = taxonomy_term_load($field_item['tid']);
+                    $hex = field_get_items('taxonomy_term', $term, 'field_color_text_value');
+                    if(!empty($hex)) {
+                        $hex = $hex[0]['value'];
+                    }
+                    else {
+                        $hex = field_get_items('taxonomy_term', $term, 'field_hex');
+                        if(!empty($hex)) {
+                            $hex = $hex[0]['rgb'];
+                        }
+                    }
+
+                    if(empty($hex)) {
+                        $field_name = 'invalid';
+                    }
+                }
+                switch($field_name) {
+                    case 'field_background_overlay_opacity':
+                    case 'field_image_background_style':
+                        break;
+                    case 'field_image_background':
+                        $image_style_field = field_get_items('paragraphs_item', $item, 'field_image_background_style');
+                        if(!empty($style)) {
+                            $image_style_name = $image_style_field[0]['value'];
+                            $image_style = image_style_load($image_style_name);
+                            $uri = image_style_path($image_style_name, $field_item['uri']);
+                            if(!file_exists($uri)) {
+                                image_style_create_derivative($image_style, $field_item['uri'], $uri);
+                            }
+
+                            $url = image_style_url($image_style_name, $field_item['uri']);
+                        }
+                        else {
+                            $url = file_create_url($field_item['uri']);
+                        }
+                        $styles[] = "background-image: url('$url')";
+                        $styles[] = "background-size: cover";
+                        $styles[] = "background-position: center";
+                        $styles[] = "background-repeat: no-repeat";
+                        break;
+                    case 'field_color_background':
+                        $styles[] = "background-color: $hex";
+                        break;
+                    case 'field_color_background_overlay':
+                        $beforeStyles = array();
+                        $beforeStyles[] = 'content: " "';
+                        $beforeStyles[] = 'position: absolute';
+                        $beforeStyles[] = 'top: 0';
+                        $beforeStyles[] = 'right: 0';
+                        $beforeStyles[] = 'left: 0';
+                        $beforeStyles[] = 'bottom: 0';
+                        $beforeStyles[] = 'width: 100%';
+                        $beforeStyles[] = 'height: 100%';
+                        $beforeStyles[] = 'z-index: 1';
+                        $beforeStyles[] = 'background-color: ' . $hex;
+
+                        $opacity = field_get_items('paragraphs_item', $item, 'field_background_overlay_opacity');
+                        if(!empty($opacity)) {
+                            $opacity = $opacity[0]['value'];
+                            $opacity = ($opacity/100);
+                            $beforeStyles[] = "opacity: $opacity";
+                        }
+
+                        $beforeStyles = implode('; ', $beforeStyles);
+
+                        $stylesWrap[] = "$wrapper { position: relative; }";
+                        $stylesWrap[] = "$wrapper > * { position: relative; z-index: 2; }";
+                        if(!empty($page_node) && $page_node->nid == $parent->nid) {
+                            $stylesWrap[] = "$wrapper:after { $beforeStyles }";
+                        }
+                        else {
+                            $stylesWrap[] = "$wrapper:before { $beforeStyles }";
+                        }
+                        break;
+                    case 'field_border_size':
+                        $border['size'] = $field_item['value'];
+                        break;
+                    case 'field_border_style':
+                        $border['style'] = $field_item['value'];
+                        break;
+                    case 'field_color_border':
+                        $border['color'] = $hex;
+                        break;
+                    case 'field_color_text':
+                        $styles[] = "color: $hex";
+                        break;
+                    case 'field_color_link':
+                        $stylesWrap[] = "$wrapper a { color: $hex }";
+                        break;
+                    case 'field_color_link_hover':
+                        $stylesWrap[] = "$wrapper a:hover { color: $hex }";
+                        break;
+                    case 'field_header_color':
+                        $fc_item = field_collection_item_load($field_item['value']);
+                        $selectorFields = field_get_items('field_collection_item', $fc_item, 'field_header_selector');
+                        $colorField = field_get_items('field_collection_item', $fc_item, 'field_color_header');
+                        if(!empty($selectorFields) && !empty($colorField)) {
+                            $term = taxonomy_term_load($colorField[0]['tid']);
+                            $hex = field_get_items('taxonomy_term', $term, 'field_hex');
+                            $hex = $hex[0]['rgb'];
+                            $selectors = array();
+                            foreach($selectorFields as $sf) {
+                                $selectors[] = "$wrapper " . $sf['value'];
+                            }
+                            $stylesWrap[] = implode(", ", $selectors) . " { color: $hex }";
+                        }
+                        break;
+                    case 'field_custom_color':
+                        $fc_item = field_collection_item_load($field_item['value']);
+                        $colorField = field_get_items('field_collection_item', $fc_item, 'field_css_color');
+                        $selectorField = field_get_items('field_collection_item', $fc_item, 'field_css_selector');
+                        $propertyField = field_get_items('field_collection_item', $fc_item, 'field_css_property');
+                        if(!empty($colorField)
+                            && !empty($selectorField)
+                            && !empty($propertyField)
+                        ) {
+                            $term = taxonomy_term_load($colorField[0]['tid']);
+                            $hex = field_get_items('taxonomy_term', $term, 'field_hex');
+                            $hex = $hex[0]['rgb'];
+                            $selector = $selectorField[0]['value'];
+                            $property = $propertyField[0]['value'];
+                            $stylesWrap[] = "$wrapper $selector { $property: $hex }";
+                        }
+                        break;
+                    case 'field_color_list_item_bullets':
+                        $stylesWrap[] = "$wrapper li:before { color: $hex }";
+                        break;
+                    case 'field_color_stars':
+                        $stylesWrap[] = "$wrapper .fa-star { color: $hex }";
+                        break;
+                    case 'field_button_colors':
+                        $fc_item = field_collection_item_load($field_item['value']);
+                        $fc_fields = array(
+                            'background-color' => field_get_items('field_collection_item', $fc_item, 'field_color_background'),
+                            'color' => field_get_items('field_collection_item', $fc_item, 'field_color_text'),
+                            'border-color' => field_get_items('field_collection_item', $fc_item, 'field_color_border'),
+                        );
+                        foreach($fc_fields as $fc_property => $fc_field_items) {
+                            if(!empty($fc_field_items)) {
+                                $term = taxonomy_term_load($fc_field_items[0]['tid']);
+                                $hex = field_get_items('taxonomy_term', $term, 'field_hex');
+                                $hex = $hex[0]['rgb'];
+                                $stylesWrap[] = "$wrapper .button { $fc_property: $hex }";
+                                $stylesWrap[] = "$wrapper input[type=\"submit\"] { $fc_property: $hex }";
+                            }
+                        }
+                        break;
+                    case 'field_button_hover_colors':
+                        $fc_item = field_collection_item_load($field_item['value']);
+                        $fc_fields = array(
+                            'background-color' => field_get_items('field_collection_item', $fc_item, 'field_color_background'),
+                            'color' => field_get_items('field_collection_item', $fc_item, 'field_color_text'),
+                            'border-color' => field_get_items('field_collection_item', $fc_item, 'field_color_border'),
+                        );
+                        foreach($fc_fields as $fc_property => $fc_field_items) {
+                            if(!empty($fc_field_items)) {
+                                $term = taxonomy_term_load($fc_field_items[0]['tid']);
+                                $hex = field_get_items('taxonomy_term', $term, 'field_hex');
+                                $hex = $hex[0]['rgb'];
+                                $stylesWrap[] = "$wrapper .button:hover { $fc_property: $hex }";
+                                $stylesWrap[] = "$wrapper input[type=\"submit\"]:hover { $fc_property: $hex }";
+                            }
+                        }
+                        break;
+                    case 'field_input_background_color':
+                        $stylesWrap[] = "$wrapper input { background-color: $hex }";
+                        $stylesWrap[] = "$wrapper textarea { background-color: $hex }";
+                        break;
+                    case 'field_input_border_color':
+                        $stylesWrap[] = "$wrapper input { border-color: $hex }";
+                        $stylesWrap[] = "$wrapper textarea { border-color: $hex }";
+                        break;
+                    case 'field_input_text_color':
+                        $stylesWrap[] = "$wrapper input { color: $hex }";
+                        $stylesWrap[] = "$wrapper textarea { color: $hex }";
+                        break;
+                    case 'field_label_color':
+                        $stylesWrap[] = "$wrapper label { color: $hex }";
+                        break;
+                }
+            }
+        }
+    }
+    if(!empty($border['size'])) {
+        $border['size'] .= 'px';
+        if(empty($border['style'])) {
+            $border['style'] = 'solid';
+        }
+        $styles[] = 'border: ' . implode(' ', array_values($border));
+    }
+
+
+    if(!empty($styles)) {
+        $styles = implode("; ", $styles);
+        $stylesWrap[] = "$wrapper { $styles; }";
+    }
+    foreach($stylesWrap as $wrapped) {
+        drupal_add_css($wrapped, array(
+            'type' => 'inline',
+            'group' => CSS_THEME,
+            'weight' => 5
+        ));
+    }
+}
+
+function _sprowt_custom_colors_image_style_options() {
+    $options = array();
+    $styles = image_styles();
+
+    foreach($styles as $key => $style) {
+        $options[$key] = $style['label'];
+    }
+
+    asort($options);
+    return $options;
+}
+
+/**
+ * Helper function to figure out the bundle name for an entity.
+ * Copied from date_get_entity_bundle
+ */
+function sprowt_custom_colors_get_entity_bundle($entity_type, $entity) {
+    switch ($entity_type) {
+        case 'field_collection_item':
+            $bundle = $entity->field_name;
+            break;
+
+        default:
+            $bundle = field_extract_bundle($entity_type, $entity);
+            break;
+    }
+    // If there is no bundle name, field_info() uses the entity name as the bundle
+    // name in its arrays.
+    if (empty($bundle)) {
+        $bundle = $entity_type;
+    }
+    return $bundle;
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function sprowt_custom_colors_field_widget_paragraphs_embed_form_alter(&$element, &$form_state, $context)
+{
+    if($context['field']['field_name'] == 'field_colors') {
+        if(empty($element['#description'])) {
+            $url = '/admin/structure/taxonomy/colors/add';
+            $element['#description'] = '<p>Use this field to set colors on this entity. To add additional colors go <a href="'.$url.'" target="_blank">here.</a></p>';
+        }
+    }
+}
+
+/**
+ * Add color picker to hex field.
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function sprowt_custom_colors_field_widget_text_textfield_form_alter(&$element, &$form_state, $context)
+{
+    $path = drupal_get_path('module', 'sprowt_custom_colors');
+    if($context['field']['field_name'] == 'field_color_text_value') {
+        drupal_add_css($path . '/css/color_example.css');
+        drupal_add_js($path . '/js/color_example.js');
+        $element['#prefix'] = '<div class="has-color-example">';
+        $element['#suffix'] = '</div>';
+    }
+}
+
+function sprowt_custom_colors_set_colors($primary = null, $secondary = null, $tertiary = null) {
+    $db_colors = array(
+        'Primary' => '117eaaef-b577-4d25-874c-6e7e57dced84',
+        'Primary Dark' => '20c3172a-3391-40a0-b5f1-0762234bf0b4',
+        'Secondary' => '900b0b22-0695-4d0a-8fa7-833e5076a512',
+        'Secondary Dark' => 'dbb46673-7c60-4edc-ac27-694219f5fe23',
+        'Tertiary' => 'daa9e39f-3472-4547-928a-b3ce84291880',
+        'Header Secondary' => '170bf62f-e072-4b95-ad52-8416e836258e'
+    );
+    
+    foreach($db_colors as $name => $uuid) {
+        $term = entity_uuid_load('taxonomy_term', array($uuid));
+        $term = array_pop($term);
+        $term->field_color_text_value = array();
+        $Term = entity_metadata_wrapper('taxonomy_term', $term);
+        switch($name) {
+            case 'Primary':
+                if(!empty($primary)) {
+                    $Term->field_hex = array(
+                        'rgb' => $primary
+                    );
+                }
+                break;
+            case 'Primary Dark':
+                if(!empty($primary)) {
+                    $hex = $primary;
+                    $color = new Color($hex);
+                    $Term->field_hex = array(
+                        'rgb' => '#' . $color->darken()
+                    );
+                }
+                break;
+            case 'Secondary':
+                if(!empty($secondary)) {
+                    $Term->field_hex = array(
+                        'rgb' => $secondary
+                    );
+                }
+                break;
+            case 'Secondary Dark':
+                if(!empty($secondary)) {
+                    $hex = $secondary;
+                    $color = new Color($hex);
+                    $Term->field_hex = array(
+                        'rgb' => '#' . $color->darken()
+                    );
+                }
+                break;
+            case 'Tertiary':
+                if(!empty($tertiary)) {
+                    $Term->field_hex = array(
+                        'rgb' => $tertiary
+                    );
+                }
+                break;
+            case 'Header Secondary':
+                if(!empty($secondary)) {
+                    $hex = $secondary;
+                    $color = new Color($hex);
+                    $Term->field_hex = array(
+                        'rgb' => '#' . $color->mix('#ffffff', 25)
+                    );
+                }
+                break;
+        }
+        $Term->save();
+    }
+}

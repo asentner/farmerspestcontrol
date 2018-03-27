@@ -137,6 +137,27 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'type' => 'file',
   );
 
+  // Exported field_base: 'field_big_text'.
+  $field_bases['field_big_text'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_big_text',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_block_reference'.
   $field_bases['field_block_reference'] = array(
     'active' => 1,
@@ -1073,6 +1094,27 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_prefix'.
+  $field_bases['field_prefix'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_prefix',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_region'.
   $field_bases['field_region'] = array(
     'active' => 1,
@@ -1276,6 +1318,27 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_suffix'.
+  $field_bases['field_suffix'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_suffix',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_tags'.
   $field_bases['field_tags'] = array(
     'active' => 1,
@@ -1335,6 +1398,35 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_two_buttons'.
+  $field_bases['field_two_buttons'] = array(
+    'active' => 1,
+    'cardinality' => 2,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_two_buttons',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'link',
+    'settings' => array(
+      'attributes' => array(
+        'class' => '',
+        'rel' => '',
+        'target' => 'default',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'title' => 'optional',
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'link_field',
   );
 
   return $field_bases;

@@ -627,15 +627,6 @@ function sprowt_user_settings_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create landing_page content'.
-  $permissions['create landing_page content'] = array(
-    'name' => 'create landing_page content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create localtarget content'.
   $permissions['create localtarget content'] = array(
     'name' => 'create localtarget content',
@@ -838,15 +829,6 @@ function sprowt_user_settings_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any landing_page content'.
-  $permissions['delete any landing_page content'] = array(
-    'name' => 'delete any landing_page content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any localtarget content'.
   $permissions['delete any localtarget content'] = array(
     'name' => 'delete any localtarget content',
@@ -1001,15 +983,6 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'delete own faq content'.
   $permissions['delete own faq content'] = array(
     'name' => 'delete own faq content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own landing_page content'.
-  $permissions['delete own landing_page content'] = array(
-    'name' => 'delete own landing_page content',
     'roles' => array(
       'client' => 'client',
     ),
@@ -1258,15 +1231,6 @@ function sprowt_user_settings_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any landing_page content'.
-  $permissions['edit any landing_page content'] = array(
-    'name' => 'edit any landing_page content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any localtarget content'.
   $permissions['edit any localtarget content'] = array(
     'name' => 'edit any localtarget content',
@@ -1434,15 +1398,6 @@ function sprowt_user_settings_user_default_permissions() {
   // Exported permission: 'edit own faq content'.
   $permissions['edit own faq content'] = array(
     'name' => 'edit own faq content',
-    'roles' => array(
-      'client' => 'client',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own landing_page content'.
-  $permissions['edit own landing_page content'] = array(
-    'name' => 'edit own landing_page content',
     'roles' => array(
       'client' => 'client',
     ),

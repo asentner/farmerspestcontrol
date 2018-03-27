@@ -328,8 +328,7 @@ Class ThemeBuilder {
         $form['#attached']['js'][] = "https://code.jquery.com/jquery-1.11.2.min.js"; //I don't wanna use drupal's old as dirt jQuery
         $form['#attached']['js'][] = $path . "/js/machine-name.js";
     
-        $form['#attached']['css'][] = $path . "/css/spectrum.css";
-        $form['#attached']['js'][] = $path . "/js/spectrum.js";
+
     
         $form['#attached']['css'][] = $path . "/css/theme_copy.css";
         $form['#attached']['js'][] = $path . "/js/branding.js";
@@ -412,48 +411,8 @@ Class ThemeBuilder {
             '#process' => array('form_process_machine_name')
         );
     
-        $form['colors'] = array(
-            '#type' => 'fieldset',
-            '#title' => t('Choose your theme\'s colors (optional)'),
-            '#description' => 'This will only apply after the dev team modifies the theme'
-        );
-    
-        $form['colors']['primary'] = array(
-            '#type' => 'textfield',
-            '#title' => 'Primary Color',
-            '#attributes' => array(
-                'id' => 'primary-color',
-                'class' => array('color'),
-                'data-spectrum' => 'spectrum-primary',
-            ),
-            '#prefix' => '<div class="color-picker">',
-            '#suffix' => '<input type="text" id="spectrum-primary" class="spectrum" data-color_id="primary-color"></div>',
-        );
-    
-        $form['colors']['secondary'] = array(
-            '#type' => 'textfield',
-            '#title' => 'Secondary Color',
-            '#attributes' => array(
-                'id' => 'secondary-color',
-                'class' => array('color'),
-                'data-spectrum' => 'spectrum-secondary',
-            ),
-            '#prefix' => '<div class="color-picker">',
-            '#suffix' => '<input type="text" id="spectrum-secondary" class="spectrum" data-color_id="secondary-color"></div>',
-        );
-    
-        $form['colors']['tertiary'] = array(
-            '#type' => 'textfield',
-            '#title' => 'Tertiary Color',
-            '#attributes' => array(
-                'id' => 'tertiary-color',
-                'class' => array('color'),
-                'data-spectrum' => 'spectrum-tertiary',
-            ),
-            '#prefix' => '<div class="color-picker">',
-            '#suffix' => '<input type="text" id="spectrum-tertiary" class="spectrum" data-color_id="tertiary-color"></div>',
-        );
-    
+        $this->addColorFieldsToForm($form,null, false);
+        
         $form['actions']['submit'] = array(
             '#type' => 'submit',
             '#value' => t('Save and Continue'),
@@ -468,6 +427,70 @@ Class ThemeBuilder {
         }
 
         return $form;
+    }
+    
+    function addColorFieldsToForm(&$form, $description = null, $update_jquery = true) {
+        $data = _sprowt_get_data();
+        $branding = !empty($data['branding']) ? $data['branding'] : array();
+        $path = drupal_get_path('profile', 'sprowt');
+        if($update_jquery) {
+            $form['#attached']['js'][] = "https://code.jquery.com/jquery-1.11.2.min.js";
+        }
+        if($description === null) {
+            $description = 'This will only apply after the dev team modifies the theme';
+        }
+        
+        $form['#attached']['css'][] = $path . "/css/spectrum.css";
+        $form['#attached']['js'][] = $path . "/js/spectrum.js";
+        $form['#attached']['js'][] = $path . "/js/color_picker.js";
+        $form['#attached']['css'][] = $path . "/css/color_picker.css";
+        
+        $form['colors'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Choose your theme\'s colors (optional)'),
+            '#description' => t($description)
+        );
+    
+        $form['colors']['primary'] = array(
+            '#type' => 'textfield',
+            '#title' => 'Primary Color',
+            '#default_value' => !empty($branding['primary-color']) ? $branding['primary-color'] : null,
+            '#attributes' => array(
+                'id' => 'primary-color',
+                'class' => array('color'),
+                'data-spectrum' => 'spectrum-primary',
+            ),
+            '#prefix' => '<div class="color-picker">',
+            '#suffix' => '<input type="text" id="spectrum-primary" class="spectrum" data-color_id="primary-color"></div>',
+        );
+    
+        $form['colors']['secondary'] = array(
+            '#type' => 'textfield',
+            '#title' => 'Secondary Color',
+            '#default_value' => !empty($branding['secondary-color']) ? $branding['secondary-color'] : null,
+            '#attributes' => array(
+                'id' => 'secondary-color',
+                'class' => array('color'),
+                'data-spectrum' => 'spectrum-secondary',
+            ),
+            '#prefix' => '<div class="color-picker">',
+            '#suffix' => '<input type="text" id="spectrum-secondary" class="spectrum" data-color_id="secondary-color"></div>',
+        );
+    
+        $form['colors']['tertiary'] = array(
+            '#type' => 'textfield',
+            '#title' => 'Tertiary Color',
+            '#default_value' => !empty($branding['tertiary-color']) ? $branding['tertiary-color'] : null,
+            '#attributes' => array(
+                'id' => 'tertiary-color',
+                'class' => array('color'),
+                'data-spectrum' => 'spectrum-tertiary',
+            ),
+            '#prefix' => '<div class="color-picker">',
+            '#suffix' => '<input type="text" id="spectrum-tertiary" class="spectrum" data-color_id="tertiary-color"></div>',
+        );
+        
+        
     }
 
     function theme_machine_name_exists($name) {

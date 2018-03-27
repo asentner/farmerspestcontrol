@@ -67,37 +67,36 @@ function sprowt_paragraphs_theme($existing, $type, $theme, $path)
 function sprowt_paragraphs_preprocess_entity(&$variables)
 {
     if ($variables['entity_type'] == 'paragraphs_item') {
-        drupal_add_css(drupal_get_path('module', 'sprowt_paragraphs') . '/css/paragraphs.css');
-        $custom_class = field_get_items('paragraphs_item', $variables['elements']['#entity'], 'field_custom_class');
-        if(!empty($custom_class)) {
-            foreach($custom_class as $class) {
-                $classes = explode(' ', $class['value']);
-                $new_classes_array = array_merge($variables['classes_array'], $classes);
-                $variables['classes_array'] = $new_classes_array;
-                $variables['attributes_array']['class'] = $new_classes_array;
-            }
-        }
 
-        if($variables['elements']['#bundle'] == 'table_cell') {
-            $para = entity_metadata_wrapper('paragraphs_item', $variables['elements']['#entity']);
-            $rowspan = $para->field_cell_rowspan->value();
-            $colspan = $para->field_cell_colspan->value();
-            $variables['header_cell'] = ($variables['paragraphs_item']->hostEntity()->field_name == 'field_header_row');
-            if(!isset($variables['attributes_array'])) {
-                $variables['attributes_array'] = array();
-            }
-            if(!empty($rowspan)) {
-                $variables['attributes_array']['rowspan'] = $rowspan;
-            }
-            if(!empty($colspan)) {
-                $variables['attributes_array']['colspan'] = $colspan;
-            }
+        foreach (module_implements('preprocess_paragraphs_item') as $module) {
+            $function = $module . '_preprocess_paragraphs_item';
+            $function($variables);
         }
+    }
+}
 
-        if($variables['elements']['#bundle'] == 'table_row' || $variables['elements']['#bundle'] == 'table_cell') {
-            $para = $variables['elements']['#entity'];
-            $delta = $para->delta();
-            $variables['classes_array'][] = (($delta + 1) % 2) ? 'odd' : 'even';
+/**
+ * Implements hook_entity_load().
+ */
+function sprowt_paragraphs_entity_load($entities, $type)
+{
+    foreach($entities as $entity) {
+        $entity_id = entity_id($type, $entity);
+        $bundle = sprowt_paragraphs_get_entity_bundle($type, $entity);
+        switch($type) {
+            case 'paragraphs_item':
+                $label = field_get_items('paragraphs_item', $entity, 'field_label');
+                if(!empty($label)) {
+                    $label = $label[0]['value'];
+                    $id = drupal_html_id($label);
+                }
+                else {
+                    $id = drupal_html_id("paragraphs-item--$bundle--$entity_id");
+                }
+                break;
+        }
+        if(!empty($id)) {
+            $entity->html_unique_id = $id;
         }
     }
 }
@@ -105,9 +104,76 @@ function sprowt_paragraphs_preprocess_entity(&$variables)
 /**
  * Implements hook_preprocess_HOOK().
  */
+function sprowt_paragraphs_preprocess_paragraphs_item(&$variables)
+{
+    $item = $variables['paragraphs_item'];
+    $variables['attributes_array']['id'] = $item->html_unique_id;
+    $custom_class = field_get_items('paragraphs_item', $variables['elements']['#entity'], 'field_custom_class');
+    $current_path = current_path();
+    if(!path_is_admin($current_path)) {
+        drupal_add_css(drupal_get_path('module', 'sprowt_paragraphs') . '/css/paragraphs.css');
+    }
+    if(!empty($custom_class)) {
+        foreach($custom_class as $class) {
+            $classes = explode(' ', $class['value']);
+            $new_classes_array = array_merge($variables['classes_array'], $classes);
+            $variables['classes_array'] = $new_classes_array;
+            $variables['attributes_array']['class'] = $new_classes_array;
+        }
+    }
+
+    if($variables['elements']['#bundle'] == 'table_cell') {
+        $para = entity_metadata_wrapper('paragraphs_item', $variables['elements']['#entity']);
+        $rowspan = $para->field_cell_rowspan->value();
+        $colspan = $para->field_cell_colspan->value();
+        $variables['header_cell'] = ($variables['paragraphs_item']->hostEntity()->field_name == 'field_header_row');
+        if(!isset($variables['attributes_array'])) {
+            $variables['attributes_array'] = array();
+        }
+        if(!empty($rowspan)) {
+            $variables['attributes_array']['rowspan'] = $rowspan;
+        }
+        if(!empty($colspan)) {
+            $variables['attributes_array']['colspan'] = $colspan;
+        }
+    }
+
+    if($variables['elements']['#bundle'] == 'table_row' || $variables['elements']['#bundle'] == 'table_cell') {
+        $para = $variables['elements']['#entity'];
+        $delta = $para->delta();
+        $variables['classes_array'][] = (($delta + 1) % 2) ? 'odd' : 'even';
+    }
+
+    if($variables['elements']['#bundle'] == 'modal') {
+        drupal_add_js(drupal_get_path('module', 'sprowt_paragraphs') . '/js/modal.js');
+    }
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
 function sprowt_paragraphs_preprocess_field(&$variables)
 {
-    $element = $variables['element'];
+    $element = &$variables['element'];
+
+    //fix fragment links for modals
+    if($element['#field_type'] == 'link_field') {
+        $current_path = current_path();
+        foreach ($element['#items'] as $delta => &$item) {
+            if(strpos($item['url'],'#') !== false) {
+                $field_info = $element[$delta]['#field'];
+                $current_url = url($current_path, array(
+                    'absolute' => $field_info['settings']['absolute_url']
+                ));
+                $url_parts = _link_parse_url($item['url']);
+                if ($url_parts['url'] == $current_url) {
+                    $item['url'] = $url_parts['fragment'];
+                    $element[$delta]['#element']['url'] = $url_parts['fragment'];
+                }
+            }
+        }
+    }
 
     $no_wrap = array(
         'field_table_cells',
@@ -169,4 +235,42 @@ function sprowt_paragraphs_preprocess_paragraphs_items(&$variables)
     if(in_array($variables['field_name'], $no_wrap)) {
         $variables['theme_hook_suggestions'][] = 'paragraphs_items_no_wrap';
     }
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function sprowt_paragraphs_field_widget_paragraphs_embed_form_alter(&$element, &$form_state, $context)
+{
+    if(!empty($element['paragraph_bundle_title'])
+        && !empty($element['#entity'])
+        && !empty($element['#entity']->html_unique_id)
+    ) {
+        $element['paragraph_bundle_title']['html_id'] = array(
+            '#type' => 'markup',
+            '#markup' => '<p><strong>HTML ID: </strong><span>' .$element['#entity']->html_unique_id. '</span></p>'
+        );
+    }
+}
+
+/**
+ * Helper function to figure out the bundle name for an entity.
+ * Copied from date_get_entity_bundle
+ */
+function sprowt_paragraphs_get_entity_bundle($entity_type, $entity) {
+    switch ($entity_type) {
+        case 'field_collection_item':
+            $bundle = $entity->field_name;
+            break;
+
+        default:
+            $bundle = field_extract_bundle($entity_type, $entity);
+            break;
+    }
+    // If there is no bundle name, field_info() uses the entity name as the bundle
+    // name in its arrays.
+    if (empty($bundle)) {
+        $bundle = $entity_type;
+    }
+    return $bundle;
 }

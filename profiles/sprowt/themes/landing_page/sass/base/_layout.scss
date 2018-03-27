@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+.l-page {
+  @include flexbox;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  > div {
+    width: 100%;
+  }
+  .l-main {
+    flex: 1 1 auto;
+  }
+}

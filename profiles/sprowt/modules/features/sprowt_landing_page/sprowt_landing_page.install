@@ -1,0 +1,15 @@
+<?php
+
+function sprowt_landing_page_install() {
+    db_update('system')
+        ->fields(array('weight' => 2))
+        ->condition('name', 'sprowt_landing_page', '=')
+        ->execute();
+    
+    theme_enable(array('landing_page'));
+    db_update('block')
+        ->fields(array('region' => '-1'))
+        ->condition('theme', 'landing_page')
+        ->condition('module', 'system', '!=')
+        ->execute();
+}

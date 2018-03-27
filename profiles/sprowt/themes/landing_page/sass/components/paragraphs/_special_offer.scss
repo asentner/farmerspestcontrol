@@ -1,0 +1,73 @@
+.paragraphs-item-landing-page-special-offer {
+  text-align: center;
+  &.entity {
+    padding: 25px;
+  }
+
+
+  .button {
+    display: block;
+    width: 100%;
+  }
+
+  .field--name-field-display-title {
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    .field__items {
+      padding: 0 15px;
+      font-weight: 600;
+      line-height: 1.33;
+    }
+  }
+
+  .field--name-field-prefix {
+    font-size: 44px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .field--name-field-big-text {
+    font-size: 140px;
+    font-weight: 800;
+  }
+
+  .field--name-field-suffix {
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .field--name-field-two-buttons {
+    margin-top: 10px;
+    .field__item {
+      + .field__item {
+        margin-top: 10px;
+      }
+    }
+  }
+
+
+  @include breakpoint(406px) {
+    .field--name-field-two-buttons {
+      .field__items {
+        @include flexbox;
+      }
+      .field__item {
+        flex: 1 1 auto;
+        + .field__item {
+          margin-top: 0;
+          margin-left: 20px;
+        }
+      }
+
+      .button {
+        padding: 5px;
+      }
+    }
+  }
+
+}

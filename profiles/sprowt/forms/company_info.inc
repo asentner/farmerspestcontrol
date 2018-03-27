@@ -4,7 +4,6 @@
  */
 
 function sprowt_company_info($form, &$form_state, &$install_state){
-
     drupal_set_title(st('Configure Company Input'));
     $form['company_info'] = array(
         'company_name' => array(

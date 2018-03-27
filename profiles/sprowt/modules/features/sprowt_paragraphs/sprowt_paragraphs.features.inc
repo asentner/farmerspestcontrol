@@ -43,6 +43,11 @@ function sprowt_paragraphs_paragraphs_info() {
       'bundle' => 'linked_image',
       'locked' => '1',
     ),
+    'modal' => array(
+      'name' => 'Modal',
+      'bundle' => 'modal',
+      'locked' => '1',
+    ),
     'paragraphs' => array(
       'name' => 'Paragraphs',
       'bundle' => 'paragraphs',

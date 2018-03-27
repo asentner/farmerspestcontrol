@@ -31,11 +31,17 @@ foreach(glob(drupal_get_path('profile', 'sprowt') . "/forms/*.inc") as $include)
  * implements hook_install_tasks_alter()
  */
 
-function sprowt_install_tasks_alter(&$tasks, $install_state) {
+function sprowt_install_tasks_alter(&$tasks, &$install_state) {
 
     _sprowt_set_maintenance_theme("adminimal");
 
     $tasks['install_select_locale']['function'] = 'sprowt_locale_selection';
+
+    $tasks_performed = $install_state['tasks_performed'];
+    if(!isset($install_state['storage'])) {
+        $install_state['storage'] = array();
+    }
+    $install_state['storage']['is_starter'] = variable_get('sprowt_is_starter');
 
 
     $task_map = array(
@@ -47,6 +53,8 @@ function sprowt_install_tasks_alter(&$tasks, $install_state) {
         'install_system_module',
         'install_bootstrap_full',
         'sprowt_setup_tables', //sprowt
+        'sprowt_is_starter', //sprowt
+        'sprowt_starter_choose_page', //sprowt
         'sprowt_company_info', //sprowt
         'sprowt_market_setup', //sprowt
         'sprowt_branding', //sprowt
@@ -68,6 +76,10 @@ function sprowt_install_tasks_alter(&$tasks, $install_state) {
     foreach($task_map as $task){
         $new_tasks[$task] = $tasks[$task];
         unset($tasks[$task]);
+        
+        if($task == 'sprowt_starter_choose_page' && empty($install_state['storage']['is_starter'])) {
+            $new_tasks[$task]['run'] = INSTALL_TASK_SKIP;
+        }
     }
 
     $new_tasks = $new_tasks + $tasks;

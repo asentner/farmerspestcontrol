@@ -1,0 +1,19 @@
+.has-color-example {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;}
+.has-color-example .form-item {
+    margin: 0;
+    padding: 0; }
+
+.has-color-example .color-example {
+    margin-left: 15px;
+    border: 3px solid #eee;
+    padding: 5px 20px;
+    min-height: 20px;
+}

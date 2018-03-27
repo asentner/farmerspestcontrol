@@ -1,0 +1,52 @@
+.paragraphs-item-landing-page-features {
+    h1,h2,h3 {
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    text-align: center;
+    .field--name-field-features-list {
+        margin-top: 30px;
+        font-size: 18px;
+        ul {
+            margin-top: -15px;
+        }
+        li {
+            margin-top: 15px;
+            text-align: left;
+            padding-left: 25px;
+            &:before {
+                content: $fa-var-check-circle;
+                font-size: 1em;
+                margin: 0;
+            }
+        }
+    }
+
+    .field--name-field-button {
+        margin-top: 30px;
+    }
+
+    @include breakpoint($tab) {
+        h2 {
+            font-size: 28px;
+        }
+        .field--name-field-features-list {
+            margin-top: 60px;
+            max-width: 1009px;
+            margin-left: auto;
+            margin-right: auto;
+            ul {
+                columns: 2;
+                li {
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,65 @@
+diff --git a/link.module b/link.module
+index 1e9d088..464eecb 100644
+--- a/link.module
++++ b/link.module
+@@ -8,6 +8,8 @@
+ define('LINK_EXTERNAL', 'external');
+ define('LINK_INTERNAL', 'internal');
+ define('LINK_FRONT', 'front');
++define('LINK_FRAGMENT', 'fragment');
++define('LINK_QUERY', 'query');
+ define('LINK_EMAIL', 'email');
+ define('LINK_NEWS', 'news');
+ define('LINK_DOMAINS', 'aero|arpa|asia|biz|build|com|cat|ceo|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|post|pro|tel|travel|mobi|local|xxx');
+@@ -511,10 +513,27 @@ function _link_sanitize(&$item, $delta, &$field, $instance, &$entity) {
+   if ($type == FALSE && $instance['settings']['validate_url'] === 0) {
+     $type = LINK_EXTERNAL;
+   }
++  elseif ($type == LINK_FRAGMENT || $type == LINK_QUERY) {
++    // If type is a fragment or query, then use the current URL.
++    $item['url'] = $_GET['q'] . $item['url'];
++  }
++
+   $url = link_cleanup_url($item['url']);
+   $url_parts = _link_parse_url($url);
+ 
+-  if (!empty($url_parts['url'])) {
++  if ($type === LINK_EXTERNAL) {
++    // Touch external links as little as possible because external sites can
++    // have very weird URL query parameters. Therefore we cannot use
++    // $url_parts.
++    if (drupal_validate_utf8($url)) {
++      $item['url'] = drupal_strip_dangerous_protocols($url);
++    }
++    else {
++      // Invalid UTF-8, so there is nothing we can do.
++      $item['url'] = '';
++    }
++  }
++  else {
+     $item['url'] = url($url_parts['url'],
+       array('query' => isset($url_parts['query']) ? $url_parts['query'] : NULL,
+       'fragment' => isset($url_parts['fragment']) ? $url_parts['fragment'] : NULL,
+@@ -528,6 +547,9 @@ function _link_sanitize(&$item, $delta, &$field, $instance, &$entity) {
+   if ($type == LINK_EMAIL) {
+     $display_url = str_replace('mailto:', '', $url);
+   }
++  elseif ($type === LINK_EXTERNAL) {
++    $display_url = $item['url'];
++  }
+   else {
+     $display_url = url($url_parts['url'],
+       array(
+@@ -1366,6 +1388,12 @@ function link_url_type($text) {
+   if (in_array('mailto', $allowed_protocols) && preg_match($email_pattern, $text)) {
+     return LINK_EMAIL;
+   }
++  if (strpos($text, '#') === 0) {
++    return LINK_FRAGMENT;
++  }
++  if (strpos($text, '?') === 0) {
++    return LINK_QUERY;
++  }
+   if (in_array('news', $allowed_protocols) && preg_match($news_pattern, $text)) {
+     return LINK_NEWS;
+   }

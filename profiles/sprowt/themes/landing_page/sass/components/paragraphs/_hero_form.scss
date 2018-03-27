@@ -1,0 +1,28 @@
+.paragraphs-item-paragraphs.hero-form {
+  padding: 30px;
+  .field--name-field-intro {
+      font-size: 19px;
+      font-weight: 600;
+      font-style: italic;
+    h2 {
+      font-style: normal;
+    }
+  }
+
+  .block {
+    text-align: left;
+  }
+
+  label {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @include breakpoint($tab) {
+    width: 350px;
+    h2 {
+      font-size: 30px;
+      font-weight: normal;
+    }
+  }
+}
