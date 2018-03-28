@@ -1,8 +1,17 @@
-.block--views-team-list {
-
-.node {
-    text-align: center;
+.block--views-team-list.block--grid {
+  .view-content{
+    justify-content: flex-start;
+    align-items: flex-start;
   }
+  .views-row{
+    @include flexbox;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .node {
+      text-align: center;
+    }
   .field--name-field-image {
     img {
       @extend %image-hover;
