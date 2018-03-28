@@ -152,7 +152,7 @@ dependencies[] = save_edit
 dependencies[] = breakpoints
 dependencies[] = webform_fivestar
 dependencies[] = multiple_selects
-
+dependencies[] = entityreference_filter
 
 
 ; Custom Modules
