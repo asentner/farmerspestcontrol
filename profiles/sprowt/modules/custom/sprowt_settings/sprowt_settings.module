@@ -29,6 +29,11 @@ function sprowt_settings_menu()
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+  $items['<phone_number_sms>'] = array(
+    'page callback' => 'drupal_not_found',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
     
     $items['node/uuid/%'] = array(
         'page callback' => '_sprowt_settings_node_uuid_redirect',
@@ -329,6 +334,22 @@ function _sprowt_settings_shortcode_replace($string)
     }
 
     return $string;
+}
+
+function _sprowt_settings_map_embed_link_to_iframe($link) {
+    if (preg_match('/.*google.*maps.*[\?|\&]mid=([^\&\"]+)/', $link, $l)) {
+        $mid = $l[1];
+        $link = '//www.google.com/maps/d/embed?mid=' . $mid;
+    }
+    
+    if (preg_match('/.*google.*\/maps\/place\/(.*)\/@([\d\.-]+),([\d\.-]+),/', $link, $l)) {
+        $key = 'AIzaSyAdbUlxjFZ56MzUB_E8I3x1nSn0mJ-YCKI';
+        $link = "https://www.google.com/maps/embed/v1/place?key=$key&q={$l[1]}&center={$l[2]},{$l[3]}";
+    }
+    
+    $html = '<div class="media_embed map-embed"><iframe src="' . $link . '"></iframe></div>';
+    
+    return $html;
 }
 
 //Grabs the current node service
@@ -657,6 +678,12 @@ function _sprowt_settings_link(array $variables) {
 
         $variables['path'] = "tel:+1$phone";
     }
+
+  if (in_array($variables['path'], array('<phone_number_sms>'))) {
+    $phone = sprowt_settings_get_phone_number('$1$2$3');
+    $variables['path'] = "sms:+1$phone";
+    $variables["options"]["external"]=true;
+  }
 
     // Call the original theme function for normal menu link.
     return theme('sprowt_settings_link_default', $variables);
@@ -1014,4 +1041,54 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
   }
   
   return $replacements;
+}
+
+
+/**
+ * Add color picker to hex field.
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function sprowt_settings_field_widget_color_field_plain_text_form_alter(&$element, &$form_state, $context)
+{
+    $path = drupal_get_path('profile', 'sprowt');
+    $element['rgb']['#attached']['css'][] = $path . "/css/spectrum.css";
+    $element['rgb']['#attached']['js'][] = $path . "/js/spectrum.js";
+    $element['rgb']['#attached']['js'][] = drupal_get_path('module', 'sprowt_settings') . "/js/sprowt_colorfield.js";
+    $element['rgb']['#attached']['css'][] = drupal_get_path('module', 'sprowt_settings') . "/css/sprowt_colorfield.css";
+
+    $id = drupal_html_id('colorfield-spectrum');
+
+    $spectrum_addition = array(
+        '#attributes' => array(
+            'class' => array('color'),
+            'data-spectrum' => $id,
+        ),
+        '#prefix' => '<div class="color-picker">',
+        '#suffix' => '<input type="text" id="'.$id.'" class="spectrum"></div>',
+    );
+    $element['rgb'] = array_merge($element['rgb'], $spectrum_addition);
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function sprowt_settings_preprocess_field(&$variables)
+{
+    $element = &$variables['element'];
+    $parent = &$element['#object'];
+
+    if($element['#field_type'] == 'link_field') {
+        foreach($variables['items'] as &$item) {
+            $url = $item['#element']['url'];
+            if(strpos($url, '#') !== false) {
+                $url_parts = explode('#', $url);
+                array_shift($url_parts);
+                $hash = '#' . implode('#', $url_parts);
+                if($hash == '##phone_number##') {
+                    $phone = sprowt_settings_get_phone_number('$1$2$3');
+                    $item['#element']['url'] = 'tel:+1' . $phone;
+                }
+            }
+        }
+    }
 }

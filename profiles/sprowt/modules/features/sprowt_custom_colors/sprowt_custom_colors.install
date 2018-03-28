@@ -1,0 +1,8 @@
+<?php
+
+function sprowt_custom_colors_install() {
+    db_update('system')
+        ->fields(array('weight' => 1))
+        ->condition('name', 'sprowt_custom_colors', '=')
+        ->execute();
+}

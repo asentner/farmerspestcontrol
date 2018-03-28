@@ -76,6 +76,10 @@ $actions = array(
     'addNodeDefaultImages' => "Updating Default Images..."
 );
 
+if(variable_get('sprowt_is_starter', false)) {
+    $actions['setUpSprowtStarter'] = 'Setting Up Sprowt Starter Specific Settings...';
+}
+
 $i = 0;
 
 foreach($actions as $method => $message) {

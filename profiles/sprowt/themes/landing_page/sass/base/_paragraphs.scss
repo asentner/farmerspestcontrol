@@ -1,0 +1,13 @@
+.entity-paragraphs-item {
+    padding: 30px 20px;
+    > .content {
+        max-width: $container;
+        margin: 0 auto;
+    }
+    .entity-paragraphs-item {
+        padding: 0;
+    }
+    @include breakpoint($tab) {
+        padding: 60px 30px;
+    }
+}

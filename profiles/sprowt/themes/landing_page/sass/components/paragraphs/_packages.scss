@@ -1,0 +1,95 @@
+.paragraphs-item-landing-page-packages {
+  overflow: hidden;
+  .field--name-field-lp-packages {
+    > .field__items {
+      @include flexbox;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-left: -30px;
+      margin-top: -30px;
+      > .field__item {
+        margin-left: 30px;
+        margin-top: 30px;
+        width: 100%;
+        @include breakpoint(330px) {
+          width: 328px;
+        }
+      }
+    }
+  }
+
+  .node {
+    text-align: center;
+    h3 {
+      margin: 0;
+    }
+    header {
+      padding: 16px 20px 25px;
+    }
+
+    img {
+      display: block;
+      width: 86px;
+      height: 86px;
+      border: solid 5px #ffffff;
+      border-radius: 100px;
+      margin: 0 auto;
+    }
+  }
+
+  .field--name-field-icon {
+    position: absolute;
+    top: -43px;
+    left: 0;
+    right: 0;
+  }
+
+  .field--name-field-display-title {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .field--name-field-starting-price {
+    padding: 16px 20px 52px;
+    font-weight: bold;
+    font-size: 44px;
+    .prefix {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    .suffix {
+      font-size: 18px;
+    }
+  }
+
+  .node__content {
+    padding: 50px 20px 15px;
+    position: relative;
+  }
+
+  .field--name-body {
+    font-size: 16px;
+    line-height: 1.5;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .button {
+    display: block;
+    width: 100%;
+  }
+
+  .field--name-field-block-link {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .field--name-field-initial-fee {
+    font-size: 14px;
+    font-style: italic;
+  }
+}

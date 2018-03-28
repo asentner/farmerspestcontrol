@@ -16,6 +16,7 @@ function sprowt_taxonomy_taxonomy_default_vocabularies() {
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => -9,
+      'entity_type' => 'taxonomy_vocabulary',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -39,6 +40,7 @@ function sprowt_taxonomy_taxonomy_default_vocabularies() {
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
+      'entity_type' => 'taxonomy_vocabulary',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -62,6 +64,7 @@ function sprowt_taxonomy_taxonomy_default_vocabularies() {
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
+      'entity_type' => 'taxonomy_vocabulary',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -85,6 +88,7 @@ function sprowt_taxonomy_taxonomy_default_vocabularies() {
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => -10,
+      'entity_type' => 'taxonomy_vocabulary',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -108,6 +112,7 @@ function sprowt_taxonomy_taxonomy_default_vocabularies() {
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => -8,
+      'entity_type' => 'taxonomy_vocabulary',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',

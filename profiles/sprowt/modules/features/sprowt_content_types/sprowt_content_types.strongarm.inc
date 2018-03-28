@@ -195,13 +195,6 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'diff_enable_revisions_page_node_landing_page';
-  $strongarm->value = 1;
-  $export['diff_enable_revisions_page_node_landing_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_localtarget';
   $strongarm->value = 1;
   $export['diff_enable_revisions_page_node_localtarget'] = $strongarm;
@@ -289,13 +282,6 @@ function sprowt_content_types_strongarm() {
   $strongarm->name = 'diff_show_preview_changes_node_faq';
   $strongarm->value = 1;
   $export['diff_show_preview_changes_node_faq'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'diff_show_preview_changes_node_landing_page';
-  $strongarm->value = 1;
-  $export['diff_show_preview_changes_node_landing_page'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -391,13 +377,6 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'diff_view_mode_preview_node_landing_page';
-  $strongarm->value = 'full';
-  $export['diff_view_mode_preview_node_landing_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'diff_view_mode_preview_node_localtarget';
   $strongarm->value = 'full';
   $export['diff_view_mode_preview_node_localtarget'] = $strongarm;
@@ -480,6 +459,14 @@ function sprowt_content_types_strongarm() {
         'label' => 'Tertiary Teaser',
         'custom settings' => 1,
       ),
+      'landing_page' => array(
+        'label' => 'Landing Page',
+        'custom settings' => 1,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'Landing Page (Compact)',
+        'custom settings' => 1,
+      ),
     ),
   );
   $export['entity_view_modes'] = $strongarm;
@@ -521,6 +508,12 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -586,6 +579,12 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => TRUE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -650,6 +649,12 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'modal' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -730,6 +735,12 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -796,6 +807,12 @@ function sprowt_content_types_strongarm() {
       'modal' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -819,69 +836,6 @@ function sprowt_content_types_strongarm() {
     ),
   );
   $export['field_bundle_settings_node__faq'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_node__landing_page';
-  $strongarm->value = array(
-    'view_modes' => array(
-      'alt_teaser' => array(
-        'custom_settings' => TRUE,
-      ),
-      'teaser' => array(
-        'custom_settings' => TRUE,
-      ),
-      'full' => array(
-        'custom_settings' => FALSE,
-      ),
-      'rss' => array(
-        'custom_settings' => FALSE,
-      ),
-      'search_index' => array(
-        'custom_settings' => FALSE,
-      ),
-      'search_result' => array(
-        'custom_settings' => FALSE,
-      ),
-      'diff_standard' => array(
-        'custom_settings' => FALSE,
-      ),
-      'token' => array(
-        'custom_settings' => FALSE,
-      ),
-      'secondary_teaser' => array(
-        'custom_settings' => TRUE,
-      ),
-      'tertiary_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
-      'quaternary_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
-    ),
-    'extra_fields' => array(
-      'form' => array(
-        'metatags' => array(
-          'weight' => '40',
-        ),
-        'title' => array(
-          'weight' => '43',
-        ),
-        'path' => array(
-          'weight' => '30',
-        ),
-        'rabbit_hole' => array(
-          'weight' => '0',
-        ),
-        'xmlsitemap' => array(
-          'weight' => '30',
-        ),
-      ),
-      'display' => array(),
-    ),
-  );
-  $export['field_bundle_settings_node__landing_page'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -920,6 +874,12 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -988,6 +948,12 @@ function sprowt_content_types_strongarm() {
       'modal' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1049,6 +1015,12 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -1114,6 +1086,12 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => TRUE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1177,6 +1155,12 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1238,6 +1222,12 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -1314,6 +1304,12 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1377,6 +1373,12 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => TRUE,
       ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1438,6 +1440,12 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'quaternary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -1503,6 +1511,12 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1566,6 +1580,12 @@ function sprowt_content_types_strongarm() {
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -1627,6 +1647,12 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => FALSE,
       ),
       'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -1708,13 +1734,6 @@ function sprowt_content_types_strongarm() {
   $strongarm->name = 'honeypot_form_faq_node_form';
   $strongarm->value = 0;
   $export['honeypot_form_faq_node_form'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'honeypot_form_landing_page_node_form';
-  $strongarm->value = 0;
-  $export['honeypot_form_landing_page_node_form'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1987,13 +2006,6 @@ example.org';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'linkchecker_scan_node_landing_page';
-  $strongarm->value = 1;
-  $export['linkchecker_scan_node_landing_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'linkchecker_scan_node_localtarget';
   $strongarm->value = 1;
   $export['linkchecker_scan_node_localtarget'] = $strongarm;
@@ -2084,15 +2096,6 @@ example.org';
     0 => 'main-menu',
   );
   $export['menu_options_faq'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'menu_options_landing_page';
-  $strongarm->value = array(
-    0 => 'main-menu',
-  );
-  $export['menu_options_landing_page'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -2240,13 +2243,6 @@ example.org';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_parent_landing_page';
-  $strongarm->value = 'main-menu:0';
-  $export['menu_parent_landing_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'menu_parent_localtarget';
   $strongarm->value = 'main-menu:0';
   $export['menu_parent_localtarget'] = $strongarm;
@@ -2380,13 +2376,6 @@ example.org';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'metatag_enable_node__landing_page';
-  $strongarm->value = 1;
-  $export['metatag_enable_node__landing_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_node__localtarget';
   $strongarm->value = 1;
   $export['metatag_enable_node__localtarget'] = $strongarm;
@@ -2510,17 +2499,6 @@ example.org';
     1 => 'promote',
   );
   $export['node_options_faq'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_landing_page';
-  $strongarm->value = array(
-    0 => 'status',
-    1 => 'promote',
-    2 => 'revision',
-  );
-  $export['node_options_landing_page'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -2677,13 +2655,6 @@ example.org';
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_landing_page';
-  $strongarm->value = '1';
-  $export['node_preview_landing_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_localtarget';
   $strongarm->value = '1';
   $export['node_preview_localtarget'] = $strongarm;
@@ -2799,13 +2770,6 @@ example.org';
   $strongarm->name = 'node_submitted_faq';
   $strongarm->value = 0;
   $export['node_submitted_faq'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_landing_page';
-  $strongarm->value = 0;
-  $export['node_submitted_landing_page'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -2946,13 +2910,6 @@ example.org';
   $strongarm->name = 'pathauto_node_faq_pattern';
   $strongarm->value = '';
   $export['pathauto_node_faq_pattern'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'pathauto_node_landing_page_pattern';
-  $strongarm->value = '';
-  $export['pathauto_node_landing_page_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -3232,16 +3189,6 @@ example.org';
     'priority' => '0.5',
   );
   $export['xmlsitemap_settings_node_faq'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'xmlsitemap_settings_node_landing_page';
-  $strongarm->value = array(
-    'status' => '1',
-    'priority' => '0.5',
-  );
-  $export['xmlsitemap_settings_node_landing_page'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

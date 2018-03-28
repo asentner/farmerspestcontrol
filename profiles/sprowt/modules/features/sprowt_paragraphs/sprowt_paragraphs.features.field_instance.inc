@@ -1252,6 +1252,185 @@ function sprowt_paragraphs_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'paragraphs_item-modal-field_content'.
+  $field_instances['paragraphs_item-modal-field_content'] = array(
+    'bundle' => 'modal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 0,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_content',
+    'label' => 'Content',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'select',
+      'allowed_bundles' => array(
+        'annotated_image' => -1,
+        'block_embed' => -1,
+        'body' => -1,
+        'colors' => -1,
+        'image_break' => -1,
+        'landing_page_features' => -1,
+        'landing_page_header_footer' => -1,
+        'linked_image' => -1,
+        'modal' => -1,
+        'paragraphs' => -1,
+        'table' => -1,
+        'table_cell' => -1,
+        'table_row' => -1,
+      ),
+      'bundle_weights' => array(
+        'annotated_image' => 2,
+        'block_embed' => 3,
+        'body' => 4,
+        'colors' => 5,
+        'image_break' => 6,
+        'landing_page_features' => 7,
+        'landing_page_header_footer' => 8,
+        'linked_image' => 9,
+        'modal' => 10,
+        'paragraphs' => 11,
+        'table' => 12,
+        'table_cell' => 13,
+        'table_row' => 14,
+      ),
+      'default_edit_mode' => 'preview',
+      'title' => 'Paragraph',
+      'title_multiple' => 'Paragraphs',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-modal-field_custom_class'.
+  $field_instances['paragraphs_item-modal-field_custom_class'] = array(
+    'bundle' => 'modal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_custom_class',
+    'label' => 'Custom Class',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'paragraphs_item-modal-field_label'.
+  $field_instances['paragraphs_item-modal-field_label'] = array(
+    'bundle' => 'modal',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'inline',
+        'module' => 'advanced_text_formatter',
+        'settings' => array(
+          'allowed_html' => array(
+            0 => 'a',
+            1 => 'b',
+            2 => 'br',
+            3 => 'dd',
+            4 => 'dl',
+            5 => 'dt',
+            6 => 'em',
+            7 => 'i',
+            8 => 'li',
+            9 => 'ol',
+            10 => 'p',
+            11 => 'strong',
+            12 => 'u',
+            13 => 'ul',
+          ),
+          'autop' => 0,
+          'ellipsis' => 1,
+          'filter' => 'input',
+          'format' => 'plain_text',
+          'token_replace' => 0,
+          'trim_length' => 600,
+          'use_summary' => 0,
+          'word_boundary' => 1,
+        ),
+        'type' => 'advanced_text',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_label',
+    'label' => 'Label',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'paragraphs_item-paragraphs-field_content'.
   $field_instances['paragraphs_item-paragraphs-field_content'] = array(
     'bundle' => 'paragraphs',

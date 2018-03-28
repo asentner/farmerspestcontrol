@@ -27,7 +27,7 @@ function sprowt_branding($form, &$form_state, &$install_state){
     //remove colors for now
     $form['new_theme']['#access'] = false;
     $form['new_theme_name']['#access'] = false;
-    $form['colors']['#access'] = false;
+    //$form['colors']['#access'] = false;
     
     
     return $form;

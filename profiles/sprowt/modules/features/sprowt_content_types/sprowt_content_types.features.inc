@@ -64,14 +64,6 @@ function sprowt_content_types_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
-    'landing_page' => array(
-      'name' => t('Landing page'),
-      'base' => 'node_content',
-      'description' => t('<em>Landing pages</em> are associated with a special offer, market, and service. They include a call tracking number.'),
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
     'localtarget' => array(
       'name' => t('LocalTarget'),
       'base' => 'node_content',
@@ -220,14 +212,6 @@ function sprowt_content_types_weight_features_default_settings() {
   );
 
   $settings['faqs'] = array(
-    'enabled' => 0,
-    'range' => 20,
-    'menu_weight' => 0,
-    'default' => 0,
-    'sync_translations' => 0,
-  );
-
-  $settings['landing_page'] = array(
     'enabled' => 0,
     'range' => 20,
     'menu_weight' => 0,

@@ -1,0 +1,17 @@
+.color-picker {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;}
+.color-picker .form-item {
+    margin: 0;
+    padding: 0; }
+.color-picker .form-text {
+    max-width: 200px; }
+.color-picker .sp-replacer {
+    margin-left: 15px;
+}

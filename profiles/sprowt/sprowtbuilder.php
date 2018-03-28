@@ -803,4 +803,56 @@ Class SprowtBuilder {
           node_save($node);
         }
     }
+
+    function setUpSprowtStarter() {
+        $branding = $this->data['branding'];
+        module_enable(array('sprowt_landing_page'));
+        _sprowt_landing_page_create_landing_pages();
+
+        $excludedNids = entity_get_id_by_uuid('node', array('e6e64b98-71d8-4eb3-9c9c-dc1c573c13cb','9512a22e-11e7-47f5-a63d-e8861401302a'));
+        $excludedNids = array_values($excludedNids);
+        
+        $landing_page_nids = db_query("
+            SELECT nid
+            FROM node
+            WHERE type = 'landing_page'
+        ")->fetchCol();
+        $nodes = node_load_multiple($landing_page_nids);
+
+        foreach($nodes as $node) {
+            $nids = _sprowt_landing_page_find_all_nids_used($node);
+            $excludedNids = array_merge($excludedNids, $nids);
+        }
+
+        $nids_to_be_disabled = db_query("
+            SELECT nid
+            FROM node
+            WHERE status = 1
+            AND nid NOT IN (:nids)
+        ", array(
+            ':nids' => $excludedNids
+        ))->fetchCol();
+
+        db_update('node')->fields(array('status' => 0))->condition('nid', $excludedNids, 'NOT IN')->execute();
+        variable_set('sprowt_starter_nids_disabled', $nids_to_be_disabled);
+
+        $homeUUID = variable_get('sprowt_starter_landing_page_uuid');
+
+        $homeNid = entity_get_id_by_uuid('node', array($homeUUID));
+        if(empty($homeNid)) {
+            $home = array_shift($nodes);
+            $homeNid = $home->nid;
+        }
+        else {
+            $homeNid = array_pop($homeNid);
+        }
+
+        variable_set('site_frontpage', "node/$homeNid");
+    
+        sprowt_custom_colors_set_colors(
+            !empty($branding['primary-color']) ? $branding['primary-color'] : null,
+            !empty($branding['secondary-color']) ? $branding['secondary-color'] : null,
+            !empty($branding['tertiary-color']) ? $branding['tertiary-color'] : null
+        );
+    }
 }

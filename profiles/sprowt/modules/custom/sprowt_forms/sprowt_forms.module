@@ -19,7 +19,7 @@ function sprowt_forms_menu() {
 }
 
 function sprowt_forms_form_alter(&$form, &$form_state, $form_id){
-    if (strpos($form_id, 'webform_') !== false) {
+    if (strpos($form_id, 'webform_client_form_') !== false) {
         $form['#submit'][] = '_onWebformSubmit';
     }
 }

@@ -1,0 +1,714 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Landing Page feature.
+ */
+
+include_once 'sprowt_landing_page.features.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function sprowt_landing_page_menu()
+{
+    $items = array();
+
+    $items['admin/config/sprowt/generate-landing-pages'] = array(
+        'title' => 'Generate Landing Pages',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_sprowt_landing_page_generate_landing_page_form'),
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => '_sprowt_landing_page_access_callback'
+    );
+    
+    $starter = variable_get('sprowt_is_starter');
+    if(!empty($starter)) {
+        $items['admin/config/sprowt/undo-starter'] = array(
+            'title' => 'Undo Sprowt Starter',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('_sprowt_landing_page_undo_starter_form'),
+            'type' => MENU_NORMAL_ITEM,
+            'access callback' => '_sprowt_landing_page_access_callback'
+        );
+    }
+
+    return $items;
+}
+
+function _sprowt_landing_page_access_callback() {
+    global $user;
+
+    $access = !empty($user->uid) && in_array('administrator', $user->roles);
+
+    $access = $access || user_access('create landing_page content');
+
+    return $access;
+}
+
+function _sprowt_landing_page_generate_landing_page_form() {
+    $form = array();
+    drupal_set_title('Generate Landing Pages');
+
+    $form['intro'] = array(
+        '#type' => 'markup',
+        '#markup' => '<p>This page allows you to generate four new landing page nodes prefilled with content in four different themes.</p>'
+    );
+    
+    sprowt_require_class('themebuilder');
+    $TB = new ThemeBuilder();
+    $TB->addColorFieldsToForm($form, 'These three colors will change the values used for the colors of the base landing pages. Leave blank if you want to use the default value(s).');
+    if($colors = variable_get('sprowt_landing_pages_color_form_colors', false)) {
+        foreach($colors as $name => $val) {
+            $form['colors'][$name]['#default_value'] = $val;
+        }
+    }
+    $form['actions'] = array();
+    $form['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Generate',
+        '#submit' => array('_sprowt_landing_page_generate_landing_page_form_submit')
+    );
+
+    $form['actions']['just_colors'] = array(
+        '#type' => 'submit',
+        '#value' => 'Just Change Colors',
+        '#submit' => array('_sprowt_landing_page_generate_landing_page_form_submit')
+    );
+    
+    
+    return $form;
+}
+
+function _sprowt_landing_page_generate_landing_page_form_color_change($form, &$form_state) {
+    $values = $form_state['values'];
+    sprowt_custom_colors_set_colors(
+        !empty($values['primary']) ? $values['primary'] : NULL,
+        !empty($values['secondary']) ? $values['secondary'] : NULL,
+        !empty($values['tertiary']) ? $values['tertiary'] : NULL
+    );
+    variable_set('sprowt_landing_pages_color_form_colors', [
+        'primary'   => !empty($values['primary']) ? $values['primary'] : NULL,
+        'secondary' => !empty($values['secondary']) ? $values['secondary'] : NULL,
+        'tertiary'  => !empty($values['tertiary']) ? $values['tertiary'] : NULL,
+    ]);
+    drupal_set_message('Colors Changed!');
+}
+
+function _sprowt_landing_page_generate_landing_page_form_submit($form, &$form_state) {
+    $values = $form_state['values'];
+    sprowt_custom_colors_set_colors(
+        !empty($values['primary']) ? $values['primary'] : null,
+        !empty($values['secondary']) ? $values['secondary'] : null,
+        !empty($values['tertiary']) ? $values['tertiary'] : null
+    );
+    variable_set('sprowt_landing_pages_color_form_colors', array(
+        'primary' => !empty($values['primary']) ? $values['primary'] : null,
+        'secondary' => !empty($values['secondary']) ? $values['secondary'] : null,
+        'tertiary' => !empty($values['tertiary']) ? $values['tertiary'] : null,
+    ));
+    _sprowt_landing_page_create_landing_pages();
+    drupal_set_message('Landing pages added!');
+}
+
+function _sprowt_landing_page_undo_starter_form() {
+    $form = array();
+    drupal_set_title('Undo Sprowt Starter');
+    
+    $form['intro'] = array(
+        '#type' => 'markup',
+        '#markup' => '<p>Click below to convert this site from a Sprowt Starter Site to a regaular sprowt site</p>
+        <p>This will publish all pages that were unpublished suring rollout and reset the homepage.</p>'
+    );
+    
+    $form['actions'] = array();
+    $form['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Undo',
+        '#submit' => array('_sprowt_landing_page_undo_starter_form_submit')
+    );
+    
+    return $form;
+}
+
+function _sprowt_landing_page_undo_starter_form_submit($form, &$form_state) {
+    $nids = variable_get('sprowt_starter_nids_disabled', array());
+    
+    if(!empty($nids)) {
+        db_update('node')
+            ->fields(array('status' => 1))
+            ->condition('nid', $nids, 'IN')
+            ->execute();
+    }
+    
+    $home = entity_get_id_by_uuid('node', array('3c0659bb-655d-415d-bb4e-822b9a4e4218'));
+    $home = array_pop($home);
+    variable_set('site_frontpage', "node/$home");
+    variable_set('sprowt_is_starter', false);
+    drupal_set_message('Sprowt Starter Converted to Regular Sprowt!');
+    menu_rebuild();
+    $form_state['redirect'] = '<front>';
+}
+
+/**
+ * Implements hook_entity_view_mode_info().
+ */
+function sprowt_landing_page_entity_view_mode_info()
+{
+    $view_modes = array(
+        'node' => array(
+            'landing_page' => array(
+                'label' => t('Landing Page')
+            ),
+            'landing_page_compact' => array(
+                'label' => t('Landing Page (Compact)')
+            ),
+        )
+    );
+
+    return $view_modes;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_landing_page_theme($existing, $type, $theme, $path) {
+    return array(
+        'field__field_features_list' => array (
+            'template' => 'field--field-features-list',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+        'field__field_display_title__landing_page_hero' => array (
+            'template' => 'field--field-display-title--landing-page-hero',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+        'field__field_display_title__landing_page_special_offer' => array (
+            'template' => 'field--field-display-title--landing-page-special-offer',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+        'paragraphs_item__landing_page_hero' => array (
+            'template' => 'paragraphs-item--landing-page-hero',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
+    );
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_landing_page_preprocess_paragraphs_item(&$variables)
+{
+    $paragraphs_item = $variables['paragraphs_item'];
+    if($paragraphs_item->bundle == 'landing_page_header_footer') {
+        $p = entity_metadata_wrapper('paragraphs_item', $paragraphs_item);
+
+        if(empty($variables['content']['field_landing_page_logo'])) {
+            $theme_default = variable_get('theme_default');
+            $logo = theme_get_setting('logo', $theme_default);
+            $site_name = variable_get('site_name');
+            $paragraphs_item->field_landing_page_logo[LANGUAGE_NONE][0] = array(
+                'uri' => $logo,
+                'alt' => $site_name,
+                'title' => $site_name
+            );
+
+            $variables['content']['field_landing_page_logo'] = field_view_field('paragraphs_item', $paragraphs_item, 'field_landing_page_logo', $variables['view_mode']);
+        }
+    }
+
+    if($paragraphs_item->bundle == 'landing_page_benefits') {
+        $style = field_get_items('paragraphs_item', $paragraphs_item, 'field_benefit_style');
+        if(!empty($style)) {
+            $style = $style[0]['value'];
+            $variables['classes_array'][] = "benefit-style--" . $style;
+        }
+
+    }
+    
+    if($paragraphs_item->bundle == 'landing_page_areas_we_service') {
+        if(!empty($variables['field_map_code'])) {
+            hide($variables['content']['field_image']);
+        }
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_landing_page_preprocess_field(&$variables)
+{
+    $element = $variables['element'];
+    $parent = $variables['element']['#object'];
+    if($variables['element']['#field_name'] == 'field_embedded_testimonial') {
+        $items = &$variables['items'];
+        $key = rand(0, (count($items) - 1));
+        $items = array(
+            $key => $items[$key]
+        );
+    }
+    
+    if($variables['element']['#field_name'] == 'field_market') {
+        if(!empty($parent->bundle) && $parent->bundle == 'landing_page_areas_we_service'){
+            $items = &$variables['items'];
+            foreach($items as $delta => &$item) {
+                $term = $variables['element']['#items'][$delta]['taxonomy_term'];
+                $item['#weight'] = $term->weight;
+            }
+            uasort($items, function($a,$b) {
+                if($a['#weight'] == $b['#weight']) {
+                    return 0;
+                }
+                
+                return $a['#weight'] > $b['#weight'] ? 1 : -1;
+            });
+        }
+    }
+
+    if($element['#field_type'] == 'text' && $element['#bundle'] == 'landing_page_special_offer') {
+        foreach($variables['items'] as &$item) {
+            $item['#markup'] = str_replace('$', '<span class="dollar">$</span>', $item['#markup']);
+        }
+    }
+}
+
+function _sprowt_landing_page_create_landing_pages() {
+    require_once DRUPAL_ROOT . '/includes/utility.inc';
+    $file = drupal_get_path('module', 'sprowt_landing_page') . '/landing_pages.export';
+    $export = file_get_contents($file);
+    $existing = variable_get('node_export_existing', 'new');
+    $array = [];
+    eval('$array = ' . $export . ';');
+    _sprowt_landing_page_import_color_terms();
+    _sprowt_landing_page_get_term_maps(true);
+    foreach($array as &$obj) {
+        variable_set('node_export_existing', 'new');
+        _sprowt_landing_page_convert_color_field_tids($obj);
+        _sprowt_landing_page_convert_entity_refrence_fields($obj);
+        _sprowt_landing_page_convert_market_service_refrence_fields($obj);
+        variable_set('node_export_existing', 'revision');
+        _sprowt_landing_page_convert_blockreference_fields($obj);
+    }
+    $newExport = drupal_var_export($array);
+
+    variable_set('node_export_existing', 'new');
+    node_export_import($newExport);
+    variable_set('node_export_existing', $existing);
+}
+
+function _sprowt_landing_page_find_all_nids_used($node) {
+    paragraphs_export_extract_paragraphs($node, $node, 'node');
+    field_collection_export_extract_field_collection($node, $node, 'node');
+    $nids = &drupal_static('_sprowt_landing_page_find_all_nids_used');
+    $nids = array(
+        $node->nid
+    );
+    _sprowt_landing_page_loop_through_export_for_field($node, '', function(&$array, $field_name){
+        $nids = &drupal_static('_sprowt_landing_page_find_all_nids_used');
+        $efFields = _sprowt_landing_page_get_entity_refrence_field_names();
+        if(in_array($field_name, $efFields)) {
+            foreach($array as $lang => $items) {
+                foreach($items as $item) {
+                    $nids[] = $item['target_id'];
+                }
+            }
+        }
+    });
+
+    return $nids;
+}
+
+function _sprowt_landing_page_loop_through_export_for_field(&$var, $field_name = '', $function){
+    if(is_object($var)) {
+        $array = json_decode(json_encode($var), true);
+        foreach($array as $prop => $value) {
+            _sprowt_landing_page_loop_through_export_for_field($var->{$prop}, $prop, $function);
+        }
+
+    }
+
+    $array = &$var;
+
+    if($field_name == 'paragraph_fields' || $field_name == 'fc_fields') {
+        if(!empty($array) && is_array($array)) {
+            foreach ($array as $field_name => &$fields) {
+                if (!empty($fields) && is_array($fields)) {
+                    foreach ($fields as $lang => &$items) {
+                        _sprowt_landing_page_loop_through_export_for_field($items, '', $function);
+                    }
+                }
+            }
+        }
+    }
+
+    if(strpos($field_name, 'field_') === 0) {
+        $function($array, $field_name);
+    }
+
+    if(is_array($array)) {
+        foreach($array as $key => &$value) {
+            _sprowt_landing_page_loop_through_export_for_field($value, $key, $function);
+        }
+    }
+
+    return $array;
+}
+
+function _sprowt_landing_page_convert_market_service_refrence_fields(&$var, $field_name = '') {
+    return _sprowt_landing_page_loop_through_export_for_field($var, $field_name, function(&$array, $field_name) {
+        $mFields = array(
+            'field_market'
+        );
+        if(in_array($field_name, $mFields)) {
+            $vocab = taxonomy_vocabulary_machine_name_load('markets');
+            $tree = taxonomy_get_tree($vocab->vid);
+            $market_tids = array();
+            foreach($tree as $term) {
+                $market_tids[] = $term->tid;
+            }
+            foreach($array as $lang => &$items) {
+                $new_items = array();
+                foreach ($market_tids as $tid) {
+                    $new_items[] = array('tid' => $tid);
+                }
+                $array[$lang] = $new_items;
+            }
+        }
+
+        $sFields = array(
+            'field_service',
+            'field_services'
+        );
+        if(in_array($field_name, $sFields)) {
+            //not handling service fields for now
+        }
+    });
+}
+
+function _sprowt_landing_page_convert_blockreference_fields(&$var, $field_name = '') {
+    return _sprowt_landing_page_loop_through_export_for_field($var, $field_name, function(&$array, $field_name) {
+        $efFields = array(
+            'field_block_reference'
+        );
+        $maps = _sprowt_landing_page_get_node_maps();
+        if (in_array($field_name, $efFields)) {
+            foreach ($array as $lang => &$items) {
+                foreach ($items as $key => &$item) {
+                    if(empty($item['uuid'])) {
+                        $modDelta = $item['moddelta'];
+                        if (strpos($modDelta, 'webform:client-block-') !== false) {
+                            $nid = str_replace('webform:client-block-', '', $modDelta);
+                            $uuid = $maps['old'][$nid];
+                            if (!empty($maps['new'][$uuid])) {
+                                $item['moddelta'] = 'webform:client-block-' . $maps['new'][$uuid];
+                                $item['uuid'] = $uuid;
+                                _sprowt_landing_page_update_webform_block_settings($uuid);
+                            }
+                            else {
+                                $newNid = _sprowt_landing_pages_add_default_node($uuid);
+                                $maps = _sprowt_landing_page_get_node_maps(true);
+                                if (empty($newNid)) {
+                                    unset($items[$key]);
+                                }
+                                else {
+                                    $item['moddelta'] = 'webform:client-block-' . $newNid;
+                                    $item['uuid'] = $uuid;
+                                    _sprowt_landing_page_update_webform_block_settings($uuid);
+                                }
+                            }
+                        }
+                    }
+                }
+                $items = array_values($items);
+            }
+        }
+    });
+}
+
+function _sprowt_landing_page_update_webform_block_settings($uuid) {
+    $path = drupal_get_path('module', 'sprowt_landing_page');
+    $file = $path . '/landing_page_block_export.json';
+    $json = file_get_contents($file);
+    $block_export = json_decode($json, true);
+
+    $maps = _sprowt_landing_page_get_node_maps();
+    $oldNid = array_search($uuid, $maps['old']);
+    $newNid = $maps['new'][$uuid];
+
+    foreach($block_export['block'] as $block) {
+        if($block['module'] == 'webform') {
+            if($block['delta'] == 'client-block-' . $oldNid) {
+                $settings = $block;
+                unset($settings['bid']);
+                unset($settings['theme']);
+                unset($settings['delta']);
+                unset($settings['module']);
+                db_update('block')
+                    ->fields($settings)
+                    ->condition('module', 'webform')
+                    ->condition('delta', 'client-block-' . $newNid)
+                    ->execute();
+            }
+        }
+    }
+
+}
+
+function _sprowt_landing_page_convert_entity_refrence_fields(&$var, $field_name = '') {
+    return _sprowt_landing_page_loop_through_export_for_field($var, $field_name, function(&$array, $field_name) {
+        $efFields = _sprowt_landing_page_get_entity_refrence_field_names();
+        $maps = _sprowt_landing_page_get_node_maps();
+        if(in_array($field_name, $efFields)) {
+            foreach($array as $lang => &$items) {
+                foreach($items as $key => &$item) {
+                    if(empty($item['uuid'])) {
+                        $nid = $item['target_id'];
+                        if($nid == 99) {
+                            $test = true;
+                        }
+                        $uuid = $maps['old'][$nid];
+                        if (!empty($maps['new'][$uuid])) {
+                            $item['target_id'] = $maps['new'][$uuid];
+                            $item['uuid'] = $uuid;
+                        }
+                        else {
+                            $item['target_id'] = _sprowt_landing_pages_add_default_node($uuid);
+                            $item['uuid'] = $uuid;
+                            $maps = _sprowt_landing_page_get_node_maps(true);
+                            if (empty($item['target_id'])) {
+                                unset($items[$key]);
+                            }
+                        }
+                    }
+                }
+                $items = array_values($items);
+            }
+        }
+    });
+}
+
+function _sprowt_landing_pages_add_default_node($uuid) {
+    $path = drupal_get_path('module', 'sprowt_landing_page');
+    $file = $path . '/defaults.json';
+    $json = file_get_contents($file);
+    
+    $exportedNodes = json_decode($json, true);
+    foreach($exportedNodes as $ex) {
+        if($ex['uuid'] == $uuid) {
+            node_export_import(json_encode(array($ex)));
+            
+            $node = entity_uuid_load('node', array($uuid));
+            $node = array_pop($node);
+            return $node->nid;
+        }
+    }
+    
+    return null;
+}
+
+function _sprowt_landing_page_get_entity_refrence_field_names($reset = false) {
+    $fields = &drupal_static(__FUNCTION__);
+    if(!isset($fields) || $reset) {
+        $fields = db_query("
+            SELECT field_name
+            FROM field_config
+            WHERE type = 'entityreference'
+        ")->fetchCol();
+    }
+    
+    return $fields;
+}
+
+function _sprowt_landing_page_get_node_maps($reset = false) {
+    $map = &drupal_static(__FUNCTION__);
+    if(!isset($map) || $reset) {
+        $path = drupal_get_path('module', 'sprowt_landing_page');
+        $file = $path . '/node_map.json';
+        $json = file_get_contents($file);
+        $old_map = json_decode($json, true);
+        
+        $new_map = db_query("
+            SELECT uuid, nid
+            FROM node
+        ")->fetchAllKeyed();
+        
+        $map = array(
+            'old' => $old_map,
+            'new' => $new_map
+        );
+    }
+    
+    return $map;
+}
+
+function _sprowt_landing_page_convert_color_field_tids(&$var, $field_name = '') {
+    return _sprowt_landing_page_loop_through_export_for_field($var, $field_name, function(&$array, $field_name) {
+        $color_fields = _sprowt_landing_page_get_color_field_names();
+        if(in_array($field_name, $color_fields)) {
+            $map = _sprowt_landing_page_get_term_maps();
+            foreach ($array as $lang => &$items) {
+                foreach ($items as &$item) {
+                    if(empty($item['uuid'])) {
+                        $tid = $item['tid'];
+                        $uuid = $map['old'][$tid];
+                        $item['tid'] = $map['new'][$uuid];
+                        $item['uuid'] = $uuid;
+                    }
+                }
+            }
+        }
+    });
+}
+
+function _sprowt_landing_page_get_term_maps($reset = false){
+    $map = &drupal_static(__FUNCTION__);
+    if(!isset($map) || $reset) {
+        $path = drupal_get_path('module', 'sprowt_landing_page');
+        $file = $path . '/colors.json';
+        $json = file_get_contents($file);
+        $old_map = array();
+        $treeArray = json_decode($json, true);
+        foreach($treeArray as $array) {
+            $term = (object) $array;
+            $old_map[$term->tid] = $term->uuid;
+        }
+        $vocab = taxonomy_vocabulary_machine_name_load('colors');
+        $tree = taxonomy_get_tree($vocab->vid, 0, null, true);
+        $new_map = array();
+        foreach($tree as $term) {
+            $new_map[$term->uuid] = $term->tid;
+        }
+        $map = array(
+            'old' => $old_map,
+            'new' => $new_map
+        );
+    }
+    
+    return $map;
+}
+
+function _sprowt_landing_page_get_color_field_names($reset = false) {
+    $return = &drupal_static(__FUNCTION__);
+    if(!isset($return) || $reset) {
+        $fields = db_query("
+      SELECT field_name
+      FROM field_config
+      WHERE type = 'taxonomy_term_reference'
+    ")->fetchCol();
+        
+        $return = [];
+        foreach ($fields as $field) {
+            $info = field_info_field($field);
+            foreach ($info['settings']['allowed_values'] as $av) {
+                if ($av['vocabulary'] == 'colors') {
+                    $return[] = $field;
+                }
+            }
+        }
+    }
+    
+    return $return;
+}
+
+function _sprowt_landing_page_export_color_terms() {
+    $path = drupal_get_path('module', 'sprowt_landing_page');
+    $file = $path . '/colors.json';
+    $vocab = taxonomy_vocabulary_machine_name_load('colors');
+    $tree = taxonomy_get_tree($vocab->vid, 0, null, true);
+    $json = json_encode($tree);
+    file_put_contents($file, $json);
+}
+
+function _sprowt_landing_page_export_node_map() {
+    $path = drupal_get_path('module', 'sprowt_landing_page');
+    $file = $path . '/node_map.json';
+    
+    $node_map = db_query("
+        SELECT nid, uuid
+        FROM node
+    ")->fetchAllKeyed();
+    $json = json_encode($node_map);
+    file_put_contents($file, $json);
+}
+
+function _sprowt_landing_page_generate_export_files() {
+    require_once drupal_get_path('profile', 'sprowt') . '/includes/blockbuilder.php';
+    $BB = new BlockBuilder();
+
+    $path = drupal_get_path('module', 'sprowt_landing_page');
+    _sprowt_landing_page_export_color_terms();
+    _sprowt_landing_page_export_node_map();
+    $BB->exportToFile('landing_page', $path . '/landing_page_block_export.json');
+
+    $default_types = array(
+        'testimonial',
+        'benefit',
+        'package',
+        'webform'
+    );
+
+    $default_nids = db_query("
+        SELECT nid
+        FROM node
+        WHERE type in (:types)
+    ", array(
+        ':types' => $default_types
+    ))->fetchCol();
+
+    $result = node_export($default_nids, 'json');
+    if($result['success']) {
+        $file = $path . '/defaults.json';
+        file_put_contents($file, $result['output']);
+    }
+
+    $landing_page_nids = db_query("
+        SELECT nid
+        FROM node
+        WHERE type in ('landing_page')
+    ")->fetchCol();
+    $result = node_export($landing_page_nids, 'drupal');
+    if($result['success']) {
+        $file = $path . '/landing_pages.export';
+        file_put_contents($file, $result['output']);
+    }
+
+
+}
+
+function _sprowt_landing_page_import_color_terms($file = null, $override = false) {
+    if(empty($file)) {
+        $path = drupal_get_path('module', 'sprowt_landing_page');
+        $file = $path . '/colors.json';
+    }
+    $vocab = taxonomy_vocabulary_machine_name_load('colors');
+    $json = file_get_contents($file);
+    
+    $treeArray = json_decode($json, true);
+    $unset = array(
+        'tid',
+        'vid',
+        'html_unique_id',
+    );
+    foreach($treeArray as $array) {
+        $term = (object) $array;
+        foreach($unset as $prop) {
+            if(!empty($term->{$prop})) {
+                unset($term->{$prop});
+            }
+        }
+        $term->vid = $vocab->vid;
+        $tidTerm = entity_uuid_load('taxonomy_term', array($term->uuid));
+        if(empty($tidTerm)) {
+            taxonomy_term_save($term);
+        }
+        elseif($override) {
+            $tidTerm = array_pop($tidTerm);
+            $term->tid = $tidTerm->tid;
+            taxonomy_term_save($term);
+        }
+    }
+    
+    return _sprowt_landing_page_get_term_maps(true);
+}

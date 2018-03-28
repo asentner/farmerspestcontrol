@@ -168,44 +168,6 @@ function sprowt_content_types_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_content|node|landing_page|form';
-  $field_group->group_name = 'group_content';
-  $field_group->entity_type = 'node';
-  $field_group->bundle = 'landing_page';
-  $field_group->mode = 'form';
-  $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Content',
-    'weight' => '0',
-    'children' => array(
-      0 => 'body',
-      1 => 'field_call_out',
-      2 => 'field_image',
-      3 => 'field_market',
-      4 => 'field_offer',
-      5 => 'field_phone_number',
-      6 => 'field_seo_title',
-      7 => 'field_service',
-      8 => 'field_service_description',
-      9 => 'field_special_offer',
-      10 => 'field_content_edited',
-      11 => 'title',
-    ),
-    'format_type' => 'tab',
-    'format_settings' => array(
-      'formatter' => 'closed',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-content field-group-tab',
-        'required_fields' => 1,
-      ),
-    ),
-  );
-  $field_groups['group_content|node|landing_page|form'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
   $field_group->identifier = 'group_content|node|localtarget|form';
   $field_group->group_name = 'group_content';
   $field_group->entity_type = 'node';

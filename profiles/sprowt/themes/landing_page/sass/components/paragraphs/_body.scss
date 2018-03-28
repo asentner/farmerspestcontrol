@@ -1,0 +1,8 @@
+.paragraphs-item-body {
+  > .content {
+    max-width: 840px;
+  }
+  @include breakpoint($tab) {
+    padding: 60px 30px 70px;
+  }
+}

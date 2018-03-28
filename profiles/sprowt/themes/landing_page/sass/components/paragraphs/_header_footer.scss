@@ -1,0 +1,48 @@
+.paragraphs-item-landing-page-header-footer {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 19px;
+  a {
+    font-weight: bold;
+  }
+
+  a > img {
+    @extend %image-hover;
+  }
+
+  .field--name-field-landing-page-logo {
+    margin-bottom: 20px;
+  }
+}
+
+@include breakpoint($tab) {
+  .paragraphs-item-landing-page-header-footer {
+    padding: 36px 30px;
+    font-size: 26px;
+    .field--name-field-landing-page-logo {
+      margin-bottom: 30px;
+    }
+  }
+
+  .l-header .paragraphs-item-landing-page-header-footer {
+    text-align: left;
+    .content {
+      @include flexbox;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+    .field--name-field-landing-page-logo {
+      margin-bottom: 0;
+    }
+
+    .field--name-field-cta-text {
+      text-align: right;
+    }
+  }
+
+  .l-footer .paragraphs-item-landing-page-header-footer {
+    padding: 60px 30px 130px;
+  }
+}

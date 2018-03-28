@@ -1,0 +1,131 @@
+%benefits-compact {
+  padding: 20px;
+  text-align: center;
+  .field--name-field-image,
+  .field--name-field-icon {
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    height: 63px;
+    width: 63px;
+    min-width: 60px;
+    overflow: hidden;
+    .field__item {
+      @include flexbox;
+    }
+    a {
+      @extend %image-hover;
+      height: 100%;
+      width: 100%;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .node__title {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+  @include breakpoint($tab) {
+    padding: 20px 30px;
+    text-align: left;
+    .node {
+      @include flexbox;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .field--name-field-image,
+    .field--name-field-icon {
+      margin: 0;
+    }
+    .node__content {
+      margin-left: 20px;
+    }
+    .node__title {
+      font-size: 24px;
+    }
+    .field--name-field-embedded-benefits {
+      > .field__items {
+        justify-content: center;
+        max-width: 1150px;
+        > .field__item {
+          width: auto;
+          + .field__item {
+            margin-left: percentage(60/1150);
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    .block__title {
+      font-size: 1.95em;
+    }
+  }
+}
+
+%benefits {
+  text-align: center;
+  .node__title {
+    font-size: 1.325em;
+    font-weight: 600;
+  }
+  .field--name-field-image,
+  .field--name-field-icon {
+    margin-bottom: 20px;
+    text-align: center;
+    a {
+      display: inline-block;
+    }
+    img {
+      border-radius: 50%;
+      border: 2px solid white;
+      display: inline-block;
+      margin: 0 auto;
+    }
+    a > img {
+      @extend %image-hover;
+    }
+  }
+
+  .field--name-field-embedded-benefits {
+    .field__item {
+      + .field__item {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  @include breakpoint($tab) {
+    padding: 50px 30px 65px;
+    .field--name-field-embedded-benefits {
+      > .field__items {
+        @include flexbox;
+        justify-content: space-between;
+        max-width: 1070px;
+        margin: 0 auto;
+        > div {
+          width: percentage(301/1070);
+        }
+      }
+      .field__item {
+        + .field__item {
+          margin-top: 0;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+.paragraphs-item-landing-page-benefits {
+  @extend %benefits;
+  &.benefit-style--compact {
+    @extend %benefits-compact;
+  }
+  @include breakpoint($tab) {
+
+  }
+}

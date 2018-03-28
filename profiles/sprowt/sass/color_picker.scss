@@ -1,0 +1,13 @@
+.color-picker {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    .form-item {
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-text {
+        max-width: 200px;
+    }
+}
