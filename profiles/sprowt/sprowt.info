@@ -153,6 +153,7 @@ dependencies[] = breakpoints
 dependencies[] = webform_fivestar
 dependencies[] = multiple_selects
 dependencies[] = entityreference_filter
+dependencies[] = text_summary_options
 
 
 ; Custom Modules
