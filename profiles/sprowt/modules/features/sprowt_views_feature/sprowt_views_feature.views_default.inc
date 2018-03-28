@@ -882,7 +882,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field: Display title */
+  /* Field: Content: Display title */
   $handler->display->display_options['fields']['field_display_title']['id'] = 'field_display_title';
   $handler->display->display_options['fields']['field_display_title']['table'] = 'field_data_field_display_title';
   $handler->display->display_options['fields']['field_display_title']['field'] = 'field_display_title';
@@ -1051,7 +1051,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field: Display title */
+  /* Field: Content: Display title */
   $handler->display->display_options['fields']['field_display_title']['id'] = 'field_display_title';
   $handler->display->display_options['fields']['field_display_title']['table'] = 'field_data_field_display_title';
   $handler->display->display_options['fields']['field_display_title']['field'] = 'field_display_title';
@@ -1348,6 +1348,26 @@ function sprowt_views_feature_views_default_views() {
 
   /* Display: Related packages (services list) */
   $handler = $view->new_display('block', 'Related packages (services list)', 'services');
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Services (field_services) */
+  $handler->display->display_options['relationships']['field_services_tid']['id'] = 'field_services_tid';
+  $handler->display->display_options['relationships']['field_services_tid']['table'] = 'field_data_field_services';
+  $handler->display->display_options['relationships']['field_services_tid']['field'] = 'field_services_tid';
+  /* Relationship: Taxonomy term: Content using Service */
+  $handler->display->display_options['relationships']['reverse_field_service_node']['id'] = 'reverse_field_service_node';
+  $handler->display->display_options['relationships']['reverse_field_service_node']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['relationships']['reverse_field_service_node']['field'] = 'reverse_field_service_node';
+  $handler->display->display_options['relationships']['reverse_field_service_node']['relationship'] = 'field_services_tid';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['block_description'] = 'Related packages (Services)';
 
   /* Display: Related packages (services sidebar) */
@@ -1440,7 +1460,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['bid']['id'] = 'bid';
   $handler->display->display_options['fields']['bid']['table'] = 'bean';
   $handler->display->display_options['fields']['bid']['field'] = 'bid';
-  /* Contextual filter: Block: LTP Reference (field_ltp_reference) */
+  /* Contextual filter: Broken/missing handler */
   $handler->display->display_options['arguments']['field_ltp_reference_target_id']['id'] = 'field_ltp_reference_target_id';
   $handler->display->display_options['arguments']['field_ltp_reference_target_id']['table'] = 'field_data_field_ltp_reference';
   $handler->display->display_options['arguments']['field_ltp_reference_target_id']['field'] = 'field_ltp_reference_target_id';
@@ -1484,7 +1504,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'default';
-  /* Relationship: Entity Reference: Referenced Entity */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['id'] = 'field_faq_service_reference_target_id';
   $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['table'] = 'field_data_field_faq_service_reference';
   $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['field'] = 'field_faq_service_reference_target_id';
@@ -1492,7 +1512,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['bid']['id'] = 'bid';
   $handler->display->display_options['fields']['bid']['table'] = 'bean';
   $handler->display->display_options['fields']['bid']['field'] = 'bid';
-  /* Contextual filter: Block: Service reference (field_faq_service_reference) */
+  /* Contextual filter: Broken/missing handler */
   $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['id'] = 'field_faq_service_reference_target_id';
   $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['table'] = 'field_data_field_faq_service_reference';
   $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['field'] = 'field_faq_service_reference_target_id';
