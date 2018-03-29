@@ -15,7 +15,7 @@ function sprowt_install_tasks($install_state) {
         'sprowt_setup_tables' => array(),
         'sprowt_configure' => array(),
         'sprowt_module_preinstall' => array(),
-        'sprowt_install_features' => array(),
+        'sprowt_module_postinstall' => array(),
         'sprowt_is_starter' => array(
             'display_name' => t('Is This a Sprowt Starter Roll Out?'),
             'type' => 'form',
