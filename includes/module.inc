@@ -446,6 +446,9 @@ function module_enable($module_list, $enable_dependencies = TRUE) {
       ':type' => 'module',
       ':name' => $module))
       ->fetchObject();
+    watchdog('Sprowt Test', 'Attempting to install module: %module', array(
+        '%module' => $module
+    ));
     if ($existing->status == 0) {
       // Load the module's code.
       drupal_load('module', $module);
