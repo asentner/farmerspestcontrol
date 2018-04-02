@@ -66,7 +66,7 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
         'sprowt_module_preinstall', //sprowt
         'install_profile_modules',
         'install_import_locales',
-        'sprowt_install_features', //sprowt
+        'sprowt_module_postinstall', //sprowt
         'install_configure_form',
         'sprowt_configure',
     );
@@ -325,16 +325,15 @@ function sprowt_module_preinstall() {
  * Function for installing features and other modules
  */
 
-function sprowt_install_features(){
-
-
+function sprowt_module_postinstall(){
 
     variable_set('features_rebuild_on_module_install', true);
 
     //disabling comment module
 
     module_disable(array('comment'));
-
+    //hopefully this fixes the weird issues we get on a fresh Pantheon rollout
+    drupal_flush_all_caches();
 }
 
 

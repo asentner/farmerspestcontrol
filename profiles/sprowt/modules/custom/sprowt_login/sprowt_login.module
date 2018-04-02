@@ -171,7 +171,7 @@ function sprowt_login_page_build(&$page) {
         );
 
         $navbar = theme('sprowt_dashboard_navbar', array(
-            'logo' => '/' . $path . '/images/inline-logo.png',
+            'logo' => '/' . $path . '/images/coalmarch-logo.svg',
             'nav_links' => array(
                 array(
                     'title' => 'Administer Site',

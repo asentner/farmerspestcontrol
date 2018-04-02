@@ -2506,6 +2506,10 @@
     font-family: "Montserrat", "Helvetica", "Arial", sans-serif; }
     #sprowt-dashboard-nav *.fa {
       font-family: FontAwesome; }
+  #sprowt-dashboard-nav .logo svg {
+    width: 100%;
+    height: auto;
+    max-width: 227px; }
   #sprowt-dashboard-nav .interior {
     max-width: 1210px;
     height: 110px;

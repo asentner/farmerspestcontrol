@@ -1,7 +1,17 @@
+<?php
+$logo_parts = explode('.', basename($logo));
+$ext = array_pop($logo_parts);
+if($ext == 'svg') {
+    $logo_html = file_get_contents(DRUPAL_ROOT . $logo);
+}
+else {
+    $logo_html = '<img src="'.$logo.'" alt="Sprowt">';
+}
+?>
 <div id="sprowt-dashboard-nav">
     <div class="interior">
         <div class="logo">
-            <img src="<?php print $logo; ?>" alt="Sprowt">
+            <?php print $logo_html; ?>
         </div>
         <?php if(!empty($nav_links)): ?>
 

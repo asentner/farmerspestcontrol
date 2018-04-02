@@ -25,6 +25,14 @@ $montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
     }
   }
 
+  .logo {
+    svg {
+      width: 100%;
+      height: auto;
+      max-width: 227px;
+    }
+  }
+
   .interior {
     max-width: 1210px;
     height: 110px;
