@@ -334,9 +334,7 @@ function sprowt_module_postinstall(){
     module_disable(array('comment'));
 
     //hopefully this fixes the weird issues we get on a fresh Pantheon rollout
-    if(!module_exists('sprowt')) {
-        module_enable(array('sprowt'));
-    }
+    variable_set('install_profile', 'sprowt');
     system_list_reset();
     drupal_flush_all_caches();
 }
