@@ -332,7 +332,9 @@ function sprowt_module_postinstall(){
     //disabling comment module
 
     module_disable(array('comment'));
+
     //hopefully this fixes the weird issues we get on a fresh Pantheon rollout
+    system_list_reset();
     drupal_flush_all_caches();
 }
 
