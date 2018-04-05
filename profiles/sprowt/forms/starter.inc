@@ -24,11 +24,15 @@ function sprowt_is_starter($form, &$form_state, &$install_state) {
 }
 
 function _sprowt_is_starter_yes(&$form, &$form_state) {
-    variable_set('sprowt_is_starter', true);
+    _sprowt_save_to_table('starter', array(
+        'is_starter' => true
+    ));
 }
 
 function _sprowt_is_starter_no(&$form, &$form_state) {
-    variable_set('sprowt_is_starter', false);
+    _sprowt_save_to_table('starter', array(
+        'is_starter' => false
+    ));
 }
 
 function sprowt_starter_choose_page($form, &$form_state, &$install_state) {
@@ -96,5 +100,7 @@ function sprowt_starter_choose_page($form, &$form_state, &$install_state) {
 
 function sprowt_starter_choose_page_submit(&$form, &$form_state) {
     $values = $form_state['values'];
-    variable_set('sprowt_starter_landing_page_uuid', $values['choose_page']);
+    _sprowt_save_to_table('starter', array(
+        'landing_page_uuid' => $values['choose_page']
+    ));
 }

@@ -59,6 +59,7 @@ function update_progress($function, $perc, $message, $actions, $current, $id) {
 }
 
 $sb = new SprowtBuilder();
+$data = $sb->getData();
 
 
 $actions = array(
@@ -76,7 +77,7 @@ $actions = array(
     'addNodeDefaultImages' => "Updating Default Images..."
 );
 
-if(variable_get('sprowt_is_starter', false)) {
+if(!empty($data['starter']['is_starter'])) {
     $actions['setUpSprowtStarter'] = 'Setting Up Sprowt Starter Specific Settings...';
 }
 

@@ -24,7 +24,6 @@ foreach(glob(drupal_get_path('profile', 'sprowt') . "/forms/*.inc") as $include)
     include_once($include);
 }
 
-
 /**
  * Alter tasks order and such
  *
@@ -36,12 +35,14 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
     _sprowt_set_maintenance_theme("adminimal");
 
     $tasks['install_select_locale']['function'] = 'sprowt_locale_selection';
+    $Sprowtbuilder = new SprowtBuilder();
 
     $tasks_performed = $install_state['tasks_performed'];
     if(!isset($install_state['storage'])) {
         $install_state['storage'] = array();
     }
-    $install_state['storage']['is_starter'] = variable_get('sprowt_is_starter');
+    $install_state['storage']['is_starter'] = $Sprowtbuilder->is_starter();
+    $install_state['storage']['from_file'] = variable_get('sprowt_install_from_file', false);
 
 
     $task_map = array(
@@ -53,6 +54,7 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
         'install_system_module',
         'install_bootstrap_full',
         'sprowt_setup_tables', //sprowt
+        'sprowt_install_from_file', //sprowt
         'sprowt_is_starter', //sprowt
         'sprowt_starter_choose_page', //sprowt
         'sprowt_company_info', //sprowt
@@ -63,21 +65,44 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
         'sprowt_social', //sprowt
         'sprowt_review', //sprowt
         'sprowt_integrations', //sprowt
+        'sprowt_save_file', //sprowt
         'sprowt_module_preinstall', //sprowt
         'install_profile_modules',
         'install_import_locales',
         'sprowt_module_postinstall', //sprowt
+        'sprowt_check_install',
         'install_configure_form',
         'sprowt_configure',
     );
 
     $new_tasks = array();
 
+    $setup_tasks = array(
+        'sprowt_is_starter',
+        'sprowt_starter_choose_page',
+        'sprowt_company_info',
+        'sprowt_market_setup',
+        'sprowt_branding',
+        'sprowt_users',
+        'sprowt_locations',
+        'sprowt_social',
+        'sprowt_review',
+        'sprowt_integrations'
+    );
+
     foreach($task_map as $task){
         $new_tasks[$task] = $tasks[$task];
         unset($tasks[$task]);
         
         if($task == 'sprowt_starter_choose_page' && empty($install_state['storage']['is_starter'])) {
+            $new_tasks[$task]['run'] = INSTALL_TASK_SKIP;
+        }
+
+        if(in_array($task, $setup_tasks) && !empty($install_state['storage']['from_file'])) {
+            $new_tasks[$task]['run'] = INSTALL_TASK_SKIP;
+        }
+
+        if(module_exists('sprowt') && $task == 'sprowt_check_install') {
             $new_tasks[$task]['run'] = INSTALL_TASK_SKIP;
         }
     }

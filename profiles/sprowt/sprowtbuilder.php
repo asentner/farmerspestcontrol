@@ -36,6 +36,9 @@ Class SprowtBuilder {
      *
      */
     function getData(){
+        if(!db_table_exists('sprowt_setup')) {
+            return false;
+        }
         $query = db_query(
             "SELECT * FROM sprowt_setup"
         );
@@ -63,6 +66,44 @@ Class SprowtBuilder {
         }
         
         return $this->data;
+    }
+    
+    function saveData($data) {
+        db_truncate('sprowt_setup')->execute();
+        $insert = db_insert('sprowt_setup')
+            ->fields(
+                array(
+                    'form_name',
+                    'form_field',
+                    'field_value',
+                ));
+        
+        foreach($data as $form_name => $fields) {
+            foreach($fields as $field_name => $field_value) {
+                if($form_name == 'market_setup'
+                    || $form_name == 'users'
+                    || $form_name == 'locations')
+                {
+                    $field_value = json_encode($field_value);
+                }
+    
+                $insert->values(array(
+                    'form_name' => $form_name,
+                    'form_field' => $field_name,
+                    'field_value' => $field_value
+                ));
+            }
+        }
+    
+        return $insert->execute();
+    }
+    
+    function is_starter() {
+        if(empty($this->data)){
+            $this->getData();
+        }
+        
+        return isset($this->data['starter']['is_starter']) ? $this->data['starter']['is_starter'] : null;
     }
     
     /**
@@ -805,7 +846,11 @@ Class SprowtBuilder {
     }
 
     function setUpSprowtStarter() {
+        if(empty($this->data)){
+            $this->getData();
+        }
         $branding = $this->data['branding'];
+        $starter = $this->data['starter'];
         module_enable(array('sprowt_landing_page'));
         _sprowt_landing_page_create_landing_pages();
 
@@ -836,7 +881,7 @@ Class SprowtBuilder {
         db_update('node')->fields(array('status' => 0))->condition('nid', $excludedNids, 'NOT IN')->execute();
         variable_set('sprowt_starter_nids_disabled', $nids_to_be_disabled);
 
-        $homeUUID = variable_get('sprowt_starter_landing_page_uuid');
+        $homeUUID = $starter['landing_page_uuid'];
 
         $homeNid = entity_get_id_by_uuid('node', array($homeUUID));
         if(empty($homeNid)) {

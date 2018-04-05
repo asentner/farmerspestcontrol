@@ -16,6 +16,10 @@ function sprowt_install_tasks($install_state) {
         'sprowt_configure' => array(),
         'sprowt_module_preinstall' => array(),
         'sprowt_module_postinstall' => array(),
+        'sprowt_install_from_file' => array(
+            'display_name' => t('Would You Like to Install From a File?'),
+            'type' => 'form',
+        ),
         'sprowt_is_starter' => array(
             'display_name' => t('Is This a Sprowt Starter Roll Out?'),
             'type' => 'form',
@@ -56,8 +60,16 @@ function sprowt_install_tasks($install_state) {
             'display_name' => t('Integration Setup'),
             'type' => 'form',
         ),
+        'sprowt_save_file' => array(
+            'display_name' => t('Save To File'),
+            'type' => 'form',
+        ),
         'sprowt_setup_form' => array(
             'display_name' => t('Setting Up Sprowt'),
+            'type' => 'form',
+        ),
+        'sprowt_check_install' => array(
+            'display_name' => t('There was an error with your Sprowt Install'),
             'type' => 'form',
         ),
 
