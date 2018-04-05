@@ -2579,8 +2579,7 @@ span.dollar {
     overflow: hidden;
     margin-top: 30px; }
     .paragraphs-item-landing-page-areas-we-service .field--name-field-market ul {
-      -webkit-columns: 2;
-              columns: 2;
+      columns: 2;
       width: 74.46809%;
       margin: 0 auto; }
     .paragraphs-item-landing-page-areas-we-service .field--name-field-market li {
@@ -2751,8 +2750,7 @@ span.dollar {
       margin-left: auto;
       margin-right: auto; }
       .paragraphs-item-landing-page-features .field--name-field-features-list ul {
-        -webkit-columns: 2;
-                columns: 2; }
+        columns: 2; }
         .paragraphs-item-landing-page-features .field--name-field-features-list ul li:first-child {
           margin-top: 0; } }
 
@@ -2786,7 +2784,11 @@ span.dollar {
         -ms-flex: 0 1 auto; }
     .l-header .paragraphs-item-landing-page-header-footer .field--name-field-landing-page-logo {
       margin-bottom: 0; }
+      .l-header .paragraphs-item-landing-page-header-footer .field--name-field-landing-page-logo img {
+        max-width: 400px; }
     .l-header .paragraphs-item-landing-page-header-footer .field--name-field-cta-text {
+      min-width: 525px;
+      margin-left: 20px;
       text-align: right; }
   .l-footer .paragraphs-item-landing-page-header-footer {
     padding: 60px 30px 130px; } }
@@ -2843,8 +2845,7 @@ span.dollar {
     .paragraphs-item-landing-page-hero .paragraphs-item-landing-page-features {
       width: 430px; }
       .paragraphs-item-landing-page-hero .paragraphs-item-landing-page-features .field--name-field-features-list ul {
-        -webkit-columns: 1;
-                columns: 1; }
+        columns: 1; }
         .paragraphs-item-landing-page-hero .paragraphs-item-landing-page-features .field--name-field-features-list ul li:first-child {
           margin-top: 15px; } }
 

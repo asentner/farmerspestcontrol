@@ -35,9 +35,14 @@
     }
     .field--name-field-landing-page-logo {
       margin-bottom: 0;
+      img {
+        max-width: 400px;
+      }
     }
 
     .field--name-field-cta-text {
+      min-width: 525px;
+      margin-left: 20px;
       text-align: right;
     }
   }
