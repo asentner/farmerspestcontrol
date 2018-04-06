@@ -127,7 +127,7 @@ function _sprowt_set_maintenance_theme($target_theme) {
     if ($GLOBALS['theme'] != $target_theme) {
         unset($GLOBALS['theme']);
 
-        drupal_static_reset();
+        //drupal_static_reset();
         $GLOBALS['conf']['maintenance_theme'] = $target_theme;
         $adminimal_settings = variable_get('theme_adminimal_settings', array());
         $adminimal_settings['logo_path'] = 'profiles/sprowt/images/sprowt-logo.png';
