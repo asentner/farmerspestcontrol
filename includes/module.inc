@@ -453,7 +453,7 @@ function module_enable($module_list, $enable_dependencies = TRUE) {
             '$module_list' => $module_list
         );
         
-        drupal_set_message("Error in module_enable . <pre>" . print_r($variables, true) . "</pre>", 'error');
+        watchdog('Sprowt',"Error in module_enable . <pre>" . print_r($variables, true) . "</pre>", array(), WATCHDOG_ERROR);
     }
     if ($existing->status == 0) {
       // Load the module's code.
