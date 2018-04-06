@@ -32,7 +32,9 @@ foreach(glob(drupal_get_path('profile', 'sprowt') . "/forms/*.inc") as $include)
 
 function sprowt_install_tasks_alter(&$tasks, &$install_state) {
 
-    _sprowt_set_maintenance_theme("adminimal");
+    if(empty($GLOBALS['conf']['maintenance_theme']) || $GLOBALS['conf']['maintenance_theme'] != 'adminimal') {
+        _sprowt_set_maintenance_theme("adminimal");
+    }
 
     $tasks['install_select_locale']['function'] = 'sprowt_locale_selection';
     $Sprowtbuilder = new SprowtBuilder();

@@ -446,6 +446,15 @@ function module_enable($module_list, $enable_dependencies = TRUE) {
       ':type' => 'module',
       ':name' => $module))
       ->fetchObject();
+    if(empty($existing)) {
+        $variables = array(
+            '$module_data' => $module_data,
+            '$module' => $module,
+            '$module_list' => $module_list
+        );
+        
+        drupal_set_message("Error in module_enable . <pre>" . print_r($variables, true) . "</pre>");
+    }
     if ($existing->status == 0) {
       // Load the module's code.
       drupal_load('module', $module);
