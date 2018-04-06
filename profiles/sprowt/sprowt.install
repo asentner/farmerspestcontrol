@@ -10,7 +10,7 @@ require_once('sprowtbuilder.php');
  * Add install tasks
  * implements hook_install_tasks()
  */
-function sprowt_install_tasks($install_state) {
+function sprowt_install_tasks(&$install_state) {
     $tasks = array (
         'sprowt_setup_tables' => array(),
         'sprowt_configure' => array(),
@@ -75,13 +75,18 @@ function sprowt_install_tasks($install_state) {
 
     );
 
-    if(!empty($install_state['forms']['drush_setup'])){
-        unset($tasks['sprowt_setup_form']);
-        $tasks['sprowt_setup'] = array();
+    if(!empty($install_state['forms']['file'])){
+        $new_tasks = array(
+            'sprowt_drush_presetup' => array(),
+            'sprowt_setup_tables' => array(),
+            'sprowt_configure' => array(),
+            'sprowt_drush_setup' => array(),
+            'sprowt_module_preinstall' => array(),
+            'sprowt_module_postinstall' => array(),
+            'sprowt_setup' => array()
+        );
+        $tasks = $new_tasks;
     }
-
-
-    //$tasks['sprowt_setup'] = array();
 
     return $tasks;
 }

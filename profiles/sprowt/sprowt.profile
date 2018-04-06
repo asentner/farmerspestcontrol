@@ -74,7 +74,29 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
         'install_configure_form',
         'sprowt_configure',
     );
-
+    
+    
+    if(!empty($install_state['forms']['file'])){
+        $task_map = array(
+            'install_select_profile',
+            'install_select_locale',
+            'install_load_profile',
+            'install_verify_requirements',
+            'sprowt_drush_presetup',
+            'install_settings_form', //set up database
+            'install_system_module',
+            'install_bootstrap_full',
+            'sprowt_setup_tables', //sprowt
+            'sprowt_drush_setup', //sprowt
+            'sprowt_module_preinstall', //sprowt
+            'install_profile_modules',
+            'install_import_locales',
+            'sprowt_module_postinstall', //sprowt
+            'install_configure_form',
+            'sprowt_setup',
+        );
+    }
+    
     $new_tasks = array();
 
     $setup_tasks = array(
@@ -364,22 +386,93 @@ function sprowt_module_postinstall(){
 //    drupal_flush_all_caches();
 }
 
+function sprowt_drush_presetup(&$install_state) {
+    if(!empty($install_state['forms']['file'])){
+        $file = $install_state['forms']['file'];
+        $json = file_get_contents($file);
+        $data = json_decode($json, true);
+        
+        if(json_last_error() !== JSON_ERROR_NONE) {
+            throw new SprowtException("[$file] File is not a JSON file.");
+        }
+        
+        if(!isset($data['company_info'])) {
+            throw new SprowtException("Invalid File.");
+        }
+        
+        $company_name = $data['company_info']['company_name'];
+        if(empty($company_name)) {
+            throw new SprowtException("Company Name Required.");
+        }
+        
+        $database = preg_replace('/[a-z0-9_]/', '_', strtolower($company_name));
+        $database = trim($database, '_');
+        $install_state['forms']['install_settings_form']['mysql']['database'] = $database;
+    
+        $install_state['forms']['install_configure_form']['site_name'] = $data['company_info']['company_name'];
+        $install_state['forms']['install_configure_form']['site_mail'] = $data['company_info']['webform_from_email'];
+        
+        $install_state['forms']['install_configure_form']['account']['name'] = 'coalmarch';
+        $install_state['forms']['install_configure_form']['account']['mail'] = 'devel@coalmarch.com';
+        $install_state['forms']['install_configure_form']['account']['pass']['pass1'] = 'c04lm4rch';
+        $install_state['forms']['install_configure_form']['account']['pass']['pass2'] = 'c04lm4rch';
+        $install_state['forms']['install_configure_form']['update_status_module'] = array();
+    }
+    else {
+        throw new SprowtException("A file is required.");
+    }
+}
+
+function sprowt_drush_setup(&$install_state) {
+    if(!empty($install_state['forms']['file'])){
+        $file = $install_state['forms']['file'];
+        $json = file_get_contents($file);
+        $data = json_decode($json, true);
+    
+        if(json_last_error() !== JSON_ERROR_NONE) {
+            throw new SprowtException("[$file] File is not a JSON file.");
+        }
+    
+        if(!isset($data['company_info'])) {
+            throw new SprowtException("Invalid File.");
+        }
+        $sb = new SprowtBuilder();
+        $sb->saveData($data);
+    }
+    else {
+        throw new SprowtException("A file is required.");
+    }
+}
 
 function sprowt_setup(&$install_state){
 
     $sb = new SprowtBuilder();
     $data = $sb->getData();
     $id = md5(serialize($data));
-
-    if(!empty($install_state['forms']['drush_setup'])){
-        $sb->addUsers();
-        $sb->addBranding();
-        $sb->addNodes();
-        $sb->addCompanyInfo();
-        $sb->addMarketsServices();
-        $sb->addLocations();
-        $sb->addSocial();
-        $sb->addIntegrations();
+    
+    if(!empty($install_state['forms']['file'])){
+        $actions = array(
+            'getData' => "Getting Sprowt Data...",
+            'addUsers' => "Adding Users...",
+            'addNodes' => "Adding Default Nodes...",
+            'addCompanyInfo' => "Adding Company Info...",
+            'addReview' => "Adding Review Sites...",
+            'addMarketsServices' => "Adding Markets and Services...",
+            'addLocations' => "Adding Locations...",
+            'addBranding' => "Adding Branding...",
+            'addSocial' => "Adding Social Media...",
+            'addIntegrations' => "Adding Integrations...",
+            'revertFeatures' => "Revert Features...",
+            'addNodeDefaultImages' => "Updating Default Images..."
+        );
+    
+        if(!empty($data['starter']['is_starter'])) {
+            $actions['setUpSprowtStarter'] = 'Setting Up Sprowt Starter Specific Settings...';
+        }
+    
+        foreach($actions as $method => $message) {
+            $sb->$method();
+        }
         return true;
     }
     else {
