@@ -31,7 +31,9 @@ foreach(glob(drupal_get_path('profile', 'sprowt') . "/forms/*.inc") as $include)
  */
 
 function sprowt_install_tasks_alter(&$tasks, &$install_state) {
-
+    //maybe this is getting unset somewhere?
+    $install_state['parameters']['profile'] = 'sprowt';
+    
     if(empty($GLOBALS['conf']['maintenance_theme']) || $GLOBALS['conf']['maintenance_theme'] != 'adminimal') {
         _sprowt_set_maintenance_theme("adminimal");
     }
@@ -356,7 +358,7 @@ function _sprowt_get_features(){
 /**
  * Some pre-install stuff
  */
-function sprowt_module_preinstall() {
+function sprowt_module_preinstall(&$install_state) {
     //set this to false so that the batch module install doesn't break
     //we'll rebuild the features at the end when we revert them all
     variable_set('features_rebuild_on_module_install', false);
@@ -368,6 +370,8 @@ function sprowt_module_preinstall() {
     $modules = array_merge($modules, $features);
 
     variable_set('install_profile_modules', $modules);
+    variable_set('install_profile', 'sprowt');
+    $install_state['parameters']['profile'] = 'sprowt';
 }
 
 /**
