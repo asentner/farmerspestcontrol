@@ -713,3 +713,59 @@ function _sprowt_landing_page_import_color_terms($file = null, $override = false
     
     return _sprowt_landing_page_get_term_maps(true);
 }
+
+function sprowt_landing_page_fix_form_modal_links(&$entity, $entity_type, $language) {
+    foreach (field_info_instances('paragraphs_item', 'modal') as $new_field_name => $new_field_instance) {
+        list( , , $bundle) = entity_extract_ids($entity_type, $entity);
+        $entity_changed = false;
+        foreach (field_info_instances($entity_type, $bundle) as $field_name => $field_instance) {
+            $field_info = field_info_field($field_name);
+            if(!empty($entity->$field_name)) {
+                if ($field_info['type'] == 'paragraphs') {
+                    foreach ($entity->$field_name as $lang => $items) {
+                        foreach ($items as $item) {
+                            $paragraph = entity_load('paragraphs_item', [$item['value']]);
+                            $paragraph = array_pop($paragraph);
+                            sprowt_landing_page_fix_form_modal_links($paragraph, 'paragraphs_item', $lang);
+                        }
+                    }
+                }
+                if ($field_info['type'] == 'field_collection') {
+                    foreach ($entity->$field_name as $lang => $items) {
+                        foreach ($items as $item) {
+                            $fc = entity_load('field_collection_item', [$item['value']]);
+                            $fc = array_pop($fc);
+                            sprowt_landing_page_fix_form_modal_links($fc, 'field_collection_item', $lang);
+                        }
+                    }
+                }
+    
+                if ($field_info['type'] == 'text_long' || $field_info['type'] == 'text') {
+                    foreach ($entity->$field_name as $lang => &$tlitems) {
+                        foreach ($tlitems as &$tlitem) {
+                            $val = $tlitem['value'];
+                            if(strpos($tlitem['value'], '#form-modal--2') !== 0) {
+                                $entity_changed = true;
+                                $tlitem['value'] = str_replace('#form-modal--2', '#form-modal', $val);
+                            }
+                        }
+                    }
+                }
+    
+                if ($field_info['type'] == 'link_field') {
+                    foreach ($entity->$field_name as $lang => &$litems) {
+                        foreach ($litems as &$litem) {
+                            if ($litem['url'] == '#form-modal--2') {
+                                $entity_changed = true;
+                                $litem['url'] = '#form-modal';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if($entity_changed) {
+        entity_save($entity_type, $entity);
+    }
+}

@@ -46,25 +46,27 @@ function sprowt_custom_colors_entity_load($entities, $type)
     foreach($entities as $entity) {
         $entity_id = entity_id($type, $entity);
         $bundle = sprowt_custom_colors_get_entity_bundle($type, $entity);
-        switch($type) {
-            case 'taxonomy_vocabulary':
-                break;
-            case 'paragraphs_item':
-                $label = field_get_items('paragraphs_item', $entity, 'field_label');
-                if(!empty($label)) {
-                    $label = $label[0]['value'];
-                    $id = drupal_html_id($label);
-                }
-                else {
-                    $id = drupal_html_id("paragraphs-item--$bundle--$entity_id");
-                }
-                break;
-            default:
-                $id = drupal_html_id("$type--$bundle--$entity_id");
-                break;
-        }
-        if(!empty($id)) {
-            $entity->html_unique_id = $id;
+        if(empty($entity->html_unique_id)) {
+            switch ($type) {
+                case 'taxonomy_vocabulary':
+                    break;
+                case 'paragraphs_item':
+                    $label = field_get_items('paragraphs_item', $entity, 'field_label');
+                    if (!empty($label)) {
+                        $label = $label[0]['value'];
+                        $id = drupal_html_id($label);
+                    }
+                    else {
+                        $id = drupal_html_id("paragraphs-item--$bundle--$entity_id");
+                    }
+                    break;
+                default:
+                    $id = drupal_html_id("$type--$bundle--$entity_id");
+                    break;
+            }
+            if (!empty($id)) {
+                $entity->html_unique_id = $id;
+            }
         }
     }
 }

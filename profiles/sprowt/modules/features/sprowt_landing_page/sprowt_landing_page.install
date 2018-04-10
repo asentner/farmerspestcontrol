@@ -13,3 +13,116 @@ function sprowt_landing_page_install() {
         ->condition('module', 'system', '!=')
         ->execute();
 }
+
+/**
+ * Add thank you modals
+ */
+function sprowt_landing_page_update_7100() {
+    $landing_page_nids = db_query("
+        SELECT nid
+        FROM node
+        WHERE type = 'landing_page'
+    ")->fetchCol();
+
+    foreach(node_load_multiple($landing_page_nids) as $node) {
+        $n = entity_metadata_wrapper('node', $node);
+
+        $paras = $n->field_landing_page_content->value();
+        $has_modal = false;
+        foreach($paras as $p) {
+            if(!empty($p->html_unique_id) && $p->html_unique_id == 'thank-you-modal') {
+                $has_modal = true;
+            }
+            sprowt_landing_page_fix_form_modal_links($p, 'paragraphs_item', LANGUAGE_NONE);
+        }
+
+        if(!$has_modal) {
+            /**
+             * @var $modal \UUIDParagraphsItemEntity
+             * @var $body \UUIDParagraphsItemEntity
+             * @var $colors \UUIDParagraphsItemEntity
+             */
+            $modal = entity_create('paragraphs_item', array('bundle' => 'modal', 'field_name' => 'field_landing_page_content'));
+            $modal->field_label = array(
+                LANGUAGE_NONE => array(
+                    array(
+                        'value' => 'Thank You Modal'
+                    ),
+                ),
+            );
+
+            $body = entity_create('paragraphs_item', array('bundle' => 'body', 'field_name' => 'field_content'));
+            $body->field_header = array(
+                LANGUAGE_NONE => array(
+                    array(
+                        'value' => 'Thank You'
+                    ),
+                ),
+            );
+            $body->field_body_text = array(
+                LANGUAGE_NONE => array(
+                    array(
+                        'format' => 'filtered_html',
+                        'value' => '<p>Lorem ipsum dolor sit amet, nec in nobis ignota laoreet, id eirmod delenit per. Doctus feugait recteque nec cu, per illum conceptam id, vidisse saperet pericula mea eu. Nec te velit signiferumque, ut sea illud facilisi. Docendi partiendo no usu.</p>'
+                    ),
+                ),
+            );
+            $body->setHostEntity('paragraphs_item', $modal);
+
+            $colors = entity_create('paragraphs_item', array('bundle' => 'colors', 'field_name' => 'field_colors'));
+            /**
+             * @var $header \FieldCollectionExportEntity
+             */
+            $header = entity_create('field_collection_item', array('field_name' => 'field_header_color'));
+            $header->field_header_selector = array (
+                LANGUAGE_NONE =>
+                    array (
+                        0 =>
+                            array (
+                                'value' => 'h1',
+                            ),
+                        1 =>
+                            array (
+                                'value' => 'h2',
+                            ),
+                        2 =>
+                            array (
+                                'value' => 'h3',
+                            ),
+                        3 =>
+                            array (
+                                'value' => 'h4',
+                            ),
+                        4 =>
+                            array (
+                                'value' => 'h5',
+                            ),
+                        5 =>
+                            array (
+                                'value' => 'h6',
+                            ),
+                    )
+            );
+
+            $primary_color_tid = entity_get_id_by_uuid('taxonomy_term', array('117eaaef-b577-4d25-874c-6e7e57dced84'));
+            $primary_color_tid = array_pop($primary_color_tid);
+            $header->field_color_header = array(
+                LANGUAGE_NONE => array(
+                    array(
+                        'tid' => $primary_color_tid
+                    ),
+                ),
+            );
+
+            $header->setHostEntity('paragraphs_item', $colors);
+            $colors->setHostEntity('paragraphs_item', $modal);
+            $modal->setHostEntity('node', $node);
+        }
+        node_save($node);
+    }
+
+    $webform = entity_uuid_load('node', array('5d5bafc2-a549-4ace-9353-08e981734453'));
+    $webform = array_pop($webform);
+    $webform->webform['redirect_url'] = '#thank-you-modal';
+    node_save($webform);
+}
