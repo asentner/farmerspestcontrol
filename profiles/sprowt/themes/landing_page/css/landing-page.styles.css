@@ -2785,7 +2785,8 @@ span.dollar {
     .l-header .paragraphs-item-landing-page-header-footer .field--name-field-landing-page-logo {
       margin-bottom: 0; }
       .l-header .paragraphs-item-landing-page-header-footer .field--name-field-landing-page-logo img {
-        max-width: 400px; }
+        max-width: 400px;
+        height: 0; }
     .l-header .paragraphs-item-landing-page-header-footer .field--name-field-cta-text {
       min-width: 525px;
       margin-left: 20px;
