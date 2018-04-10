@@ -1,6 +1,58 @@
 <?php
 
 /**
+ * Implements hook_clone_node_alter().
+ */
+function field_collection_export_clone_node_alter(&$node, $context) {
+    foreach (field_info_fields() as $field_name => $field) {
+        if ($field['type'] == 'field_collection' && isset($node->$field_name)) {
+            $language = $node->language;
+            //reset field to original to cancel out the broken paragraphs_clone_node_alter() function
+            $node->$field_name = $context['original_node']->$field_name;
+            foreach ($node->$field_name as $key => $values) {
+                field_collection_export_clone_items('node', $node, $field_name, $language);
+            }
+        }
+    }
+}
+
+/**
+ * Modified copy of paragraphs_clone_items. Meant to fix the original function.
+ */
+function field_collection_export_clone_items($entity_type, &$entity, $field_name, $language = LANGUAGE_NONE) {
+    $old_items = $entity->{$field_name}[$language];
+    if (!is_array($old_items)) {
+        $old_items = array($old_items);
+    }
+    
+    unset($entity->{$field_name}[$language]);
+    
+    foreach ($old_items as $old_item_array) {
+        $old_item = entity_load('field_collection_item', array($old_item_array['value']));
+        $old_item = array_pop($old_item);
+        /* @var $new_item ParagraphsItemEntity */
+        $new_item = entity_create('field_collection_item', array('field_name' => $field_name));
+        $new_item->setHostEntity($entity_type, $entity, $language);
+        
+        // Check if any of the fields in the newly cloned fc item is a paragraph.
+        foreach (field_info_instances('field_collection_item', $field_name) as $new_field_name => $new_field_instance) {
+            if (!empty($old_item->{$new_field_name})) {
+                $new_item->{$new_field_name} = $old_item->{$new_field_name};
+                $field_info = field_info_field($new_field_name);
+                if ($field_info['type'] == 'field_collection') {
+                    field_collection_export_clone_items('field_collection_item', $new_item, $new_field_name, $language);
+                }
+                if(function_exists('paragraphs_export_clone_items')) {
+                    if ($field_info['type'] == 'paragraphs') {
+                        paragraphs_export_clone_items('paragraphs_item', $new_item, $new_field_name, $language);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
  * Implements hook_node_export_node_alter().
  */
 function field_collection_export_node_export_node_alter(&$node, $original_node) {

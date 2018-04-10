@@ -1,5 +1,5 @@
 name = Field Collection Export
-description = For exporting field collections in nodes with node_export
+description = For exporting field collections in nodes with node_export and cloning them with node_clone
 package = Node export
 core = 7.x
 
