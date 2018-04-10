@@ -35,5 +35,20 @@
             });
         });
 
+        var hash = window.location.hash;
+        var $hashModal = $(hash);
+        if($hashModal.length > 0 && $hashModal.hasClass('paragraphs-item-modal')) {
+            $.magnificPopup.open({
+                type: 'inline',
+                closeBtnInside: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in sprowt-paragraphs-modal-container',
+                items: {
+                    src: hash,
+                    type: 'inline'
+                }
+            });
+        }
+
     });
 })(jQuery)
