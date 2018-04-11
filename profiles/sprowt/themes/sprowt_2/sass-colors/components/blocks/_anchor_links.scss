@@ -1,0 +1,13 @@
+.bean-anchor-link-bean{
+  background-color: palette(secondary, base);
+  color: palette(black, base);
+  a{
+    color: palette(black, base);
+    &:before{
+      color: palette(primary, base);
+    }
+    &:after{
+      background-color: palette(primary, base);
+    }
+  }
+}

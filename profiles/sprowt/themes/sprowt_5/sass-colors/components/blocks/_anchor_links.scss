@@ -1,0 +1,16 @@
+.bean-anchor-link-bean{
+  background-color: palette(primary, base);
+  color: palette(secondary, base);
+  .field--name-field-display-title{
+    color: palette(secondary, base);
+  }
+  a{
+    color: palette(secondary, base);
+    &:before{
+      color: palette(primary, dark);
+    }
+    &:after{
+      background-color: palette(primary, dark);
+    }
+  }
+}
