@@ -30,7 +30,7 @@
         margin-top: 30px;
         ul {
             columns: 2;
-            width: percentage(350/470);
+            //width: percentage(350/470);
             margin: 0 auto;
         }
         li {
@@ -71,6 +71,14 @@
         .inner {
             margin-left: percentage(122/1050);
             width: percentage(470/1050);
+        }
+    }
+
+    @include breakpoint($desk) {
+        .field--name-field-market {
+            ul {
+                width: percentage(350/470);
+            }
         }
     }
 }

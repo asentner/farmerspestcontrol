@@ -72,7 +72,7 @@ function _sprowt_landing_page_generate_landing_page_form() {
     $form['actions']['just_colors'] = array(
         '#type' => 'submit',
         '#value' => 'Just Change Colors',
-        '#submit' => array('_sprowt_landing_page_generate_landing_page_form_color_change')
+        '#submit' => array('_sprowt_landing_page_generate_landing_page_form_submit')
     );
     
     
@@ -232,6 +232,15 @@ function sprowt_landing_page_preprocess_paragraphs_item(&$variables)
     if($paragraphs_item->bundle == 'landing_page_areas_we_service') {
         if(!empty($variables['field_map_code'])) {
             hide($variables['content']['field_image']);
+        }
+    }
+
+    $features_style = field_get_items('paragraphs_item', $paragraphs_item, 'field_features_style');
+    if(!empty($features_style)) {
+        foreach($features_style as $class) {
+            $new_classes_array = array_merge($variables['classes_array'], array($class['value']));
+            $variables['classes_array'] = $new_classes_array;
+            $variables['attributes_array']['class'] = $new_classes_array;
         }
     }
 }

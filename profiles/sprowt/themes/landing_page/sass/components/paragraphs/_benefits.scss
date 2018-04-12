@@ -67,15 +67,20 @@
 }
 
 %benefits {
-  text-align: center;
+  text-align: left;
+  .node {
+    @include flexbox;
+    align-items: flex-start;
+  }
   .node__title {
     font-size: 1.325em;
     font-weight: 600;
   }
   .field--name-field-image,
   .field--name-field-icon {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
+    margin-right: 10px;
     a {
       display: inline-block;
     }
@@ -84,6 +89,8 @@
       border: 2px solid white;
       display: inline-block;
       margin: 0 auto;
+      height: auto;
+      width: 90px;
     }
     a > img {
       @extend %image-hover;
@@ -100,6 +107,10 @@
 
   @include breakpoint($tab) {
     padding: 50px 30px 65px;
+    text-align: center;
+    .node {
+      display: block;
+    }
     .field--name-field-embedded-benefits {
       > .field__items {
         @include flexbox;
@@ -115,6 +126,14 @@
           margin-top: 0;
           margin-left: 20px;
         }
+      }
+    }
+
+    .field--name-field-image,
+    .field--name-field-icon {
+      margin-right: 0;
+      img {
+        width: auto;
       }
     }
   }

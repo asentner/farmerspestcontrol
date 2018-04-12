@@ -13,6 +13,7 @@ function sprowt_landing_page_metatag_export_default() {
   // Exported Metatag config instance: node:landing_page.
   $config['node:landing_page'] = array(
     'instance' => 'node:landing_page',
+    'disabled' => FALSE,
     'config' => array(
       'robots' => array(
         'value' => array(
