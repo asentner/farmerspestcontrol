@@ -72,7 +72,7 @@ function _sprowt_landing_page_generate_landing_page_form() {
     $form['actions']['just_colors'] = array(
         '#type' => 'submit',
         '#value' => 'Just Change Colors',
-        '#submit' => array('_sprowt_landing_page_generate_landing_page_form_submit')
+        '#submit' => array('_sprowt_landing_page_generate_landing_page_form_color_change')
     );
     
     
