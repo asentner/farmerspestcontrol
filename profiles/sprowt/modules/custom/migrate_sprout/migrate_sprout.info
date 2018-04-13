@@ -1,0 +1,10 @@
+name = "Sprout migration"
+description = "Migrate content from Sprout to Sprowt"
+package = "Coalmarch"
+core = 7.x
+
+dependencies[] = migrate
+dependencies[] = migrate_d2d
+
+files[] = migrate_sprout.migrate.inc
+files[] = node.inc
