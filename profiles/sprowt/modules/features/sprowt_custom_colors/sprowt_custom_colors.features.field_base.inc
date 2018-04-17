@@ -396,6 +396,8 @@ function sprowt_custom_colors_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -484,6 +486,8 @@ function sprowt_custom_colors_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -759,6 +763,31 @@ function sprowt_custom_colors_field_default_field_bases() {
     'type' => 'paragraphs',
   );
 
+  // Exported field_base: 'field_no_shadow'.
+  $field_bases['field_no_shadow'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_no_shadow',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 0,
+        1 => 1,
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_shadow_blur_radius'.
   $field_bases['field_shadow_blur_radius'] = array(
     'active' => 1,
@@ -868,6 +897,32 @@ function sprowt_custom_colors_field_default_field_bases() {
     'settings' => array(),
     'translatable' => 0,
     'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_text_shadow'.
+  $field_bases['field_text_shadow'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_text_shadow',
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'hide_initial_item' => 0,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
   );
 
   return $field_bases;

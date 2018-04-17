@@ -24,5 +24,49 @@
       font-size: 30px;
       font-weight: normal;
     }
+
+    form {
+      overflow: hidden;
+      > div {
+        @include flexbox;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: -20px;
+      }
+
+      .form-item {
+        width: percentage(200/678);
+        margin-left: 20px;
+      }
+      .form-actions {
+        width: percentage(200/678);
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        left: 10px;
+      }
+    }
+  }
+
+  @include breakpoint($desk) {
+    form {
+      overflow: hidden;
+      > div {
+        display: block;
+        margin-left: 0;
+      }
+
+      .form-item {
+        width: 100%;
+        margin-left: 0;
+      }
+      .form-actions {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        position: static;
+        left: auto;
+      }
+    }
   }
 }

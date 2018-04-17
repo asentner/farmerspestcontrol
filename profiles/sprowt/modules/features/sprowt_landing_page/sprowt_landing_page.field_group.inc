@@ -81,8 +81,8 @@ function sprowt_landing_page_field_group_info() {
     'label' => 'Advanced',
     'weight' => '5',
     'children' => array(
-      0 => 'field_label',
-      1 => 'field_custom_class',
+      0 => 'field_custom_class',
+      1 => 'field_label',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -281,7 +281,7 @@ function sprowt_landing_page_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Features',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
       0 => 'field_features_list',
     ),

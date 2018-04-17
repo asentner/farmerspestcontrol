@@ -11,7 +11,19 @@
   }
 
   .field--name-field-landing-page-logo {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    img {
+      max-width: 220px;
+      height: auto;
+    }
+  }
+
+}
+
+.l-header .paragraphs-item-landing-page-header-footer {
+  .field--name-field-cta-text {
+    margin: 0 auto;
+    max-width: 270px;
   }
 }
 
@@ -21,6 +33,10 @@
     font-size: 26px;
     .field--name-field-landing-page-logo {
       margin-bottom: 30px;
+      img {
+        max-width: 300px;
+        height: auto;
+      }
     }
   }
 
@@ -33,22 +49,45 @@
       max-width: 1170px;
       margin: 0 auto;
     }
-    .field--name-field-landing-page-logo {
-      margin-bottom: 0;
-      img {
-        max-width: 400px;
-        height: auto;
-      }
-    }
 
     .field--name-field-cta-text {
+      text-align: center;
+      min-width: 350px;
+      margin-left: auto;
+      margin-right: 0;
+      //text-align: right;
+    }
+
+    .field--name-field-landing-page-logo {
+      margin: 0;
+      margin-right: 20px;
+    }
+  }
+
+  .l-footer .paragraphs-item-landing-page-header-footer {
+    padding: 60px 30px 70px;
+  }
+}
+
+@include breakpoint($desk) {
+  .paragraphs-item-landing-page-header-footer {
+    .field--name-field-landing-page-logo {
+      img {
+        max-width: 400px;
+      }
+    }
+  }
+
+  .l-header .paragraphs-item-landing-page-header-footer {
+    .field--name-field-cta-text {
       min-width: 525px;
-      margin-left: 20px;
+      margin-left: auto;
+      margin-right: 0;
       text-align: right;
     }
   }
 
   .l-footer .paragraphs-item-landing-page-header-footer {
-    padding: 60px 30px 130px;
+    padding: 70px 30px 80px;
   }
 }
