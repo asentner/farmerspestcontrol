@@ -29,11 +29,12 @@ function sprowt_settings_menu()
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-  $items['<phone_number_sms>'] = array(
-    'page callback' => 'drupal_not_found',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
+    
+    $items['<phone_number_sms>'] = array(
+        'page callback' => 'drupal_not_found',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
     
     $items['node/uuid/%'] = array(
         'page callback' => '_sprowt_settings_node_uuid_redirect',
@@ -388,7 +389,6 @@ function _sprowt_settings_can_replace() {
 
 function sprowt_settings_preprocess_page(&$variables)
 {
-
 }
 
 // implements hook_preprocess_block()
@@ -936,7 +936,11 @@ function sprowt_settings_token_info() {
             'name' => 'Company Phone Number',
             'description' => 'Phone Number',
             'needs-data' => 'sprowt'
-        )
+        ),
+        'server' => array(
+            'name' => 'Server Variables',
+            'description' => 'Variables from the $_SERVER global.'
+        ),
     );
 
 
@@ -966,6 +970,16 @@ function sprowt_settings_token_info() {
                 'description' => 'Company Phone Number, numbers only',
             ),
         ),
+        'server' => array(
+            'HTTP_REFERER' => array(
+                'name' => t('HTTP_REFERER'),
+                'description' => t('The address of the page (if any) which referred the user agent to the current page. This is set by the user agent. Not all user agents will set this, and some provide the ability to modify HTTP_REFERER as a feature. In short, it cannot really be trusted.')
+            ),
+            'HTTP_USER_AGENT' => array(
+                'name' => 'HTTP_USER_AGENT',
+                'description' => 'Contents of the User-Agent: header from the current request, if there is one. This is a string denoting the user agent being which is accessing the page.'
+            ),
+        ),
     );
     
     $tokens['site']['sprowt'] = array(
@@ -992,6 +1006,7 @@ function sprowt_settings_token_info() {
  */
 function sprowt_settings_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
+    $sanitize = !empty($options['sanitize']);
   foreach($tokens as $name => $original) {
     switch($name) {
       case 'sprowt:company_name':
@@ -1039,6 +1054,26 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
       }
     }
   }
+    
+    if ($type == 'server') {
+        foreach ($tokens as $name => $original) {
+            switch ($name) {
+                case 'HTTP_REFERER':
+                    $replacements[$original] = $_SERVER['HTTP_REFERER'];
+                    if ($sanitize) {
+                        $replacements[$original] = filter_xss($replacements[$original]);
+                    }
+                    break;
+            
+                case 'HTTP_USER_AGENT':
+                    $replacements[$original] = $_SERVER['HTTP_USER_AGENT'];
+                    if ($sanitize) {
+                        $replacements[$original] = filter_xss($replacements[$original]);
+                    }
+                    break;
+            }
+        }
+    }
   
   return $replacements;
 }

@@ -53,6 +53,9 @@
         }
         .field--name-field-header-paragraph {
             text-align: center;
+            h2 {
+                line-height: 34px;
+            }
         }
         .paragraphs-item-landing-page-features {
             .field--name-field-features-list {
@@ -66,6 +69,85 @@
                         li:first-child {
                             margin-top: 15px;
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    &.with-overlap {
+        background-size: auto 38.515% !important;
+        background-position: top center !important;
+        &:before {
+            height: 38.515% !important;
+        }
+
+        .content > .interior + .paragraphs-items {
+            margin-top: 60px;
+        }
+        .interior {
+            text-align: center;
+        }
+
+        @include breakpoint($tab) {
+            background-size: auto 54.09% !important;
+            &:before {
+                height: 54.09% !important;
+            }
+            .content > .interior + .paragraphs-items {
+                margin-top: 85px;
+            }
+            > .content {
+                display: block;
+                > .paragraphs-items {
+                    max-width: 88.28125%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    .entity-paragraphs-item {
+                        max-width: 100%;
+                    }
+                    .hero-form {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        @include breakpoint($desk) {
+            background-size: cover !important;
+            background-position: center !important;
+            &:before {
+                height: 100% !important;
+            }
+
+            .interior {
+                text-align: left;
+            }
+            > .content {
+                @include flexbox;
+                align-items: flex-end;
+                justify-content: space-between;
+                max-width: 1090px;
+                margin: 0 auto;
+                > .paragraphs-items {
+                    min-width: 406px;
+                    margin-left: auto;
+                    margin-right: 0;
+                    .entity-paragraphs-item {
+                        max-width: 430px;
+                    }
+                }
+                > .interior {
+                    flex: 1 1 auto;
+                    font-size: 21px;
+                    font-weight: 600;
+                    h1 {
+                        font-size: 56px;
+                        margin-bottom: 10px;
+                    }
+                    + .paragraphs-items {
+                        margin-top: 0;
+                        margin-left: 60px;
                     }
                 }
             }

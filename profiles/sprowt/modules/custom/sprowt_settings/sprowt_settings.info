@@ -6,3 +6,4 @@ package = Sprowt
 configure = admin/config/system/sprowt-settings
 
 scripts[] = js/sprowt.js
+scripts[] = js/referrer.js

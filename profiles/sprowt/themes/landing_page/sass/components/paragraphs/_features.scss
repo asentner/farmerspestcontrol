@@ -30,6 +30,22 @@
         margin-top: 30px;
     }
 
+    &.inline {
+        .field--name-field-features-list {
+            ul {
+                columns: auto;
+                text-align: center;
+                li {
+                    display: inline-block;
+                    text-align: left;
+                    + li {
+                        margin-left: 20px;
+                    }
+                }
+            }
+        }
+    }
+
     @include breakpoint($tab) {
         h2 {
             font-size: 28px;
@@ -45,6 +61,22 @@
                     &:first-child {
                         margin-top: 0;
                     }
+                }
+            }
+        }
+
+        &.inline {
+            .field--name-field-features-list {
+                margin-top: 40px;
+            }
+        }
+    }
+
+    @include breakpoint($desk) {
+        &.three_columns {
+            .field--name-field-features-list {
+                ul {
+                    columns: 3;
                 }
             }
         }

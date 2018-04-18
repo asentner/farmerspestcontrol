@@ -1,7 +1,17 @@
 .paragraphs-item-body {
+  p {
+    line-height: 1.6;
+  }
   > .content {
     max-width: 840px;
   }
+
+  .field--name-field-body-text {
+    h2 {
+      margin-bottom: 5px;
+    }
+  }
+
   @include breakpoint($tab) {
     padding: 60px 30px 70px;
   }

@@ -198,6 +198,72 @@ function _sprowt_custom_colors_apply_styling($wrapperSelector, $paragraphs_item)
             $styles[] = 'box-shadow: ' . implode(', ', $shadows);
         }
 
+        if($field_name == 'field_text_shadow' && !empty($field_items)) {
+            $shadows = array();
+            $none_selected = false;
+            foreach($field_items as $field_item) {
+                $fc_item = field_collection_item_load($field_item['value']);
+                $none = field_get_items('field_collection_item', $fc_item, 'field_no_shadow');
+                $offsetX = field_get_items('field_collection_item', $fc_item, 'field_shadow_offset_x');
+                $offsetY = field_get_items('field_collection_item', $fc_item, 'field_shadow_offset_y');
+                $blur = field_get_items('field_collection_item', $fc_item, 'field_shadow_blur_radius');
+                $color = field_get_items('field_collection_item', $fc_item, 'field_shadow_color');
+
+                if(!empty($none) && !empty($none[0]['value'])) {
+                    $none_selected = true;
+                    continue;
+                }
+
+                if(!empty($color)) {
+                    $shadow = array();
+
+                    if(!empty($offsetX) && !empty($offsetX[0]['value'])) {
+                        $shadow[] = $offsetX[0]['value'] . 'px';
+                    }
+                    else {
+                        $shadow[] = '0';
+                    }
+
+                    if(!empty($offsetY) && !empty($offsetY[0]['value'])) {
+                        $shadow[] = $offsetY[0]['value'] . 'px';
+                    }
+                    else {
+                        $shadow[] = '0';
+                    }
+
+                    if(!empty($blur) && !empty($blur[0]['value'])) {
+                        $shadow[] = $blur[0]['value'] . 'px';
+                    }
+                    else {
+                        $shadow[] = '0';
+                    }
+
+                    $term = taxonomy_term_load($color[0]['tid']);
+                    $hex = field_get_items('taxonomy_term', $term, 'field_color_text_value');
+                    if(!empty($hex)) {
+                        $hex = $hex[0]['value'];
+                    }
+                    else {
+                        $hex = field_get_items('taxonomy_term', $term, 'field_hex');
+                        if(!empty($hex)) {
+                            $hex = $hex[0]['rgb'];
+                        }
+                    }
+
+                    $shadow[] = $hex;
+
+                    $shadows[] = implode(' ', $shadow);
+                }
+            }
+
+            if(!empty($shadows)) {
+                $styles[] = 'text-shadow: ' . implode(', ', $shadows);
+            }
+            elseif (!empty($none_selected)) {
+                $styles[] = 'text-shadow: none';
+            }
+        }
+
         if(!empty($field_items)) {
             foreach($field_items as $field_item) {
                 if(!empty($field_item['tid'])) {
