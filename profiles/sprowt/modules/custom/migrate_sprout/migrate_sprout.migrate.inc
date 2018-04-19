@@ -1,5 +1,14 @@
 <?php
 
+global $conf;
+$conf['migrate_sprout_sourcedb'] = array(
+    'host' => 'dbserver.live.d6ddcc85-f07e-4af2-a994-975c15b11771.drush.in',
+    'password' => '054049b34aca4383a63fb64a3b4df2cd',
+    'port' => 11310
+);
+
+$conf['migrate_sprout_source_base_url'] = 'https://www.interstatepest.com';
+
 /**
  * Implements hook_migrate_api().
  */
@@ -27,9 +36,10 @@ function migrate_sprout_migrate_api() {
      * group_name (a.k.a. import job).
      */
     $common_arguments = array(
-        'source_connection' => 'legacy',
+        'source_connection' => 'sprout',
         'source_version' => 7,
         'group_name' => 'sprout',
+        'soft_dependencies' => array('SproutPrep')
     );
     
     $sourcedb = variable_get('migrate_sprout_sourcedb', array());
@@ -46,8 +56,8 @@ function migrate_sprout_migrate_api() {
         'class_name' => 'DrupalFile7Migration',
         'description' => t('Import files'),
         'default_uid' => 1,
-        'source_dir' => variable_get('migrate_sprout_source_base_url'),
-        'destination_dir' => 'public://sprout_files',
+        'source_dir' => variable_get('migrate_sprout_source_base_url') . '/sites/default/files',
+        'destination_dir' => 'public://',
     );
     
     $api['migrations']['File'] = $common_arguments + $file_arguments;
@@ -101,89 +111,89 @@ function migrate_sprout_migrate_api() {
             'destination_type' => 'blog',
             'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
         ),
-        'CTA' => array(
-            'class_name' => 'CTAMigration',
-            'description' => t('Migration of CTAs'),
-            'source_type' => 'cta',
-            'destination_type' => 'cta',
-        ),
-        'LocalTarget' => array(
-            'class_name' => 'LocalTargetMigration',
-            'description' => t('Migration of LocalTargets'),
-            'source_type' => 'localtarget',
-            'destination_type' => 'localtarget',
-            'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
-        ),
-        'Location' => array(
-            'class_name' => 'LocationMigration',
-            'description' => t('Migration of Locations'),
-            'source_type' => 'location',
-            'destination_type' => 'location',
-            'dependencies' => array('MarketTerms'),
-        ),
-        'Market' => array(
-            'class_name' => 'MarketMigration',
-            'description' => t('Migration of Markets'),
-            'source_type' => 'market',
-            'destination_type' => 'market',
-            'dependencies' => array('File', 'MarketTerms'),
-        ),
-        'Package' => array(
-            'class_name' => 'PackageMigration',
-            'description' => t('Migration of Packages'),
-            'source_type' => 'package',
-            'destination_type' => 'package',
-            'dependencies' => array('File', 'ServiceTerms'),
-        ),
-        'Profile' => array(
-            'class_name' => 'ProfileMigration',
-            'description' => t('Migration of Profiles'),
-            'source_type' => 'profile',
-            'destination_type' => 'profile',
-            'dependencies' => array('File'),
-        ),
-        'Region' => array(
-            'class_name' => 'RegionMigration',
-            'description' => t('Migration of Regions'),
-            'source_type' => 'region',
-            'destination_type' => 'region',
-            'dependencies' => array('File', 'RegionTerms'),
-        ),
-        'Service' => array(
-            'class_name' => 'ServiceMigration',
-            'description' => t('Migration of Services'),
-            'source_type' => 'service',
-            'destination_type' => 'service',
-            'dependencies' => array('File', 'ServiceTerms'),
-        ),
-        'SlideshowSlide' => array(
-            'class_name' => 'SlideMigration',
-            'description' => t('Migration of Slideshow Slides'),
-            'source_type' => 'slide',
-            'destination_type' => 'slide',
-            'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
-        ),
-        'SpecialOffer' => array(
-            'class_name' => 'SpecialOfferMigration',
-            'description' => t('Migration of Special Offers'),
-            'source_type' => 'special_offer',
-            'destination_type' => 'special_offer',
-            'dependencies' => array('File', 'ServiceTerms'),
-        ),
-        'Testimonial' => array(
-            'class_name' => 'TestimonialMigration',
-            'description' => t('Migration of Testimonials'),
-            'source_type' => 'testimonial',
-            'destination_type' => 'testimonial',
-            'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
-        ),
-        'Webform' => array(
-            'class_name' => 'WebformMigration',
-            'description' => t('Migration of Webforms'),
-            'source_type' => 'webform',
-            'destination_type' => 'webform',
-            'dependencies' => array(),
-        ),
+//        'CTA' => array(
+//            'class_name' => 'CTAMigration',
+//            'description' => t('Migration of CTAs'),
+//            'source_type' => 'cta',
+//            'destination_type' => 'cta',
+//        ),
+//        'LocalTarget' => array(
+//            'class_name' => 'LocalTargetMigration',
+//            'description' => t('Migration of LocalTargets'),
+//            'source_type' => 'localtarget',
+//            'destination_type' => 'localtarget',
+//            'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
+//        ),
+//        'Location' => array(
+//            'class_name' => 'LocationMigration',
+//            'description' => t('Migration of Locations'),
+//            'source_type' => 'location',
+//            'destination_type' => 'location',
+//            'dependencies' => array('MarketTerms'),
+//        ),
+//        'Market' => array(
+//            'class_name' => 'MarketMigration',
+//            'description' => t('Migration of Markets'),
+//            'source_type' => 'market',
+//            'destination_type' => 'market',
+//            'dependencies' => array('File', 'MarketTerms'),
+//        ),
+//        'Package' => array(
+//            'class_name' => 'PackageMigration',
+//            'description' => t('Migration of Packages'),
+//            'source_type' => 'package',
+//            'destination_type' => 'package',
+//            'dependencies' => array('File', 'ServiceTerms'),
+//        ),
+//        'Profile' => array(
+//            'class_name' => 'ProfileMigration',
+//            'description' => t('Migration of Profiles'),
+//            'source_type' => 'profile',
+//            'destination_type' => 'profile',
+//            'dependencies' => array('File'),
+//        ),
+//        'Region' => array(
+//            'class_name' => 'RegionMigration',
+//            'description' => t('Migration of Regions'),
+//            'source_type' => 'region',
+//            'destination_type' => 'region',
+//            'dependencies' => array('File', 'RegionTerms'),
+//        ),
+//        'Service' => array(
+//            'class_name' => 'ServiceMigration',
+//            'description' => t('Migration of Services'),
+//            'source_type' => 'service',
+//            'destination_type' => 'service',
+//            'dependencies' => array('File', 'ServiceTerms'),
+//        ),
+//        'SlideshowSlide' => array(
+//            'class_name' => 'SlideMigration',
+//            'description' => t('Migration of Slideshow Slides'),
+//            'source_type' => 'slide',
+//            'destination_type' => 'slide',
+//            'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
+//        ),
+//        'SpecialOffer' => array(
+//            'class_name' => 'SpecialOfferMigration',
+//            'description' => t('Migration of Special Offers'),
+//            'source_type' => 'special_offer',
+//            'destination_type' => 'special_offer',
+//            'dependencies' => array('File', 'ServiceTerms'),
+//        ),
+//        'Testimonial' => array(
+//            'class_name' => 'TestimonialMigration',
+//            'description' => t('Migration of Testimonials'),
+//            'source_type' => 'testimonial',
+//            'destination_type' => 'testimonial',
+//            'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
+//        ),
+//        'Webform' => array(
+//            'class_name' => 'WebformMigration',
+//            'description' => t('Migration of Webforms'),
+//            'source_type' => 'webform',
+//            'destination_type' => 'webform',
+//            'dependencies' => array(),
+//        ),
     );
     
     
@@ -195,6 +205,7 @@ function migrate_sprout_migrate_api() {
     $api['migrations']['SproutFinish'] = array(
         'class_name' => 'SproutFinish',
         'group_name' => 'sprout',
+        'soft_dependencies' => array_keys($api['migrations'])
     );
     
     return $api;

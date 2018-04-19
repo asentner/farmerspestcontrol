@@ -39,6 +39,7 @@ class DrupalFile7Migration extends DrupalFileMigration {
   }
 
   protected function baseQuery() {
+
     $query = Database::getConnection('default', $this->sourceConnection)
              ->select('file_managed', 'f')
              ->fields('f')

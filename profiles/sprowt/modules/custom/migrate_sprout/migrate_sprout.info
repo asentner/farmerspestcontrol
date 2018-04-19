@@ -7,4 +7,5 @@ dependencies[] = migrate
 dependencies[] = migrate_d2d
 
 files[] = migrate_sprout.migrate.inc
+files[] = before_after.inc
 files[] = node.inc
