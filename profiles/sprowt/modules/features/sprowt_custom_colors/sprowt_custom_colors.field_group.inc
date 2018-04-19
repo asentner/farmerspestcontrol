@@ -23,11 +23,11 @@ function sprowt_custom_colors_field_group_info() {
     'label' => 'Background',
     'weight' => '0',
     'children' => array(
-      0 => 'field_color_background',
-      1 => 'field_image_background',
-      2 => 'field_image_background_style',
-      3 => 'field_color_background_overlay',
-      4 => 'field_background_overlay_opacity',
+      0 => 'field_background_overlay_opacity',
+      1 => 'field_color_background',
+      2 => 'field_color_background_overlay',
+      3 => 'field_image_background',
+      4 => 'field_image_background_style',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -56,11 +56,11 @@ function sprowt_custom_colors_field_group_info() {
     'label' => 'Body',
     'weight' => '2',
     'children' => array(
-      0 => 'field_color_text',
-      1 => 'field_color_link',
-      2 => 'field_color_link_hover',
+      0 => 'field_color_link',
+      1 => 'field_color_link_hover',
+      2 => 'field_color_list_item_bullets',
       3 => 'field_color_stars',
-      4 => 'field_color_list_item_bullets',
+      4 => 'field_color_text',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -89,9 +89,9 @@ function sprowt_custom_colors_field_group_info() {
     'label' => 'Border',
     'weight' => '1',
     'children' => array(
-      0 => 'field_color_border',
+      0 => 'field_border_size',
       1 => 'field_border_style',
-      2 => 'field_border_size',
+      2 => 'field_color_border',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -181,8 +181,8 @@ function sprowt_custom_colors_field_group_info() {
     'children' => array(
       0 => 'field_input_background_color',
       1 => 'field_input_border_color',
-      2 => 'field_label_color',
-      3 => 'field_input_text_color',
+      2 => 'field_input_text_color',
+      3 => 'field_label_color',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -241,6 +241,7 @@ function sprowt_custom_colors_field_group_info() {
     'weight' => '4',
     'children' => array(
       0 => 'field_box_shadow',
+      1 => 'field_text_shadow',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

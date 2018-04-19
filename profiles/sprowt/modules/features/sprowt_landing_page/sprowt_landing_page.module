@@ -234,6 +234,15 @@ function sprowt_landing_page_preprocess_paragraphs_item(&$variables)
             hide($variables['content']['field_image']);
         }
     }
+
+    $features_style = field_get_items('paragraphs_item', $paragraphs_item, 'field_features_style');
+    if(!empty($features_style)) {
+        foreach($features_style as $class) {
+            $new_classes_array = array_merge($variables['classes_array'], array($class['value']));
+            $variables['classes_array'] = $new_classes_array;
+            $variables['attributes_array']['class'] = $new_classes_array;
+        }
+    }
 }
 
 /**

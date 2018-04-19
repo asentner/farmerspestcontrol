@@ -956,7 +956,7 @@ function sprowt_landing_page_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'above',
@@ -1023,7 +1023,48 @@ function sprowt_landing_page_field_default_field_instances() {
         'show_token_tree' => 0,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'paragraphs_item-landing_page_features-field_features_style'.
+  $field_instances['paragraphs_item-landing_page_features-field_features_style'] = array(
+    'bundle' => 'landing_page_features',
+    'default_value' => array(
+      0 => array(
+        'value' => 'two_columns',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'This only applies to paragraphs that are NOT within other paragraphs',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_features_style',
+    'label' => 'Features Style',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 2,
     ),
   );
 
@@ -1123,7 +1164,7 @@ function sprowt_landing_page_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'paragraphs_editor_preview' => array(
         'label' => 'inline',
@@ -2576,6 +2617,7 @@ function sprowt_landing_page_field_default_field_instances() {
   t('Embedded Benefits');
   t('Embedded Testimonial');
   t('Features');
+  t('Features Style');
   t('Footer Paragraph');
   t('Header');
   t('Header Paragraph');
@@ -2592,6 +2634,7 @@ function sprowt_landing_page_field_default_field_instances() {
   t('Packages');
   t('Prefix');
   t('Suffix');
+  t('This only applies to paragraphs that are NOT within other paragraphs');
   t('Title');
 
   return $field_instances;

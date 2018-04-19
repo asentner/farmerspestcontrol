@@ -10,16 +10,21 @@
     margin-top: 20px;
     font-size: 15px;
     font-style: italic;
-    .field--name-field-market * {
-      display: inline-block;
+    .field--name-field-market {
+      font-size: 0;
+      &:before {
+        content: ",";
+        margin-right: 5px;
+        font-size: 15px;
+      }
+      * {
+        font-size: 15px;
+        display: inline-block;
+      }
     }
     .field--title {
       @include flexbox;
       justify-content: center;
-      margin-right: 5px;
-      &:after {
-        content: ",";
-      }
     }
   }
 
