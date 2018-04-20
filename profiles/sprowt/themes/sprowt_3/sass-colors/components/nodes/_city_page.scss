@@ -1,0 +1,61 @@
+//Hero
+.block--views-city-pages-city-hero {
+  $color-image-bg: palette(secondary, base);
+	$color-text: palette(white, pure);
+
+  .node {
+		background-color: $color-image-bg;
+  }
+	.slide-image-background {
+		&:before {
+			background-color: #216e83; // this color is used as a color-module place holder
+		}
+	}
+  .field--name-field-display-title {
+    color: $color-text;
+  }
+  .field--name-field-intro {
+		color: $color-text;
+	}
+}
+
+//Anchor link block
+.node--city-page--alt-teaser{
+  background-color: palette(primary, base);
+  color: palette(white, pure);
+  a{
+    color: palette(white, pure);
+    &:before{
+      color: palette(black, pure);
+    }
+    &:after{
+      background-color: palette(black, pure);
+    }
+  }
+}
+
+//Benefits block
+.block--views-city-pages-benefits{
+   $color-bg: palette(neutral, wild-sand);
+   $color-border: palette(white, pure);
+   $color-title: palette(primary, base);
+   $color-title-hover: palette(secondary, base);
+
+   background-color: $color-bg;
+
+   .node__title {
+      color: $color-title;
+      a {
+        color: $color-title;
+        &:hover {
+          color: $color-title-hover;
+        }
+      }
+   }
+   .field--name-field-image {
+      img {
+         border-color: $color-border;
+         background-color: $color-border;
+      }
+   }
+}
