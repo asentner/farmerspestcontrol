@@ -2,9 +2,46 @@
 
 class BaseNodeMigration extends DrupalNode7Migration {
     public function __construct(array $arguments) {
+        $this->sourceFields += $this->addMetatagToSource();
         parent::__construct($arguments);
     }
-
+    
+    function addMetatagToSource() {
+        $fields = array();
+        if($this->moduleExists('metatag')) {
+            $elements = metatag_get_info();
+    
+            foreach ($elements['tags'] as $value) {
+                $metatag_field = 'metatag_' . $value['name'];
+                $fields[$metatag_field] = $value['description'];
+            }
+        }
+        
+        return $fields;
+    }
+    
+    function prepareRow($row) {
+        parent::prepareRow($row);
+        $query = Database::getConnection('default', $this->sourceConnection)
+            ->select('metatag', 'm')
+            ->fields('m')
+            ->condition('m.entity_type', 'node')
+            ->condition('m.entity_id', $row->nid)
+            ->condition('m.revision_id', $row->vid);
+    
+        $result = $query->execute();
+        
+        foreach($result as $r) {
+            $data = unserialize($r->data);
+            foreach($data as $mField => $value) {
+                $index = "metatag_{$mField}";
+                $row->$index = $value['value'];
+            }
+        }
+        
+        return $row;
+    }
+    
     public function autoMap() {
         $sourceFields = $this->getSource()->fields();
         $destFields = $this->getDestination()->fields();
@@ -50,6 +87,23 @@ class BaseNodeMigration extends DrupalNode7Migration {
         );
     }
 
+    public function isImagefield($field, $type = 'destination') {
+        switch($type) {
+            case 'destination':
+                $info = field_info_field($field);
+                return $info['type'] == 'image';
+                break;
+            case 'source':
+                $sourceFieldInfo = $this->version->getSourceFieldInfo();
+                if(!empty($sourceFieldInfo[$field])) {
+                    return $sourceFieldInfo[$field][$type] == 'image';
+                }
+                break;
+        }
+        
+        return false;
+    }
+    
     public function mapFileField($sourceField, $destField = null) {
         if(empty($destField)) {
             $destField = $sourceField;
@@ -63,10 +117,10 @@ class BaseNodeMigration extends DrupalNode7Migration {
             ->defaultValue(TRUE);
         $this->addFieldMapping($destField . ':language')
             ->defaultValue(LANGUAGE_NONE);
-        $this->addFieldMapping($destField . ':alt', $sourceField . ':alt')
-            ->sourceMigration('File');
-        $this->addFieldMapping($destField . ':title', $sourceField . ':title')
-            ->sourceMigration('File');
+        if($this->isImagefield($destField) && $this->isImagefield($sourceField, 'source')) {
+            $this->addFieldMapping($destField . ':alt', $sourceField . ':alt');
+            $this->addFieldMapping($destField . ':title', $sourceField . ':title');
+        }
     }
 
     public function mapTermField($sourceMigration, $sourceField, $destField = null) {
@@ -121,9 +175,8 @@ class BlogMigration extends BaseNodeMigration
         $this->autoMap();
     }
 
-
     function fixPostDate($value) {
-        $value = date('Y-m-d H:i:s', $value);
+        return date('Y-m-d H:i:s', $value);
     }
 
 }

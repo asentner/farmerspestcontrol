@@ -21,6 +21,9 @@ function migrate_sprout_migrate_api() {
             ),
             'migrations' => array(),
         ),
+        'destination handlers' => array(
+            'FocalPointDestinationHandler',
+        ),
     );
     
     $api['migrations']['SproutPrep'] = array(
@@ -53,7 +56,7 @@ function migrate_sprout_migrate_api() {
     }
     
     $file_arguments = array(
-        'class_name' => 'DrupalFile7Migration',
+        'class_name' => 'FocalPointFile',
         'description' => t('Import files'),
         'default_uid' => 1,
         'source_dir' => variable_get('migrate_sprout_source_base_url') . '/sites/default/files',
