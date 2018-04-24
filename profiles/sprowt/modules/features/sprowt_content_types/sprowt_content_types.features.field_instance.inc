@@ -312,6 +312,18 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'quaternary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -382,6 +394,18 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => -1,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -481,6 +505,18 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 10,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -608,17 +644,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -1256,6 +1299,12 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -1264,7 +1313,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -1947,17 +1996,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -2011,17 +2067,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -2085,17 +2148,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -4192,17 +4262,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -4960,17 +5037,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -5603,17 +5687,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -6110,17 +6201,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -6878,17 +6976,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -7260,17 +7365,24 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -7974,6 +8086,12 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'display_summary' => 1,
+      'required_summary' => array(
+        0 => 0,
+      ),
+      'show_summary' => array(
+        0 => 1,
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -7982,7 +8100,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',

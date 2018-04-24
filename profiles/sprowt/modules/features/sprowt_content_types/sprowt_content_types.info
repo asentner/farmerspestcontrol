@@ -516,3 +516,4 @@ features_exclude[field_base][field_ebooking] = field_ebooking
 features_exclude[field_base][field_image_delete_me] = field_image_delete_me
 features_exclude[field_instance][node-webform-field_ebooking] = node-webform-field_ebooking
 features_exclude[field_instance][node-localtarget-field_image_delete_me] = node-localtarget-field_image_delete_me
+project path = profiles/sprowt/modules/features
