@@ -1,9 +1,9 @@
 <?php
 
 require_once drupal_get_path('module', 'system') . '/system.admin.inc';
-require_once drupal_get_path('module','review_boost') . '/review_boost_sms.php';
-require_once drupal_get_path('module','review_boost') . '/review_boost_customer.php';
-
+use ReviewBoost\ReviewBoost;
+use ReviewBoost\Sms\ReviewBoostSMS;
+use ReviewBoost\Customer\ReviewBoostCustomer;
 function _review_boost_admin_menu_block_page() {
     $item = menu_get_item();
     if ($content = system_admin_menu_block($item)) {
@@ -19,7 +19,7 @@ function _review_boost_admin_import_csv() {
   global $conf;
   $conf['preprocess_js'] = false; //disable js aggregation for this page
   drupal_page_is_cacheable(false); //disable caching for this page
-  drupal_add_js(drupal_get_path('module','review_boost') . '/js/review_boost.js');
+  drupal_add_js(drupal_get_path('module','review_boost') . '/resources/assets/js/review_boost.js');
     return theme('review_boost_admin_import_csv', array(
         'form' => drupal_get_form('_review_boost_admin_import_csv_form'),
     ));
@@ -255,6 +255,7 @@ function _review_boost_admin_import_csv_form_submit($form, &$form_state) {
           ->execute();
 
         _review_boost_get_hashes($hash);
+
 
        //Send sms if both email and phone exists
         if(!empty($data['customer_phone']) && !empty($data['customer_email'])){
@@ -781,7 +782,7 @@ function _review_boost_admin_survey_results(){
         'type' => 'inline',
         'scope' => 'footer'
     ));
-    drupal_add_js(drupal_get_path('module', 'review_boost') . '/js/results.js', array(
+    drupal_add_js(drupal_get_path('module', 'review_boost') . '/resources/assets/js/results.js', array(
         'type' => 'file',
         'scope' => 'footer'
     ));
@@ -1186,7 +1187,7 @@ function _review_boost_admin_review() {
     drupal_page_is_cacheable(false); //disable caching for this page
     drupal_add_js('//code.jquery.com/jquery-1.12.4.min.js');
     drupal_add_js('//cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.80/jsrender.min.js');
-    drupal_add_js(drupal_get_path('module', 'review_boost') . '/js/review_links.js');
+    drupal_add_js(drupal_get_path('module', 'review_boost') . '/resources/assets/js/review_links.js');
     return theme('review_boost_review_settings', array(
         'form' => drupal_get_form('_review_boost_admin_review_form'),
     ));

@@ -6,6 +6,9 @@
  * Time: 4:34 PM
  */
 
+namespace ReviewBoost\Customer;
+use ReviewBoost\Sms\ReviewBoostSMS;
+
 class ReviewBoostCustomer {
 
   private $email_optout_status,
@@ -72,7 +75,7 @@ class ReviewBoostCustomer {
    * if no customer is found.
    */
   function getCustomerByPhone($phone){
-    $result = db_query("SELECT distinct(customer_phone), sms_optout FROM {review_boost_customer}
+    $result = db_query("SELECT distinct(customer_phone), sms_optout,email FROM {review_boost_customer}
           WHERE customer_phone = :phone",
       array(
         ':phone' => $phone
@@ -253,4 +256,5 @@ class ReviewBoostCustomer {
     }
     return $result;
   }
+
 }

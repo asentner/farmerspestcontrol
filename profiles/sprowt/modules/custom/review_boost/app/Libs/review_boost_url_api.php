@@ -6,15 +6,19 @@
  * Time: 11:22 PM
  */
 
-class GoogleUrlApi {
+namespace ReviewBoost\Libs;
+
+
+
+class ReviewBoostUrlApi {
   // Constructor
-  function __construct($key,$apiURL = 'https://www.googleapis.com/urlshortener/v1/url') {
+  public function __construct($key,$apiURL = 'https://www.googleapis.com/urlshortener/v1/url') {
     // Keep the API Url
     $this->apiURL = $apiURL.'?key='.$key;
   }
 
   // Shorten a URL
-  function shorten($url) {
+  public function shorten($url) {
     // Send information along
     $response = $this->send($url);
     // Return the result
@@ -22,7 +26,7 @@ class GoogleUrlApi {
   }
 
   // Expand a URL
-  function expand($url) {
+  public function expand($url) {
     // Send information along
     $response = $this->send($url,false);
     // Return the result
@@ -30,7 +34,7 @@ class GoogleUrlApi {
   }
 
   // Send information to Google
-  function send($url,$shorten = true) {
+  public function send($url,$shorten = true) {
     // Create cURL
     $ch = curl_init();
     // If we're shortening a URL...

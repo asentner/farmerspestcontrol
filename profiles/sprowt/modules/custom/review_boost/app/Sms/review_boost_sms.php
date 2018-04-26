@@ -6,10 +6,10 @@
  * Time: 1:35 AM
  */
 
-require __DIR__ . '/vendor/autoload.php';
-require_once drupal_get_path('module', 'review_boost') . '/review_boost.php';
-require_once drupal_get_path('module', 'review_boost') . '/google_url_api.php';
+namespace ReviewBoost\Sms;
 
+use ReviewBoost\Libs\ReviewBoostUrlApi;
+use ReviewBoost\ReviewBoost;
 use Twilio\Rest\Client;
 
 class ReviewBoostSMS {
@@ -31,15 +31,23 @@ class ReviewBoostSMS {
     $this->formToken = $formToken;
   }
 
+  public function testCallback(){
+    $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+    return $url . 'sms/callback';
+  }
+
   /**
    * @param $customerPhone
    *
    * Sends message to client via Twilio API
    */
   public function sendSMS($customerPhone) {
+    $url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+
     $msgContent = [
       'From' => $this->twilio_admin_phone,
       'Body' => $this->getTokenizedMsg(),
+      'statusCallback' => $url . 'sms/callback',
     ];
     //check if image has been uploaded and include with sms button checked
     if (!empty($this->fetchImageURI('twilio_image'))) {
@@ -93,7 +101,7 @@ class ReviewBoostSMS {
   }
 
   /**
-   * @param $phone
+   * @param $phonegoogle_url_api
    *
    * @return mixed
    *
@@ -150,7 +158,7 @@ class ReviewBoostSMS {
    * Shortens URL
    */
   public function shortenURL($url) {
-    $googer = new GoogleUrlApi($this->googleAPIKey);
+    $googer = new ReviewBoostUrlApi($this->googleAPIKey);
     $shortUrl = $googer->shorten($url);
     return $shortUrl;
   }

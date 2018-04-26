@@ -1,5 +1,10 @@
 <?php
-require_once drupal_get_path('module','review_boost') . '/review_boost_sms.php';
+
+namespace ReviewBoost;
+
+use ReviewBoost\Sms\ReviewBoostSMS;
+use DateTimeZone;
+use DateTime;
 class ReviewBoost {
     private $tokens = array();
     private $token_desciptions = array();

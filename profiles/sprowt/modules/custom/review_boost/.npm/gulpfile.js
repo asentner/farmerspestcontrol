@@ -11,7 +11,7 @@ var notify = require("gulp-notify");
 var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('sass', function() {
-  gulp.src('../sass/**/*.scss')
+  gulp.src('../resources/assets/sass/**/*.scss')
       .pipe(sourcemaps.init())
       .pipe(sassGlob())
       .pipe(sass().on('error', notify.onError('<%= error.message %>')))
@@ -23,7 +23,7 @@ gulp.task('sass', function() {
 
 gulp.task('watch', function() {
   livereload.listen();
-  gulp.watch('../sass/**/*.scss', ['sass']);
+  gulp.watch('../resources/assets/sass/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['sass', 'watch']);
