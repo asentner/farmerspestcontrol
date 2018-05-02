@@ -612,7 +612,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 3,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -705,7 +705,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -788,9 +788,13 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'secondary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
         'weight' => 0,
       ),
       'teaser' => array(
@@ -937,13 +941,9 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
-        'module' => 'image_link_formatter',
-        'settings' => array(
-          'image_link' => 'field_link',
-          'image_style' => 'benefits__front_page_',
-        ),
-        'type' => 'image_link_formatter',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'sidebar' => array(
         'label' => 'hidden',
@@ -1050,7 +1050,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_plain',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -1131,7 +1131,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -1197,7 +1197,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'sidebar' => array(
         'label' => 'above',
@@ -2344,7 +2344,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 31,
+      'default_image' => 41,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -2358,7 +2358,14 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
@@ -2369,16 +2376,48 @@ function sprowt_content_types_field_default_field_instances() {
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'insert' => 0,
-        'insert_absolute' => FALSE,
+        'insert_absolute' => 0,
         'insert_class' => '',
-        'insert_default' => array(
-          0 => 'auto',
-        ),
+        'insert_default' => 'auto',
         'insert_styles' => array(
-          0 => 'auto',
+          'auto' => 'auto',
+          'icon_link' => 0,
+          'image' => 0,
+          'image_affiliation_image' => 0,
+          'image_annotated_image' => 0,
+          'image_benefits' => 0,
+          'image_benefits__front_page_' => 0,
+          'image_flexslider_full' => 0,
+          'image_flexslider_thumbnail' => 0,
+          'image_focal_point_preview' => 0,
+          'image_focal_point_scale_and_crop_80x80' => 0,
+          'image_focal_point_scale_and_crop_100x100' => 0,
+          'image_focal_point_scale_and_crop_185x150' => 0,
+          'image_focal_point_scale_and_crop_250x250' => 0,
+          'image_focal_point_scale_and_crop_470x400' => 0,
+          'image_focal_point_scale_and_crop_500x325' => 0,
+          'image_focal_point_scale_and_crop_600x475' => 0,
+          'image_focal_point_scale_and_crop_800x600' => 0,
+          'image_fresh_light_service' => 0,
+          'image_large' => 0,
+          'image_markets' => 0,
+          'image_medium' => 0,
+          'image_menu_icon' => 0,
+          'image_package_icon' => 0,
+          'image_primary__800x400_' => 0,
+          'image_profile' => 0,
+          'image_scale_60x60' => 0,
+          'image_scale_235' => 0,
+          'image_service' => 0,
+          'image_service_primary' => 0,
+          'image_slideshow_homepage' => 0,
+          'image_special_offers_slideshow' => 0,
+          'image_thumbnail' => 0,
+          'link' => 0,
         ),
         'insert_width' => '',
         'preview_image_style' => 'thumbnail',
@@ -6103,9 +6142,22 @@ function sprowt_content_types_field_default_field_instances() {
     'display' => array(
       'alt_teaser' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 2,
+        'module' => 'smart_trim',
+        'settings' => array(
+          'more_link' => 1,
+          'more_text' => 'Read more',
+          'summary_handler' => 'full',
+          'trim_length' => 200,
+          'trim_link' => 0,
+          'trim_options' => array(
+            'text' => 0,
+          ),
+          'trim_preserve_tags' => '',
+          'trim_suffix' => '...',
+          'trim_type' => 'chars',
+        ),
+        'type' => 'smart_trim_format',
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -6163,10 +6215,10 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'smart_trim',
         'settings' => array(
-          'more_link' => 1,
+          'more_link' => 0,
           'more_text' => 'Learn more',
           'summary_handler' => 'full',
-          'trim_length' => 200,
+          'trim_length' => 150,
           'trim_link' => 0,
           'trim_options' => array(
             'text' => 'text',
@@ -6426,7 +6478,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
-      'default_image' => 4,
+      'default_image' => 3,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
@@ -6519,7 +6571,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -7471,7 +7523,7 @@ function sprowt_content_types_field_default_field_instances() {
     'description' => 'Leave this field blank to default to the end of the current month, which will dynamically update each month.',
     'display' => array(
       'alt_teaser' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'date_only',
@@ -7499,10 +7551,10 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 2,
       ),
       'secondary_teaser' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'standard_numeric',
+          'format_type' => 'expiration_date',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -7527,7 +7579,7 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 2,
       ),
       'teaser' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'expiration_date',
@@ -7535,7 +7587,7 @@ function sprowt_content_types_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 4,
@@ -7543,7 +7595,7 @@ function sprowt_content_types_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_expiration_date',
-    'label' => 'Expiration date',
+    'label' => 'Expires',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -7560,6 +7612,7 @@ function sprowt_content_types_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -8292,7 +8345,7 @@ function sprowt_content_types_field_default_field_instances() {
   t('Displays below the intro.');
   t('Email');
   t('Enter a comma-separated list of words to describe your content.');
-  t('Expiration date');
+  t('Expires');
   t('Google+ URL');
   t('Hero Image');
   t('Highlight');

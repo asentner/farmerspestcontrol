@@ -198,6 +198,7 @@ features[variable][] = clear_all_special_offer
 features[variable][] = clear_all_testimonial
 features[variable][] = comment_page
 features[variable][] = comment_webform
+features[variable][] = date_format_expiration_date
 features[variable][] = diff_enable_revisions_page_node_affiliation
 features[variable][] = diff_enable_revisions_page_node_benefit
 features[variable][] = diff_enable_revisions_page_node_blog

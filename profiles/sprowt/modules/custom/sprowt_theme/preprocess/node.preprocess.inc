@@ -39,4 +39,23 @@ function sprowt_theme_preprocess_node(&$variables) {
           }
       }
   }
+
+    if($node->type == 'special_offer') {
+      if(empty($variables['field_expiration_date'])) {
+          $N = entity_metadata_wrapper('node', $node);
+          $date = new DateTime(date('Y-m-t 12:00:00'));
+          $N->field_expiration_date = $date->getTimestamp();
+
+
+          $array = field_view_field(
+              'node',
+              $N->value(),
+              'field_expiration_date',
+              $variables['view_mode'] == 'full' ? 'default' : $variables['view_mode']
+              );
+
+          $variables['content']['field_expiration_date'] = $array;
+      }
+    }
+
 }

@@ -1,0 +1,51 @@
+<?php
+
+function sprowt_content_types_install() {
+    sprowt_content_types_update_7100();
+}
+
+/**
+ * add expiration date format
+ */
+function sprowt_content_types_update_7100() {
+    db_insert('date_formats')
+        ->fields(array(
+            'format' => 'F j, Y',  // PHP Date String
+            'type' => 'custom',          // 'custom'
+            'locked' => 0,               // 0 = user-specified date format
+        ))
+        ->execute();
+    db_insert('date_format_type')
+        ->fields(array(
+            'type' => 'expiration_date',  // Machine Name
+            'title' => 'Expiration Date', // Display Name
+            'locked' => 0,        // 1 = can't change through UI, 0 = can change
+        ))
+        ->execute();
+
+    variable_set('date_format_expiration_date', 'F j, Y');
+}
+
+/**
+ * Update expiration date field
+ */
+function sprowt_content_types_update_7101() {
+    $field_instance = field_info_instance('node','field_expiration_date', 'special_offer');
+
+    $field_instance['label'] = 'Expires';
+
+    $displays = array(
+        'teaser',
+        'secondary_teaser',
+        'alt_teaser'
+    );
+
+    foreach($displays as $display) {
+        if(!empty($field_instance['display'][$display])) {
+            $field_instance['display'][$display]['label'] = 'inline';
+            $field_instance['display'][$display]['settings']['format_type'] = 'expiration_date';
+        }
+    }
+
+    field_update_instance($field_instance);
+}
