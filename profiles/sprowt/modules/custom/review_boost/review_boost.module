@@ -1,0 +1,978 @@
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use ReviewBoost\ReviewBoost as ReviewBoost;
+use ReviewBoost\Sms\ReviewBoostSMS;
+use ReviewBoost\Customer\ReviewBoostCustomer;
+use ReviewBoost\Rest\Respond\Respond;
+use ReviewBoost\Rest\Message\Message;
+use ReviewBoost\Customer\ReviewBoostToken;
+use ReviewBoost\Sms\Undelivered;
+use ReviewBoost\Rest\Callback\Callback;
+use ReviewBoost\Review\ReviewBoostReview;
+/**
+ * Implements hook_menu().
+ */
+
+function review_boost_menu() {
+  $items['customer-survey'] = [
+    'title' => 'Thank you for taking our customer satisfaction survey!',
+    'page callback' => '_review_boost_questionnaire_anon',
+    'access arguments' => ['access content'],
+    'type' => MENU_CALLBACK,
+  ];
+
+  $items['customer-survey/%'] = [
+    'title' => 'Thank you for taking our customer satisfaction survey!',
+    'page callback' => '_review_boost_questionnaire',
+    'page arguments' => [1],
+    'access arguments' => ['access content'],
+    'type' => MENU_CALLBACK,
+  ];
+
+  $items['customer-survey/%/thank-you'] = [
+    'title' => 'Thank you!',
+    'page callback' => '_review_boost_questionnaire_complete',
+    'page arguments' => [1],
+    'access arguments' => ['access content'],
+    'type' => MENU_CALLBACK,
+  ];
+
+  $items['admin/survey'] = [
+    'title' => 'Review Boost',
+    'description' => 'Review Boost',
+    'page callback' => '_review_boost_admin_menu_block_page',
+    'access callback' => '_review_boost_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'position' => 'left',
+  ];
+
+  $items['admin/survey/import-csv'] = [
+    'title' => 'Import CSV',
+    'description' => 'Import a list of customers to receive a survey request',
+    'page callback' => '_review_boost_admin_import_csv',
+    'access callback' => '_review_boost_admin_access',
+    //'type' => MENU_NORMAL_ITEM,
+    'file' => 'review_boost.admin.inc',
+  ];
+
+  $items['admin/survey/import-csv/confirm'] = [
+    'title' => 'Import CSV Confirm',
+    'description' => 'Import a list of customers to receive a survey request',
+    'page callback' => '_review_boost_admin_import_csv_confirm',
+    'access callback' => '_review_boost_admin_access',
+    'type' => MENU_CALLBACK,
+    'file' => 'review_boost.admin.inc',
+  ];
+
+  $items['admin/survey/settings'] = [
+    'title' => 'Review Boost settings',
+    'description' => 'Administration for Review Boost',
+    'page callback' => '_review_boost_admin',
+    'access callback' => '_review_boost_admin_access',
+    'file' => 'review_boost.admin.inc',
+  ];
+
+  $items['admin/survey/review-settings'] = [
+    'title' => 'Review Boost Review settings',
+    'description' => 'Review Administration for Review Boost',
+    'page callback' => '_review_boost_admin_review',
+    'access callback' => '_review_boost_admin_access',
+    'file' => 'review_boost.admin.inc',
+  ];
+
+  $items['admin/survey/sample'] = [
+    'title' => 'Survey Sample CSV',
+    'description' => 'survey sample csv',
+    'page callback' => '_review_boost_admin_sample_csv',
+    'access callback' => '_review_boost_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'type' => MENU_CALLBACK,
+  ];
+
+  $items['admin/survey/%/result'] = [
+    'title' => 'Survey Result',
+    'description' => 'survey result',
+    'page callback' => '_review_boost_admin_survey_result',
+    'page arguments' => [2],
+    'access callback' => '_review_boost_admin_access',
+    'type' => MENU_CALLBACK,
+    'file' => 'review_boost.admin.inc',
+  ];
+
+  $items['admin/survey/%/delete'] = [
+    'title' => 'Survey Result',
+    'description' => 'survey result',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['_review_boost_result_delete', 2],
+    'access callback' => '_review_boost_admin_access',
+    'type' => MENU_CALLBACK,
+    'file' => 'review_boost.admin.inc',
+  ];
+
+  $items['admin/survey/results'] = [
+    'title' => 'Survey Results',
+    'description' => 'Answered surveys',
+    'page callback' => '_review_boost_admin_survey_results',
+    'access callback' => '_review_boost_admin_access',
+    'file' => 'review_boost.admin.inc',
+  ];
+
+  $items['admin/survey/results/csv'] = [
+    'title' => 'Download CSV',
+    'description' => 'survey results csv',
+    'page callback' => '_review_boost_admin_results_csv',
+    'access callback' => '_review_boost_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'type' => MENU_LOCAL_ACTION,
+  ];
+
+  $items['admin/survey/sms-settings'] = [
+    'title' => 'SMS/MMS Settings',
+    'description' => 'Twilio API credentials, admin SMS number, and custom message including custom image',
+    'page callback' => '_review_boost_sms_admin',
+    'access callback' => '_review_boost_admin_access',
+    'file' => 'review_boost_sms.admin.inc',
+  ];
+  $items['sms/response'] = [
+    'page callback' => '_review_boost_sms_response',
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+  $items['sms/callback'] = [
+    'page callback' => '_review_boost_sms_callback',
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+  $items['review/links/get-clicked-link'] = [
+    'page callback' => '_review_boost_review_get_clicked_link',
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+  $items['admin/survey/advanced'] = [
+    'title' => 'Developer Tools',
+    'description' => 'Clear Queue, Customers, and Tokens.',
+    'access callback' => '_review_boost_developer_admin_access',
+  ];
+  $items['admin/survey/advanced/clear-tokens'] = [
+    'title' => 'Clear All Tokens',
+    'description' => 'Deletes ALL DATA the token table.',
+    'page callback' => '_review_boost_admin_clear_tokens',
+    'access callback' => '_review_boost_developer_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+  $items['admin/survey/advanced/clear-customers'] = [
+    'title' => 'Clear All Customers',
+    'description' => 'Deletes ALL DATA from the customers table',
+    'page callback' => '_review_boost_admin_clear_customers',
+    'access callback' => '_review_boost_developer_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+  $items['admin/survey/advanced/clear-message-queue'] = [
+    'title' => 'Clear All Queued',
+    'description' => 'Deletes all queued SMS/Email messages',
+    'page callback' => '_review_boost_admin_clear_message_queue',
+    'access callback' => '_review_boost_developer_admin_access',
+    'file' => 'review_boost.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function review_boost_theme($existing, $type, $theme, $path) {
+  $template_path = drupal_get_path('module', 'review_boost') . '/templates';
+  $sms_template_path = drupal_get_path('module','review_boost').'templates/sms';
+  return [
+    'review_boost_questionnaire' => [
+      'variables' => [
+        'form' => NULL,
+      ],
+      'template' => 'review_boost_questionnaire',
+      'path' => $template_path,
+    ],
+    'review_boost_expired' => [
+      'variables' => [
+        'company_email' => NULL,
+        'signoff' => NULL,
+      ],
+      'template' => 'review_boost_expired',
+      'path' => $template_path,
+    ],
+    'review_boost_complete' => [
+      'variables' => [
+        'request_review' => FALSE,
+      ],
+      'template' => 'review_boost_complete',
+      'path' => $template_path,
+    ],
+    'review_boost_admin_import_csv' => [
+      'variables' => [
+        'form' => NULL,
+      ],
+      'template' => 'review_boost_admin_import_csv',
+      'path' => $template_path,
+    ],
+    'review_boost_sms_admin' => [
+      'variables' => [
+        'form' => NULL,
+      ],
+      'template' => 'review_boost_sms_admin',
+      'path' => $template_path,
+    ],
+    'review_boost_admin' => [
+      'variables' => [
+        'form' => NULL,
+      ],
+      'template' => 'review_boost_admin',
+      'path' => $template_path,
+    ],
+    'review_boost_email_request' => [
+      'variables' => [
+        'customer_name' => NULL,
+        'company_name' => NULL,
+        'company_signoff' => NULL,
+        'survey_link' => NULL,
+      ],
+      'template' => 'review_boost_email_request',
+      'path' => $template_path,
+    ],
+    'review_boost_email_signoff' => [
+      'variables' => [
+        'company_name' => NULL,
+        'street' => NULL,
+        'street2' => NULL,
+        'locality' => NULL,
+        'province' => NULL,
+        'postal_code' => NULL,
+        'phone_number' => NULL,
+      ],
+      'template' => 'review_boost_email_signoff',
+      'path' => $template_path,
+    ],
+    'review_boost_settings' => [
+      'variables' => [
+        'form' => NULL,
+      ],
+      'template' => 'review_boost_settings',
+      'path' => $template_path,
+    ],
+    'review_boost_review_settings' => [
+      'variables' => [
+        'form' => NULL,
+      ],
+      'template' => 'review_boost_review_settings',
+      'path' => $template_path,
+    ],
+    'review_boost_survey_result' => [
+      'variables' => [
+        'fields' => [],
+        'token' => NULL,
+      ],
+      'template' => 'review_boost_survey_result',
+      'path' => $template_path,
+    ],
+    'review_boost_survey_results' => [
+      'variables' => [
+        'results' => [],
+        'pager' => NULL,
+        'totals' => [],
+      ],
+      'template' => 'review_boost_survey_results',
+      'path' => $template_path,
+    ],
+    'review_boost_complete_default' => [
+      'variables' => [
+        'request_review' => FALSE,
+      ],
+      'template' => 'review_boost_complete_default',
+      'path' => $template_path,
+    ],
+    'review_boost_admin_import_csv_confirm' => [
+      'variables' => [
+        'form' => NULL,
+        'data' => [],
+        'test_data' => [],
+      ],
+      'template' => 'review_boost_admin_import_csv_confirm',
+      'path' => $template_path,
+    ],
+    'review_boost_skipped_survey_questions_default' => [
+      'template' => 'review_boost_skip_survey_questions_default',
+      'path' => $template_path,
+    ],
+  ];
+}
+
+/**
+ * Implements hook_permission
+ */
+function review_boost_permission() {
+  return [
+    'administer_review_boost' => [
+      'title' => t('Administer Review Boost'),
+    ],
+    'developer_review_boost' => [
+      'title' => t('Developer Administer Review Boost'),
+      'description' =>t('Enables advanced developer options.')
+    ],
+  ];
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function review_boost_cron_queue_info() {
+  return [
+    'review_boost_email_worker' => [
+      'worker callback' => '_review_boost_email_worker',
+      'time' => 60 * 15,
+    ],
+    'review_boost_sms_worker' => [
+      'worker callback' => '_review_boost_sms_worker',
+      'time' => 60 * 15,
+    ],
+  ];
+}
+
+function _review_boost_get_signoff() {
+  $RB = new ReviewBoost();
+  return $RB->companySignoff();
+}
+
+function _review_boost_get_email() {
+  $RB = new ReviewBoost();
+  return $RB->getEmail();
+}
+
+function _review_boost_get_phone() {
+  $RB = new ReviewBoost();
+  return $RB->getPhone();
+}
+
+function _review_boost_translate_values($str, $token, $additional_trans = []) {
+  $RB = new ReviewBoost($token);
+  return $RB->translateValues($str, $additional_trans);
+}
+
+function review_boost_mail($key, &$message, $params) {
+  if (module_exists('smtp')) {
+    $allow_html = variable_get('smtp_allowhtml', FALSE);
+  }
+  else {
+    $allow_html = FALSE;
+  }
+
+  if ($allow_html) {
+    $headers = [
+      'MIME-Version' => '1.0',
+      'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+      'Content-Transfer-Encoding' => '8Bit',
+      'X-Mailer' => 'Drupal',
+    ];
+
+    $message['headers'] = $headers;
+  }
+  switch ($key) {
+    case 'survey_email':
+      $RB = new ReviewBoost($params['data']['token']);
+      $data = [
+        '%from_email' => $message['from'],
+      ];
+
+      $RB->addTokenValues($data);
+
+      $message['subject'] = variable_get('review_boost_customer_subject', 'How did we do?');
+
+      $message['subject'] = $RB->translateValues($message['subject']);
+
+      $message['body'][] = $RB->customerEmailBody();
+      break;
+    case 'admin_email':
+      global $base_url;
+      $RB = new ReviewBoost($params['token']);
+      $survey_link = $base_url . '/admin/survey/' . $params['token'] . '/result';
+      $data = [
+        '%rating' => $params['rating'],
+        '%comments' => $params['comments'],
+        '%survey_link' => $survey_link,
+        '%from_email' => $message['from'],
+      ];
+      if ($RB->allowHtml()) {
+        $data['%comments'] = nl2br($data['%comments']);
+      }
+      $RB->addTokenValues($data);
+
+      $message['subject'] = variable_get('review_boost_admin_subject', 'A new ReviewBoost survey has been filled out');
+
+      $message['subject'] = $RB->translateValues($message['subject']);
+
+      $message['body'][] = $RB->adminEmailBody();
+  }
+}
+
+function _review_boost_email_worker($item) {
+
+  $tid = ReviewBoostToken::fetchUserTid($item['data']['token']);
+  $from_email = variable_get('review_boost_customer_from_email', _review_boost_get_email());
+  $message = drupal_mail('review_boost', 'survey_email', $item['data']['customer_email'], LANGUAGE_NONE, $item, $from_email, TRUE);
+
+  db_update('review_boost_token')
+    ->fields(['email_sent' => 1])
+    ->condition('token', $item['data']['token'])
+    ->execute();
+
+  //handle callbacks
+  $cRow = array(
+    'email_delivered' => 0,
+    'tid' => $tid
+  );
+
+  if($message['result']){ //email was delivered
+    $cRow['email_delivered'] = 1;
+  }
+
+  $callback = new Callback();
+
+  if($callback->checkIfExists($tid)){
+    $callback->update($cRow);
+  }else{
+    $cRow['tid'] = $tid;
+    $callback->insert($cRow);
+  }
+}
+
+function _review_boost_sms_worker($item) {
+
+  $tid = ReviewBoostToken::fetchUserTid($item['data']['token']);
+  $callback = new Callback();
+  $sms = new ReviewBoostSMS($item['data']['token']);
+  $sms->setPhone($item['data']['customer_phone']);
+  $cRow = array(
+    'sms_delivered' => 0
+  );
+
+  try {
+
+    $sms->sendSMS($sms->getPhone());
+    db_update('review_boost_token')->fields(['text_sent' => 1])->execute();
+    $cRow['sms_delivered'] = 1;
+    if($callback->checkIfExists($tid)){
+
+      $callback->update($cRow);
+
+    }else{
+
+      $cRow['tid'] = $tid;
+      $callback->insert($cRow);
+
+    }
+  } catch (Exception $e) {
+
+    if($callback->checkIfExists($tid)){
+
+      $callback->update($cRow);
+
+    }else{
+
+      $cRow['tid'] = $tid;
+      $callback->insert($cRow);
+
+    }
+
+
+    if(!empty($item['data']['customer_email'])){
+
+      $queue = DrupalQueue::get('review_boost_email_worker');
+      $queue->createItem(['data' => $item['data']]);
+
+      drupal_set_message('There was an error sending a text to a customer with the id of: ' . $item['data']['customer_id']
+        . ' Email will be sent instead');
+
+      watchdog('review_boost_sms',"Error sending SMS to customer %customer_id. Sent email instead. Error: %error",array(
+        '%customer_id' => $item['data']['customer_id'],
+        '%error' => $e
+      ));
+
+      db_update('review_boost_token')->fields(['email_sent' => 1])->execute();
+
+    }else{
+      watchdog('review_boost_sms',"Error sending backup email to customer %customer_id. Error: %error",array(
+        '%customer_id' => $item['data']['customer_id'],
+        '%error' => $e
+      ));
+    }
+
+  }
+}
+
+function _review_boost_questionnaire_anon() {
+  $now = new DateTime();
+  $token = _review_boost_generate_token();
+  db_insert('review_boost_token')
+    ->fields([
+      'token' => $token,
+      'customer_id' => 'anon_' . $now->format('YmdHis'),
+      'first_name' => 'Anonymous',
+      'last_name' => '',
+      'email' => '',
+      'tech' => '',
+      'sales' => '',
+      'branch' => '',
+      'service' => '',
+      'service_date' => $now->getTimestamp(),
+      'creation_date' => time(),
+      'email_sent' => 1,
+    ])
+    ->execute();
+
+  return _review_boost_questionnaire($token);
+}
+
+function _review_boost_questionnaire($token) {
+  $RB = new ReviewBoost();
+
+  if($RB->getSkipSurveyStatus()){
+    return _review_boost_skip_survey_questions($token);
+  }
+  // Query for the token id to see if it's valid and to pass to the form
+  $result = db_query('SELECT tid FROM {review_boost_token} WHERE token = :token', [
+    'token' => $token,
+  ])->fetchAssoc();
+
+  $exists = db_query("
+        SELECT count(*)
+        FROM review_boost_result
+        WHERE tid = :tid
+    ", [
+    ':tid' => $result['tid'],
+  ])->fetchField();
+
+  if ($exists) {
+    drupal_set_title('Survey Expired');
+    $signoff = _review_boost_get_signoff();
+    return theme('review_boost_expired', [
+      'company_email' => _review_boost_get_email(),
+      'signoff' => $signoff,
+    ]);
+  }
+
+
+  // If the query returns false, throw a 404
+  if (!$result) {
+    return MENU_NOT_FOUND;
+  }
+
+  // Pass the form to the template and render the page
+  return theme('review_boost_questionnaire', [
+    'form' => drupal_get_form('_review_boost_questionnaire_form', $result['tid']),
+  ]);
+}
+
+function _review_boost_questionnaire_form($form, $form_state, $tid) {
+  $path = drupal_get_path('module', 'review_boost');
+
+  $form['hidden']['tid'] = [
+    '#type' => 'hidden',
+    '#default_value' => $tid,
+  ];
+
+  $form['service_rating'] = [
+    '#type' => 'hidden',
+    //'#required' => true,
+    '#attributes' => [
+      'id' => [
+        'backingServiceRating',
+      ],
+    ],
+  ];
+
+  $form['rateit'] = [
+    '#title' => t('Overall, how would you rate your satisfaction with our service?'),
+    '#type' => 'markup',
+    '#markup' => '<div id="rateit" class="rateit bigstars" data-rateit-backingfld="#backingServiceRating" data-rateit-starwidth="32" data-rateit-starheight="32" data-rateit-step="1"></div>',
+    '#weight' => 2,
+  ];
+
+  $form['service_comments'] = [
+    '#resizable' => FALSE,
+    '#type' => 'textarea',
+    '#title' => t("Additional Thoughts?"),
+    '#weight' => 4,
+  ];
+
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => 'Finish Survey',
+    '#weight' => 100,
+    '#limit_validation_errors' => [[]],
+  ];
+
+  // Add JS
+  $form['#attached']['js'] = [
+    $path . '/resources/assets/js/jquery.rateit.js',
+    $path . '/resources/assets/js/review_boost.js',
+  ];
+
+  // Add CSS
+  $form['#attached']['css'] = [
+    $path . '/css/rateit.css',
+    $path . '/css/review_boost.css',
+  ];
+
+  return $form;
+}
+
+function _review_boost_questionnaire_form_validate($form, &$form_state) {
+  if (empty($form_state['values']['service_rating'])) {
+    form_set_error('service_rating', 'Please select a rating');
+  }
+}
+
+function _review_boost_questionnaire_form_submit($form, &$form_state) {
+  $result = db_query('SELECT token FROM {review_boost_token} WHERE tid = :tid', [
+    ':tid' => $form_state['values']['tid'],
+  ])->fetchAssoc();
+
+  db_insert('review_boost_result')
+    ->fields([
+      'tid' => $form_state['values']['tid'],
+      'service_rating' => $form_state['values']['service_rating'],
+      'service_comments' => $form_state['values']['service_comments'],
+      'creation_date' => time(),
+    ])
+    ->execute();
+
+  _review_boost_send_admin_email($result['token'], $form_state['values']['service_rating'], $form_state['values']['service_comments']);
+
+  drupal_goto('customer-survey/' . $result['token'] . '/thank-you');
+}
+
+function _review_boost_send_admin_email($token, $rating, $comments) {
+  $to = variable_get('review_boost_admin_email', variable_get('site_mail'));
+
+  $to_parts = explode(',', $to);
+  foreach ($to_parts as $key => $v) {
+    $to_parts[$key] = trim($v);
+  }
+
+  $to = implode(',', $to_parts);
+
+
+  $data = [
+    'token' => $token,
+    'rating' => $rating,
+    'comments' => $comments,
+  ];
+
+  drupal_mail('review_boost', 'admin_email', $to, LANGUAGE_NONE, $data, _review_boost_get_email());
+}
+
+
+function _review_boost_questionnaire_complete_default($high = FALSE) {
+
+  $RB = new ReviewBoost();
+
+  return theme('review_boost_complete_default', [
+    'request_review' => $high,
+    'gplus_url' => variable_get('sprowt_settings_gplus_url', variable_get('coal_admin_gplus_url', FALSE)),
+    'bbb_url' => variable_get('sprowt_settings_bbb_url', variable_get('coal_admin_bbb_url', FALSE)),
+    'company_email' => $RB->getEmail(),
+    'signoff' => $RB->companySignoff(),
+  ]);
+}
+
+/**
+ * @param $token
+ *
+ * @return bool|string
+ *
+ * Function is called if 'Skip Survey Status' = true. It then translates token values
+ * and returns the review boost complete theme (the template that would normally be called if a user
+ * leaves a 'high' review.
+ */
+function _review_boost_skip_survey_questions($token){
+
+  $RB = new ReviewBoost($token);
+
+  if($RB->getSkipSurveyStatus()){
+    $skip = $RB->skipSurveyQuestions();
+    $title = $RB->translateValues($skip['title']);
+    $content = $RB->translateValues($skip['content']);
+
+    return theme('review_boost_complete', [
+      'title' => $title,
+      'content' => $content,
+    ]);
+  }
+  return false;
+}
+
+/**
+ * @return string
+ *
+ * Provides default content for the page the user sees when the option 'skip survey content' is selected.
+ */
+function _review_boost_skip_survey_questions_content(){
+  $RB = new ReviewBoost();
+
+  return theme('review_boost_skipped_survey_questions_default',[
+    'gplus_url' => variable_get('sprowt_settings_gplus_url', variable_get('coal_admin_gplus_url', FALSE)),
+    'bbb_url' => variable_get('sprowt_settings_bbb_url', variable_get('coal_admin_bbb_url', FALSE)),
+    'company_email' => $RB->getEmail(),
+    'signoff' => $RB->companySignoff(),
+  ]);
+}
+
+function _review_boost_questionnaire_complete($token) {
+  $result = db_query('SELECT t.token,r.* FROM review_boost_token t RIGHT JOIN review_boost_result r ON r.tid = t.tid WHERE t.token = :token', [
+    'token' => $token,
+  ])->fetchAssoc();
+
+  $RB = new ReviewBoost($token);
+  if (!$result) {
+    return MENU_NOT_FOUND;
+  }
+
+
+  $high = $result['service_rating'] >= $RB->getThreshold();
+
+  if ($high) {
+    $title = variable_get('review_boost_thank_you_high_title', 'We’re so glad you enjoyed your service!');
+    $content_val = variable_get('review_boost_thank_you_high_content');
+    if (empty($content_val['value'])) {
+      $content_val = ['value' => _review_boost_questionnaire_complete_default(TRUE)];
+    }
+  }
+  else {
+    $title = variable_get('review_boost_thank_you_low_title', 'Thank you for your response!');
+    $content_val = variable_get('review_boost_thank_you_low_content');
+    if (empty($content_val['value'])) {
+      $content_val = ['value' => _review_boost_questionnaire_complete_default(FALSE)];
+    }
+  }
+
+  $content = $content_val['value'];
+
+  if (function_exists('_sprowt_settings_shortcode_replace')) {
+    $title = _sprowt_settings_shortcode_replace($title);
+    $content = _sprowt_settings_shortcode_replace($content);
+  }
+  elseif (function_exists('_leadbuilder_settings_shortcode_replace')) {
+    $title = _leadbuilder_settings_shortcode_replace($title);
+    $content = _leadbuilder_settings_shortcode_replace($content);
+  }
+
+  $extra_trans = [
+    '%rating' => $result['service_rating'],
+    '%comments' => nl2br($result['service_comments']),
+  ];
+
+  $RB->addTokenValues($extra_trans);
+
+  $title = $RB->translateValues($title);
+  $content = $RB->translateValues($content);
+
+  return theme('review_boost_complete', [
+    'request_review' => $high,
+    'title' => $title,
+    'content' => $content,
+  ]);
+}
+
+
+function _review_boost_admin_access() {
+  global $user;
+
+  $logged_in = $user->uid;
+
+  $administer_survey = user_access('administer_review_boost');
+
+  return ($logged_in && $administer_survey);
+}
+
+function _review_boost_developer_admin_access(){
+  global $user;
+
+  $logged_in = $user->uid;
+
+  $developer_permissions = user_access('developer_review_boost');
+
+
+  return ($logged_in && $developer_permissions);
+}
+
+function _review_boost_get_options() {
+  return [
+    1 => 1,
+    2 => 2,
+    3 => 3,
+    4 => 4,
+    5 => 5,
+    6 => 6,
+    7 => 7,
+    8 => 8,
+    9 => 9,
+    10 => 10,
+    11 => 11,
+  ];
+}
+
+function _review_boost_generate_token() {
+  return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+    mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+    mt_rand(0, 0xffff),
+    mt_rand(0, 0x0fff) | 0x4000,
+    mt_rand(0, 0x3fff) | 0x8000,
+    mt_rand(0, 0xffff),
+    mt_rand(0, 0xffff),
+    mt_rand(0, 0xffff)
+  );
+}
+
+function _review_boost_get_default_admin_email_body() {
+  $RB = new ReviewBoost();
+  return $RB->defaultAdminEmailBody();
+}
+
+function _review_boost_rand_words($count = 1, $clean = TRUE) {
+  $words = simplexml_load_file('http://www.lipsum.com/feed/xml?amount=' . $count . '&what=words&start=0')->lipsum;
+  if ($clean) {
+    $words = str_replace('.', '', strtolower($words));
+  }
+  $w_array = explode(' ', $words);
+  if (count($w_array) > $count) {
+    $w_array = array_splice($w_array, 0, $count);
+  }
+  return implode(' ', $w_array);
+}
+
+//todo add validation criteria based on twilio api id for incoming requests.
+function _review_boost_sms_response() {
+
+
+  $respond = new Respond($_REQUEST);
+  $isAuthorized = $respond->verifyAccountId();
+
+  if($isAuthorized){
+    $sms = new ReviewBoostSMS();
+    $customer = new ReviewBoostCustomer();
+
+    $opt_out_keywords = array('optout','stop','opt out','opt-out','cancel');
+    $opt_in_keywords = array('optin','opt-in','opt in','start');
+
+    $phone = ltrim($respond->getCustomerPhone(),'+1');
+    $msg = $respond->formatResponseBody();
+
+    if(in_array($msg,$opt_out_keywords)){
+
+      $customer->updateSMSOptStatus($phone,1); //optout
+      $sms->sendReply($phone,'You have successfully opted-out of sms surveys! Reply opt-in to opt back in.');
+
+    }
+    elseif(in_array($msg,$opt_in_keywords)){
+
+      $customer->updateSMSOptStatus($phone,0);
+      $sms->sendReply($phone,'You have successfully opted back in to sms surveys!');
+
+    }else{
+
+      $sms->sendReply($phone,variable_get('twilio_admin_auto_response'));
+
+    }
+
+  }else{
+    $respond->responseError();
+  }
+
+}
+
+function _review_boost_sms_callback(){
+
+//  variable_set('test_callback',$_POST);
+//
+//  $callback = new Callback($_POST);
+//
+//  if(!$callback->checkIfUndelivered()){
+//    $callback->storeUndelivered();
+//    $token = new ReviewBoostToken();
+//    $data = $token->getByPhone(Message::to());
+//    $queue = DrupalQueue::get('review_boost_email_worker');
+//    $queue->createItem(['data' => $data]);
+//
+//  }else{
+//    watchdog('review_boost_sms','Bad callback');
+//  }
+}
+
+/**
+ * Sets review link clicked in db from ajax call
+ */
+function _review_boost_review_get_clicked_link(){
+
+  $review = new ReviewBoostReview();
+  $link = trim(htmlspecialchars($_POST['_link']));//just because, sanitize and strip post link
+  $clientToken = trim(htmlspecialchars($_POST['_token']));
+  $tid = ReviewBoostToken::fetchUserTid($clientToken);
+  $date = new DateTime('now');
+
+  //tid does not exist in token table
+  if(empty($tid)){
+    watchdog('Review Boost Review Exception','Customer does not exist/tid was not found for token %token',
+      array(
+        '%token'=>$clientToken
+      ));
+  //if tid does exist in token table
+  }else{
+
+    $row = array(
+      'tid'=>$tid,
+      'link' => $link,
+      'click_date' => $date->getTimeStamp()
+      );
+
+    if($review->checkUserExists($tid)){
+      $review->update($row);
+
+    }else{
+
+      $row[$link] = 1;
+      unset($row['link']);
+      $review->insert($row);
+
+    }
+
+  }
+
+}
+
+/**
+ * Fetches all review links from db
+ */
+function _review_boost_review_get_all_links(){
+//  $rb = new ReviewBoost();
+//  $links = $rb->getReviewLinks();
+//  $linkClass = [];
+//  foreach($links as $link => $value){
+//    $linkClass[] = $value['class'];
+//  }
+//  return $linkClass;
+  //drupal_json_output($rb->getReviewLinks(true));
+}
+
+function review_boost_views_api(){
+    return array(
+        'api' => '3',
+        'path' => drupal_get_path('module','review_boost')  . '/views',
+    );
+}
+
