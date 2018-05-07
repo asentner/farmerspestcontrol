@@ -10,13 +10,13 @@
 function sprowt_bean_types_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_benefits'.
-  $field_bases['field_benefits'] = array(
+  // Exported field_base: 'field_benefits_ref'.
+  $field_bases['field_benefits_ref'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_benefits',
+    'field_name' => 'field_benefits_ref',
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
