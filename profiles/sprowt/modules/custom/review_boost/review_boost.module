@@ -434,25 +434,21 @@ function _review_boost_email_worker($item) {
   //handle callbacks
   $cRow = array(
     'email_delivered' => 0,
+    'tid' => $tid
   );
 
   if($message['result']){ //email was delivered
-
     $cRow['email_delivered'] = 1;
   }
+
   $callback = new Callback();
 
   if($callback->checkIfExists($tid)){
-
     $callback->update($cRow);
-
   }else{
-
     $cRow['tid'] = $tid;
     $callback->insert($cRow);
-
   }
-
 }
 
 function _review_boost_sms_worker($item) {
@@ -492,8 +488,7 @@ function _review_boost_sms_worker($item) {
       $callback->insert($cRow);
 
     }
-    //Add undelivered phone number to database
-    //$undelivered->store($row);
+
 
     if(!empty($item['data']['customer_email'])){
 
