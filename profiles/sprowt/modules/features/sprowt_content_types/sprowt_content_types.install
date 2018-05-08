@@ -8,22 +8,34 @@ function sprowt_content_types_install() {
  * add expiration date format
  */
 function sprowt_content_types_update_7100() {
-    db_insert('date_formats')
-        ->fields(array(
-            'format' => 'F j, Y',  // PHP Date String
-            'type' => 'custom',          // 'custom'
-            'locked' => 0,               // 0 = user-specified date format
-        ))
-        ->execute();
-    db_insert('date_format_type')
-        ->fields(array(
-            'type' => 'expiration_date',  // Machine Name
-            'title' => 'Expiration Date', // Display Name
-            'locked' => 0,        // 1 = can't change through UI, 0 = can change
-        ))
-        ->execute();
-
-    variable_set('date_format_expiration_date', 'F j, Y');
+    $format = 'F j, Y';
+    $existing = db_query("SELECT format FROM date_formats WHERE format = :format", array(
+        ':format' => $format
+    ))->fetchField();
+    if(empty($existing)) {
+        db_insert('date_formats')
+            ->fields([
+                'format' => $format,  // PHP Date String
+                'type'   => 'custom',          // 'custom'
+                'locked' => 0,               // 0 = user-specified date format
+            ])
+            ->execute();
+    }
+    
+    $existing = db_query("SELECT type FROM date_format_type WHERE type = :type", array(
+        ':type' => 'expiration_date'
+    ))->fetchField();
+    if(empty($existing)) {
+        db_insert('date_format_type')
+            ->fields([
+                'type'   => 'expiration_date', // Machine Name
+                'title'  => 'Expiration Date', // Display Name
+                'locked' => 0, // 1 = can't change through UI, 0 = can change
+            ])
+            ->execute();
+    }
+    
+    variable_set('date_format_expiration_date', $format);
 }
 
 /**
