@@ -30,6 +30,15 @@
                     items: {
                         src: '#' + id,
                         type: 'inline'
+                    },
+                    callbacks: {
+                        open: function() {
+                            window.dataLayer = window.dataLayer || [];
+                            window.dataLayer.push({
+                                'event': 'paragraphModal',
+                                'modalId': id
+                            });
+                        }
                     }
                 });
             });
@@ -46,6 +55,15 @@
                 items: {
                     src: hash,
                     type: 'inline'
+                },
+                callbacks: {
+                    open: function() {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                            'event': 'paragraphModal',
+                            'modalId': hash.replace('#', '')
+                        });
+                    }
                 }
             });
         }
