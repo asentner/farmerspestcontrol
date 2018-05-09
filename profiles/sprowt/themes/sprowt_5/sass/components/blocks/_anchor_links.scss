@@ -1,0 +1,89 @@
+.bean-anchor-link-bean{
+  padding: 30px 20px;
+  .content{
+    max-width: 550px;
+    margin: 0 auto;
+    @include flexbox;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    .field--name-field-display-title{
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .field--name-field-anchor-link{
+      .field__items{
+        @include flexbox;
+        flex-wrap: wrap;
+        .field__item{
+          flex: 1 0 50%;
+          padding: 7px 0;
+        }
+      }
+    }
+    a{
+      font-size: 16px;
+      font-weight: 600;
+      position: relative;
+      &:before{
+        @include faicon('\f0da');
+        padding-right: 7px;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 100%;
+        bottom: -3px;
+        height: 2px;
+        transition-property: left right;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+      }
+      &:hover{
+        &:after{
+          right: 0;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .content{
+      .field--name-field-anchor-link{
+        .field__items{
+          .field__item{
+            padding: 5px 20px;
+          }
+        }
+      }
+      a{
+        font-size: 20px;
+        &:before{
+          font-size: 21px;
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .content{
+      max-width: $container;
+      flex-direction: row;
+      align-items: flex-start;
+      .field--name-field-display-title{
+        font-size: 20px;
+        padding-right: 30px;
+      }
+      .field--name-field-anchor-link{
+        .field__items{
+          flex-wrap: nowrap;
+          .field__item{
+            flex: 1 0 auto;
+            padding: 0 20px;
+          }
+        }
+      }
+    }
+  }
+}

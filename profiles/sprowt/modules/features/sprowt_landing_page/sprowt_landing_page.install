@@ -126,3 +126,13 @@ function sprowt_landing_page_update_7100() {
     $webform->webform['redirect_url'] = '#thank-you-modal';
     node_save($webform);
 }
+
+/**
+ * Update landing page form again
+ */
+function sprowt_landing_page_update_7101(){
+    $webform = entity_uuid_load('node', array('5d5bafc2-a549-4ace-9353-08e981734453'));
+    $webform = array_pop($webform);
+    $webform->webform['redirect_url'] = '[current-page:url]#thank-you-modal';
+    node_save($webform);
+}

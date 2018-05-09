@@ -10,24 +10,94 @@
 function sprowt_bean_types_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'bean-benefits_bean-field_bean_title'.
-  $field_instances['bean-benefits_bean-field_bean_title'] = array(
-    'bundle' => 'benefits_bean',
+  // Exported field_instance: 'bean-aggregated_reviews_bean-field_rating'.
+  $field_instances['bean-aggregated_reviews_bean-field_rating'] = array(
+    'bundle' => 'aggregated_reviews_bean',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Rating 1-5',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number_unformatted',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_rating',
+    'label' => 'Rating',
+    'required' => 0,
+    'settings' => array(
+      'max' => 5,
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'bean-aggregated_reviews_bean-field_review_count'.
+  $field_instances['bean-aggregated_reviews_bean-field_review_count'] = array(
+    'bundle' => 'aggregated_reviews_bean',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Exact Review Count google reads',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_review_count',
+    'label' => 'Review Count',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'bean-aggregated_reviews_bean-field_review_count_text'.
+  $field_instances['bean-aggregated_reviews_bean-field_review_count_text'] = array(
+    'bundle' => 'aggregated_reviews_bean',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Review Count Text the User sees',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'bean',
-    'field_name' => 'field_bean_title',
-    'label' => 'Bean Title',
+    'field_name' => 'field_review_count_text',
+    'label' => 'Review Count Text',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -41,12 +111,12 @@ function sprowt_bean_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 12,
     ),
   );
 
-  // Exported field_instance: 'bean-benefits_bean-field_benefits'.
-  $field_instances['bean-benefits_bean-field_benefits'] = array(
+  // Exported field_instance: 'bean-benefits_bean-field_benefits_ref'.
+  $field_instances['bean-benefits_bean-field_benefits_ref'] = array(
     'bundle' => 'benefits_bean',
     'default_value' => NULL,
     'deleted' => 0,
@@ -65,7 +135,7 @@ function sprowt_bean_types_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'bean',
-    'field_name' => 'field_benefits',
+    'field_name' => 'field_benefits_ref',
     'label' => 'Benefits',
     'required' => 0,
     'settings' => array(
@@ -76,7 +146,7 @@ function sprowt_bean_types_field_default_field_instances() {
       'module' => 'multiple_selects',
       'settings' => array(),
       'type' => 'multiple_selects',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -111,7 +181,7 @@ function sprowt_bean_types_field_default_field_instances() {
         'show_token_tree' => 0,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -1329,13 +1399,13 @@ function sprowt_bean_types_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Bean Title');
   t('Benefits');
   t('Body');
   t('Button URL');
   t('Call Out Text');
   t('Concerns');
   t('Display title');
+  t('Exact Review Count google reads');
   t('FAQs');
   t('H1 Title');
   t('If you want this FAQ to automatically appear on a LTP page, reference that page.');
@@ -1343,6 +1413,11 @@ function sprowt_bean_types_field_default_field_instances() {
   t('Image Insert');
   t('LTP Reference');
   t('Linked Images');
+  t('Rating');
+  t('Rating 1-5');
+  t('Review Count');
+  t('Review Count Text');
+  t('Review Count Text the User sees');
   t('Service reference');
 
   return $field_instances;

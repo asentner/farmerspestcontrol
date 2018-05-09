@@ -1,11 +1,15 @@
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
 
-require_once drupal_get_path('module', 'review_boost') . '/review_boost.php';
-require_once drupal_get_path('module', 'review_boost') . '/review_boost_sms.php';
-require_once drupal_get_path('module', 'review_boost') . '/review_boost_customer.php';
-
-use Twilio\Twiml;
-
+use ReviewBoost\ReviewBoost as ReviewBoost;
+use ReviewBoost\Sms\ReviewBoostSMS;
+use ReviewBoost\Customer\ReviewBoostCustomer;
+use ReviewBoost\Rest\Respond\Respond;
+use ReviewBoost\Rest\Message\Message;
+use ReviewBoost\Customer\ReviewBoostToken;
+use ReviewBoost\Sms\Undelivered;
+use ReviewBoost\Rest\Callback\Callback;
+use ReviewBoost\Review\ReviewBoostReview;
 /**
  * Implements hook_menu().
  */
@@ -138,6 +142,12 @@ function review_boost_menu() {
   ];
   $items['sms/callback'] = [
     'page callback' => '_review_boost_sms_callback',
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+  $items['review/links/get-clicked-link'] = [
+    'page callback' => '_review_boost_review_get_clicked_link',
     'access arguments' => TRUE,
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -411,28 +421,98 @@ function review_boost_mail($key, &$message, $params) {
 }
 
 function _review_boost_email_worker($item) {
+
+  $tid = ReviewBoostToken::fetchUserTid($item['data']['token']);
   $from_email = variable_get('review_boost_customer_from_email', _review_boost_get_email());
   $message = drupal_mail('review_boost', 'survey_email', $item['data']['customer_email'], LANGUAGE_NONE, $item, $from_email, TRUE);
+
   db_update('review_boost_token')
     ->fields(['email_sent' => 1])
     ->condition('token', $item['data']['token'])
     ->execute();
+
+  //handle callbacks
+  $cRow = array(
+    'email_delivered' => 0,
+    'tid' => $tid
+  );
+
+  if($message['result']){ //email was delivered
+    $cRow['email_delivered'] = 1;
+  }
+
+  $callback = new Callback();
+
+  if($callback->checkIfExists($tid)){
+    $callback->update($cRow);
+  }else{
+    $cRow['tid'] = $tid;
+    $callback->insert($cRow);
+  }
 }
 
 function _review_boost_sms_worker($item) {
+
+  $tid = ReviewBoostToken::fetchUserTid($item['data']['token']);
+  $callback = new Callback();
   $sms = new ReviewBoostSMS($item['data']['token']);
   $sms->setPhone($item['data']['customer_phone']);
-  try {
-    $sms->sendSMS($sms->getPhone());
-  } catch (Exception $e) {
-    watchdog('review_boost_sms','There was an error sending a text to customer: %customer_id with error: %error',array(
-      '%customer_id' => $item['data']['customer_id'],
-      '%error' => $e
-    ));
-    drupal_set_message('There was an error sending a text to a customer with the id of: ' . $item['data']['customer_id']);
-  }
+  $cRow = array(
+    'sms_delivered' => 0
+  );
 
-  db_update('review_boost_token')->fields(['text_sent' => 1])->execute();
+  try {
+
+    $sms->sendSMS($sms->getPhone());
+    db_update('review_boost_token')->fields(['text_sent' => 1])->execute();
+    $cRow['sms_delivered'] = 1;
+    if($callback->checkIfExists($tid)){
+
+      $callback->update($cRow);
+
+    }else{
+
+      $cRow['tid'] = $tid;
+      $callback->insert($cRow);
+
+    }
+  } catch (Exception $e) {
+
+    if($callback->checkIfExists($tid)){
+
+      $callback->update($cRow);
+
+    }else{
+
+      $cRow['tid'] = $tid;
+      $callback->insert($cRow);
+
+    }
+
+
+    if(!empty($item['data']['customer_email'])){
+
+      $queue = DrupalQueue::get('review_boost_email_worker');
+      $queue->createItem(['data' => $item['data']]);
+
+      drupal_set_message('There was an error sending a text to a customer with the id of: ' . $item['data']['customer_id']
+        . ' Email will be sent instead');
+
+      watchdog('review_boost_sms',"Error sending SMS to customer %customer_id. Sent email instead. Error: %error",array(
+        '%customer_id' => $item['data']['customer_id'],
+        '%error' => $e
+      ));
+
+      db_update('review_boost_token')->fields(['email_sent' => 1])->execute();
+
+    }else{
+      watchdog('review_boost_sms',"Error sending backup email to customer %customer_id. Error: %error",array(
+        '%customer_id' => $item['data']['customer_id'],
+        '%error' => $e
+      ));
+    }
+
+  }
 }
 
 function _review_boost_questionnaire_anon() {
@@ -539,8 +619,8 @@ function _review_boost_questionnaire_form($form, $form_state, $tid) {
 
   // Add JS
   $form['#attached']['js'] = [
-    $path . '/js/jquery.rateit.js',
-    $path . '/js/review_boost.js',
+    $path . '/resources/assets/js/jquery.rateit.js',
+    $path . '/resources/assets/js/review_boost.js',
   ];
 
   // Add CSS
@@ -778,36 +858,121 @@ function _review_boost_rand_words($count = 1, $clean = TRUE) {
 
 //todo add validation criteria based on twilio api id for incoming requests.
 function _review_boost_sms_response() {
-  $auth_id = $_REQUEST['AccountSid'];
-  //only process if account sID's match
-  if($auth_id === variable_get('twilio_admin_account_id')){
-    $opt_out_keywords = array('optout','stop','opt out','opt-out','cancel');
-    $opt_in_keywords = array('optin','opt-in','opt in','start');
+
+
+  $respond = new Respond($_REQUEST);
+  $isAuthorized = $respond->verifyAccountId();
+
+  if($isAuthorized){
     $sms = new ReviewBoostSMS();
-
-
-    $customer_phone = $_REQUEST['From'];
-
-    $formattedPhone = ltrim($customer_phone, '+1');
-    $customer_msg = trim($_REQUEST['Body']);
-    $formattedMsg = strtolower($customer_msg);
     $customer = new ReviewBoostCustomer();
 
-    //todo check if customer has already opted out or not.
-    if(in_array($formattedMsg,$opt_out_keywords)){
-      $customer->updateSMSOptStatus($formattedPhone,1); //optout
-      $sms->sendReply($customer_phone,'You have successfully opted-out of sms surveys! Reply opt-in to opt back in.');
+    $opt_out_keywords = array('optout','stop','opt out','opt-out','cancel');
+    $opt_in_keywords = array('optin','opt-in','opt in','start');
+
+    $phone = ltrim($respond->getCustomerPhone(),'+1');
+    $msg = $respond->formatResponseBody();
+
+    if(in_array($msg,$opt_out_keywords)){
+
+      $customer->updateSMSOptStatus($phone,1); //optout
+      $sms->sendReply($phone,'You have successfully opted-out of sms surveys! Reply opt-in to opt back in.');
+
     }
-    elseif(in_array($formattedMsg,$opt_in_keywords)){
-      $customer->updateSMSOptStatus($formattedPhone,0);
-      $sms->sendReply($customer_phone,'You have successfully opted back in to sms surveys!');
+    elseif(in_array($msg,$opt_in_keywords)){
+
+      $customer->updateSMSOptStatus($phone,0);
+      $sms->sendReply($phone,'You have successfully opted back in to sms surveys!');
+
     }else{
-      $sms->sendReply($customer_phone,variable_get('twilio_admin_auto_response'));
+
+      $sms->sendReply($phone,variable_get('twilio_admin_auto_response'));
+
     }
+
   }else{
-    watchdog('review_boost_sms','Error processing response for phone: %phone. Twilio Account sID does not match.',array(
-      '%phone'=>$_REQUEST['From']
-    ));
+    $respond->responseError();
   }
 
 }
+
+function _review_boost_sms_callback(){
+
+//  variable_set('test_callback',$_POST);
+//
+//  $callback = new Callback($_POST);
+//
+//  if(!$callback->checkIfUndelivered()){
+//    $callback->storeUndelivered();
+//    $token = new ReviewBoostToken();
+//    $data = $token->getByPhone(Message::to());
+//    $queue = DrupalQueue::get('review_boost_email_worker');
+//    $queue->createItem(['data' => $data]);
+//
+//  }else{
+//    watchdog('review_boost_sms','Bad callback');
+//  }
+}
+
+/**
+ * Sets review link clicked in db from ajax call
+ */
+function _review_boost_review_get_clicked_link(){
+
+  $review = new ReviewBoostReview();
+  $link = trim(htmlspecialchars($_POST['_link']));//just because, sanitize and strip post link
+  $clientToken = trim(htmlspecialchars($_POST['_token']));
+  $tid = ReviewBoostToken::fetchUserTid($clientToken);
+  $date = new DateTime('now');
+
+  //tid does not exist in token table
+  if(empty($tid)){
+    watchdog('Review Boost Review Exception','Customer does not exist/tid was not found for token %token',
+      array(
+        '%token'=>$clientToken
+      ));
+  //if tid does exist in token table
+  }else{
+
+    $row = array(
+      'tid'=>$tid,
+      'link' => $link,
+      'click_date' => $date->getTimeStamp()
+      );
+
+    if($review->checkUserExists($tid)){
+      $review->update($row);
+
+    }else{
+
+      $row[$link] = 1;
+      unset($row['link']);
+      $review->insert($row);
+
+    }
+
+  }
+
+}
+
+/**
+ * Fetches all review links from db
+ */
+function _review_boost_review_get_all_links(){
+//  $rb = new ReviewBoost();
+//  $links = $rb->getReviewLinks();
+//  $linkClass = [];
+//  foreach($links as $link => $value){
+//    $linkClass[] = $value['class'];
+//  }
+//  return $linkClass;
+  //drupal_json_output($rb->getReviewLinks(true));
+}
+
+function review_boost_views_api(){
+    return array(
+        'api' => '3',
+        'path' => drupal_get_path('module','review_boost')  . '/views',
+    );
+}
+

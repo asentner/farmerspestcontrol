@@ -1,7 +1,10 @@
 <?php
 require_once drupal_get_path('module', 'system') . '/system.admin.inc';
-require_once drupal_get_path('module','review_boost') . '/review_boost_sms.php';
-require_once drupal_get_path('module','review_boost') . '/review_boost.php';
+
+use ReviewBoost\ReviewBoost as ReviewBoost;
+use ReviewBoost\Sms\ReviewBoostSMS;
+
+
 
 function _review_boost_sms_admin_menu_block_page() {
   $item = menu_get_item();

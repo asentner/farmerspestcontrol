@@ -13,6 +13,15 @@ function sprowt_bean_types_bean_admin_ui_types() {
   $bean_type = new stdClass();
   $bean_type->disabled = FALSE; /* Edit this to true to make a default bean_type disabled initially */
   $bean_type->api_version = 5;
+  $bean_type->name = 'aggregated_reviews_bean';
+  $bean_type->label = 'Aggregated Reviews Bean';
+  $bean_type->options = '';
+  $bean_type->description = '';
+  $export['aggregated_reviews_bean'] = $bean_type;
+
+  $bean_type = new stdClass();
+  $bean_type->disabled = FALSE; /* Edit this to true to make a default bean_type disabled initially */
+  $bean_type->api_version = 5;
   $bean_type->name = 'benefits_bean';
   $bean_type->label = 'Benefits bean';
   $bean_type->options = '';

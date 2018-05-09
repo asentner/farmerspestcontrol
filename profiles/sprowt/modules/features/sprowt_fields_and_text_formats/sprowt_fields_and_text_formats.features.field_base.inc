@@ -153,6 +153,8 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1110,9 +1112,28 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_rating'.
+  $field_bases['field_rating'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_rating',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'decimal_separator' => '.',
+    ),
+    'translatable' => 0,
+    'type' => 'number_float',
   );
 
   // Exported field_base: 'field_region'.
@@ -1139,6 +1160,44 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
+  );
+
+  // Exported field_base: 'field_review_count'.
+  $field_bases['field_review_count'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_review_count',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_review_count_text'.
+  $field_bases['field_review_count_text'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_review_count_text',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_seo_title'.
@@ -1334,6 +1393,8 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'required_summary' => 0,
+      'show_summary' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',

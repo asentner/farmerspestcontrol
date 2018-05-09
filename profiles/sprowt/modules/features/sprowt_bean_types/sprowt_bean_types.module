@@ -5,3 +5,22 @@
  */
 
 include_once 'sprowt_bean_types.features.inc';
+
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_bean_types_theme($existing, $type, $theme, $path) {
+    return array(
+        'bean__aggregated_reviews_bean' => array (
+            'template' => 'bean--aggregated-reviews-bean',
+            'path' => $path . '/theme',
+            'base hook' => 'bean',
+        ),
+        'field__field_rating__aggregated_reviews_bean' => array (
+            'template' => 'field--field-rating--aggregated-reviews-bean',
+            'path' => $path . '/theme',
+            'base hook' => 'field',
+        ),
+    );
+}

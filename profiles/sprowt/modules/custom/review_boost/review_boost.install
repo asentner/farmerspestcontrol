@@ -181,23 +181,30 @@ function review_boost_schema() {
         ),
         'primary key' => array('id'),
       ),
-      'review_boost_undelivered' => array(
+      'review_boost_callback' => array(
         'fields' => array(
           'id' => array(
             'type' => 'serial',
             'unsigned' => true,
             'not null' => true,
           ),
-          'phone' =>array(
-            'type' => 'varchar',
-            'length' => 22,
+          'sms_delivered' => array(
+            'type' => 'int',
+            'size' => 'tiny',
             'not null' => true,
-            'default' => '',
+            'default' => 0,
+          ),
+          'email_delivered' => array(
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => true,
+            'default' => 0,
           ),
           'error_code' => array(
             'type' => 'varchar',
             'length' => 255,
             'not null' => true,
+            'default' => '',
           ),
           'reviewed' => array(
             'type' => 'int',
@@ -205,15 +212,174 @@ function review_boost_schema() {
             'not null' => true,
             'default' => 0,
           ),
+          'tid' => array(
+            'type' => 'int',
+            'unsigned' => true,
+            'not null' => true,
+          ),
         ),
-        'indexes' => array(
-          'undelivered_phone' => array('phone')
+        'foreign keys' => array(
+          'review_boost_token' => array(
+            'table' => 'review_boost_token',
+            'columns' => array('tid' => 'tid'),
+          ),
         ),
         'primary key' => array('id'),
-      )
+      ),
+      'review_boost_review_customer_clicks' => array(
+        'fields' => array(
+          'id' => array(
+            'type' => 'serial',
+            'unsigned' => true,
+            'not null' => true,
+          ),
+          'tid' => array(
+            'type' => 'int',
+            'unsigned' => true,
+            'not null' => true,
+          ),
+          'facebook' => array(
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => true,
+            'default' => 0
+          ),
+          'gplus' => array(
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => true,
+            'default' => 0
+          ),
+          'yelp' => array(
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => true,
+            'default' => 0
+          ),
+          'bbb' => array(
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => true,
+            'default' => 0
+          ),
+          'angie' => array(
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => true,
+            'default' => 0
+          ),
+          'yp' => array(
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => true,
+            'default' => 0
+          ),
+          'click_date' => array(
+            'type' => 'int',
+            'size' => 'big',
+            'not null' => TRUE,
+            'default' => 0,
+          ),
+        ),
+        'primary key' => array('id'),
+        'foreign keys' => array(
+          'review_boost_token' => array(
+            'table' => 'review_boost_token',
+            'columns' => array('tid' => 'tid'),
+          ),
+        ),
+      ),
     );
 
     return $schema;
+}
+
+/**
+ * Change error code field to have a default value as well as drop email and phone columns
+ */
+
+function review_boost_update_7112(){
+  db_change_field('review_boost_callback', 'error_code', 'error_code', array(
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => true,
+    'default' => '',
+  ));
+
+  if(db_field_exists('review_boost_callback','phone')){
+    db_drop_field('review_boost_callback','phone');
+  }
+
+  if(db_field_exists('review_boost_callback','email')){
+    db_drop_field('review_boost_callback','email');
+  }
+}
+
+/**
+ * Adds delivered callback columns for phone and sms to the callback table
+ */
+function review_boost_update_7111(){
+  if(db_field_exists('review_boost_callback','delivered')){
+    db_drop_field('review_boost_callback','delivered');
+  }
+  $field = array(
+    'type' => 'int',
+    'size' => 'tiny',
+    'not null' => TRUE,
+    'default' => 0,
+  );
+  if(!db_field_exists('review_boost_callback','sms_delivered')){
+    db_add_field('review_boost_callback','sms_delivered',$field);
+  }
+
+  if(!db_field_exists('review_boost_callback','email_delivered')){
+    db_add_field('review_boost_callback','email_delivered',$field);
+  }
+
+}
+/**
+ * Drop existing undelivered table and add new Callback table
+ */
+function review_boost_update_7110(){
+  $schema = review_boost_schema();
+  if(db_table_exists('review_boost_undelivered')){
+    db_drop_table('review_boost_undelivered');
+  }
+  if(!db_table_exists('review_boost_callback')){
+    db_create_table('review_boost_callback',$schema['review_boost_callback']);
+  }
+}
+
+/**
+ * Add database for customer click tracking for review sites
+ */
+function review_boost_update_7109(){
+  $schema = review_boost_schema();
+  if(!db_table_exists('review_boost_review_customer_clicks')){
+    db_create_table('review_boost_review_customer_clicks',$schema['review_boost_review_customer_clicks']);
+  }
+}
+
+/**
+ * Add cross reference for tracking undelivered messages
+ */
+function review_boost_update_7108(){
+
+  db_add_field('review_boost_undelivered','tid',
+    array(
+      'type' => 'int',
+      'unsigned' => true,
+      'not null' => true,
+    ),
+    array(
+      'foreign keys' => array(
+        'review_boost_token' => array(
+          'table' => 'review_boost_token',
+          'columns' => array('tid' => 'tid'),
+        ),
+      ),
+    )
+    );
 }
 
 /**

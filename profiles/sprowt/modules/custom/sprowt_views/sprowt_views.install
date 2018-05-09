@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * revert sprowt_views_feature and add new view block to sidebar on service nodes
+ */
+function sprowt_views_update_7100(){
+    features_revert_module('sprowt_views_feature');
+
+    $theme = variable_get('theme_default');
+
+    $fields = db_query("
+        SELECT *
+        FROM block
+        WHERE module = 'views'
+        AND delta = 'special_offers-sidebar'
+        AND theme = :theme
+    ", array(
+        ':theme' => $theme
+    ))->fetchAssoc();
+
+    $old_bid = $fields['bid'];
+
+    $unset = array(
+        'bid',
+        'module',
+        'delta',
+        'theme'
+    );
+
+    foreach($unset as $u) {
+        unset($fields[$u]);
+    }
+
+    $fields['css_class'] = empty($fields['css_class']) ? 'block--views-special-offers-sidebar' : $fields['css_class'] . ' block--views-special-offers-sidebar';
+
+    $new_bid = db_query("
+        SELECT bid
+        FROM block
+        WHERE module = 'views'
+        AND delta = 'special_offers-sidebar_service'
+        AND theme = :theme
+    ", array(
+        ':theme' => $theme
+    ))->fetchField();
+
+    db_update('block')
+        ->fields($fields)
+        ->condition('module', 'views')
+        ->condition('delta', 'special_offers-sidebar_service')
+        ->execute();
+
+    db_delete('block_node_type')
+        ->condition('module', 'views')
+        ->condition('delta', 'special_offers-sidebar')
+        ->condition('type', 'service')
+        ->execute();
+    db_delete('block_node_type')
+        ->condition('module', 'views')
+        ->condition('delta', 'special_offers-sidebar_service')
+        ->condition('type', 'service')
+        ->execute();
+
+    db_insert('block_node_type')
+        ->fields(array(
+            'module' => 'views',
+            'delta' => 'special_offers-sidebar_service',
+            'type' => 'service'
+        ))
+        ->execute();
+
+
+
+}

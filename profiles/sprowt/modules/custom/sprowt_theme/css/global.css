@@ -9,3 +9,7 @@
 .captcha .fieldset-description {
   display: none;
 }
+
+.node--special-offer--teaser .field--name-field-expiration-date {
+  margin-top: 20px;
+}

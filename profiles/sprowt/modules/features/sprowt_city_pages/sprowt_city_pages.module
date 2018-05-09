@@ -1,0 +1,56 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt City Pages feature.
+ */
+
+include_once 'sprowt_city_pages.features.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_city_pages_theme($existing, $type, $theme, $path) {
+  $theme = array();
+  $theme['field__field_anchor_tag'] = array(
+    'render element' => 'content',
+    'base hook' => 'field',
+    'template' => 'field--field-anchor-tag',
+    'path' => drupal_get_path('module', 'sprowt_city_pages') . '/templates',
+    );
+   $theme['field__field_title'] = array(
+     'render element' => 'content',
+     'base hook' => 'field',
+     'template' => 'field--field-title',
+     'path' => drupal_get_path('module', 'sprowt_city_pages') . '/templates',
+    );
+    $theme['node__city_page__alt_teaser'] = array(
+      'render element' => 'content',
+      'base hook' => 'node',
+      'template' => 'node--city-page--alt-teaser',
+      'path' => drupal_get_path('module', 'sprowt_city_pages') . '/templates',
+     );
+     $theme['node__city_page__teaser'] = array(
+       'render element' => 'content',
+       'base hook' => 'node',
+       'template' => 'node--city-page--teaser',
+       'path' => drupal_get_path('module', 'sprowt_city_pages') . '/templates',
+      );
+      $theme['page__node__city_page'] = array(
+        'render element' => 'content',
+        'base hook' => 'page',
+        'template' => 'page--node--city-page',
+        'path' => drupal_get_path('module', 'sprowt_city_pages') . '/templates',
+       );
+       $theme['paragraphs_item__city_service'] = array(
+         'render element' => 'content',
+         'base hook' => 'paragraphs_item',
+         'template' => 'paragraphs-item--city-service',
+         'path' => drupal_get_path('module', 'sprowt_city_pages') . '/templates',
+        );
+  return $theme;
+}
+
+function sprowt_city_pages_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_city_pages');
+    drupal_add_css($path . '/css/sprowt_city_pages.css');
+}
