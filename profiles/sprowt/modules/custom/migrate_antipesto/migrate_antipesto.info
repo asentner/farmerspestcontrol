@@ -1,0 +1,14 @@
+name = "AntiPesto migration"
+description = "Migrate content from AntiPesto to Sprowt"
+package = "Coalmarch"
+core = 7.x
+
+dependencies[] = migrate
+dependencies[] = migrate_d2d
+dependencies[] = sprowt_package_comparison
+
+files[] = migrate_antipesto.migrate.inc
+files[] = before_after.inc
+files[] = node.inc
+files[] = file.inc
+files[] = user.inc

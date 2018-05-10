@@ -286,9 +286,13 @@ function sprowt_theme_copy_form_system_theme_settings_alter(&$form, &$form_state
     $var = $form['var']['#value'];
     $theme_name = substr($var, 6);
     $theme_name = substr($theme_name, 0, -9);
-    
+
+
     //if(sprowt_is_sprowt_theme($theme_name)) {
         // Work-around for this bug: https://drupal.org/node/1862892
+        if(empty($form_state['build_info']['files'])) {
+            $form_state['build_info']['files'] = array();
+        }
         $theme_settings_path = drupal_get_path('theme', 'omega') . '/includes/assets/assets.settings.inc';
         if (file_exists($theme_settings_path) && !in_array($theme_settings_path, $form_state['build_info']['files'])) {
             $form_state['build_info']['files'][] = $theme_settings_path;
