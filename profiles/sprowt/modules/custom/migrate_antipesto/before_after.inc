@@ -43,9 +43,7 @@ class ApPrep extends MigrationBase {
             FROM node
             WHERE type IN (:types)
         ", array(
-            ':types' => array(
-                'affiliation'
-            )
+            ':types' => $types
         ))->fetchCol();
 
         node_delete_multiple($nids);

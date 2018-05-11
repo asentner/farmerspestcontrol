@@ -205,3 +205,91 @@ class PackageMigration extends BaseNodeMigration {
         return null;
     }
 }
+
+class ServiceMigration extends BaseNodeMigration {
+    
+    public function __construct(array $arguments)
+    {
+        parent::__construct($arguments);
+        $this->mapFileField('field_image');
+        $this->mapFileField('field_icon');
+        $this->mapTermField('ServiceTerms', 'field_service_category', 'field_service');
+        $this->addFieldMapping('field_intro', 'field_emotional_intro');
+        $this->addFieldMapping('field_intro:format')
+            ->defaultValue('filtered_html');
+        $this->addFieldMapping('field_display_title', 'field_emotional_title');
+        $this->addFieldMapping('field_package_intro', 'field_services_intro');
+        $this->addFieldMapping('field_package_intro:format')
+            ->defaultValue('filtered_html');
+        
+        $this->addFieldMapping('field_ap_short_title', 'field_short_title');
+        $this->addFieldMapping('field_ap_services_title', 'field_services_title');
+        $this->addFieldMapping('field_ap_service_type', 'field_service_type');
+        
+        $this->autoMap();
+    }
+    
+}
+
+class WebformMigration extends BaseNodeMigration {
+    
+    public function __construct(array $arguments)
+    {
+        parent::__construct($arguments);
+        $this->autoMap();
+    }
+    
+    public function complete($entity, stdClass $row) {
+        /**
+         * Once the webform nodes are created, then update the rest of the tables
+         */
+        //Components
+        $this->component($row->nid, $entity->nid);
+        //Submissions
+        $this->submissions($row->nid, $entity->nid);
+        //Submitted data
+        $this->submitted_data($row->nid, $entity->nid);
+        //Conditional
+        $this->conditional($row->nid, $entity->nid);
+        //Conditional rules
+        $this->conditional_rules($row->nid, $entity->nid);
+        //Emails
+        $this->emails($row->nid, $entity->nid);
+        //Last download
+        $this->last_download($row->nid, $entity->nid);
+    }
+    public function component($old_id, $new_id) {
+        $this->set_new_values('webform_component', 'wc', $old_id, $new_id);
+    }
+    public function submissions($old_id, $new_id) {
+        $this->set_new_values('webform_submissions', 'ws', $old_id, $new_id);
+    }
+    public function submitted_data($old_id, $new_id) {
+        $this->set_new_values('webform_submitted_data', 'wsd', $old_id, $new_id);
+    }
+    public function conditional($old_id, $new_id) {
+        $this->set_new_values('webform_conditional', 'wc', $old_id, $new_id);
+    }
+    public function conditional_rules($old_id, $new_id) {
+        $this->set_new_values('webform_conditional_rules', 'wcr', $old_id, $new_id);
+    }
+    public function emails($old_id, $new_id) {
+        $this->set_new_values('webform_emails', 'we', $old_id, $new_id);
+    }
+    public function last_download($old_id, $new_id) {
+        $this->set_new_values('webform_last_download', 'wld', $old_id, $new_id);
+    }
+    //Function to set new values
+    public function set_new_values($table, $alias,  $old_id, $new_id) {
+        $rows = Database::getConnection('default', $this->sourceConnection)
+            ->select($table, $alias)
+            ->fields($alias)
+            ->condition($alias . '.nid', $old_id)
+            ->execute()->fetchAll();
+        foreach ($rows as $row) {
+            $row->nid = $new_id;
+            drupal_write_record($table, $row);
+        }
+    }
+    
+}

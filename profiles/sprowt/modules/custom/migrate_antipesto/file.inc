@@ -12,7 +12,9 @@ class FocalPointDestinationHandler extends MigrateDestinationHandler {
     }
     
     public function complete($entity, stdClass $row){
-        focal_point_save($entity->fid, $entity->focal_point);
+        if(!empty($entity->focal_point)) {
+            focal_point_save($entity->fid, $entity->focal_point);
+        }
     }
 }
 

@@ -7,7 +7,7 @@ $conf['migrate_antipesto_sourcedb'] = array(
     'port' => 10553
 );
 
-$conf['migrate_antipesto_source_base_url'] = 'https://www.antipestodrush.com';
+$conf['migrate_antipesto_source_base_url'] = 'https://www.antipesto.com';
 
 /**
  * Implements hook_migrate_api().
@@ -142,13 +142,13 @@ function migrate_antipesto_migrate_api() {
 //            'destination_type' => 'profile',
 //            'dependencies' => array('File'),
 //        ),
-//        'Service' => array(
-//            'class_name' => 'ServiceMigration',
-//            'description' => t('Migration of Services'),
-//            'source_type' => 'service',
-//            'destination_type' => 'service',
-//            'dependencies' => array('File', 'ServiceTerms'),
-//        ),
+        'Service' => array(
+            'class_name' => 'ServiceMigration',
+            'description' => t('Migration of Services'),
+            'source_type' => 'service_category',
+            'destination_type' => 'service',
+            'dependencies' => array('File', 'ServiceTerms'),
+        ),
 //        'SpecialOffer' => array(
 //            'class_name' => 'SpecialOfferMigration',
 //            'description' => t('Migration of Special Offers'),
@@ -163,13 +163,13 @@ function migrate_antipesto_migrate_api() {
 //            'destination_type' => 'testimonial',
 //            'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
 //        ),
-//        'Webform' => array(
-//            'class_name' => 'WebformMigration',
-//            'description' => t('Migration of Webforms'),
-//            'source_type' => 'webform',
-//            'destination_type' => 'webform',
-//            'dependencies' => array(),
-//        ),
+        'Webform' => array(
+            'class_name' => 'WebformMigration',
+            'description' => t('Migration of Webforms'),
+            'source_type' => 'webform',
+            'destination_type' => 'webform',
+            'dependencies' => array(),
+        ),
     );
     
     

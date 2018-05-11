@@ -6,6 +6,7 @@ core = 7.x
 dependencies[] = migrate
 dependencies[] = migrate_d2d
 dependencies[] = sprowt_package_comparison
+dependencies[] = antipesto_legacy_feature
 
 files[] = migrate_antipesto.migrate.inc
 files[] = before_after.inc
