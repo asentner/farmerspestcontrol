@@ -116,6 +116,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -169,6 +181,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -239,6 +263,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -291,6 +327,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 10,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -346,6 +394,18 @@ function sprowt_city_pages_field_default_field_instances() {
         ),
         'type' => 'paragraphs_view',
         'weight' => 3,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -425,6 +485,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 4,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -477,6 +549,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -500,20 +584,34 @@ function sprowt_city_pages_field_default_field_instances() {
     'label' => 'Hero Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => TRUE,
       'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => TRUE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
         'insert' => 0,
         'insert_absolute' => FALSE,
         'insert_class' => '',
@@ -554,6 +652,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'type' => 'image',
         'weight' => 2,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -572,20 +682,34 @@ function sprowt_city_pages_field_default_field_instances() {
     'label' => 'Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => TRUE,
       'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => TRUE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'image',
       'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+          ),
+        ),
         'insert' => 0,
         'insert_absolute' => FALSE,
         'insert_class' => '',
@@ -622,6 +746,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -676,6 +812,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -723,6 +871,18 @@ function sprowt_city_pages_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'secondary_teaser' => array(
@@ -921,14 +1081,14 @@ function sprowt_city_pages_field_default_field_instances() {
     'label' => 'Image Insert',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => TRUE,
       'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => TRUE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
