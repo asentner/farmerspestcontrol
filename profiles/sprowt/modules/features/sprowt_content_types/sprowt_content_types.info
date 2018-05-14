@@ -507,6 +507,7 @@ features_exclude[dependencies][advanced_text_formatter] = advanced_text_formatte
 features_exclude[dependencies][multiupload_imagefield_widget] = multiupload_imagefield_widget
 features_exclude[dependencies][sprowt_fields_and_text_formats] = sprowt_fields_and_text_formats
 features_exclude[dependencies][paragraphs] = paragraphs
+features_exclude[dependencies][antipesto_legacy_feature] = antipesto_legacy_feature
 features_exclude[field_base][field_tags] = field_tags
 features_exclude[field_base][field_button] = field_button
 features_exclude[field_base][field_offer] = field_offer
