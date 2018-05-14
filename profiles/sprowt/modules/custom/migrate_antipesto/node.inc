@@ -262,7 +262,22 @@ class WebformMigration extends BaseNodeMigration {
         $this->set_new_values('webform_component', 'wc', $old_id, $new_id);
     }
     public function submissions($old_id, $new_id) {
-        $this->set_new_values('webform_submissions', 'ws', $old_id, $new_id);
+        $this->set_new_values('webform_submissions', 'ws', $old_id, $new_id, function(&$row){
+            if(empty($row->serial)) {
+                $row->serial = $row->sid;
+            }
+            
+            if(empty($row->highest_valid_page)) {
+                $row->highest_valid_page = 0;
+            }
+            
+            if(empty($row->completed)) {
+                $row->completed = $row->submitted;
+            }
+            if(empty($row->modified)) {
+                $row->modified = $row->submitted;
+            }
+        });
     }
     public function submitted_data($old_id, $new_id) {
         $this->set_new_values('webform_submitted_data', 'wsd', $old_id, $new_id);
@@ -274,19 +289,36 @@ class WebformMigration extends BaseNodeMigration {
         $this->set_new_values('webform_conditional_rules', 'wcr', $old_id, $new_id);
     }
     public function emails($old_id, $new_id) {
-        $this->set_new_values('webform_emails', 'we', $old_id, $new_id);
+        $this->set_new_values('webform_emails', 'we', $old_id, $new_id, function(&$row){
+            if(!isset($row->status)) {
+                $row->status = 1;
+            }
+        });
     }
     public function last_download($old_id, $new_id) {
         $this->set_new_values('webform_last_download', 'wld', $old_id, $new_id);
     }
     //Function to set new values
-    public function set_new_values($table, $alias,  $old_id, $new_id) {
-        $rows = Database::getConnection('default', $this->sourceConnection)
-            ->select($table, $alias)
-            ->fields($alias)
-            ->condition($alias . '.nid', $old_id)
-            ->execute()->fetchAll();
+    public function set_new_values($table, $alias,  $old_id, $new_id, $adjust) {
+        if(empty($adjust)) {
+            $adjust = function(&$row) {
+                //do nothing
+            };
+        }
+        try {
+            $rows = Database::getConnection('default', $this->sourceConnection)
+                ->select($table, $alias)
+                ->fields($alias)
+                ->condition($alias . '.nid', $old_id)
+                ->execute()->fetchAll();
+        }
+        catch (Exception $e) {
+            watchdog_exception('Webform Migration Exception', $e);
+            $rows = array();
+        }
+        
         foreach ($rows as $row) {
+            $adjust($row);
             $row->nid = $new_id;
             drupal_write_record($table, $row);
         }
