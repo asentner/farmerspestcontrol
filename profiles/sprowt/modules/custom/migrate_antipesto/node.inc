@@ -243,6 +243,8 @@ class WebformMigration extends BaseNodeMigration {
         /**
          * Once the webform nodes are created, then update the rest of the tables
          */
+        //settings
+        $this->webformSettings($row->nid, $entity->nid);
         //Components
         $this->component($row->nid, $entity->nid);
         //Submissions
@@ -290,27 +292,42 @@ class WebformMigration extends BaseNodeMigration {
     }
     public function emails($old_id, $new_id) {
         $this->set_new_values('webform_emails', 'we', $old_id, $new_id, function(&$row){
+            if(!isset($row->exclude_empty)) {
+                $row->exclude_empty = 0;
+            }
+    
+            if(!isset($row->extra)) {
+                $row->extra = '';
+            }
+            
             if(!isset($row->status)) {
                 $row->status = 1;
             }
+            
         });
     }
     public function last_download($old_id, $new_id) {
         $this->set_new_values('webform_last_download', 'wld', $old_id, $new_id);
     }
     //Function to set new values
-    public function set_new_values($table, $alias,  $old_id, $new_id, $adjust) {
+    public function set_new_values($table, $alias,  $old_id, $new_id, $adjust = null) {
         if(empty($adjust)) {
             $adjust = function(&$row) {
                 //do nothing
             };
         }
         try {
-            $rows = Database::getConnection('default', $this->sourceConnection)
-                ->select($table, $alias)
-                ->fields($alias)
-                ->condition($alias . '.nid', $old_id)
-                ->execute()->fetchAll();
+            $exists = Database::getConnection('default', $this->sourceConnection)->schema()->tableExists($table);
+            if($exists) {
+                $rows = Database::getConnection('default', $this->sourceConnection)
+                    ->select($table, $alias)
+                    ->fields($alias)
+                    ->condition($alias . '.nid', $old_id)
+                    ->execute()->fetchAll();
+            }
+            else {
+                $rows = array();
+            }
         }
         catch (Exception $e) {
             watchdog_exception('Webform Migration Exception', $e);
@@ -322,6 +339,26 @@ class WebformMigration extends BaseNodeMigration {
             $row->nid = $new_id;
             drupal_write_record($table, $row);
         }
+    }
+    
+    public function webformSettings($old_id, $new_id) {
+        $connection = Database::getConnection('default', $this->sourceConnection);
+        $rows = $connection
+            ->select('webform', 'w')
+            ->fields('w')
+            ->condition('w' . '.nid', $old_id)
+            ->execute()->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach($rows as $row) {
+            $fields = $row;
+            unset($fields['nid']);
+            unset($fields['teaser']);
+            db_update('webform')
+                ->condition('nid', $new_id)
+                ->fields($fields)
+                ->execute();
+        }
+        
     }
     
 }

@@ -135,13 +135,6 @@ function migrate_antipesto_migrate_api() {
             'destination_type' => 'package',
             'dependencies' => array('File', 'ServiceTerms'),
         ),
-//        'Profile' => array(
-//            'class_name' => 'ProfileMigration',
-//            'description' => t('Migration of Profiles'),
-//            'source_type' => 'profile',
-//            'destination_type' => 'profile',
-//            'dependencies' => array('File'),
-//        ),
         'Service' => array(
             'class_name' => 'ServiceMigration',
             'description' => t('Migration of Services'),
@@ -149,20 +142,6 @@ function migrate_antipesto_migrate_api() {
             'destination_type' => 'service',
             'dependencies' => array('File', 'ServiceTerms'),
         ),
-//        'SpecialOffer' => array(
-//            'class_name' => 'SpecialOfferMigration',
-//            'description' => t('Migration of Special Offers'),
-//            'source_type' => 'special_offer',
-//            'destination_type' => 'special_offer',
-//            'dependencies' => array('File', 'ServiceTerms'),
-//        ),
-//        'Testimonial' => array(
-//            'class_name' => 'TestimonialMigration',
-//            'description' => t('Migration of Testimonials'),
-//            'source_type' => 'testimonial',
-//            'destination_type' => 'testimonial',
-//            'dependencies' => array('File', 'MarketTerms', 'ServiceTerms'),
-//        ),
         'Webform' => array(
             'class_name' => 'WebformMigration',
             'description' => t('Migration of Webforms'),

@@ -34,7 +34,9 @@ class ApPrep extends MigrationBase {
             'service',
             'market',
             'region',
-            'localtarget'
+            'localtarget',
+            'package',
+            'affiliation'
         );
         self::displayMessage(t('Deleting nodes of type(s): ['. implode(', ', $types).']'), 'warning');
 
