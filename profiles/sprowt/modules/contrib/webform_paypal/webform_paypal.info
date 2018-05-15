@@ -1,0 +1,12 @@
+name = Webform Paypal Component
+description = 'Provides webform component that allows you to paste in a paypal pay now button'
+core = 7.x
+package = Webform
+dependencies[] = webform (4.x)
+
+; Information added by Drupal.org packaging script on 2016-06-17
+version = "7.x-2.x-dev"
+core = "7.x"
+project = "webform_paypal"
+datestamp = "1466206440"
+
