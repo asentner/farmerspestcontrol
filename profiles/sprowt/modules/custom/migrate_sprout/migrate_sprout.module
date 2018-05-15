@@ -1,0 +1,16 @@
+<?php
+
+//nothing here
+
+function _migrate_sprout_user_email_map($reset = false) {
+    $map = &drupal_static(__FUNCTION__);
+    
+    if(!isset($map) || $reset) {
+        $map = db_query("
+            SELECT mail, uid
+            FROM users
+        ")->fetchAllKeyed();
+    }
+    
+    return $map;
+}

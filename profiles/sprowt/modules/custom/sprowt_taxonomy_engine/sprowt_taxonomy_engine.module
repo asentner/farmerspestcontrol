@@ -810,6 +810,9 @@ function _sprowt_market_term_map(){
  */
 function _sprowt_service_node_from_tid($tid) {
     $map = _sprowt_service_term_map();
+    if(empty($map[$tid])) {
+        return new stdClass();
+    }
 	$nid = $map[$tid];
 	
 	return node_load($nid);
@@ -820,6 +823,10 @@ function _sprowt_service_node_from_tid($tid) {
  */
 function _sprowt_market_node_from_tid($tid) {
     $map = _sprowt_market_term_map();
+    if(empty($map[$tid])) {
+        return new stdClass();
+    }
+    
 	$nid = $map[$tid];
 	
 	return node_load($nid);
@@ -881,10 +888,10 @@ function sprowt_taxonomy_engine_tokens($type, $tokens, array $data = array(), ar
                 case 'sprowt_node:localtarget_url_pattern':
                 case 'localtarget_url_pattern':
                     if($node->type == 'localtarget') {
-                        $market = _sprowt_market_node_from_tid($node->field_market[LANGUAGE_NONE][0]['tid']);
-                        $service = _sprowt_service_node_from_tid($node->field_service[LANGUAGE_NONE][0]['tid']);
+                        $market = !empty($node->field_market[LANGUAGE_NONE][0]['tid']) ? _sprowt_market_node_from_tid($node->field_market[LANGUAGE_NONE][0]['tid']) : new stdClass();
+                        $service = !empty($node->field_service[LANGUAGE_NONE][0]['tid']) ? _sprowt_service_node_from_tid($node->field_service[LANGUAGE_NONE][0]['tid']) : new stdClass();
 
-                        $state = $market->field_state[LANGUAGE_NONE][0]['value'];
+                        $state = !empty($market->field_state[LANGUAGE_NONE][0]['value']) ? $market->field_state[LANGUAGE_NONE][0]['value'] : null;
 
                         if(empty($state)) {
                             $nid = db_query("
@@ -902,9 +909,9 @@ function sprowt_taxonomy_engine_tokens($type, $tokens, array $data = array(), ar
                         }
 
                         $url = array(
-                            _sprowt_taxonomy_engine_slugify($service->title),
-                            _sprowt_taxonomy_engine_slugify($market->title),
-                            _sprowt_taxonomy_engine_slugify($state),
+                            !empty($service->title) ? _sprowt_taxonomy_engine_slugify($service->title) : null,
+                            !empty($market->title) ? _sprowt_taxonomy_engine_slugify($market->title) : null,
+                            !empty($state) ? _sprowt_taxonomy_engine_slugify($state) : null,
                         );
 
                         foreach($url as $k => $v) {
