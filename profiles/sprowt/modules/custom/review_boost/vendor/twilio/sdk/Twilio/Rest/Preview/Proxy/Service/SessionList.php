@@ -11,6 +11,7 @@ namespace Twilio\Rest\Preview\Proxy\Service;
 
 use Twilio\ListResource;
 use Twilio\Options;
+use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -29,9 +30,7 @@ class SessionList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Sessions';
     }
@@ -133,6 +132,7 @@ class SessionList extends ListResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return SessionInstance Newly created SessionInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($options = array()) {
         $options = new Values($options);
@@ -141,7 +141,7 @@ class SessionList extends ListResource {
             'UniqueName' => $options['uniqueName'],
             'Ttl' => $options['ttl'],
             'Status' => $options['status'],
-            'Participants' => $options['participants'],
+            'Participants' => Serialize::map($options['participants'], function($e) { return $e; }),
         ));
 
         $payload = $this->version->create(
@@ -151,11 +151,7 @@ class SessionList extends ListResource {
             $data
         );
 
-        return new SessionInstance(
-            $this->version,
-            $payload,
-            $this->solution['serviceSid']
-        );
+        return new SessionInstance($this->version, $payload, $this->solution['serviceSid']);
     }
 
     /**
@@ -165,11 +161,7 @@ class SessionList extends ListResource {
      * @return \Twilio\Rest\Preview\Proxy\Service\SessionContext 
      */
     public function getContext($sid) {
-        return new SessionContext(
-            $this->version,
-            $this->solution['serviceSid'],
-            $sid
-        );
+        return new SessionContext($this->version, $this->solution['serviceSid'], $sid);
     }
 
     /**

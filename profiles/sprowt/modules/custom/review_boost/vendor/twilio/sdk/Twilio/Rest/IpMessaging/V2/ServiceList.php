@@ -32,13 +32,12 @@ class ServiceList extends ListResource {
     /**
      * Create a new ServiceInstance
      * 
-     * @param string $friendlyName The friendly_name
+     * @param string $friendlyName Human-readable name for this service instance
      * @return ServiceInstance Newly created ServiceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($friendlyName) {
-        $data = Values::of(array(
-            'FriendlyName' => $friendlyName,
-        ));
+        $data = Values::of(array('FriendlyName' => $friendlyName, ));
 
         $payload = $this->version->create(
             'POST',
@@ -47,10 +46,7 @@ class ServiceList extends ListResource {
             $data
         );
 
-        return new ServiceInstance(
-            $this->version,
-            $payload
-        );
+        return new ServiceInstance($this->version, $payload);
     }
 
     /**
@@ -146,10 +142,7 @@ class ServiceList extends ListResource {
      * @return \Twilio\Rest\IpMessaging\V2\ServiceContext 
      */
     public function getContext($sid) {
-        return new ServiceContext(
-            $this->version,
-            $sid
-        );
+        return new ServiceContext($this->version, $sid);
     }
 
     /**

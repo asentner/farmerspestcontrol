@@ -37,9 +37,7 @@ class InstalledAddOnContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'sid' => $sid,
-        );
+        $this->solution = array('sid' => $sid, );
 
         $this->uri = '/InstalledAddOns/' . rawurlencode($sid) . '';
     }
@@ -48,6 +46,7 @@ class InstalledAddOnContext extends InstanceContext {
      * Deletes the InstalledAddOnInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
@@ -57,6 +56,7 @@ class InstalledAddOnContext extends InstanceContext {
      * Fetch a InstalledAddOnInstance
      * 
      * @return InstalledAddOnInstance Fetched InstalledAddOnInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -67,11 +67,7 @@ class InstalledAddOnContext extends InstanceContext {
             $params
         );
 
-        return new InstalledAddOnInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new InstalledAddOnInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
@@ -79,12 +75,13 @@ class InstalledAddOnContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return InstalledAddOnInstance Updated InstalledAddOnInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
 
         $data = Values::of(array(
-            'Configuration' => Serialize::json_object($options['configuration']),
+            'Configuration' => Serialize::jsonObject($options['configuration']),
             'UniqueName' => $options['uniqueName'],
         ));
 
@@ -95,11 +92,7 @@ class InstalledAddOnContext extends InstanceContext {
             $data
         );
 
-        return new InstalledAddOnInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new InstalledAddOnInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
@@ -109,10 +102,7 @@ class InstalledAddOnContext extends InstanceContext {
      */
     protected function getExtensions() {
         if (!$this->_extensions) {
-            $this->_extensions = new InstalledAddOnExtensionList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_extensions = new InstalledAddOnExtensionList($this->version, $this->solution['sid']);
         }
 
         return $this->_extensions;

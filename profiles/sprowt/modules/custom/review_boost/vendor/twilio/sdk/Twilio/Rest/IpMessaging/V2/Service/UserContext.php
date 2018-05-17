@@ -12,15 +12,19 @@ namespace Twilio\Rest\IpMessaging\V2\Service;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
 use Twilio\Options;
+use Twilio\Rest\IpMessaging\V2\Service\User\UserBindingList;
 use Twilio\Rest\IpMessaging\V2\Service\User\UserChannelList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
  * @property \Twilio\Rest\IpMessaging\V2\Service\User\UserChannelList userChannels
+ * @property \Twilio\Rest\IpMessaging\V2\Service\User\UserBindingList userBindings
+ * @method \Twilio\Rest\IpMessaging\V2\Service\User\UserBindingContext userBindings(string $sid)
  */
 class UserContext extends InstanceContext {
     protected $_userChannels = null;
+    protected $_userBindings = null;
 
     /**
      * Initialize the UserContext
@@ -34,10 +38,7 @@ class UserContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'sid' => $sid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Users/' . rawurlencode($sid) . '';
     }
@@ -46,6 +47,7 @@ class UserContext extends InstanceContext {
      * Fetch a UserInstance
      * 
      * @return UserInstance Fetched UserInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -68,6 +70,7 @@ class UserContext extends InstanceContext {
      * Deletes the UserInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
@@ -78,6 +81,7 @@ class UserContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return UserInstance Updated UserInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
@@ -118,6 +122,23 @@ class UserContext extends InstanceContext {
         }
 
         return $this->_userChannels;
+    }
+
+    /**
+     * Access the userBindings
+     * 
+     * @return \Twilio\Rest\IpMessaging\V2\Service\User\UserBindingList 
+     */
+    protected function getUserBindings() {
+        if (!$this->_userBindings) {
+            $this->_userBindings = new UserBindingList(
+                $this->version,
+                $this->solution['serviceSid'],
+                $this->solution['sid']
+            );
+        }
+
+        return $this->_userBindings;
     }
 
     /**

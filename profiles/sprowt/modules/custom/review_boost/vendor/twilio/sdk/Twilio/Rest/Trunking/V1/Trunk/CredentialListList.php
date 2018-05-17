@@ -25,9 +25,7 @@ class CredentialListList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'trunkSid' => $trunkSid,
-        );
+        $this->solution = array('trunkSid' => $trunkSid, );
 
         $this->uri = '/Trunks/' . rawurlencode($trunkSid) . '/CredentialLists';
     }
@@ -37,11 +35,10 @@ class CredentialListList extends ListResource {
      * 
      * @param string $credentialListSid The credential_list_sid
      * @return CredentialListInstance Newly created CredentialListInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($credentialListSid) {
-        $data = Values::of(array(
-            'CredentialListSid' => $credentialListSid,
-        ));
+        $data = Values::of(array('CredentialListSid' => $credentialListSid, ));
 
         $payload = $this->version->create(
             'POST',
@@ -50,11 +47,7 @@ class CredentialListList extends ListResource {
             $data
         );
 
-        return new CredentialListInstance(
-            $this->version,
-            $payload,
-            $this->solution['trunkSid']
-        );
+        return new CredentialListInstance($this->version, $payload, $this->solution['trunkSid']);
     }
 
     /**
@@ -150,11 +143,7 @@ class CredentialListList extends ListResource {
      * @return \Twilio\Rest\Trunking\V1\Trunk\CredentialListContext 
      */
     public function getContext($sid) {
-        return new CredentialListContext(
-            $this->version,
-            $this->solution['trunkSid'],
-            $sid
-        );
+        return new CredentialListContext($this->version, $this->solution['trunkSid'], $sid);
     }
 
     /**

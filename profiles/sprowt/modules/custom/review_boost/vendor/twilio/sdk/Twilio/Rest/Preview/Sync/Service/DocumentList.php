@@ -30,9 +30,7 @@ class DocumentList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Documents';
     }
@@ -42,13 +40,14 @@ class DocumentList extends ListResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return DocumentInstance Newly created DocumentInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($options = array()) {
         $options = new Values($options);
 
         $data = Values::of(array(
             'UniqueName' => $options['uniqueName'],
-            'Data' => Serialize::json_object($options['data']),
+            'Data' => Serialize::jsonObject($options['data']),
         ));
 
         $payload = $this->version->create(
@@ -58,11 +57,7 @@ class DocumentList extends ListResource {
             $data
         );
 
-        return new DocumentInstance(
-            $this->version,
-            $payload,
-            $this->solution['serviceSid']
-        );
+        return new DocumentInstance($this->version, $payload, $this->solution['serviceSid']);
     }
 
     /**
@@ -158,11 +153,7 @@ class DocumentList extends ListResource {
      * @return \Twilio\Rest\Preview\Sync\Service\DocumentContext 
      */
     public function getContext($sid) {
-        return new DocumentContext(
-            $this->version,
-            $this->solution['serviceSid'],
-            $sid
-        );
+        return new DocumentContext($this->version, $this->solution['serviceSid'], $sid);
     }
 
     /**

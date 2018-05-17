@@ -11,9 +11,6 @@ namespace Twilio\Rest\Wireless\V1\Sim;
 
 use Twilio\Page;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class DataSessionPage extends Page {
     public function __construct($version, $response, $solution) {
         parent::__construct($version, $response);
@@ -23,11 +20,7 @@ class DataSessionPage extends Page {
     }
 
     public function buildInstance(array $payload) {
-        return new DataSessionInstance(
-            $this->version,
-            $payload,
-            $this->solution['simSid']
-        );
+        return new DataSessionInstance($this->version, $payload, $this->solution['simSid']);
     }
 
     /**

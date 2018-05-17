@@ -36,6 +36,7 @@ class RoomList extends ListResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return RoomInstance Newly created RoomInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($options = array()) {
         $options = new Values($options);
@@ -48,7 +49,7 @@ class RoomList extends ListResource {
             'StatusCallbackMethod' => $options['statusCallbackMethod'],
             'MaxParticipants' => $options['maxParticipants'],
             'RecordParticipantsOnConnect' => Serialize::booleanToString($options['recordParticipantsOnConnect']),
-            'VideoCodecs' => $options['videoCodecs'],
+            'VideoCodecs' => Serialize::map($options['videoCodecs'], function($e) { return $e; }),
             'MediaRegion' => $options['mediaRegion'],
         ));
 
@@ -59,10 +60,7 @@ class RoomList extends ListResource {
             $data
         );
 
-        return new RoomInstance(
-            $this->version,
-            $payload
-        );
+        return new RoomInstance($this->version, $payload);
     }
 
     /**
@@ -166,10 +164,7 @@ class RoomList extends ListResource {
      * @return \Twilio\Rest\Video\V1\RoomContext 
      */
     public function getContext($sid) {
-        return new RoomContext(
-            $this->version,
-            $sid
-        );
+        return new RoomContext($this->version, $sid);
     }
 
     /**

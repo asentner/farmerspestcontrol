@@ -59,9 +59,7 @@ class FleetInstance extends InstanceResource {
             'links' => Values::array_get($payload, 'links'),
         );
 
-        $this->solution = array(
-            'sid' => $sid ?: $this->properties['sid'],
-        );
+        $this->solution = array('sid' => $sid ?: $this->properties['sid'], );
     }
 
     /**
@@ -73,10 +71,7 @@ class FleetInstance extends InstanceResource {
      */
     protected function proxy() {
         if (!$this->context) {
-            $this->context = new FleetContext(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->context = new FleetContext($this->version, $this->solution['sid']);
         }
 
         return $this->context;
@@ -86,6 +81,7 @@ class FleetInstance extends InstanceResource {
      * Fetch a FleetInstance
      * 
      * @return FleetInstance Fetched FleetInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -95,6 +91,7 @@ class FleetInstance extends InstanceResource {
      * Deletes the FleetInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();
@@ -105,11 +102,10 @@ class FleetInstance extends InstanceResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return FleetInstance Updated FleetInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
-        return $this->proxy()->update(
-            $options
-        );
+        return $this->proxy()->update($options);
     }
 
     /**

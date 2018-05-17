@@ -20,16 +20,15 @@ class AddressList extends ListResource {
      * Construct the AddressList
      * 
      * @param Version $version Version that contains the resource
-     * @param string $accountSid The account_sid
+     * @param string $accountSid The unique id of the Account responsible for this
+     *                           address.
      * @return \Twilio\Rest\Api\V2010\Account\AddressList 
      */
     public function __construct(Version $version, $accountSid) {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'accountSid' => $accountSid,
-        );
+        $this->solution = array('accountSid' => $accountSid, );
 
         $this->uri = '/Accounts/' . rawurlencode($accountSid) . '/Addresses.json';
     }
@@ -37,14 +36,20 @@ class AddressList extends ListResource {
     /**
      * Create a new AddressInstance
      * 
-     * @param string $customerName The customer_name
-     * @param string $street The street
-     * @param string $city The city
-     * @param string $region The region
-     * @param string $postalCode The postal_code
-     * @param string $isoCountry The iso_country
+     * @param string $customerName Your name or business name, or that of your
+     *                             customer.
+     * @param string $street The number and street address where you or your
+     *                       customer is located.
+     * @param string $city The city in which you or your customer is located.
+     * @param string $region The state or region in which you or your customer is
+     *                       located.
+     * @param string $postalCode The postal code in which you or your customer is
+     *                           located.
+     * @param string $isoCountry The ISO country code of your or your customer's
+     *                           address.
      * @param array|Options $options Optional Arguments
      * @return AddressInstance Newly created AddressInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($customerName, $street, $city, $region, $postalCode, $isoCountry, $options = array()) {
         $options = new Values($options);
@@ -68,11 +73,7 @@ class AddressList extends ListResource {
             $data
         );
 
-        return new AddressInstance(
-            $this->version,
-            $payload,
-            $this->solution['accountSid']
-        );
+        return new AddressInstance($this->version, $payload, $this->solution['accountSid']);
     }
 
     /**
@@ -175,11 +176,7 @@ class AddressList extends ListResource {
      * @return \Twilio\Rest\Api\V2010\Account\AddressContext 
      */
     public function getContext($sid) {
-        return new AddressContext(
-            $this->version,
-            $this->solution['accountSid'],
-            $sid
-        );
+        return new AddressContext($this->version, $this->solution['accountSid'], $sid);
     }
 
     /**

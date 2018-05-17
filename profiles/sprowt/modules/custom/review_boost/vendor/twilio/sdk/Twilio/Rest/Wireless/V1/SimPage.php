@@ -11,9 +11,6 @@ namespace Twilio\Rest\Wireless\V1;
 
 use Twilio\Page;
 
-/**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- */
 class SimPage extends Page {
     public function __construct($version, $response, $solution) {
         parent::__construct($version, $response);
@@ -23,10 +20,7 @@ class SimPage extends Page {
     }
 
     public function buildInstance(array $payload) {
-        return new SimInstance(
-            $this->version,
-            $payload
-        );
+        return new SimInstance($this->version, $payload);
     }
 
     /**

@@ -67,9 +67,7 @@ class TrunkInstance extends InstanceResource {
             'links' => Values::array_get($payload, 'links'),
         );
 
-        $this->solution = array(
-            'sid' => $sid ?: $this->properties['sid'],
-        );
+        $this->solution = array('sid' => $sid ?: $this->properties['sid'], );
     }
 
     /**
@@ -80,10 +78,7 @@ class TrunkInstance extends InstanceResource {
      */
     protected function proxy() {
         if (!$this->context) {
-            $this->context = new TrunkContext(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->context = new TrunkContext($this->version, $this->solution['sid']);
         }
 
         return $this->context;
@@ -93,6 +88,7 @@ class TrunkInstance extends InstanceResource {
      * Fetch a TrunkInstance
      * 
      * @return TrunkInstance Fetched TrunkInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -102,6 +98,7 @@ class TrunkInstance extends InstanceResource {
      * Deletes the TrunkInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();
@@ -112,11 +109,10 @@ class TrunkInstance extends InstanceResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return TrunkInstance Updated TrunkInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
-        return $this->proxy()->update(
-            $options
-        );
+        return $this->proxy()->update($options);
     }
 
     /**

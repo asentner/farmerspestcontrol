@@ -24,10 +24,16 @@ abstract class HostedNumberOrderOptions {
      * @param string $ccEmails A list of emails.
      * @param string $status The Status of this HostedNumberOrder.
      * @param string $verificationCode A verification code.
+     * @param string $verificationType Verification Type.
+     * @param string $verificationDocumentSid Verification Document Sid
+     * @param string $extension Digits to dial after connecting the verification
+     *                          call.
+     * @param integer $callDelay The number of seconds, between 0 and 60, to delay
+     *                           before initiating the verification call.
      * @return UpdateHostedNumberOrderOptions Options builder
      */
-    public static function update($friendlyName = Values::NONE, $uniqueName = Values::NONE, $email = Values::NONE, $ccEmails = Values::NONE, $status = Values::NONE, $verificationCode = Values::NONE) {
-        return new UpdateHostedNumberOrderOptions($friendlyName, $uniqueName, $email, $ccEmails, $status, $verificationCode);
+    public static function update($friendlyName = Values::NONE, $uniqueName = Values::NONE, $email = Values::NONE, $ccEmails = Values::NONE, $status = Values::NONE, $verificationCode = Values::NONE, $verificationType = Values::NONE, $verificationDocumentSid = Values::NONE, $extension = Values::NONE, $callDelay = Values::NONE) {
+        return new UpdateHostedNumberOrderOptions($friendlyName, $uniqueName, $email, $ccEmails, $status, $verificationCode, $verificationType, $verificationDocumentSid, $extension, $callDelay);
     }
 
     /**
@@ -56,10 +62,14 @@ abstract class HostedNumberOrderOptions {
      * @param string $statusCallbackUrl Status Callback URL.
      * @param string $statusCallbackMethod Status Callback Method.
      * @param string $smsApplicationSid SMS Application Sid.
+     * @param string $addressSid Address sid.
+     * @param string $email Email.
+     * @param string $verificationType Verification Type.
+     * @param string $verificationDocumentSid Verification Document Sid
      * @return CreateHostedNumberOrderOptions Options builder
      */
-    public static function create($accountSid = Values::NONE, $friendlyName = Values::NONE, $uniqueName = Values::NONE, $ccEmails = Values::NONE, $smsUrl = Values::NONE, $smsMethod = Values::NONE, $smsFallbackUrl = Values::NONE, $smsFallbackMethod = Values::NONE, $statusCallbackUrl = Values::NONE, $statusCallbackMethod = Values::NONE, $smsApplicationSid = Values::NONE) {
-        return new CreateHostedNumberOrderOptions($accountSid, $friendlyName, $uniqueName, $ccEmails, $smsUrl, $smsMethod, $smsFallbackUrl, $smsFallbackMethod, $statusCallbackUrl, $statusCallbackMethod, $smsApplicationSid);
+    public static function create($accountSid = Values::NONE, $friendlyName = Values::NONE, $uniqueName = Values::NONE, $ccEmails = Values::NONE, $smsUrl = Values::NONE, $smsMethod = Values::NONE, $smsFallbackUrl = Values::NONE, $smsFallbackMethod = Values::NONE, $statusCallbackUrl = Values::NONE, $statusCallbackMethod = Values::NONE, $smsApplicationSid = Values::NONE, $addressSid = Values::NONE, $email = Values::NONE, $verificationType = Values::NONE, $verificationDocumentSid = Values::NONE) {
+        return new CreateHostedNumberOrderOptions($accountSid, $friendlyName, $uniqueName, $ccEmails, $smsUrl, $smsMethod, $smsFallbackUrl, $smsFallbackMethod, $statusCallbackUrl, $statusCallbackMethod, $smsApplicationSid, $addressSid, $email, $verificationType, $verificationDocumentSid);
     }
 }
 
@@ -72,18 +82,28 @@ class UpdateHostedNumberOrderOptions extends Options {
      * @param string $ccEmails A list of emails.
      * @param string $status The Status of this HostedNumberOrder.
      * @param string $verificationCode A verification code.
+     * @param string $verificationType Verification Type.
+     * @param string $verificationDocumentSid Verification Document Sid
+     * @param string $extension Digits to dial after connecting the verification
+     *                          call.
+     * @param integer $callDelay The number of seconds, between 0 and 60, to delay
+     *                           before initiating the verification call.
      */
-    public function __construct($friendlyName = Values::NONE, $uniqueName = Values::NONE, $email = Values::NONE, $ccEmails = Values::NONE, $status = Values::NONE, $verificationCode = Values::NONE) {
+    public function __construct($friendlyName = Values::NONE, $uniqueName = Values::NONE, $email = Values::NONE, $ccEmails = Values::NONE, $status = Values::NONE, $verificationCode = Values::NONE, $verificationType = Values::NONE, $verificationDocumentSid = Values::NONE, $extension = Values::NONE, $callDelay = Values::NONE) {
         $this->options['friendlyName'] = $friendlyName;
         $this->options['uniqueName'] = $uniqueName;
         $this->options['email'] = $email;
         $this->options['ccEmails'] = $ccEmails;
         $this->options['status'] = $status;
         $this->options['verificationCode'] = $verificationCode;
+        $this->options['verificationType'] = $verificationType;
+        $this->options['verificationDocumentSid'] = $verificationDocumentSid;
+        $this->options['extension'] = $extension;
+        $this->options['callDelay'] = $callDelay;
     }
 
     /**
-     * A human readable description of this resource, up to 64 characters.
+     * A 64 character string that is a human readable text that describes this resource.
      * 
      * @param string $friendlyName A human readable description of this resource.
      * @return $this Fluent Builder
@@ -128,7 +148,7 @@ class UpdateHostedNumberOrderOptions extends Options {
     }
 
     /**
-     * The Status of this HostedNumberOrder. User can only update this to `pending-loa` or `pending-verification`.
+     * User can only post to `pending-verification` status to transition the HostedNumberOrder to initiate a verification call or verification of ownership with a copy of a phone bill.
      * 
      * @param string $status The Status of this HostedNumberOrder.
      * @return $this Fluent Builder
@@ -146,6 +166,52 @@ class UpdateHostedNumberOrderOptions extends Options {
      */
     public function setVerificationCode($verificationCode) {
         $this->options['verificationCode'] = $verificationCode;
+        return $this;
+    }
+
+    /**
+     * Optional. The method used for verifying ownership of the number to be hosted. One of phone-call (default) or phone-bill.
+     * 
+     * @param string $verificationType Verification Type.
+     * @return $this Fluent Builder
+     */
+    public function setVerificationType($verificationType) {
+        $this->options['verificationType'] = $verificationType;
+        return $this;
+    }
+
+    /**
+     * Optional. The unique sid identifier of the Identity Document that represents the document for verifying ownership of the number to be hosted. Required when VerificationType is phone-bill.
+     * 
+     * @param string $verificationDocumentSid Verification Document Sid
+     * @return $this Fluent Builder
+     */
+    public function setVerificationDocumentSid($verificationDocumentSid) {
+        $this->options['verificationDocumentSid'] = $verificationDocumentSid;
+        return $this;
+    }
+
+    /**
+     * Digits to dial after connecting the verification call.
+     * 
+     * @param string $extension Digits to dial after connecting the verification
+     *                          call.
+     * @return $this Fluent Builder
+     */
+    public function setExtension($extension) {
+        $this->options['extension'] = $extension;
+        return $this;
+    }
+
+    /**
+     * The number of seconds, between 0 and 60, to delay before initiating the verification call. Defaults to 0.
+     * 
+     * @param integer $callDelay The number of seconds, between 0 and 60, to delay
+     *                           before initiating the verification call.
+     * @return $this Fluent Builder
+     */
+    public function setCallDelay($callDelay) {
+        $this->options['callDelay'] = $callDelay;
         return $this;
     }
 
@@ -268,8 +334,12 @@ class CreateHostedNumberOrderOptions extends Options {
      * @param string $statusCallbackUrl Status Callback URL.
      * @param string $statusCallbackMethod Status Callback Method.
      * @param string $smsApplicationSid SMS Application Sid.
+     * @param string $addressSid Address sid.
+     * @param string $email Email.
+     * @param string $verificationType Verification Type.
+     * @param string $verificationDocumentSid Verification Document Sid
      */
-    public function __construct($accountSid = Values::NONE, $friendlyName = Values::NONE, $uniqueName = Values::NONE, $ccEmails = Values::NONE, $smsUrl = Values::NONE, $smsMethod = Values::NONE, $smsFallbackUrl = Values::NONE, $smsFallbackMethod = Values::NONE, $statusCallbackUrl = Values::NONE, $statusCallbackMethod = Values::NONE, $smsApplicationSid = Values::NONE) {
+    public function __construct($accountSid = Values::NONE, $friendlyName = Values::NONE, $uniqueName = Values::NONE, $ccEmails = Values::NONE, $smsUrl = Values::NONE, $smsMethod = Values::NONE, $smsFallbackUrl = Values::NONE, $smsFallbackMethod = Values::NONE, $statusCallbackUrl = Values::NONE, $statusCallbackMethod = Values::NONE, $smsApplicationSid = Values::NONE, $addressSid = Values::NONE, $email = Values::NONE, $verificationType = Values::NONE, $verificationDocumentSid = Values::NONE) {
         $this->options['accountSid'] = $accountSid;
         $this->options['friendlyName'] = $friendlyName;
         $this->options['uniqueName'] = $uniqueName;
@@ -281,10 +351,14 @@ class CreateHostedNumberOrderOptions extends Options {
         $this->options['statusCallbackUrl'] = $statusCallbackUrl;
         $this->options['statusCallbackMethod'] = $statusCallbackMethod;
         $this->options['smsApplicationSid'] = $smsApplicationSid;
+        $this->options['addressSid'] = $addressSid;
+        $this->options['email'] = $email;
+        $this->options['verificationType'] = $verificationType;
+        $this->options['verificationDocumentSid'] = $verificationDocumentSid;
     }
 
     /**
-     * Optional. The unique SID identifier of the Account or Sub-Account to create this HostedNumberOrder on.
+     * This defaults to the AccountSid of the authorization the user is using. This can be provided to specify a subaccount to add the HostedNumberOrder to.
      * 
      * @param string $accountSid Account Sid.
      * @return $this Fluent Builder
@@ -295,7 +369,7 @@ class CreateHostedNumberOrderOptions extends Options {
     }
 
     /**
-     * Optional. A human readable description of this resource, up to 64 characters.
+     * A 64 character string that is a human readable text that describes this resource.
      * 
      * @param string $friendlyName A human readable description of this resource.
      * @return $this Fluent Builder
@@ -318,7 +392,7 @@ class CreateHostedNumberOrderOptions extends Options {
     }
 
     /**
-     * Optional. A list of emails that LOA document for this HostedNumberOrder will be carbon copied to.
+     * Optional. A list of emails that the LOA document for this HostedNumberOrder will be carbon copied to.
      * 
      * @param string $ccEmails A list of emails.
      * @return $this Fluent Builder
@@ -329,7 +403,7 @@ class CreateHostedNumberOrderOptions extends Options {
     }
 
     /**
-     * Optional. The SMS URL attached to the IncomingPhoneNumber resource.
+     * The URL that Twilio should request when somebody sends an SMS to the phone number. This will be copied onto the IncomingPhoneNumber resource.
      * 
      * @param string $smsUrl SMS URL.
      * @return $this Fluent Builder
@@ -340,7 +414,7 @@ class CreateHostedNumberOrderOptions extends Options {
     }
 
     /**
-     * Optional. The SMS Method attached to the IncomingPhoneNumber resource.
+     * The HTTP method that should be used to request the SmsUrl. Must be either `GET` or `POST`.  This will be copied onto the IncomingPhoneNumber resource.
      * 
      * @param string $smsMethod SMS Method.
      * @return $this Fluent Builder
@@ -351,7 +425,7 @@ class CreateHostedNumberOrderOptions extends Options {
     }
 
     /**
-     * Optional. The SMS Fallback URL attached to the IncomingPhoneNumber resource.
+     * A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl. This will be copied onto the IncomingPhoneNumber resource.
      * 
      * @param string $smsFallbackUrl SMS Fallback URL.
      * @return $this Fluent Builder
@@ -362,7 +436,7 @@ class CreateHostedNumberOrderOptions extends Options {
     }
 
     /**
-     * Optional. The SMS Fallback Method attached to the IncomingPhoneNumber resource.
+     * The HTTP method that should be used to request the SmsFallbackUrl. Must be either `GET` or `POST`. This will be copied onto the IncomingPhoneNumber resource.
      * 
      * @param string $smsFallbackMethod SMS Fallback Method.
      * @return $this Fluent Builder
@@ -402,6 +476,50 @@ class CreateHostedNumberOrderOptions extends Options {
      */
     public function setSmsApplicationSid($smsApplicationSid) {
         $this->options['smsApplicationSid'] = $smsApplicationSid;
+        return $this;
+    }
+
+    /**
+     * Optional. A 34 character string that uniquely identifies the Address resource that represents the address of the owner of this phone number.
+     * 
+     * @param string $addressSid Address sid.
+     * @return $this Fluent Builder
+     */
+    public function setAddressSid($addressSid) {
+        $this->options['addressSid'] = $addressSid;
+        return $this;
+    }
+
+    /**
+     * Optional. Email of the owner of this phone number that is being hosted.
+     * 
+     * @param string $email Email.
+     * @return $this Fluent Builder
+     */
+    public function setEmail($email) {
+        $this->options['email'] = $email;
+        return $this;
+    }
+
+    /**
+     * Optional. The method used for verifying ownership of the number to be hosted. One of phone-call (default) or phone-bill.
+     * 
+     * @param string $verificationType Verification Type.
+     * @return $this Fluent Builder
+     */
+    public function setVerificationType($verificationType) {
+        $this->options['verificationType'] = $verificationType;
+        return $this;
+    }
+
+    /**
+     * Optional. The unique sid identifier of the Identity Document that represents the document for verifying ownership of the number to be hosted. Required when VerificationType is phone-bill.
+     * 
+     * @param string $verificationDocumentSid Verification Document Sid
+     * @return $this Fluent Builder
+     */
+    public function setVerificationDocumentSid($verificationDocumentSid) {
+        $this->options['verificationDocumentSid'] = $verificationDocumentSid;
         return $this;
     }
 

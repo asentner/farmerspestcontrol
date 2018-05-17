@@ -45,9 +45,7 @@ class ServiceContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'sid' => $sid,
-        );
+        $this->solution = array('sid' => $sid, );
 
         $this->uri = '/Services/' . rawurlencode($sid) . '';
     }
@@ -57,6 +55,7 @@ class ServiceContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return ServiceInstance Updated ServiceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
@@ -85,17 +84,14 @@ class ServiceContext extends InstanceContext {
             $data
         );
 
-        return new ServiceInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new ServiceInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
      * Fetch a ServiceInstance
      * 
      * @return ServiceInstance Fetched ServiceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -106,17 +102,14 @@ class ServiceContext extends InstanceContext {
             $params
         );
 
-        return new ServiceInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new ServiceInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
      * Deletes the ServiceInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
@@ -129,10 +122,7 @@ class ServiceContext extends InstanceContext {
      */
     protected function getPhoneNumbers() {
         if (!$this->_phoneNumbers) {
-            $this->_phoneNumbers = new PhoneNumberList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_phoneNumbers = new PhoneNumberList($this->version, $this->solution['sid']);
         }
 
         return $this->_phoneNumbers;
@@ -145,10 +135,7 @@ class ServiceContext extends InstanceContext {
      */
     protected function getShortCodes() {
         if (!$this->_shortCodes) {
-            $this->_shortCodes = new ShortCodeList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_shortCodes = new ShortCodeList($this->version, $this->solution['sid']);
         }
 
         return $this->_shortCodes;
@@ -161,10 +148,7 @@ class ServiceContext extends InstanceContext {
      */
     protected function getAlphaSenders() {
         if (!$this->_alphaSenders) {
-            $this->_alphaSenders = new AlphaSenderList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_alphaSenders = new AlphaSenderList($this->version, $this->solution['sid']);
         }
 
         return $this->_alphaSenders;

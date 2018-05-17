@@ -29,9 +29,7 @@ class CertificateList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'fleetSid' => $fleetSid,
-        );
+        $this->solution = array('fleetSid' => $fleetSid, );
 
         $this->uri = '/Fleets/' . rawurlencode($fleetSid) . '/Certificates';
     }
@@ -42,6 +40,7 @@ class CertificateList extends ListResource {
      * @param string $certificateData The public certificate data.
      * @param array|Options $options Optional Arguments
      * @return CertificateInstance Newly created CertificateInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($certificateData, $options = array()) {
         $options = new Values($options);
@@ -59,11 +58,7 @@ class CertificateList extends ListResource {
             $data
         );
 
-        return new CertificateInstance(
-            $this->version,
-            $payload,
-            $this->solution['fleetSid']
-        );
+        return new CertificateInstance($this->version, $payload, $this->solution['fleetSid']);
     }
 
     /**
@@ -164,11 +159,7 @@ class CertificateList extends ListResource {
      * @return \Twilio\Rest\Preview\DeployedDevices\Fleet\CertificateContext 
      */
     public function getContext($sid) {
-        return new CertificateContext(
-            $this->version,
-            $this->solution['fleetSid'],
-            $sid
-        );
+        return new CertificateContext($this->version, $this->solution['fleetSid'], $sid);
     }
 
     /**

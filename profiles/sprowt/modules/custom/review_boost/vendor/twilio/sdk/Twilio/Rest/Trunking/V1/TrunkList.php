@@ -36,6 +36,7 @@ class TrunkList extends ListResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return TrunkInstance Newly created TrunkInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($options = array()) {
         $options = new Values($options);
@@ -56,10 +57,7 @@ class TrunkList extends ListResource {
             $data
         );
 
-        return new TrunkInstance(
-            $this->version,
-            $payload
-        );
+        return new TrunkInstance($this->version, $payload);
     }
 
     /**
@@ -155,10 +153,7 @@ class TrunkList extends ListResource {
      * @return \Twilio\Rest\Trunking\V1\TrunkContext 
      */
     public function getContext($sid) {
-        return new TrunkContext(
-            $this->version,
-            $sid
-        );
+        return new TrunkContext($this->version, $sid);
     }
 
     /**

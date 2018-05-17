@@ -39,6 +39,7 @@ class ServiceList extends ListResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return ServiceInstance Newly created ServiceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($options = array()) {
         $options = new Values($options);
@@ -65,10 +66,7 @@ class ServiceList extends ListResource {
             $data
         );
 
-        return new ServiceInstance(
-            $this->version,
-            $payload
-        );
+        return new ServiceInstance($this->version, $payload);
     }
 
     /**
@@ -169,10 +167,7 @@ class ServiceList extends ListResource {
      * @return \Twilio\Rest\Notify\V1\ServiceContext 
      */
     public function getContext($sid) {
-        return new ServiceContext(
-            $this->version,
-            $sid
-        );
+        return new ServiceContext($this->version, $sid);
     }
 
     /**

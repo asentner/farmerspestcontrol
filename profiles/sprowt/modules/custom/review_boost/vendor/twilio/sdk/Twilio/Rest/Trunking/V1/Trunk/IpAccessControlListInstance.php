@@ -48,10 +48,7 @@ class IpAccessControlListInstance extends InstanceResource {
             'url' => Values::array_get($payload, 'url'),
         );
 
-        $this->solution = array(
-            'trunkSid' => $trunkSid,
-            'sid' => $sid ?: $this->properties['sid'],
-        );
+        $this->solution = array('trunkSid' => $trunkSid, 'sid' => $sid ?: $this->properties['sid'], );
     }
 
     /**
@@ -78,6 +75,7 @@ class IpAccessControlListInstance extends InstanceResource {
      * Fetch a IpAccessControlListInstance
      * 
      * @return IpAccessControlListInstance Fetched IpAccessControlListInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -87,6 +85,7 @@ class IpAccessControlListInstance extends InstanceResource {
      * Deletes the IpAccessControlListInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();

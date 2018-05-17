@@ -64,10 +64,7 @@ class BindingInstance extends InstanceResource {
             'links' => Values::array_get($payload, 'links'),
         );
 
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'sid' => $sid ?: $this->properties['sid'],
-        );
+        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid ?: $this->properties['sid'], );
     }
 
     /**
@@ -93,6 +90,7 @@ class BindingInstance extends InstanceResource {
      * Fetch a BindingInstance
      * 
      * @return BindingInstance Fetched BindingInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -102,6 +100,7 @@ class BindingInstance extends InstanceResource {
      * Deletes the BindingInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();

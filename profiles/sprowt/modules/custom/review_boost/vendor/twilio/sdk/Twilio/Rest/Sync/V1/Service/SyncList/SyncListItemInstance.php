@@ -12,6 +12,7 @@ namespace Twilio\Rest\Sync\V1\Service\SyncList;
 use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
+use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -25,6 +26,7 @@ use Twilio\Version;
  * @property string url
  * @property string revision
  * @property array data
+ * @property \DateTime dateExpires
  * @property \DateTime dateCreated
  * @property \DateTime dateUpdated
  * @property string createdBy
@@ -35,8 +37,10 @@ class SyncListItemInstance extends InstanceResource {
      * 
      * @param \Twilio\Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @param string $serviceSid The service_sid
-     * @param string $listSid The list_sid
+     * @param string $serviceSid The unique SID identifier of the Service Instance
+     *                           that hosts this List object.
+     * @param string $listSid The unique 34-character SID identifier of the List
+     *                        containing this Item.
      * @param integer $index The index
      * @return \Twilio\Rest\Sync\V1\Service\SyncList\SyncListItemInstance 
      */
@@ -52,6 +56,7 @@ class SyncListItemInstance extends InstanceResource {
             'url' => Values::array_get($payload, 'url'),
             'revision' => Values::array_get($payload, 'revision'),
             'data' => Values::array_get($payload, 'data'),
+            'dateExpires' => Deserialize::dateTime(Values::array_get($payload, 'date_expires')),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'createdBy' => Values::array_get($payload, 'created_by'),
@@ -89,6 +94,7 @@ class SyncListItemInstance extends InstanceResource {
      * Fetch a SyncListItemInstance
      * 
      * @return SyncListItemInstance Fetched SyncListItemInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -98,6 +104,7 @@ class SyncListItemInstance extends InstanceResource {
      * Deletes the SyncListItemInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();
@@ -106,13 +113,12 @@ class SyncListItemInstance extends InstanceResource {
     /**
      * Update the SyncListItemInstance
      * 
-     * @param array $data The data
+     * @param array|Options $options Optional Arguments
      * @return SyncListItemInstance Updated SyncListItemInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($data) {
-        return $this->proxy()->update(
-            $data
-        );
+    public function update($options = array()) {
+        return $this->proxy()->update($options);
     }
 
     /**

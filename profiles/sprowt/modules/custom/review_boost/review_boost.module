@@ -440,7 +440,7 @@ function _review_boost_email_worker($item) {
   if($message['result']){ //email was delivered
     $cRow['email_delivered'] = 1;
   }
-
+  
   $callback = new Callback();
 
   if($callback->checkIfExists($tid)){

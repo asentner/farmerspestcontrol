@@ -25,9 +25,7 @@ class IpAccessControlListList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'trunkSid' => $trunkSid,
-        );
+        $this->solution = array('trunkSid' => $trunkSid, );
 
         $this->uri = '/Trunks/' . rawurlencode($trunkSid) . '/IpAccessControlLists';
     }
@@ -37,11 +35,10 @@ class IpAccessControlListList extends ListResource {
      * 
      * @param string $ipAccessControlListSid The ip_access_control_list_sid
      * @return IpAccessControlListInstance Newly created IpAccessControlListInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($ipAccessControlListSid) {
-        $data = Values::of(array(
-            'IpAccessControlListSid' => $ipAccessControlListSid,
-        ));
+        $data = Values::of(array('IpAccessControlListSid' => $ipAccessControlListSid, ));
 
         $payload = $this->version->create(
             'POST',
@@ -50,11 +47,7 @@ class IpAccessControlListList extends ListResource {
             $data
         );
 
-        return new IpAccessControlListInstance(
-            $this->version,
-            $payload,
-            $this->solution['trunkSid']
-        );
+        return new IpAccessControlListInstance($this->version, $payload, $this->solution['trunkSid']);
     }
 
     /**
@@ -151,11 +144,7 @@ class IpAccessControlListList extends ListResource {
      * @return \Twilio\Rest\Trunking\V1\Trunk\IpAccessControlListContext 
      */
     public function getContext($sid) {
-        return new IpAccessControlListContext(
-            $this->version,
-            $this->solution['trunkSid'],
-            $sid
-        );
+        return new IpAccessControlListContext($this->version, $this->solution['trunkSid'], $sid);
     }
 
     /**

@@ -122,6 +122,7 @@ class PublicKeyList extends ListResource {
      * @param string $publicKey URL encoded representation of the public key
      * @param array|Options $options Optional Arguments
      * @return PublicKeyInstance Newly created PublicKeyInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($publicKey, $options = array()) {
         $options = new Values($options);
@@ -139,10 +140,7 @@ class PublicKeyList extends ListResource {
             $data
         );
 
-        return new PublicKeyInstance(
-            $this->version,
-            $payload
-        );
+        return new PublicKeyInstance($this->version, $payload);
     }
 
     /**
@@ -152,10 +150,7 @@ class PublicKeyList extends ListResource {
      * @return \Twilio\Rest\Accounts\V1\Credential\PublicKeyContext 
      */
     public function getContext($sid) {
-        return new PublicKeyContext(
-            $this->version,
-            $sid
-        );
+        return new PublicKeyContext($this->version, $sid);
     }
 
     /**

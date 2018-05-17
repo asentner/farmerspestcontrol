@@ -11,6 +11,7 @@ namespace Twilio\Rest\Preview\HostedNumbers;
 
 use Twilio\InstanceContext;
 use Twilio\Options;
+use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -29,9 +30,7 @@ class HostedNumberOrderContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'sid' => $sid,
-        );
+        $this->solution = array('sid' => $sid, );
 
         $this->uri = '/HostedNumberOrders/' . rawurlencode($sid) . '';
     }
@@ -40,6 +39,7 @@ class HostedNumberOrderContext extends InstanceContext {
      * Fetch a HostedNumberOrderInstance
      * 
      * @return HostedNumberOrderInstance Fetched HostedNumberOrderInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -50,17 +50,14 @@ class HostedNumberOrderContext extends InstanceContext {
             $params
         );
 
-        return new HostedNumberOrderInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new HostedNumberOrderInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
      * Deletes the HostedNumberOrderInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
@@ -71,6 +68,7 @@ class HostedNumberOrderContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return HostedNumberOrderInstance Updated HostedNumberOrderInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
@@ -79,9 +77,13 @@ class HostedNumberOrderContext extends InstanceContext {
             'FriendlyName' => $options['friendlyName'],
             'UniqueName' => $options['uniqueName'],
             'Email' => $options['email'],
-            'CcEmails' => $options['ccEmails'],
+            'CcEmails' => Serialize::map($options['ccEmails'], function($e) { return $e; }),
             'Status' => $options['status'],
             'VerificationCode' => $options['verificationCode'],
+            'VerificationType' => $options['verificationType'],
+            'VerificationDocumentSid' => $options['verificationDocumentSid'],
+            'Extension' => $options['extension'],
+            'CallDelay' => $options['callDelay'],
         ));
 
         $payload = $this->version->update(
@@ -91,11 +93,7 @@ class HostedNumberOrderContext extends InstanceContext {
             $data
         );
 
-        return new HostedNumberOrderInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new HostedNumberOrderInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**

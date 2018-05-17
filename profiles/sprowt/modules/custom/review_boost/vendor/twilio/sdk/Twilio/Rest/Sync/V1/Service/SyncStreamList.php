@@ -29,9 +29,7 @@ class SyncStreamList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Streams';
     }
@@ -41,13 +39,12 @@ class SyncStreamList extends ListResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return SyncStreamInstance Newly created SyncStreamInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($options = array()) {
         $options = new Values($options);
 
-        $data = Values::of(array(
-            'UniqueName' => $options['uniqueName'],
-        ));
+        $data = Values::of(array('UniqueName' => $options['uniqueName'], 'Ttl' => $options['ttl'], ));
 
         $payload = $this->version->create(
             'POST',
@@ -56,11 +53,7 @@ class SyncStreamList extends ListResource {
             $data
         );
 
-        return new SyncStreamInstance(
-            $this->version,
-            $payload,
-            $this->solution['serviceSid']
-        );
+        return new SyncStreamInstance($this->version, $payload, $this->solution['serviceSid']);
     }
 
     /**
@@ -156,11 +149,7 @@ class SyncStreamList extends ListResource {
      * @return \Twilio\Rest\Sync\V1\Service\SyncStreamContext 
      */
     public function getContext($sid) {
-        return new SyncStreamContext(
-            $this->version,
-            $this->solution['serviceSid'],
-            $sid
-        );
+        return new SyncStreamContext($this->version, $this->solution['serviceSid'], $sid);
     }
 
     /**

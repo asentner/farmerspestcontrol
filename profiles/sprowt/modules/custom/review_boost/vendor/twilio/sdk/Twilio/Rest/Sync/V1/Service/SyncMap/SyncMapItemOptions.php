@@ -17,20 +17,78 @@ use Twilio\Values;
  */
 abstract class SyncMapItemOptions {
     /**
-     * @param string $order The order
-     * @param string $from The from
+     * @param integer $ttl Time-to-live of this Map in seconds, defaults to no
+     *                     expiration.
+     * @return CreateSyncMapItemOptions Options builder
+     */
+    public static function create($ttl = Values::NONE) {
+        return new CreateSyncMapItemOptions($ttl);
+    }
+
+    /**
+     * @param string $order A string; asc or desc. Map Items are ordered
+     *                      lexicographically by Item key.
+     * @param string $from The Item key offset (including the specified key).
      * @param string $bounds The bounds
      * @return ReadSyncMapItemOptions Options builder
      */
     public static function read($order = Values::NONE, $from = Values::NONE, $bounds = Values::NONE) {
         return new ReadSyncMapItemOptions($order, $from, $bounds);
     }
+
+    /**
+     * @param array $data Contains an arbitrary JSON object to be stored in this
+     *                    Map Item.
+     * @param integer $ttl New time-to-live of this Map in seconds.
+     * @return UpdateSyncMapItemOptions Options builder
+     */
+    public static function update($data = Values::NONE, $ttl = Values::NONE) {
+        return new UpdateSyncMapItemOptions($data, $ttl);
+    }
+}
+
+class CreateSyncMapItemOptions extends Options {
+    /**
+     * @param integer $ttl Time-to-live of this Map in seconds, defaults to no
+     *                     expiration.
+     */
+    public function __construct($ttl = Values::NONE) {
+        $this->options['ttl'] = $ttl;
+    }
+
+    /**
+     * Time-to-live of this Map in seconds, defaults to no expiration. In the range [1, 31 536 000 (1 year)], or 0 for infinity.
+     * 
+     * @param integer $ttl Time-to-live of this Map in seconds, defaults to no
+     *                     expiration.
+     * @return $this Fluent Builder
+     */
+    public function setTtl($ttl) {
+        $this->options['ttl'] = $ttl;
+        return $this;
+    }
+
+    /**
+     * Provide a friendly representation
+     * 
+     * @return string Machine friendly representation
+     */
+    public function __toString() {
+        $options = array();
+        foreach ($this->options as $key => $value) {
+            if ($value != Values::NONE) {
+                $options[] = "$key=$value";
+            }
+        }
+        return '[Twilio.Sync.V1.CreateSyncMapItemOptions ' . implode(' ', $options) . ']';
+    }
 }
 
 class ReadSyncMapItemOptions extends Options {
     /**
-     * @param string $order The order
-     * @param string $from The from
+     * @param string $order A string; asc or desc. Map Items are ordered
+     *                      lexicographically by Item key.
+     * @param string $from The Item key offset (including the specified key).
      * @param string $bounds The bounds
      */
     public function __construct($order = Values::NONE, $from = Values::NONE, $bounds = Values::NONE) {
@@ -40,9 +98,10 @@ class ReadSyncMapItemOptions extends Options {
     }
 
     /**
-     * The order
+     * A string; asc or desc. Map Items are [ordered lexicographically](https://en.wikipedia.org/wiki/Lexicographical_order) by Item key.
      * 
-     * @param string $order The order
+     * @param string $order A string; asc or desc. Map Items are ordered
+     *                      lexicographically by Item key.
      * @return $this Fluent Builder
      */
     public function setOrder($order) {
@@ -51,9 +110,9 @@ class ReadSyncMapItemOptions extends Options {
     }
 
     /**
-     * The from
+     * The Item key offset (including the specified key). If not present, query is performed from the start or end, depending on the Order query parameter.
      * 
-     * @param string $from The from
+     * @param string $from The Item key offset (including the specified key).
      * @return $this Fluent Builder
      */
     public function setFrom($from) {
@@ -85,5 +144,55 @@ class ReadSyncMapItemOptions extends Options {
             }
         }
         return '[Twilio.Sync.V1.ReadSyncMapItemOptions ' . implode(' ', $options) . ']';
+    }
+}
+
+class UpdateSyncMapItemOptions extends Options {
+    /**
+     * @param array $data Contains an arbitrary JSON object to be stored in this
+     *                    Map Item.
+     * @param integer $ttl New time-to-live of this Map in seconds.
+     */
+    public function __construct($data = Values::NONE, $ttl = Values::NONE) {
+        $this->options['data'] = $data;
+        $this->options['ttl'] = $ttl;
+    }
+
+    /**
+     * Contains an arbitrary JSON object to be stored in this Map Item. Serialized to string to respect HTTP form input, up to 16KB.
+     * 
+     * @param array $data Contains an arbitrary JSON object to be stored in this
+     *                    Map Item.
+     * @return $this Fluent Builder
+     */
+    public function setData($data) {
+        $this->options['data'] = $data;
+        return $this;
+    }
+
+    /**
+     * New time-to-live of this Map in seconds. In the range [1, 31 536 000 (1 year)], or 0 for infinity.
+     * 
+     * @param integer $ttl New time-to-live of this Map in seconds.
+     * @return $this Fluent Builder
+     */
+    public function setTtl($ttl) {
+        $this->options['ttl'] = $ttl;
+        return $this;
+    }
+
+    /**
+     * Provide a friendly representation
+     * 
+     * @return string Machine friendly representation
+     */
+    public function __toString() {
+        $options = array();
+        foreach ($this->options as $key => $value) {
+            if ($value != Values::NONE) {
+                $options[] = "$key=$value";
+            }
+        }
+        return '[Twilio.Sync.V1.UpdateSyncMapItemOptions ' . implode(' ', $options) . ']';
     }
 }

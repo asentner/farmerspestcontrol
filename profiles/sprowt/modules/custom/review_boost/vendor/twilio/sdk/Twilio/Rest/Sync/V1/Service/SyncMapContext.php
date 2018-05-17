@@ -11,6 +11,7 @@ namespace Twilio\Rest\Sync\V1\Service;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\Options;
 use Twilio\Rest\Sync\V1\Service\SyncMap\SyncMapItemList;
 use Twilio\Rest\Sync\V1\Service\SyncMap\SyncMapPermissionList;
 use Twilio\Values;
@@ -40,10 +41,7 @@ class SyncMapContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'sid' => $sid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Maps/' . rawurlencode($sid) . '';
     }
@@ -52,6 +50,7 @@ class SyncMapContext extends InstanceContext {
      * Fetch a SyncMapInstance
      * 
      * @return SyncMapInstance Fetched SyncMapInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -74,9 +73,37 @@ class SyncMapContext extends InstanceContext {
      * Deletes the SyncMapInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
+    }
+
+    /**
+     * Update the SyncMapInstance
+     * 
+     * @param array|Options $options Optional Arguments
+     * @return SyncMapInstance Updated SyncMapInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function update($options = array()) {
+        $options = new Values($options);
+
+        $data = Values::of(array('Ttl' => $options['ttl'], ));
+
+        $payload = $this->version->update(
+            'POST',
+            $this->uri,
+            array(),
+            $data
+        );
+
+        return new SyncMapInstance(
+            $this->version,
+            $payload,
+            $this->solution['serviceSid'],
+            $this->solution['sid']
+        );
     }
 
     /**

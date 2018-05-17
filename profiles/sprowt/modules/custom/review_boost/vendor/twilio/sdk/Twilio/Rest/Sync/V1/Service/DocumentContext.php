@@ -11,6 +11,7 @@ namespace Twilio\Rest\Sync\V1\Service;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\Options;
 use Twilio\Rest\Sync\V1\Service\Document\DocumentPermissionList;
 use Twilio\Serialize;
 use Twilio\Values;
@@ -37,10 +38,7 @@ class DocumentContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'sid' => $sid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Documents/' . rawurlencode($sid) . '';
     }
@@ -49,6 +47,7 @@ class DocumentContext extends InstanceContext {
      * Fetch a DocumentInstance
      * 
      * @return DocumentInstance Fetched DocumentInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -71,6 +70,7 @@ class DocumentContext extends InstanceContext {
      * Deletes the DocumentInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
@@ -79,12 +79,16 @@ class DocumentContext extends InstanceContext {
     /**
      * Update the DocumentInstance
      * 
-     * @param array $data The data
+     * @param array|Options $options Optional Arguments
      * @return DocumentInstance Updated DocumentInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
-    public function update($data) {
+    public function update($options = array()) {
+        $options = new Values($options);
+
         $data = Values::of(array(
-            'Data' => Serialize::json_object($data),
+            'Data' => Serialize::jsonObject($options['data']),
+            'Ttl' => $options['ttl'],
         ));
 
         $payload = $this->version->update(

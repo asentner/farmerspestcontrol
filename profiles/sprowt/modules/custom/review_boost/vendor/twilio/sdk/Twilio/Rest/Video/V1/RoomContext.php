@@ -11,16 +11,20 @@ namespace Twilio\Rest\Video\V1;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\Rest\Video\V1\Room\ParticipantList;
 use Twilio\Rest\Video\V1\Room\RoomRecordingList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
  * @property \Twilio\Rest\Video\V1\Room\RoomRecordingList recordings
+ * @property \Twilio\Rest\Video\V1\Room\ParticipantList participants
  * @method \Twilio\Rest\Video\V1\Room\RoomRecordingContext recordings(string $sid)
+ * @method \Twilio\Rest\Video\V1\Room\ParticipantContext participants(string $sid)
  */
 class RoomContext extends InstanceContext {
     protected $_recordings = null;
+    protected $_participants = null;
 
     /**
      * Initialize the RoomContext
@@ -33,9 +37,7 @@ class RoomContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'sid' => $sid,
-        );
+        $this->solution = array('sid' => $sid, );
 
         $this->uri = '/Rooms/' . rawurlencode($sid) . '';
     }
@@ -44,6 +46,7 @@ class RoomContext extends InstanceContext {
      * Fetch a RoomInstance
      * 
      * @return RoomInstance Fetched RoomInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -54,23 +57,18 @@ class RoomContext extends InstanceContext {
             $params
         );
 
-        return new RoomInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new RoomInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
      * Update the RoomInstance
      * 
-     * @param string $status The status
+     * @param string $status Set to completed to end the Room.
      * @return RoomInstance Updated RoomInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($status) {
-        $data = Values::of(array(
-            'Status' => $status,
-        ));
+        $data = Values::of(array('Status' => $status, ));
 
         $payload = $this->version->update(
             'POST',
@@ -79,11 +77,7 @@ class RoomContext extends InstanceContext {
             $data
         );
 
-        return new RoomInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new RoomInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
@@ -93,13 +87,23 @@ class RoomContext extends InstanceContext {
      */
     protected function getRecordings() {
         if (!$this->_recordings) {
-            $this->_recordings = new RoomRecordingList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_recordings = new RoomRecordingList($this->version, $this->solution['sid']);
         }
 
         return $this->_recordings;
+    }
+
+    /**
+     * Access the participants
+     * 
+     * @return \Twilio\Rest\Video\V1\Room\ParticipantList 
+     */
+    protected function getParticipants() {
+        if (!$this->_participants) {
+            $this->_participants = new ParticipantList($this->version, $this->solution['sid']);
+        }
+
+        return $this->_participants;
     }
 
     /**

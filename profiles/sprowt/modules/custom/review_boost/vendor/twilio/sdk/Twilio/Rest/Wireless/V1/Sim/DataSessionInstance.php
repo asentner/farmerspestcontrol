@@ -16,14 +16,12 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- * 
  * @property string sid
  * @property string simSid
  * @property string accountSid
  * @property string radioLink
- * @property integer operatorMcc
- * @property integer operatorMnc
+ * @property string operatorMcc
+ * @property string operatorMnc
  * @property string operatorCountry
  * @property string operatorName
  * @property string cellId
@@ -40,7 +38,8 @@ class DataSessionInstance extends InstanceResource {
      * 
      * @param \Twilio\Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @param string $simSid The sim_sid
+     * @param string $simSid The unique id of the SIM resource that this Data
+     *                       Session is for.
      * @return \Twilio\Rest\Wireless\V1\Sim\DataSessionInstance 
      */
     public function __construct(Version $version, array $payload, $simSid) {
@@ -65,9 +64,7 @@ class DataSessionInstance extends InstanceResource {
             'end' => Deserialize::dateTime(Values::array_get($payload, 'end')),
         );
 
-        $this->solution = array(
-            'simSid' => $simSid,
-        );
+        $this->solution = array('simSid' => $simSid, );
     }
 
     /**

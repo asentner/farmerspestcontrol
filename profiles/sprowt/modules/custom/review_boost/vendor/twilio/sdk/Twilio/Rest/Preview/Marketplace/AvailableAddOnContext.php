@@ -35,9 +35,7 @@ class AvailableAddOnContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'sid' => $sid,
-        );
+        $this->solution = array('sid' => $sid, );
 
         $this->uri = '/AvailableAddOns/' . rawurlencode($sid) . '';
     }
@@ -46,6 +44,7 @@ class AvailableAddOnContext extends InstanceContext {
      * Fetch a AvailableAddOnInstance
      * 
      * @return AvailableAddOnInstance Fetched AvailableAddOnInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -56,11 +55,7 @@ class AvailableAddOnContext extends InstanceContext {
             $params
         );
 
-        return new AvailableAddOnInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new AvailableAddOnInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
@@ -70,10 +65,7 @@ class AvailableAddOnContext extends InstanceContext {
      */
     protected function getExtensions() {
         if (!$this->_extensions) {
-            $this->_extensions = new AvailableAddOnExtensionList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_extensions = new AvailableAddOnExtensionList($this->version, $this->solution['sid']);
         }
 
         return $this->_extensions;

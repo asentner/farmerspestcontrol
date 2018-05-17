@@ -36,9 +36,7 @@ class FaxContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'sid' => $sid,
-        );
+        $this->solution = array('sid' => $sid, );
 
         $this->uri = '/Faxes/' . rawurlencode($sid) . '';
     }
@@ -47,6 +45,7 @@ class FaxContext extends InstanceContext {
      * Fetch a FaxInstance
      * 
      * @return FaxInstance Fetched FaxInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -57,11 +56,7 @@ class FaxContext extends InstanceContext {
             $params
         );
 
-        return new FaxInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new FaxInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
@@ -69,13 +64,12 @@ class FaxContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return FaxInstance Updated FaxInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
 
-        $data = Values::of(array(
-            'Status' => $options['status'],
-        ));
+        $data = Values::of(array('Status' => $options['status'], ));
 
         $payload = $this->version->update(
             'POST',
@@ -84,17 +78,14 @@ class FaxContext extends InstanceContext {
             $data
         );
 
-        return new FaxInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new FaxInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
      * Deletes the FaxInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
@@ -107,10 +98,7 @@ class FaxContext extends InstanceContext {
      */
     protected function getMedia() {
         if (!$this->_media) {
-            $this->_media = new FaxMediaList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_media = new FaxMediaList($this->version, $this->solution['sid']);
         }
 
         return $this->_media;

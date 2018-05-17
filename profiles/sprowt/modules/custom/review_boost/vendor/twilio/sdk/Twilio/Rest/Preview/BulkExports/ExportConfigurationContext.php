@@ -30,9 +30,7 @@ class ExportConfigurationContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'resourceType' => $resourceType,
-        );
+        $this->solution = array('resourceType' => $resourceType, );
 
         $this->uri = '/Exports/' . rawurlencode($resourceType) . '/Configuration';
     }
@@ -41,6 +39,7 @@ class ExportConfigurationContext extends InstanceContext {
      * Fetch a ExportConfigurationInstance
      * 
      * @return ExportConfigurationInstance Fetched ExportConfigurationInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -51,11 +50,7 @@ class ExportConfigurationContext extends InstanceContext {
             $params
         );
 
-        return new ExportConfigurationInstance(
-            $this->version,
-            $payload,
-            $this->solution['resourceType']
-        );
+        return new ExportConfigurationInstance($this->version, $payload, $this->solution['resourceType']);
     }
 
     /**
@@ -63,6 +58,7 @@ class ExportConfigurationContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return ExportConfigurationInstance Updated ExportConfigurationInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
@@ -80,11 +76,7 @@ class ExportConfigurationContext extends InstanceContext {
             $data
         );
 
-        return new ExportConfigurationInstance(
-            $this->version,
-            $payload,
-            $this->solution['resourceType']
-        );
+        return new ExportConfigurationInstance($this->version, $payload, $this->solution['resourceType']);
     }
 
     /**

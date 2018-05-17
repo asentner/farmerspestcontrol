@@ -60,10 +60,7 @@ class TranscriptionInstance extends InstanceResource {
             'uri' => Values::array_get($payload, 'uri'),
         );
 
-        $this->solution = array(
-            'accountSid' => $accountSid,
-            'sid' => $sid ?: $this->properties['sid'],
-        );
+        $this->solution = array('accountSid' => $accountSid, 'sid' => $sid ?: $this->properties['sid'], );
     }
 
     /**
@@ -89,6 +86,7 @@ class TranscriptionInstance extends InstanceResource {
      * Fetch a TranscriptionInstance
      * 
      * @return TranscriptionInstance Fetched TranscriptionInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -98,6 +96,7 @@ class TranscriptionInstance extends InstanceResource {
      * Deletes the TranscriptionInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();

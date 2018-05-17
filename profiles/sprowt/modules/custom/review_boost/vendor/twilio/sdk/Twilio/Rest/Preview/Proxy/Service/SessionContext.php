@@ -14,6 +14,7 @@ use Twilio\InstanceContext;
 use Twilio\Options;
 use Twilio\Rest\Preview\Proxy\Service\Session\InteractionList;
 use Twilio\Rest\Preview\Proxy\Service\Session\ParticipantList;
+use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -41,10 +42,7 @@ class SessionContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'sid' => $sid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Sessions/' . rawurlencode($sid) . '';
     }
@@ -53,6 +51,7 @@ class SessionContext extends InstanceContext {
      * Fetch a SessionInstance
      * 
      * @return SessionInstance Fetched SessionInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -75,6 +74,7 @@ class SessionContext extends InstanceContext {
      * Deletes the SessionInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
@@ -85,6 +85,7 @@ class SessionContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return SessionInstance Updated SessionInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
@@ -93,7 +94,7 @@ class SessionContext extends InstanceContext {
             'UniqueName' => $options['uniqueName'],
             'Ttl' => $options['ttl'],
             'Status' => $options['status'],
-            'Participants' => $options['participants'],
+            'Participants' => Serialize::map($options['participants'], function($e) { return $e; }),
         ));
 
         $payload = $this->version->update(

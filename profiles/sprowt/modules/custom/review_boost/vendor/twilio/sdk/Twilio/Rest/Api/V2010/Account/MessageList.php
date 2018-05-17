@@ -27,9 +27,7 @@ class MessageList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'accountSid' => $accountSid,
-        );
+        $this->solution = array('accountSid' => $accountSid, );
 
         $this->uri = '/Accounts/' . rawurlencode($accountSid) . '/Messages.json';
     }
@@ -40,6 +38,7 @@ class MessageList extends ListResource {
      * @param string $to The phone number to receive the message
      * @param array|Options $options Optional Arguments
      * @return MessageInstance Newly created MessageInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($to, $options = array()) {
         $options = new Values($options);
@@ -49,7 +48,7 @@ class MessageList extends ListResource {
             'From' => $options['from'],
             'MessagingServiceSid' => $options['messagingServiceSid'],
             'Body' => $options['body'],
-            'MediaUrl' => $options['mediaUrl'],
+            'MediaUrl' => Serialize::map($options['mediaUrl'], function($e) { return $e; }),
             'StatusCallback' => $options['statusCallback'],
             'ApplicationSid' => $options['applicationSid'],
             'MaxPrice' => $options['maxPrice'],
@@ -60,6 +59,7 @@ class MessageList extends ListResource {
             'ProviderSid' => $options['providerSid'],
             'ContentRetention' => $options['contentRetention'],
             'AddressRetention' => $options['addressRetention'],
+            'SmartEncoded' => Serialize::booleanToString($options['smartEncoded']),
         ));
 
         $payload = $this->version->create(
@@ -69,11 +69,7 @@ class MessageList extends ListResource {
             $data
         );
 
-        return new MessageInstance(
-            $this->version,
-            $payload,
-            $this->solution['accountSid']
-        );
+        return new MessageInstance($this->version, $payload, $this->solution['accountSid']);
     }
 
     /**
@@ -178,11 +174,7 @@ class MessageList extends ListResource {
      * @return \Twilio\Rest\Api\V2010\Account\MessageContext 
      */
     public function getContext($sid) {
-        return new MessageContext(
-            $this->version,
-            $this->solution['accountSid'],
-            $sid
-        );
+        return new MessageContext($this->version, $this->solution['accountSid'], $sid);
     }
 
     /**

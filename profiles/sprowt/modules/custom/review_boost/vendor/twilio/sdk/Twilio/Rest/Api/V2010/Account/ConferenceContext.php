@@ -35,10 +35,7 @@ class ConferenceContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'accountSid' => $accountSid,
-            'sid' => $sid,
-        );
+        $this->solution = array('accountSid' => $accountSid, 'sid' => $sid, );
 
         $this->uri = '/Accounts/' . rawurlencode($accountSid) . '/Conferences/' . rawurlencode($sid) . '.json';
     }
@@ -47,6 +44,7 @@ class ConferenceContext extends InstanceContext {
      * Fetch a ConferenceInstance
      * 
      * @return ConferenceInstance Fetched ConferenceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -70,12 +68,15 @@ class ConferenceContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return ConferenceInstance Updated ConferenceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
 
         $data = Values::of(array(
             'Status' => $options['status'],
+            'AnnounceUrl' => $options['announceUrl'],
+            'AnnounceMethod' => $options['announceMethod'],
         ));
 
         $payload = $this->version->update(

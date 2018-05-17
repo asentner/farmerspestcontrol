@@ -11,6 +11,7 @@ namespace Twilio\Rest\Sync\V1\Service;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\Options;
 use Twilio\Rest\Sync\V1\Service\SyncStream\StreamMessageList;
 use Twilio\Values;
 use Twilio\Version;
@@ -27,7 +28,7 @@ class SyncStreamContext extends InstanceContext {
      * Initialize the SyncStreamContext
      * 
      * @param \Twilio\Version $version Version that contains the resource
-     * @param string $serviceSid The service_sid
+     * @param string $serviceSid Service Instance SID or unique name.
      * @param string $sid Stream SID or unique name.
      * @return \Twilio\Rest\Sync\V1\Service\SyncStreamContext 
      */
@@ -35,10 +36,7 @@ class SyncStreamContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-            'sid' => $sid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, 'sid' => $sid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Streams/' . rawurlencode($sid) . '';
     }
@@ -47,6 +45,7 @@ class SyncStreamContext extends InstanceContext {
      * Fetch a SyncStreamInstance
      * 
      * @return SyncStreamInstance Fetched SyncStreamInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -69,9 +68,37 @@ class SyncStreamContext extends InstanceContext {
      * Deletes the SyncStreamInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
+    }
+
+    /**
+     * Update the SyncStreamInstance
+     * 
+     * @param array|Options $options Optional Arguments
+     * @return SyncStreamInstance Updated SyncStreamInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function update($options = array()) {
+        $options = new Values($options);
+
+        $data = Values::of(array('Ttl' => $options['ttl'], ));
+
+        $payload = $this->version->update(
+            'POST',
+            $this->uri,
+            array(),
+            $data
+        );
+
+        return new SyncStreamInstance(
+            $this->version,
+            $payload,
+            $this->solution['serviceSid'],
+            $this->solution['sid']
+        );
     }
 
     /**

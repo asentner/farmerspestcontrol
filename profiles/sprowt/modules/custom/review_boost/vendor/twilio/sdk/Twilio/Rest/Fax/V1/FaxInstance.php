@@ -74,9 +74,7 @@ class FaxInstance extends InstanceResource {
             'url' => Values::array_get($payload, 'url'),
         );
 
-        $this->solution = array(
-            'sid' => $sid ?: $this->properties['sid'],
-        );
+        $this->solution = array('sid' => $sid ?: $this->properties['sid'], );
     }
 
     /**
@@ -87,10 +85,7 @@ class FaxInstance extends InstanceResource {
      */
     protected function proxy() {
         if (!$this->context) {
-            $this->context = new FaxContext(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->context = new FaxContext($this->version, $this->solution['sid']);
         }
 
         return $this->context;
@@ -100,6 +95,7 @@ class FaxInstance extends InstanceResource {
      * Fetch a FaxInstance
      * 
      * @return FaxInstance Fetched FaxInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -110,17 +106,17 @@ class FaxInstance extends InstanceResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return FaxInstance Updated FaxInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
-        return $this->proxy()->update(
-            $options
-        );
+        return $this->proxy()->update($options);
     }
 
     /**
      * Deletes the FaxInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();

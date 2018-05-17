@@ -18,8 +18,6 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- * 
  * @property \Twilio\Rest\Wireless\V1\Sim\UsageRecordList usageRecords
  * @property \Twilio\Rest\Wireless\V1\Sim\DataSessionList dataSessions
  */
@@ -38,9 +36,7 @@ class SimContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'sid' => $sid,
-        );
+        $this->solution = array('sid' => $sid, );
 
         $this->uri = '/Sims/' . rawurlencode($sid) . '';
     }
@@ -49,6 +45,7 @@ class SimContext extends InstanceContext {
      * Fetch a SimInstance
      * 
      * @return SimInstance Fetched SimInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -59,11 +56,7 @@ class SimContext extends InstanceContext {
             $params
         );
 
-        return new SimInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new SimInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
@@ -71,6 +64,7 @@ class SimContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return SimInstance Updated SimInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
@@ -101,11 +95,7 @@ class SimContext extends InstanceContext {
             $data
         );
 
-        return new SimInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new SimInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
@@ -115,10 +105,7 @@ class SimContext extends InstanceContext {
      */
     protected function getUsageRecords() {
         if (!$this->_usageRecords) {
-            $this->_usageRecords = new UsageRecordList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_usageRecords = new UsageRecordList($this->version, $this->solution['sid']);
         }
 
         return $this->_usageRecords;
@@ -131,10 +118,7 @@ class SimContext extends InstanceContext {
      */
     protected function getDataSessions() {
         if (!$this->_dataSessions) {
-            $this->_dataSessions = new DataSessionList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_dataSessions = new DataSessionList($this->version, $this->solution['sid']);
         }
 
         return $this->_dataSessions;

@@ -29,9 +29,7 @@ class UsageContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'simSid' => $simSid,
-        );
+        $this->solution = array('simSid' => $simSid, );
 
         $this->uri = '/Sims/' . rawurlencode($simSid) . '/Usage';
     }
@@ -41,14 +39,12 @@ class UsageContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return UsageInstance Fetched UsageInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch($options = array()) {
         $options = new Values($options);
 
-        $params = Values::of(array(
-            'End' => $options['end'],
-            'Start' => $options['start'],
-        ));
+        $params = Values::of(array('End' => $options['end'], 'Start' => $options['start'], ));
 
         $payload = $this->version->fetch(
             'GET',
@@ -56,11 +52,7 @@ class UsageContext extends InstanceContext {
             $params
         );
 
-        return new UsageInstance(
-            $this->version,
-            $payload,
-            $this->solution['simSid']
-        );
+        return new UsageInstance($this->version, $payload, $this->solution['simSid']);
     }
 
     /**

@@ -17,8 +17,6 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
- * 
  * @property string sid
  * @property string uniqueName
  * @property string accountSid
@@ -68,9 +66,7 @@ class RatePlanInstance extends InstanceResource {
             'url' => Values::array_get($payload, 'url'),
         );
 
-        $this->solution = array(
-            'sid' => $sid ?: $this->properties['sid'],
-        );
+        $this->solution = array('sid' => $sid ?: $this->properties['sid'], );
     }
 
     /**
@@ -82,10 +78,7 @@ class RatePlanInstance extends InstanceResource {
      */
     protected function proxy() {
         if (!$this->context) {
-            $this->context = new RatePlanContext(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->context = new RatePlanContext($this->version, $this->solution['sid']);
         }
 
         return $this->context;
@@ -95,6 +88,7 @@ class RatePlanInstance extends InstanceResource {
      * Fetch a RatePlanInstance
      * 
      * @return RatePlanInstance Fetched RatePlanInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -105,17 +99,17 @@ class RatePlanInstance extends InstanceResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return RatePlanInstance Updated RatePlanInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
-        return $this->proxy()->update(
-            $options
-        );
+        return $this->proxy()->update($options);
     }
 
     /**
      * Deletes the RatePlanInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();

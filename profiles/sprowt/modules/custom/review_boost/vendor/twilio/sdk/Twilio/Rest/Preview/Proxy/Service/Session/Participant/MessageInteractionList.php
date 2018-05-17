@@ -11,6 +11,7 @@ namespace Twilio\Rest\Preview\Proxy\Service\Session\Participant;
 
 use Twilio\ListResource;
 use Twilio\Options;
+use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -45,13 +46,14 @@ class MessageInteractionList extends ListResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return MessageInteractionInstance Newly created MessageInteractionInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($options = array()) {
         $options = new Values($options);
 
         $data = Values::of(array(
             'Body' => $options['body'],
-            'MediaUrl' => $options['mediaUrl'],
+            'MediaUrl' => Serialize::map($options['mediaUrl'], function($e) { return $e; }),
         ));
 
         $payload = $this->version->create(

@@ -38,13 +38,12 @@ class FleetList extends ListResource {
      * 
      * @param array|Options $options Optional Arguments
      * @return FleetInstance Newly created FleetInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($options = array()) {
         $options = new Values($options);
 
-        $data = Values::of(array(
-            'FriendlyName' => $options['friendlyName'],
-        ));
+        $data = Values::of(array('FriendlyName' => $options['friendlyName'], ));
 
         $payload = $this->version->create(
             'POST',
@@ -53,10 +52,7 @@ class FleetList extends ListResource {
             $data
         );
 
-        return new FleetInstance(
-            $this->version,
-            $payload
-        );
+        return new FleetInstance($this->version, $payload);
     }
 
     /**
@@ -152,10 +148,7 @@ class FleetList extends ListResource {
      * @return \Twilio\Rest\Preview\DeployedDevices\FleetContext 
      */
     public function getContext($sid) {
-        return new FleetContext(
-            $this->version,
-            $sid
-        );
+        return new FleetContext($this->version, $sid);
     }
 
     /**

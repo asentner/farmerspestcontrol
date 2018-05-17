@@ -125,9 +125,10 @@ class WorkspaceList extends ListResource {
     /**
      * Create a new WorkspaceInstance
      * 
-     * @param string $friendlyName The friendly_name
+     * @param string $friendlyName Human readable description of this workspace
      * @param array|Options $options Optional Arguments
      * @return WorkspaceInstance Newly created WorkspaceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($friendlyName, $options = array()) {
         $options = new Values($options);
@@ -148,10 +149,7 @@ class WorkspaceList extends ListResource {
             $data
         );
 
-        return new WorkspaceInstance(
-            $this->version,
-            $payload
-        );
+        return new WorkspaceInstance($this->version, $payload);
     }
 
     /**
@@ -161,10 +159,7 @@ class WorkspaceList extends ListResource {
      * @return \Twilio\Rest\Taskrouter\V1\WorkspaceContext 
      */
     public function getContext($sid) {
-        return new WorkspaceContext(
-            $this->version,
-            $sid
-        );
+        return new WorkspaceContext($this->version, $sid);
     }
 
     /**

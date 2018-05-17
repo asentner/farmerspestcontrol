@@ -27,9 +27,7 @@ class LocalList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'accountSid' => $accountSid,
-        );
+        $this->solution = array('accountSid' => $accountSid, );
 
         $this->uri = '/Accounts/' . rawurlencode($accountSid) . '/IncomingPhoneNumbers/Local.json';
     }
@@ -131,9 +129,10 @@ class LocalList extends ListResource {
     /**
      * Create a new LocalInstance
      * 
-     * @param string $phoneNumber The phone_number
+     * @param string $phoneNumber The phone number you want to purchase.
      * @param array|Options $options Optional Arguments
      * @return LocalInstance Newly created LocalInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($phoneNumber, $options = array()) {
         $options = new Values($options);
@@ -155,6 +154,8 @@ class LocalList extends ListResource {
             'VoiceFallbackUrl' => $options['voiceFallbackUrl'],
             'VoiceMethod' => $options['voiceMethod'],
             'VoiceUrl' => $options['voiceUrl'],
+            'IdentitySid' => $options['identitySid'],
+            'AddressSid' => $options['addressSid'],
         ));
 
         $payload = $this->version->create(
@@ -164,11 +165,7 @@ class LocalList extends ListResource {
             $data
         );
 
-        return new LocalInstance(
-            $this->version,
-            $payload,
-            $this->solution['accountSid']
-        );
+        return new LocalInstance($this->version, $payload, $this->solution['accountSid']);
     }
 
     /**

@@ -30,10 +30,7 @@ class InstalledAddOnExtensionContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'installedAddOnSid' => $installedAddOnSid,
-            'sid' => $sid,
-        );
+        $this->solution = array('installedAddOnSid' => $installedAddOnSid, 'sid' => $sid, );
 
         $this->uri = '/InstalledAddOns/' . rawurlencode($installedAddOnSid) . '/Extensions/' . rawurlencode($sid) . '';
     }
@@ -43,6 +40,7 @@ class InstalledAddOnExtensionContext extends InstanceContext {
      * 
      * @return InstalledAddOnExtensionInstance Fetched
      *                                         InstalledAddOnExtensionInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -67,11 +65,10 @@ class InstalledAddOnExtensionContext extends InstanceContext {
      * @param boolean $enabled A Boolean indicating if the Extension will be invoked
      * @return InstalledAddOnExtensionInstance Updated
      *                                         InstalledAddOnExtensionInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($enabled) {
-        $data = Values::of(array(
-            'Enabled' => Serialize::booleanToString($enabled),
-        ));
+        $data = Values::of(array('Enabled' => Serialize::booleanToString($enabled), ));
 
         $payload = $this->version->update(
             'POST',

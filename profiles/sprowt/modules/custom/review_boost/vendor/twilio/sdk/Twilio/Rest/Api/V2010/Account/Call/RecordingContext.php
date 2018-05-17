@@ -27,11 +27,7 @@ class RecordingContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'accountSid' => $accountSid,
-            'callSid' => $callSid,
-            'sid' => $sid,
-        );
+        $this->solution = array('accountSid' => $accountSid, 'callSid' => $callSid, 'sid' => $sid, );
 
         $this->uri = '/Accounts/' . rawurlencode($accountSid) . '/Calls/' . rawurlencode($callSid) . '/Recordings/' . rawurlencode($sid) . '.json';
     }
@@ -40,6 +36,7 @@ class RecordingContext extends InstanceContext {
      * Fetch a RecordingInstance
      * 
      * @return RecordingInstance Fetched RecordingInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -63,6 +60,7 @@ class RecordingContext extends InstanceContext {
      * Deletes the RecordingInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);

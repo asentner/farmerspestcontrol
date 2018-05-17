@@ -30,11 +30,14 @@ use Twilio\Version;
  * @property string type
  * @property integer maxParticipants
  * @property boolean recordParticipantsOnConnect
+ * @property string videoCodecs
+ * @property string mediaRegion
  * @property string url
  * @property array links
  */
 class RoomInstance extends InstanceResource {
     protected $_recordings = null;
+    protected $_participants = null;
 
     /**
      * Initialize the RoomInstance
@@ -63,13 +66,13 @@ class RoomInstance extends InstanceResource {
             'type' => Values::array_get($payload, 'type'),
             'maxParticipants' => Values::array_get($payload, 'max_participants'),
             'recordParticipantsOnConnect' => Values::array_get($payload, 'record_participants_on_connect'),
+            'videoCodecs' => Values::array_get($payload, 'video_codecs'),
+            'mediaRegion' => Values::array_get($payload, 'media_region'),
             'url' => Values::array_get($payload, 'url'),
             'links' => Values::array_get($payload, 'links'),
         );
 
-        $this->solution = array(
-            'sid' => $sid ?: $this->properties['sid'],
-        );
+        $this->solution = array('sid' => $sid ?: $this->properties['sid'], );
     }
 
     /**
@@ -80,10 +83,7 @@ class RoomInstance extends InstanceResource {
      */
     protected function proxy() {
         if (!$this->context) {
-            $this->context = new RoomContext(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->context = new RoomContext($this->version, $this->solution['sid']);
         }
 
         return $this->context;
@@ -93,6 +93,7 @@ class RoomInstance extends InstanceResource {
      * Fetch a RoomInstance
      * 
      * @return RoomInstance Fetched RoomInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -101,13 +102,12 @@ class RoomInstance extends InstanceResource {
     /**
      * Update the RoomInstance
      * 
-     * @param string $status The status
+     * @param string $status Set to completed to end the Room.
      * @return RoomInstance Updated RoomInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($status) {
-        return $this->proxy()->update(
-            $status
-        );
+        return $this->proxy()->update($status);
     }
 
     /**
@@ -117,6 +117,15 @@ class RoomInstance extends InstanceResource {
      */
     protected function getRecordings() {
         return $this->proxy()->recordings;
+    }
+
+    /**
+     * Access the participants
+     * 
+     * @return \Twilio\Rest\Video\V1\Room\ParticipantList 
+     */
+    protected function getParticipants() {
+        return $this->proxy()->participants;
     }
 
     /**

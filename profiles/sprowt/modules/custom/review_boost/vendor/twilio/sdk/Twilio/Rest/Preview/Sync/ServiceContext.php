@@ -45,9 +45,7 @@ class ServiceContext extends InstanceContext {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'sid' => $sid,
-        );
+        $this->solution = array('sid' => $sid, );
 
         $this->uri = '/Services/' . rawurlencode($sid) . '';
     }
@@ -56,6 +54,7 @@ class ServiceContext extends InstanceContext {
      * Fetch a ServiceInstance
      * 
      * @return ServiceInstance Fetched ServiceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         $params = Values::of(array());
@@ -66,17 +65,14 @@ class ServiceContext extends InstanceContext {
             $params
         );
 
-        return new ServiceInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new ServiceInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
      * Deletes the ServiceInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->version->delete('delete', $this->uri);
@@ -87,6 +83,7 @@ class ServiceContext extends InstanceContext {
      * 
      * @param array|Options $options Optional Arguments
      * @return ServiceInstance Updated ServiceInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function update($options = array()) {
         $options = new Values($options);
@@ -105,11 +102,7 @@ class ServiceContext extends InstanceContext {
             $data
         );
 
-        return new ServiceInstance(
-            $this->version,
-            $payload,
-            $this->solution['sid']
-        );
+        return new ServiceInstance($this->version, $payload, $this->solution['sid']);
     }
 
     /**
@@ -119,10 +112,7 @@ class ServiceContext extends InstanceContext {
      */
     protected function getDocuments() {
         if (!$this->_documents) {
-            $this->_documents = new DocumentList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_documents = new DocumentList($this->version, $this->solution['sid']);
         }
 
         return $this->_documents;
@@ -135,10 +125,7 @@ class ServiceContext extends InstanceContext {
      */
     protected function getSyncLists() {
         if (!$this->_syncLists) {
-            $this->_syncLists = new SyncListList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_syncLists = new SyncListList($this->version, $this->solution['sid']);
         }
 
         return $this->_syncLists;
@@ -151,10 +138,7 @@ class ServiceContext extends InstanceContext {
      */
     protected function getSyncMaps() {
         if (!$this->_syncMaps) {
-            $this->_syncMaps = new SyncMapList(
-                $this->version,
-                $this->solution['sid']
-            );
+            $this->_syncMaps = new SyncMapList($this->version, $this->solution['sid']);
         }
 
         return $this->_syncMaps;

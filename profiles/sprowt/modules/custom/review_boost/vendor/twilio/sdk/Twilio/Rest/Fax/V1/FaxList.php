@@ -135,6 +135,7 @@ class FaxList extends ListResource {
      * @param string $mediaUrl URL that points to the fax media
      * @param array|Options $options Optional Arguments
      * @return FaxInstance Newly created FaxInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($to, $mediaUrl, $options = array()) {
         $options = new Values($options);
@@ -148,6 +149,7 @@ class FaxList extends ListResource {
             'SipAuthUsername' => $options['sipAuthUsername'],
             'SipAuthPassword' => $options['sipAuthPassword'],
             'StoreMedia' => Serialize::booleanToString($options['storeMedia']),
+            'Ttl' => $options['ttl'],
         ));
 
         $payload = $this->version->create(
@@ -157,10 +159,7 @@ class FaxList extends ListResource {
             $data
         );
 
-        return new FaxInstance(
-            $this->version,
-            $payload
-        );
+        return new FaxInstance($this->version, $payload);
     }
 
     /**
@@ -170,10 +169,7 @@ class FaxList extends ListResource {
      * @return \Twilio\Rest\Fax\V1\FaxContext 
      */
     public function getContext($sid) {
-        return new FaxContext(
-            $this->version,
-            $sid
-        );
+        return new FaxContext($this->version, $sid);
     }
 
     /**

@@ -28,12 +28,14 @@ use Twilio\VersionInfo;
  * @property \Twilio\Rest\Notify notify
  * @property \Twilio\Rest\Preview preview
  * @property \Twilio\Rest\Pricing pricing
+ * @property \Twilio\Rest\Proxy proxy
  * @property \Twilio\Rest\Taskrouter taskrouter
  * @property \Twilio\Rest\Trunking trunking
  * @property \Twilio\Rest\Video video
  * @property \Twilio\Rest\Messaging messaging
  * @property \Twilio\Rest\Wireless wireless
  * @property \Twilio\Rest\Sync sync
+ * @property \Twilio\Rest\Studio studio
  * @property \Twilio\Rest\Api\V2010\AccountInstance account
  * @property \Twilio\Rest\Api\V2010\Account\AddressList addresses
  * @property \Twilio\Rest\Api\V2010\Account\ApplicationList applications
@@ -97,12 +99,14 @@ class Client {
     protected $_notify = null;
     protected $_preview = null;
     protected $_pricing = null;
+    protected $_proxy = null;
     protected $_taskrouter = null;
     protected $_trunking = null;
     protected $_video = null;
     protected $_messaging = null;
     protected $_wireless = null;
     protected $_sync = null;
+    protected $_studio = null;
 
     /**
      * Initializes the Twilio Client
@@ -684,6 +688,18 @@ class Client {
     }
 
     /**
+     * Access the Proxy Twilio Domain
+     * 
+     * @return \Twilio\Rest\Proxy Proxy Twilio Domain
+     */
+    protected function getProxy() {
+        if (!$this->_proxy) {
+            $this->_proxy = new Proxy($this);
+        }
+        return $this->_proxy;
+    }
+
+    /**
      * Access the Taskrouter Twilio Domain
      * 
      * @return \Twilio\Rest\Taskrouter Taskrouter Twilio Domain
@@ -753,6 +769,18 @@ class Client {
             $this->_sync = new Sync($this);
         }
         return $this->_sync;
+    }
+
+    /**
+     * Access the Studio Twilio Domain
+     * 
+     * @return \Twilio\Rest\Studio Studio Twilio Domain
+     */
+    protected function getStudio() {
+        if (!$this->_studio) {
+            $this->_studio = new Studio($this);
+        }
+        return $this->_studio;
     }
 
     /**

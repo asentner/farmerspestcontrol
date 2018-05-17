@@ -30,9 +30,7 @@ class BindingList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'serviceSid' => $serviceSid,
-        );
+        $this->solution = array('serviceSid' => $serviceSid, );
 
         $this->uri = '/Services/' . rawurlencode($serviceSid) . '/Bindings';
     }
@@ -40,11 +38,12 @@ class BindingList extends ListResource {
     /**
      * Create a new BindingInstance
      * 
-     * @param string $identity The identity
-     * @param string $bindingType The binding_type
-     * @param string $address The address
+     * @param string $identity The Identity to which this Binding belongs to.
+     * @param string $bindingType The type of the Binding.
+     * @param string $address The address specific to the channel.
      * @param array|Options $options Optional Arguments
      * @return BindingInstance Newly created BindingInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($identity, $bindingType, $address, $options = array()) {
         $options = new Values($options);
@@ -53,7 +52,7 @@ class BindingList extends ListResource {
             'Identity' => $identity,
             'BindingType' => $bindingType,
             'Address' => $address,
-            'Tag' => $options['tag'],
+            'Tag' => Serialize::map($options['tag'], function($e) { return $e; }),
             'NotificationProtocolVersion' => $options['notificationProtocolVersion'],
             'CredentialSid' => $options['credentialSid'],
             'Endpoint' => $options['endpoint'],
@@ -66,11 +65,7 @@ class BindingList extends ListResource {
             $data
         );
 
-        return new BindingInstance(
-            $this->version,
-            $payload,
-            $this->solution['serviceSid']
-        );
+        return new BindingInstance($this->version, $payload, $this->solution['serviceSid']);
     }
 
     /**
@@ -135,8 +130,8 @@ class BindingList extends ListResource {
         $params = Values::of(array(
             'StartDate' => Serialize::iso8601Date($options['startDate']),
             'EndDate' => Serialize::iso8601Date($options['endDate']),
-            'Identity' => $options['identity'],
-            'Tag' => $options['tag'],
+            'Identity' => Serialize::map($options['identity'], function($e) { return $e; }),
+            'Tag' => Serialize::map($options['tag'], function($e) { return $e; }),
             'PageToken' => $pageToken,
             'Page' => $pageNumber,
             'PageSize' => $pageSize,
@@ -174,11 +169,7 @@ class BindingList extends ListResource {
      * @return \Twilio\Rest\Notify\V1\Service\BindingContext 
      */
     public function getContext($sid) {
-        return new BindingContext(
-            $this->version,
-            $this->solution['serviceSid'],
-            $sid
-        );
+        return new BindingContext($this->version, $this->solution['serviceSid'], $sid);
     }
 
     /**

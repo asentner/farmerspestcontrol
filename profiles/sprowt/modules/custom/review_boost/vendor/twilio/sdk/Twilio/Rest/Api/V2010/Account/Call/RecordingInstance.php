@@ -19,6 +19,7 @@ use Twilio\Version;
  * @property string accountSid
  * @property string apiVersion
  * @property string callSid
+ * @property string conferenceSid
  * @property \DateTime dateCreated
  * @property \DateTime dateUpdated
  * @property string duration
@@ -26,6 +27,10 @@ use Twilio\Version;
  * @property string price
  * @property string uri
  * @property array encryptionDetails
+ * @property string priceUnit
+ * @property string status
+ * @property integer channels
+ * @property string source
  * @property integer errorCode
  */
 class RecordingInstance extends InstanceResource {
@@ -47,6 +52,7 @@ class RecordingInstance extends InstanceResource {
             'accountSid' => Values::array_get($payload, 'account_sid'),
             'apiVersion' => Values::array_get($payload, 'api_version'),
             'callSid' => Values::array_get($payload, 'call_sid'),
+            'conferenceSid' => Values::array_get($payload, 'conference_sid'),
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'duration' => Values::array_get($payload, 'duration'),
@@ -54,6 +60,10 @@ class RecordingInstance extends InstanceResource {
             'price' => Values::array_get($payload, 'price'),
             'uri' => Values::array_get($payload, 'uri'),
             'encryptionDetails' => Values::array_get($payload, 'encryption_details'),
+            'priceUnit' => Values::array_get($payload, 'price_unit'),
+            'status' => Values::array_get($payload, 'status'),
+            'channels' => Values::array_get($payload, 'channels'),
+            'source' => Values::array_get($payload, 'source'),
             'errorCode' => Values::array_get($payload, 'error_code'),
         );
 
@@ -89,6 +99,7 @@ class RecordingInstance extends InstanceResource {
      * Fetch a RecordingInstance
      * 
      * @return RecordingInstance Fetched RecordingInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch() {
         return $this->proxy()->fetch();
@@ -98,6 +109,7 @@ class RecordingInstance extends InstanceResource {
      * Deletes the RecordingInstance
      * 
      * @return boolean True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function delete() {
         return $this->proxy()->delete();

@@ -11,6 +11,7 @@ namespace Twilio\Rest\Api\V2010\Account\Sip;
 
 use Twilio\ListResource;
 use Twilio\Options;
+use Twilio\Serialize;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -27,9 +28,7 @@ class DomainList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'accountSid' => $accountSid,
-        );
+        $this->solution = array('accountSid' => $accountSid, );
 
         $this->uri = '/Accounts/' . rawurlencode($accountSid) . '/SIP/Domains.json';
     }
@@ -126,6 +125,7 @@ class DomainList extends ListResource {
      * @param string $domainName The unique address on Twilio to route SIP traffic
      * @param array|Options $options Optional Arguments
      * @return DomainInstance Newly created DomainInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($domainName, $options = array()) {
         $options = new Values($options);
@@ -140,6 +140,7 @@ class DomainList extends ListResource {
             'VoiceFallbackMethod' => $options['voiceFallbackMethod'],
             'VoiceStatusCallbackUrl' => $options['voiceStatusCallbackUrl'],
             'VoiceStatusCallbackMethod' => $options['voiceStatusCallbackMethod'],
+            'SipRegistration' => Serialize::booleanToString($options['sipRegistration']),
         ));
 
         $payload = $this->version->create(
@@ -149,11 +150,7 @@ class DomainList extends ListResource {
             $data
         );
 
-        return new DomainInstance(
-            $this->version,
-            $payload,
-            $this->solution['accountSid']
-        );
+        return new DomainInstance($this->version, $payload, $this->solution['accountSid']);
     }
 
     /**
@@ -163,11 +160,7 @@ class DomainList extends ListResource {
      * @return \Twilio\Rest\Api\V2010\Account\Sip\DomainContext 
      */
     public function getContext($sid) {
-        return new DomainContext(
-            $this->version,
-            $this->solution['accountSid'],
-            $sid
-        );
+        return new DomainContext($this->version, $this->solution['accountSid'], $sid);
     }
 
     /**

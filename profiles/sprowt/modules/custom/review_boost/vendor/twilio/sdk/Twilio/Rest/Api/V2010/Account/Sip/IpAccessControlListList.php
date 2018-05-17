@@ -26,9 +26,7 @@ class IpAccessControlListList extends ListResource {
         parent::__construct($version);
 
         // Path Solution
-        $this->solution = array(
-            'accountSid' => $accountSid,
-        );
+        $this->solution = array('accountSid' => $accountSid, );
 
         $this->uri = '/Accounts/' . rawurlencode($accountSid) . '/SIP/IpAccessControlLists.json';
     }
@@ -125,11 +123,10 @@ class IpAccessControlListList extends ListResource {
      * 
      * @param string $friendlyName A human readable description of this resource
      * @return IpAccessControlListInstance Newly created IpAccessControlListInstance
+     * @throws TwilioException When an HTTP error occurs.
      */
     public function create($friendlyName) {
-        $data = Values::of(array(
-            'FriendlyName' => $friendlyName,
-        ));
+        $data = Values::of(array('FriendlyName' => $friendlyName, ));
 
         $payload = $this->version->create(
             'POST',
@@ -138,11 +135,7 @@ class IpAccessControlListList extends ListResource {
             $data
         );
 
-        return new IpAccessControlListInstance(
-            $this->version,
-            $payload,
-            $this->solution['accountSid']
-        );
+        return new IpAccessControlListInstance($this->version, $payload, $this->solution['accountSid']);
     }
 
     /**
@@ -152,11 +145,7 @@ class IpAccessControlListList extends ListResource {
      * @return \Twilio\Rest\Api\V2010\Account\Sip\IpAccessControlListContext 
      */
     public function getContext($sid) {
-        return new IpAccessControlListContext(
-            $this->version,
-            $this->solution['accountSid'],
-            $sid
-        );
+        return new IpAccessControlListContext($this->version, $this->solution['accountSid'], $sid);
     }
 
     /**

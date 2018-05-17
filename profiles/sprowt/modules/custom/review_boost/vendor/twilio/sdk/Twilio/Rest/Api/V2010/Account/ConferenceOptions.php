@@ -29,11 +29,14 @@ abstract class ConferenceOptions {
     }
 
     /**
-     * @param string $status The status
+     * @param string $status Specifying completed will end the conference and kick
+     *                       all participants
+     * @param string $announceUrl The announce_url
+     * @param string $announceMethod The announce_method
      * @return UpdateConferenceOptions Options builder
      */
-    public static function update($status = Values::NONE) {
-        return new UpdateConferenceOptions($status);
+    public static function update($status = Values::NONE, $announceUrl = Values::NONE, $announceMethod = Values::NONE) {
+        return new UpdateConferenceOptions($status, $announceUrl, $announceMethod);
     }
 }
 
@@ -60,7 +63,7 @@ class ReadConferenceOptions extends Options {
     }
 
     /**
-     * Only show conferences that started on this date, given as YYYY-MM-DD. You can also specify inequality such as DateCreated&lt;=YYYY-MM-DD
+     * Only show conferences that started on this date, given as `YYYY-MM-DD`. You can also specify inequality, such as `DateCreated<=YYYY-MM-DD` for conferences that started at or before midnight on a date, and `DateCreated>=YYYY-MM-DD` for conferences that started at or after midnight on a date.
      * 
      * @param string $dateCreatedBefore Filter by date created
      * @return $this Fluent Builder
@@ -71,7 +74,7 @@ class ReadConferenceOptions extends Options {
     }
 
     /**
-     * Only show conferences that started on this date, given as YYYY-MM-DD. You can also specify inequality such as DateCreated&lt;=YYYY-MM-DD
+     * Only show conferences that started on this date, given as `YYYY-MM-DD`. You can also specify inequality, such as `DateCreated<=YYYY-MM-DD` for conferences that started at or before midnight on a date, and `DateCreated>=YYYY-MM-DD` for conferences that started at or after midnight on a date.
      * 
      * @param string $dateCreated Filter by date created
      * @return $this Fluent Builder
@@ -82,7 +85,7 @@ class ReadConferenceOptions extends Options {
     }
 
     /**
-     * Only show conferences that started on this date, given as YYYY-MM-DD. You can also specify inequality such as DateCreated&lt;=YYYY-MM-DD
+     * Only show conferences that started on this date, given as `YYYY-MM-DD`. You can also specify inequality, such as `DateCreated<=YYYY-MM-DD` for conferences that started at or before midnight on a date, and `DateCreated>=YYYY-MM-DD` for conferences that started at or after midnight on a date.
      * 
      * @param string $dateCreatedAfter Filter by date created
      * @return $this Fluent Builder
@@ -93,7 +96,7 @@ class ReadConferenceOptions extends Options {
     }
 
     /**
-     * Only show conferences that were last updated on this date, given as YYYY-MM-DD. You can also specify inequality such as DateUpdated&gt;=YYYY-MM-DD
+     * Only show conferences that were last updated on this date, given as `YYYY-MM-DD`. You can also specify inequality, such as `DateUpdated<=YYYY-MM-DD` for conferences that were last updated at or before midnight on a date, and `DateUpdated>=YYYY-MM-DD` for conferences that were updated at or after midnight on a date.
      * 
      * @param string $dateUpdatedBefore Filter by date updated
      * @return $this Fluent Builder
@@ -104,7 +107,7 @@ class ReadConferenceOptions extends Options {
     }
 
     /**
-     * Only show conferences that were last updated on this date, given as YYYY-MM-DD. You can also specify inequality such as DateUpdated&gt;=YYYY-MM-DD
+     * Only show conferences that were last updated on this date, given as `YYYY-MM-DD`. You can also specify inequality, such as `DateUpdated<=YYYY-MM-DD` for conferences that were last updated at or before midnight on a date, and `DateUpdated>=YYYY-MM-DD` for conferences that were updated at or after midnight on a date.
      * 
      * @param string $dateUpdated Filter by date updated
      * @return $this Fluent Builder
@@ -115,7 +118,7 @@ class ReadConferenceOptions extends Options {
     }
 
     /**
-     * Only show conferences that were last updated on this date, given as YYYY-MM-DD. You can also specify inequality such as DateUpdated&gt;=YYYY-MM-DD
+     * Only show conferences that were last updated on this date, given as `YYYY-MM-DD`. You can also specify inequality, such as `DateUpdated<=YYYY-MM-DD` for conferences that were last updated at or before midnight on a date, and `DateUpdated>=YYYY-MM-DD` for conferences that were updated at or after midnight on a date.
      * 
      * @param string $dateUpdatedAfter Filter by date updated
      * @return $this Fluent Builder
@@ -165,20 +168,48 @@ class ReadConferenceOptions extends Options {
 
 class UpdateConferenceOptions extends Options {
     /**
-     * @param string $status The status
+     * @param string $status Specifying completed will end the conference and kick
+     *                       all participants
+     * @param string $announceUrl The announce_url
+     * @param string $announceMethod The announce_method
      */
-    public function __construct($status = Values::NONE) {
+    public function __construct($status = Values::NONE, $announceUrl = Values::NONE, $announceMethod = Values::NONE) {
         $this->options['status'] = $status;
+        $this->options['announceUrl'] = $announceUrl;
+        $this->options['announceMethod'] = $announceMethod;
     }
 
     /**
-     * The status
+     * Specifying `completed` will end the conference and kick all participants
      * 
-     * @param string $status The status
+     * @param string $status Specifying completed will end the conference and kick
+     *                       all participants
      * @return $this Fluent Builder
      */
     public function setStatus($status) {
         $this->options['status'] = $status;
+        return $this;
+    }
+
+    /**
+     * The announce_url
+     * 
+     * @param string $announceUrl The announce_url
+     * @return $this Fluent Builder
+     */
+    public function setAnnounceUrl($announceUrl) {
+        $this->options['announceUrl'] = $announceUrl;
+        return $this;
+    }
+
+    /**
+     * The announce_method
+     * 
+     * @param string $announceMethod The announce_method
+     * @return $this Fluent Builder
+     */
+    public function setAnnounceMethod($announceMethod) {
+        $this->options['announceMethod'] = $announceMethod;
         return $this;
     }
 
