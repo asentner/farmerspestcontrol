@@ -19,7 +19,7 @@ class ReviewBoostReview {
    *
    * @return array
    */
-  public function getAllReviewLinks(){
+  public function getAllReviewLinkClasses(){
 
     $rb = new ReviewBoost();
     $links = $rb->getReviewLinks();
@@ -52,10 +52,11 @@ class ReviewBoostReview {
 
   //todo make this less coupled. Maybe iterate over the row array
   function update($row){
+    $link = $row['link'];
     try{
       db_update('review_boost_review_customer_clicks')
         ->fields(array(
-          $row['link']=>1
+          "\"".trim($link)."\""=>1
         ))
         ->condition('tid', $row['tid'])
         ->execute();
@@ -88,8 +89,58 @@ class ReviewBoostReview {
     return true;
   }
 
-  function logUserClick($token,$link){
+  /**
+   * @string $link
+   *
+   * @return bool
+   *
+   * Searches review_boost_review_customer_clicks for the link column name. Link must be the machine id of the custom link
+   *
+   */
+  function checkLinkExists($link){
+    $column = db_query("SELECT * FROM {information_schema.COLUMNS}
+      WHERE TABLE_NAME = :tName
+      AND COLUMN_NAME = :cName",
+      array(
+        ':tName' => 'review_boost_review_customer_clicks',
+        ':cName' => $link,
+      )
+      )->fetchField();
+    if(empty($column)){
+      return false;
+    }
+    return true;
+  }
 
+  /**
+   * @string $link
+   *
+   * Adds a link to a column in the review_boost_review_customer_clicks database
+   *
+   */
+  function addLinkToTable($link){
+
+    $field = array(
+      'type' => 'int',
+      'size' => 'tiny',
+      'not null' => true,
+      'default' => 0
+    );
+
+    db_add_field('review_boost_review_customer_clicks', $link, $field);
+
+  }
+
+  function mapLinksToToken(){
+    $rb = new ReviewBoost();
+    $links = $rb->getReviewLinks();
+    $linkTokens = [];
+    foreach($links as $link => $value){
+      $token = '%'.$value['id'];
+      $linkTokens[$token] = $value;
+    }
+
+    return $linkTokens;
   }
 
 }

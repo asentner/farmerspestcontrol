@@ -42,7 +42,7 @@
 
         },
         machinify: function(val) {
-            return val.replace(/[^A-Za-z0-9\-]/g,'-').toLowerCase();
+            return val.replace(/[^A-Za-z0-9\-]/g,'_').toLowerCase();
         },
         addRow: function(obj) {
             if(obj == undefined) {

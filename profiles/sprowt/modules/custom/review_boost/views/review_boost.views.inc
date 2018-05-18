@@ -1,5 +1,6 @@
 <?php
 
+use ReviewBoost\ReviewBoost as ReviewBoost;
 /**
  * Implements hook_views_data
  */
@@ -432,117 +433,29 @@ function customerClicksTable(){
     ),
   );
 
-  $data['facebook'] = array(
-    'title' => t('Facebook'),
-    'help' => t('Field for displaying customer facebook clicks'),
-    'field' => array(
-      'handler' => 'views_handler_field_boolean',
-      'click sortable' => TRUE,
-    ),
-    'filter' => array(
-      'handler' => 'views_handler_filter_boolean_operator',
-      'label' => t('Published'),
-      'type' => 'yes-no',
-      'use equal' => TRUE,
-    ),
-    'sort' => array(
-      'handler' => 'views_handler_sort',
-    ),
-  );
+  $rb = new ReviewBoost();
 
-  $data['gplus'] = array(
-    'title' => t('Google Plus'),
-    'help' => t('Field for displaying customer google plus clicks'),
-    'field' => array(
-      'handler' => 'views_handler_field_boolean',
-      'click sortable' => TRUE,
-    ),
-    'filter' => array(
-      'handler' => 'views_handler_filter_boolean_operator',
-      'label' => t('Published'),
-      'type' => 'yes-no',
-      'use equal' => TRUE,
-    ),
-    'sort' => array(
-      'handler' => 'views_handler_sort',
-    ),
-  );
+  $links = $rb->getReviewLinks();
 
-  $data['yelp'] = array(
-    'title' => t('Yelp'),
-    'help' => t('Field for displaying customer yelp clicks'),
-    'field' => array(
-      'handler' => 'views_handler_field_boolean',
-      'click sortable' => TRUE,
-    ),
-    'filter' => array(
-      'handler' => 'views_handler_filter_boolean_operator',
-      'label' => t('Published'),
-      'type' => 'yes-no',
-      'use equal' => TRUE,
-    ),
-    'sort' => array(
-      'handler' => 'views_handler_sort',
-    ),
-  );
-
-  $data['bbb'] = array(
-    'title' => t('BBB'),
-    'help' => t('Field for displaying customer better business bureau clicks'),
-    'field' => array(
-      'handler' => 'views_handler_field_boolean',
-      'click sortable' => TRUE,
-    ),
-    'filter' => array(
-      'handler' => 'views_handler_filter_boolean_operator',
-      'label' => t('Published'),
-      'type' => 'yes-no',
-      'use equal' => TRUE,
-    ),
-    'sort' => array(
-      'handler' => 'views_handler_sort',
-    ),
-  );
-
-  $data['angie'] = array(
-
-    'title' => t('Angie'),
-    'help' => t('Field for displaying customer angie\'s list clicks'),
-    'field' => array(
-      'handler' => 'views_handler_field_boolean',
-      'click sortable' => TRUE,
-    ),
-    'filter' => array(
-      'handler' => 'views_handler_filter_boolean_operator',
-      'label' => t('Published'),
-      'type' => 'yes-no',
-      'use equal' => TRUE,
-    ),
-    'sort' => array(
-      'handler' => 'views_handler_sort',
-    ),
-
-  );
-
-  $data['yp'] = array(
-
-    'title' => t('YP'),
-    'help' => t('Field for displaying customer yellow pages clicks'),
-    'field' => array(
-      'handler' => 'views_handler_field_boolean',
-      'click sortable' => TRUE,
-    ),
-    'filter' => array(
-      'handler' => 'views_handler_filter_boolean_operator',
-      'label' => t('Published'),
-      'type' => 'yes-no',
-      'use equal' => TRUE,
-    ),
-    'sort' => array(
-      'handler' => 'views_handler_sort',
-    ),
-
-  );
+  foreach($links as $link => $value){
+    $data[$value['id']] = array(
+      'title' => t($value['title']),
+      'help' => t('Field for displaying customer '. $value['title']. ' clicks'),
+      'field' => array(
+        'handler' => 'views_handler_field_boolean',
+        'click sortable' => TRUE,
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_boolean_operator',
+        'label' => t('Published'),
+        'type' => 'yes-no',
+        'use equal' => TRUE,
+      ),
+      'sort' => array(
+        'handler' => 'views_handler_sort',
+      ),
+    );
+  }
 
   $data['click_date'] = array(
     'title' => t('Click Date'),

@@ -4,6 +4,7 @@ require_once drupal_get_path('module', 'system') . '/system.admin.inc';
 use ReviewBoost\ReviewBoost;
 use ReviewBoost\Sms\ReviewBoostSMS;
 use ReviewBoost\Customer\ReviewBoostCustomer;
+use ReviewBoost\Review\ReviewBoostReview;
 function _review_boost_admin_menu_block_page() {
     $item = menu_get_item();
     if ($content = system_admin_menu_block($item)) {
@@ -1240,8 +1241,8 @@ function _review_boost_admin_review_form_validate(&$form, &$form_state) {
         }
     }
 
-    if(count($enabled) > 3) {
-        form_set_error('review_links', 'No more than three links can be enabled');
+    if(count($enabled) > 20) {
+        form_set_error('review_links', 'No more than 20 links can be enabled');
         drupal_add_js(array('hidden_errors' => json_encode($enabled)), 'setting');
         $form_state['rebuild'] = true;
     }
@@ -1252,6 +1253,16 @@ function _review_boost_admin_review_form_submit(&$form, &$form_state) {
     $links = json_decode($values['review_links'], true);
 
     variable_set('review_boost_review_links', $links);
+
+    $review = new ReviewBoostReview();
+
+    //add custom links to the review_boost_review_customer_clicks table
+    foreach($links as $link){
+      if(!$review->checkLinkExists($link['id'])){
+        $review->addLinkToTable($link['id']);
+      }
+    }
+
     cache_clear_all();
 }
 

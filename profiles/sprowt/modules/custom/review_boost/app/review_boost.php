@@ -2,6 +2,7 @@
 
 namespace ReviewBoost;
 
+use ReviewBoost\Review\ReviewBoostReview;
 use ReviewBoost\Sms\ReviewBoostSMS;
 use DateTimeZone;
 use DateTime;
@@ -15,7 +16,6 @@ class ReviewBoost {
     private $company_phone = null;
     private $company_email = null;
     private $allow_html = null;
-
     function __construct($formToken = '') {
         $this->formToken = $formToken;
         $this->setDefaultTokens();
@@ -185,12 +185,64 @@ class ReviewBoost {
             ),
         );
 
-        $this->tokens = array();
-        $this->token_desciptions = array();
-        foreach ($default_tokens as $t => $v) {
-            $this->tokens[$t] = $v['value'];
-            $this->token_desciptions[$t] = $v['description'];
-        }
+        //add token links to the default_tokens array
+      $link_urls = $this->mapTokenLinks('_url');
+      $link_titles = $this->mapTokenLinks('_title');
+      $links = $this->mapTokenLinks();
+      //add just the raw url of review links to default tokens list
+      foreach($link_urls as $url_key => $url_val){
+        $default_tokens[$url_key] = array(
+          'value' => $this->formatReviewLink($url_val,'url'),
+          'description' => $url_val['id']. " raw url for single token link.",
+        );
+      }
+
+      //add just the raw title of review links to default tokens list
+      foreach($link_titles as $title_key => $title_val){
+        $default_tokens[$title_key] = array(
+          'value' => $this->formatReviewLink($title_val,'title'),
+          'description' => $title_val['id']. " just the title of the link.",
+        );
+      }
+
+      //add full link with html markup to tokens list
+      foreach($links as $key => $val){
+        $default_tokens[$key] = array(
+          'value' => $this->formatReviewLink($val),
+          'description' => $val['id']. " single review link token that renders a a clickable link.",
+        );
+      }
+
+      $this->setTokenInformation($default_tokens);
+    }
+
+    function setTokenInformation($default_tokens){
+      $this->tokens = array();
+      $this->token_desciptions = array();
+      foreach ($default_tokens as $t => $v) {
+        $this->tokens[$t] = $v['value'];
+        $this->token_desciptions[$t] = $v['description'];
+      }
+    }
+
+  /**
+   * @param $linkType
+   *
+   * @return array
+   *
+   * $linktype is appended to the end of the token string.
+   *
+   */
+    function mapTokenLinks($linkType = '_full'){
+      $links = $this->getReviewLinks();
+      $tokenLinks = [];
+
+      foreach($links as $link => $value){
+          $token = trim('%'.$value['id'].$linkType);
+          $tokenLinks[$token] = $value;
+      }
+
+      return $tokenLinks;
     }
 
     function getEmail() {
@@ -518,6 +570,36 @@ class ReviewBoost {
         $html .= '</div>';
 
         return $html;
+    }
+
+  /**
+   * @param $link
+   * @param string $link_type
+   *  param should be either 'url' or 'title'
+   *
+   * @return string
+   *
+   * Returns a single formatted review link.
+   * The full case returns the entire link with markup for click tracking.
+   * If adding raw url or title token, you must have an id attribute with the link id and a class attribute
+   * with 'review-link' as this is what javascript looks for to see if you clicked on a review link or not.
+   *
+   */
+    function formatReviewLink($link,$link_type = "full"){
+      $html = '';
+      if($link['enabled'] || variable_get('review_boost_show_all_links', false)) {
+        switch ($link_type){
+          case "url":
+            $html = $link['link'];
+            break;
+          case "title":
+            $html = $link['title'];
+            break;
+          case "full":
+            $html = $html = "<a id='{$link['id']}' class='review-link' href=\"{$link['link']}\" target=\"_blank\"><span>{$link['title']}</span></a>";
+        }
+      }
+      return $html;
     }
 
     function getThreshold() {

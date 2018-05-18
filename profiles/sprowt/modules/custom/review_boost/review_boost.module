@@ -931,28 +931,27 @@ function _review_boost_review_get_clicked_link(){
       array(
         '%token'=>$clientToken
       ));
+
   //if tid does exist in token table
   }else{
 
     $row = array(
       'tid'=>$tid,
       'link' => $link,
-      'click_date' => $date->getTimeStamp()
+      'click_date' => $date->getTimeStamp(),
       );
 
     if($review->checkUserExists($tid)){
+      unset($row['id']);
       $review->update($row);
-
     }else{
-
-      $row[$link] = 1;
-      unset($row['link']);
+      $formatLink = "\"".trim($link)."\""; //add quotes in case the column has '_' or '-' in it
+      $row[$formatLink] = $row[$link]; //set formatLink to equal the index of old unformatted link
+      unset($row['link']); //don't need this anymore
+      $row[$formatLink] = 1;
       $review->insert($row);
-
     }
-
   }
-
 }
 
 /**
