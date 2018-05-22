@@ -1204,9 +1204,23 @@ function _review_boost_admin_review_form($form, &$form_state) {
         '#type' => 'hidden',
         '#default_value' => $RB->getReviewLinks(true),
         '#attributes' => array(
-            'id' => 'review-links'
+            'id' => 'review-links',
         ),
     );
+  $form['edited_links'] = array(
+    '#type' => 'hidden',
+    '#default_value' => '[]',
+    '#attributes' => array(
+      'id' => 'edited_links',
+    ),
+  );
+  $form['deleted_links'] = array(
+    '#type' => 'hidden',
+    '#default_value' => '[]',
+    '#attributes' => array(
+      'id' => 'deleted_links',
+    ),
+  );
 
     $form['actions'] = array(
         'submit' => array(
@@ -1251,20 +1265,49 @@ function _review_boost_admin_review_form_validate(&$form, &$form_state) {
 function _review_boost_admin_review_form_submit(&$form, &$form_state) {
     $values = $form_state['values'];
     $links = json_decode($values['review_links'], true);
-
+    $updatedLinks = json_decode($values['edited_links'],true);
+    $deletedLinks = json_decode($values['deleted_links'],true);
     variable_set('review_boost_review_links', $links);
 
     $review = new ReviewBoostReview();
 
-    //add custom links to the review_boost_review_customer_clicks table
-    foreach($links as $link){
-      if(!$review->checkLinkExists($link['id'])){
-        $review->addLinkToTable($link['id']);
+    if(empty($deletedLinks)){
+      if(!empty($updatedLinks)){
+        foreach($updatedLinks as $l){
+          if(!empty($l['old_value'])){
+            $review->updateLinkColumn($l['old_value'],$l['new_value']);
+          }
+        }
+      }
+      //add custom links to the review_boost_review_customer_clicks table
+      foreach($links as $link){
+        if(!$review->checkLinkExists($link['id'])){
+          $review->addLinkToTable($link['id']);
+        }
+      }
+    }else{
+      foreach($deletedLinks as $d){
+        $review->deleteLinkColumn($d['row_name']);
+      }
+
+      //perform machine key updates if available
+      if(!empty($updatedLinks)){
+        foreach($updatedLinks as $l){
+          if(!empty($l['old_value'])){
+            $review->updateLinkColumn($l['old_value'],$l['new_value']);
+          }
+        }
+      }
+      //add new links if available
+      foreach($links as $link){
+        if(!$review->checkLinkExists($link['id'])){
+          $review->addLinkToTable($link['id']);
+        }
       }
     }
-
     cache_clear_all();
 }
+
 
 function _review_boost_admin_clear_message_queue(){
   $smsQueue = DrupalQueue::get('review_boost_sms_worker');

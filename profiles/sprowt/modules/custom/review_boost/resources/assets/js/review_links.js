@@ -1,7 +1,14 @@
 (function($){
+
+
+
+  var editedLinks = [];
+  var deletedLinks = [];
     var rb = {
         init: function(){
             var links = rb.getLinks();
+
+
             $.each(links, function(i,v){
                 rb.addRow(v);
             });
@@ -13,13 +20,27 @@
 
             $('#table-body').on('keyup', '.machine-name-source', function(){
                 var val = $(this).val();
-                $(this).closest('div').find('.machine-name-value').text(rb.machinify(val));
-                $(this).closest('tr').find('.machine-name-target').val(rb.machinify(val));
+                var machineVal = $(this).closest('div').find('.machine-name-value').text(rb.machinify(val));
+                var machineTarget = $(this).closest('tr').find('.machine-name-target');
+                $(machineTarget).val(rb.machinify(val));
+              //define the link object that has been edited
+              var edited = {old_value:machineTarget["0"].defaultValue, new_value:$(machineTarget).val()};
+              console.log(edited);
+              //search edited object for any link with the same name
+              var item = rb.findObjectByAttribute(editedLinks,"old_value",machineTarget["0"].defaultValue);
+              rb.handleEditing(item,edited);
             });
 
+            //update machine names of links and add to edited links json string in dom
             $('#table-body').on('keyup', '.machine-name-target', function(){
                 var val = $(this).val();
                 $(this).val(rb.machinify(val));
+
+                //define the link object that has been edited
+                var edited = {old_value:this.defaultValue, new_value:$(this).val()};
+                //search edited object for any link with the same name
+                var item = rb.findObjectByAttribute(editedLinks,"old_value",this.defaultValue);
+                rb.handleEditing(item,edited);
             });
 
             $('#table-body').on('keyup click', function(){
@@ -34,13 +55,41 @@
 
             $('#table-body').on('click', '.removeRow', function(e){
                 e.preventDefault();
-                $(this).closest('tr').remove();
+              var deletedRow = $(this).closest('tr').attr('id');
+              var deletedObj = {row_name:deletedRow};
+              deletedLinks.push(deletedObj);
+
+              $('#deleted_links').val(JSON.stringify(deletedLinks));
+              $(this).closest('tr').remove();
                 rb.updateLinks();
             });
 
             rb.handleErrors();
 
         },
+
+      findObjectByAttribute: function (items, attribute, value) {
+        for (var i = 0; i < items.length; i++) {
+          if (items[i][attribute] === value) {
+            return [items[i],i];
+          }
+        }
+        return null;
+      },
+
+      handleEditing: function(item,edited){
+        if(editedLinks.length !==0){
+          if(!item){
+            editedLinks.push(edited);
+          }else{
+            editedLinks[item[1]].new_value = edited.new_value;
+          }
+        }else{
+          editedLinks.push(edited);
+        }
+        $('#edited_links').val(JSON.stringify(editedLinks));
+      },
+
         machinify: function(val) {
             return val.replace(/[^A-Za-z0-9\-]/g,'_').toLowerCase();
         },
@@ -79,6 +128,7 @@
             });
             $('#review-links').val(JSON.stringify(val));
         },
+
         getLinks: function(){
             return JSON.parse($('#review-links').val());
         },
@@ -138,10 +188,16 @@
             }
 
             return match_error;
-        }
-    }
+        },
+
+    };
+
+
+
 
     $(document).ready(function(){
+
         rb.init();
+        //rb.fetchEdited();
     });
 })(jQuery)

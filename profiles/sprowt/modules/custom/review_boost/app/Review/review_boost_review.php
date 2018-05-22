@@ -12,7 +12,11 @@ use Exception;
 
 class ReviewBoostReview {
 
-  function __construct(){}
+  private $table_name;
+
+  function __construct(){
+    $this->table_name = 'review_boost_review_customer_clicks';
+  }
 
   /**
    * Fetches the class name of all review links set in Review Boost Review Settings
@@ -129,6 +133,40 @@ class ReviewBoostReview {
 
     db_add_field('review_boost_review_customer_clicks', $link, $field);
 
+  }
+
+  function updateLinkColumn($oldVal, $newVal){
+
+    try{
+      db_change_field('review_boost_review_customer_clicks',$oldVal,$newVal,array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => true,
+        'default' => 0
+      ));
+    }catch(Exception $e){
+      watchdog('Review Boost Review Error','Error updating %oldval to %newval from %table with %exception',array(
+        '%oldval' => $oldVal,
+        '%newval' => $newVal,
+        '%table' => $this->table_name,
+        '%exception' => $e
+      ));
+    }
+
+
+  }
+
+  function deleteLinkColumn($column){
+    try{
+      db_drop_field($this->table_name,$column);
+    }
+    catch(Exception $e){
+      watchdog('Review Boost Review Error','Error deleting %column from %table with %exception',array(
+        '%column' => $column,
+        '%table' => $this->table_name,
+        '%exception' => $e
+      ));
+    }
   }
 
   function mapLinksToToken(){
