@@ -1,0 +1,276 @@
+.node-type-solution{
+  .l-content{
+    max-width: 100%;
+  }
+}
+
+body.node-type-solution {
+    .solution-menu-toggle {
+        display: none;
+    }
+
+    .l-header {
+        box-shadow: 0.6px 7px 6px 0 rgba(0, 0, 0, 0.27);
+    }
+
+    .solution--full--header{
+      //uploaded background image
+      // background-size: cover;
+      // background-position: center;
+
+      //no uploaded background image
+      background-image: url('../images/hero-bg-pattern.png') !important;
+      background-size: contain;
+      background-repeat: repeat;
+    }
+    h1.node__title{
+      strong{
+        &:after{
+          content: "™";
+          font-size: 24px;
+          position: relative;
+          top: -10px;
+        }
+      }
+
+      @include breakpoint($tab){
+        strong{
+          &:after{
+            font-size: 50px;
+            top: -15px;
+          }
+        }
+      }
+    }
+
+    @include breakpoint($tab) {
+        .solution-menu-toggle {
+            display: block;
+            font-size: 19px;
+            font-weight: bold;
+            .block__content > div {
+                @include flexbox;
+                align-items: center;
+                div {
+                    text-align: center;
+                }
+            }
+            em {
+                font-weight: 600;
+                margin: 0 5px;
+                display: block;
+            }
+            .menu-toggle {
+                @include flexbox;
+                align-items: center;
+                font-size: 19.8px;
+                text-transform: uppercase;
+                .fa {
+                    font-size: 27.7px;
+                    font-weight: normal;
+                    margin-left: 5px;
+                }
+            }
+        }
+        .block--nav-main {
+            display: none;
+        }
+    }
+
+    @include breakpoint($nav) {
+        .block--block-3 {
+            font-size: 23.8px;
+        }
+    }
+
+    @include breakpoint(1120px) {
+        .solution-menu-toggle {
+            .block__content > div {
+                div {
+                    text-align: left;
+                }
+            }
+            em {
+                display: inline;
+            }
+        }
+    }
+
+    .scm-modal-container {
+        .mfp-close {
+            font-size: 0;
+            @include flexbox;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            &:after {
+                font-family: FontAwesome;
+                content: $fa-var-times;
+                font-size: 26px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                text-align: center;
+            }
+        }
+        .mfp-content {
+            max-height: 1000px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .concern-title {
+            //font-size: 18px;
+            font-weight: 600;
+        }
+
+        .node__title {
+            //font-size: 36px;
+            font-weight: 600;
+        }
+
+        .node__content {
+            padding-bottom: 30px;
+        }
+
+        .field--name-field-icon-file {
+            margin: 0 -30px 30px;
+            position: relative;
+            &:after {
+                display: block;
+                content: "";
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 12px;
+                width: 100%;
+                z-index: 1;
+            }
+            > div {
+                position: relative;
+                z-index: 2;
+            }
+
+            .field__item {
+                @include flexbox;
+                align-items: center;
+                justify-content: center;
+                width: 158px;
+                height: 158px;
+                border-radius: 100%;
+                margin: 0 auto;
+            }
+            svg, img {
+                display: block;
+                height: 89px !important; //override inline styles
+                width: auto;
+            }
+        }
+
+        .field--name-field-concern-treatment,
+        .field--name-field-concern-steps {
+            .field__label {
+                @extend h2;
+                font-size: 1.625em;
+                line-height: 1.15;
+            }
+            h2 {
+                @extend h3;
+            }
+        }
+
+        .controls {
+            min-height: 45px;
+            .button {
+                text-transform: uppercase;
+                flex: 1 1 auto;
+                width: 50%;
+                font-size: .8em;
+                text-align: center;
+                padding: 5px;
+                &:after {
+                    display: inline-block;
+                    line-height: inherit;
+                    padding: 0;
+                    background: none;
+                    color: inherit;
+                    vertical-align: middle;
+                    left: 0;
+                    margin-left: 15px;
+                    font-size: .8em;
+                }
+                &.scm-left {
+                    &:after {
+                        display: none;
+                    }
+                    &:before {
+                        font-family: "FontAwesome";
+                        font-weight: normal;
+                        content: $fa-var-long-arrow-left;
+                        font-size: 26px;
+                        display: inline-block;
+                        line-height: inherit;
+                        padding: 0;
+                        background: none;
+                        vertical-align: middle;
+                        margin-right: 15px;
+                        font-size: .8em;
+                    }
+                }
+            }
+        }
+
+        @include breakpoint($tab) {
+            .concern-title {
+                font-size: 18px;
+            }
+
+            .node__title {
+                font-size: 36px;
+            }
+
+            .field--name-field-icon-file {
+                margin-left: -80px;
+                margin-right: -80px;
+            }
+
+            .controls {
+                .button {
+                    font-size: 20px;
+                    padding: 15px 15px 15px 20px;
+                    &:after {
+                        font-size: 26px;
+                    }
+
+                    &.scm-left {
+                        &:before {
+                            font-size: 26px;
+                        }
+                    }
+                }
+            }
+
+            .field--name-field-concern-treatment {
+                margin-bottom: 35px;
+            }
+
+            .node__content {
+                padding-bottom: 88px;
+            }
+        }
+
+        @include breakpoint(1200px) {
+            .field--name-field-icon-file {
+                margin-left: -130px;
+                margin-right: -130px;
+            }
+
+            .node__content {
+                padding: 0 70px 88px;
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.block--sprowt-block-cta {
+  .l-region--postscript-third & {
+    padding: 30px 20px;
+    text-align: center;
+    a {
+      &[href^='tel:'] {
+        font-weight: 600;
+      }
+    }
+    .node__title {
+      margin-bottom: .5em;
+    }
+    .button {
+      margin: .5em auto 0;
+      max-width: 220px;
+    }
+    @include breakpoint($tab) {
+      .node__content {
+        @include flexbox;
+        justify-content: center;
+        align-items: center;
+      }
+      .node__title {
+        margin-bottom: .2em;
+      }
+      .field--name-body {
+        margin-left: 1em;
+        font-size: 1.15em;
+      }
+      .button {
+        margin-top: 0;
+        margin-left: .5em;
+      }
+    }
+    @include breakpoint($desk) {
+      .field--name-body {
+        font-size: 1.5em;
+      }
+    }
+  }
+}

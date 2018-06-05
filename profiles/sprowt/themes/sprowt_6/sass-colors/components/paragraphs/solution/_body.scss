@@ -1,0 +1,15 @@
+div.entity.solution-body {
+  h2 {
+    em {
+      color: palette(primary, dark);
+    }
+  }
+  > .content {
+    > .field--name-field-intro h2 {
+      color: palette(primary, dark);
+    }
+  }
+  h4 {
+    color: palette(secondary, light);
+  }
+}

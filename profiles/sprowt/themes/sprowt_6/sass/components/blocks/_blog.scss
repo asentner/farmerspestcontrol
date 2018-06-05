@@ -1,0 +1,127 @@
+//full page listing teaser
+.block--views-blog-list{
+  .field--name-field-image{
+    img{
+      border-radius: 0;
+      border: solid 3px;
+    }
+  }
+}
+
+.node--blog--teaser{
+  .node__title{
+    font-size: 22px
+  }
+  .field--name-body{
+    .field__item{
+      > .more-link{
+        margin: 40px 0 0;
+        text-align: left;
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .node__title{
+      font-size: 24px;
+    }
+  }
+  @include breakpoint($desk){
+    .node__title{
+      font-size: 26px;
+    }
+  }
+}
+
+//call out teaser
+.block--views-blog-blog-call-out{
+  max-width: 870px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  .block__title{
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .view-header{
+    margin-bottom: 60px;
+  }
+  .view-title{
+    font-family: $font-body;
+    font-size: 51px;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+  }
+  .view-content{
+    @include flexbox;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  @include breakpoint($tab){
+    .view-content{
+      .views-row{
+        flex: 1 1 50%;
+        max-width: 350px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    padding: 90px 0;
+    .view-content{
+      .views-row{
+        max-width: 410px;
+      }
+    }
+  }
+}
+
+.node--blog--alt-teaser{
+  img{
+    border: solid 3px;
+  }
+  .teaser-content{
+    padding: 25px;
+    .node__title{
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.43;
+      letter-spacing: .2px;
+    }
+    .field--name-field-post-date{
+      font-size: 15px;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: 0.1px;
+    }
+    .field--name-body{
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.62;
+      letter-spacing: .2px;
+    }
+    .more-link {
+      text-align: left;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.2px;
+      padding-top: 30px;
+      max-width: 225px;
+      &:after{
+        @include faicon('\f178');
+        padding-left: 7px;
+      }
+    }
+  }
+  @include breakpoint($tab){
+
+  }
+  @include breakpoint($desk){
+
+  }
+}

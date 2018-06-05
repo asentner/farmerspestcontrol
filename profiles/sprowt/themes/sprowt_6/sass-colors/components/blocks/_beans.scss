@@ -1,0 +1,180 @@
+//utility BBB & reviews block
+.block--bean-utility-header-review-score{
+  .rating{
+    .stars{
+      h4, i{
+        color: palette(tertiary, base);
+      }
+    }
+    > p{
+      color: palette(white, base);
+    }
+  }
+  @include breakpoint($tab){
+    .rating{
+      > p{
+        color: palette(neutral, gray-chateau);
+      }
+    }
+  }
+}
+
+//front body call out
+.block--bean-front-body-call-out{
+  background: palette(primary, dark);
+  .block__content{
+    .content{
+      .field--name-field-call-out-text{
+        color: palette(white, pure);
+        a{
+          color: palette(white, pure);
+          &:hover{
+            color: palette(tertiary, base);
+          }
+        }
+      }
+      .field--name-field-button{
+        .button{
+          color: palette(primary, dark);
+          background-color: palette(white, pure);
+          border-color: palette(white, pure);
+          &:hover{
+            color: palette(white, pure);
+            background-color: transparent;
+            border-color: palette(white, pure);
+          }
+        }
+      }
+    }
+  }
+}
+
+//front reviews callout
+.block--bean-reviews-call-out-front{
+  background: palette(primary, dark);
+  .content{
+    .field--name-field-display-title{
+      color: palette(white, pure);
+    }
+  }
+}
+
+//front careers block
+.block--bean-careers-block-front{
+  background: palette(white, pure);
+  .content{
+    .field--name-field-body-text{
+      h3{
+        color: palette(primary, dark);
+      }
+      h2{
+        color: palette(neutral, mine-shaft);
+      }
+      p{
+        color: palette(secondary, base);
+        a{
+          color: palette(secondary, base);
+          &:hover{
+            color: palette(primary, base);
+          }
+          &:after{
+            color: palette(primary, base);
+          }
+        }
+        .button{
+          color: palette(white, pure);
+          background: palette(primary, dark);
+          &:hover{
+            color: palette(primary, dark);
+            background: palette(white, pure);
+          }
+        }
+      }
+    }
+  }
+}
+
+//credit cards
+.block--bean-credit-cards{
+  h2{
+    color: palette(white, pure);
+  }
+}
+
+//Learning Center CTA bean
+.block--bean-learning-center-cta-service-pa{
+  background-color: palette(neutral, alabaster);
+}
+
+.bean-cta-learning-center{
+  .block__title, .field--name-field-body-text{
+    color: palette(secondary, light);
+  }
+  .field--name-field-bean-title{
+    color: palette(primary, base);
+  }
+}
+
+//Benefits bean
+.bean-benefits-bean{
+  .field--name-field-bean-title{
+    color: palette(neutral, mercury);
+  }
+  .field--name-field-body-text{
+    color: palette(secondary, light);
+  }
+}
+
+//FAQ bean
+.block--views-referenced-faq-blocks-faq-block{
+  .block__title{
+    color: palette(neutral, mercury);
+  }
+}
+
+.bean-faq-bean{
+  .field--name-field-body-text{
+    color: palette(secondary, light);
+  }
+  .field--name-field-faqs{
+    .field__item{
+      border-color: palette(neutral, mercury);
+    }
+  }
+}
+
+//Sidebar Free Inspections
+.block--bean-inspections-sidebar{
+  background: palette(primary, base);
+  .field--name-field-body-text, h2{
+    color: palette(white, pure);
+  }
+  h4{
+    color: palette(white, base);
+  }
+  .button{
+    background: palette(white, pure);
+    color: palette(primary, base);
+    &:hover{
+      background: palette(secondary, light);
+      color: palette(white, pure);
+    }
+  }
+}
+
+//Sidebar Reviews Bean
+.block--bean-sidebar-review-links{
+  background: palette(secondary, light);
+  a{
+    color: palette(white, pure);
+    &:before{
+      color: palette(primary, base);
+    }
+    &:hover{
+      color: palette(primary, base);
+      &:before{
+        color: palette(white, pure);
+      }
+    }
+  }
+}

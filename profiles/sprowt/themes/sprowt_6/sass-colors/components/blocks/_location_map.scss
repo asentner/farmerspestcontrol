@@ -1,0 +1,53 @@
+//LTP location and map
+.block--views-locations-ltp-location-map{
+  background-color: palette(primary, dark);
+  .node--location--secondary-teaser{
+
+    .location-info{
+      h3{
+        color: palette(white, base);
+      }
+      h2{
+        color: palette(white, pure);
+        &:after{
+          background-color: palette(white, pure);
+        }
+      }
+      .location-details{
+        .address-block{
+          color: palette(white, base);
+          .field--name-field-address-label{
+            color: palette(primary, light);
+          }
+        }
+        .hours-block{
+          color: palette(white, base);
+          .field--name-field-hours-label{
+            color: palette(primary, light);
+          }
+        }
+      }
+      .field--name-field-call-out{
+        background-color: transparent;
+        p{
+          color: palette(white, pure);
+          a{
+            color: palette(white, pure);
+            &:hover{
+              color: palette(primary, light);
+            }
+          }
+          .button{
+            background-color: palette(white, pure);
+            color: palette(primary, dark);
+            border-color: palette(white, pure);
+            &:hover{
+              background-color: transparent;
+              color: palette(white, pure);
+            }
+          }
+        }
+      }
+    }
+  }
+}

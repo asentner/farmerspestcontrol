@@ -1,0 +1,16 @@
+div.entity.guarantee {
+    color: palette(neutral, gallery);
+    background-color: palette(primary, dark);
+    h2, .field--name-field-header {
+        color: palette(white, pure);
+    }
+
+    > .content {
+        border-color: #e52025;
+    }
+}
+
+
+div.entity.guarantee > .content{
+  border-color: transparent;
+}

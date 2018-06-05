@@ -1,0 +1,20 @@
+.paragraphs-item-faq{
+  .content{
+    h3{
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.43;
+      margin: 0;
+      @include breakpoint($tab){
+        font-size: 21px;
+      }
+    }
+    .field--name-field-answer{
+      font-size: 16px;
+      line-height: 1.67;
+      @include breakpoint($tab){
+        font-size: 18px;
+      }
+    }
+  }
+}

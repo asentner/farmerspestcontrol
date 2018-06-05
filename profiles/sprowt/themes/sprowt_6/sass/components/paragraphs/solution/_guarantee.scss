@@ -1,0 +1,42 @@
+div.entity.guarantee {
+  max-width: 984px;
+  margin: 40px auto 0;
+  padding: 0;
+  position: relative;
+
+  background-image: url('../images/hero-bg-pattern.png') !important;
+  background-repeat: repeat;
+  h2, .field--name-field-header {
+    font-family: $font-body;
+  }
+  h2{
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: .4px;
+  }
+  .field--name-field-body-text{
+    font-size: 21px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  > .content {
+    padding: 40px 40px 50px;
+    position: relative;
+    z-index: 5;
+    > * {
+      max-width: 575px;
+    }
+  }
+  @include breakpoint($tab){
+    &:after{
+      content: url('../images/tech-cta.png');
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+  @include breakpoint(1000px){
+    margin: 40px auto 70px;
+  }
+}

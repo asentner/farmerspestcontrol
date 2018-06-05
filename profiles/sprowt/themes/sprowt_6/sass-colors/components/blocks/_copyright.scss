@@ -1,0 +1,9 @@
+.block--sprowt-settings-sprowt-copyright {
+  color: rgba(palette(white, pure), .4);
+  a {
+    color: rgba(palette(white, pure), .4);
+    &:hover{
+      color: palette(white, pure);
+    }
+  }
+}

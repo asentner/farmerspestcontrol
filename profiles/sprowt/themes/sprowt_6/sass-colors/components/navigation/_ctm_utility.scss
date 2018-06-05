@@ -1,0 +1,23 @@
+.block--menu-menu-ctm-utility-menu{
+  .menu{
+    li{
+      &:first-of-type{
+        a{
+          &:before{
+            color: palette(primary, dark);
+          }
+        }
+      }
+      .nolink{
+        color: palette(primary, dark);
+      }
+
+      a{
+        color: palette(secondary, light);
+        &:hover{
+          color: palette(primary, dark);
+        }
+      }
+    }
+  }
+}

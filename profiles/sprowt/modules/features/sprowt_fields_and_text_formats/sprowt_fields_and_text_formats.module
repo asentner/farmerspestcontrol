@@ -37,6 +37,9 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
         foreach($items as &$item) {
             if(strpos($item['#file']->filemime, 'svg') !== false) {
                 $svg_html = file_get_contents(drupal_realpath($item['#file']->uri));
+                if(empty($svg_html)) {
+                    $svg_html = '<svg></svg>';
+                }
                 $doc = new DOMDocument();
                 $doc->loadXML($svg_html);
                 $svg = $doc->getElementsByTagName('svg');

@@ -1,0 +1,84 @@
+.front {
+  .l-main {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 100%;
+    .l-content{
+      max-width: 100%;
+      .front-content{
+        background-image: url('../images/brand-bg-mobile.png');
+        background-position-x: -30%;
+        background-position-y: bottom;
+        background-repeat: no-repeat;
+      }
+      .block--system-main{
+        position: relative;
+        padding: 45px 20px 280px;
+        max-width: $container;
+        margin: 0 auto;
+        .block__content{
+          max-width: 550px;
+        }
+        .node__title{
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 1.1;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+        }
+        .field--name-body{
+          padding-top: 30px;
+          h2, h3{
+            font-size: 32px;
+            font-weight: 700;
+            line-height: auto;
+            margin-bottom: 0;
+          }
+          p{
+            font-size: 18px;
+            line-height: 1.67;
+          }
+        }
+      }
+    }
+    @include breakpoint($mobile){
+      .l-content{
+        .block--system-main{
+          padding: 45px 20px 330px;
+        }
+      }
+    }
+    @include breakpoint($tab){
+      .l-content{
+        .front-content{
+          background-image: url('../images/brand-bg.jpg');
+          background-size: cover;
+          background-position: center center;
+        }
+        .block--system-main{
+          padding: 65px 35px 300px;
+          .field--name-body{
+            h2, h3{
+              font-size: 38px;
+            }
+          }
+        }
+      }
+    }
+    @include breakpoint($desk){
+      .l-content{
+        .block--system-main{
+          padding: 130px 0 100px;
+          .node__title{
+            font-size: 30px;
+          }
+          .field--name-body{
+            h2, h3{
+              font-size: 48px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,482 @@
+//utility BBB accreddited
+.block--bean-bbb-accredited{
+  display: none;
+  padding-left: 45px;
+  img{
+    max-height: 45px;
+    width: auto;
+  }
+  @include breakpoint($desk){
+    display: block;
+  }
+}
+
+//front body call out
+.block--bean-front-body-call-out{
+  padding: 40px 20px;
+  .block__content{
+    max-width: $container;
+    margin: 0 auto;
+    position: relative;
+    z-index: 20;
+    .content{
+      @include flexbox;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .field--name-field-call-out-text {
+        font-family: $font-body;
+        font-size: 32px;
+        font-weight: 700;
+        padding-bottom: 40px;
+        text-align: center;
+        p{
+          line-height: 1.25;
+        }
+      }
+      .field--name-field-button{
+        a{
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    padding: 45px;
+    .block__content{
+      .content{
+        .field--name-field-call-out-text{
+          text-align: left;
+          padding-right: 20px;
+          p{
+            font-size: 32px;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    padding: 50px 0;
+    .block__content{
+      .content{
+        flex-direction: row;
+        .field--name-field-call-out-text{
+          padding-bottom: 0;
+          p{
+            font-size: 34px;
+            line-height: .85;
+          }
+        }
+      }
+    }
+  }
+}
+
+//front reviews call out
+.block--bean-reviews-call-out-front{
+  padding: 35px 0;
+  .content{
+    @include flexbox;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .field--name-field-display-title{
+      padding: 0 25px 25px;
+      margin-bottom: 0;
+      font-size: 22px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.5;
+      letter-spacing: 2.2px;
+      position: relative;
+      .field__items{
+        position: relative;
+        z-index: 1;
+      }
+    }
+    .field--name-field-images{
+      >.field__items{
+        @include flexbox;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        >.field__item{
+          flex: 1 0 50%;
+          padding: 15px;
+          @extend %image-hover;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .content{
+      .field--name-field-images{
+        >.field__items{
+          flex-direction: row;
+          flex-wrap: nowrap;
+          >.field__item{
+            flex: 1 0 25%;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    padding: 0;
+    .content{
+      flex-direction: row;
+      > div + div{
+        max-width: 100%;
+      }
+      .field--name-field-display-title{
+        padding: 50px 25px;
+        font-size: 22px;
+        z-index: 1;
+        // &:before{
+        //   content: '';
+        //   -webkit-clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
+        //   clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
+        //   height: 100%;
+        //   width: 100%;
+        //   position: absolute;
+        //   top: 0;
+        //   right: -34px;
+        //   z-index: -1;
+        // }
+      }
+      .field--name-field-images{
+        padding: 0;
+        padding-left: 25px;
+        >.field__items{
+          >.field__item{
+            padding: 0 5px;
+            flex: 1 0 auto;
+            .field--name-field-image{
+              img{
+                max-width: 93%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//front careers block
+.block--bean-careers-block-front{
+  .bean-generic-bean{
+    padding: 40px 20px 275px;
+    background-image: url('../images/employment-cta-mobile.jpg');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+  }
+  .content{
+    max-width: $container;
+    margin: 0 auto;
+    @include flexbox;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    .field--name-field-body-text{
+      h3{
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+      h2{
+        font-family: $font-body;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.1;
+        margin-top: 38px;
+      }
+      p{
+        font-size: 16px;
+        line-height: 1.67;
+        a{
+          font-size: 17px;
+          font-weight: 600;
+          text-transform: uppercase;
+          line-height: 1.65;
+          letter-spacing: .2px;
+        }
+      }
+      p + p{
+        margin-top: 45px;
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .bean-generic-bean{
+      background-position-x: 160%;
+      background-position-y: bottom;
+      padding: 40px;
+    }
+    .content{
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      .field--name-field-body-text{
+        max-width: 525px;
+        h3{
+          font-size: 26px
+        }
+        h2{
+          font-size: 38px;
+        }
+        p{
+          font-size: 17px;
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .bean-generic-bean{
+      padding: 40px 0;
+      background-image: url('../images/employment-cta.jpg');
+      background-size: cover;
+      background-position: center center;
+    }
+    .content{
+      flex-direction: row;
+      align-items: center;
+      .field--name-field-body-text{
+        max-width: 600px;
+        h3{
+          font-size: 30px;
+        }
+        h2{
+          font-size: 42px;
+        }
+        p{
+          font-size: 17px;
+          a{
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+//credit cards
+.block--bean-credit-cards{
+  padding: 20px 0;
+  @include flexbox;
+  justify-content: center;
+  align-items: center;
+  h2{
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    padding-right: 10px;
+  }
+  img{
+    max-width: 155px;
+  }
+}
+
+//footer logo
+.block--bean-footer-logo{
+  text-align: center;
+  padding: 40px 10px 10px;
+  img{
+    max-width: 235px;
+  }
+  @include breakpoint($tab){
+    padding: 50px 0 20px;
+    img{
+      max-width: 275px;
+    }
+  }
+  @include breakpoint($desk){
+    padding: 90px 0 20px;
+    img{
+      max-width: 305px;
+    }
+  }
+}
+
+//Learning Center CTA bean
+.block--bean-learning-center-cta-service-pa{
+  text-align: center;
+  padding: 50px 20px;
+  .block__title{
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  @include breakpoint($desk){
+    padding: 80px 0;
+  }
+}
+
+.bean-cta-learning-center{
+  text-align: center;
+  .content{
+    max-width: $nav;
+    margin: 0 auto;
+  }
+  .field--name-field-bean-title{
+    font-size: 40px;
+    font-weight: 400;
+    font-family: $font-body;
+    line-height: 1;
+
+  }
+  .field--name-field-body-text{
+    padding: 15px 0 25px;
+    font-size: 18px;
+    line-height: 1/67;
+    letter-spacing: .2px;
+  }
+  .field--name-field-concerns{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 25px 0;
+    .field__items{
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+  .field--name-field-button{
+    padding: 20px 0;
+    .button{
+      padding-right: 75px;
+      min-width: 330px;
+      position: relative;
+      &:after{
+        line-height: 1.15;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        left: auto;
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .field--name-field-bean-title{
+      font-size: 50px;
+    }
+    .field--name-field-concerns{
+      .field__items{
+        .field__item{
+          flex: 1 1 33%;
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .field--name-field-concerns{
+      .field__items{
+        justify-content: space-between;
+        .field__item{
+          flex: 1 1 auto;
+        }
+      }
+    }
+  }
+}
+
+//Benefits bean
+.block--bean-benefits-bean-service-page{
+  margin: 40px 0;
+}
+
+.bean-benefits-bean{
+  .field--name-field-bean-title{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .field--name-field-body-text{
+    font-size: 18px;
+    line-height: 1.67;
+    padding-bottom: 30px;
+  }
+}
+
+//FAQ bean
+.block--views-referenced-faq-blocks-faq-block{
+  margin: 30px 0 0;
+  .block__title{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+}
+
+.bean-faq-bean{
+  .field--name-field-body-text{
+    font-size: 18px;
+    line-height: 1.67;
+    padding-bottom: 20px;
+  }
+  .field--name-field-faqs{
+    .field__item{
+      border-bottom: solid 2px;
+      &:last-of-type{
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+//Sidebar Free Inspections
+.block--bean-inspections-sidebar{
+  padding: 25px;
+  .field--name-field-body-text{
+    text-align: center;
+  }
+  h4{
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+  }
+  h2{
+    margin: 0;
+    font-family: $font-body;
+    font-weight: 400;
+    font-size: 41px;
+    line-height: .89;
+  }
+  img{
+    margin-top: 10px;
+  }
+  p{
+    line-height: 1;
+  }
+  p + p{
+    margin-top: 0;
+    padding-top: 16px;
+    line-height: 1.44;
+    font-size: 18px;
+  }
+  .button{
+    margin-top: 10px;
+  }
+}
+
+//Sidebar Reviews Bean
+.block--bean-sidebar-review-links{
+  margin-top: 0 !important;
+  padding: 40px 30px;
+  a{
+    font-size: 18px;
+    line-height: 1.89;
+    &:before{
+      @include faicon('\f138');
+      padding-right: 10px;
+    }
+  }
+}

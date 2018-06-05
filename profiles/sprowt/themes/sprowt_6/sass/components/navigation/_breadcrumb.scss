@@ -1,0 +1,36 @@
+.not-front .l-breadcrumb {
+  padding: 20px;
+  position: relative;
+  z-index: 25;
+}
+
+.node-type-localtarget .l-breadcrumb {
+  padding: 0;
+}
+
+.breadcrumb {
+  @include container;
+  li {
+    display: inline-block;
+    &:first-child {
+      a {
+        font-size: 0;
+        &:before {
+          @extend .fa;
+          @extend .fa-home;
+          font-size: 16px;
+        }
+      }
+    }
+    + li {
+      margin-left: .5em;
+      &:before {
+        @include faicon("\F105");
+        margin-right: .5em;
+      }
+    }
+  }
+  @include breakpoint($container) {
+    padding: 0 44px;
+  }
+}

@@ -1,0 +1,115 @@
+//front forms
+.front, .node-type-city-page, .node-type-localtarget{
+  .block--webform{
+    max-width: 720px;
+    margin: 0 auto;
+    h2{
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      padding-top: 25px;
+    }
+    .block__content{
+      padding: 0px 20px 20px;
+      .field--name-body{
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.83;
+        letter-spacing: .2px;
+        padding-bottom: 20px;
+      }
+      .webform-client-form{
+        max-width: 570px;
+        margin: 0 auto;
+        .form-item{
+          margin: .75em 0;
+        }
+        input, textarea{
+          padding: 20px 10px;
+        }
+        textarea{
+          min-height: 180px;
+        }
+        .form-actions{
+          text-align: center;
+          margin: 0 auto;
+          padding-top: 25px;
+          input{
+            min-width: 225px;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+    @include breakpoint($tab){
+      h2{
+        font-size: 46px;
+      }
+      .block__content{
+        padding: 0px 20px 40px;
+        .field--name-body{
+          font-size: 18px;
+        }
+        .webform-client-form{
+          .fieldset-wrapper{
+            @include flexbox;
+            justify-content: space-between;
+            .form-item{
+              &:first-of-type{
+                padding-right: 10px;
+              }
+              &:last-of-type{
+                padding-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//sidebar forms
+.not-front{
+  .block--form-sidebar {
+    $border-width: 2px;
+    border: $border-width solid;
+    padding: 30px 20px;
+    .block__title {
+      font-size: 1.4em;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .field--name-body{
+      text-align: center;
+      padding-top: 10px;
+    }
+    .form-row {
+      @include breakpoint($tab) {
+        .fieldset-wrapper {
+          display: block;
+          > .form-item {
+            margin-bottom: 0;
+            + .form-item {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+    input {
+      width: 100%;
+    }
+    .form-actions {
+      margin: 1.5em auto 0;
+    }
+
+    @include breakpoint($tab) {
+      .block__title {
+        // max-width: 200px;
+        margin: 0 auto;
+      }
+    }
+  }
+}

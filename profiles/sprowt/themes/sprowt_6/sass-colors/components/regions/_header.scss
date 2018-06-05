@@ -1,0 +1,12 @@
+.l-header{
+  .header-first-wrap{
+    background-color: palette(black, pure);
+    @include breakpoint($tab){
+      background-color: palette(secondary, light);
+    }
+  }
+  .header-fourth-wrap{
+    background: palette(primary, dark);
+    box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.26);
+  }
+}

@@ -1,0 +1,15 @@
+div.entity-paragraphs-item.solution-annotated-image {
+    background-color: palette(neutral, haze);
+    background-size: cover;
+    background-position: center;
+
+    h2 {
+      color: palette(primary, dark);
+        em {
+            color: palette(primary, dark);
+        }
+    }
+    .pointer{
+      background: palette(primary, base);
+    }
+}

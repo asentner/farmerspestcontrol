@@ -1,0 +1,87 @@
+// homepage service listing
+
+.front {
+  .block--views-services-all, .block--views-services-all-mobile {
+    $color-border: palette(secondary, light);
+    $color-services-body: palette(black, base);
+
+    $color-title: palette(primary, base);
+    $color-title-hover: palette(primary, dark);
+
+
+    .view-content {
+      .views-row{
+        .node--service--teaser, .node--service--alt-teaser{
+          background: transparent;
+          @include breakpoint($tab){
+            border-color: palette(white, base);
+            background: palette(white, pure);
+          }
+          .field--name-field-icon{
+            background: palette(primary, base);
+          }
+          .node__title {
+            a {
+              color: $color-title;
+              &:hover {
+                color: $color-title-hover;
+              }
+            }
+          }
+          .field--name-body {
+            color: $color-services-body;
+            .more-link{
+              background-color: transparent;
+              color: palette(primary, base);
+              &:after{
+                color: palette(secondary, light);
+              }
+              &:hover{
+                color: palette(tertiary, dark);
+                &:after{
+                  color: palette(primary, dark);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+//our services listing
+.block--views-services-our-services{
+  .view-content{
+    .views-row{
+      border-color: palette(neutral, haze)
+    }
+  }
+}
+
+.node--service--quinary-teaser{
+  .field--name-field-icon{
+    background: palette(primary, base);
+  }
+  .node__title {
+    a {
+      color: palette(primary, base);
+      &:hover {
+        color: palette(secondary, base);
+      }
+    }
+  }
+  .field--name-body {
+    color: palette(secondary, base);
+    .more-link{
+      color: palette(primary, base);
+      &:after{
+        color: palette(secondary, base);
+      }
+      &:hover{
+        color: palette(secondary, base);
+      }
+    }
+  }
+}

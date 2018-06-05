@@ -1,0 +1,23 @@
+.block--sprowt-block-cta {
+  $color-bg: palette(primary, base);
+  $color-fg: palette(white, pure);
+  $color-button-bg: palette(white, pure);
+  $color-button-fg: palette(primary, base);
+  $color-button-bg-hover: palette(secondary, base);
+  $color-button-fg-hover: palette(white, pure);
+
+
+  .l-region--postscript-third & {
+    background-color: $color-bg;
+    color: $color-fg;
+    a {
+      color: inherit;
+    }
+    .node__title {
+      color: inherit;
+    }
+    .button {
+      @include button-color;
+    }
+  }
+}

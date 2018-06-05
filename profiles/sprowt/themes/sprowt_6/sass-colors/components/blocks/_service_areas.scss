@@ -1,0 +1,29 @@
+.block-areas-map {
+  $color-bg: palette(secondary, light);
+  $color-title: palette(white, base);
+  $color-body: palette(white, pure);
+  $color-map-link: palette(black, pure);
+  $color-map-link-hover: palette(primary, base);
+  $color-map-arrow: palette(primary, base);
+
+  //starting styling of block
+  background-color: $color-bg;
+  .block__title {
+    color: $color-title;
+  }
+  .block__content {
+    color: $color-body;
+    h2, h3{
+      color: $color-body;
+    }
+    .button{
+      background-color: palette(primary, dark);
+      border-color: palette(primary, dark);
+      color: $color-body;
+      &:hover{
+        background-color: $color-body;
+        color: palette(primary, dark);
+      }
+    }
+  }
+}

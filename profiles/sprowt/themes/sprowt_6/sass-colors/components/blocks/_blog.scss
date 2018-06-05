@@ -1,0 +1,61 @@
+//full page listing teaser
+.block--views-blog-list{
+  .field--name-field-image{
+    img{
+      border-color: palette(neutral, gallery);
+    }
+  }
+}
+
+.node--blog--teaser{
+  .field--name-body{
+    .field__item{
+      > .more-link{
+        color: palette(primary, base);
+        background-color: transparent;
+        &:hover{
+          color: palette(secondary, base);
+          &:after{
+            color: palette(secondary, base);
+          }
+        }
+      }
+    }
+  }
+}
+
+//call out teaser
+.block--views-blog-blog-call-out{
+  .block-title{
+    color: palette(secondary, light);
+  }
+  .view-title{
+    color: palette(primary, base);
+  }
+}
+
+.node--blog--alt-teaser{
+  img{
+    border-color: palette(neutral, mercury);
+  }
+  .teaser-content{
+    .node__title{
+      color: palette(primary, base);
+    }
+    .field--name-field-post-date{
+      color: palette(secondary, light);
+    }
+    .more-link{
+      color: palette(secondary, light);
+      &:after{
+        color: palette(primary, base);
+      }
+      &:hover{
+        color: palette(primary, base);
+        &:after{
+          color: palette(secondary, light);
+        }
+      }
+    }
+  }
+}

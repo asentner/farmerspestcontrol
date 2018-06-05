@@ -1,0 +1,160 @@
+.not-front.node-type-issue{
+  .l-main{
+    // margin-top: 200px;
+    margin-bottom: 75px;
+  }
+  .node--issue--full{
+    .node-title{
+      // position: absolute;
+      // left: 0;
+      // right: 0;
+      // top: 290px;
+      .node__title{
+        // padding: 50px 20px;
+        padding: 0 20px 50px;
+        max-width: $container;
+        margin: 0 auto;
+        font-size: 40px;
+        font-weight: 800;
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
+    h1{
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: .4px;
+    }
+    h2, h3{
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .node__content{
+      // margin-top: 35px;
+    }
+    .body-content{
+      .field--name-body{
+        p{
+          font-size: 18px;
+          line-height: 1.67;
+        }
+        img{
+          max-width: 360px;
+          height: auto;
+          margin: 20px;
+        }
+      }
+    }
+    .identifications{
+      margin-top: 60px;
+      .field-collection-container{
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+      .field--name-field-identification-title{
+        margin-bottom: 2px;
+        .field__item{
+          padding: 25px;
+          font-size: 28px;
+          font-weight: 700;
+          line-height: 1;
+          text-align: center;
+        }
+      }
+      .field-collection-view{
+        padding: 2px 0;
+        margin: 0;
+        border-bottom: none;
+      }
+      .field-collection-container{
+        .entity-field-collection-item{
+          >.content{
+            @include flexbox;
+            .field--name-field-indentification-label{
+              margin-right: 4px;
+              flex: 1 1 40%;
+              padding: 25px;
+              font-size: 16px;
+              font-weight: 700;
+              line-height: 1.5;
+            }
+            .field--name-field-identification-description{
+              flex: 1 1 60%;
+              padding: 20px 25px 20px 10px;
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 1.5;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .l-main{
+      // margin-top: 150px;
+      margin-bottom: 100px;
+    }
+    .node--issue--full{
+      .node-title{
+        // top: 280px;
+        .node__title{
+          // padding: 70px 20px;
+          font-size: 50px;
+          // background-image: url('../images/pilot.svg');
+          // background-size: 31%;
+          // background-position: 100% 11%;
+          // background-repeat: no-repeat;
+        }
+      }
+      h1{
+        font-size: 38px;
+      }
+      h2, h3{
+        font-size: 28px;
+      }
+      .identifications{
+        .field-collection-container{
+          >.content{
+            .field--name-field-indentification-label{
+              flex: 1 1 35%;
+              padding: 25px 40px;
+            }
+            .field--name-field-identification-description{
+              flex: 1 1 65%;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .l-main{
+      // margin-top: 190px;
+
+    }
+    .node--issue--full{
+      .node-title{
+        // top: 285px;
+        .node__title{
+          font-size: 60px;
+          // background-size: 21%;
+          // background-position: 100% 11%;
+        }
+      }
+      h1{
+        font-size: 42px;
+        line-height: 1.2;
+      }
+      h2, h3{
+        font-size: 32px;
+      }
+      .node__content{
+        // margin-top: 50px;
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+div.entity-paragraphs-item.plan-details {
+    > .content {
+        > .field--name-field-intro {
+            font-family: $font-body;
+            font-weight: normal;
+            font-style: normal;
+        }
+    }
+
+    .paragraphs-item-plan-information{
+      .field--name-field-icon-file{
+        position: static;
+        margin-bottom: 15px;
+      }
+      .header{ //add bg texture and stitching to box header - override module
+        padding: 20px 20px 30px;
+        position: relative;
+
+        h2, .field--name-field-intro {
+          font-weight: 600;
+        }
+
+      }
+
+      .field--name-field-body-text p {
+        line-height: 1.25;
+      }
+
+      .field--name-field-plan-features .field__item {
+        font-size: 21px;
+      }
+
+      .field--name-field-call-out strong {
+        &:before, &:after {
+          font-size: 8px;
+          @include breakpoint(420px) {
+            font-size: 13.5px;
+          }
+        }
+      }
+    }
+
+    .paragraphs-item-body{ //add box shadow and border to box - override module
+      box-shadow: 0 5px 49.2px 8px rgba(0, 0, 0, 0.35);
+      // border: solid 5px;
+      .field--name-field-body-text {
+        font-size: 16px;
+      }
+
+      .field--name-field-intro p {
+        line-height: 1.25;
+      }
+    }
+    @include breakpoint($tab) {
+        position: relative;
+        overflow: hidden;
+        &:after {
+            content: " ";
+            position: absolute;
+            width: 100%;
+            height: 500%;
+            top: 50%;
+            transform: translateY(-50%) rotate(25deg);
+            right: -70%;
+        }
+        > * {
+            position: relative;
+            z-index: 2;
+        }
+    }
+}

@@ -1,0 +1,150 @@
+div.entity-paragraphs-item.plan-info-concerns {
+  .paragraphs-item-plan-information {
+    .field--name-field-intro {
+      font-size: 17px;
+    }
+    .body-content {
+      font-size: 15px;
+    }
+    .field--name-field-plan-features {
+      .field__item {
+        line-height: (18/15);
+      }
+    }
+  }
+  .paragraphs-item-body {
+    .content{
+      .field--name-field-header{ //add bg texture and stitching to box header - override module
+        position: relative;
+      }
+    }
+    .scm-links {
+      list-style: none;
+      margin: 0;
+      li {
+        margin: 0;
+        list-style: none;
+      }
+      a {
+        &:after {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  @include breakpoint(635px){
+    .paragraphs-item-plan-information{
+      .field--name-field-body-text{
+        width: 70%;
+      }
+    }
+  }
+  @include breakpoint(900px) {
+      max-width: 100%;
+      .field--name-field-content {
+        > .field__items {
+          display: block;
+          > .field__item {
+            + .field__item {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    .paragraphs-item-plan-information--wrap {
+      width: 100%;
+    }
+    .paragraphs-item-body--wrap {
+      width: 100%;
+      margin: 0;
+      margin-top: 30px;
+    }
+    .paragraphs-item-plan-information {
+      .field--name-field-icon-file {
+        width: 148px;
+      }
+      .header {
+        h2 {
+          font-size: 41px;
+        }
+      }
+      .field--name-field-intro {
+        font-size: 22px;
+        line-height: 26px;
+      }
+      .body-content {
+        font-size: 17px;
+        h3 {
+          font-size: 19px;
+          font-weight: bold;
+        }
+      }
+      .field--name-field-plan-features {
+        margin-top: 20px;
+        font-weight: 600;
+        .field__item {
+          padding-left: 30px;
+          +.field__item {
+            margin-top: 20px;
+          }
+        }
+      }
+      .field--name-field-body-text + .features {
+        margin-left: 7.5%;
+      }
+    }
+    .paragraphs-item-body {
+      .content .field--name-field-header:first-child {
+        font-size: 28px;
+        padding: 40px 30px 35px;
+      }
+      .content .field--name-field-intro {
+        font-size: 19px;
+        padding: 20px 30px 0;
+      }
+      .content .field--name-field-body-text {
+        padding: 20px 30px 60px 30px;
+      }
+      .scm-links {
+        list-style: none;
+        margin: 0;
+        li {
+          margin: 0;
+          list-style: none;
+        }
+        a {
+          &:after {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint(1100px) {
+    .field--name-field-content {
+      > .field__items {
+        @include flexbox;
+        > .field__item {
+          + .field__item {
+            margin-left: 32px;
+          }
+        }
+      }
+    }
+    .paragraphs-item-plan-information--wrap {
+      width: 60%
+    }
+    .paragraphs-item-body--wrap {
+      width: 30%;
+      margin-top: 0; //overide module to align top of box with top of left content
+    }
+  }
+  @include breakpoint(1600px) {
+    .paragraphs-item-plan-information--wrap {
+      width: 635px;
+    }
+    .paragraphs-item-body--wrap {
+      width: 460px;
+    }
+  }
+}

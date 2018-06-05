@@ -1,0 +1,55 @@
+.block--menu-menu-ctm-utility-menu{
+  display: none;
+  .block__title{
+    display: none;
+  }
+  .menu{
+    padding-right: 45px;
+    @include flexbox;
+    flex-direction: column;
+    align-items: center;
+    li{
+      @include flexbox;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      a, .nolink{
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 1.0;
+        text-align: center;
+      }
+      .nolink{
+        padding-left: 7px;
+      }
+      &:first-of-type{
+        a{
+          font-style: italic;
+          &:before{
+            @include faicon('\f2a0');
+            font-size: 33px;
+            font-style: normal;
+            line-height: 1;
+            text-align: center;
+            padding-right: 5px;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    display: block;
+  }
+  @include breakpoint($nav){
+    .menu{
+      padding-right: 0;
+      flex-direction: row;
+      li{
+        flex-direction: column;
+        a, .nolink{
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}

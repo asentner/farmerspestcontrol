@@ -1,0 +1,140 @@
+name = Sprowt 6
+base theme = omega
+screenshot = screenshot.png
+engine = phptemplate
+core = 7.x
+
+; ========================================
+; Stylesheets
+; ========================================
+stylesheets[all][] = css/sprowt_6.reset.css
+stylesheets[all][] = css/sprowt_6.styles.css
+stylesheets[all][] = css/sprowt_6.colors.css
+stylesheets[print][] = css/sprowt_6.print.css
+
+; ========================================
+; Scripts
+; ========================================
+scripts[] = js/sprowt_6.behaviors.js
+
+; ========================================
+; Regions
+; ========================================
+regions[header_first] = Header first
+regions[header_second] = Header second
+regions[header_third] = Header third
+regions[header_fourth] = Header fourth
+
+regions[preface_first] = Preface first
+regions[preface_second] = Preface second
+regions[preface_third] = Preface third
+regions[preface_fourth] = Preface fourth
+
+regions[content] = Content
+regions[sidebar] = Sidebar
+
+regions[postscript_first] = Postscript first
+regions[postscript_second] = Postscript second
+regions[postscript_third] = Postscript third
+regions[postscript_fourth] = Postscript fourth
+regions[postscript_fifth] = Postscript fifth
+
+regions[footer_first] = Footer first
+regions[footer_second] = Footer second
+regions[footer_third] = Footer third
+regions[footer_fourth] = Footer fourth
+
+; ========================================
+; Settings
+; ========================================
+settings[toggle_logo] = 1
+settings[toggle_name] = 1
+settings[toggle_slogan] = 1
+settings[toggle_node_user_picture] = 1
+settings[toggle_comment_user_picture] = 1
+settings[toggle_comment_user_verification] = 1
+settings[toggle_favicon] = 1
+settings[toggle_main_menu] = 1
+settings[toggle_secondary_menu] = 1
+settings[omega_toggle_front_page_content] = 1
+settings[toggle_touch_icon_plain] = 0
+settings[toggle_touch_icon_precomp] = 0
+settings[default_logo] = 0
+settings[logo_path] = profiles/sprowt/themes/sprowt_6/images/primary-logo.svg
+settings[logo_upload] = ""
+settings[default_favicon] = 1
+settings[favicon_path] = ""
+settings[favicon_upload] = ""
+settings[omega_enable_warning] = 1
+settings[omega_toggle_extension_compatibility] = 1
+settings[omega_conditional_classes_html] = 1
+settings[omega_apple_touch] = 1
+settings[omega_cleartype] = 1
+settings[omega_handheld_friendly] = 1
+settings[omega_mobile_optimized] = 1
+settings[omega_viewport] = 1
+settings[omega_viewport_initial_scale] = _default
+settings[omega_viewport_user_scaleable] = 1
+settings[omega_viewport_minimum_scale] = _default
+settings[omega_viewport_maximum_scale] = _default
+settings[omega_chrome_edge] = 1
+settings[omega_internet_explorer_support] = _none
+settings[omega_toggle_extension_assets] = 1
+settings[omega_libraries][selectivizr][status] = 0
+settings[omega_libraries][selectivizr][variant] = _default
+settings[omega_libraries][respond][status] = 0
+settings[omega_libraries][respond][variant] = _default
+settings[omega_libraries][pie][status] = 0
+settings[omega_libraries][pie][variant] = _default
+settings[omega_libraries][html5shiv][status] = 0
+settings[omega_libraries][html5shiv][variant] = _default
+settings[omega_toggle_extension_layouts] = 0
+settings[omega_layout] = ""
+settings[omega_toggle_extension_development] = 0
+settings[omega_enable_export_reminder] = ""
+settings[omega_rebuild_theme_registry] = ""
+settings[omega_rebuild_aggregates] = ""
+settings[omega_browser_width_indicator] = ""
+settings[omega_livereload] = ""
+settings[omega_livereload_script] = ""
+settings[omega_livereload_host] = ""
+settings[omega_livereload_port] = ""
+settings[omega_demo_regions] = ""
+settings[omega_demo_regions_list] = ""
+settings[scheme] = default
+settings[palette][primary] = #80b840
+settings[palette][primary_1] = #6fab34
+settings[palette][secondary] = #216e82
+settings[palette][secondary_1] = #21768c
+settings[palette][slide_overlay] = #216e83
+settings[palette][ltp_map] = #f4f4f5
+settings[theme] = sprowt_6
+settings[info][fields][primary] = Primary Base
+settings[info][fields][primary_1] = Primary Dark
+settings[info][fields][secondary] = Secondary Base
+settings[info][fields][secondary_1] = Secondary Light
+settings[info][fields][slide_overlay] = Slide Overlay
+settings[info][fields][ltp_map] = LTP Location Background
+settings[info][schemes][default][title] = Default
+settings[info][schemes][default][colors][primary] = #80b840
+settings[info][schemes][default][colors][primary_1] = #6fab34
+settings[info][schemes][default][colors][secondary] = #216e82
+settings[info][schemes][default][colors][secondary_1] = #21768c
+settings[info][schemes][default][colors][slide_overlay] = #216e83
+settings[info][schemes][default][colors][ltp_map] = #f4f4f5
+settings[info][schemes][][title] = Custom
+settings[info][css][] = css/sprowt_6.colors.css
+settings[info][blend_target] = #ffffff
+settings[info][preview_css] = color/preview.css
+settings[info][preview_js] = color/preview.js
+settings[info][preview_html] = color/preview.html
+settings[info][base_image] = color/base.png
+settings[disable_sprowt_warning] = 0
+settings[sprowt_background_image] = 0
+settings[sprowt_background_image_style] = 0
+settings[default_touch_icon_plain] = 0
+settings[touch_icon_path_plain] = ""
+settings[touch_icon_upload_plain] = ""
+settings[default_touch_icon_precomp] = 0
+settings[touch_icon_path_precomp] = ""
+settings[touch_icon_upload_precomp] = ""

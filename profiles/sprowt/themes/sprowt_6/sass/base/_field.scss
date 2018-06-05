@@ -1,0 +1,39 @@
+.field__item {
+  .node--teaser .field--name-body &,
+  .node--alt-teaser .field--name-body &,
+  .node--tertiary-teaser &,
+  .node--quinary-teaser .field--name-body &  {
+    //commented items were taken out to fix an IE issue
+
+    // @include flexbox;
+    // flex-direction: column;
+    // align-items: center;
+    > * {
+      width: 100%;
+    }
+    > .more-link {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.2px;
+      margin: 40px auto 20px;
+      max-width: 225px;
+      &:after{
+        @include faicon('\f178');
+        padding-left: 7px;
+      }
+    }
+    @include breakpoint($tab){
+      > .more-link{
+        margin: 40px auto 20px;
+      }
+    }
+    @include breakpoint($desk){
+      > .more-link{
+        margin: 40px auto 20px;
+      }
+    }
+  }
+}

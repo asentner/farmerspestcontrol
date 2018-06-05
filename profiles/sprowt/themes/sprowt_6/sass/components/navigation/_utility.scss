@@ -1,0 +1,99 @@
+.block--nav-utility {
+  display: none;
+  font-weight: 600;
+  .menu-block-wrapper {
+    a {
+      padding: 10px 20px;
+    }
+  }
+  .menu {
+    text-align: center;
+    li {
+      + li {
+        margin-top: 1px;
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    padding-right: 20px;
+    display: block;
+    .menu-block-wrapper {
+      a {
+        padding: 25px 30px;
+      }
+    }
+    .menu {
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      li {
+        + li {
+          margin-top: 0;
+        }
+        a {
+          @include flexbox;
+          align-items: center;
+          text-transform: uppercase;
+          line-height: 1;
+        }
+        a:before {
+          display: inline-block;
+          margin-right: 5px;
+          font-size: 16px;
+        }
+        &:nth-child(1) {
+          a:before {
+            @include faicon('\f05d');
+          }
+        }
+        &:nth-child(2) {
+          a:before {
+            @include faicon($fa-var-lock);
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($nav) {
+    padding-right: 0;
+    .menu-block-wrapper {
+      a {
+        text-transform: none;
+        font-weight: bold;
+        &[href^='tel:'] {
+          padding: 0;
+          text-transform: none;
+          &:before {
+            @include faicon("\F105");
+            margin-right: .5em;
+          }
+        }
+      }
+    }
+    .menu {
+      li {
+        &:nth-child(1n) {
+          a {
+            font-size: 17px;
+            text-transform: none;
+          }
+          a:before {
+            font-size: 18px;
+            margin-right: 7px;
+          }
+          a[href^='tel:']:before {
+            display: inline-block;
+            @include faicon("\F105");
+            margin-right: .5em;
+            font-size: 16px;
+          }
+        }
+        &:nth-child(2){
+          a{
+            padding-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

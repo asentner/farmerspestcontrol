@@ -1,0 +1,25 @@
+.footer-nav{
+  .menu-block-wrapper{
+    >.menu{ //first level
+      >li{
+        >a{
+          color: palette(white, pure);
+          border-color: palette(primary, base);
+          &:hover{
+            color: palette(primary, base);
+          }
+        }
+        >.menu{ //second level
+          >li{
+            >a{
+              color: palette(neutral, alto);
+              &:hover{
+                color: palette(tertiary, dark);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

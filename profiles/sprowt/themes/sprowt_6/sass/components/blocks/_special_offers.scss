@@ -1,0 +1,313 @@
+// homepage
+.block--views-special-offers-front2{
+  padding: 0 20px;
+  .view{
+    @include flexbox;
+    flex-direction: column;
+  }
+  .view-header{
+    max-width: 375px;
+    margin: 0 auto;
+    text-align: left;
+    padding-bottom: 35px;
+    h2{
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    p + p{
+      margin-top: 40px;
+    }
+    p{
+      font-size: 18px;
+      line-height: 1.67;
+      a{
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 20px;
+        letter-spacing: .2px;
+        &:after{
+          @include faicon('\f178');
+          padding-left: 7px;
+        }
+      }
+    }
+  }
+  .view-content{
+    @include flexbox;
+    flex-direction: column;
+    .views-row{
+      box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18);
+      padding: 10px;
+      .node{
+        padding: 25px 10px;
+        min-height: 419px;
+        position: relative;
+        border: 5px dashed;
+        .offer-link{
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 10;
+        }
+        .node__content{
+          @include flexbox;
+          flex-direction: column;
+          text-align: center;
+        }
+        h2{
+          font-size: 47px;
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: 1.5px;
+          margin: 0 0 10px;
+        }
+        h3{
+          height: 43px;
+          overflow: visible;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1.24;
+          letter-spacing: 0.1px;
+          max-width: 300px;
+          margin: 0 auto;
+        }
+        .field--name-field-button{
+          margin-top: 20px;
+        }
+        .field--name-field-expiration-date{
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1;
+          letter-spacing: 0.2px;
+          position: absolute;
+          left: 20px;
+          bottom: 40px;
+        }
+        .logo{
+          position: absolute;
+          bottom: 80px;
+          right: 20px;
+          img{
+            max-width: 105px;
+            max-height: 105px;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    padding: 0;
+    .view-header{
+      margin: 0 50px;
+      max-width: 580px;
+      h2{
+        font-size: 26px;
+      }
+    }
+    .view-content{
+      flex-direction: row;
+      margin: 0 30px;
+      .views-row{
+        width: 390px;
+        min-height: 425px;
+        margin: 0 9px;
+        .node{
+          .logo{
+            img{
+              max-width: 105px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .view{
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .view-header{
+      max-width: 375px;
+      margin: 0;
+      text-align: left;
+      padding-bottom: 0;
+      padding-left: 10px;
+      h2{
+        font-size: 30px;
+      }
+    }
+    .view-content{
+      margin: 0;
+      .views-row{
+        box-shadow: none;
+        &:hover{
+          box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18);
+        }
+        &:first-of-type{
+          margin-left: 0;
+        }
+        &:last-of-type{
+          margin-right: 0;
+        }
+        .node{
+          h2{
+            font-size: 58px;
+          }
+          h3{
+            font-size: 21px;
+          }
+          .field--name-field-button{
+            margin-top: 40px;
+          }
+          .logo{
+            bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.block-special-offers-intro {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 60px 20px 30px;
+  text-align: center;
+  .block__title {
+    @extend h3;
+    text-transform: uppercase;
+  }
+}
+
+//sidebars
+.block--views-special-offers-sidebar-sec, .block--views-096cf025523abc0c052989875f4f93fe{
+  max-width: 305px;
+  padding: 0 20px;
+  margin: 0 auto;
+  .view-content{
+    .views-row{
+      box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.18);
+      padding: 10px;
+      .node{
+        padding: 25px 10px;
+        min-height: 419px;
+        position: relative;
+        border: 5px dashed;
+        .offer-link{
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 10;
+        }
+        .node__content{
+          @include flexbox;
+          flex-direction: column;
+          text-align: center;
+        }
+        h2{
+          font-size: 47px;
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: 1.5px;
+          margin: 0 0 10px;
+        }
+        h3{
+          height: 43px;
+          overflow: visible;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1.24;
+          letter-spacing: 0.1px;
+          max-width: 300px;
+          margin: 0 auto;
+        }
+        .field--name-field-button{
+          margin-top: 20px;
+        }
+        .field--name-field-expiration-date{
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 1;
+          letter-spacing: 0.2px;
+          position: absolute;
+          left: 20px;
+          bottom: 40px;
+        }
+        .logo{
+          position: absolute;
+          bottom: 80px;
+          right: 20px;
+          img{
+            max-width: 105px;
+            max-height: 105px;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    padding: 0;
+    .view-content{
+      .views-row{
+        width: 305px;
+        min-height: 375px;
+      }
+    }
+  }
+}
+
+//full page listing
+.block--views-special-offers-list {
+  .views-row {
+    + .views-row {
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
+  .node {
+    border: 3px dashed;
+    padding: 20px;
+    .node__title{
+      font-size: 30px;
+    }
+    .field--name-field-expiration-date{
+      padding-top: 20px;
+      span{
+        font-weight: 600;
+        font-style: italic;
+        &:before{
+          content: 'Expires:';
+          padding-right: 7px;
+        }
+      }
+    }
+    .field--name-field-button{
+      margin-top: 30px;
+      a{
+        text-align: left;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 22px;
+        letter-spacing: .2px;
+        padding: 0;
+        border: none;
+        &:after{
+          @include faicon('\f178');
+          padding-left: 7px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+div.entity-paragraphs-item.cta {
+    background-color: palette(neutral, haze);
+    color: palette(neutral, gallery);
+    .field--name-field-header {
+        color: palette(primary, base);
+    }
+
+    em {
+        color: palette(secondary, base);
+        a {
+            color: palette(secondary, base);
+        }
+    }
+}

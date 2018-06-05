@@ -1,0 +1,19 @@
+.paragraphs-items-field-city-services{
+  .field--name-field-city-services{
+    >.field__items{
+      >.field__item{
+        padding: 45px 0;
+        border-bottom: solid 10px;
+        .paragraphs-item-city-service{
+          padding: 0;
+          .field--name-field-button{
+            margin-top: 1em;
+          }
+        }
+        &:last-of-type{
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

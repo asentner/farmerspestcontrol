@@ -1,0 +1,220 @@
+//Hero
+.block--views-city-pages-city-hero {
+	$overlay-opacity: 0.5; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+
+  .node {
+    background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+  }
+	.slide-image-background {
+		position: relative;
+		min-height: 360px;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: $overlay-opacity;
+		}
+	}
+  .field--name-field-display-title {
+		line-height: 1.1;
+    margin-bottom: 0;
+  }
+  .field--name-field-intro {
+		margin-top: 20px;
+    line-height: 1.5;
+    font-size: 1.25em;
+    font-weight: 600;
+	}
+  .node__content {
+    max-width: 800px;
+		margin: auto;
+		padding: 80px 20px 60px;
+		position: relative;
+    text-align: center;
+  }
+  @include breakpoint($tab) {
+		.slide-image-background {
+			min-height: 520px;
+		}
+		.node__content {
+			padding: 140px 20px 60px;
+		}
+		.field--name-field-display-title {
+			font-size: 3.0em;
+		}
+	}
+	@include breakpoint($desk) {
+		.node__content {
+			padding: 150px 0;
+		}
+		.field--name-field-display-title {
+			font-size: 3.7em;
+		}
+	}
+}
+
+//Anchor link block
+.node--city-page--alt-teaser{
+  padding: 30px 20px;
+  .node__content{
+    max-width: 550px;
+    margin: 0 auto;
+    @include flexbox;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    .field--name-field-anchor-title{
+      font-size: 24px;
+      font-weight: 700;
+			padding-bottom: 15px;
+      text-transform: uppercase;
+    }
+    .field--name-field-anchor-link{
+      width: 90%;
+      .field__items{
+        @include flexbox;
+        flex-wrap: wrap;
+        .field__item{
+          flex: 1 0 50%;
+          padding: 7px 0;
+        }
+      }
+    }
+    a{
+      font-size: 16px;
+      font-weight: 600;
+      position: relative;
+      &:before{
+        @include faicon('\f0da');
+        padding-right: 7px;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 100%;
+        bottom: -3px;
+        height: 2px;
+        transition-property: left right;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+      }
+      &:hover{
+        &:after{
+          right: 0;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .node__content{
+      .field--name-field-anchor-link{
+        width: 75%;
+        .field__items{
+          .field__item{
+            padding: 5px 20px;
+          }
+        }
+      }
+      a{
+        font-size: 20px;
+        &:before{
+          font-size: 21px;
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .node__content{
+      max-width: $container;
+      flex-direction: row;
+      align-items: flex-start;
+      .field--name-field-anchor-title{
+        font-size: 20px;
+        padding-right: 30px;
+				padding-bottom: 0;
+      }
+      .field--name-field-anchor-link{
+        width: auto;
+        .field__items{
+          flex-wrap: nowrap;
+          .field__item{
+            flex: 1 0 auto;
+            padding: 0 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+//Benfits block
+.block--views-city-pages-benefits {
+   padding: 20px 20px 60px;
+   text-align: center;
+   .view-content {
+      flex-wrap: nowrap;
+      max-width: 1160px;
+      position: relative;
+      z-index: 99;
+   }
+   .views-row {
+    max-width: 360px;
+    margin: 0 auto 20px;
+  }
+   .node__title {
+      font-size: 1.325em;
+      font-weight: 600;
+   }
+   .field--name-field-image,
+   .field--name-field-icon {
+		 margin: 0 auto 20px;
+			border-radius: 50%;
+			border: 2px solid;
+			height: 200px;
+			width: 200px;
+			@include flexbox;
+			justify-content: center;
+			align-items: center;
+      img {
+        max-width: 130px;
+				max-height: 90px;
+				width: auto;
+				height: auto;
+				border-radius: 0;
+				border: none;
+      }
+      a > img {
+        @extend %image-hover;
+      }
+   }
+   @include breakpoint($tab) {
+      .view-content {
+         @include container;
+         @include flexbox;
+         justify-content: space-around;
+         margin-top: -115px;
+      }
+      .views-row {
+        flex: 0 1 percentage(1/2);
+        width: percentage(1/2);
+        padding: 0 20px;
+        margin: 0;
+      }
+   }
+   @include breakpoint($desk) {
+      .views-row {
+        flex: 0 1 percentage(1/3);
+        width: percentage(1/3);
+      }
+      .node__title {
+        font-size: 1.5em;
+      }
+    }
+}

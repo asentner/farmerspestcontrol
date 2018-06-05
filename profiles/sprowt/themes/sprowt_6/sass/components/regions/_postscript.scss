@@ -1,0 +1,56 @@
+.front, .node-type-city-page{
+  .l-postscript{
+
+    .l-wrap--postscript-second{
+      padding: 70px 0;
+      .l-region--postscript-second{
+        max-width: $container;
+        margin: 0 auto;
+      }
+    }
+
+    .postscript-fourth-wrap{
+      padding: 50px 20px;
+      .l-region--postscript-fourth{
+        @include flexbox;
+        flex-direction: column;
+        max-width: $container;
+        margin: 0 auto;
+      }
+      @include breakpoint($tab){
+        padding: 60px 85px;
+      }
+      @include breakpoint($desk){
+        padding: 65px 0 95px;
+        .l-region--postscript-fourth{
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+    }
+
+  }
+}
+
+.node-type-localtarget{
+  .l-postscript{
+
+    .l-wrap--postscript-second{
+      background-image: url('../images/bg-webform.jpg');
+      padding: 70px 0;
+      .l-region--postscript-second{
+        max-width: $container;
+        margin: 0 auto;
+      }
+      @include breakpoint($tab){
+        background-image: url('../images/bg-coupons.jpg');
+      }
+    }
+
+    .l-region--postscript-third{
+      padding: 70px 20px;
+      background-image: url('../images/bg-texture.png');
+    }
+  }
+}

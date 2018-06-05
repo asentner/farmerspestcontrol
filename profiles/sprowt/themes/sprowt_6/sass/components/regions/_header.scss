@@ -1,0 +1,44 @@
+.l-header {
+  z-index: 100;
+  position: relative;
+  margin-top: 75px;
+  .l-region--header-first {
+    @include flexbox;
+    flex-direction: column;
+  }
+  .header-third-wrap{
+    padding: 0 20px;
+    .l-region--header-third{
+      max-width: $container;
+      margin: 0 auto;
+      @include flexbox;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .header-fourth-wrap{
+    .l-region--header-fourth{
+      margin: 0 auto;
+      max-width: $container;
+    }
+  }
+  @include breakpoint($tab) {
+    margin-top: 0;
+    .l-region--header-first{
+      flex-direction: row;
+      align-items: center;
+      @include container;
+      .block--nav-utility {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+// if logged in remove margin top
+.logged-in {
+  .l-header {
+    margin-top: 0;
+  }
+}

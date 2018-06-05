@@ -1,0 +1,30 @@
+div.entity-paragraphs-item.paragraphs-item-table{
+  .field--name-field-header{
+    background: palette(primary, dark);
+    color: palette(white, pure);
+  }
+  table {
+    background-color: palette(neutral, haze);
+  }
+  th {
+    background-color: palette(secondary, base);
+    color: palette(white, pure);
+  }
+  td{
+    span{
+      color: #939393;
+    }
+  }
+  tbody{
+    tr.odd{
+      td {
+        background-color: palette(neutral, alabaster);
+      }
+    }
+    tr.even{
+      td {
+        background-color: palette(neutral, haze);
+      }
+    }
+  }
+}
