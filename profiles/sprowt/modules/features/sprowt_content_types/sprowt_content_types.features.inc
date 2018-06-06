@@ -277,8 +277,8 @@ function sprowt_content_types_weight_features_default_settings() {
 
   $settings['service'] = array(
     'enabled' => 1,
-    'range' => 50,
-    'menu_weight' => 1,
+    'range' => 10,
+    'menu_weight' => 0,
     'default' => 0,
     'sync_translations' => 0,
   );

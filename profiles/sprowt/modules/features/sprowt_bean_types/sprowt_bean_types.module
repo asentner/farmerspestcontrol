@@ -12,15 +12,45 @@ include_once 'sprowt_bean_types.features.inc';
  */
 function sprowt_bean_types_theme($existing, $type, $theme, $path) {
     return array(
+        //aggregated reviews
         'bean__aggregated_reviews_bean' => array (
             'template' => 'bean--aggregated-reviews-bean',
-            'path' => $path . '/theme',
+            'path' => $path . '/aggregated_reviews',
             'base hook' => 'bean',
         ),
         'field__field_rating__aggregated_reviews_bean' => array (
             'template' => 'field--field-rating--aggregated-reviews-bean',
-            'path' => $path . '/theme',
+            'path' => $path . '/aggregated_reviews',
+            'base hook' => 'field',
+        ),
+        //hero
+        'bean__hero' => array (
+            'template' => 'bean--hero',
+            'path' => $path . '/hero',
+            'base hook' => 'bean',
+        ),
+        //generic
+        'bean__generic_bean' => array (
+            'template' => 'bean--generic-bean',
+            'path' => $path . '/generic',
+            'base hook' => 'bean',
+        ),
+        //faq
+        'field__field_question' => array (
+            'template' => 'field--field-question',
+            'path' => $path . '/faq',
+            'base hook' => 'field',
+        ),
+        //h1
+        'field__field_h1_title' => array (
+            'template' => 'field--field-h1-title',
+            'path' => $path . '/h1',
             'base hook' => 'field',
         ),
     );
+}
+
+function sprowt_bean_types_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_bean_types');
+    drupal_add_css($path . '/hero/css/hero_bean.css');
 }
