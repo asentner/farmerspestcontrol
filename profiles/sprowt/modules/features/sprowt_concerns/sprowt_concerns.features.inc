@@ -33,3 +33,20 @@ function sprowt_concerns_node_info() {
   drupal_alter('node_info', $items);
   return $items;
 }
+
+/**
+ * Implements hook_weight_features_default_settings().
+ */
+function sprowt_concerns_weight_features_default_settings() {
+  $settings = array();
+
+  $settings['concern'] = array(
+    'enabled' => 1,
+    'range' => 20,
+    'menu_weight' => 0,
+    'default' => 0,
+    'sync_translations' => 0,
+  );
+
+  return $settings;
+}
