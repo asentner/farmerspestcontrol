@@ -439,3 +439,157 @@ function sprowt_solution_finder_preprocess_node(&$variables) {
         drupal_add_js(drupal_get_path('module', 'sprowt_solution_finder') .'/js/solutions_pages.js');
     }
 }
+
+function _sprowt_solution_finder_add_concerns() {
+    $path = drupal_get_path('module', 'tpc_custom');
+
+    $terms = array(
+        'Roaches',
+        'Ants',
+        'Spiders',
+        'Rodents',
+        'Bed Bugs',
+        'Termites',
+        'Mosquitoes',
+        'Flies',
+        'Ticks',
+        'Fire Ants',
+        'Fleas',
+        'Not Sure/Not Listed'
+    );
+
+    $body = 'Lorem ipsum dolor sit amet, in usu lorem invidunt reformidans, prima putent eu per, at nam alia mentitum. Odio probo mucius his no. Ei simul oratio his. Ne cum suas ludus. Per et solet quidam assentior.';
+
+    $concern_map = _sprowt_solution_finder_concern_map();
+
+    foreach($terms as $weight => $termName) {
+
+        if(!empty($concern_map[$termName])) {
+            $node = node_load($concern_map[$termName]);
+        }
+        else {
+            $node = entity_create('node', array('type' => 'concern'));
+        }
+
+        $node->title = $termName;
+        $node->body[LANGUAGE_NONE][0]['value'] = $body;
+        $node->weight_weight = $weight;
+        node_save($node);
+
+        $icon = null;
+
+        if($termName == 'Fire Ants') {
+            $icon = $path . '/icons/Ants.svg';
+        }
+        elseif ($termName != 'Not Sure/Not Listed') {
+            $icon = $path . '/icons/'. $termName .'.svg';
+        }
+
+        if(!empty($icon) && file_exists($icon)) {
+            $data = file_get_contents($icon);
+            $filename = basename($icon);
+            $dest = "public://$filename";
+
+            $file = file_save_data($data, $dest, FILE_EXISTS_REPLACE);
+            $file->status = FILE_STATUS_PERMANENT;
+            $file->display = 1;
+            $file->description = "";
+            file_save($file);
+            $node->field_icon_file[LANGUAGE_NONE][0] = (array) $file;
+            $node->field_include_in_solution_finder[LANGUAGE_NONE][0]['value'] = 1;
+            node_save($node);
+        }
+    }
+}
+
+function _sprowt_solution_finder_defaultSolutions() {
+
+
+    $general_pest = array(
+        'Ants',
+        'Roaches',
+        'Spiders',
+        'Rodents',
+        'Fleas',
+        'Flies',
+    );
+
+    $outdoor = array(
+        'Mosquitoes',
+        'Ticks',
+        'Fire Ants'
+    );
+
+    $healthyHome = _sprowt_solution_finder_buildSolution('HealthyHome', $general_pest)->save();
+    $healthyHomePlus = _sprowt_solution_finder_buildSolution('HealthyHome Plus', array_merge(
+            $general_pest,
+            array(
+                'Termites'
+            )
+        )
+    )->save();
+    $healthyHomeAndSafelawn = _sprowt_solution_finder_buildSolution('HeallthyHome + SafeLawn', array_merge(
+            $general_pest,
+            $outdoor
+        )
+    )->save();
+    $healthyHomePlusAndSafelawn = _sprowt_solution_finder_buildSolution('HeallthyHomePlus + SafeLawn', array_merge(
+            $general_pest,
+            $outdoor,
+            array(
+                'Termites'
+            )
+        )
+    )->save();
+    $safeLawn = _sprowt_solution_finder_buildSolution('SafeLawn', $outdoor)->save();
+    $termiteHomeDefense = _sprowt_solution_finder_buildSolution('Termite Home Defense', array(
+        'Termites'
+    ))->save();
+    $sleepEasy = _sprowt_solution_finder_buildSolution('SleepEasy', array(
+        'Bed Bugs'
+    ))->save();
+}
+
+function _sprowt_solution_finder_concern_map() {
+    return db_query("
+        SELECT title, nid
+        FROM node
+        WHERE type = 'concern'
+        AND status = 1
+    ")->fetchAllKeyed();
+}
+
+
+
+function _sprowt_solution_finder_buildSolution($name, $pests){
+    $concern_map = _sprowt_solution_finder_concern_map();
+
+    $nid = db_query("
+        SELECT nid
+        FROM node
+        WHERE type = 'solution'
+        AND title = :title
+    ", array(
+        ':title' => $name
+    ))->fetchField();
+
+    if(!empty($nid)) {
+        $data = node_load($nid);
+    }
+    else {
+        $data = entity_create('node', array('type' => 'solution'));
+    }
+    $solution = entity_metadata_wrapper('node', $data);
+    $solution->title = $name;
+    $nids = array();
+    foreach($pests as $pest) {
+        if(!empty($concern_map[$pest])) {
+            $nids[] = $concern_map[$pest];
+        }
+    }
+
+    $solution->field_concerns = $nids;
+
+    return $solution;
+}
+

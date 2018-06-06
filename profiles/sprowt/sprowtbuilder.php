@@ -13,6 +13,8 @@ Class SprowtBuilder {
     
     public $data = array();
     public $default_images = array();
+
+    private $node_json;
     
     
     function __construct() {
@@ -227,8 +229,20 @@ Class SprowtBuilder {
     function addNodes(){
         variable_set('sprowt_settings_paths', $this->paths);
 
+        $sprowt_path = drupal_get_path('profile', 'sprowt');
+        $theme_path = drupal_get_path('theme', $this->data['branding']['theme']);
+        $json_filename = "sprowt_export.json";
+        if(file_exists($theme_path . "/$json_filename")) {
+            $json_file = $theme_path . "/$json_filename";
+        }
+        else {
+            $json_file = $sprowt_path . "/$json_filename";
+        }
+
+
         // drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
-        $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprowt/sprowt_export.json");
+        $node_json = file_get_contents($json_file);
+        $this->node_json = $node_json;
         
         
         $nodes = json_decode($node_json,true);
@@ -370,7 +384,8 @@ Class SprowtBuilder {
             'menu-mobile-callout' => "menu-mobile-callout_link_export.json",
             'menu-utility-menu' => "menu-utility-menu_link_export.json",
             'menu-mobile-footer' => "menu-mobile-footer_link_export.json",
-            'menu-mobile-utility' => "menu-mobile-utility_link_export.json"
+            'menu-mobile-utility' => "menu-mobile-utility_link_export.json",
+            'menu-ctm-utility-menu' => "menu-ctm-utility-menu_link_export.json"
         );
 
         $MB = new MenuBuilder();
@@ -800,8 +815,8 @@ Class SprowtBuilder {
     }
 
     function afterRevert(){
-        // drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
-        $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprowt/sprowt_export.json");
+
+        $node_json = $this->node_json;
         $orig_nodes = json_decode($node_json,true);
         $uuid_array = array();
         foreach($orig_nodes as $node) {

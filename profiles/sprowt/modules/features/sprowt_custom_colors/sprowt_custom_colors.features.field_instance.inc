@@ -815,6 +815,12 @@ function sprowt_custom_colors_field_default_field_instances() {
         'type' => 'paragraphs_view',
         'weight' => 3,
       ),
+      'quinary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),

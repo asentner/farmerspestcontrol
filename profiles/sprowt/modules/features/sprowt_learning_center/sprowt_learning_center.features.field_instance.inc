@@ -570,14 +570,14 @@ function sprowt_learning_center_field_default_field_instances() {
     'label' => 'Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => TRUE,
+      'alt_field' => 1,
       'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => TRUE,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(

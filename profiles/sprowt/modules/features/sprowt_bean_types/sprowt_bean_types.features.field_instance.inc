@@ -115,41 +115,6 @@ function sprowt_bean_types_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'bean-benefits_bean-field_benefits'.
-  $field_instances['bean-benefits_bean-field_benefits'] = array(
-    'bundle' => 'benefits_bean',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'entityreference',
-        'settings' => array(
-          'links' => 0,
-          'use_content_language' => 1,
-          'view_mode' => 'alt_teaser',
-        ),
-        'type' => 'entityreference_entity_view',
-        'weight' => 2,
-      ),
-    ),
-    'entity_type' => 'bean',
-    'field_name' => 'field_benefits',
-    'label' => 'Benefits',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'multiple_selects',
-      'settings' => array(),
-      'type' => 'multiple_selects',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'bean-benefits_bean-field_benefits_ref'.
   $field_instances['bean-benefits_bean-field_benefits_ref'] = array(
     'bundle' => 'benefits_bean',

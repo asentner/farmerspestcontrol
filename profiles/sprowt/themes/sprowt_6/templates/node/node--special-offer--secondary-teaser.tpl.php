@@ -19,7 +19,7 @@
   <?php print render($content['field_expiration_date']); ?>
 
   <div class="logo">
-    <img src="/sites/all/themes/sprowt_6/images/coupons-logo@2x.png" alt="Placeholder Company Name">
+    <img src="<?php print  path_to_theme(); ?>/images/coupons-logo@2x.png" alt="<?php print variable_get('site_name'); ?>">
   </div>
 
 </article>

@@ -15,7 +15,7 @@ function sprowt_city_pages_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'city_page';
   $context->description = 'Block placement for City Pages';
-  $context->tag = 'page';
+  $context->tag = 'Page';
   $context->conditions = array(
     'node' => array(
       'values' => array(
@@ -61,7 +61,7 @@ function sprowt_city_pages_context_default_contexts() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Block placement for City Pages');
-  t('page');
+  t('Page');
   $export['city_page'] = $context;
 
   return $export;

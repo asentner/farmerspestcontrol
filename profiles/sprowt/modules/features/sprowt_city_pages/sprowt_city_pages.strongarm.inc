@@ -70,6 +70,9 @@ function sprowt_city_pages_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'quinary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

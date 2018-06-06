@@ -51,6 +51,7 @@
             var ajax_ops = {
                 url: setup_url,
                 dataType: 'json',
+                timeout: 0,
                 success: function( data, textStatus, jqXHR ) {
 
                     if (data.indexOf('xdebug-error') > -1) {
@@ -61,6 +62,7 @@
                 },
                 error: function( jqXHR, textStatus, errorThrown ) {
                     var obj = {
+                        jQXHR: jqXHR,
                         textStatus: textStatus,
                         errorThrown: errorThrown
                     };

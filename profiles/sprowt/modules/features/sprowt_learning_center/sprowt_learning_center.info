@@ -64,4 +64,3 @@ features_exclude[dependencies][options] = options
 features_exclude[dependencies][taxonomy] = taxonomy
 features_exclude[dependencies][link] = link
 features_exclude[variable][pathauto_node_concern_pattern] = pathauto_node_concern_pattern
-project path = sites/all/modules/features
