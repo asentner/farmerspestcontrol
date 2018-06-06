@@ -30,6 +30,18 @@ function sprowt_concerns_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 2,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'modal' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -112,6 +124,18 @@ function sprowt_concerns_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 3,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'modal' => array(
         'label' => 'above',
         'settings' => array(),
@@ -181,6 +205,18 @@ function sprowt_concerns_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 4,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'modal' => array(
         'label' => 'hidden',
@@ -253,6 +289,18 @@ function sprowt_concerns_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'modal' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -323,6 +371,18 @@ function sprowt_concerns_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
+        'weight' => 0,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'modal' => array(
@@ -463,6 +523,18 @@ function sprowt_concerns_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
+      ),
+      'landing_page' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'landing_page_compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'modal' => array(
         'label' => 'above',
