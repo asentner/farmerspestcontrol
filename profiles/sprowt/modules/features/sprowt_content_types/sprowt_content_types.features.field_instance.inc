@@ -330,12 +330,6 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
-      'quinary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
       'secondary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -414,12 +408,6 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'quaternary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'quinary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -531,12 +519,6 @@ function sprowt_content_types_field_default_field_instances() {
         'weight' => 0,
       ),
       'quaternary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'quinary_teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
