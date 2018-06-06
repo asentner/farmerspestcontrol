@@ -666,13 +666,15 @@ function sprowt_is_sprowt_theme($theme) {
     return in_array($theme, array_keys($sprowt_themes));
 }
 
-function sprowt_add_cm_user($username) {
+function sprowt_add_cm_user($username, $password = '') {
     require_once drupal_get_path('profile', 'sprowt') . '/includes/userbuilder.php';
     
     $UB = new UserBuilder();
     
-    if($account = $UB->addCoalmarchUser($username)) {
-        _user_mail_notify('register_admin_created', $account);
+    if($account = $UB->addCoalmarchUser($username, $password)) {
+        if(empty($password)) {
+            _user_mail_notify('register_admin_created', $account);
+        }
     }
     else {
         throw new SprowtException('Coalmarch user, '.$username.',  could not be created');
