@@ -53,7 +53,7 @@ function sprowt_learning_center_theme() {
         'template' => 'node--issue',
         'path' => drupal_get_path('module', 'sprowt_learning_center') . '/templates',
       ),
-      
+
   );
 }
 
