@@ -786,7 +786,7 @@ function sprowt_views_feature_views_default_views() {
   /* Display: Service offers */
   $handler = $view->new_display('block', 'Service offers', 'list');
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Market */
+  /* Field: Field: Market */
   $handler->display->display_options['fields']['field_market']['id'] = 'field_market';
   $handler->display->display_options['fields']['field_market']['table'] = 'field_data_field_market';
   $handler->display->display_options['fields']['field_market']['field'] = 'field_market';
@@ -818,7 +818,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Content: Market (field_market) */
+  /* Relationship: Field: Market (field_market) */
   $handler->display->display_options['relationships']['field_market_tid']['id'] = 'field_market_tid';
   $handler->display->display_options['relationships']['field_market_tid']['table'] = 'field_data_field_market';
   $handler->display->display_options['relationships']['field_market_tid']['field'] = 'field_market_tid';
@@ -882,7 +882,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Display title */
+  /* Field: Field: Display title */
   $handler->display->display_options['fields']['field_display_title']['id'] = 'field_display_title';
   $handler->display->display_options['fields']['field_display_title']['table'] = 'field_data_field_display_title';
   $handler->display->display_options['fields']['field_display_title']['field'] = 'field_display_title';
@@ -1051,7 +1051,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Display title */
+  /* Field: Field: Display title */
   $handler->display->display_options['fields']['field_display_title']['id'] = 'field_display_title';
   $handler->display->display_options['fields']['field_display_title']['table'] = 'field_data_field_display_title';
   $handler->display->display_options['fields']['field_display_title']['field'] = 'field_display_title';
@@ -1092,6 +1092,67 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['block_description'] = 'LocalTarget Local Content Block';
+
+  /* Display: LTP Other Services */
+  $handler = $view->new_display('block', 'LTP Other Services', 'other_services');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h4>Treatment Options</h4>
+
+<p>Have more than one pest problem? Check out our additional service options:</p>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  /* Field: Field: Service */
+  $handler->display->display_options['fields']['field_service']['id'] = 'field_service';
+  $handler->display->display_options['fields']['field_service']['table'] = 'field_data_field_service';
+  $handler->display->display_options['fields']['field_service']['field'] = 'field_service';
+  $handler->display->display_options['fields']['field_service']['label'] = '';
+  $handler->display->display_options['fields']['field_service']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_service']['alter']['path'] = '[path]';
+  $handler->display->display_options['fields']['field_service']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_service']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['not'] = TRUE;
+  /* Contextual filter: Field: Market (field_market) */
+  $handler->display->display_options['arguments']['field_market_tid']['id'] = 'field_market_tid';
+  $handler->display->display_options['arguments']['field_market_tid']['table'] = 'field_data_field_market';
+  $handler->display->display_options['arguments']['field_market_tid']['field'] = 'field_market_tid';
+  $handler->display->display_options['arguments']['field_market_tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_market_tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['field_market_tid']['default_argument_options']['term_page'] = FALSE;
+  $handler->display->display_options['arguments']['field_market_tid']['default_argument_options']['node'] = TRUE;
+  $handler->display->display_options['arguments']['field_market_tid']['default_argument_options']['limit'] = TRUE;
+  $handler->display->display_options['arguments']['field_market_tid']['default_argument_options']['vocabularies'] = array(
+    'markets' => 'markets',
+  );
+  $handler->display->display_options['arguments']['field_market_tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_market_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_market_tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_description'] = 'LTP Other Services';
   $export['localtarget'] = $view;
 
   $view = new view();
@@ -1461,7 +1522,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['bid']['id'] = 'bid';
   $handler->display->display_options['fields']['bid']['table'] = 'bean';
   $handler->display->display_options['fields']['bid']['field'] = 'bid';
-  /* Contextual filter: Broken/missing handler */
+  /* Contextual filter: Block: LTP Reference (field_ltp_reference) */
   $handler->display->display_options['arguments']['field_ltp_reference_target_id']['id'] = 'field_ltp_reference_target_id';
   $handler->display->display_options['arguments']['field_ltp_reference_target_id']['table'] = 'field_data_field_ltp_reference';
   $handler->display->display_options['arguments']['field_ltp_reference_target_id']['field'] = 'field_ltp_reference_target_id';
@@ -1505,7 +1566,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'default';
-  /* Relationship: Broken/missing handler */
+  /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['id'] = 'field_faq_service_reference_target_id';
   $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['table'] = 'field_data_field_faq_service_reference';
   $handler->display->display_options['relationships']['field_faq_service_reference_target_id']['field'] = 'field_faq_service_reference_target_id';
@@ -1513,7 +1574,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['fields']['bid']['id'] = 'bid';
   $handler->display->display_options['fields']['bid']['table'] = 'bean';
   $handler->display->display_options['fields']['bid']['field'] = 'bid';
-  /* Contextual filter: Broken/missing handler */
+  /* Contextual filter: Block: Service reference (field_faq_service_reference) */
   $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['id'] = 'field_faq_service_reference_target_id';
   $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['table'] = 'field_data_field_faq_service_reference';
   $handler->display->display_options['arguments']['field_faq_service_reference_target_id']['field'] = 'field_faq_service_reference_target_id';
@@ -1595,7 +1656,7 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['link_url'] = 'node/uuid/c1c20802-54d4-49c2-ad31-61784e121b9f';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = 1;
+  $handler->display->display_options['pager']['options']['offset'] = '';
   $handler->display->display_options['block_description'] = 'List of all services';
 
   /* Display: Front Page Services */
@@ -1869,6 +1930,31 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['filters']['promote']['field'] = 'promote';
   $handler->display->display_options['filters']['promote']['value'] = '1';
   $handler->display->display_options['block_description'] = 'Mobile: Front Page Services';
+
+  /* Display: List of all Services (Our Services) */
+  $handler = $view->new_display('block', 'List of all Services (Our Services)', 'our_services');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'tablet desktop';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'View All Services';
+  $handler->display->display_options['defaults']['link_display'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['link_url'] = 'node/uuid/c1c20802-54d4-49c2-ad31-61784e121b9f';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'quinary_teaser';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['block_description'] = 'List of all Services (Our Services)';
   $export['services'] = $view;
 
   $view = new view();
@@ -2421,6 +2507,69 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['block_description'] = 'Special offers (services sidebar)';
+
+  /* Display: Sidebar Offers (secondary services) */
+  $handler = $view->new_display('block', 'Sidebar Offers (secondary services)', 'sidebar_sec_service');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Special Offers';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'secondary_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Global: Random */
+  $handler->display->display_options['sorts']['random']['id'] = 'random';
+  $handler->display->display_options['sorts']['random']['table'] = 'views';
+  $handler->display->display_options['sorts']['random']['field'] = 'random';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Has taxonomy term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['term_page'] = FALSE;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['anyall'] = '+';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['limit'] = TRUE;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
+    'services' => 'services',
+  );
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_description'] = 'Special offers (sec. services sidebar)';
+
+  /* Display: Sidebar Offers (secondary) */
+  $handler = $view->new_display('block', 'Sidebar Offers (secondary)', 'sidebar_sec');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Special Offers';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'secondary_teaser';
+  $handler->display->display_options['row_options']['links'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Global: Random */
+  $handler->display->display_options['sorts']['random']['id'] = 'random';
+  $handler->display->display_options['sorts']['random']['table'] = 'views';
+  $handler->display->display_options['sorts']['random']['field'] = 'random';
+  $handler->display->display_options['block_description'] = 'Special offers (sec sidebar)';
   $export['special_offers'] = $view;
 
   $view = new view();
