@@ -25,6 +25,7 @@ if(!db_table_exists('sprowt_progress')){
         'message' =>  array('type'=> 'text'),
         'actions' => array('type'=> 'int', 'default' => '0'),
           'current_action' => array('type'=> 'int', 'default' => '0'),
+          'count' => array('type'=> 'int', 'default' => '0'),
         'complete' => array('type'=> 'int','not null' => true, 'default' => '0'),
       ),
       'primary key' => array('id')
@@ -105,4 +106,7 @@ $updated = db_update('sprowt_progress') // Table name no longer needs {}
   ->condition('id', $progress['id'], '=')
   ->execute();
   
-echo "Sprowt Setup Done!";
+echo json_encode(array(
+    'success' => true,
+    'message' => 'Sprowt Setup Done!'
+));

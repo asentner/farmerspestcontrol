@@ -153,13 +153,13 @@ class BlockBuilder {
             switch ($row['module']) {
                 case 'block':
                     $row['delta'] = $this->block_custom_map[$current_row['delta']];
-                    if(strpos($row['css_class'], 'sprowt-block-imported') === false) {
+                    if (strpos($row['css_class'], 'sprowt-block-imported') === false) {
                         $row['css_class'] .= ' sprowt-block-imported';
                     }
                     break;
                 case 'multiblock':
                     $row['delta'] = $this->multiblock_map[$current_row['delta']];
-                    if(strpos($row['css_class'], 'sprowt-block-imported') === false) {
+                    if (strpos($row['css_class'], 'sprowt-block-imported') === false) {
                         $row['css_class'] .= ' sprowt-block-imported';
                     }
                     break;
@@ -167,27 +167,28 @@ class BlockBuilder {
                     $nid = str_replace('sprowt_block_cta_', '', $row['delta']);
                     $uuid = empty($this->uuid_map[$nid]) ? 0 : $this->uuid_map[$nid];
                     if (!empty($nid_map[$uuid])) {
-                        if(strpos($row['css_class'], 'sprowt-block-imported') === false) {
+                        if (strpos($row['css_class'], 'sprowt-block-imported') === false) {
                             $row['css_class'] .= ' sprowt-block-imported';
                         }
                         $row['css_class'] .= ' block--sprowt-block-cta-sprowt-block-cta-' . $nid;
                         $row['delta'] = 'sprowt_block_cta_' . $nid_map[$uuid];
-                    } else {
+                    }
+                    else {
                         $row['delta'] = '';
                     }
                     break;
             }
-            
+
             $test = array(
                 'module' => $row['module'],
                 'delta' => $row['delta'],
                 'theme' => $row['theme']
             );
-            
+
             $exists = $this->row_exists('block', $test, 'bid');
-            
-            if(!$exists) {
-                if(!empty($row['delta'])) {
+
+            if (!$exists) {
+                if (!empty($row['delta'])) {
                     $trans[] = db_insert('block')->fields($row);
                 }
                 else {
@@ -199,14 +200,14 @@ class BlockBuilder {
             else {
                 $trans[] = db_update('block')->fields($row)->condition('bid', $exists);
             }
-            
+
             //update all block rows with new info
             $update_row = $row;
             unset($update_row['theme']);
             unset($update_row['region']);
             $trans[] = db_update('block')->fields($update_row)->condition('module', $row['module'])->condition('delta', $row['delta']);
-            
         }
+
         
         if(!empty($trans)) {
             $t = db_transaction();
@@ -221,6 +222,7 @@ class BlockBuilder {
                 }
             }
         }
+
     }
     
     function setNids() {
@@ -332,6 +334,84 @@ class BlockBuilder {
                 $row['delta'] = implode('_', $delta_parts);
                 $this->block_node_type[$k] = $row;
             }
+        }
+
+    }
+
+    function handleContexts() {
+        $nid_map = db_query("
+            SELECT uuid, nid
+            FROM node
+        ")->fetchAllKeyed();
+        if(module_exists('context')) {
+            $contexts = context_load(NULL, TRUE);
+            foreach($contexts as $context_name => $context) {
+                $context_changed = false;
+                if(!empty($context->reactions) && !empty($context->reactions['block']['blocks'])) {
+                    foreach($context->reactions['block']['blocks'] as $key => $block) {
+                        switch ($block['module']) {
+                            case 'block':
+                                $block['delta'] = $this->block_custom_map[$block['delta']];
+                                unset($context->reactions['block']['blocks'][$key]);
+                                $context->reactions['block']['blocks'][$block['module'] .'-' . $block['delta']] = $block;
+                                $context_changed = true;
+                                break;
+                            case 'multiblock':
+                                $block['delta'] = $this->multiblock_map[$block['delta']];
+                                unset($context->reactions['block']['blocks'][$key]);
+                                $context->reactions['block']['blocks'][$block['module'] .'-' . $block['delta']] = $block;
+                                $context_changed = true;
+                                break;
+                            case 'sprowt_block_cta':
+                                $nid = str_replace('sprowt_block_cta_', '', $block['delta']);
+                                $uuid = empty($this->uuid_map[$nid]) ? 0 : $this->uuid_map[$nid];
+                                unset($context->reactions['block']['blocks'][$key]);
+                                if (!empty($nid_map[$uuid])) {
+                                    $block['delta'] = 'sprowt_block_cta_' . $nid_map[$uuid];
+                                    $context->reactions['block']['blocks'][$block['module'] .'-' . $block['delta']] = $block;
+                                }
+                                $context_changed = true;
+                                break;
+                            case 'webform':
+                                $delta_parts = explode('-', $block['delta']);
+                                $nid = array_pop($delta_parts);
+                                $uuid = $this->uuid_map[$nid];
+                                $delta_parts[] = $nid_map[$uuid];
+                                $block['delta'] = implode('-', $delta_parts);
+                                unset($context->reactions['block']['blocks'][$key]);
+                                $context->reactions['block']['blocks']['webform-' . $block['delta']] = $block;
+                                $context_changed = true;
+                                break;
+                        }
+                    }
+                }
+
+                if(!empty($context->conditions['path']['values'])) {
+                    foreach($context->conditions['path']['values'] as $key => $path) {
+                        if(strpos($path, 'node/') === 0) {
+                            $nid = str_replace('node/', '', $path);
+                            $uuid = empty($this->uuid_map[$nid]) ? 0 : $this->uuid_map[$nid];
+                            if(!empty($nid_map[$uuid])) {
+                                $context->conditions['path']['values'][$key] = "node/{$nid_map[$uuid]}";
+                                $context_changed = true;
+                            }
+                            else {
+                                unset($context->conditions['path']['values'][$key]);
+                                $context_changed = true;
+                            }
+                        }
+                    }
+                    if(empty($context->conditions['path']['values'])) {
+                        unset($context->conditions['path']);
+                        $context_changed = true;
+                    }
+                }
+
+                if($context_changed) {
+                    context_save($context);
+                }
+            }
+            $contexts = context_load(NULL, TRUE);
         }
     }
     
@@ -757,6 +837,11 @@ class BlockBuilder {
     function setFromJson($json) {
         $this->setFromArray(json_decode($json, true));
     }
+
+    function setFromFile($filepath) {
+        $json = file_get_contents($filepath);
+        $this->setFromJson($json);
+    }
     
     function setTheme($theme) {
         $this->theme = $theme;
@@ -781,7 +866,7 @@ class BlockBuilder {
         $this->setNids();
         $this->writeMenublock();
     }
-    
+
     function importJson($json, $theme = null) {
         $this->import(json_decode($json, true), $theme);
     }

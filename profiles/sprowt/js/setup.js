@@ -50,7 +50,6 @@
 
             var ajax_ops = {
                 url: setup_url,
-                dataType: 'json',
                 timeout: 0,
                 success: function( data, textStatus, jqXHR ) {
 

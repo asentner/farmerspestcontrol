@@ -247,7 +247,7 @@ Class ThemeBuilder {
         return rmdir($src);
     }
 
-    function import_blocks($old, $new, $filename = null){
+    function getBlockFile($old, $new, $filename = null) {
         $custom_filename = true;
         if(empty($filename)) {
             $custom_filename = false;
@@ -263,14 +263,24 @@ Class ThemeBuilder {
             }
             else {
                 if($custom_filename) {
-                    $this->import_blocks($base_theme, $new, $filename);
+                    return $this->getBlockFile($base_theme, $new, $filename);
                 }
                 else {
-                    $this->import_blocks($base_theme, $new);
+                    return $this->getBlockFile($base_theme, $new);
                 }
                 return false;
             }
         }
+
+        return $file_location;
+    }
+
+    function import_blocks($old, $new, $filename = null){
+        if(empty($filename)) {
+            $filename = $old . '_block_export.json';
+        }
+
+        $file_location = $this->getBlockFile($old, $new, $filename);
 
         $BB = new BlockBuilder();
 

@@ -443,6 +443,8 @@ Class SprowtBuilder {
                 }
             }
 
+            node_export_file_field_import($n, clone $n);
+
             if($n->type == 'webform') {
 
                 foreach($node['webform']['emails'] as $k => $email) {
@@ -815,7 +817,10 @@ Class SprowtBuilder {
     }
 
     function afterRevert(){
-
+        if(empty($this->data)){
+            $this->getData();
+        }
+        $branding = $this->data['branding'];
         $node_json = $this->node_json;
         $orig_nodes = json_decode($node_json,true);
         $uuid_array = array();
@@ -857,6 +862,15 @@ Class SprowtBuilder {
           }
           
           node_save($node);
+        }
+
+        //update contexts
+        $themeBuilder = new ThemeBuilder();
+        $blockFile = $themeBuilder->getBlockFile($branding['theme'], $branding['theme']);
+        if(!empty($blockFile)) {
+            $blockBuilder = new BlockBuilder();
+            $blockBuilder->setFromFile($blockFile);
+            $blockBuilder->handleContexts();
         }
     }
 
