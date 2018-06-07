@@ -440,156 +440,236 @@ function sprowt_solution_finder_preprocess_node(&$variables) {
     }
 }
 
-function _sprowt_solution_finder_add_concerns() {
-    $path = drupal_get_path('module', 'tpc_custom');
-
-    $terms = array(
-        'Roaches',
-        'Ants',
-        'Spiders',
-        'Rodents',
-        'Bed Bugs',
-        'Termites',
-        'Mosquitoes',
-        'Flies',
-        'Ticks',
-        'Fire Ants',
-        'Fleas',
-        'Not Sure/Not Listed'
-    );
-
-    $body = 'Lorem ipsum dolor sit amet, in usu lorem invidunt reformidans, prima putent eu per, at nam alia mentitum. Odio probo mucius his no. Ei simul oratio his. Ne cum suas ludus. Per et solet quidam assentior.';
-
-    $concern_map = _sprowt_solution_finder_concern_map();
-
-    foreach($terms as $weight => $termName) {
-
-        if(!empty($concern_map[$termName])) {
-            $node = node_load($concern_map[$termName]);
-        }
-        else {
-            $node = entity_create('node', array('type' => 'concern'));
-        }
-
-        $node->title = $termName;
-        $node->body[LANGUAGE_NONE][0]['value'] = $body;
-        $node->weight_weight = $weight;
-        node_save($node);
-
-        $icon = null;
-
-        if($termName == 'Fire Ants') {
-            $icon = $path . '/icons/Ants.svg';
-        }
-        elseif ($termName != 'Not Sure/Not Listed') {
-            $icon = $path . '/icons/'. $termName .'.svg';
-        }
-
-        if(!empty($icon) && file_exists($icon)) {
-            $data = file_get_contents($icon);
-            $filename = basename($icon);
-            $dest = "public://$filename";
-
-            $file = file_save_data($data, $dest, FILE_EXISTS_REPLACE);
-            $file->status = FILE_STATUS_PERMANENT;
-            $file->display = 1;
-            $file->description = "";
-            file_save($file);
-            $node->field_icon_file[LANGUAGE_NONE][0] = (array) $file;
-            $node->field_include_in_solution_finder[LANGUAGE_NONE][0]['value'] = 1;
-            node_save($node);
+function _sprowt_solution_finder_sample_nodes() {
+    require_once DRUPAL_ROOT . '/includes/utility.inc';
+    $path = drupal_get_path('module', 'sprowt_solution_finder');
+    $file = $path . '/nodes/concerns.json';
+    $json = file_get_contents($file);
+    $existing = variable_get('node_export_existing', 'new');
+    variable_set('node_export_existing', 'new');
+    $concernsArray = json_decode($json, true);
+    foreach($concernsArray as $concernArray) {
+        $uuid = $concernArray['uuid'];
+        if(empty(entity_get_id_by_uuid('node', array($uuid)))) {
+            node_export_import(json_encode(array($concernArray)));
         }
     }
+
+    $exportFile = $path . '/nodes/solution.export';
+    $export = file_get_contents($exportFile);
+
+    $array = [];
+    eval('$array = ' . $export . ';');
+    foreach($array as $key => &$obj) {
+        if(!empty(entity_get_id_by_uuid('node', array($obj->uuid)))) {
+            unset($array[$key]);
+            continue;
+        }
+        _sprowt_solution_finder_convert_entity_refrence_fields($obj);
+        _sprowt_solution_finder_convert_blockreference_fields($obj);
+    }
+
+    if(!empty($array)) {
+        $newExport = drupal_var_export($array);
+        node_export_import($newExport);
+
+        $obj = array_shift($array);
+        $nodes = entity_uuid_load('node', array($obj->uuid));
+        $node = array_pop($nodes);
+        $n = entity_metadata_wrapper('node', $node);
+        $concern_nids = db_query("
+                SELECT n.nid
+                FROM node n
+                LEFT JOIN weight_weights w on w.entity_type = 'node' AND w.entity_id = n.nid
+                LEFT JOIN field_data_field_include_in_solution_finder i on i.entity_id = n.nid AND i.entity_type = 'node'
+                WHERE n.type = 'concern'
+                AND n.status = 1
+                AND i.field_include_in_solution_finder_value = 1
+                ORDER BY w.weight ASC
+                LIMIT 3
+            ")->fetchCol();
+        $n->field_concerns = $concern_nids;
+
+        $testimonial_nids = db_query("
+            SELECT nid
+            FROM node
+            WHERE type = 'testimonial'
+            AND status = 1
+            LIMIT 3
+        ")->fetchCol();
+        $n->field_testimonial_ref = $testimonial_nids;
+        $n->save();
+
+    }
+    variable_set('node_export_existing', $existing);
 }
 
-function _sprowt_solution_finder_defaultSolutions() {
-
-
-    $general_pest = array(
-        'Ants',
-        'Roaches',
-        'Spiders',
-        'Rodents',
-        'Fleas',
-        'Flies',
-    );
-
-    $outdoor = array(
-        'Mosquitoes',
-        'Ticks',
-        'Fire Ants'
-    );
-
-    $healthyHome = _sprowt_solution_finder_buildSolution('HealthyHome', $general_pest)->save();
-    $healthyHomePlus = _sprowt_solution_finder_buildSolution('HealthyHome Plus', array_merge(
-            $general_pest,
-            array(
-                'Termites'
-            )
-        )
-    )->save();
-    $healthyHomeAndSafelawn = _sprowt_solution_finder_buildSolution('HeallthyHome + SafeLawn', array_merge(
-            $general_pest,
-            $outdoor
-        )
-    )->save();
-    $healthyHomePlusAndSafelawn = _sprowt_solution_finder_buildSolution('HeallthyHomePlus + SafeLawn', array_merge(
-            $general_pest,
-            $outdoor,
-            array(
-                'Termites'
-            )
-        )
-    )->save();
-    $safeLawn = _sprowt_solution_finder_buildSolution('SafeLawn', $outdoor)->save();
-    $termiteHomeDefense = _sprowt_solution_finder_buildSolution('Termite Home Defense', array(
-        'Termites'
-    ))->save();
-    $sleepEasy = _sprowt_solution_finder_buildSolution('SleepEasy', array(
-        'Bed Bugs'
-    ))->save();
+function _sprowt_solution_finder_convert_blockreference_fields(&$var, $field_name = '') {
+    return _sprowt_solution_finder_loop_through_export_for_field($var, $field_name, function(&$array, $field_name) {
+        $efFields = array(
+            'field_block_reference'
+        );
+        $maps = _sprowt_solution_finder_get_node_maps();
+        if (in_array($field_name, $efFields)) {
+            foreach ($array as $lang => &$items) {
+                foreach ($items as $key => &$item) {
+                    if(empty($item['uuid'])) {
+                        $modDelta = $item['moddelta'];
+                        if (strpos($modDelta, 'webform:client-block-') !== false) {
+                            $nid = str_replace('webform:client-block-', '', $modDelta);
+                            $uuid = $maps['old'][$nid];
+                            if (!empty($maps['new'][$uuid])) {
+                                $item['moddelta'] = 'webform:client-block-' . $maps['new'][$uuid];
+                                $item['uuid'] = $uuid;
+                            }
+                            else {
+                                unset($items[$key]);
+                            }
+                        }
+                    }
+                }
+                $items = array_values($items);
+            }
+        }
+    });
 }
 
-function _sprowt_solution_finder_concern_map() {
-    return db_query("
-        SELECT title, nid
+
+function _sprowt_solution_finder_get_entity_refrence_field_names($reset = false) {
+    $fields = &drupal_static(__FUNCTION__);
+    if(!isset($fields) || $reset) {
+        $fields = db_query("
+            SELECT field_name
+            FROM field_config
+            WHERE type = 'entityreference'
+        ")->fetchCol();
+    }
+
+    return $fields;
+}
+
+function _sprowt_solution_finder_get_node_maps($reset = false) {
+    $map = &drupal_static(__FUNCTION__);
+    if(!isset($map) || $reset) {
+        $path = drupal_get_path('module', 'sprowt_solution_finder');
+        $file = $path . '/nodes/node_map.json';
+        $json = file_get_contents($file);
+        $old_map = json_decode($json, true);
+
+        $new_map = db_query("
+            SELECT uuid, nid
+            FROM node
+        ")->fetchAllKeyed();
+
+        $map = array(
+            'old' => $old_map,
+            'new' => $new_map
+        );
+    }
+
+    return $map;
+}
+
+function _sprowt_solution_finder_export_node_map() {
+    $path = drupal_get_path('module', 'sprowt_solution_finder');
+    $file = $path . '/nodes/node_map.json';
+
+    $node_map = db_query("
+        SELECT nid, uuid
         FROM node
-        WHERE type = 'concern'
-        AND status = 1
     ")->fetchAllKeyed();
+    $json = json_encode($node_map);
+    file_put_contents($file, $json);
 }
 
+function _sprowt_solution_finder_convert_entity_refrence_fields(&$var, $field_name = '') {
+    return _sprowt_solution_finder_loop_through_export_for_field($var, $field_name, function(&$array, $field_name) {
+        $efFields = _sprowt_solution_finder_get_entity_refrence_field_names();
+        $maps = _sprowt_solution_finder_get_node_maps();
+        if(in_array($field_name, $efFields)) {
+            foreach($array as $lang => &$items) {
+                foreach($items as $key => &$item) {
+                    if(empty($item['uuid'])) {
+                        $nid = $item['target_id'];
+                        if($nid == 99) {
+                            $test = true;
+                        }
+                        $uuid = $maps['old'][$nid];
+                        if (!empty($maps['new'][$uuid])) {
+                            $item['target_id'] = $maps['new'][$uuid];
+                            $item['uuid'] = $uuid;
+                        }
+                        else {
+                            unset($items[$key]);
+                        }
+                    }
+                }
+                $items = array_values($items);
+            }
+        }
+    });
+}
 
+function _sprowt_solution_finder_loop_through_export_for_field(&$var, $field_name = '', $function){
+    if(is_object($var)) {
+        $array = json_decode(json_encode($var), true);
+        foreach($array as $prop => $value) {
+            _sprowt_solution_finder_loop_through_export_for_field($var->{$prop}, $prop, $function);
+        }
 
-function _sprowt_solution_finder_buildSolution($name, $pests){
-    $concern_map = _sprowt_solution_finder_concern_map();
-
-    $nid = db_query("
-        SELECT nid
-        FROM node
-        WHERE type = 'solution'
-        AND title = :title
-    ", array(
-        ':title' => $name
-    ))->fetchField();
-
-    if(!empty($nid)) {
-        $data = node_load($nid);
     }
-    else {
-        $data = entity_create('node', array('type' => 'solution'));
-    }
-    $solution = entity_metadata_wrapper('node', $data);
-    $solution->title = $name;
-    $nids = array();
-    foreach($pests as $pest) {
-        if(!empty($concern_map[$pest])) {
-            $nids[] = $concern_map[$pest];
+
+    $array = &$var;
+
+    if($field_name == 'paragraph_fields' || $field_name == 'fc_fields') {
+        if(!empty($array) && is_array($array)) {
+            foreach ($array as $field_name => &$fields) {
+                if (!empty($fields) && is_array($fields)) {
+                    foreach ($fields as $lang => &$items) {
+                        _sprowt_solution_finder_loop_through_export_for_field($items, '', $function);
+                    }
+                }
+            }
         }
     }
 
-    $solution->field_concerns = $nids;
+    if(strpos($field_name, 'field_') === 0) {
+        $function($array, $field_name);
+    }
 
-    return $solution;
+    if(is_array($array)) {
+        foreach($array as $key => &$value) {
+            _sprowt_solution_finder_loop_through_export_for_field($value, $key, $function);
+        }
+    }
+
+    return $array;
 }
 
+/**
+ * Implements hook_features_post_restore().
+ */
+function sprowt_solution_finder_features_post_restore($op, $items)
+{
+    if($op == 'enable' && in_array('sprowt_solution_finder', array_keys($items))) {
+        variable_set('sprowt_solution_finder_being_enabled', true);
+    }
+    if($op == 'rebuild' && in_array('sprowt_solution_finder', array_keys($items))) {
+        if(variable_get('sprowt_solution_finder_being_enabled', false)) {
+            _sprowt_solution_finder_sample_nodes();
+            $nidArray =  db_query("
+                SELECT nid, title
+                FROM node
+                WHERE type = 'solution'
+                AND status = 1
+            ")->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($nidArray as $array) {
+                $link = l($array['title'], 'node/' . $array['nid']);
+
+                drupal_set_message("Example Solution with example concerns added. Solution: " . $link . '!');
+            }
+            variable_del('sprowt_solution_finder_being_enabled');
+        }
+    }
+}
