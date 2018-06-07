@@ -77,19 +77,19 @@ function sprowt_city_pages_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'title' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'path' => array(
-          'weight' => '13',
+          'weight' => '14',
         ),
         'rabbit_hole' => array(
-          'weight' => '11',
+          'weight' => '12',
         ),
         'xmlsitemap' => array(
-          'weight' => '12',
+          'weight' => '13',
         ),
       ),
       'display' => array(),

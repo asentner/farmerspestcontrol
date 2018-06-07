@@ -16,19 +16,21 @@
 .front {
   .block--views-services-all, .block--views-services-all-mobile {
     margin: 0 auto;
+    padding: 20px;
+    overflow: hidden;
     .view-content {
       @include flexbox;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: center;
+      margin-top: -30px;
+      margin-left: -20px;
       // align-items: center;
       .views-row{
         max-width: 275px;
         flex: 1 1 50%;
-        // padding: 0 20px;
-        &:nth-child(1), &:nth-child(2){
-          padding-bottom: 20px;
-        }
+        margin-top: 30px;
+        margin-left: 20px;
         .node--service--teaser, .node--service--alt-teaser{
           padding: 15px;
           @include flexbox;
@@ -76,13 +78,11 @@
       }
     }
     @include breakpoint($tab){
-      max-width: 625px;
+      max-width: 1350px;
       .view-content{
         padding: 0;
         .views-row{
-          &:nth-child(1), &:nth-child(2){
-            padding-bottom: 80px;
-          }
+          padding-top: 65px;
           .node--service--teaser, .node--service--alt-teaser{
             min-height: 415px;
             border: solid 3px;
@@ -109,13 +109,9 @@
       }
     }
     @include breakpoint(1160px){
-      max-width: $container;
       .view-content{
         .views-row{
           flex: 1 1 auto;
-          &:nth-child(1), &:nth-child(2){
-            padding-bottom: 0;
-          };
         }
       }
     }
@@ -124,10 +120,8 @@
 
 .front {
   .block--views-services-all.block--list, .block--views-services-all-mobile.block--list {
-    padding: 50px 0 30px;
-    .views-row + .views-row{
-      padding-top: 0;
-      margin-top: 0;
+    .views-row {
+      margin-top: 30px;
       border-top: none;
     }
   }

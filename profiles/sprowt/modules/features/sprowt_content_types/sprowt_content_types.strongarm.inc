@@ -2614,6 +2614,7 @@ example.org';
     'region' => 'region',
     'service' => 'service',
     'slide' => 'slide',
+    'solution' => 'solution',
     'special_offer' => 'special_offer',
     'testimonial' => 'testimonial',
     'webform' => 'webform',

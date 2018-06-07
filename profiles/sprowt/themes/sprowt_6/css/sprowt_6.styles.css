@@ -5201,7 +5201,9 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
   display: none; }
 
 .front .block--views-services-all, .front .block--views-services-all-mobile {
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden; }
   .front .block--views-services-all .view-content, .front .block--views-services-all-mobile .view-content {
     display: -ms-flexbox;
     display: flex;
@@ -5209,16 +5211,18 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
         flex-direction: row;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    -ms-flex-pack: justify;
-        justify-content: space-between; }
+    -ms-flex-pack: center;
+        justify-content: center;
+    margin-top: -30px;
+    margin-left: -20px; }
     .front .block--views-services-all .view-content > *, .front .block--views-services-all-mobile .view-content > * {
       -ms-flex: 0 1 auto; }
     .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
       max-width: 275px;
       -ms-flex: 1 1 50%;
-          flex: 1 1 50%; }
-      .front .block--views-services-all .view-content .views-row:nth-child(1), .front .block--views-services-all .view-content .views-row:nth-child(2), .front .block--views-services-all-mobile .view-content .views-row:nth-child(1), .front .block--views-services-all-mobile .view-content .views-row:nth-child(2) {
-        padding-bottom: 20px; }
+          flex: 1 1 50%;
+      margin-top: 30px;
+      margin-left: 20px; }
       .front .block--views-services-all .view-content .views-row .node--service--teaser, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser {
         padding: 15px;
         display: -ms-flexbox;
@@ -5272,17 +5276,17 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
             text-align: center; }
   @media (min-width: 768px) {
     .front .block--views-services-all, .front .block--views-services-all-mobile {
-      max-width: 625px; }
+      max-width: 1350px; }
       .front .block--views-services-all .view-content, .front .block--views-services-all-mobile .view-content {
         padding: 0; }
-        .front .block--views-services-all .view-content .views-row:nth-child(1), .front .block--views-services-all .view-content .views-row:nth-child(2), .front .block--views-services-all-mobile .view-content .views-row:nth-child(1), .front .block--views-services-all-mobile .view-content .views-row:nth-child(2) {
-          padding-bottom: 80px; }
-        .front .block--views-services-all .view-content .views-row .node--service--teaser, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser {
-          min-height: 415px;
-          border: solid 3px;
-          box-shadow: 0px 15px 12.8px 2.3px rgba(46, 56, 52, 0.25); }
-          .front .block--views-services-all .view-content .views-row .node--service--teaser header, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser header, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser header, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser header {
-            margin-top: -65px; } }
+        .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
+          padding-top: 65px; }
+          .front .block--views-services-all .view-content .views-row .node--service--teaser, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser {
+            min-height: 415px;
+            border: solid 3px;
+            box-shadow: 0px 15px 12.8px 2.3px rgba(46, 56, 52, 0.25); }
+            .front .block--views-services-all .view-content .views-row .node--service--teaser header, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser header, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser header, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser header {
+              margin-top: -65px; } }
   @media (min-width: 1024px) {
     .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
       max-width: 290px; }
@@ -5292,20 +5296,13 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
           font-size: 21px;
           font-weight: 700; } }
   @media (min-width: 1160px) {
-    .front .block--views-services-all, .front .block--views-services-all-mobile {
-      max-width: 1210px; }
-      .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto; }
-        .front .block--views-services-all .view-content .views-row:nth-child(1), .front .block--views-services-all .view-content .views-row:nth-child(2), .front .block--views-services-all-mobile .view-content .views-row:nth-child(1), .front .block--views-services-all-mobile .view-content .views-row:nth-child(2) {
-          padding-bottom: 0; } }
+    .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto; } }
 
-.front .block--views-services-all.block--list, .front .block--views-services-all-mobile.block--list {
-  padding: 50px 0 30px; }
-  .front .block--views-services-all.block--list .views-row + .views-row, .front .block--views-services-all-mobile.block--list .views-row + .views-row {
-    padding-top: 0;
-    margin-top: 0;
-    border-top: none; }
+.front .block--views-services-all.block--list .views-row, .front .block--views-services-all-mobile.block--list .views-row {
+  margin-top: 30px;
+  border-top: none; }
 
 .block--views-services-our-services .view-content .views-row {
   padding: 40px 0;

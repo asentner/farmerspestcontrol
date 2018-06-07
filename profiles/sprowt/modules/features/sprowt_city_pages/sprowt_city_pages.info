@@ -30,6 +30,7 @@ features[field_base][] = field_anchor_title
 features[field_base][] = field_city_services
 features[field_base][] = field_title
 features[field_group][] = group_anchor_block|node|city_page|form
+features[field_group][] = group_content|node|city_page|form
 features[field_instance][] = bean-anchor_link_bean-field_anchor_link
 features[field_instance][] = bean-anchor_link_bean-field_display_title
 features[field_instance][] = node-city_page-body
