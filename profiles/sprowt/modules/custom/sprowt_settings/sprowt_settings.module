@@ -189,11 +189,62 @@ function sprowt_settings_block_view($delta = '')
             break;
         */
         case 'sprowt_copyright':
-            $block['content'] = theme('sprowt_settings_copyright');
+            $block['content'] = _sprowt_settings_copyright_block();
             break;
     }
 
     return $block;
+}
+
+
+/**
+ * Implements hook_block_configure().
+ */
+function sprowt_settings_block_configure($delta = '') {
+    $form = array();
+    switch($delta) {
+        case 'sprowt_copyright':
+            $htmlField = variable_get('sprowt_settings_copyright_block', array(
+                'value' => '',
+                'format' => 'full_html'
+            ));
+            if(empty($htmlField['value'])) {
+                $htmlField['value'] = theme('sprowt_settings_copyright');
+            }
+            $form['sprowt_settings_copyright_block'] = array(
+                '#title' => 'Copyright Text',
+                '#type' => 'text_format',
+                '#default_value' => $htmlField['value'],
+                '#format' => $htmlField['format'],
+                '#description' => '<p>Some useful tokens:<br><ul><li>[current-year] : The current year</li><li>[company-name] : The company name defined in <a href="/admin/config/sprowt/sprowt-settings">Sprowt Settings</a></li></ul></p>'
+            );
+            break;
+    }
+    
+    return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function sprowt_settings_block_save($delta = '', $edit = []) {
+    switch($delta) {
+        case 'sprowt_copyright':
+            variable_set('sprowt_settings_copyright_block', $edit['sprowt_settings_copyright_block']);
+    }
+}
+
+function _sprowt_settings_copyright_block(){
+    $htmlField = variable_get('sprowt_settings_copyright_block', array(
+        'value' => '',
+        'format' => 'full_html'
+    ));
+    
+    if(empty($htmlField['value'])) {
+        $htmlField['value'] = theme('sprowt_settings_copyright');
+    }
+    
+    return $htmlField['value'];
 }
 
 //Grabs and converts phone number to readable format.

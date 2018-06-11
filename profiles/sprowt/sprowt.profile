@@ -484,6 +484,9 @@ function sprowt_setup(&$install_state){
     else {
         return false;
     }
+    
+    variable_set('site_name', $data['company_info']['company_name']);
+    variable_set('site_mail', 'devel@coalmarch.com');
 }
 
 function _sprowt_get_data(){
