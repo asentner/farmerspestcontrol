@@ -194,7 +194,11 @@ Class SprowtBuilder {
         if(!empty($this->data['company_info']['contact_email'])){
             variable_set('sprowt_settings_contact_email', $this->data['company_info']['contact_email']);
         }
-  
+    
+        if(!empty($this->data['company_info']['company_type'])){
+            variable_set('sprowt_settings_company_type', $this->data['company_info']['company_type']);
+        }
+        
         variable_set('sprowt_settings_webform_to_email', $this->data['company_info']['webform_to_email']);
 
         if(function_exists('_sprowt_login_create_sprowt_company_alias')) {

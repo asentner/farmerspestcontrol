@@ -19,6 +19,14 @@ function sprowt_company_info($form, &$form_state, &$install_state){
             '#description' => 'Phone number used to throughout the site. Should be 10 digits and all numbers. e.g.: 9195555555',
             '#default_value' => _sprowt_form_default('company_phone')
         ),
+        'company_type' => array(
+            '#type' => 'radios',
+            '#title' => t('Company Type'),
+            '#required' => true,
+            '#description' => 'The type of services this Sprowt company provides',
+            '#default_value' => 'home_services',
+            '#options' => _sprowt_company_types()
+        ),
         'webform' => array(
             '#type' => 'fieldset',
             '#title' => t('Webform Settings'),
@@ -86,6 +94,7 @@ function sprowt_company_info_validate($form, &$form_state){
         'company_name',
         'company_phone',
         'contact_name',
+        'company_type',
         'contact_email',
         'contact_phone',
         'webform_from_email',
@@ -138,6 +147,7 @@ function sprowt_company_info_submit($form, &$form_state){
         'company_name',
         'company_phone',
         'contact_name',
+        'company_type',
         'contact_email',
         'contact_phone',
         'webform_from_email',
@@ -150,4 +160,13 @@ function sprowt_company_info_submit($form, &$form_state){
     }
 
     _sprowt_save_to_table('company_info', $fields);
+}
+
+function _sprowt_company_types() {
+    return array(
+        'pest_control' => 'Pest Control',
+        'lawn_care' => 'Lawn Care',
+        'home_services' => 'Home Services',
+        'other' => 'Other'
+    );
 }

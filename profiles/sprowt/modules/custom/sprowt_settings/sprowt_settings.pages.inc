@@ -45,7 +45,16 @@ function sprowt_settings_admin()
         '#maxlength' => 1000,
         '#description' => t("Email typically used as the 'to' email in webforms."),
     );
-
+    
+    $form['company_info']['sprowt_settings_company_type'] = array(
+        '#type' => 'radios',
+        '#title' => t('Company Type'),
+        '#required' => true,
+        '#description' => 'The type of services this Sprowt company provides',
+        '#default_value' => variable_get('sprowt_settings_company_type', 'home_services'),
+        '#options' => _sprowt_company_types()
+    );
+    
     /*
      * We no longer use site wide locations
      *
