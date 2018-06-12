@@ -2,6 +2,12 @@
     <li class="region" id="{{:id}}">
         <input data-regionId="{{:id}}" class="regionName form-text" type="text" placeholder="Region Name" value="{{:regionName}}">
         <button type="button" class="addMarket button" data-regionid="{{:id}}">Add Market</button>
+        <button type="button" class="addMarketBulk button" data-regionid="{{:id}}">Bulk Add Markets</button>
+        <div class="marketBulkWrap" style="display:none;">
+            <h3>Add Markets. One per line.</h3>
+            <div><textarea rows="10" class="marketBulkText" style="width: 100%;"></textarea></div>
+            <button type="button" class="addMarketBulkSubmit button" data-regionid="{{:id}}">Add Markets</button>
+        </div>
         {{if addRemove}}
         <button type="button" class="removeRegion button" data-regionid="{{:id}}">Remove</button>
         {{/if}}
