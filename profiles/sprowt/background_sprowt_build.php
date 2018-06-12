@@ -1,53 +1,194 @@
 <?php
 
-function curl_request_async($url, $params, $type='POST')
+/**
+ * Utility class for HHVM/PHP environment handling.
+ *
+ * From here: https://raw.githubusercontent.com/sebastianbergmann/environment/master/src/Runtime.php
+ *
+ */
+final class Runtime
 {
-    $post_params = [];
+    /**
+     * @var string
+     */
+    private static $binary;
     
-    foreach ($params as $key => &$val) {
-        if (is_array($val)) $val = implode(',', $val);
-        $post_params[] = $key.'='.rawurlencode($val);
-    }
-    $post_string = implode('&', $post_params);
-    
-    $parts = parse_url($url);
-    
-    if(empty($parts['path'])) {
-        $parts['path'] = '/';
-    }
-    
-    if($parts['scheme'] == 'https') {
-        $parts['port'] = 443;
-        $parts['host'] = "ssl://{$parts['host']}";
+    /**
+     * Returns true when Xdebug is supported or
+     * the runtime used is PHPDBG.
+     */
+    public function canCollectCodeCoverage()
+    {
+        return $this->hasXdebug() || $this->hasPHPDBGCodeCoverage();
     }
     
-    $fp = fsockopen($parts['host'],
-        isset($parts['port']) ? $parts['port'] : 80,
-        $errno, $errstr, 30);
+    /**
+     * Returns true when OPcache is loaded and opcache.save_comments=0 is set.
+     *
+     * Code taken from Doctrine\Common\Annotations\AnnotationReader::__construct().
+     */
+    public function discardsComments()
+    {
+        if (\extension_loaded('Zend Optimizer+') && (\ini_get('zend_optimizerplus.save_comments') === '0' || \ini_get('opcache.save_comments') === '0')) {
+            return true;
+        }
+        
+        if (\extension_loaded('Zend OPcache') && \ini_get('opcache.save_comments') == 0) {
+            return true;
+        }
+        
+        return false;
+    }
     
-    // Data goes in the path for a GET request
-    if('GET' == $type) $parts['path'] .= '?'.$post_string;
+    /**
+     * Returns the path to the binary of the current runtime.
+     * Appends ' --php' to the path when the runtime is HHVM.
+     */
+    public function getBinary()
+    {
+        // HHVM
+        if (self::$binary === null && $this->isHHVM()) {
+            // @codeCoverageIgnoreStart
+            if ((self::$binary = \getenv('PHP_BINARY')) === false) {
+                self::$binary = PHP_BINARY;
+            }
+            
+            self::$binary = \escapeshellarg(self::$binary) . ' --php' .
+                ' -d hhvm.php7.all=1';
+            // @codeCoverageIgnoreEnd
+        }
+        
+        if (self::$binary === null && PHP_BINARY !== '') {
+            self::$binary = \escapeshellarg(PHP_BINARY);
+        }
+        
+        if (self::$binary === null) {
+            // @codeCoverageIgnoreStart
+            $possibleBinaryLocations = [
+                PHP_BINDIR . '/php',
+                PHP_BINDIR . '/php-cli.exe',
+                PHP_BINDIR . '/php.exe'
+            ];
+            
+            foreach ($possibleBinaryLocations as $binary) {
+                if (\is_readable($binary)) {
+                    self::$binary = \escapeshellarg($binary);
+                    break;
+                }
+            }
+            // @codeCoverageIgnoreEnd
+        }
+        
+        if (self::$binary === null) {
+            // @codeCoverageIgnoreStart
+            self::$binary = 'php';
+            // @codeCoverageIgnoreEnd
+        }
+        
+        return self::$binary;
+    }
     
-    $out = "$type ".$parts['path']." HTTP/1.1\r\n";
-    $out.= "Host: ".$parts['host']."\r\n";
-    $out.= "Content-Type: application/x-www-form-urlencoded\r\n";
-    $out.= "Content-Length: ".strlen($post_string)."\r\n";
-    $out.= "Connection: Close\r\n\r\n";
-    // Data goes in the request body for a POST request
-    if ('POST' == $type && isset($post_string)) $out.= $post_string;
+    public function getNameWithVersion()
+    {
+        return $this->getName() . ' ' . $this->getVersion();
+    }
     
-    fwrite($fp, $out);
-    fclose($fp);
+    public function getName()
+    {
+        if ($this->isHHVM()) {
+            // @codeCoverageIgnoreStart
+            return 'HHVM';
+            // @codeCoverageIgnoreEnd
+        }
+        
+        if ($this->isPHPDBG()) {
+            // @codeCoverageIgnoreStart
+            return 'PHPDBG';
+            // @codeCoverageIgnoreEnd
+        }
+        
+        return 'PHP';
+    }
+    
+    public function getVendorUrl()
+    {
+        if ($this->isHHVM()) {
+            // @codeCoverageIgnoreStart
+            return 'http://hhvm.com/';
+            // @codeCoverageIgnoreEnd
+        }
+        
+        return 'https://secure.php.net/';
+    }
+    
+    public function getVersion()
+    {
+        if ($this->isHHVM()) {
+            // @codeCoverageIgnoreStart
+            return HHVM_VERSION;
+            // @codeCoverageIgnoreEnd
+        }
+        
+        return PHP_VERSION;
+    }
+    
+    /**
+     * Returns true when the runtime used is PHP and Xdebug is loaded.
+     */
+    public function hasXdebug()
+    {
+        return ($this->isPHP() || $this->isHHVM()) && \extension_loaded('xdebug');
+    }
+    
+    /**
+     * Returns true when the runtime used is HHVM.
+     */
+    public function isHHVM()
+    {
+        return \defined('HHVM_VERSION');
+    }
+    
+    /**
+     * Returns true when the runtime used is PHP without the PHPDBG SAPI.
+     */
+    public function isPHP()
+    {
+        return !$this->isHHVM() && !$this->isPHPDBG();
+    }
+    
+    /**
+     * Returns true when the runtime used is PHP with the PHPDBG SAPI.
+     */
+    public function isPHPDBG()
+    {
+        return PHP_SAPI === 'phpdbg' && !$this->isHHVM();
+    }
+    
+    /**
+     * Returns true when the runtime used is PHP with the PHPDBG SAPI
+     * and the phpdbg_*_oplog() functions are available (PHP >= 7.0).
+     *
+     * @codeCoverageIgnore
+     */
+    public function hasPHPDBGCodeCoverage()
+    {
+        return $this->isPHPDBG();
+    }
 }
 
-$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+$actual_link = __FILE__;
 $base = str_replace(basename($actual_link), '', $actual_link);
-$url = $base . 'BackgroundBuilder.php';
-if(!empty($_GET['XDEBUG_SESSION_START'])) {
-    $url .= '?XDEBUG_SESSION_START=1';
-}
+$script = $base . 'BackgroundBuilder.php';
 
-curl_request_async($url, []);
+$dir = __DIR__;
+$outputfile = $dir . '/sprowtoutput.log';
+$pidfile = $dir . '/sprowtpid';
+$rt = new Runtime();
+$php = $rt->getBinary();
+
+$cmd = $php . " " . $script;
+//from here: https://stackoverflow.com/a/45966/5873687
+exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $outputfile, $pidfile));
 
 echo json_encode(array(
     'success' => true,

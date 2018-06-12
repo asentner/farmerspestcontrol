@@ -65,4 +65,33 @@ $return = array(
     'message' => $progress['message'],
 );
 
+$dir = __DIR__;
+$pidfile = $dir . '/sprowtpid';
+$outputfile = $dir . '/sprowtoutput.log';
+
+function isRunning($pid){
+    try{
+        $result = shell_exec(sprintf("ps %d", $pid));
+        if( count(preg_split("/\n/", $result)) > 2){
+            return true;
+        }
+    }catch(Exception $e){}
+    
+    return false;
+}
+
+if($current == 100) {
+    unlink($pidfile);
+    unlink($outputfile);
+}
+elseif(!isRunning(file_get_contents($pidfile))) {
+    $log = file_get_contents($outputfile);
+    if(strpos($log, 'Sprowt Setup Done!') === false) {
+        $return = array(
+            'status' => 0,
+            'data' => "<pre>$log</pre>"
+        );
+    }
+}
+
 echo json_encode($return);

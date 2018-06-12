@@ -4,6 +4,10 @@ set_time_limit(0);
 ini_set('max_execution_time', 0); //0=NOLIMIT
 ignore_user_abort();
 
+if(!isset($_SERVER['REMOTE_ADDR'])) {
+    $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+}
+
 if(!defined('DRUPAL_ROOT')){
     define('DRUPAL_ROOT', str_replace("/profiles/sprowt", "", getcwd()));
     chdir(DRUPAL_ROOT);
@@ -106,7 +110,4 @@ $updated = db_update('sprowt_progress') // Table name no longer needs {}
     ->condition('id', $progress['id'], '=')
     ->execute();
 
-echo json_encode(array(
-    'success' => true,
-    'message' => 'Sprowt Setup Done!'
-));
+echo 'Sprowt Setup Done!';
