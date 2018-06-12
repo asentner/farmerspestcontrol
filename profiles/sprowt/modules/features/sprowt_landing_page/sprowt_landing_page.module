@@ -507,6 +507,12 @@ function _sprowt_landing_pages_add_default_node($uuid) {
     $exportedNodes = json_decode($json, true);
     foreach($exportedNodes as $ex) {
         if($ex['uuid'] == $uuid) {
+            if(module_exists('authorizenetwebform')) {
+                $webform_types = webform_node_types();
+                if (in_array($ex['type'], $webform_types)) {
+                    $ex['use_authorizenet'] = false;
+                }
+            }
             node_export_import(json_encode(array($ex)));
             
             $node = entity_uuid_load('node', array($uuid));
