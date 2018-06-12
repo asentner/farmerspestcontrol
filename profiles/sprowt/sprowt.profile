@@ -39,13 +39,14 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
     }
 
     $tasks['install_select_locale']['function'] = 'sprowt_locale_selection';
-    $Sprowtbuilder = new SprowtBuilder();
-
-    $tasks_performed = $install_state['tasks_performed'];
+    
     if(!isset($install_state['storage'])) {
         $install_state['storage'] = array();
     }
-    $install_state['storage']['is_starter'] = $Sprowtbuilder->is_starter();
+    if(!empty($install_state['tasks_performed']) && in_array('install_bootstrap_full', $install_state['tasks_performed'])) {
+        $Sprowtbuilder = new SprowtBuilder();
+        $install_state['storage']['is_starter'] = $Sprowtbuilder->is_starter();
+    }
     $install_state['storage']['from_file'] = variable_get('sprowt_install_from_file', false);
 
 

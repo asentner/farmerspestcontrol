@@ -38,7 +38,7 @@ Class SprowtBuilder {
      *
      */
     function getData(){
-        if(!db_table_exists('sprowt_setup')) {
+        if(!function_exists('db_table_exists') || !db_table_exists('sprowt_setup')) {
             return false;
         }
         $query = db_query(
@@ -106,6 +106,10 @@ Class SprowtBuilder {
         }
         
         return isset($this->data['starter']['is_starter']) ? $this->data['starter']['is_starter'] : null;
+    }
+    
+    static function isStarter() {
+    
     }
     
     /**
