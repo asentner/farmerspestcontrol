@@ -510,7 +510,7 @@ function _sprowt_landing_pages_add_default_node($uuid) {
             if(module_exists('authorizenetwebform')) {
                 $webform_types = webform_node_types();
                 if (in_array($ex['type'], $webform_types)) {
-                    $ex['use_authorizenet'] = false;
+                    $ex['use_authorizenet'] = 0;
                 }
             }
             node_export_import(json_encode(array($ex)));
