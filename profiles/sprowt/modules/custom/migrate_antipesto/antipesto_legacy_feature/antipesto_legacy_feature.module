@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Antipesto Legacy Feature feature.
- */
-
-include_once 'antipesto_legacy_feature.features.inc';
