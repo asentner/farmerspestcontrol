@@ -65,9 +65,9 @@ $return = array(
     'message' => $progress['message'],
 );
 
-$dir = __DIR__;
-$pidfile = $dir . '/sprowtpid';
+$dir = sys_get_temp_dir();
 $outputfile = $dir . '/sprowtoutput.log';
+$pidfile = $dir . '/sprowtpid';
 
 function isRunning($pid){
     try{
@@ -82,7 +82,6 @@ function isRunning($pid){
 
 if($current == 100) {
     unlink($pidfile);
-    unlink($outputfile);
 }
 elseif(!isRunning(file_get_contents($pidfile))) {
     $log = file_get_contents($outputfile);
