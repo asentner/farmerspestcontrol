@@ -1,0 +1,83 @@
+.block--views-locations-list {
+  .view-content{
+    padding-top: 15px;
+    .views-row{
+      padding: 5px 0;
+      border-bottom: solid 2px;
+      &:last-of-type{
+        border-bottom: none;
+      }
+    }
+    .node--location--teaser{
+      @include flexbox;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      h2{
+        padding-right: 5px;
+        margin-bottom: 0;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.53;
+        letter-spacing: .2px;
+        &:after{
+          content: ":";
+        }
+      }
+      .node__content{
+
+        span{
+          font-size: 16px;
+          line-height: 1;
+          letter-spacing: .2px;
+        }
+      }
+      .field-phone-number{
+        padding-left: 10px;
+        span{
+          padding-right: 5px;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1;
+          letter-spacing: .2px;
+        }
+        a{
+          font-size: 16px;
+          line-height: 1.58;
+          letter-spacing: .2px;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    padding-bottom: 20px;
+    .view-content{
+      .node--location--teaser{
+        flex-wrap: nowrap;
+        h2{
+          font-size: 17px;
+        }
+        .node__content{
+          padding-right: 10px;
+          border-right: 1px solid;
+          span{
+            font-size: 17px;
+          }
+        }
+        .field-phone-number{
+          span{
+            font-size: 17px;
+          }
+          a{
+            font-size: 17px;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    padding-bottom: 0;
+  }
+}

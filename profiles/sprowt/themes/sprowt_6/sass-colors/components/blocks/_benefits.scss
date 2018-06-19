@@ -1,0 +1,47 @@
+//front Benefits intro
+.front{
+  .block--bean-benefits-intro-block-front{
+    .content{
+      .field--name-field-h1-title p{
+        strong{
+          color: palette(primary, base);
+        }
+      }
+    }
+  }
+}
+
+//LTP benefits
+.local-target-benefits {
+   $color-bg: palette(neutral, wild-sand);
+   $color-border: palette(white, pure);
+   $color-title: palette(primary, base);
+   $color-title-hover: palette(secondary, base);
+
+   background-color: $color-bg;
+
+   .node__title {
+      color: $color-title;
+      a {
+        color: $color-title;
+        &:hover {
+          color: $color-title-hover;
+        }
+      }
+   }
+   .field--name-field-image {
+      img {
+         border-color: $color-border;
+         background-color: $color-border;
+      }
+   }
+}
+
+//Benefits bean list
+.node--benefit--alt-teaser{
+  .node__content{
+    .node__title, .field--name-body{
+      color: palette(secondary, light);
+    }
+  }
+}

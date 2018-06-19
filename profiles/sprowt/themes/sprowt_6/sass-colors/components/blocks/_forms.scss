@@ -1,0 +1,56 @@
+//front forms
+.front, .node-type-city-page, .node-type-localtarget{
+  .block--webform{
+    .block__content{
+      .webform-client-form{
+        .form-actions{
+          input{
+            background-color: palette(primary, dark);
+            color: palette(white, pure);
+            border-color: palette(primary, dark) !important;
+            &:hover{
+              color: palette(primary, dark);
+              background-color: palette(white, pure);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+//sidebar forms
+.block--form-sidebar {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, haze);
+  $color-title: palette(secondary, base);
+  $color-text: palette(neutral, xanadu);
+
+  border-color: $color-border !important;
+  background-color: $color-bg;
+  color: $color-text;
+  .block__title {
+    color: $color-title;
+  }
+  label {
+    color: $color-text;
+  }
+}
+
+// local target page form
+.node-type-localtarget{
+  .block--webform{
+    background: transparent;
+    h2{
+      color: palette(primary, base);
+    }
+    .block__content{
+      .webform-client-form{
+        .form-actions{
+
+        }
+      }
+    }
+  }
+}

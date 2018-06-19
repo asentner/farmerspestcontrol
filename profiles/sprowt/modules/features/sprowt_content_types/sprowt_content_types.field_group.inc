@@ -13,6 +13,33 @@ function sprowt_content_types_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_call_out|node|location|form';
+  $field_group->group_name = 'group_call_out';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'location';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Call Out',
+    'weight' => '3',
+    'children' => array(
+      0 => 'field_call_out',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-call-out field-group-tab',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_call_out|node|location|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_content|node|affiliation|form';
   $field_group->group_name = 'group_content';
   $field_group->entity_type = 'node';
@@ -216,18 +243,18 @@ function sprowt_content_types_field_group_info() {
     'label' => 'Content',
     'weight' => '1',
     'children' => array(
-      0 => 'field_email',
-      1 => 'field_google_url',
-      2 => 'field_locality',
-      3 => 'field_market',
-      4 => 'field_phone_number',
-      5 => 'field_postal_code',
-      6 => 'field_state',
-      7 => 'field_street_address',
-      8 => 'field_phone_label',
-      9 => 'field_address_label',
-      10 => 'field_hours',
-      11 => 'field_hours_label',
+      0 => 'field_address_label',
+      1 => 'field_email',
+      2 => 'field_google_url',
+      3 => 'field_hours',
+      4 => 'field_hours_label',
+      5 => 'field_locality',
+      6 => 'field_market',
+      7 => 'field_phone_label',
+      8 => 'field_phone_number',
+      9 => 'field_postal_code',
+      10 => 'field_state',
+      11 => 'field_street_address',
       12 => 'title',
     ),
     'format_type' => 'tab',
@@ -637,6 +664,7 @@ function sprowt_content_types_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Call Out');
   t('Content');
   t('Locale');
   t('Social and Map');

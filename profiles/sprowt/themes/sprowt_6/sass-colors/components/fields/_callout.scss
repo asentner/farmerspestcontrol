@@ -1,0 +1,11 @@
+.field--name-field-call-out {
+  $color-callout-bg: palette(secondary);
+  $color-callout-fg: palette(white, pure);
+
+  padding: 20px;
+  background-color: $color-callout-bg;
+  color: $color-callout-fg;
+  h1, h2, h3, h4, h5 {
+    color: $color-callout-fg;
+  }
+}

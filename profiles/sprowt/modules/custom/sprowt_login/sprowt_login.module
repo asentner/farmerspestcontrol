@@ -57,7 +57,17 @@ function _sprowt_login_login_page() {
             'query' => drupal_get_query_parameters()
         ));
     }
-
+    
+    $tag = array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+            'name' => 'robots',
+            'content' => 'noindex,nofollow'
+        ),
+    );
+    
+    drupal_add_html_head($tag, 'sprowt_no_index');
+    
     return drupal_get_form('user_login_block');
 }
 

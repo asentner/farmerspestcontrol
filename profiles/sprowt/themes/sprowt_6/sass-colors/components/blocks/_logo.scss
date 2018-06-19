@@ -1,0 +1,16 @@
+// header
+.block--logo-block-logo {
+  .mobile-menu-toggle {
+    i {
+      color: palette(primary);
+    }
+  }
+  @include breakpoint($tab) {
+    .tablet-menu-toggle {
+      color: palette(neutral, emperor);
+      i {
+        color: palette(primary);
+      }
+    }
+  }
+}

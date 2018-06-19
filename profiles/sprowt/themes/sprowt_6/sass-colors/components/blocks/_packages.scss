@@ -1,0 +1,146 @@
+%package-list {
+  $color-title-bg: palette(primary, base);
+  $color-title-fg: palette(white, pure);
+
+  $color-row-odd-bg: palette(neutral, wild-sand);
+  $color-row-even-bg: lighten($color-row-odd-bg, 10);
+
+  $color-node-title: palette(primary, base);
+  $color-node-title-hover: palette(secondary, base);
+
+  $color-button-bg: palette(primary, base);
+  $color-button-fg: palette(white, pure);
+  $color-button-hover: palette(secondary, base);
+
+  .block__title {
+    background-color: $color-title-bg;
+    color: $color-title-fg;
+  }
+  .view-content {
+    border-color: $color-row-odd-bg;
+  }
+  .views-row-odd {
+    background-color: $color-row-odd-bg;
+  }
+  .views-row-even {
+    background-color: $color-row-even-bg;
+  }
+  .node__title {
+    a {
+      color: $color-node-title;
+      &:hover {
+        color: $color-node-title-hover;
+      }
+    }
+  }
+  .field--name-body {
+    .field__item {
+      .more-link {
+        background-color: $color-button-bg;
+        color: $color-button-fg;
+        &:hover {
+          background-color: $color-button-hover;
+        }
+      }
+    }
+  }
+}
+
+%package-grid {
+  $color-block-bg: palette(neutral, wild-sand);
+  .view-content {
+    background-color: $color-block-bg;
+  }
+  .node {
+    background-color: transparent;
+  }
+}
+
+.block--views-packages-services,
+.block--views-packages-localtarget {
+  @extend %package-list;
+}
+
+.block--views-packages-services.block--grid,
+.block--views-packages-localtarget.block--grid {
+  @extend %package-grid;
+}
+
+//services package package comparison
+.block--views-packages-package-comparison{
+  .view-content{
+    .node-wrap{
+      border-color: palette(neutral, mercury);
+      .node--package--tertiary-teaser{
+        .node__title{
+          color: palette(white, pure);
+        }
+        .highlighted-text{
+          background-color: palette(neutral, mercury);
+          span{
+            color: palette(white, pure);
+          }
+        }
+        .content-wrap{
+          .starting-price{
+            color: palette(neutral, mercury);
+          }
+          .block-link{
+            .field--name-field-block-link{
+              .more-link{
+                color: palette(white, pure);
+                &:after{
+                  color: palette(white, pure);
+                }
+              }
+            }
+            &:hover{
+              background-color: palette(neutral, mercury) !important;
+              .field--name-field-block-link{
+                .more-link{
+                  color: palette(white, pure);
+                  &:after{
+                    color: palette(white, pure);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+//full package package
+.not-front.node-type-package{
+  .node--package--full{
+    .node-title{
+      background-color: palette(neutral, gallery);
+      background: -webkit-linear-gradient(118deg, palette(neutral, gallery) 55%, palette(neutral, mercury) 55%) repeat scroll 0 0;
+      background: -moz-linear-gradient(118deg, palette(neutral, gallery) 55%, palette(neutral, mercury) 55%) repeat scroll 0 0;
+      background: linear-gradient(118deg, palette(neutral, gallery) 55%, palette(neutral, mercury) 55%) repeat scroll 0 0;
+      .node__title{
+        color: palette(primary, base);
+      }
+    }
+    h1{
+      color: palette(secondary, light);
+    }
+    h2{
+      color: palette(secondary, light);
+    }
+    h3, .field--name-field-subtitle{
+      color: palette(neutral, mercury);
+    }
+    .field--name-body{
+      h2{
+        color: palette(secondary, light);
+      }
+      h2{
+        color: palette(neutral, mercury);
+      }
+    }
+  }
+}

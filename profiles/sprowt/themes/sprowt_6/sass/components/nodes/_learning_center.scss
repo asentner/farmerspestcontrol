@@ -1,0 +1,121 @@
+//page layout
+.node-type-page.page-node-42{
+  .node--page--full{
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: center;
+    h1{
+      max-width: $container;
+      margin: 0 auto;
+      font-size: 40px;
+      font-weight: 800;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .field--name-field-intro{
+      max-width: 700px;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.65;
+      margin: 0 auto;
+    }
+    .node__content{
+      margin-top: 20px;
+      .pest-tool{
+        font-size: 19px;
+        .carat-link{
+          font-weight: 600;
+          &:after{
+            @include faicon('\f105');
+            padding-left: 5px;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .node--page--full{
+      h1{
+        font-size: 50px;
+      }
+      .node__content{
+        margin-top: 30px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .node--page--full{
+      h1{
+        font-size: 60px;
+      }
+      .node__content{
+        margin-top: 35px;
+      }
+    }
+  }
+}
+
+//Concerns view setup
+.block--views-learning-center-learning-list{
+  max-width: 1000px;
+  margin: 40px auto 0;
+  .view-learning-center{
+    .views-row{
+      padding: 40px 0;
+      border-bottom: solid 4px;
+      &:last-of-type{
+        border-bottom: none;
+      }
+    }
+  }
+  .issue-wrap{
+    max-width: 800px;
+    @include flexbox;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    >div{
+      flex: 1 1 33%;
+      max-width: 266px;
+      .views-field{
+        a{
+          font-size: 17px;
+          line-height: 1.76;
+          &:before{
+            @include faicon('\f105');
+            padding-right: 7px;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .issue-wrap{
+      margin-left: 24%;
+      text-align: left;
+    }
+  }
+  @include breakpoint($desk){
+    .issue-wrap{
+      margin-left: 20%;
+    }
+  }
+}
+
+
+//custom node styling - hide sidebar
+.page-node-37.section-learning-center{
+  .l-content{
+    max-width: 100%;
+    .node--page--full{
+      text-align: center;
+      h1{
+        text-align: center;
+      }
+    }
+  }
+  aside{
+    display: none;
+  }
+
+}

@@ -1,0 +1,14 @@
+.block--views-team-list {
+  $color-border: palette(neutral, alto);
+  $color-bg: palette(white, pure);
+
+  .node {
+    background-color: transparent;
+  }
+  .field--name-field-image {
+    img {
+      background-color: $color-bg;
+      border-color: $color-border;
+    }
+  }
+}

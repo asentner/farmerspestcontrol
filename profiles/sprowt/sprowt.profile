@@ -39,13 +39,14 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
     }
 
     $tasks['install_select_locale']['function'] = 'sprowt_locale_selection';
-    $Sprowtbuilder = new SprowtBuilder();
-
-    $tasks_performed = $install_state['tasks_performed'];
+    
     if(!isset($install_state['storage'])) {
         $install_state['storage'] = array();
     }
-    $install_state['storage']['is_starter'] = $Sprowtbuilder->is_starter();
+    if(!empty($install_state['tasks_performed']) && in_array('install_bootstrap_full', $install_state['tasks_performed'])) {
+        $Sprowtbuilder = new SprowtBuilder();
+        $install_state['storage']['is_starter'] = $Sprowtbuilder->is_starter();
+    }
     $install_state['storage']['from_file'] = variable_get('sprowt_install_from_file', false);
 
 
@@ -484,6 +485,9 @@ function sprowt_setup(&$install_state){
     else {
         return false;
     }
+    
+    variable_set('site_name', $data['company_info']['company_name']);
+    variable_set('site_mail', 'devel@coalmarch.com');
 }
 
 function _sprowt_get_data(){
@@ -666,13 +670,15 @@ function sprowt_is_sprowt_theme($theme) {
     return in_array($theme, array_keys($sprowt_themes));
 }
 
-function sprowt_add_cm_user($username) {
+function sprowt_add_cm_user($username, $password = '') {
     require_once drupal_get_path('profile', 'sprowt') . '/includes/userbuilder.php';
     
     $UB = new UserBuilder();
     
-    if($account = $UB->addCoalmarchUser($username)) {
-        _user_mail_notify('register_admin_created', $account);
+    if($account = $UB->addCoalmarchUser($username, $password)) {
+        if(empty($password)) {
+            _user_mail_notify('register_admin_created', $account);
+        }
     }
     else {
         throw new SprowtException('Coalmarch user, '.$username.',  could not be created');

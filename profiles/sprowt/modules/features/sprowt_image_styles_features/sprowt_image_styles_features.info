@@ -16,6 +16,7 @@ features[image][] = focal_point_scale_and_crop_600x475
 features[image][] = focal_point_scale_and_crop_800x600
 features[image][] = focal_point_scale_and_crop_80x80
 features[image][] = fresh_light_service
+features[image][] = ltp_local_image
 features[image][] = markets
 features[image][] = package_icon
 features[image][] = primary__800x400_

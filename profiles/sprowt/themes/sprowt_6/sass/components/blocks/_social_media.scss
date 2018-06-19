@@ -1,0 +1,73 @@
+.block--sprowt-settings-sprowt-social-media {
+  padding: 20px;
+  font-size: 23px;
+  .block__content {
+    ul {
+      @include flexbox;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    li{
+      padding: 8px 0;
+      width: 145px;
+    }
+    a {
+      @include flexbox;
+      align-items: center;
+      i{
+        @include flexbox;
+        justify-content: center;
+        align-items: center;
+        box-sizing: content-box;
+        border-radius: 50%;
+        line-height: normal;
+        width: 45px;
+        min-width: 45px;
+        height: 45px;
+      }
+      span{
+        padding-left: 15px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: .2px;
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    padding: 35px 0;
+    .block__content {
+      ul {
+        flex-direction: row;
+        justify-content: center;
+      }
+      li {
+        padding: 0;
+        width: auto;
+        a{
+          span{
+            max-width: 145px;
+          }
+        }
+        + li {
+          margin-left: 30px;
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    padding: 50px 0;
+    .block__content{
+      li{
+        a{
+          span{
+            max-width: 100%;
+          }
+        }
+        + li{
+          margin-left: 40px;
+        }
+      }
+    }
+  }
+}

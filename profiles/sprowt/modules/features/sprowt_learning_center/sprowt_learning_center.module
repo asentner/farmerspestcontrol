@@ -22,7 +22,38 @@ function sprowt_learning_center_theme() {
                 'title' => NULL,
             ),
         'base hook' => 'views_view_unformatted',
-    ),
+      ),
+      'node__concern__alt_teaser' => array(
+        'render element' => 'content',
+        'base hook' => 'node',
+        'template' => 'node--concern--alt-teaser',
+        'path' => drupal_get_path('module', 'sprowt_learning_center') . '/templates',
+      ),
+      'node__concern__secondary_teaser' => array(
+        'render element' => 'content',
+        'base hook' => 'node',
+        'template' => 'node--concern--secondary-teaser',
+        'path' => drupal_get_path('module', 'sprowt_learning_center') . '/templates',
+      ),
+      'node__concern__teaser' => array(
+        'render element' => 'content',
+        'base hook' => 'node',
+        'template' => 'node--concern--teaser',
+        'path' => drupal_get_path('module', 'sprowt_learning_center') . '/templates',
+      ),
+      'node__concern' => array(
+        'render element' => 'content',
+        'base hook' => 'node',
+        'template' => 'node--concern',
+        'path' => drupal_get_path('module', 'sprowt_learning_center') . '/templates',
+      ),
+      'node__issue' => array(
+        'render element' => 'content',
+        'base hook' => 'node',
+        'template' => 'node--issue',
+        'path' => drupal_get_path('module', 'sprowt_learning_center') . '/templates',
+      ),
+
   );
 }
 
@@ -67,4 +98,9 @@ function sprowt_learning_center_cb_identifier_values($identifier, $obj)
     $crumb_items[] = $crumb_item;
 
     return $crumb_items;
+}
+
+function sprowt_learning_center_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_learning_center');
+    drupal_add_css($path . '/css/sprowt_learning_center.css');
 }

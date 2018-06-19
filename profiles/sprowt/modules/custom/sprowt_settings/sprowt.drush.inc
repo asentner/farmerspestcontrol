@@ -44,10 +44,11 @@ function sprowt_drush_command() {
     $items['cm-add'] = array(
         'description' => 'Add a coalmarch user',
         'options' => array(
-            'name' => 'coalmarch username'
+            'name' => 'coalmarch username',
+            'password' => 'optionally set password'
         ),
         'examples' => array(
-            'drush cm-add --name=wmcmillian',
+            'drush cm-add --name=wmcmillian --password="SomePassword123"',
             'drush cm-add',
             'drush cma'
         ),
@@ -186,7 +187,7 @@ function drush_sprowt_menu_export($menu) {
 
 function drush_sprowt_cm_add(){
     $username = drush_get_option('name');
-
+    $password = drush_get_option('password');
     if(empty($username)) {
         $files = glob(drupal_get_path('profile', 'sprowt') . '/coalmarch_users/*.json');
         $options = array();
@@ -200,7 +201,7 @@ function drush_sprowt_cm_add(){
     }
     
     try {
-        sprowt_add_cm_user($username);
+        sprowt_add_cm_user($username, $password);
         drush_log("$username created!", 'ok');
     }
     catch (SprowtException $e){

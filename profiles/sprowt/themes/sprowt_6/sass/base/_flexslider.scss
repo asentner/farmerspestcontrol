@@ -1,0 +1,21 @@
+// this resets all the flexslider stuff
+.flexslider {
+	box-shadow: none;
+	margin: 0;
+	background: none;
+	border: 0;
+}
+
+.flex-control-nav {
+	display: none;
+}
+.flexslider:hover{
+	.flex-direction-nav{
+		.flex-prev{
+			left:-8px;
+		}
+		.flex-next{
+			right:5px;
+		}
+	}
+}

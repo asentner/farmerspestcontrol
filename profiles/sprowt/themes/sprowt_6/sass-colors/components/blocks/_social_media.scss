@@ -1,0 +1,19 @@
+.block--sprowt-settings-sprowt-social-media {
+  .block__content {
+    a {
+      color: palette(white, pure);
+      i{
+        background-color: palette(primary, base);
+      }
+      &:hover{
+        i{
+          background-color: palette(white, pure);
+          color: palette(primary, base);
+        }
+        span{
+          color: palette(primary, base);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+div.entity-paragraphs-item.plan-details {
+  background-color: palette(primary, dark);
+  color: palette(secondary, base);
+  h2, h3, h4, h5, h6 {
+      color: palette(secondary, base);
+  }
+
+  .paragraphs-item-plan-information{
+    .header{
+      background-color: palette(secondary, light);
+    }
+    .field--name-field-plan-features-header{
+      color: palette(primary, dark);
+    }
+    .field--name-field-plan-features{
+      .field__item:before{
+        color: palette(primary, base);
+      }
+    }
+    .field--name-field-call-out{
+      strong{
+        color: palette(primary, dark);
+        &:before, &:after{
+          color: palette(secondary, light);
+        }
+      }
+    }
+    .field--name-field-link{
+      a{
+        color: palette(primary, base);
+        &:before{
+          color: palette(primary, base);
+        }
+      }
+    }
+  }
+
+  .paragraphs-item-body{ //add box shadow and border to box - override module
+    box-shadow: 0 5px 49.2px 8px rgba(0, 0, 0, 0.35);
+    // border-color: #b2b2b2;
+    .field--name-field-header{
+      color: palette(primary, dark);
+    }
+    .field--name-field-body-text {
+    }
+
+    .field--name-field-intro{
+      .starting-at{
+        color: palette(primary, dark);
+      }
+    }
+  }
+
+  @include breakpoint($tab) {
+  }
+
+  @include breakpoint($desk) {
+      background-size: auto 120%;
+      background-repeat: no-repeat;
+      background-position: -500px;
+  }
+}

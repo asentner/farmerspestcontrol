@@ -1,0 +1,66 @@
+.block--views-affiliates-list {
+  $image-max-width: 275px; // should be controlled by image style
+  $image-spacing-vert: 30px; // vertical spacing for mobile
+  $image-spacing-horiz: 20px; // minimum horizontal spacing for tablet and wider
+  $content-max-width: $desk; // smaller value for less affiliations
+
+  padding: 35px 20px 55px;
+  .block__title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 3px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 45px;
+  }
+  .view-content {
+    @include flexbox;
+    flex-direction: column;
+    align-items: center;
+  }
+  .views-row {
+    + .views-row {
+      margin-top: $image-spacing-vert;
+    }
+  }
+  .field--name-field-image {
+    max-width: $image-max-width;
+  }
+  img {
+    max-height: 90px;
+    max-width: $image-max-width;
+    width: auto;
+    @extend %image-hover;
+  }
+  @include breakpoint($tab) {
+    padding: 65px 20px 85px;
+    .view-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      max-width: $content-max-width;
+      margin: 0 auto;
+    }
+    .views-row {
+      padding: 0 $image-spacing-horiz;
+      + .views-row {
+        margin: 0;
+      }
+    }
+    img{
+      max-height: 70px;
+    }
+  }
+  @include breakpoint($desk){
+    .block__title{
+      font-size: 30px;
+    }
+    .views-row {
+      padding: 0 $image-spacing-horiz/2;
+    }
+    img{
+      max-height: 90px;
+    }
+  }
+}

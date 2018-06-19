@@ -1,0 +1,59 @@
+.not-front.node-type-issue{
+  .node--issue--full{
+    .node-title{
+      // background-color: palette(neutral, gallery);
+      // background: -webkit-linear-gradient(118deg, palette(neutral, gallery) 55%, palette(neutral, mercury) 55%) repeat scroll 0 0;
+      // background: -moz-linear-gradient(118deg, palette(neutral, gallery) 55%, palette(neutral, mercury) 55%) repeat scroll 0 0;
+      // background: linear-gradient(118deg, palette(neutral, gallery) 55%, palette(neutral, mercury) 55%) repeat scroll 0 0;
+      .node__title{
+        color: palette(primary, base);
+      }
+    }
+    h1{
+      color: palette(secondary, light);
+    }
+    h2{
+      color: palette(secondary, light);
+    }
+    h3, .field--name-field-subtitle{
+      color: palette(secondary, lightest);
+    }
+    .field--name-body{
+      h2{
+        color: palette(secondary, light);
+      }
+      h2{
+        color: palette(secondary, lightest);
+      }
+    }
+    .body-content{
+      .field--name-body{
+        p{
+          color: palette(secondary, light);
+        }
+      }
+    }
+    .identifications{
+      .field--name-field-identification-title{
+        background: palette(secondary, base);
+        .field__item{
+          color: palette(white, pure);
+        }
+      }
+      .field-collection-container{
+        .entity-field-collection-item{
+          >.content{
+            .field--name-field-indentification-label{
+              color: palette(secondary, base);
+              background-color: palette(neutral, mercury);
+            }
+            .field--name-field-identification-description{
+              color: palette(secondary, base);
+              background-color: palette(neutral, gallery);
+            }
+          }
+        }
+      }
+    }
+  }
+}

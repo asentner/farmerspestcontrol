@@ -13,6 +13,8 @@ Class SprowtBuilder {
     
     public $data = array();
     public $default_images = array();
+
+    private $node_json;
     
     
     function __construct() {
@@ -36,7 +38,7 @@ Class SprowtBuilder {
      *
      */
     function getData(){
-        if(!db_table_exists('sprowt_setup')) {
+        if(!function_exists('db_table_exists') || !db_table_exists('sprowt_setup')) {
             return false;
         }
         $query = db_query(
@@ -104,6 +106,10 @@ Class SprowtBuilder {
         }
         
         return isset($this->data['starter']['is_starter']) ? $this->data['starter']['is_starter'] : null;
+    }
+    
+    static function isStarter() {
+    
     }
     
     /**
@@ -192,7 +198,11 @@ Class SprowtBuilder {
         if(!empty($this->data['company_info']['contact_email'])){
             variable_set('sprowt_settings_contact_email', $this->data['company_info']['contact_email']);
         }
-  
+    
+        if(!empty($this->data['company_info']['company_type'])){
+            variable_set('sprowt_settings_company_type', $this->data['company_info']['company_type']);
+        }
+        
         variable_set('sprowt_settings_webform_to_email', $this->data['company_info']['webform_to_email']);
 
         if(function_exists('_sprowt_login_create_sprowt_company_alias')) {
@@ -227,8 +237,20 @@ Class SprowtBuilder {
     function addNodes(){
         variable_set('sprowt_settings_paths', $this->paths);
 
+        $sprowt_path = drupal_get_path('profile', 'sprowt');
+        $theme_path = drupal_get_path('theme', $this->data['branding']['theme']);
+        $json_filename = "sprowt_export.json";
+        if(file_exists($theme_path . "/$json_filename")) {
+            $json_file = $theme_path . "/$json_filename";
+        }
+        else {
+            $json_file = $sprowt_path . "/$json_filename";
+        }
+
+
         // drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
-        $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprowt/sprowt_export.json");
+        $node_json = file_get_contents($json_file);
+        $this->node_json = $node_json;
         
         
         $nodes = json_decode($node_json,true);
@@ -370,7 +392,8 @@ Class SprowtBuilder {
             'menu-mobile-callout' => "menu-mobile-callout_link_export.json",
             'menu-utility-menu' => "menu-utility-menu_link_export.json",
             'menu-mobile-footer' => "menu-mobile-footer_link_export.json",
-            'menu-mobile-utility' => "menu-mobile-utility_link_export.json"
+            'menu-mobile-utility' => "menu-mobile-utility_link_export.json",
+            'menu-ctm-utility-menu' => "menu-ctm-utility-menu_link_export.json"
         );
 
         $MB = new MenuBuilder();
@@ -427,6 +450,8 @@ Class SprowtBuilder {
                     $n->$instance = $node[$instance];
                 }
             }
+
+            node_export_file_field_import($n, clone $n);
 
             if($n->type == 'webform') {
 
@@ -800,8 +825,11 @@ Class SprowtBuilder {
     }
 
     function afterRevert(){
-        // drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
-        $node_json = file_get_contents(DRUPAL_ROOT . "/profiles/sprowt/sprowt_export.json");
+        if(empty($this->data)){
+            $this->getData();
+        }
+        $branding = $this->data['branding'];
+        $node_json = $this->node_json;
         $orig_nodes = json_decode($node_json,true);
         $uuid_array = array();
         foreach($orig_nodes as $node) {
@@ -842,6 +870,15 @@ Class SprowtBuilder {
           }
           
           node_save($node);
+        }
+
+        //update contexts
+        $themeBuilder = new ThemeBuilder();
+        $blockFile = $themeBuilder->getBlockFile($branding['theme'], $branding['theme']);
+        if(!empty($blockFile)) {
+            $blockBuilder = new BlockBuilder();
+            $blockBuilder->setFromFile($blockFile);
+            $blockBuilder->handleContexts();
         }
     }
 

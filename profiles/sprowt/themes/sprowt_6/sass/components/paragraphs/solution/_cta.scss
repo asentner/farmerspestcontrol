@@ -1,0 +1,70 @@
+div.entity-paragraphs-item.cta {
+    max-width: 100%;
+    padding: 50px 20px;
+    //background-image: url('../images/bg-texture-solution-finder.png');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 600;
+    .field--name-field-header {
+        @extend h3;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        font-style: normal;
+    }
+
+    em {
+        @extend h2;
+        font-family: $font-body;
+        font-style: normal;
+        font-weight: 800;
+    }
+
+    .button {
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    > .content {
+        max-width: 560px;
+        margin: 0 auto;
+    }
+
+    @include breakpoint($tab) {
+        font-size: 30px;
+        padding: 80px 30px 75px;
+        .field--name-field-header {
+            font-size: 30px;
+        }
+
+        em {
+            font-size: 48px;
+        }
+
+        p + p {
+            margin-top: 10px;
+        }
+    }
+
+    @include breakpoint(1350px) {
+        > .content {
+            position: relative;
+            // &:after {  //commented out until updated branding on image
+            //     content: url('../images/tpc-guy.png');
+            //     position: absolute;
+            //     left: 560 + 52px;
+            //     bottom: -76px;
+            // }
+        }
+    }
+
+    @include breakpoint(1600px) {
+        background-position: right percentage(52/1600) bottom;
+    }
+
+}

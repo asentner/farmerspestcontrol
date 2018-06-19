@@ -10,6 +10,12 @@
 function sprowt_menu_settings_menu_default_menu_custom() {
   $menus = array();
 
+  // Exported menu: menu-ctm-utility-menu.
+  $menus['menu-ctm-utility-menu'] = array(
+    'menu_name' => 'menu-ctm-utility-menu',
+    'title' => 'CTM Utility Menu',
+    'description' => '',
+  );
   // Exported menu: menu-mobile-callout.
   $menus['menu-mobile-callout'] = array(
     'menu_name' => 'menu-mobile-callout',
@@ -42,6 +48,7 @@ function sprowt_menu_settings_menu_default_menu_custom() {
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('CTM Utility Menu');
   t('Mobile Footer');
   t('Mobile Utility');
   t('Mobile callout');

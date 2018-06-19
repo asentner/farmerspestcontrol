@@ -1,0 +1,93 @@
+%ebooking-panel-title {
+  color: palette(secondary, base);
+}
+
+%ebooking-selected-package {
+  &:after {
+    background-color: palette(secondary, base);
+  }
+}
+
+// package styling - this will likely change once we pull in packages as nodes
+%ebooking-package {
+  .package {
+    &:hover,
+    &.selected {
+      border-color: palette(secondary, base);
+    }
+    &.selected {
+      &:after {
+        @extend %ebooking-selected-package;
+      }
+    }
+    .current-price {
+      color: palette(primary, base);
+    }
+  }
+} // end package styling
+
+
+.node-ebooking {
+  .l-main {
+    background-color: palette(secondary, base);
+    .node--webform--full {
+      .node__content {
+        .node__title:first-child {
+          color: palette(white , pure);
+        }
+      }
+    }
+  }
+  .webform-component--fieldset-4--instructions-4 {
+    p:first-child {
+      color: palette(primary, base);
+    }
+  }
+}
+
+.node-ebooking.processed {
+  .step-number {
+    color: palette(primary, base);
+  }
+  .webform-component-markup[class*="title"] {
+    h2, h3 {
+      @extend %ebooking-panel-title;
+    }
+  }
+  div[class*="if-business"] {
+    border-color: palette(secondary, base);
+    .close-popup {
+      color: palette(secondary, base);
+    }
+  }
+  .basic-form {
+    color: palette(secondary, light);
+    &:hover {
+      color: palette(secondary, base);
+    }
+  }
+  // package styling - this will likely change once we pull in packages as nodes
+  .webform-component-optionsmarkup {
+    @extend %ebooking-package;
+  }
+}
+
+// ebooking checkout page
+.node-ebooking .ebooking_summary {
+  .webform-component-markup[class*="review"] {
+    @extend %ebooking-package;
+    > h3 {
+      color: palette(primary, base);
+    }
+    .package {
+      @extend %ebooking-selected-package;
+      border-color: palette(secondary, base);
+    }
+  }
+  .webform-component-markup[class*="tooltip"] {
+    border-color: palette(secondary, base);
+    .close-tooltip {
+      color: palette(secondary, base);
+    }
+  }
+}

@@ -1,0 +1,84 @@
+//front testimonials
+.block-front-testimonials{
+  .block__title{
+    color: palette(primary, dark);
+  }
+  .block__content{
+    .view-header{
+      h2{
+        color: palette(black, base);
+      }
+    }
+    .view-content{
+      .views-row{
+        .node--testimonial--teaser{
+          border-color: palette(neutral, wild-sand);
+          .reviewer{
+            color: palette(primary, base);
+          }
+          .fa-star{
+            color: palette(tertiary, dark);
+          }
+        }
+      }
+    }
+  }
+}
+
+%block--testimonials-sidebar {
+  $color-bg: palette(primary, dark);
+  $color-title: palette(white, pure);
+  $color-stars: palette(tertiary, light);
+  $color-body: palette(white, pure);
+
+  background-color: $color-bg;
+  .block__title {
+    color: $color-title;
+  }
+  .node__content {
+    color: $color-body;
+  }
+  .fa-star {
+    color: $color-stars;
+  }
+  .node--testimonial{
+    .field--title, .field--name-field-market{
+      color: $color-stars;
+    }
+  }
+}
+
+.block--testimonials-sidebar {
+  @extend %block--testimonials-sidebar;
+}
+
+.block--views-testimonials-random {
+  @extend %block--testimonials-sidebar;
+}
+
+// LTP testimonial
+.local-target-testimonial {
+  $color-title: palette(secondary, base);
+  $color-star: palette(primary, base);
+
+  .block__content {
+    color: $color-title;
+  }
+  .rating {
+    color: $color-star;
+  }
+  .field--title,
+  .field--name-field-market {
+    font-size: 15px;
+  }
+}
+
+.local-target-testimonial {
+    $color-bg: palette(secondary, base);
+    $color-body: palette(white, pure);
+
+    background-color: $color-bg;
+    .block__content {
+      color: $color-body;
+    }
+}

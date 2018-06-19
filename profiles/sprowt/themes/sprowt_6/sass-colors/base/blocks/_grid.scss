@@ -1,0 +1,11 @@
+%block--grid {
+  $grid-color-bg: palette(neutral, wild-sand);
+
+  .node {
+    background-color: $grid-color-bg;
+  }
+}
+
+.block--grid {
+  @extend %block--grid;
+}

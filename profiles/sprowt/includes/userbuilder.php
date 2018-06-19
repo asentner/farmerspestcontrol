@@ -123,7 +123,7 @@ class UserBuilder {
         return $user;
     }
 
-    function addCoalmarchUser($username) {
+    function addCoalmarchUser($username, $password = '') {
         require_once DRUPAL_ROOT . '/includes/password.inc';
         $filepath = getcwd() . "/profiles/sprowt/coalmarch_users/$username.json";
         if(!file_exists($filepath)) {
@@ -132,7 +132,16 @@ class UserBuilder {
         else {
             $json = file_get_contents($filepath);
             $userinfo = json_decode($json, true);
-            $userinfo['password'] = user_hash_password(rand() . time());
+            if(!empty($password)) {
+                if(!empty($userinfo['encrypted'])) {
+                    unset($userinfo['encrypted']);
+                }
+                $userinfo['password'] = $password;
+            }
+            else {
+                $userinfo['encrypted'] = true;
+                $userinfo['password'] = user_hash_password(rand() . time());
+            }
             return $this->addUser($userinfo);
         }
     }

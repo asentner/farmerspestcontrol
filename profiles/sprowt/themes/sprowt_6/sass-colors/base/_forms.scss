@@ -1,0 +1,27 @@
+%form-text {
+  $color-bg: palette(white, pure);
+  $color-border: palette(neutral, mercury);
+  $color-border-focus: palette(neutral, xanadu);
+
+  background-color: $color-bg;
+  border-color: $color-border !important;
+  &:focus {
+    border-color: $color-border-focus;
+  }
+}
+
+input {
+  @extend %form-text;
+  &[type=submit] {
+    @extend %button;
+    @include button-color();
+  }
+}
+
+textarea {
+  @extend %form-text;
+}
+
+select {
+  @extend %form-text;
+}

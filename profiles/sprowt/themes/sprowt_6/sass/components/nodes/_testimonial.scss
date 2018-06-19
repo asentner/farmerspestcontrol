@@ -1,0 +1,17 @@
+.node--testimonial {
+  [itemprop="reviewRating"] {
+    font-size: 18px;
+    line-height: 1;
+    margin-top: .5em;
+    margin-bottom: 1em;
+    // text-align: center;
+  }
+  .field--name-body {
+    margin-bottom: 1em;
+  }
+  .field--name-field-market,
+  .field--title {
+    @extend %field--meta;
+    margin-top: .5em;
+  }
+}

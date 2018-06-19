@@ -1,0 +1,177 @@
+//Use this styling for static background of gradient & mascot on homepage
+.block--views-slideshow-front{
+	$color-image-bg: palette(primary, base);
+	$color-text: palette(white, pure);
+
+	.node--slide {
+		background-color: $color-image-bg;
+	}
+	.slide-content{
+		&:after{
+			background-color: palette(white, pure);
+			color: rgba(palette(primary, base), 1);
+		}
+	}
+	.node__title, .field--name-field-subtitle {
+		color: $color-text;
+	}
+	.flex-direction-nav a {
+		&:before {
+			color: rgba(white, .7);
+		}
+	}
+	.field--name-body {
+		color: $color-text;
+	}
+	@include breakpoint($tab){
+		li{
+			background: palette(primary, base);
+		}
+		.node--slide{
+			background-color: transparent;
+		}
+		.slide-image{
+			&:after{
+				background-color: rgba(palette(primary, base), .35);
+			}
+		}
+		.slide-content{
+			&:after{
+				background-color: transparent;
+				color: rgba(palette(white, pure), 1);
+			}
+		}
+	}
+	@include breakpoint($desk){
+		li{
+			background: palette(primary, base);
+		}
+		.slide-image{
+			&:after{
+				background-color: transparent;
+			}
+		}
+	}
+	// @include breakpoint(1120px){
+	// 	.slide-image{
+	// 		&:after{
+	// 			background-color: transparent;
+	// 		}
+	// 	}
+	// }
+}
+
+.block--views-slideshow-localtarget{
+	$color-image-bg: palette(primary, base);
+	$color-text: palette(white, pure);
+
+	.node--slide {
+		background-color: $color-image-bg;
+	}
+	.slide-content{
+		&:after{
+			background-color: palette(white, pure);
+			color: rgba(palette(primary, base), 1);
+		}
+	}
+	.node__title, .field--name-field-subtitle {
+		color: $color-text;
+	}
+	.flex-direction-nav a {
+		&:before {
+			color: rgba(white, .7);
+		}
+	}
+	.field--name-body {
+		color: $color-text;
+	}
+	@include breakpoint($tab){
+		li{
+			background: palette(primary, base);
+		}
+		.node--slide{
+			background-color: transparent;
+		}
+		.slide-image{
+			&:after{
+				background-color: rgba(palette(primary, base), .35);
+			}
+		}
+		.slide-content{
+			&:after{
+				background-color: transparent;
+				color: rgba(palette(white, pure), 1);
+			}
+		}
+	}
+	@include breakpoint($desk){
+		li{
+			background: palette(primary, base);
+		}
+		.slide-image{
+			&:after{
+				// background-color: transparent;
+			}
+		}
+	}
+	@include breakpoint(1120px){
+		.slide-image{
+			&:after{
+				background-color: transparent;
+			}
+		}
+	}
+}
+
+//Use this styping if loading a hero image on the homepage
+// .block--views-slideshow-front{
+// 	$color-image-bg: palette(primary, base);
+// 	$color-text: palette(white, pure);
+//
+// 	.node--slide {
+// 		background-color: $color-image-bg;
+// 	}
+// 	.slide-content{
+// 		&:after{
+// 			color: rgba(palette(white, pure), 1);
+// 		}
+// 	}
+// 	.node__title, .field--name-field-subtitle {
+// 		color: $color-text;
+// 	}
+// 	.flex-direction-nav a {
+// 		&:before {
+// 			color: rgba(white, .7);
+// 		}
+// 	}
+// 	.field--name-body {
+// 		color: $color-text;
+// 	}
+// }
+
+
+// //local target hero
+// .block--views-slideshow-localtarget {
+// 	$color-image-bg: palette(primary, base);
+// 	$color-text: palette(white, pure);
+//
+// 	.node--slide {
+// 		background-color: $color-image-bg;
+// 	}
+// 	.slide-content{
+// 		&:after{
+// 			color: rgba(palette(white, pure), 1);
+// 		}
+// 	}
+// 	.node__title, .field--name-field-subtitle {
+// 		color: $color-text;
+// 	}
+// 	.flex-direction-nav a {
+// 		&:before {
+// 			color: rgba(white, .7);
+// 		}
+// 	}
+// 	.field--name-body {
+// 		color: $color-text;
+// 	}
+// }

@@ -11,3 +11,9 @@
     
 </ul>
 <button type="button" class="button" id="addService">Add Another Service</button>
+<button type="button" class="button" id="bulkAddServices">Bulk Add Services</button>
+<div id="bulk-services-form" style="display:none;">
+    <h3>Add Services. One per line</h3>
+    <div><textarea id="bulkServiceAddArea" rows="10" style="width: 100%;"></textarea></div>
+    <button type="button" class="button" id="bulkAddServicesSubmit">Add Services</button>
+</div>

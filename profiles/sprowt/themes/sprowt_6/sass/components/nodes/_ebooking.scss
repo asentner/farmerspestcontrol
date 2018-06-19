@@ -1,0 +1,51 @@
+.not-front.node-ebooking.node-type-webform {
+  .l-main {
+    margin-bottom: 0 !important;
+  }
+  @include breakpoint($tab) {
+    .l-main {
+      margin-bottom: 0 !important;
+    }
+  }
+  .step-number {
+    margin-bottom: 1em !important;
+    font-size: 24px !important;
+  }
+  @include breakpoint($desk) {
+    .step-number {
+      margin-bottom: 1em !important;
+      font-size: 24px !important;
+    }
+  }
+  .form-item {
+    .description {
+      margin-top: 10px;
+    }
+  }
+  .button.inactive {
+    display: none;
+  }
+  .button-prev {
+    padding-right: 15px;
+    padding-left: 80px;
+    &:after {
+      content: $fa-var-long-arrow-left;
+      right: auto;
+      left: 0;
+    }
+  }
+
+  // ebooking checkout page
+  .ebooking_summary {
+    .webform-component-markup[class*="review"] {
+      margin-bottom: 50px;
+      > p {
+        font-weight: 600;
+        font-style: italic;
+      }
+    }
+    .webform-component-markup[class*="tooltip"] {
+
+    }
+  }
+}

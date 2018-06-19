@@ -27,6 +27,39 @@ function sprowt_learning_center_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_custom_breadcrumb_features_default_settings().
+ */
+function sprowt_learning_center_custom_breadcrumb_features_default_settings() {
+  $custom_breadcrumbs = array();
+
+  // Exported custom breadcrumb: concern.
+  $custom_breadcrumbs['concern'] = array(
+    'name' => 'Concern',
+    'titles' => 'Learning Center',
+    'paths' => 'learning-center',
+    'visibility_php' => '',
+    'node_type' => 'concern',
+    'language' => '',
+    'machine_name' => 'concern',
+  );
+
+  // Exported custom breadcrumb: issue.
+  $custom_breadcrumbs['issue'] = array(
+    'name' => 'Issue',
+    'titles' => 'Learning Center
+<concern>',
+    'paths' => 'learning-center
+<concern>',
+    'visibility_php' => '',
+    'node_type' => 'issue',
+    'language' => '',
+    'machine_name' => 'issue',
+  );
+
+  return $custom_breadcrumbs;
+}
+
+/**
  * Implements hook_node_info().
  */
 function sprowt_learning_center_node_info() {

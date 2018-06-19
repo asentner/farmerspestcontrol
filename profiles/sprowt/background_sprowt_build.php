@@ -1,108 +1,202 @@
 <?php
 
-set_time_limit(0);
-ini_set('max_execution_time', 0); //0=NOLIMIT
-ignore_user_abort();
+/**
+ * Utility class for HHVM/PHP environment handling.
+ *
+ * From here: https://raw.githubusercontent.com/sebastianbergmann/environment/master/src/Runtime.php
+ *
+ */
+final class Runtime
+{
+    /**
+     * @var string
+     */
+    private static $binary;
 
-if(!defined('DRUPAL_ROOT')){
-    define('DRUPAL_ROOT', str_replace("/profiles/sprowt", "", getcwd()));
-    chdir(DRUPAL_ROOT);
-    require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
-    drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-}
-
-//set profile because it's not set for some reason
-
-variable_set('install_profile', 'sprowt');
-
-if(!db_table_exists('sprowt_progress')){
-    $sprowt_progress_schema = array(
-      'description' => 'The initial setup for this sprowt site',
-      'fields' => array(
-        'id' => array('type' => 'serial', 'unsigned' => true, 'not null' => true),
-        'function' => array('type'=> 'varchar', 'length' => 255, 'not null' => true, 'default' => ''),
-        'progress' => array('type'=> 'int', 'default' => '0'),
-        'message' =>  array('type'=> 'text'),
-        'actions' => array('type'=> 'int', 'default' => '0'),
-          'current_action' => array('type'=> 'int', 'default' => '0'),
-        'complete' => array('type'=> 'int','not null' => true, 'default' => '0'),
-      ),
-      'primary key' => array('id')
-    );
-    
-    db_create_table('sprowt_progress', $sprowt_progress_schema);
-    
-    global $base_url;
-    $progress_id = db_insert('sprowt_progress')
-        ->fields(array(
-            'function' => 'init',
-            'progress' => 0
-        ))
-        ->execute();
-}
-
-$progress = db_query("SELECT * FROM sprowt_progress")->fetchAssoc();
-
-
-function update_progress($function, $perc, $message, $actions, $current, $id) {
-    $updated = db_update('sprowt_progress') // Table name no longer needs {}
-      ->fields(array(
-        'function' => $function,
-        'progress' => floor($perc * 100),
-        'message' => $message,
-        'actions' => $actions,
-        'current_action' => $current
-      ))
-      ->condition('id', $id, '=');
-      
-    $updated->execute();
-}
-
-$sb = new SprowtBuilder();
-$data = $sb->getData();
-
-
-$actions = array(
-    'getData' => "Getting Sprowt Data...",
-    'addUsers' => "Adding Users...",
-    'addNodes' => "Adding Default Nodes...",
-    'addCompanyInfo' => "Adding Company Info...",
-    'addReview' => "Adding Review Sites...",
-    'addMarketsServices' => "Adding Markets and Services...",
-    'addLocations' => "Adding Locations...",
-    'addBranding' => "Adding Branding...",
-    'addSocial' => "Adding Social Media...",
-    'addIntegrations' => "Adding Integrations...",
-    'revertFeatures' => "Revert Features...",
-    'addNodeDefaultImages' => "Updating Default Images..."
-);
-
-if(!empty($data['starter']['is_starter'])) {
-    $actions['setUpSprowtStarter'] = 'Setting Up Sprowt Starter Specific Settings...';
-}
-
-$i = 0;
-
-foreach($actions as $method => $message) {
-    if(empty($i)) {
-        update_progress($method, 0 , $message, count($actions), $i, $progress['id']);
+    /**
+     * Returns true when Xdebug is supported or
+     * the runtime used is PHPDBG.
+     */
+    public function canCollectCodeCoverage()
+    {
+        return $this->hasXdebug() || $this->hasPHPDBGCodeCoverage();
     }
-    else {
-        update_progress($method, $i/count($actions) , $message, count($actions), $i, $progress['id']);
+
+    /**
+     * Returns true when OPcache is loaded and opcache.save_comments=0 is set.
+     *
+     * Code taken from Doctrine\Common\Annotations\AnnotationReader::__construct().
+     */
+    public function discardsComments()
+    {
+        if (\extension_loaded('Zend Optimizer+') && (\ini_get('zend_optimizerplus.save_comments') === '0' || \ini_get('opcache.save_comments') === '0')) {
+            return true;
+        }
+
+        if (\extension_loaded('Zend OPcache') && \ini_get('opcache.save_comments') == 0) {
+            return true;
+        }
+
+        return false;
     }
-    $sb->$method();
-    $i++;
+
+    /**
+     * Returns the path to the binary of the current runtime.
+     * Appends ' --php' to the path when the runtime is HHVM.
+     */
+    public function getBinary()
+    {
+        // HHVM
+        if (self::$binary === null && $this->isHHVM()) {
+            // @codeCoverageIgnoreStart
+            if ((self::$binary = \getenv('PHP_BINARY')) === false) {
+                self::$binary = PHP_BINARY;
+            }
+
+            self::$binary = \escapeshellarg(self::$binary) . ' --php' .
+                ' -d hhvm.php7.all=1';
+            // @codeCoverageIgnoreEnd
+        }
+
+        if (self::$binary === null && PHP_BINARY !== '') {
+            self::$binary = \escapeshellarg(PHP_BINARY);
+        }
+
+        if (self::$binary === null) {
+            // @codeCoverageIgnoreStart
+            $possibleBinaryLocations = [
+                PHP_BINDIR . '/php',
+                PHP_BINDIR . '/php-cli.exe',
+                PHP_BINDIR . '/php.exe'
+            ];
+
+            foreach ($possibleBinaryLocations as $binary) {
+                if (\is_readable($binary)) {
+                    self::$binary = \escapeshellarg($binary);
+                    break;
+                }
+            }
+            // @codeCoverageIgnoreEnd
+        }
+
+        if (self::$binary === null) {
+            // @codeCoverageIgnoreStart
+            self::$binary = 'php';
+            // @codeCoverageIgnoreEnd
+        }
+
+        return self::$binary;
+    }
+
+    public function getNameWithVersion()
+    {
+        return $this->getName() . ' ' . $this->getVersion();
+    }
+
+    public function getName()
+    {
+        if ($this->isHHVM()) {
+            // @codeCoverageIgnoreStart
+            return 'HHVM';
+            // @codeCoverageIgnoreEnd
+        }
+
+        if ($this->isPHPDBG()) {
+            // @codeCoverageIgnoreStart
+            return 'PHPDBG';
+            // @codeCoverageIgnoreEnd
+        }
+
+        return 'PHP';
+    }
+
+    public function getVendorUrl()
+    {
+        if ($this->isHHVM()) {
+            // @codeCoverageIgnoreStart
+            return 'http://hhvm.com/';
+            // @codeCoverageIgnoreEnd
+        }
+
+        return 'https://secure.php.net/';
+    }
+
+    public function getVersion()
+    {
+        if ($this->isHHVM()) {
+            // @codeCoverageIgnoreStart
+            return HHVM_VERSION;
+            // @codeCoverageIgnoreEnd
+        }
+
+        return PHP_VERSION;
+    }
+
+    /**
+     * Returns true when the runtime used is PHP and Xdebug is loaded.
+     */
+    public function hasXdebug()
+    {
+        return ($this->isPHP() || $this->isHHVM()) && \extension_loaded('xdebug');
+    }
+
+    /**
+     * Returns true when the runtime used is HHVM.
+     */
+    public function isHHVM()
+    {
+        return \defined('HHVM_VERSION');
+    }
+
+    /**
+     * Returns true when the runtime used is PHP without the PHPDBG SAPI.
+     */
+    public function isPHP()
+    {
+        return !$this->isHHVM() && !$this->isPHPDBG();
+    }
+
+    /**
+     * Returns true when the runtime used is PHP with the PHPDBG SAPI.
+     */
+    public function isPHPDBG()
+    {
+        return PHP_SAPI === 'phpdbg' && !$this->isHHVM();
+    }
+
+    /**
+     * Returns true when the runtime used is PHP with the PHPDBG SAPI
+     * and the phpdbg_*_oplog() functions are available (PHP >= 7.0).
+     *
+     * @codeCoverageIgnore
+     */
+    public function hasPHPDBGCodeCoverage()
+    {
+        return $this->isPHPDBG();
+    }
 }
 
+$base = getcwd();
+$script = $base . '/BackgroundBuilder.php';
 
-$updated = db_update('sprowt_progress') // Table name no longer needs {}
-  ->fields(array(
-    'function' => 'Done',
-    'progress' => 100,
-    'message' => 'Finished!',
-    'complete' => 1
-  ))
-  ->condition('id', $progress['id'], '=')
-  ->execute();
-  
-echo "Sprowt Setup Done!";
+$dir = sys_get_temp_dir();
+$outputfile = $dir . '/sprowtoutput.log';
+$pidfile = $dir . '/sprowtpid';
+
+$rt = new Runtime();
+$php = $rt->getBinary();
+$php = str_replace('php-fpm', 'php', $php);
+
+$cmd = $php . ' ' . $script;
+$cmdFull = sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $outputfile, $pidfile);
+//from here: https://stackoverflow.com/a/45966/5873687
+exec($cmdFull, $out);
+
+echo json_encode(array(
+    'out' => $out,
+    'cmdFull' => $cmdFull,
+    'cmd' => $cmd,
+    'base' => $base,
+    'outputfile' => $outputfile,
+    'pidfile' => $pidfile
+));

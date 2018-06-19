@@ -1,0 +1,50 @@
+div.entity-paragraphs-item.solution-annotated-image {
+  h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+      em {
+        font-family: $font-body;
+        text-transform: none;
+        font-size: (48/30) * 1em;
+        display: inline-block;
+        margin: 0 10px;
+      }
+      strong {
+        font-weight: 800;
+      }
+    }
+    .field--name-field-annotation-label{
+      font-size: 17px;
+    }
+    .field--name-field-intro {
+        max-width: 940px;
+        margin: 0 auto;
+    }
+    .field--name-field-annotation-description {
+      line-height: 1.53;
+    }
+  @include breakpoint($tab) {
+    h2 {
+      font-size: 30px;
+    }
+    .paragraphs-item-annotated-image{
+      > .content{
+        flex-direction: column;
+      }
+    }
+    .field--name-field-annotations{
+      margin: 30px auto 0;
+    }
+  }
+  @include breakpoint(920px){
+    .paragraphs-item-annotated-image{
+      > .content{
+        flex-direction: row;
+      }
+    }
+    .field--name-field-annotations{
+      margin: 0;
+      margin-left: 26px;
+    }
+  }
+}

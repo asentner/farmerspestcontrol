@@ -1,0 +1,44 @@
+.front{
+  .l-postscript{
+
+    .l-wrap--postscript-second{
+      background-color: palette(neutral, haze);
+    }
+
+    .l-region--postscript-third{
+      background: palette(primary, base);
+    }
+
+    .postscript-fourth-wrap{
+      background-color: palette(neutral, haze);
+      .l-region--postscript-fourth{
+
+      }
+    }
+
+  }
+}
+
+
+.l-region--postscript-fifth{
+  background: palette(primary, dark);
+}
+
+.node-type-localtarget{
+  .l-postscript{
+    .l-wrap--postscript-second{
+      background-color: palette(neutral, haze);
+    }
+  }
+}
+
+.node-type-city-page{
+  .l-postscript{
+    .l-wrap--postscript-second{
+      background-color: palette(neutral, haze);
+    }
+    .postscript-fourth-wrap{
+      background-color: palette(white, pure);
+    }
+  }
+}

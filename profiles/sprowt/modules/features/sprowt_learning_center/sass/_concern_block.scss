@@ -1,0 +1,184 @@
+//learning center cta bean reviews
+.node--concern--alt-teaser{
+  margin: 20px;
+  max-width: 130px;
+  .field--name-field-icon-file{
+    margin: 0 auto;
+    height: 112px;
+    width: 112px;
+    border-radius: 100%;
+    .field__item{
+      height: 112px;
+      width: 112px;
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+    }
+    svg{
+      max-height: 80px;
+      width: 55% !important;
+    }
+  }
+  .node__title{
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.36;
+    letter-spacing: .1px;
+    text-align: center;
+  }
+  @include breakpoint($tab){
+    margin: 20px auto;
+  }
+  @include breakpoint($desk){
+    margin: 0 auto;
+  }
+}
+
+//learning center concern listing
+.node--concern--teaser{
+  @include flexbox;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+  .field--name-field-icon-file{
+    margin: 0 auto;
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    .field__item{
+      height: 150px;
+      width: 150px;
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+    }
+    svg{
+      max-height: 80px;
+      width: 45% !important;
+    }
+  }
+  .content{
+    text-align: center;
+    padding-top: 15px;
+    .node__title{
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .field--name-body{
+      font-size: 18px;
+      line-height: 1.67;
+    }
+  }
+  @include breakpoint($tab){
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    .content{
+      text-align: left;
+      margin-left: 20px;
+    }
+  }
+  @include breakpoint($desk){
+    .content{
+      max-width: 800px;
+      padding-top: 0;
+    }
+  }
+}
+
+//seasonal block concern listing
+.block--views-ref-seas-blocks-seasonal-block{
+  background-image: url('../images/bg-texture.png');
+  padding: 15px 15px 65px;
+  text-align: center;
+  .block__title{
+    max-width: $container;
+    margin: 0 auto;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    &:before{
+      @include faicon('\f12a');
+      font-weight: 400;
+      padding-right: 7px;
+    }
+    &:after{
+      @include faicon('\f12a');
+      font-weight: 400;
+      padding-left: 7px;
+    }
+  }
+  .block__content{
+    max-width: $container;
+    margin: 0 auto;
+  }
+  .bean-sesonal{
+    .field--name-field-body-text{
+      margin-bottom: 25px;
+      p{
+        font-size: 18px;
+        line-height: 1.67;
+      }
+    }
+    .field--name-field-concerns{
+      border: solid 3px;
+      .field__items{
+        max-width: 725px;
+        margin: 0 auto;
+        @include flexbox;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        .node--concern--secondary-teaser{
+          margin: 20px;
+          max-width: 130px;
+          .field--name-field-icon-file{
+            margin: 0 auto;
+            height: 112px;
+            width: 112px;
+            border-radius: 100%;
+            transition: background-color 0.3s;
+            .field__item{
+              height: 112px;
+              width: 112px;
+              @include flexbox;
+              justify-content: center;
+              align-items: center;
+            }
+            svg{
+              max-height: 90px;
+              width: 65% !important;
+              .cls-1{
+                transition: fill 0.3s;
+              }
+            }
+          }
+          .node__title{
+            font-size: 21px;
+            font-weight: 600;
+            line-height: 1.36;
+            letter-spacing: .1px;
+            text-align: center;
+            transition: color 0.3s;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($tab){
+    .bean-sesonal{
+      .field--name-field-concerns{
+        padding: 50px 40px 40px;
+        .field__items{
+          .node--concern--secondary-teaser{
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+  }
+}

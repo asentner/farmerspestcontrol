@@ -100,6 +100,38 @@ function sprowt_solution_finder_block_info()
 }
 
 /**
+ * Implements hook_block_configure().
+ */
+function sprowt_solution_finder_block_configure($delta = '') {
+    $form = array();
+    switch($delta) {
+        case 'solution_finder':
+            $form['html_title'] = array(
+                '#type' => 'textfield',
+                '#text_format' => 'full_html',
+                '#maxlength' => 2000,
+                '#title' => t('HTML Title'),
+                '#description' => t('An alternate version of the block title, accepts HTML by way of the full_html text format.<br><strong>&lt;strong&gt;</strong> tags will be <strong>bold</strong>. <strong>&lt;em&gt;</strong> tags will be <em>italic</em>. <strong>&lt;span&gt;</strong> tags will be <strong>bold</strong>, <em>italic</em>, and <span style="border-bottom: 2px solid;">underlined</span>.'),
+                '#default_value' => variable_get('solution_finder_html_title')
+            );
+            break;
+    }
+    
+    return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function sprowt_solution_finder_block_save($delta = '', $edit = []) {
+    switch($delta) {
+        case 'solution_finder':
+            variable_set('solution_finder_html_title', $edit['html_title']);
+            break;
+    }
+}
+
+/**
  * Implements hook_block_view().
  */
 function sprowt_solution_finder_block_view($delta = '')
@@ -153,6 +185,11 @@ function sprowt_solution_finder_block_view($delta = '')
                     ),
                 ),
             );
+            
+            $html_title = variable_get('solution_finder_html_title');
+            if(!empty($html_title)) {
+                $block['subject'] = $html_title;
+            }
 
             break;
     }
@@ -399,5 +436,240 @@ function sprowt_solution_finder_sprowt_shortcode_replace($string)
 function sprowt_solution_finder_preprocess_node(&$variables) {
     if($variables['view_mode'] == 'full' && $variables['node']->type == 'solution') {
         drupal_add_css(drupal_get_path('module', 'sprowt_solution_finder') . '/css/solution_finder.css');
+        drupal_add_js(drupal_get_path('module', 'sprowt_solution_finder') .'/js/solutions_pages.js');
+    }
+}
+
+function _sprowt_solution_finder_sample_nodes() {
+    require_once DRUPAL_ROOT . '/includes/utility.inc';
+    $path = drupal_get_path('module', 'sprowt_solution_finder');
+    $file = $path . '/nodes/concerns.json';
+    $json = file_get_contents($file);
+    $existing = variable_get('node_export_existing', 'new');
+    variable_set('node_export_existing', 'new');
+    $concernsArray = json_decode($json, true);
+    foreach($concernsArray as $concernArray) {
+        $uuid = $concernArray['uuid'];
+        if(empty(entity_get_id_by_uuid('node', array($uuid)))) {
+            node_export_import(json_encode(array($concernArray)));
+        }
+    }
+
+    $exportFile = $path . '/nodes/solution.export';
+    $export = file_get_contents($exportFile);
+
+    $array = [];
+    eval('$array = ' . $export . ';');
+    foreach($array as $key => &$obj) {
+        if(!empty(entity_get_id_by_uuid('node', array($obj->uuid)))) {
+            unset($array[$key]);
+            continue;
+        }
+        _sprowt_solution_finder_convert_entity_refrence_fields($obj);
+        _sprowt_solution_finder_convert_blockreference_fields($obj);
+    }
+
+    if(!empty($array)) {
+        $newExport = drupal_var_export($array);
+        node_export_import($newExport);
+
+        $obj = array_shift($array);
+        $nodes = entity_uuid_load('node', array($obj->uuid));
+        $node = array_pop($nodes);
+        $n = entity_metadata_wrapper('node', $node);
+        $concern_nids = db_query("
+                SELECT n.nid
+                FROM node n
+                LEFT JOIN weight_weights w on w.entity_type = 'node' AND w.entity_id = n.nid
+                LEFT JOIN field_data_field_include_in_solution_finder i on i.entity_id = n.nid AND i.entity_type = 'node'
+                WHERE n.type = 'concern'
+                AND n.status = 1
+                AND i.field_include_in_solution_finder_value = 1
+                ORDER BY w.weight ASC
+                LIMIT 3
+            ")->fetchCol();
+        $n->field_concerns = $concern_nids;
+
+        $testimonial_nids = db_query("
+            SELECT nid
+            FROM node
+            WHERE type = 'testimonial'
+            AND status = 1
+            LIMIT 3
+        ")->fetchCol();
+        $n->field_testimonial_ref = $testimonial_nids;
+        $n->save();
+
+    }
+    variable_set('node_export_existing', $existing);
+}
+
+function _sprowt_solution_finder_convert_blockreference_fields(&$var, $field_name = '') {
+    return _sprowt_solution_finder_loop_through_export_for_field($var, $field_name, function(&$array, $field_name) {
+        $efFields = array(
+            'field_block_reference'
+        );
+        $maps = _sprowt_solution_finder_get_node_maps();
+        if (in_array($field_name, $efFields)) {
+            foreach ($array as $lang => &$items) {
+                foreach ($items as $key => &$item) {
+                    if(empty($item['uuid'])) {
+                        $modDelta = $item['moddelta'];
+                        if (strpos($modDelta, 'webform:client-block-') !== false) {
+                            $nid = str_replace('webform:client-block-', '', $modDelta);
+                            $uuid = $maps['old'][$nid];
+                            if (!empty($maps['new'][$uuid])) {
+                                $item['moddelta'] = 'webform:client-block-' . $maps['new'][$uuid];
+                                $item['uuid'] = $uuid;
+                            }
+                            else {
+                                unset($items[$key]);
+                            }
+                        }
+                    }
+                }
+                $items = array_values($items);
+            }
+        }
+    });
+}
+
+
+function _sprowt_solution_finder_get_entity_refrence_field_names($reset = false) {
+    $fields = &drupal_static(__FUNCTION__);
+    if(!isset($fields) || $reset) {
+        $fields = db_query("
+            SELECT field_name
+            FROM field_config
+            WHERE type = 'entityreference'
+        ")->fetchCol();
+    }
+
+    return $fields;
+}
+
+function _sprowt_solution_finder_get_node_maps($reset = false) {
+    $map = &drupal_static(__FUNCTION__);
+    if(!isset($map) || $reset) {
+        $path = drupal_get_path('module', 'sprowt_solution_finder');
+        $file = $path . '/nodes/node_map.json';
+        $json = file_get_contents($file);
+        $old_map = json_decode($json, true);
+
+        $new_map = db_query("
+            SELECT uuid, nid
+            FROM node
+        ")->fetchAllKeyed();
+
+        $map = array(
+            'old' => $old_map,
+            'new' => $new_map
+        );
+    }
+
+    return $map;
+}
+
+function _sprowt_solution_finder_export_node_map() {
+    $path = drupal_get_path('module', 'sprowt_solution_finder');
+    $file = $path . '/nodes/node_map.json';
+
+    $node_map = db_query("
+        SELECT nid, uuid
+        FROM node
+    ")->fetchAllKeyed();
+    $json = json_encode($node_map);
+    file_put_contents($file, $json);
+}
+
+function _sprowt_solution_finder_convert_entity_refrence_fields(&$var, $field_name = '') {
+    return _sprowt_solution_finder_loop_through_export_for_field($var, $field_name, function(&$array, $field_name) {
+        $efFields = _sprowt_solution_finder_get_entity_refrence_field_names();
+        $maps = _sprowt_solution_finder_get_node_maps();
+        if(in_array($field_name, $efFields)) {
+            foreach($array as $lang => &$items) {
+                foreach($items as $key => &$item) {
+                    if(empty($item['uuid'])) {
+                        $nid = $item['target_id'];
+                        if($nid == 99) {
+                            $test = true;
+                        }
+                        $uuid = $maps['old'][$nid];
+                        if (!empty($maps['new'][$uuid])) {
+                            $item['target_id'] = $maps['new'][$uuid];
+                            $item['uuid'] = $uuid;
+                        }
+                        else {
+                            unset($items[$key]);
+                        }
+                    }
+                }
+                $items = array_values($items);
+            }
+        }
+    });
+}
+
+function _sprowt_solution_finder_loop_through_export_for_field(&$var, $field_name = '', $function){
+    if(is_object($var)) {
+        $array = json_decode(json_encode($var), true);
+        foreach($array as $prop => $value) {
+            _sprowt_solution_finder_loop_through_export_for_field($var->{$prop}, $prop, $function);
+        }
+
+    }
+
+    $array = &$var;
+
+    if($field_name == 'paragraph_fields' || $field_name == 'fc_fields') {
+        if(!empty($array) && is_array($array)) {
+            foreach ($array as $field_name => &$fields) {
+                if (!empty($fields) && is_array($fields)) {
+                    foreach ($fields as $lang => &$items) {
+                        _sprowt_solution_finder_loop_through_export_for_field($items, '', $function);
+                    }
+                }
+            }
+        }
+    }
+
+    if(strpos($field_name, 'field_') === 0) {
+        $function($array, $field_name);
+    }
+
+    if(is_array($array)) {
+        foreach($array as $key => &$value) {
+            _sprowt_solution_finder_loop_through_export_for_field($value, $key, $function);
+        }
+    }
+
+    return $array;
+}
+
+/**
+ * Implements hook_features_post_restore().
+ */
+function sprowt_solution_finder_features_post_restore($op, $items)
+{
+    if($op == 'enable' && in_array('sprowt_solution_finder', array_keys($items))) {
+        variable_set('sprowt_solution_finder_being_enabled', true);
+    }
+    if($op == 'rebuild' && in_array('sprowt_solution_finder', array_keys($items))) {
+        if(variable_get('sprowt_solution_finder_being_enabled', false)) {
+            _sprowt_solution_finder_sample_nodes();
+            $nidArray =  db_query("
+                SELECT nid, title
+                FROM node
+                WHERE type = 'solution'
+                AND status = 1
+            ")->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($nidArray as $array) {
+                $link = l($array['title'], 'node/' . $array['nid']);
+
+                drupal_set_message("Example Solution with example concerns added. Solution: " . $link . '!');
+            }
+            variable_del('sprowt_solution_finder_being_enabled');
+        }
     }
 }

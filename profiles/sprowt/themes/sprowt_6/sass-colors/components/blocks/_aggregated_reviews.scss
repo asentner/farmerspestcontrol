@@ -1,0 +1,13 @@
+.block--bean-google-reviews-block {
+  .field--name-field-rating {
+      color: palette(tertiary, base);
+  }
+  .field--name-field-review-count-text {
+      color: palette(white, base);
+  }
+  @include breakpoint($tab){
+    .field--name-field-review-count-text {
+        color: palette(neutral, gray-chateau);
+    }
+  }
+}

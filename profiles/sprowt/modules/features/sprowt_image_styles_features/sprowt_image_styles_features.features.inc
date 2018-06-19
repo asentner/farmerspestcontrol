@@ -254,6 +254,21 @@ function sprowt_image_styles_features_image_default_styles() {
     ),
   );
 
+  // Exported image style: ltp_local_image.
+  $styles['ltp_local_image'] = array(
+    'label' => 'LTP Local Image',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 370,
+          'height' => 245,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: markets.
   $styles['markets'] = array(
     'label' => 'Markets',

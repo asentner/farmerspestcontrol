@@ -1,0 +1,13 @@
+.solution-finder-form {
+  .concern-wrap {
+    label {
+      &:hover, &.checked {
+        svg{
+          path{
+            fill: palette(primary, base);
+          }
+        }
+      }
+    }
+  }
+}

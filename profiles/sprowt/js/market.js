@@ -81,14 +81,50 @@
         });
         
         
-        if ($('#hidden_errors') != '') {
-            errors = JSON.parse($('#hidden_errors').val());
+        if ($('#hidden_errors').val() != '') {
+            var errors = JSON.parse($('#hidden_errors').val());
             $.each(errors, function(i,v){
                 $(v).addClass('error');
             });
         }
         
-        
+
+        $('#bulkAddServices').click(function(e){
+            e.preventDefault();
+            $('#bulkServiceAddArea').val('');
+            $('#bulk-services-form').slideToggle();
+        });
+
+        $('#bulkAddServicesSubmit').click(function(e){
+            e.preventDefault();
+            var services = $('#bulkServiceAddArea').val().trim().split("\n");
+            $.each(services, function(i,service){
+                if(service != '') {
+                    service = service.trim();
+                    $.market_setup.addService(undefined, undefined, service);
+                }
+            });
+            $('#bulkServiceAddArea').val('');
+            $('#bulk-services-form').slideToggle();
+        });
+
+        $('#regions').on('click', '.addMarketBulk', function(){
+            var regionId = $(this).data('regionid');
+            $('#'+regionId).find('.marketBulkText').val('');
+            $('#'+regionId).find('.marketBulkWrap').slideToggle();
+        });
+
+        $('#regions').on('click', '.addMarketBulkSubmit', function(){
+            var regionId = $(this).data('regionid');
+            var markets = $('#'+regionId).find('.marketBulkText').val().trim().split("\n");
+            $.each(markets, function(i,market){
+                market = market.trim();
+                $.market_setup.addMarket(regionId, market);
+            });
+            $('#'+regionId).find('.marketBulkText').val('');
+            $('#'+regionId).find('.marketBulkWrap').slideToggle();
+        });
+
     });
     
     $.market_setup = {

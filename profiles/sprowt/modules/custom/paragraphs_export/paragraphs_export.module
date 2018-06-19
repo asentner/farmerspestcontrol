@@ -141,12 +141,12 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
 }
 
 function paragraphs_export_extract_paragraphs(&$element, $original, $element_type) {
-  if($element_type == 'node') {
-    $bundle = $original->type;
-  }
-  else {
-    $bundle = $original->bundle;
-  }
+    if($element_type == 'node' || $element_type == 'bean') {
+        $bundle = $original->type;
+    }
+    else {
+        $bundle = $original->bundle;
+    }
   $instances = field_info_instances($element_type, $bundle);
   $paragraph_fields = array();
   foreach($instances as $field_name => $instance) {
