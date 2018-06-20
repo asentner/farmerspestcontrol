@@ -233,6 +233,16 @@ function sprowt_login_page_build(&$page) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_login_preprocess_html(&$variables)
+{
+    if(user_access('view sprowt dashboard')) {
+        $variables['classes_array'][] = 'has-sprowt-dashboard';
+    }
+}
+
+/**
  * Implements hook_user_login().
  */
 function sprowt_login_user_login(&$edit, $account)
