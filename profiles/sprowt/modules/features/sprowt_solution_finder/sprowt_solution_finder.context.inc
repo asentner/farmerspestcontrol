@@ -13,6 +13,45 @@ function sprowt_solution_finder_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'solutions_finder_city';
+  $context->description = 'Solutions finder block placement';
+  $context->tag = 'Solutions Finder';
+  $context->conditions = array(
+    'node' => array(
+      'values' => array(
+        'city_page' => 'city_page',
+      ),
+      'options' => array(
+        'node_form' => '1',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'sprowt_solution_finder-solution_finder' => array(
+          'module' => 'sprowt_solution_finder',
+          'delta' => 'solution_finder',
+          'region' => 'preface_first',
+          'weight' => '10',
+        ),
+      ),
+    ),
+    'theme_html' => array(
+      'class' => 'city--solutions-finder',
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Solutions Finder');
+  t('Solutions finder block placement');
+  $export['solutions_finder_city'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = TRUE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'solutions_finder_front';
   $context->description = 'Solutions finder block placement';
   $context->tag = 'Solutions Finder';
