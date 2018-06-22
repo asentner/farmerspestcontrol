@@ -2704,7 +2704,8 @@ span.dollar {
       display: inline-block;
       margin: 0 auto;
       height: auto;
-      width: 90px; }
+      min-width: 135px;
+      max-width: 135px; }
   .paragraphs-item-landing-page-benefits .field--name-field-embedded-benefits .field__item + .field__item {
     margin-top: 20px; }
   @media (min-width: 768px) {
@@ -2730,7 +2731,8 @@ span.dollar {
       .paragraphs-item-landing-page-benefits .field--name-field-image, .paragraphs-item-landing-page-benefits .field--name-field-icon {
         margin-right: 0; }
         .paragraphs-item-landing-page-benefits .field--name-field-image img, .paragraphs-item-landing-page-benefits .field--name-field-icon img {
-          width: auto; } }
+          min-width: 200px;
+          max-width: 200px; } }
 
 .paragraphs-item-body p {
   line-height: 1.6; }
