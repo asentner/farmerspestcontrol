@@ -291,6 +291,7 @@ function _sprowt_settings_shortcode_replace($string)
         '[google+]' => variable_get('sprowt_settings_gplus_url'),
         '[instagram]' => variable_get('sprowt_settings_instagram_url'),
         '[node-service]' => _sprowt_settings_node_service(),
+        '[node-market]' => _sprowt_settings_node_market(),
         '[current-year]' => date('Y'),
     );
 
@@ -410,6 +411,22 @@ function _sprowt_settings_node_service()
     $node = menu_get_object();
     if (!empty($node->field_service[LANGUAGE_NONE][0]['tid'])) {
         $term = taxonomy_term_load($node->field_service[LANGUAGE_NONE][0]['tid']);
+        if (empty($term)) {
+            return '';
+        }
+        return $term->name;
+    }
+    else {
+        return '';
+    }
+}
+
+//Grabs the current node market
+function _sprowt_settings_node_market()
+{
+    $node = menu_get_object();
+    if (!empty($node->field_market[LANGUAGE_NONE][0]['tid'])) {
+        $term = taxonomy_term_load($node->field_market[LANGUAGE_NONE][0]['tid']);
         if (empty($term)) {
             return '';
         }
