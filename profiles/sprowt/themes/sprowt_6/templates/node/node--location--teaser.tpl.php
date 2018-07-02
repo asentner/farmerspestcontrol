@@ -12,7 +12,7 @@
 ?>
 <div<?php print $attributes; ?>>
 
-  <h2 itemprop="name"><?php print $title; ?></h2>
+  <h2><?php print $title; ?></h2>
 
   <div<?php print $content_attributes; ?>>
     <span class="field-street-address"><?php

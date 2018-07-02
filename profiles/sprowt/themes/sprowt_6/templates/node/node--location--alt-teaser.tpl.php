@@ -12,7 +12,7 @@
 ?>
 <div<?php print $attributes; ?>>
   <div<?php print $content_attributes; ?>>
-    <h4 itemprop="name"><?php print $title; ?></h4>
+    <h4><?php print $title; ?></h4>
     <span class="field-street-address"><?php
     $addresses = array();
     foreach($field_street_address as $a) {
