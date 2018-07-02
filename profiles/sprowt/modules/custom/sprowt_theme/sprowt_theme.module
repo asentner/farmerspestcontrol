@@ -117,6 +117,31 @@ function template_preprocess_itemreviewed_structured_data(&$variables) {
     $variables['image'] = theme_get_setting('logo');
 }
 
+function _sprowt_theme_location_structured_data($node) {
+    $n = entity_metadata_wrapper('node', $node);
+    $data = array(
+        '@context' => 'http://schema.org',
+        '@type' => 'LocalBusiness',
+        'name' => variable_get('site_name'),
+        'image' => theme_get_setting('logo'),
+        'url' => $GLOBALS['base_url'],
+        'address' => array(
+            '@type' => 'PostalAddress',
+            'name' => $node->title,
+            'streetAddress' => $n->field_street_address->value(),
+            'addressLocality' => $n->field_locality->value(),
+            'addressRegion' => $n->field_state->value(),
+            'postalCode' => $n->field_postal_code->value()
+        ),
+    );
+    $phone = $n->field_phone_number->value();
+    if(!empty($phone)) {
+        $data['telephone'] = $phone;
+    }
+    
+    return $data;
+}
+
 /**
  * Implements hook_preprocess().
  */

@@ -98,6 +98,7 @@ features[field_instance][] = node-location-field_postal_code
 features[field_instance][] = node-location-field_social_reviews
 features[field_instance][] = node-location-field_state
 features[field_instance][] = node-location-field_street_address
+features[field_instance][] = node-location-field_structured_data_disable
 features[field_instance][] = node-market-body
 features[field_instance][] = node-market-field_image
 features[field_instance][] = node-market-field_market
