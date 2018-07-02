@@ -3,6 +3,10 @@ body.admin-menu.adminimal-menu:before  {
   min-height: 60px;
 }
 
+body.has-sprowt-dashboard.admin-menu.adminimal-menu:before {
+  min-height: auto;
+}
+
 #admin-menu {
   z-index: 99999999;
   .dropdown li ul {
@@ -97,6 +101,17 @@ body.adminimal-menu #admin-menu .admin-menu-search input {
     margin-top: -26px;
     a {
       padding: 0;
+    }
+  }
+  body.has-sprowt-dashboard {
+    .tabs {
+      position: relative;
+      margin-top: 0;
+    }
+
+    .action-links {
+      position: absolute;
+      margin-top: -32px;
     }
   }
 }

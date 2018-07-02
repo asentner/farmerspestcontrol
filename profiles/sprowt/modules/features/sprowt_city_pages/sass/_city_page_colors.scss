@@ -59,3 +59,10 @@
       }
    }
 }
+
+.city--solutions-finder{
+  .block--views-city-pages-benefits{
+     $color-bg: palette(white, pure);
+     background-color: $color-bg;
+  }
+}

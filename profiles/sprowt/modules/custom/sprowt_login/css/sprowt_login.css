@@ -91,52 +91,35 @@
   margin-left: .3em; }
 
 .fa-spin {
-  -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
 
 .fa-pulse {
-  -webkit-animation: fa-spin 1s infinite steps(8);
   animation: fa-spin 1s infinite steps(8); }
-
-@-webkit-keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 @keyframes fa-spin {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   100% {
-    -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
 .fa-rotate-90 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg); }
 
 .fa-rotate-180 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-  -webkit-transform: rotate(180deg);
   transform: rotate(180deg); }
 
 .fa-rotate-270 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg); }
 
 .fa-flip-horizontal {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
-  -webkit-transform: scale(-1, 1);
   transform: scale(-1, 1); }
 
 .fa-flip-vertical {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-  -webkit-transform: scale(1, -1);
   transform: scale(1, -1); }
 
 :root .fa-rotate-90,
@@ -2334,19 +2317,14 @@
     padding: 10px 20px;
     max-width: 1210px;
     margin: 0 auto;
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center; }
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
+    -ms-flex-align: center;
+        align-items: center; }
     #dashboards #tab-links ul > * {
       -ms-flex: 0 1 auto; }
     #dashboards #tab-links ul li {
@@ -2384,15 +2362,12 @@
       padding: 200px 20px 50px;
       margin: 0;
       max-width: 100%;
-      display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      -webkit-box-pack: center;
-          -ms-flex-pack: center;
-              justify-content: center; }
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
       .not-logged-in.page-sprowt .l-page .l-main .l-content {
         text-align: center; }
         .not-logged-in.page-sprowt .l-page .l-main .l-content .block-wrap {
@@ -2495,70 +2470,70 @@
     .not-logged-in.page-sprowt .l-page .l-main {
       padding: 0 20px; } }
 
-#sprowt-dashboard-nav {
+body.has-sprowt-dashboard #sprowt-dashboard-nav {
   background: linear-gradient(to right, #181818, #262626);
   border-bottom: 2px solid rgba(255, 231, 178, 0.6);
   box-shadow: -10px 0 15.4px 0.6px rgba(24, 24, 24, 0.83);
   position: relative;
   z-index: 105;
   padding: 0 20px; }
-  #sprowt-dashboard-nav * {
+  body.has-sprowt-dashboard #sprowt-dashboard-nav * {
     font-family: "Montserrat", "Helvetica", "Arial", sans-serif; }
-    #sprowt-dashboard-nav *.fa {
+    body.has-sprowt-dashboard #sprowt-dashboard-nav *.fa {
       font-family: FontAwesome; }
-  #sprowt-dashboard-nav .logo svg {
+  body.has-sprowt-dashboard #sprowt-dashboard-nav .logo svg {
     width: 100%;
     height: auto;
     max-width: 227px; }
-  #sprowt-dashboard-nav .interior {
+    body.has-sprowt-dashboard #sprowt-dashboard-nav .logo svg path.cls-1 {
+      fill: #fff; }
+    body.has-sprowt-dashboard #sprowt-dashboard-nav .logo svg path.cls-2 {
+      fill: #febc1f; }
+  body.has-sprowt-dashboard #sprowt-dashboard-nav .interior {
     max-width: 1210px;
     height: 110px;
     margin: 0 auto;
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
     padding-top: 30px; }
-    #sprowt-dashboard-nav .interior > * {
+    body.has-sprowt-dashboard #sprowt-dashboard-nav .interior > * {
       -ms-flex: 0 1 auto; }
-  #sprowt-dashboard-nav .fa-bars {
+  body.has-sprowt-dashboard #sprowt-dashboard-nav .fa-bars {
     color: #fff;
     font-size: 26px;
     padding: 10px; }
-  #sprowt-dashboard-nav .sprowt-dashboard-nav {
+  body.has-sprowt-dashboard #sprowt-dashboard-nav .sprowt-dashboard-nav {
     position: relative; }
-  #sprowt-dashboard-nav ul {
-    display: -webkit-box;
+  body.has-sprowt-dashboard #sprowt-dashboard-nav ul {
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: end;
-        -ms-flex-align: end;
-            align-items: flex-end;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: end;
+        align-items: flex-end;
     display: none;
     position: absolute;
     top: 100%;
     right: 0;
     z-index: 88; }
-    #sprowt-dashboard-nav ul > * {
+    body.has-sprowt-dashboard #sprowt-dashboard-nav ul > * {
       -ms-flex: 0 1 auto; }
-    #sprowt-dashboard-nav ul li {
+    body.has-sprowt-dashboard #sprowt-dashboard-nav ul li {
       padding: 5px 10px;
       width: 185px;
       text-align: right;
       background: #262626; }
-      #sprowt-dashboard-nav ul li a {
+      body.has-sprowt-dashboard #sprowt-dashboard-nav ul li:before {
+        display: none; }
+      body.has-sprowt-dashboard #sprowt-dashboard-nav ul li a {
         font-size: 17px;
         line-height: 1.65;
         color: #f0f0f0; }
-        #sprowt-dashboard-nav ul li a:hover {
+        body.has-sprowt-dashboard #sprowt-dashboard-nav ul li a:hover {
           color: #f3d791; }
-        #sprowt-dashboard-nav ul li a.button {
+        body.has-sprowt-dashboard #sprowt-dashboard-nav ul li a.button {
           text-transform: none;
           font-weight: 400;
           background: transparent;
@@ -2567,41 +2542,37 @@
           box-shadow: -10px 0 15.4px 0.6px rgba(26, 31, 34, 0.32);
           color: #fff;
           margin-bottom: 5px; }
-          #sprowt-dashboard-nav ul li a.button:hover {
+          body.has-sprowt-dashboard #sprowt-dashboard-nav ul li a.button:hover {
             color: #f3d791; }
-    #sprowt-dashboard-nav ul li:first-child, #sprowt-dashboard-nav ul li:last-child {
+    body.has-sprowt-dashboard #sprowt-dashboard-nav ul li:first-child, body.has-sprowt-dashboard #sprowt-dashboard-nav ul li:last-child {
       border-left: none; }
   @media (min-width: 768px) {
-    #sprowt-dashboard-nav .sprowt-dashboard-nav-mobile-toggle {
+    body.has-sprowt-dashboard #sprowt-dashboard-nav .sprowt-dashboard-nav-mobile-toggle {
       display: none; }
-    #sprowt-dashboard-nav ul {
-      display: -webkit-box !important;
+    body.has-sprowt-dashboard #sprowt-dashboard-nav ul {
       display: -ms-flexbox !important;
       display: flex !important;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: row;
-              flex-direction: row;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-direction: row;
+          flex-direction: row;
       position: static; }
-      #sprowt-dashboard-nav ul li {
+      body.has-sprowt-dashboard #sprowt-dashboard-nav ul li {
         display: block;
         background: transparent;
         text-align: center;
         width: auto;
         padding: 0 10px;
         border-left: 1px solid #35312e; }
-        #sprowt-dashboard-nav ul li a {
+        body.has-sprowt-dashboard #sprowt-dashboard-nav ul li a {
           font-size: 16px; }
-          #sprowt-dashboard-nav ul li a.button {
+          body.has-sprowt-dashboard #sprowt-dashboard-nav ul li a.button {
             padding: 10px 20px;
             margin-bottom: 0; } }
   @media (min-width: 1024px) {
-    #sprowt-dashboard-nav ul li {
+    body.has-sprowt-dashboard #sprowt-dashboard-nav ul li {
       padding: 0 15px; }
-      #sprowt-dashboard-nav ul li a {
+      body.has-sprowt-dashboard #sprowt-dashboard-nav ul li a {
         font-size: 17px; }
-        #sprowt-dashboard-nav ul li a.button {
+        body.has-sprowt-dashboard #sprowt-dashboard-nav ul li a.button {
           padding: 10px 30px; } }

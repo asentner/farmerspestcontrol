@@ -12,7 +12,7 @@ final class Runtime
      * @var string
      */
     private static $binary;
-    
+
     /**
      * Returns true when Xdebug is supported or
      * the runtime used is PHPDBG.
@@ -21,7 +21,7 @@ final class Runtime
     {
         return $this->hasXdebug() || $this->hasPHPDBGCodeCoverage();
     }
-    
+
     /**
      * Returns true when OPcache is loaded and opcache.save_comments=0 is set.
      *
@@ -32,14 +32,14 @@ final class Runtime
         if (\extension_loaded('Zend Optimizer+') && (\ini_get('zend_optimizerplus.save_comments') === '0' || \ini_get('opcache.save_comments') === '0')) {
             return true;
         }
-        
+
         if (\extension_loaded('Zend OPcache') && \ini_get('opcache.save_comments') == 0) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Returns the path to the binary of the current runtime.
      * Appends ' --php' to the path when the runtime is HHVM.
@@ -52,16 +52,16 @@ final class Runtime
             if ((self::$binary = \getenv('PHP_BINARY')) === false) {
                 self::$binary = PHP_BINARY;
             }
-            
+
             self::$binary = \escapeshellarg(self::$binary) . ' --php' .
                 ' -d hhvm.php7.all=1';
             // @codeCoverageIgnoreEnd
         }
-        
+
         if (self::$binary === null && PHP_BINARY !== '') {
             self::$binary = \escapeshellarg(PHP_BINARY);
         }
-        
+
         if (self::$binary === null) {
             // @codeCoverageIgnoreStart
             $possibleBinaryLocations = [
@@ -69,7 +69,7 @@ final class Runtime
                 PHP_BINDIR . '/php-cli.exe',
                 PHP_BINDIR . '/php.exe'
             ];
-            
+
             foreach ($possibleBinaryLocations as $binary) {
                 if (\is_readable($binary)) {
                     self::$binary = \escapeshellarg($binary);
@@ -78,21 +78,21 @@ final class Runtime
             }
             // @codeCoverageIgnoreEnd
         }
-        
+
         if (self::$binary === null) {
             // @codeCoverageIgnoreStart
             self::$binary = 'php';
             // @codeCoverageIgnoreEnd
         }
-        
+
         return self::$binary;
     }
-    
+
     public function getNameWithVersion()
     {
         return $this->getName() . ' ' . $this->getVersion();
     }
-    
+
     public function getName()
     {
         if ($this->isHHVM()) {
@@ -100,16 +100,16 @@ final class Runtime
             return 'HHVM';
             // @codeCoverageIgnoreEnd
         }
-        
+
         if ($this->isPHPDBG()) {
             // @codeCoverageIgnoreStart
             return 'PHPDBG';
             // @codeCoverageIgnoreEnd
         }
-        
+
         return 'PHP';
     }
-    
+
     public function getVendorUrl()
     {
         if ($this->isHHVM()) {
@@ -117,10 +117,10 @@ final class Runtime
             return 'http://hhvm.com/';
             // @codeCoverageIgnoreEnd
         }
-        
+
         return 'https://secure.php.net/';
     }
-    
+
     public function getVersion()
     {
         if ($this->isHHVM()) {
@@ -128,10 +128,10 @@ final class Runtime
             return HHVM_VERSION;
             // @codeCoverageIgnoreEnd
         }
-        
+
         return PHP_VERSION;
     }
-    
+
     /**
      * Returns true when the runtime used is PHP and Xdebug is loaded.
      */
@@ -139,7 +139,7 @@ final class Runtime
     {
         return ($this->isPHP() || $this->isHHVM()) && \extension_loaded('xdebug');
     }
-    
+
     /**
      * Returns true when the runtime used is HHVM.
      */
@@ -147,7 +147,7 @@ final class Runtime
     {
         return \defined('HHVM_VERSION');
     }
-    
+
     /**
      * Returns true when the runtime used is PHP without the PHPDBG SAPI.
      */
@@ -155,7 +155,7 @@ final class Runtime
     {
         return !$this->isHHVM() && !$this->isPHPDBG();
     }
-    
+
     /**
      * Returns true when the runtime used is PHP with the PHPDBG SAPI.
      */
@@ -163,7 +163,7 @@ final class Runtime
     {
         return PHP_SAPI === 'phpdbg' && !$this->isHHVM();
     }
-    
+
     /**
      * Returns true when the runtime used is PHP with the PHPDBG SAPI
      * and the phpdbg_*_oplog() functions are available (PHP >= 7.0).
@@ -176,21 +176,27 @@ final class Runtime
     }
 }
 
-$actual_link = __FILE__;
-$base = str_replace(basename($actual_link), '', $actual_link);
-$script = $base . 'BackgroundBuilder.php';
+$base = getcwd();
+$script = $base . '/BackgroundBuilder.php';
 
-$dir = __DIR__;
+$dir = sys_get_temp_dir();
 $outputfile = $dir . '/sprowtoutput.log';
 $pidfile = $dir . '/sprowtpid';
+
 $rt = new Runtime();
 $php = $rt->getBinary();
+$php = str_replace('php-fpm', 'php', $php);
 
-$cmd = $php . " " . $script;
+$cmd = $php . ' ' . $script;
+$cmdFull = sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $outputfile, $pidfile);
 //from here: https://stackoverflow.com/a/45966/5873687
-exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $outputfile, $pidfile));
+exec($cmdFull, $out);
 
 echo json_encode(array(
-    'success' => true,
-    'message' => 'Sprowt Setup Started!'
+    'out' => $out,
+    'cmdFull' => $cmdFull,
+    'cmd' => $cmd,
+    'base' => $base,
+    'outputfile' => $outputfile,
+    'pidfile' => $pidfile
 ));
