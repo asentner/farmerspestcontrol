@@ -52,11 +52,9 @@
         }
       }
    }
-   .field--name-field-image {
-      img {
-         border-color: $color-border;
-         background-color: $color-border;
-      }
+   .field--name-field-image, .field--name-field-icon {
+     border-color: $color-border;
+     background-color: $color-border;
    }
 }
 

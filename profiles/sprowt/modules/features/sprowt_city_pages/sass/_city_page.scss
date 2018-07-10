@@ -58,6 +58,16 @@
 	}
 }
 
+.city--solutions-finder{
+	.block--views-city-pages-city-hero{
+		.node__content{
+			@include breakpoint($desk){
+				padding: 65px 0;
+			}
+		}
+	}
+}
+
 //Anchor link block
 .node--city-page--alt-teaser{
   padding: 30px 20px;
