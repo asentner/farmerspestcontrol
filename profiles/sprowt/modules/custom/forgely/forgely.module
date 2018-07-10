@@ -271,7 +271,9 @@ function _forgely_build_schema_org_array($node) {
         return false;
     }
     
-    $posting = new NodeBuilder($node);
+    require_once drupal_get_path('module', 'forgely') . '/forgely_node.php';
+
+    $posting = new ForgelyNodeBuilder($node);
     
     $schema = array(
         '@context' => 'http://schema.org/',
