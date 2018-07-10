@@ -149,3 +149,8 @@ function sprowt_theme_preprocess(&$variables, $hook) {
     $variables['itemreviewed_structured_data'] = theme('itemreviewed_structured_data');
     $variables['localbusiness_structured_data'] = theme('localbusiness_structured_data');
 }
+
+function _sprowt_theme_field_exists($field_name, $bundle, $entity_type = 'node') {
+    $tmp = field_info_instance($entity_type, $field_name, $bundle);
+    return !empty($tmp);
+}

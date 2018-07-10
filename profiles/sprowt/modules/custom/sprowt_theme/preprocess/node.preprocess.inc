@@ -64,7 +64,12 @@ function sprowt_theme_preprocess_node(&$variables) {
           $html = theme('node', $variables);
       }
       $n = entity_metadata_wrapper('node', $node);
-      $skip = $n->field_structured_data_disable->value();
+      if(_sprowt_theme_field_exists('field_structured_data_disable', 'location')) {
+          $skip = $n->field_structured_data_disable->value();
+      }
+      else {
+          $skip = true;
+      }
       if(strpos($html, 'http://schema.org') === false && empty($skip)) {
           $data = _sprowt_theme_location_structured_data($node);
           $scriptHtml = '<script type="application/ld+json">' . "\n";
