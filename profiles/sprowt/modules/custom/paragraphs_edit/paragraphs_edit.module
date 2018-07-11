@@ -1,2 +1,55 @@
 <?php
 
+/**
+ * Implements hook_menu().
+ */
+function paragraphs_edit_menu() {
+    global $user;
+    $items = array();
+    
+    $items['paragraphs-edit/%paragraphs_item'] = array(
+        'title' => 'Edit Paragraph',
+        'page callback' => 'paragraphs_edit_page',
+        'page arguments' => array(1),
+        'access callback' => 'paragraphs_paragraphs_item_access',
+        'access arguments' => array(1, 'update', $user),
+    );
+    
+    return $items;
+}
+
+function _paragraphs_edit_form($form, $form_state, $paragraph) {
+    $form['#paragraph'] = $paragraph;
+    field_attach_form('paragraphs_item', $paragraph, $form, $form_state, entity_language('paragraphs_item', $paragraph));
+    
+    $actions = array();
+    
+    $actions['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Save',
+        '#submit' => array('_paragraphs_edit_form_submit')
+    );
+    
+    $form['paragraphs_edit_actions'] = $actions;
+    
+    
+    return $form;
+}
+
+function _paragraphs_edit_form_submit(&$form, &$form_state) {
+    $something = 'something';
+}
+
+function paragraphs_edit_page($paragraph) {
+    $form = drupal_get_form('_paragraphs_edit_form', $paragraph);
+    return $form;
+}
+
+/**
+ * Implements hook_custom_theme().
+ */
+function paragraphs_edit_custom_theme() {
+    if(arg(0) == 'paragraphs-edit') {
+        return variable_get('admin_theme');
+    }
+}
