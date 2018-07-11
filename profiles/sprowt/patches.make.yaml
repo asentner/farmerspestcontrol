@@ -1,0 +1,19 @@
+core: '7.x'
+api: '2'
+projects:
+  link:
+    subdir: "contrib"
+    patch:
+      - 'https://www.drupal.org/files/issues/2018-03-20/link_anchors_and_queries-2654246-22.patch'
+  paragraphs:
+    subdir: "contrib"
+    patch:
+      - 'https://www.drupal.org/files/issues/clonefatalerror-2897975-1.patch'
+  smtp:
+    subdir: "contrib"
+    patch:
+      - 'https://www.drupal.org/files/issues/2018-06-04/2753115-41-smtp-multiple-to-addresses-error.patch'
+  taxonomy_dupecheck:
+    subdir: "contrib"
+    patch:
+      - 'https://www.drupal.org/files/issues/notice%EF%80%BA-undefined-index%EF%80%BA-term.patch'
