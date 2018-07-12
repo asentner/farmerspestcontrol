@@ -18,31 +18,43 @@ function paragraphs_edit_menu() {
     return $items;
 }
 
+function paragraphs_edit_page($paragraph) {
+    $form = drupal_get_form('_paragraphs_edit_form', $paragraph);
+    return $form;
+}
+
 function _paragraphs_edit_form($form, $form_state, $paragraph) {
+    $form = array();
     $form['#paragraph'] = $paragraph;
     field_attach_form('paragraphs_item', $paragraph, $form, $form_state, entity_language('paragraphs_item', $paragraph));
-    
-    $actions = array();
+    $form['#after_build'][] = 'paragraphs_field_widget_embed_delay_required_validation';
+    $actions = array(
+        '#type' => 'container',
+        '#weight' => 99
+    );
     
     $actions['submit'] = array(
         '#type' => 'submit',
         '#value' => 'Save',
-        '#submit' => array('_paragraphs_edit_form_submit')
     );
     
     $form['paragraphs_edit_actions'] = $actions;
-    
+    $form['#submit'] = array('_paragraphs_edit_form_submit');
+    $form['#validate'] = array('_paragraphs_edit_form_validate');
     
     return $form;
+}
+
+function _paragraphs_edit_form_validate(&$form, &$form_state) {
+    $paragraph = $form['#paragraph'];
+    field_attach_form_validate('paragraphs_item', $paragraph, $form, $form_state);
+    $form['#paragraph'] = $paragraph;
 }
 
 function _paragraphs_edit_form_submit(&$form, &$form_state) {
-    $something = 'something';
-}
-
-function paragraphs_edit_page($paragraph) {
-    $form = drupal_get_form('_paragraphs_edit_form', $paragraph);
-    return $form;
+    $paragraph = $form['#paragraph'];
+    field_attach_submit('paragraphs_item', $paragraph, $form, $form_state);
+    $paragraph->save();
 }
 
 /**
