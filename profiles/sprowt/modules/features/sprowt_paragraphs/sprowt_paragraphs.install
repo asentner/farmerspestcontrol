@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * enable paragraphs edit module
+ */
+function sprowt_paragraphs_update_7100() {
+    module_enable(array('paragraphs_edit'));
+}
