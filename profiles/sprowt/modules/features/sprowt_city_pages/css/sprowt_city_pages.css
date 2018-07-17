@@ -2360,6 +2360,10 @@
   .block--views-city-pages-city-hero .field--name-field-display-title {
     font-size: 3.7em; } }
 
+@media (min-width: 1024px) {
+  .city--solutions-finder .block--views-city-pages-city-hero .node__content {
+    padding: 65px 0; } }
+
 .node--city-page--alt-teaser {
   padding: 30px 20px; }
   .node--city-page--alt-teaser .node__content {
@@ -2563,7 +2567,7 @@
 
 .block--views-city-pages-benefits {
   background-color: #f4f4f4; }
-  .block--views-city-pages-benefits .field--name-field-image img {
+  .block--views-city-pages-benefits .field--name-field-image, .block--views-city-pages-benefits .field--name-field-icon {
     border-color: #fff;
     background-color: #fff; }
 

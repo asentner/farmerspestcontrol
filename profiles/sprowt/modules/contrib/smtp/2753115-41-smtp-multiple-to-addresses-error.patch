@@ -1,0 +1,76 @@
+diff --git a/smtp.mail.inc b/smtp.mail.inc
+index 4887ddc..6e6248a 100644
+--- a/smtp.mail.inc
++++ b/smtp.mail.inc
+@@ -762,6 +762,7 @@ class SmtpMailSystem implements MailSystemInterface {
+    *  An array containing a name and an email address.
+    */
+   protected function _get_components($input) {
++    $input = trim($input);
+     $components = array(
+       'input' => $input,
+       'name' => '',
+@@ -771,7 +772,7 @@ class SmtpMailSystem implements MailSystemInterface {
+     // If the input is a valid email address in its entirety, then there is
+     // nothing to do, just return that.
+     if (valid_email_address($input)) {
+-      $components['email'] = trim($input);
++      $components['email'] = $input;
+       return $components;
+     }
+ 
+diff --git a/tests/smtp.unit.test b/tests/smtp.unit.test
+index 88f9ad4..64a6363 100644
+--- a/tests/smtp.unit.test
++++ b/tests/smtp.unit.test
+@@ -165,6 +165,50 @@ class SmtpUnitTest extends DrupalWebTestCase {
+     $this->assertEqual($queue_count, 0, 'An email was not found in the failure queue.');
+   }
+ 
++  /**
++   * Tests email address parsing.
++   */
++   public function testAddressParsing() {
++    $mail_sytem = new class() extends SmtpMailSystem {
++
++      /**
++       * Exposes the protected _get_components method, returning an array of name and email address from a string.
++       *
++       * @param $input
++       *  A string that contains different possible combinations of names and
++       *  email address.
++       * @return
++       *  An array containing a name and an email address.
++       */
++      public function getComponents($input) {
++        return $this->_get_components($input);
++      }
++
++    };
++
++    $valid_addresses = array(
++      'to_test@example.com',
++      'to_test@example.com,to_test2@example.com',
++      'to_test@example.com, to_test2@example.com',
++    );
++
++    foreach ($valid_addresses as $address) {
++      $recipients = explode(',', $address);
++      foreach ($recipients as $recipient) {
++        // We create a new PHPMailer instance for each recipient so errors can be cleared out.
++        $mailer = new PHPMailer();
++        $components = $mail_sytem->getComponents($recipient);
++        $this->assertTrue(strlen($components['email']) > 0, format_string('Parsing address "%address" resulted in a non-zero length value', array(
++          '%address' => $components['email'],
++        )));
++        $mailer->AddAddress($components['email'], $components['name']);
++        $this->assertFalse($mailer->IsError(), format_string('PHPMailer has no errors for address "%address"', array(
++          '%address' => $components['email'],
++        )));
++      }
++    }
++  }
++
+   /**
+    * Gets the latest Maillog entry.
+    *

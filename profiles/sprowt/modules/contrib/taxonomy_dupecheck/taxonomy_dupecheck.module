@@ -90,11 +90,9 @@ function taxonomy_dupecheck_form_taxonomy_form_term_alter(&$form, &$form_state, 
 
   // Add the validator if we're checking terms for dupes.
   if (isset($types['term'])) {
-    if ($types['term']) {
-      $vids = array_filter(variable_get('taxonomy_dupecheck_vocabularies', array()));
-      if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
-        $form['#validate'][] = 'taxonomy_dupecheck_term_validate';
-      }
+    $vids = array_filter(variable_get('taxonomy_dupecheck_vocabularies', array()));
+    if (count($vids) == 0 || in_array($form['vid']['#value'], $vids)) {
+      $form['#validate'][] = 'taxonomy_dupecheck_term_validate';
     }
   }
 

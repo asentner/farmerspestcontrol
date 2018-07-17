@@ -200,6 +200,7 @@ function addtoany_page_alter(&$page) {
       . "})(jQuery);"
       . "a2a_config.callbacks=a2a_config.callbacks||[];"
       . "a2a_config.callbacks.push({ready:da2a.script_onready});"
+      . "a2a_config.overlays=a2a_config.overlays||[];"
       . "a2a_config.templates=a2a_config.templates||{};"
       . ((variable_get('addtoany_no_3p', '0') != '1') ? "" : "a2a_config.no_3p=1;")
       . variable_get('addtoany_additional_js', '');

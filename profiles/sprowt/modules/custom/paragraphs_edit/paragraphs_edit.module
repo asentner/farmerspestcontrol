@@ -1,0 +1,167 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function paragraphs_edit_menu() {
+    global $user;
+    $items = array();
+    
+    $items['paragraphs-edit/%paragraphs_item'] = array(
+        'title' => 'Edit Paragraph',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('_paragraphs_edit_form', 1),
+        'access callback' => 'paragraphs_paragraphs_item_access',
+        'access arguments' => array(1, 'update', $user),
+        'type' => MENU_LOCAL_ACTION,
+        'context' => MENU_CONTEXT_INLINE,
+    );
+    
+    // To use local task menu items, there must be a parent page.
+    $items['paragraphs-edit'] = array(
+        'title' => 'Edit Paragraph',
+        'page callback' => 'paragraphs_edit_page',
+        'page arguments' => array(1),
+        'access arguments' => TRUE,
+    );
+    
+    return $items;
+}
+
+function paragraphs_edit_page($paragraph) {
+    $form = drupal_get_form('_paragraphs_edit_form', $paragraph);
+    return $form;
+}
+
+/**
+ * @param $form
+ * @param $form_state
+ * @param $paragraph \UUIDParagraphsItemEntity
+ *
+ * @return array
+ */
+function _paragraphs_edit_form($form, &$form_state, $paragraphs_item) {
+    if (!$paragraphs_item) {
+        drupal_not_found();
+    }
+    
+    $p = entity_metadata_wrapper('paragraphs_item', $paragraphs_item);
+    
+    
+    $instance = field_info_instance('paragraphs_item', 'field_label', $paragraphs_item->bundle);
+    if(!empty($instance)) {
+        $title = $p->field_label->value();
+    }
+    
+    if(empty($title)) {
+        $bundle = paragraphs_bundle_load($paragraphs_item->bundle);
+        $title = $bundle->name;
+    }
+    
+    drupal_set_title(t('Edit !title paragraph', array('!title' => $title)));
+    
+    $form['paragraphs_item'] = array(
+        '#type' => 'value',
+        '#value' => $paragraphs_item,
+    );
+    
+    $form['actions'] = array('#type' => 'actions');
+    $form['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#weight' => 10000,
+        '#value' => t('Save'),
+        '#submit' => array('_paragraphs_edit_form_submit_button')
+    );
+    
+    $form['actions']['cancel'] = array(
+        '#type' => 'submit',
+        '#weight' => 10001,
+        '#value' => t('Cancel'),
+    );
+    
+    field_attach_form('paragraphs_item', $paragraphs_item, $form, $form_state);
+    
+    return $form;
+}
+
+function _paragraphs_edit_form_validate(&$form, &$form_state) {
+    $paragraph = $form_state['values']['paragraphs_item'];
+    field_attach_form_validate('paragraphs_item', $paragraph, $form, $form_state);
+    $form_state['values']['paragraphs_item'] = $paragraph;
+}
+
+function _paragraphs_edit_form_submit_button(&$form, &$form_state) {
+    $paragraph = $form_state['values']['paragraphs_item'];
+    field_attach_submit('paragraphs_item', $paragraph, $form, $form_state);
+    $paragraph->save();
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function paragraphs_edit_admin_paths() {
+    $paths = array(
+        'paragraphs-edit' => true,
+        'paragraphs-edit/*' => true
+    );
+    
+    return $paths;
+}
+
+///**
+// * Retrieves contextual links for a path based on registered local tasks.
+// *
+// * @see menu_contextual_links()
+// */
+//function paragraphs_edit_contextual_links($args) {
+//    $links = array();
+//
+//    $data = &drupal_static(__FUNCTION__);
+//    if (!isset($data)) {
+//        $data = paragraphs_edit_get_router_items('paragraphs-edit/%');
+//    }
+//
+//    array_unshift($args, 'paragraphs-edit');
+//    foreach ($data as $item) {
+//        if (!$item['access']) {
+//            continue;
+//        }
+//        $links['paragraphs-edit'] = $item;
+//    }
+//
+//    return $links;
+//}
+//
+///**
+// * Get Paragraphs' router items.
+// *
+// * @param $base
+// * @return mixed
+// */
+//function paragraphs_edit_get_router_items($base) {
+//    // Performance: We only query available tasks once per request.
+//    return db_select('menu_router', 'm')
+//        ->fields('m')
+//        ->condition('tab_root', db_like($base) . '%', 'LIKE')
+//        ->condition('context', MENU_CONTEXT_NONE, '<>')
+//        ->condition('context', MENU_CONTEXT_PAGE, '<>')
+//        ->orderBy('weight')
+//        ->orderBy('title')
+//        ->execute()
+//        ->fetchAllAssoc('path', PDO::FETCH_ASSOC);
+//}
+
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function paragraphs_edit_preprocess_entity(&$variables) {
+    if ($variables['entity_type'] == 'paragraphs_item') {
+        $paragraph = $variables['paragraphs_item'];
+        $contextual_links = [
+            'paragraphs-edit',
+            [$paragraph->item_id],
+        ];
+        $variables['elements']['#contextual_links']['paragraphs_edit'] = $contextual_links;
+    }
+}

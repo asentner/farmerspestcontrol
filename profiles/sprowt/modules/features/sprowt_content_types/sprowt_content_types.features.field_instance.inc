@@ -986,7 +986,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 4,
+      'default_image' => 5,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -3021,7 +3021,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 13,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3059,7 +3059,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 45,
+      'weight' => 56,
     ),
   );
 
@@ -3080,7 +3080,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -3156,7 +3156,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 15,
+        'weight' => 10,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3260,7 +3260,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 54,
+      'weight' => 65,
     ),
   );
 
@@ -3326,7 +3326,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 66,
     ),
   );
 
@@ -3347,7 +3347,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3385,7 +3385,7 @@ function sprowt_content_types_field_default_field_instances() {
         'show_token_tree' => 0,
       ),
       'type' => 'text_textarea',
-      'weight' => 53,
+      'weight' => 64,
     ),
   );
 
@@ -3410,7 +3410,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3448,7 +3448,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 52,
+      'weight' => 63,
     ),
   );
 
@@ -3518,7 +3518,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 47,
+      'weight' => 58,
     ),
   );
 
@@ -3641,7 +3641,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 44,
+      'weight' => 55,
     ),
   );
 
@@ -3666,7 +3666,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3704,7 +3704,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 50,
+      'weight' => 61,
     ),
   );
 
@@ -3776,7 +3776,7 @@ function sprowt_content_types_field_default_field_instances() {
         'placeholder' => '',
       ),
       'type' => 'telephone_default',
-      'weight' => 51,
+      'weight' => 62,
     ),
   );
 
@@ -3846,7 +3846,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 49,
+      'weight' => 60,
     ),
   );
 
@@ -3992,7 +3992,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 5,
       ),
       'type' => 'text_textfield',
-      'weight' => 48,
+      'weight' => 59,
     ),
   );
 
@@ -4062,7 +4062,67 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 57,
+    ),
+  );
+
+  // Exported field_instance: 'node-location-field_structured_data_disable'.
+  $field_instances['node-location-field_structured_data_disable'] = array(
+    'bundle' => 'location',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'By default locations include LocalBusiness structured data (readable by google). This checkbox will disable that to remove the structured data for this location.',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_structured_data_disable',
+    'label' => 'Do Not Include Structured Data',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 53,
     ),
   );
 
@@ -6613,7 +6673,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 4,
+      'default_image' => 5,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
@@ -6773,7 +6833,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 6,
+      'default_image' => 7,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -8503,10 +8563,12 @@ function sprowt_content_types_field_default_field_instances() {
   t('Background color');
   t('Body');
   t('Button URL');
+  t('By default locations include LocalBusiness structured data (readable by google). This checkbox will disable that to remove the structured data for this location.');
   t('Call Out');
   t('City or town name.');
   t('Display title');
   t('Displays below the intro.');
+  t('Do Not Include Structured Data');
   t('Email');
   t('Enter a comma-separated list of words to describe your content.');
   t('Expires');

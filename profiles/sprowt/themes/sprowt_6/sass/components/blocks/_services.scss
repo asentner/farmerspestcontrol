@@ -18,19 +18,33 @@
     margin: 0 auto;
     padding: 20px;
     overflow: hidden;
+    .block__title{
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .view-header{
+      h3{
+        font-family: $font-headings;
+        font-size: 36px;
+        font-weight: 800;
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
     .view-content {
       @include flexbox;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
       margin-top: -30px;
-      margin-left: -20px;
       // align-items: center;
       .views-row{
         max-width: 275px;
         flex: 1 1 50%;
         margin-top: 30px;
-        margin-left: 20px;
         .node--service--teaser, .node--service--alt-teaser{
           padding: 15px;
           @include flexbox;
@@ -45,16 +59,13 @@
             align-items: center;
           }
           .field--name-field-icon{
-            height: 110px;
-            width: 110px;
-            border-radius: 100%;
             @include flexbox;
             justify-content: center;
             align-items: center;
             @extend %image-hover;
             .field__item{
               img{
-                max-height: 80px;
+                max-height: 160px;
                 width: auto;
               }
             }
@@ -71,22 +82,49 @@
             line-height: 1.75;
             letter-spacing: .1px;
             .more-link{
+              font-size: 18px;
+              font-weight: 600;
               text-align: center;
+              text-transform: uppercase;
+              padding-top: 40px;
+              &:after{
+                @include faicon('\f101');
+                font-size: 19px;
+                margin-left: 5px;
+              }
             }
           }
         }
       }
     }
+    .view-footer{
+      text-align: center;
+      padding-top: 45px;
+      a{
+        padding: 20px 80px;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: .2px;
+      }
+    }
     @include breakpoint($tab){
       max-width: 1350px;
+      .block__title{
+        font-size: 30px
+      }
+      .view-header{
+        h3{
+          font-size: 51px;
+        }
+      }
       .view-content{
         padding: 0;
+        margin-left: -20px;
         .views-row{
           padding-top: 65px;
+          margin-left: 20px;
           .node--service--teaser, .node--service--alt-teaser{
             min-height: 415px;
-            border: solid 3px;
-            box-shadow: 0px 15px 12.8px 2.3px rgba(46, 56, 52, 0.25);
             header{
               margin-top: -65px;
             }
@@ -155,14 +193,12 @@
   .field--name-field-icon{
     height: 110px;
     width: 110px;
-    border-radius: 100%;
     @include flexbox;
     justify-content: center;
     align-items: center;
     @extend %image-hover;
     .field__item{
       img{
-        max-height: 80px;
         width: auto;
       }
     }

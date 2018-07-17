@@ -256,6 +256,7 @@ function sprowt_content_types_field_group_info() {
       10 => 'field_state',
       11 => 'field_street_address',
       12 => 'title',
+      13 => 'field_structured_data_disable',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

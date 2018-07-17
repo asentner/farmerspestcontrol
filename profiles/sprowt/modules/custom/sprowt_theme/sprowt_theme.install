@@ -5,3 +5,102 @@ function sprowt_theme_install() {
     ->condition('name', 'sprowt_theme', '=')
     ->execute();
 }
+
+/**
+ * Add field to location content type
+ */
+function sprowt_theme_update_7100() {
+    $info = field_info_field('field_structured_data_disable');
+    $instance = field_info_instance('node', 'field_structured_data_disable', 'location');
+    
+    $field_base = array(
+        'active' => 1,
+        'cardinality' => 1,
+        'deleted' => 0,
+        'entity_types' => array(),
+        'field_name' => 'field_structured_data_disable',
+        'indexes' => array(
+            'value' => array(
+                0 => 'value',
+            ),
+        ),
+        'locked' => 0,
+        'module' => 'list',
+        'settings' => array(
+            'allowed_values' => array(
+                0 => 0,
+                1 => 1,
+            ),
+            'allowed_values_function' => '',
+        ),
+        'translatable' => 0,
+        'type' => 'list_boolean',
+    );
+    
+    if(empty($info)) {
+        $info = field_create_field($field_base);
+    }
+    
+    $field_instance = array(
+        'bundle' => 'location',
+        'default_value' => array(
+            0 => array(
+                'value' => 0,
+            ),
+        ),
+        'deleted' => 0,
+        'description' => 'By default locations include LocalBusiness structured data (readable by google). This checkbox will disable that to remove the structured data for this location.',
+        'display' => array(
+            'alt_teaser' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+            'default' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 11,
+            ),
+            'secondary_teaser' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+            'teaser' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+            'tertiary_teaser' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+        ),
+        'entity_type' => 'node',
+        'field_name' => 'field_structured_data_disable',
+        'label' => 'Do Not Include Structured Data',
+        'required' => 0,
+        'settings' => array(
+            'user_register_form' => FALSE,
+        ),
+        'widget' => array(
+            'active' => 1,
+            'module' => 'options',
+            'settings' => array(
+                'display_label' => 1,
+            ),
+            'type' => 'options_onoff',
+            'weight' => 53,
+        ),
+    );
+    
+    if(empty($instance)) {
+        field_create_instance($field_instance);
+    }
+}

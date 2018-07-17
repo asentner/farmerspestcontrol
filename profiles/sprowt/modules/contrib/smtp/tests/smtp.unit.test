@@ -166,6 +166,50 @@ class SmtpUnitTest extends DrupalWebTestCase {
   }
 
   /**
+   * Tests email address parsing.
+   */
+   public function testAddressParsing() {
+    $mail_sytem = new class() extends SmtpMailSystem {
+
+      /**
+       * Exposes the protected _get_components method, returning an array of name and email address from a string.
+       *
+       * @param $input
+       *  A string that contains different possible combinations of names and
+       *  email address.
+       * @return
+       *  An array containing a name and an email address.
+       */
+      public function getComponents($input) {
+        return $this->_get_components($input);
+      }
+
+    };
+
+    $valid_addresses = array(
+      'to_test@example.com',
+      'to_test@example.com,to_test2@example.com',
+      'to_test@example.com, to_test2@example.com',
+    );
+
+    foreach ($valid_addresses as $address) {
+      $recipients = explode(',', $address);
+      foreach ($recipients as $recipient) {
+        // We create a new PHPMailer instance for each recipient so errors can be cleared out.
+        $mailer = new PHPMailer();
+        $components = $mail_sytem->getComponents($recipient);
+        $this->assertTrue(strlen($components['email']) > 0, format_string('Parsing address "%address" resulted in a non-zero length value', array(
+          '%address' => $components['email'],
+        )));
+        $mailer->AddAddress($components['email'], $components['name']);
+        $this->assertFalse($mailer->IsError(), format_string('PHPMailer has no errors for address "%address"', array(
+          '%address' => $components['email'],
+        )));
+      }
+    }
+  }
+
+  /**
    * Gets the latest Maillog entry.
    *
    * @return array
