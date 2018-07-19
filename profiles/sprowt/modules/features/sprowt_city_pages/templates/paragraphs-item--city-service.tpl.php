@@ -1,4 +1,6 @@
 <article <?php print $attributes; ?>>
+    <?php print render($title_prefix); ?>
+    <?php print render($title_suffix); ?>
   <div id="<?php print trim(render($content['field_anchor_tag'])); ?>" >
 
     <?php
