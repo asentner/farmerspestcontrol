@@ -1,0 +1,223 @@
+.node-type-page.section-special-offers.enhanced{
+  .l-main{
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  .node--page{
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    .node__title{
+      font-size: 30px;
+      font-weight: 700;
+      text-transform: capitalize;
+      line-height: 1.1;
+      letter-spacing: .4px;
+    }
+    .field--name-field-subtitle{
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    .field--name-body{
+      margin-bottom: 45px;
+    }
+  }
+  @include breakpoint($tab){
+    .l-main{
+      max-width: 1250px;
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+    .l-content{
+      max-width: 1250px;
+    }
+    .node--page{
+      .node__title{
+        font-size: 36px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .l-main{
+      padding: 0 5px;
+      margin-top: 3em;
+      margin-bottom: 3em;
+    }
+    .node--page{
+      .node__title{
+        font-size: 42px;
+      }
+    }
+  }
+}
+
+.block--views-special-offers-all-enhanced{
+  .view{
+    @include flexbox;
+    flex-direction: column;
+  }
+  .view-content{
+    @include flexbox;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .views-row{
+      margin: 0 auto 20px;
+    }
+  }
+  @include breakpoint($tab){
+    .view-content{
+      flex-direction: row;
+      margin: 0 30px;
+      .views-row{
+        flex: 1 0 50%;
+        margin: 0 12px 20px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .view-content{
+      margin: 0;
+      justify-content: flex-start;
+      .views-row{
+        flex: 1 0 31.33%;
+        max-width: 389px;
+      }
+    }
+  }
+}
+
+.block--views-special-offers-all-enhanced{
+  .view-filters{
+    margin-bottom: 60px;
+    .views-exposed-widgets{
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .views-widget-filter-field_services_tid{
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      label{
+        order: 1;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.5;
+        padding: 5px 0;
+        padding-right: 7px;
+      }
+      .views-widget{
+        order: 3;
+        padding: 5px 0;
+        select{
+          border-radius: 0 !important;
+          border: solid 3px;
+          font-size: 16px;
+          font-weight: 600;
+          height: 45px;
+          width: 275px;
+        }
+      }
+      .description{
+        order: 2;
+        font-size: 18px;
+        line-height: 1.5;
+        padding: 5px 0;
+        padding-right: 20px;
+      }
+    }
+    .views-submit-button{
+      input{
+        margin: 0;
+        padding: 10px 30px;
+      }
+    }
+  }
+}
+
+.node--special-offer--tertiary-teaser{
+  box-shadow: 0px 5px 17px 3px rgba(51, 51, 51, 0.2);
+  position: relative;
+  .offer-link{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+  .field--name-field-featured-icon{
+    position: absolute;
+    top: -40px;
+    right: -20px;
+  }
+  .node__content{
+    padding: 55px 35px 45px;
+    outline: 5px dashed;
+    outline-offset: -15px;
+    @include flexbox;
+    flex-direction: column;
+    text-align: center;
+  }
+  h2{
+    font-size: 47px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px;
+  }
+  h3{
+    overflow: visible;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.24;
+    letter-spacing: 0.1px;
+    margin: 0 auto 15px;
+  }
+  .field--name-body{
+    margin-bottom: 15px;
+  }
+  .field--name-field-button{
+    width: 100%;
+    max-width: 210px;
+    margin: 0 auto 15px;
+    text-align: center;
+  }
+  .logo{
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    img{
+      max-width: 210px;
+      height: auto;
+      width: 100%;
+    }
+  }
+  .field--name-field-expiration-date{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.2px;
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+  }
+  @include breakpoint($tab){
+
+  }
+  @include breakpoint($desk){
+    h2{
+      font-size: 58px;
+    }
+    h3{
+      font-size: 21px;
+    }
+  }
+}

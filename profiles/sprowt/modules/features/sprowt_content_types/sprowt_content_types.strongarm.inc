@@ -458,10 +458,6 @@ function sprowt_content_types_strongarm() {
         'label' => 'Secondary teaser',
         'custom settings' => 1,
       ),
-      'tertiary_teaser' => array(
-        'label' => 'Tertiary Teaser',
-        'custom settings' => 1,
-      ),
       'landing_page' => array(
         'label' => 'Landing Page',
         'custom settings' => 1,
@@ -476,6 +472,10 @@ function sprowt_content_types_strongarm() {
       ),
       'quinary_teaser' => array(
         'label' => 'Quinary Teaser',
+        'custom settings' => 1,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'Tertiary Teaser',
         'custom settings' => 1,
       ),
     ),
@@ -1562,7 +1562,7 @@ function sprowt_content_types_strongarm() {
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'quaternary_teaser' => array(
         'custom_settings' => FALSE,
@@ -1580,19 +1580,19 @@ function sprowt_content_types_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '5',
         ),
         'title' => array(
           'weight' => '43',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '3',
         ),
         'xmlsitemap' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
         'rabbit_hole' => array(
-          'weight' => '0',
+          'weight' => '2',
         ),
       ),
       'display' => array(),
