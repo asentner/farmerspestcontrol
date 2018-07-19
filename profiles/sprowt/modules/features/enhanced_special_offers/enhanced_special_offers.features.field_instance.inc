@@ -147,9 +147,73 @@ function enhanced_special_offers_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-special_offer-field_featured_offer'.
+  $field_instances['node-special_offer-field_featured_offer'] = array(
+    'bundle' => 'special_offer',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Marking as Featured Offer changes the styling on the offer to stand out.',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 12,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_featured_offer',
+    'label' => 'Featured Offer',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 48,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Featured Icon');
+  t('Featured Offer');
+  t('Marking as Featured Offer changes the styling on the offer to stand out.');
   t('Upload badge icons here.');
 
   return $field_instances;
