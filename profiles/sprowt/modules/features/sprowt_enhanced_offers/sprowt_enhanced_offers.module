@@ -1,0 +1,49 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Enhanced Offers feature.
+ */
+
+include_once 'sprowt_enhanced_offers.features.inc';
+
+/**
+ * Preprocess
+ */
+function sprowt_enhanced_offers_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  if($node->type == 'special_offer') {
+    $variables['featured'] = false;
+    $instance = field_info_instance('node', 'field_featured_offer', $node->type);
+
+    if(!empty($instance)) {
+      $n = entity_metadata_wrapper('node', $node);
+      $featured = $n->field_featured_offer->value();
+      if(!empty($featured)) {
+        $variables['classes_array'][] = 'featured-offer';
+        $variables['featured'] = $featured;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_enhanced_offers_theme($existing, $type, $theme, $path) {
+  $theme = array();
+    $theme['node__special_offer__tertiary_teaser'] = array(
+      'render element' => 'content',
+      'base hook' => 'node',
+      'template' => 'node--special-offer--tertiary-teaser',
+      'path' => drupal_get_path('module', 'sprowt_enhanced_offers') . '/templates',
+     );
+  return $theme;
+}
+
+/**
+ * Styling
+ */
+function sprowt_enhanced_offers_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_enhanced_offers');
+    drupal_add_css($path . '/css/enhanced_special_offers.css');
+}
