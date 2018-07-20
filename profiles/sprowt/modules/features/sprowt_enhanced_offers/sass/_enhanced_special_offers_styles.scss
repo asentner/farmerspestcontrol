@@ -53,7 +53,10 @@
   }
 }
 
-.block--views-special-offers-all-enhanced{
+.block--views-special-offers-all-enhanced, .block--views-3a8319097bcee7958bed28c69e6f77ee{
+  .block__title{
+    display: none;
+  }
   .view{
     @include flexbox;
     flex-direction: column;
@@ -90,7 +93,7 @@
   }
 }
 
-.block--views-special-offers-all-enhanced{
+.block--views-special-offers-all-enhanced, .block--views-3a8319097bcee7958bed28c69e6f77ee{
   .view-filters{
     margin-bottom: 60px;
     .views-exposed-widgets{
