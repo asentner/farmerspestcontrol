@@ -19,8 +19,8 @@
     ?>
 
     <div class="logo">
-      <?php if (isset($featured)): ?>
-        <img src="<?php print  path_to_theme(); ?>/images/featured_offer_logo@2x.png" alt="<?php print variable_get('site_name'); ?>">
+      <?php if (!empty($featured)): ?>
+        <img src="/<?php print  path_to_theme(); ?>/images/featured_offer_logo@2x.png" alt="<?php print variable_get('site_name'); ?>">
       <?php else: ?>
         <img src="<?php print theme_get_setting('logo'); ?>" alt="<?php print variable_get('site_name'); ?>">
       <?php endif; ?>
