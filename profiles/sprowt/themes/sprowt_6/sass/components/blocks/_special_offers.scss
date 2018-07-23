@@ -287,10 +287,6 @@
       span{
         font-weight: 600;
         font-style: italic;
-        &:before{
-          content: 'Expires:';
-          padding-right: 7px;
-        }
       }
     }
     .field--name-field-button{

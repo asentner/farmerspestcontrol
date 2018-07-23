@@ -25,9 +25,12 @@
  * @see template_preprocess_entity()
  * @see template_process()
  */
+
 hide($content['field_header_paragraph']);
 ?>
 <div <?php print $attributes; ?>>
+    <?php print render($title_prefix); ?>
+    <?php print render($title_suffix); ?>
   <div class="content"<?php print $content_attributes; ?>>
       <div class="interior">
           <?php print render($content); ?>

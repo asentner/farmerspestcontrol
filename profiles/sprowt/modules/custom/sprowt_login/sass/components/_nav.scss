@@ -11,7 +11,7 @@ $ltgray:#f0f0f0;
 //font
 $montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
 
-#sprowt-dashboard-nav {
+body.has-sprowt-dashboard #sprowt-dashboard-nav {
   background: linear-gradient(to right, $black, $mdblack);
   border-bottom: 2px solid rgba($ltyellow, .6);
   box-shadow: -10px 0 15.4px 0.6px rgba($black, 0.83);
@@ -30,6 +30,12 @@ $montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
       width: 100%;
       height: auto;
       max-width: 227px;
+      path.cls-1 {
+        fill: #fff;
+      }
+      path.cls-2 {
+        fill: #febc1f;
+      }
     }
   }
 
@@ -67,6 +73,9 @@ $montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
       width: 185px;
       text-align: right;
       background: $mdblack;
+      &:before {
+        display: none;
+      }
       a {
         font-size: 17px;
         line-height: 1.65;

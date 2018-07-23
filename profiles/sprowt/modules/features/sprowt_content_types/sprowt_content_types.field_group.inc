@@ -256,6 +256,7 @@ function sprowt_content_types_field_group_info() {
       10 => 'field_state',
       11 => 'field_street_address',
       12 => 'title',
+      13 => 'field_structured_data_disable',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -519,13 +520,9 @@ function sprowt_content_types_field_group_info() {
       1 => 'field_button',
       2 => 'field_expiration_date',
       3 => 'field_image',
-      4 => 'field_offer_headline',
-      5 => 'field_offer_price',
-      6 => 'field_offer_subheadline',
-      7 => 'field_original_price',
-      8 => 'field_package',
-      9 => 'field_services',
-      10 => 'title',
+      4 => 'field_package',
+      5 => 'field_services',
+      6 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -601,6 +598,38 @@ function sprowt_content_types_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_enhanced|node|special_offer|form';
+  $field_group->group_name = 'group_enhanced';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'special_offer';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Enhanced Content',
+    'weight' => '1',
+    'children' => array(
+      0 => 'field_offer_headline',
+      1 => 'field_offer_price',
+      2 => 'field_offer_subheadline',
+      3 => 'field_original_price',
+      4 => 'field_featured_offer',
+      5 => 'field_featured_icon',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-enhanced field-group-tab',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_enhanced|node|special_offer|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_locale|node|location|teaser';
   $field_group->group_name = 'group_locale';
   $field_group->entity_type = 'node';
@@ -666,6 +695,7 @@ function sprowt_content_types_field_group_info() {
   // Included for use with string extractors like potx.
   t('Call Out');
   t('Content');
+  t('Enhanced Content');
   t('Locale');
   t('Social and Map');
 

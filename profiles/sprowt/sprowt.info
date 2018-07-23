@@ -160,6 +160,7 @@ dependencies[] = text_summary_options
 ; Custom Modules
 
 dependencies[] = paragraphs_export
+dependencies[] = paragraphs_edit
 dependencies[] = field_collection_export
 dependencies[] = block_shortcode
 dependencies[] = sprowt_forms

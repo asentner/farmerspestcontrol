@@ -35,4 +35,5 @@
     hide($content['field_phone_label']);
     hide($content['field_phone_number']);
    ?>
+    <?php print render($content['json_ld']); ?>
 </article>

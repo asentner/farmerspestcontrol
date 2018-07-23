@@ -36,4 +36,5 @@
       </div>
     </div>
   <?php endif; ?>
+    <?php print render($content['json_ld']); ?>
 </article>

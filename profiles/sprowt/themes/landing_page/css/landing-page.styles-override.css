@@ -2312,6 +2312,9 @@ body.admin-menu.adminimal-menu:before {
   background-color: #333;
   min-height: 60px; }
 
+body.has-sprowt-dashboard.admin-menu.adminimal-menu:before {
+  min-height: auto; }
+
 #admin-menu {
   z-index: 99999999; }
   #admin-menu .dropdown li ul {
@@ -2382,4 +2385,10 @@ body.adminimal-menu #admin-menu .admin-menu-search input {
     position: fixed;
     margin-top: -26px; }
     .action-links a {
-      padding: 0; } }
+      padding: 0; }
+  body.has-sprowt-dashboard .tabs {
+    position: relative;
+    margin-top: 0; }
+  body.has-sprowt-dashboard .action-links {
+    position: absolute;
+    margin-top: -32px; } }

@@ -1,0 +1,9 @@
+<?php
+
+function paragraphs_edit_install() {
+    db_update('system')->fields(array(
+        'weight' => '-1'
+    ))
+        ->condition('name', 'paragraphs_edit')
+        ->execute();
+}

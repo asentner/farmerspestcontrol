@@ -1,5 +1,19 @@
 .paragraphs-item-city-service{
   padding: 25px 0;
+  .field--name-field-body-text{
+    ol {
+      list-style-type: decimal;
+    }
+    ul {
+      list-style-type: disc;
+    }
+    li {
+      margin-left: 2em;
+      + li {
+        margin-top: .5em;
+      }
+    }
+  }
   .field--name-field-button{
     margin-top: 1em;
   }

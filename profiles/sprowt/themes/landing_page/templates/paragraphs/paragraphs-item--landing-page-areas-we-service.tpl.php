@@ -27,6 +27,8 @@
  */
 ?>
 <div class="<?php print $classes; ?>"<?php print $attributes; ?>>
+    <?php print render($title_prefix); ?>
+    <?php print render($title_suffix); ?>
   <div class="content"<?php print $content_attributes; ?>>
       <?php if(!empty($field_map_code)): ?>
         <?php print render($content['field_map_code']); ?>

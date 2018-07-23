@@ -986,7 +986,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 4,
+      'default_image' => 3,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -3021,7 +3021,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 13,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3059,7 +3059,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 45,
+      'weight' => 56,
     ),
   );
 
@@ -3080,7 +3080,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
       'secondary_teaser' => array(
         'label' => 'above',
@@ -3156,7 +3156,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 15,
+        'weight' => 10,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3260,7 +3260,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 54,
+      'weight' => 65,
     ),
   );
 
@@ -3326,7 +3326,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 66,
     ),
   );
 
@@ -3347,7 +3347,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3385,7 +3385,7 @@ function sprowt_content_types_field_default_field_instances() {
         'show_token_tree' => 0,
       ),
       'type' => 'text_textarea',
-      'weight' => 53,
+      'weight' => 64,
     ),
   );
 
@@ -3410,7 +3410,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3448,7 +3448,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 52,
+      'weight' => 63,
     ),
   );
 
@@ -3518,7 +3518,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 47,
+      'weight' => 58,
     ),
   );
 
@@ -3641,7 +3641,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 44,
+      'weight' => 55,
     ),
   );
 
@@ -3666,7 +3666,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'secondary_teaser' => array(
         'label' => 'hidden',
@@ -3704,7 +3704,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 50,
+      'weight' => 61,
     ),
   );
 
@@ -3776,7 +3776,7 @@ function sprowt_content_types_field_default_field_instances() {
         'placeholder' => '',
       ),
       'type' => 'telephone_default',
-      'weight' => 51,
+      'weight' => 62,
     ),
   );
 
@@ -3846,7 +3846,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 49,
+      'weight' => 60,
     ),
   );
 
@@ -3992,7 +3992,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 5,
       ),
       'type' => 'text_textfield',
-      'weight' => 48,
+      'weight' => 59,
     ),
   );
 
@@ -4062,7 +4062,67 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 57,
+    ),
+  );
+
+  // Exported field_instance: 'node-location-field_structured_data_disable'.
+  $field_instances['node-location-field_structured_data_disable'] = array(
+    'bundle' => 'location',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'By default locations include LocalBusiness structured data (readable by google). This checkbox will disable that to remove the structured data for this location.',
+    'display' => array(
+      'alt_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+      'secondary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_structured_data_disable',
+    'label' => 'Do Not Include Structured Data',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 53,
     ),
   );
 
@@ -6613,7 +6673,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 4,
+      'default_image' => 3,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
@@ -6773,7 +6833,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 6,
+      'default_image' => 5,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -7578,6 +7638,13 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
@@ -7644,6 +7711,13 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'link_default',
         'weight' => 5,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 6,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_button',
@@ -7677,7 +7751,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 53,
+      'weight' => 47,
     ),
   );
 
@@ -7757,6 +7831,20 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'date_default',
         'weight' => 4,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'expiration_date',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 4,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_expiration_date',
@@ -7781,7 +7869,7 @@ function sprowt_content_types_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 52,
+      'weight' => 46,
     ),
   );
 
@@ -7836,6 +7924,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 1,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -7894,7 +7988,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'special_offer',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'For Anthracite (theme 6) & enhanced special offer listing this field is your bold headline.',
     'display' => array(
       'alt_teaser' => array(
         'label' => 'above',
@@ -7922,6 +8016,13 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_offer_headline',
@@ -7935,7 +8036,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -7998,6 +8099,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'number_integer',
         'weight' => 3,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_offer_price',
@@ -8015,7 +8122,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 49,
+      'weight' => 51,
     ),
   );
 
@@ -8024,7 +8131,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'special_offer',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'For Anthracite (theme 6) & enhanced special offers this field is your offer short description.',
     'display' => array(
       'alt_teaser' => array(
         'label' => 'above',
@@ -8052,6 +8159,13 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_offer_subheadline',
@@ -8065,7 +8179,7 @@ function sprowt_content_types_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'show_token_tree' => FALSE,
+        'show_token_tree' => 0,
         'size' => 60,
       ),
       'type' => 'text_textfield',
@@ -8128,6 +8242,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'number_integer',
         'weight' => 2,
       ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'field_original_price',
@@ -8145,7 +8265,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 48,
+      'weight' => 50,
     ),
   );
 
@@ -8185,6 +8305,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
       ),
     ),
     'entity_type' => 'node',
@@ -8233,6 +8359,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'tertiary_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
       ),
     ),
     'entity_type' => 'node',
@@ -8503,13 +8635,17 @@ function sprowt_content_types_field_default_field_instances() {
   t('Background color');
   t('Body');
   t('Button URL');
+  t('By default locations include LocalBusiness structured data (readable by google). This checkbox will disable that to remove the structured data for this location.');
   t('Call Out');
   t('City or town name.');
   t('Display title');
   t('Displays below the intro.');
+  t('Do Not Include Structured Data');
   t('Email');
   t('Enter a comma-separated list of words to describe your content.');
   t('Expires');
+  t('For Anthracite (theme 6) & enhanced special offer listing this field is your bold headline.');
+  t('For Anthracite (theme 6) & enhanced special offers this field is your offer short description.');
   t('Google+ URL');
   t('Hero Image');
   t('Highlight');

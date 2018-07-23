@@ -101,6 +101,7 @@ features[field_base][] = field_services
 features[field_base][] = field_special_offer
 features[field_base][] = field_state
 features[field_base][] = field_street_address
+features[field_base][] = field_structured_data_disable
 features[field_base][] = field_suffix
 features[field_base][] = field_tags
 features[field_base][] = field_testimonial_ref
