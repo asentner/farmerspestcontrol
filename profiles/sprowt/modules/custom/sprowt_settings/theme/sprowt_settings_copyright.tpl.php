@@ -15,3 +15,4 @@
 ?>
 <p>&copy; [current-year] [company-name]. All rights reserved.
 	<?php print $intro; ?> <a href="http://www.coalmarch.com" target="_blank">Coalmarch Productions, Raleigh NC</a></p>
+<p><a href="/privacy-policy">Privacy Policy</a></p>

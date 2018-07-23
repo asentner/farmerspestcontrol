@@ -5,10 +5,10 @@ include_once('sprowtbuilder.php');
 
 include_once('modules/contrib/devel/krumo/class.krumo.php');
 
-$SP = new SprowtBuilder();
-
-$object = new stdClass();
-$object->variable = 'test variable';
+//$SP = new SprowtBuilder();
+//
+//$object = new stdClass();
+//$object->variable = 'test variable';
 
 //$SP->getData();
 
@@ -18,7 +18,7 @@ $object->variable = 'test variable';
 
 //$SP->addBranding();
 
-$SP->addMarketsServices();
+//$SP->addMarketsServices();
 
 //$SP->addNodes();
 
@@ -39,3 +39,11 @@ foreach(glob('profiles/sprowt/modules/custom/*') as $module){
     print "dependencies[] = $module<br>";
 }
 */
+function importPrivacyPolicy(){
+  $fName = 'profiles/sprowt/privacypolicy.txt';
+
+  $handle = fopen($fName,'r');
+  $data = fread($handle,filesize($fName));
+
+  node_export_import($data);
+}

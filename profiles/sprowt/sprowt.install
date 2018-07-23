@@ -491,3 +491,10 @@ function sprowt_update_7005() {
 function sprowt_update_7006() {
     registry_rebuild();
 }
+/**
+ * Add Privacy Policy
+ */
+function sprowt_update_7007(){
+  $sb = new SprowtBuilder();
+  $sb->importPrivacyPolicy();
+}

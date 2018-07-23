@@ -248,7 +248,7 @@ Class SprowtBuilder {
         }
 
 
-        // drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
+        //run this command to generate a json file of all pages: drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
         $node_json = file_get_contents($json_file);
         $this->node_json = $node_json;
         
@@ -414,6 +414,15 @@ Class SprowtBuilder {
             variable_set('node_submitted_' . $obj->type, '0');
         }
     }
+
+  function importPrivacyPolicy(){
+    $fName = 'profiles/sprowt/privacypolicy.txt';
+
+    $handle = fopen($fName,'r');
+    $data = fread($handle,filesize($fName));
+
+    node_export_import($data);
+  }
     
     function node_import($nodes = array()) {
         require_once('includes/nodebuilder.php');
