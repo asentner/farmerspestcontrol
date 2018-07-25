@@ -249,7 +249,7 @@ class ReviewBoost {
         if($this->company_email === null) {
             $this->company_email = variable_get('review_boost_settings_email',
                 variable_get('webform_default_from_address',
-                    variable_set('site_mail', '')
+                    variable_get('site_mail', '')
                 )
             );
         }
