@@ -293,6 +293,7 @@ function _sprowt_settings_shortcode_replace($string)
         '[node-service]' => _sprowt_settings_node_service(),
         '[node-market]' => _sprowt_settings_node_market(),
         '[current-year]' => date('Y'),
+        '[webform-to-email]' => variable_get('sprowt_settings_webform_to_email'),
     );
 
     //you can add other shortcodes via HOOK_sprowt_shortcode_replace_alter(&$shortcodes)
