@@ -1,0 +1,29 @@
+.section-media-library{
+  .l-content{
+    div.block{
+      &:nth-of-type(3){
+        background-color: palette(neutral, concrete);
+      }
+      .block__title{
+        color: palette(neutral, mine-shaft);
+      }
+    }
+  }
+  .node--page{
+    h1{
+      color: palette(primary, dark);
+    }
+    .flex{
+      .button{
+        background-color: palette(neutral, mercury);
+        color: palette(primary, dark);
+        border-color: palette(neutral, mercury);
+        &:hover{
+          background-color: palette(primary, dark);
+          color: palette(white, pure);
+          border-color: palette(primary, dark);
+        }
+      }
+    }
+  }
+}

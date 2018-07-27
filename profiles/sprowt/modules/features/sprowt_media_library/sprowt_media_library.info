@@ -1,0 +1,12 @@
+name = Sprowt Media Library
+description = Uses Image Galleries, Video Library, and Download Library
+core = 7.x
+package = Sprowt Features
+dependencies[] = context
+dependencies[] = sprowt_download_library
+dependencies[] = sprowt_image_galleries
+dependencies[] = sprowt_video_library
+features[context][] = media_library
+features[ctools][] = context:context:3
+features[features_api][] = api:2
+features_exclude[dependencies][views] = views

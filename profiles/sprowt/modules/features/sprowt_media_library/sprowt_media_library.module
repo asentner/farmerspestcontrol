@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Media Library feature.
+ */
+
+include_once 'sprowt_media_library.features.inc';
+
+function sprowt_media_library_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_media_library');
+    drupal_add_css($path . '/css/sprowt_media_library.css');
+}

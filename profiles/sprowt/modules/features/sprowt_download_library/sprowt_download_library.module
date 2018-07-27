@@ -1,0 +1,26 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Download Library feature.
+ */
+
+include_once 'sprowt_download_library.features.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_download_library_theme($existing, $type, $theme, $path) {
+  $theme = array();
+    $theme['node__file_download__teaser'] = array(
+      'render element' => 'content',
+      'base hook' => 'node',
+      'template' => 'node--file-download--teaser',
+      'path' => drupal_get_path('module', 'sprowt_download_library') . '/templates',
+     );
+   return $theme;
+}
+
+function sprowt_download_library_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_download_library');
+    drupal_add_css($path . '/css/sprowt_download_library.css');
+}
