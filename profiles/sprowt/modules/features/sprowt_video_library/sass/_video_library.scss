@@ -1,0 +1,91 @@
+.block--views-video-library-media-library{
+  .view-content{
+    @include flexbox;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    .views-row{
+      padding: 0 10px 30px;
+      text-align: center;
+    }
+  }
+  .view-footer{
+    text-align: center;
+    margin: 0 auto;
+  }
+  @include breakpoint($tab){
+    .view-content{
+      .views-row{
+        padding: 0 10px 50px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .view-content{
+      justify-content: flex-start;
+    }
+  }
+}
+
+.node--video--teaser{
+  max-width: 375px;
+  .field--name-field-video{
+    border: solid 3px;
+  }
+  .field--name-field-video-title{
+    padding: 5px 10px 0;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+  }
+  .video-modal{
+    .play-button{
+      i{
+        font-size: 42px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+  @include breakpoint($tab){
+    max-width: 340px;
+    .field--name-field-video-title{
+      padding: 10px 15px 0;
+    }
+  }
+  @include breakpoint($desk){
+    max-width: 375px;
+    .field--name-field-video-title{
+      padding: 20px 15px 0;
+    }
+  }
+}
+
+//full listing
+.block--views-video-library-all-videos{
+  padding-top: 10px;
+  .view-content{
+    @include flexbox;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    .views-row{
+      padding: 0 10px 30px;
+      text-align: center;
+    }
+  }
+  @include breakpoint($tab){
+    .view-content{
+      .views-row{
+        padding: 0 10px 50px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .view-content{
+      justify-content: flex-start;
+    }
+  }
+}

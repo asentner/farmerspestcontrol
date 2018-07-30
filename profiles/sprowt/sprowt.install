@@ -498,3 +498,10 @@ function sprowt_update_7007(){
   $sb = new SprowtBuilder();
   $sb->importPrivacyPolicy();
 }
+
+/**
+ * alter system table to accept longer text in the info column
+ */
+function sprowt_update_7008() {
+    db_query("ALTER TABLE `system` CHANGE `info` `info` LONGBLOB NULL DEFAULT NULL")->execute();
+}

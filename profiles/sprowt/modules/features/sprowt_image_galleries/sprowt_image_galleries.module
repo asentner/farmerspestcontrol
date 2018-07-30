@@ -5,3 +5,8 @@
  */
 
 include_once 'sprowt_image_galleries.features.inc';
+
+function sprowt_image_galleries_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_image_galleries');
+    drupal_add_css($path . '/css/sprowt_image_galleries.css');
+}

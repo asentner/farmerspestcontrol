@@ -1,0 +1,26 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Video Library feature.
+ */
+
+include_once 'sprowt_video_library.features.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function sprowt_video_library_theme($existing, $type, $theme, $path) {
+  $theme = array();
+    $theme['node__video__teaser'] = array(
+      'render element' => 'content',
+      'base hook' => 'node',
+      'template' => 'node--video--teaser',
+      'path' => drupal_get_path('module', 'sprowt_video_library') . '/templates',
+     );
+   return $theme;
+}
+
+function sprowt_video_library_preprocess_page(&$variables) {
+    $path = drupal_get_path('module', 'sprowt_video_library');
+    drupal_add_css($path . '/css/sprowt_video_library.css');
+}

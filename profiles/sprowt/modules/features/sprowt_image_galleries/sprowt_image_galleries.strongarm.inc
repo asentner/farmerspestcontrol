@@ -41,16 +41,16 @@ function sprowt_image_galleries_strongarm() {
         'custom_settings' => TRUE,
       ),
       'alt_teaser' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'secondary_teaser' => array(
         'custom_settings' => TRUE,
       ),
       'tertiary_teaser' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'quaternary_teaser' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
@@ -68,6 +68,15 @@ function sprowt_image_galleries_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => FALSE,
+      ),
+      'quinary_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),
