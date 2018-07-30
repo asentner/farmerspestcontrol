@@ -543,6 +543,9 @@ function _sprowt_taxonomy_engine_build_node($type = '', $properties = array()) {
 		//Consider moving to switch statement if we want to vary dummy content!
 		$node->body[$node->language][0]['value'] = _sprowt_taxonomy_engine_get_dummy_content();
 		$node->body[$node->language][0]['format'] = 'filtered_html';
+		$node->path = array(
+		    'pathauto' => true
+        );
 		if (isset($properties['title'])) {
 			$node->title = $properties['title'];
 		}

@@ -31,6 +31,9 @@ foreach(glob(drupal_get_path('profile', 'sprowt') . "/forms/*.inc") as $include)
  */
 
 function sprowt_install_tasks_alter(&$tasks, &$install_state) {
+    
+    drupal_add_js(drupal_get_path('profile', 'sprowt') . '/js/empty.js');
+    
     //maybe this is getting unset somewhere?
     $install_state['parameters']['profile'] = 'sprowt';
     
@@ -77,7 +80,7 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
         'sprowt_module_postinstall', //sprowt
         'sprowt_check_install',
         'install_configure_form',
-        'sprowt_configure',
+        'sprowt_configure'
     );
     
     
@@ -99,6 +102,7 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
             'sprowt_module_postinstall', //sprowt
             'install_configure_form',
             'sprowt_setup',
+            'sprowt_configure'
         );
     }
     

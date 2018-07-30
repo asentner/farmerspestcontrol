@@ -3,6 +3,8 @@
 function sprowt_install_from_file($form, &$form_state, &$install_state) {
     drupal_set_title(st('Would You Like to Install From a File?'));
 
+    $form['#attached']['js'][] = drupal_get_path('profile', 'sprowt') . '/js/fromfile.js';
+    
     $form['file'] = array(
         '#type' => 'file',
         '#title' => t('Choose a file'),

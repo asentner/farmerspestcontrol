@@ -189,6 +189,11 @@ $php = str_replace('php-fpm', 'php', $php);
 
 $cmd = $php . ' ' . $script;
 $cmdFull = sprintf("%s > %s 2>&1 & echo $! >> %s", $cmd, $outputfile, $pidfile);
+
+if(!empty($_GET['XDEBUG_SESSION_START'])) {
+    $cmdFull = "export XDEBUG_CONFIG=\"idekey=willmcmillian\"; $cmdFull; unset XDEBUG_CONFIG";
+}
+
 //from here: https://stackoverflow.com/a/45966/5873687
 exec($cmdFull, $out);
 
