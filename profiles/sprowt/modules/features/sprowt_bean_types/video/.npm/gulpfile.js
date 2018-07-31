@@ -33,4 +33,4 @@ gulp.task('watch', function() {
     gulp.watch('../sass/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['clean', 'sass', 'watch']);
+gulp.task('default', ['sass', 'watch']);

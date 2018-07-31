@@ -123,6 +123,13 @@ function sprowt_bean_types_user_default_permissions() {
     'module' => 'bean',
   );
 
+  // Exported permission: 'create any video_bean bean'.
+  $permissions['create any video_bean bean'] = array(
+    'name' => 'create any video_bean bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
   // Exported permission: 'delete any aggregated_reviews_bean bean'.
   $permissions['delete any aggregated_reviews_bean bean'] = array(
     'name' => 'delete any aggregated_reviews_bean bean',
@@ -200,6 +207,13 @@ function sprowt_bean_types_user_default_permissions() {
     'module' => 'bean',
   );
 
+  // Exported permission: 'delete any video_bean bean'.
+  $permissions['delete any video_bean bean'] = array(
+    'name' => 'delete any video_bean bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
   // Exported permission: 'edit any aggregated_reviews_bean bean'.
   $permissions['edit any aggregated_reviews_bean bean'] = array(
     'name' => 'edit any aggregated_reviews_bean bean',
@@ -273,6 +287,13 @@ function sprowt_bean_types_user_default_permissions() {
   // Exported permission: 'edit any sesonal bean'.
   $permissions['edit any sesonal bean'] = array(
     'name' => 'edit any sesonal bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
+  // Exported permission: 'edit any video_bean bean'.
+  $permissions['edit any video_bean bean'] = array(
+    'name' => 'edit any video_bean bean',
     'roles' => array(),
     'module' => 'bean',
   );
@@ -379,6 +400,15 @@ function sprowt_bean_types_user_default_permissions() {
   // Exported permission: 'view any sesonal bean'.
   $permissions['view any sesonal bean'] = array(
     'name' => 'view any sesonal bean',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+    ),
+    'module' => 'bean',
+  );
+
+  // Exported permission: 'view any video_bean bean'.
+  $permissions['view any video_bean bean'] = array(
+    'name' => 'view any video_bean bean',
     'roles' => array(
       'anonymous user' => 'anonymous user',
     ),
