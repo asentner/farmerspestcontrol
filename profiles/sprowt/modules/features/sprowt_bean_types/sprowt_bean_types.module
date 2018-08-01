@@ -53,4 +53,5 @@ function sprowt_bean_types_theme($existing, $type, $theme, $path) {
 function sprowt_bean_types_preprocess_page(&$variables) {
     $path = drupal_get_path('module', 'sprowt_bean_types');
     drupal_add_css($path . '/hero/css/hero_bean.css');
+    drupal_add_css($path . '/video/css/video_bean.css');
 }
