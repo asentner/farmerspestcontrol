@@ -31,6 +31,18 @@ function sprowt_enhanced_offers_preprocess_node(&$variables) {
  */
 function sprowt_enhanced_offers_theme($existing, $type, $theme, $path) {
   $theme = array();
+  $theme['field__field_offer_headline'] = array(
+    'render element' => 'content',
+    'base hook' => 'field',
+    'template' => 'field--field-offer-headline',
+    'path' => drupal_get_path('module', 'sprowt_enhanced_offers') . '/templates',
+   );
+   $theme['field__field_offer_subheadline'] = array(
+     'render element' => 'content',
+     'base hook' => 'field',
+     'template' => 'field--field-offer-subheadline',
+     'path' => drupal_get_path('module', 'sprowt_enhanced_offers') . '/templates',
+    );
     $theme['node__special_offer__tertiary_teaser'] = array(
       'render element' => 'content',
       'base hook' => 'node',
