@@ -12,6 +12,10 @@ include_once 'sprowt_enhanced_offers.features.inc';
 function sprowt_enhanced_offers_preprocess_node(&$variables) {
   $node = $variables['node'];
   if($node->type == 'special_offer') {
+    $nb = entity_metadata_wrapper('node', $node);
+    $link = $nb->field_button->value();
+    $variables['button_url'] = $link['url'];
+    
     $variables['featured'] = false;
     $instance = field_info_instance('node', 'field_featured_offer', $node->type);
 
