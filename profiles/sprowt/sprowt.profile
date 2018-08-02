@@ -364,6 +364,10 @@ function _sprowt_get_features(){
  * Some pre-install stuff
  */
 function sprowt_module_preinstall(&$install_state) {
+    //set this so features don't break everything
+    db_query("ALTER TABLE `system` CHANGE `info` `info` LONGBLOB NULL DEFAULT NULL")->execute();
+
+
     //set this to false so that the batch module install doesn't break
     //we'll rebuild the features at the end when we revert them all
     variable_set('features_rebuild_on_module_install', false);

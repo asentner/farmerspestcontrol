@@ -59,9 +59,11 @@ function sprowt_theme_preprocess_node(&$variables) {
     }
 
     if($node->type == 'location') {
-      if(!$variables['themed']) {
+      $schema_exists = false;
+      if(empty($variables['themed'])) {
           $variables['themed'] = true;
           $html = theme('node', $variables);
+          $schema_exists = strpos($html, 'http://schema.org') !== false;
       }
       $n = entity_metadata_wrapper('node', $node);
       if(_sprowt_theme_field_exists('field_structured_data_disable', 'location')) {
@@ -70,7 +72,7 @@ function sprowt_theme_preprocess_node(&$variables) {
       else {
           $skip = true;
       }
-      if(strpos($html, 'http://schema.org') === false && empty($skip)) {
+      if(!$schema_exists && empty($skip)) {
           $data = _sprowt_theme_location_structured_data($node);
           $scriptHtml = '<script type="application/ld+json">' . "\n";
           $scriptHtml .= json_encode($data, JSON_PRETTY_PRINT) . "\n";
