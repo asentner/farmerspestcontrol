@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt Contexts feature.
+ */
+
+include_once 'sprowt_contexts.features.inc';
+
+/**
+ * Implements hook_features_post_restore().
+ */
+function sprowt_contexts_features_post_restore($op, $items)
+{
+    $feature = 'sprowt_contexts';
+    
+    if($op == 'enable' && in_array($feature, array_keys($items))) {
+        variable_set($feature. '_being_enabled', true);
+    }
+    if($op == 'rebuild' && in_array($feature, array_keys($items))) {
+        if(variable_get($feature. '_being_enabled', false)) {
+            $module = 'views';
+            $delta = 'special_offers-sidebar_service';
+            
+            db_update('block')->fields(array(
+                'region' => '-1',
+                'css_class' => 'block--views-special-offers-sidebar'
+            ))
+                ->condition('module', $module)
+                ->condition('delta', $delta)
+                ->execute();
+            
+            
+            variable_del($feature. '_being_enabled');
+        }
+    }
+}
