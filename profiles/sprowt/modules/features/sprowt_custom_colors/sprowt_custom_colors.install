@@ -6,3 +6,108 @@ function sprowt_custom_colors_install() {
         ->condition('name', 'sprowt_custom_colors', '=')
         ->execute();
 }
+
+/**
+ * Add new field
+ */
+function sprowt_custom_colors_update_7100() {
+    $info = field_info_field('field_image_bg_hide_mobile');
+    $instance = field_info_instance('paragraphs_item', 'field_image_bg_hide_mobile', 'colors');
+
+    $field_base = array(
+        'active' => 1,
+        'cardinality' => 1,
+        'deleted' => 0,
+        'entity_types' => array(),
+        'field_name' => 'field_image_bg_hide_mobile',
+        'indexes' => array(
+            'value' => array(
+                0 => 'value',
+            ),
+        ),
+        'locked' => 0,
+        'module' => 'list',
+        'settings' => array(
+            'allowed_values' => array(
+                0 => 0,
+                1 => 1,
+            ),
+            'allowed_values_function' => '',
+        ),
+        'translatable' => 0,
+        'type' => 'list_boolean',
+    );
+
+    if(empty($info)) {
+        $info = field_create_field($field_base);
+    }
+
+    $field_instance = array(
+        'bundle' => 'colors',
+        'default_value' => array(
+            0 => array(
+                'value' => 0,
+            ),
+        ),
+        'deleted' => 0,
+        'description' => '',
+        'display' => array(
+            'default' => array(
+                'label' => 'above',
+                'module' => 'list',
+                'settings' => array(),
+                'type' => 'list_default',
+                'weight' => 24,
+            ),
+            'paragraphs_editor_preview' => array(
+                'label' => 'above',
+                'settings' => array(),
+                'type' => 'hidden',
+                'weight' => 0,
+            ),
+        ),
+        'entity_type' => 'paragraphs_item',
+        'field_name' => 'field_image_bg_hide_mobile',
+        'label' => 'Hide Background Image on Mobile?',
+        'required' => 0,
+        'settings' => array(
+            'user_register_form' => FALSE,
+        ),
+        'widget' => array(
+            'active' => 1,
+            'module' => 'options',
+            'settings' => array(
+                'display_label' => 1,
+            ),
+            'type' => 'options_onoff',
+            'weight' => 6,
+        ),
+    );
+
+    if(empty($instance)) {
+        field_create_instance($field_instance);
+    }
+}
+
+/**
+ * Set background hide for all heroes
+ */
+function sprowt_custom_colors_update_7101() {
+    $uuids = db_query("
+        SELECT uuid
+        FROM paragraphs_item
+        WHERE bundle = 'landing_page_hero'
+    ")->fetchCol();
+
+    $items = entity_uuid_load('paragraphs_item', $uuids);
+
+    foreach($items as $item) {
+        $paragraph = entity_metadata_wrapper('paragraphs_item', $item);
+        $colors = $paragraph->field_colors->value();
+        if(!empty($colors) && is_object($colors)) {
+            $colorsWrap = entity_metadata_wrapper('paragraphs_item', $colors);
+            $colorsWrap->field_image_bg_hide_mobile = 1;
+            $colorsWrap->save();
+        }
+    }
+}
