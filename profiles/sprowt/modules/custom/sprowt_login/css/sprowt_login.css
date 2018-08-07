@@ -2324,7 +2324,8 @@
     -ms-flex-pack: end;
         justify-content: flex-end;
     -ms-flex-align: center;
-        align-items: center; }
+        align-items: center;
+    list-style: none; }
     #dashboards #tab-links ul > * {
       -ms-flex: 0 1 auto; }
     #dashboards #tab-links ul li {
@@ -2346,6 +2347,17 @@
   max-width: 1210px;
   text-align: center;
   margin: 200px auto; }
+
+#dashboards .field-name-body {
+  padding: 20px 40px; }
+  #dashboards .field-name-body .block > h2,
+  #dashboards .field-name-body .block__title {
+    font-size: 32px;
+    font-weight: bold; }
+  #dashboards .field-name-body .view-content {
+    max-width: 100%;
+    overflow-y: visible;
+    overflow-x: scroll; }
 
 .dashboard-page .messages {
   margin: 0; }

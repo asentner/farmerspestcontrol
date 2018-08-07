@@ -24,6 +24,7 @@ $montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
       flex-direction: row;
       justify-content: flex-end;
       align-items: center;
+      list-style: none;
       li {
         padding: 0 10px;
         a {
@@ -55,6 +56,20 @@ $montserrat: "Montserrat", "Helvetica", "Arial", sans-serif;
       max-width: 1210px;
       text-align: center;
       margin: 200px auto;
+    }
+  }
+
+  .field-name-body {
+    padding: 20px 40px;
+    .block > h2,
+    .block__title {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .view-content {
+      max-width: 100%;
+      overflow-y: visible;
+      overflow-x: scroll;
     }
   }
 }

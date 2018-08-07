@@ -12,7 +12,7 @@ function sprowt_login_menu_alter(&$items) {
 
     $items['user']['page callback'] = '_sprowt_login_user_redirect';
 
-    $items['dashboard'] = array(
+    $items['admin/dashboard'] = array(
         'title' => 'Dashboards',
         'page callback' => '_sprowt_login_dashboards',
         'access arguments' => array('view sprowt dashboard')
@@ -147,7 +147,7 @@ function sprowt_login_preprocess_page(&$variables) {
         drupal_add_css($path . '/css/sprowt_login.css');
     }
 
-    if(current_path() == 'dashboard') {
+    if(current_path() == 'admin/dashboard') {
         $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'], array('page__sprowt_dashboard'));
         drupal_add_js($path . '/js/dashboards.js');
     }
@@ -189,7 +189,7 @@ function sprowt_login_page_build(&$page) {
                 ),
                 array(
                     'title' => 'Dashboards',
-                    'url' => 'dashboard',
+                    'url' => 'admin/dashboard',
                 ),
                 array(
                     'title' => 'Logout',
@@ -250,8 +250,8 @@ function sprowt_login_user_login(&$edit, $account)
     if ((empty($_GET['destination']) || $_GET['destination'] == 'sprowt')
         && (!isset($_POST['form_id']) || $_POST['form_id'] != 'user_pass_reset'))
     {
-        $_GET['destination'] = 'dashboard';
-        $edit['redirect'] = 'dashboard';
+        $_GET['destination'] = 'admin/dashboard';
+        $edit['redirect'] = 'admin/dashboard';
     }
 }
 
