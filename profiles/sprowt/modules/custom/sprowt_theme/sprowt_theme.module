@@ -155,13 +155,19 @@ function _sprowt_theme_field_exists($field_name, $bundle, $entity_type = 'node')
     return !empty($tmp);
 }
 
-function sprowt_theme_form_alter(&$form, &$form_state){
+function sprowt_theme_form_alter(&$form, &$form_state, $form_id){
+    drupal_add_css(drupal_get_path('module', 'sprowt_theme') . '/css/utility_styles.css');
 
-  drupal_add_css(drupal_get_path('module', 'sprowt_theme') . '/css/utility_styles.css');
-
-  //Add privacy policy information above every webform submit button
-  if(in_array('webform-client-form',$form["#attributes"]["class"])){
-    $form['submit']['#prefix'] = "<div class='webform-privacy-policy'><p>By submitting this form, you are agreeing to the<a href='/privacy-policy'> privacy policy</a></p></div>";
-  }
-
+    //Add privacy policy information above every webform submit button
+    if (strpos($form_id, 'webform_client_form_') !== false) {
+        $node = $form['#node'];
+        $Node = entity_metadata_wrapper('node', $node);
+        $noPrivacy = false;
+        if(!empty($node->field_ebooking) && $Node->field_ebooking->value() == 'yes') {
+            $noPrivacy = true;
+        }
+        if(!$noPrivacy) {
+            $form['submit']['#prefix'] = "<div class='webform-privacy-policy'><p>By submitting this form, you are agreeing to the<a href='/privacy-policy'> privacy policy</a></p></div>";
+        }
+    }
 }

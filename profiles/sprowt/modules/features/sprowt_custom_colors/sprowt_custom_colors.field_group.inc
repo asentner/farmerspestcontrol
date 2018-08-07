@@ -28,6 +28,7 @@ function sprowt_custom_colors_field_group_info() {
       2 => 'field_color_background_overlay',
       3 => 'field_image_background',
       4 => 'field_image_background_style',
+      5 => 'field_image_bg_hide_mobile',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

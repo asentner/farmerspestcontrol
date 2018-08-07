@@ -155,6 +155,7 @@ dependencies[] = webform_fivestar
 dependencies[] = multiple_selects
 dependencies[] = entityreference_filter
 dependencies[] = text_summary_options
+dependencies[] = better_exposed_filters
 
 
 ; Custom Modules

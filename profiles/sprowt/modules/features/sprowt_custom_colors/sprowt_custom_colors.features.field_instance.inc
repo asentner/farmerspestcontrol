@@ -1207,7 +1207,7 @@ function sprowt_custom_colors_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 22,
+      'weight' => 24,
     ),
   );
 
@@ -1250,7 +1250,7 @@ function sprowt_custom_colors_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 18,
+      'weight' => 21,
     ),
   );
 
@@ -1294,7 +1294,7 @@ function sprowt_custom_colors_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 19,
+      'weight' => 22,
     ),
   );
 
@@ -1513,7 +1513,7 @@ function sprowt_custom_colors_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -1787,6 +1787,50 @@ function sprowt_custom_colors_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'paragraphs_item-colors-field_image_bg_hide_mobile'.
+  $field_instances['paragraphs_item-colors-field_image_bg_hide_mobile'] = array(
+    'bundle' => 'colors',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 24,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'field_name' => 'field_image_bg_hide_mobile',
+    'label' => 'Hide Background Image on Mobile?',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
   // 'paragraphs_item-colors-field_input_background_color'.
   $field_instances['paragraphs_item-colors-field_input_background_color'] = array(
     'bundle' => 'colors',
@@ -1931,7 +1975,7 @@ function sprowt_custom_colors_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 27,
+      'weight' => 28,
     ),
   );
 
@@ -1974,7 +2018,7 @@ function sprowt_custom_colors_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 23,
+      'weight' => 25,
     ),
   );
 
@@ -2887,6 +2931,7 @@ This overrides the hex code.');
   t('Header');
   t('Header Color');
   t('Hex');
+  t('Hide Background Image on Mobile?');
   t('Input Background');
   t('Input Border');
   t('Input Text');

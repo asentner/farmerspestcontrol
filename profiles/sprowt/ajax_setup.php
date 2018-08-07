@@ -71,8 +71,8 @@ $pidfile = $dir . '/sprowtpid';
 
 function isRunning($pid){
     try{
-        $result = shell_exec(sprintf("ps %d", $pid));
-        if( count(preg_split("/\n/", $result)) > 2){
+        $result = shell_exec('ps aux | grep php');
+        if( strpos($result, 'BackgroundBuilder.php') !== false){
             return true;
         }
     }catch(Exception $e){}

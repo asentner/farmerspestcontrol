@@ -4,3 +4,6 @@
 .webform-privacy-policy p{
   font-size:13px;
 }
+.node-ebooking .webform-privacy-policy {
+  display:none;
+}

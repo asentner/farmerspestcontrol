@@ -109,5 +109,14 @@ function sprowt_bean_types_bean_admin_ui_types() {
   $bean_type->description = 'Place a seasonal block on a page. The seasonal block also allows you to reference a LTP where it will automatically appear.';
   $export['sesonal'] = $bean_type;
 
+  $bean_type = new stdClass();
+  $bean_type->disabled = FALSE; /* Edit this to true to make a default bean_type disabled initially */
+  $bean_type->api_version = 5;
+  $bean_type->name = 'video_bean';
+  $bean_type->label = 'Video Bean';
+  $bean_type->options = '';
+  $bean_type->description = '';
+  $export['video_bean'] = $bean_type;
+
   return $export;
 }
