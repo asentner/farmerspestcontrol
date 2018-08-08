@@ -33,4 +33,43 @@
     }
   };
 
+  Drupal.behaviors.sprowtMobilePackages = {
+    attach: function (context, settings) {
+      var features = $('.node--package--alt-teaser .field--name-field-package-features .field__items');
+      $(features).each(function() {
+        var $features = $(this);
+        var $node = $features.closest('.node');
+        var excess = [];
+
+        excess = $(this).children("div").slice(4);
+        if(excess.length > 0) {
+          var $toggleWrap = $('<div class="toggle-wrap"></div>');
+
+          $toggleWrap.css('display', 'none');
+          $toggleWrap.append(excess);
+          $toggleWrap.appendTo($features);
+
+          var viewMore = 'View More <i class="fa fa-plus-circle"></i>';
+          var viewLess = 'View Less <i class="fa fa-minus-circle"></i>';
+          var $toggle = $('<div class="toggle"></div>');
+
+          $toggle.html(viewMore);
+          $features.after($toggle);
+          $node.on('click', '.toggle', function(){
+            $toggleWrap.slideToggle();
+            if($toggleWrap.hasClass('open')) {
+              $toggleWrap.removeClass('open');
+              $toggle.html(viewMore);
+            }
+            else {
+              $toggleWrap.addClass('open');
+              $toggle.html(viewLess);
+            }
+          });
+        }
+
+      });
+    }
+  };
+
 })(jQuery);

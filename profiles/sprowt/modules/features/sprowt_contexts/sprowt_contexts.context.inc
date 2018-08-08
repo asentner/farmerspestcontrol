@@ -53,7 +53,7 @@ function sprowt_contexts_context_default_contexts() {
   $context->description = 'Special offers sidebar block';
   $context->tag = 'Sidebar';
   $context->conditions = array(
-    'context_all' => array(
+    'context' => array(
       'values' => array(
         '~special_offers_page' => '~special_offers_page',
       ),

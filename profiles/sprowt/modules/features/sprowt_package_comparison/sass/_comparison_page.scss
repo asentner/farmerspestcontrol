@@ -77,6 +77,92 @@
 		margin: 0 auto 30px;
 	}
 
+	// mobile packages
+	.field--name-field-package-features {
+		.toggle-wrap {
+		  > * {
+			transition: 1s;
+			opacity: 0;
+			display: none;
+		  }
+		  &.open {
+			> * {
+			  opacity: 1;
+			  display: flex;
+			}
+		  }
+		}
+		.toggle {
+		  font-size: 15px;
+		  font-weight: bold;
+		  padding-top: 25px;
+		  text-transform: uppercase;
+		  cursor: pointer;
+		}
+		.fa {
+		  font-size: 17px;
+		}
+		@include breakpoint($tab) {
+		  .toggle {
+			display: none;
+		  }
+		}
+		.field__item {
+		  margin-bottom: 20px;
+		  @include flexbox;
+		  align-items: center;
+		  font-weight: bold;
+		  text-align: left;
+		  border-bottom: 2px solid #f1f1f1;
+		  padding: 10px;
+		  margin: 0;
+		  &:before {
+			content: "\f05d";
+			font-family: "FontAwesome";
+			color: #00833d;
+			font-size: 27px;
+			font-weight: 300;
+			margin-right: 10px;
+		  }
+		  @include breakpoint($tab) {
+			display: none;
+		  }
+		}
+	  }
+	.node--package {
+		a.button {
+			display: none;
+		}
+		.button {
+			// @extend %button;
+			display: block;
+			max-width: 220px;
+			margin: 20px auto 0;
+			@include breakpoint($tab) {
+				display: none;
+			}
+		}
+	}
+
+	// mobile cta
+	.node--cta--teaser {
+		.node__title {
+		  font-size: 30px;
+		}
+		.field--name-body {
+		  display: block;
+		  p {
+			font-size: 23px;
+			font-weight: bold;
+		  }
+		}
+	  }
+	@include breakpoint($tab) {
+		.block--sprowt-block-cta {
+			display: none;
+		}
+	}
+
 	@include breakpoint($tab) {
 		.l-main {
 			padding-bottom: 60px;

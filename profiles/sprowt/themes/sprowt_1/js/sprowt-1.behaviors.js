@@ -101,6 +101,8 @@ Drupal.behaviors.sprowtAccordions = {
     }
   };
 
+
+
   Drupal.behaviors.sprowtMapMouseOver = {
     attach: function (context, settings) {
       settings.mapmouseover = false;

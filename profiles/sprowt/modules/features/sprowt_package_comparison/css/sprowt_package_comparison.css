@@ -89,52 +89,35 @@
   margin-left: .3em; }
 
 .fa-spin {
-  -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
 
 .fa-pulse {
-  -webkit-animation: fa-spin 1s infinite steps(8);
   animation: fa-spin 1s infinite steps(8); }
-
-@-webkit-keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 @keyframes fa-spin {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   100% {
-    -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
 .fa-rotate-90 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg); }
 
 .fa-rotate-180 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-  -webkit-transform: rotate(180deg);
   transform: rotate(180deg); }
 
 .fa-rotate-270 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg); }
 
 .fa-flip-horizontal {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
-  -webkit-transform: scale(-1, 1);
   transform: scale(-1, 1); }
 
 .fa-flip-vertical {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-  -webkit-transform: scale(1, -1);
   transform: scale(1, -1); }
 
 :root .fa-rotate-90,
@@ -142,8 +125,7 @@
 :root .fa-rotate-270,
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical {
-  -webkit-filter: none;
-          filter: none; }
+  filter: none; }
 
 .fa-stack {
   position: relative;
@@ -2334,7 +2316,6 @@
     max-width: 340px;
     margin: 90px auto 0; }
   .bean-package-comparison .field--name-field-packages .field-collection-view, .node-type-package-comparison .field--name-field-packages .field-collection-view {
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     border-bottom: 0;
@@ -2346,7 +2327,6 @@
     .bean-package-comparison .field--name-field-packages .field-collection-view .field__item, .node-type-package-comparison .field--name-field-packages .field-collection-view .field__item {
       height: 100%; }
     .bean-package-comparison .field--name-field-packages .field-collection-view .content, .node-type-package-comparison .field--name-field-packages .field-collection-view .content {
-      display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       height: 100%; }
@@ -2366,8 +2346,7 @@
       .bean-package-comparison .field--name-field-packages .highlighted .banner-wrap::before, .node-type-package-comparison .field--name-field-packages .highlighted .banner-wrap::before {
         content: 'BEST VALUE';
         position: absolute;
-        -webkit-transform: rotate(45deg);
-                transform: rotate(45deg);
+        transform: rotate(45deg);
         right: -48px;
         top: 20px;
         font-size: 14px;
@@ -2376,7 +2355,6 @@
         padding: 10px;
         text-align: center; }
   .bean-package-comparison .field--name-field-packages .field--name-field-package, .node-type-package-comparison .field--name-field-packages .field--name-field-package {
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex; }
     .bean-package-comparison .field--name-field-packages .field--name-field-package > *, .node-type-package-comparison .field--name-field-packages .field--name-field-package > * {
@@ -2388,13 +2366,10 @@
     .bean-package-comparison .field--name-field-packages .node:hover, .node-type-package-comparison .field--name-field-packages .node:hover {
       box-shadow: 0 15px 34.6px 3.4px rgba(14, 15, 15, 0.5); }
   .bean-package-comparison .field--name-field-packages .node__content, .node-type-package-comparison .field--name-field-packages .node__content {
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+        flex-direction: column;
     height: 100%; }
     .bean-package-comparison .field--name-field-packages .node__content > *, .node-type-package-comparison .field--name-field-packages .node__content > * {
       -ms-flex: 0 1 auto; }
@@ -2428,19 +2403,14 @@
     max-width: 250px;
     margin: 0 auto; }
   .bean-package-comparison .field--name-field-packages .content-wrap, .node-type-package-comparison .field--name-field-packages .content-wrap {
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-flex: 1;
-        -ms-flex: 1 0 auto;
-            flex: 1 0 auto;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex: 1 0 auto;
+        flex: 1 0 auto;
     padding: 30px 25px; }
     .bean-package-comparison .field--name-field-packages .content-wrap > *, .node-type-package-comparison .field--name-field-packages .content-wrap > * {
       -ms-flex: 0 1 auto; }
@@ -2453,9 +2423,7 @@
       line-height: 1.5; }
   .bean-package-comparison .field--name-field-packages .feature-list, .node-type-package-comparison .field--name-field-packages .feature-list {
     padding-top: 10px;
-    -webkit-column-count: 2;
-       -moz-column-count: 2;
-            column-count: 2;
+    column-count: 2;
     text-align: left; }
   .bean-package-comparison .field--name-field-packages .feature, .node-type-package-comparison .field--name-field-packages .feature {
     display: block;
@@ -2480,12 +2448,10 @@
   .bean-package-comparison .field--name-field-packages, .node-type-package-comparison .field--name-field-packages {
     margin-bottom: 60px; }
     .bean-package-comparison .field--name-field-packages > .field__items, .node-type-package-comparison .field--name-field-packages > .field__items {
-      display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-pack: center;
-          -ms-flex-pack: center;
-              justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
       margin-left: -10px;
       margin-right: -10px; }
       .bean-package-comparison .field--name-field-packages > .field__items > *, .node-type-package-comparison .field--name-field-packages > .field__items > * {
@@ -2493,9 +2459,8 @@
       .bean-package-comparison .field--name-field-packages > .field__items > .field__item, .node-type-package-comparison .field--name-field-packages > .field__items > .field__item {
         margin-left: 10px;
         margin-right: 10px;
-        -webkit-box-flex: 1;
-            -ms-flex: 1 0 0px;
-                flex: 1 0 0;
+        -ms-flex: 1 0 0px;
+            flex: 1 0 0;
         width: 100%; }
     .bean-package-comparison .field--name-field-packages .banner-wrap, .node-type-package-comparison .field--name-field-packages .banner-wrap {
       display: none; }
@@ -2553,16 +2518,12 @@
   .block--views-package-comparison-hero .node__content {
     min-height: 520px; }
   .block--views-package-comparison-hero .node__content {
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: center;
+        justify-content: center;
     padding: 20px 20px 140px; }
     .block--views-package-comparison-hero .node__content > * {
       -ms-flex: 0 1 auto; }
@@ -2588,6 +2549,78 @@
   text-align: center;
   max-width: 820px;
   margin: 0 auto 30px; }
+
+.node-type-package-comparison .field--name-field-package-features .toggle-wrap > * {
+  transition: 1s;
+  opacity: 0;
+  display: none; }
+
+.node-type-package-comparison .field--name-field-package-features .toggle-wrap.open > * {
+  opacity: 1;
+  display: -ms-flexbox;
+  display: flex; }
+
+.node-type-package-comparison .field--name-field-package-features .toggle {
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 25px;
+  text-transform: uppercase;
+  cursor: pointer; }
+
+.node-type-package-comparison .field--name-field-package-features .fa {
+  font-size: 17px; }
+
+@media (min-width: 768px) {
+  .node-type-package-comparison .field--name-field-package-features .toggle {
+    display: none; } }
+
+.node-type-package-comparison .field--name-field-package-features .field__item {
+  margin-bottom: 20px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid #f1f1f1;
+  padding: 10px;
+  margin: 0; }
+  .node-type-package-comparison .field--name-field-package-features .field__item > * {
+    -ms-flex: 0 1 auto; }
+  .node-type-package-comparison .field--name-field-package-features .field__item:before {
+    content: "\f05d";
+    font-family: "FontAwesome";
+    color: #00833d;
+    font-size: 27px;
+    font-weight: 300;
+    margin-right: 10px; }
+  @media (min-width: 768px) {
+    .node-type-package-comparison .field--name-field-package-features .field__item {
+      display: none; } }
+
+.node-type-package-comparison .node--package a.button {
+  display: none; }
+
+.node-type-package-comparison .node--package .button {
+  display: block;
+  max-width: 220px;
+  margin: 20px auto 0; }
+  @media (min-width: 768px) {
+    .node-type-package-comparison .node--package .button {
+      display: none; } }
+
+.node-type-package-comparison .node--cta--teaser .node__title {
+  font-size: 30px; }
+
+.node-type-package-comparison .node--cta--teaser .field--name-body {
+  display: block; }
+  .node-type-package-comparison .node--cta--teaser .field--name-body p {
+    font-size: 23px;
+    font-weight: bold; }
+
+@media (min-width: 768px) {
+  .node-type-package-comparison .block--sprowt-block-cta {
+    display: none; } }
 
 @media (min-width: 768px) {
   .node-type-package-comparison .l-main {
@@ -2666,8 +2699,7 @@
             position: absolute;
             left: -5px;
             top: 50%;
-            -webkit-transform: translateY(-50%);
-                    transform: translateY(-50%); }
+            transform: translateY(-50%); }
         .node--package-comparison--teaser table thead tr:nth-child(2) td .initial-fee,
         .bean-package-comparison-table table thead tr:nth-child(2) td .initial-fee {
           display: block;

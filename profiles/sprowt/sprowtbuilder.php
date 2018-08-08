@@ -889,6 +889,18 @@ Class SprowtBuilder {
             $blockBuilder->setFromFile($blockFile);
             $blockBuilder->handleContexts();
         }
+
+
+        $module = 'views';
+        $delta = 'special_offers-sidebar_service';
+        
+        db_update('block')->fields(array(
+            'region' => '-1',
+            'css_class' => 'block--views-special-offers-sidebar'
+        ))
+            ->condition('module', $module)
+            ->condition('delta', $delta)
+            ->execute();
     }
 
     function setUpSprowtStarter() {

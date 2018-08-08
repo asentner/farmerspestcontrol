@@ -351,9 +351,15 @@ function _sprowt_get_features(){
         $theme_features = (!empty($info['features'])) ? $info['features'] : array();
         $features = array_merge($features, $theme_features);
         $overrides = (!empty($info['overrides'])) ? $info['overrides'] : array();
+        $excludes = (!empty($info['excludes'])) ? $info['excludes'] : array();
         foreach($overrides as $orig => $new) {
             $key = array_search($orig, $features);
             $features[$key] = $new;
+        }
+
+        foreach($excludes as $module) {
+            $key = array_search($module, $features);
+            unset($features[$key]);
         }
     }
     

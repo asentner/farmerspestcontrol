@@ -46,7 +46,7 @@
           hide($content['comments']);
           hide($content['links']);
           print render($content['body']);
-          // print render($content['field_package_features']);
+          print render($content['field_package_features']);
         ?>
 
         <?php if(FALSE): ?>
