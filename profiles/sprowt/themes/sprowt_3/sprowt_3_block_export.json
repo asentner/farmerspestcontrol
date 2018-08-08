@@ -1,6 +1,21 @@
 {
   "block": [
     {
+      "bid": "662",
+      "module": "views",
+      "delta": "special_offers-sidebar_service",
+      "theme": "sprowt_3",
+      "status": "0",
+      "weight": "0",
+      "region": "-1",
+      "custom": "0",
+      "visibility": "0",
+      "pages": "",
+      "title": "",
+      "cache": "-1",
+      "css_class": "block--views-special-offers-sidebar"
+    },
+    {
       "bid": "344",
       "module": "addtoany",
       "delta": "addtoany_button",
