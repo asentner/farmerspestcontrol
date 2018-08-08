@@ -1327,7 +1327,7 @@
       "theme": "sprowt_4",
       "status": "1",
       "weight": "-43",
-      "region": "sidebar",
+      "region": "-1",
       "custom": "0",
       "visibility": "0",
       "pages": "<front>\r\nnode\/35",
