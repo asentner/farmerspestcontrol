@@ -4,6 +4,7 @@
 features[] = sprowt_taxonomy
 features[] = sprowt_fields_and_text_formats
 features[] = sprowt_content_types
+features[] = sprowt_contexts
 features[] = sprowt_views_feature
 features[] = sprowt_user_settings
 features[] = sprowt_menu_settings
