@@ -17,6 +17,11 @@ function sprowt_contexts_context_default_contexts() {
   $context->description = 'Service page specific sidebar';
   $context->tag = 'Sidebar';
   $context->conditions = array(
+    'context' => array(
+      'values' => array(
+        '~special_offers_page' => '~special_offers_page',
+      ),
+    ),
     'node' => array(
       'values' => array(
         'service' => 'service',
@@ -53,7 +58,7 @@ function sprowt_contexts_context_default_contexts() {
   $context->description = 'Special offers sidebar block';
   $context->tag = 'Sidebar';
   $context->conditions = array(
-    'context_all' => array(
+    'context' => array(
       'values' => array(
         '~special_offers_page' => '~special_offers_page',
       ),
@@ -71,6 +76,7 @@ function sprowt_contexts_context_default_contexts() {
     'path' => array(
       'values' => array(
         '~<front>' => '~<front>',
+        '~special-offers' => '~special-offers',
       ),
     ),
   );
