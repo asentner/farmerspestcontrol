@@ -9,7 +9,7 @@
  ?>
 
 <div<?php print $attributes; ?> itemscope itemtype="http://schema.org/Service">
-  <?php if ($page): ?>
+
     <header>
       <?php if (isset($content['field_display_title'])): ?>
         <?php print render($content['field_display_title']); ?>
@@ -21,7 +21,11 @@
           <h1 class="field--name-field-seo-title"><?php print $title; ?></h1>
         <?php endif; ?>
       <?php else: ?>
-        <h1><?php print $title; ?></h1>
+        <?php if (isset($content['field_seo_title'])): ?>
+          <?php print render($content['field_seo_title']); ?>
+        <?php else: ?>
+          <h1 class="field--name-field-seo-title"><?php print $title; ?></h1>
+        <?php endif; ?>
       <?php endif; ?>
     </header>
     <meta itemprop="serviceType" content="<?php print $service_name; ?>">
@@ -31,7 +35,7 @@
     <span itemprop="areaServed" itemscope itemtype="http://schema.org/City">
       <meta itemprop="name" content="<?php print $market_name; ?>">
     </span>
-  <?php endif; ?>
+
 
   <?php if ($display_submitted): ?>
     <footer class="node__submitted">

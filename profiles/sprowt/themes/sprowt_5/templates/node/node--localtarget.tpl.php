@@ -9,6 +9,7 @@
  ?>
 
 <div<?php print $attributes; ?> itemscope itemtype="http://schema.org/Service">
+
   <header>
     <?php if (isset($content['field_seo_title'])): ?>
       <?php print render($content['field_seo_title']); ?>
