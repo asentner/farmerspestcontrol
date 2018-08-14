@@ -203,6 +203,10 @@ Class SprowtBuilder {
             variable_set('sprowt_settings_company_type', $this->data['company_info']['company_type']);
         }
         
+        if(!empty($this->data['company_info']['customer_login'])) {
+            variable_set('sprowt_customer_login', $this->data['company_info']['customer_login']);
+        }
+        
         variable_set('sprowt_settings_webform_to_email', $this->data['company_info']['webform_to_email']);
 
         if(function_exists('_sprowt_login_create_sprowt_company_alias')) {

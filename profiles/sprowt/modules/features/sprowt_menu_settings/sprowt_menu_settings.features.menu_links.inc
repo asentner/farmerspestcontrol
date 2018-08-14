@@ -295,17 +295,17 @@ function sprowt_menu_settings_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'main-menu_about:node/4',
   );
-  // Exported menu link: main-menu_my-account:https://www.google.com
-  $menu_links['main-menu_my-account:https://www.google.com'] = array(
+  // Exported menu link: main-menu_my-account:<sprowt_customer_login>
+  $menu_links['main-menu_my-account:<sprowt_customer_login>'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'https://www.google.com',
+    'link_path' => '<sprowt_customer_login>',
     'router_path' => '',
     'link_title' => 'My Account',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_my-account:https://www.google.com',
+      'identifier' => 'main-menu_my-account:<sprowt_customer_login>',
     ),
     'module' => 'menu',
     'hidden' => 0,

@@ -513,6 +513,9 @@ function _sprowt_form_default($field_name, $default = '') {
     if(!empty($_GET['example_values'])) {
         if($_GET['example_values'] == 1) {
             switch ($field_name) {
+                case 'customer_login':
+                    return 'http://google.com?q=customer_login';
+                    break;
                 case 'company_name':
                     return 'Company Name';
                     break;

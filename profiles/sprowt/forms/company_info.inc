@@ -19,6 +19,14 @@ function sprowt_company_info($form, &$form_state, &$install_state){
             '#description' => 'Phone number used to throughout the site. Should be 10 digits and all numbers. e.g.: 9195555555',
             '#default_value' => _sprowt_form_default('company_phone')
         ),
+        'customer_login' => array(
+            '#type' => 'textfield',
+            '#title' => t('Customer Login/My Account link'),
+            '#default_value' => _sprowt_form_default('customer_login'),
+            '#size' => 60,
+            '#maxlength' => 1000,
+            '#description' => t("Customer login link used throughout site."),
+        ),
         'company_type' => array(
             '#type' => 'radios',
             '#title' => t('Company Type'),
@@ -150,6 +158,7 @@ function sprowt_company_info_submit($form, &$form_state){
         'company_type',
         'contact_email',
         'contact_phone',
+        'customer_login',
         'webform_from_email',
         'webform_from_name',
         'webform_to_email'
