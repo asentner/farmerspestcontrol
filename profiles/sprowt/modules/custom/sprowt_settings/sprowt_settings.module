@@ -36,6 +36,12 @@ function sprowt_settings_menu()
         'type' => MENU_CALLBACK,
     );
     
+    $items['<sprowt_customer_login>'] = array(
+        'page callback' => 'drupal_not_found',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    
     $items['node/uuid/%'] = array(
         'page callback' => '_sprowt_settings_node_uuid_redirect',
         'page arguments' => array(2),
@@ -772,8 +778,19 @@ function _sprowt_settings_link(array $variables) {
   if (in_array($variables['path'], array('<phone_number_sms>'))) {
     $phone = sprowt_settings_get_phone_number('$1$2$3');
     $variables['path'] = "sms:+1$phone";
-    $variables["options"]["external"]=true;
+    $variables["options"]["external"] = true;
   }
+  
+    if (in_array($variables['path'], array('<sprowt_customer_login>'))) {
+        $link = variable_get('sprowt_customer_login');
+        if(empty($link)) {
+            $variables['path'] = '';
+        }
+        else {
+            $variables['path'] = $link;
+            $variables["options"]["external"] = TRUE;
+        }
+    }
 
     // Call the original theme function for normal menu link.
     return theme('sprowt_settings_link_default', $variables);

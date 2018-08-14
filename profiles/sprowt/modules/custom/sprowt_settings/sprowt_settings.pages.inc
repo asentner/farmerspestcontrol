@@ -113,7 +113,16 @@ function sprowt_settings_admin()
         '#required' => TRUE,
         '#element_validate' => array('element_validate_integer_positive'),
     );
-
+    
+    $form['company_info']['sprowt_customer_login'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Customer Login/My Account link'),
+        '#default_value' => variable_get('sprowt_customer_login'),
+        '#size' => 60,
+        '#maxlength' => 1000,
+        '#description' => t("Customer login link used throughout site."),
+    );
+    
     $form['company_info']['sprowt_settings_map_embed'] = array(
         '#type' => 'textarea',
         '#title' => t('Company Area Map Embed URL'),
@@ -417,13 +426,23 @@ function sprowt_settings_admin()
     return system_settings_form($form);
 }
 
-function _sprowt_settings_config_validate($form, &$form_state) {
+function _sprowt_settings_config_validate(&$form, &$form_state) {
     $values = $form_state['values'];
 
     $map = $values['sprowt_settings_map_embed'];
 
     if(preg_match('/<iframe.*src="([^"]+)"/', $map, $i)) {
         $form_state['values']['sprowt_settings_map_embed'] = $i[1];
+    }
+    
+    $customer_login = $values['sprowt_customer_login'];
+    if(!empty($customer_login)
+        && strpos('http://', $customer_login) !== 0
+        && strpos('https://', $customer_login) !== 0
+        && strpos('//', $customer_login) !== 0
+    ) {
+        $el = &$form['company_info']['sprowt_customer_login'];
+        form_error($el, 'Customer login must be a valid url');
     }
 }
 
