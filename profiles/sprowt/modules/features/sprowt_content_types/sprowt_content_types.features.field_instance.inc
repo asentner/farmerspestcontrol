@@ -986,7 +986,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 3,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -6673,7 +6673,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 3,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
@@ -6833,7 +6833,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 5,
+      'default_image' => 6,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -7679,7 +7679,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'special_offer',
     'default_value' => array(
       0 => array(
-        'url' => 'node/1',
+        'url' => 'node/52',
       ),
     ),
     'deleted' => 0,
@@ -8502,7 +8502,7 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_market',
     'label' => 'Market',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
