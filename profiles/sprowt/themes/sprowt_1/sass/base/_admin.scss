@@ -1,0 +1,87 @@
+body.admin-menu.adminimal-menu:before  {
+  background-color: #333;
+  min-height: 60px;
+}
+
+#admin-menu {
+  z-index: 99999999;
+}
+.slicknav_menu {
+  position: relative;
+  z-index: 999;
+}
+.tabs {
+  display: block;
+  width: 100%;
+  background-color: #333;
+  //margin-top: -32px;
+  border-bottom: none;
+  //position: fixed;
+  z-index: 999;
+  margin-bottom: 0;
+  li {
+    float: none;
+    margin-right: 0;
+  }
+  li.active a {
+    background-color: #454545;
+  }
+  a {
+    background-color: #333;
+    color: white;
+    font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif;
+    &:hover {
+      background-color: #333;
+      color: white;
+      text-decoration: underline;
+    }
+  }
+}
+.action-links {
+  //position: fixed;
+  right: 20px;
+  //margin-top: -26px;
+  z-index: 999;
+  margin-top: 0;
+  a {
+    display: block;
+    background-color: #333;
+    padding: 0.3em 0.8em;
+    color: white;
+    font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif;
+    &:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+}
+
+body.adminimal-menu #admin-menu .admin-menu-search input {
+  min-height: 0; //undo stuff
+}
+
+@include breakpoint($nav) {
+  .tabs {
+    position: fixed;
+    top: 29px;
+    left: 0;
+    right: 0;
+    li {
+      float: left;
+      margin-right: 1em;
+    }
+  }
+
+  .action-links {
+    position: fixed;
+    top: 33px;
+    right: 20px;
+    a {
+      padding: 0;
+    }
+  }
+}
+
+body.admin-menu.adminimal-menu:before{
+  min-height: 65px;
+}
