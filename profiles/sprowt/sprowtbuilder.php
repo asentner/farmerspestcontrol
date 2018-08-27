@@ -950,4 +950,23 @@ Class SprowtBuilder {
             !empty($branding['tertiary-color']) ? $branding['tertiary-color'] : null
         );
     }
+    
+    function resetLocalTargetPaths() {
+        $nids = db_query("SELECT nid from node WHERE type = 'localtarget'")->fetchCol();
+        $nodes = node_load_multiple($nids);
+        
+        $sources = array();
+        foreach($nodes as $node) {
+            $sources[] = "node/{$node->nid}";
+        }
+        
+        db_delete('url_alias')->condition('source', $sources, 'IN')->execute();
+        
+        
+        foreach($nodes as $node) {
+            $node->path['pathauto'] = 1;
+            node_save($node);
+        }
+        
+    }
 }
