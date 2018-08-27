@@ -2338,73 +2338,70 @@ div.accordion .accordion-header {
 div.accordion .accordion-content {
   padding: 20px; }
 
-body.admin-menu.adminimal-menu:before {
-  background-color: #333;
-  min-height: 60px; }
-
 #admin-menu {
   z-index: 99999999; }
 
-.slicknav_menu {
+body.adminimal-menu #admin-menu .admin-menu-search input {
+  min-height: 0; }
+
+body.admin-menu.adminimal-menu:not(.node-type-solution):before {
+  background-color: #333;
+  min-height: 65px; }
+
+body.admin-menu.adminimal-menu:not(.node-type-solution) .slicknav_menu {
   position: relative;
   z-index: 999; }
 
-.tabs {
+body.admin-menu.adminimal-menu:not(.node-type-solution) .tabs {
   display: block;
   width: 100%;
   background-color: #333;
   border-bottom: none;
   z-index: 999;
   margin-bottom: 0; }
-  .tabs li {
+  body.admin-menu.adminimal-menu:not(.node-type-solution) .tabs li {
     float: none;
     margin-right: 0; }
-  .tabs li.active a {
+  body.admin-menu.adminimal-menu:not(.node-type-solution) .tabs li.active a {
     background-color: #454545; }
-  .tabs a {
+  body.admin-menu.adminimal-menu:not(.node-type-solution) .tabs a {
     background-color: #333;
     color: white;
     font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif; }
-    .tabs a:hover {
+    body.admin-menu.adminimal-menu:not(.node-type-solution) .tabs a:hover {
       background-color: #333;
       color: white;
       text-decoration: underline; }
 
-.action-links {
+body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links {
   right: 20px;
   z-index: 999;
   margin-top: 0; }
-  .action-links a {
+  body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links a {
     display: block;
     background-color: #333;
     padding: 0.3em 0.8em;
     color: white;
     font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif; }
-    .action-links a:hover {
+    body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links a:hover {
       color: white;
       text-decoration: underline; }
 
-body.adminimal-menu #admin-menu .admin-menu-search input {
-  min-height: 0; }
-
-@media (min-width: 1030px) {
-  .tabs {
+@media (min-width: 768px) {
+  body.admin-menu.adminimal-menu:not(.node-type-solution) .tabs {
     position: fixed;
     top: 29px;
     left: 0;
     right: 0; }
-    .tabs li {
+    body.admin-menu.adminimal-menu:not(.node-type-solution) .tabs li {
       float: left;
       margin-right: 1em; }
-  .action-links {
+  body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links {
     position: fixed;
     top: 33px;
     right: 20px; }
-    .action-links a {
+    body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links a {
       padding: 0; } }
-
-body.admin-menu.adminimal-menu:before {
-  min-height: 65px; }
 
 .mobile {
   display: block; }

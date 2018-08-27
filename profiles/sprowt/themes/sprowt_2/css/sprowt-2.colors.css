@@ -87,6 +87,16 @@ hr {
   .block--views-affiliates-list .block__title {
     color: #373d38; }
 
+.bean-anchor-link-bean {
+  background-color: #e9b404;
+  color: #373d38; }
+  .bean-anchor-link-bean a {
+    color: #373d38; }
+    .bean-anchor-link-bean a:before {
+      color: #47b649; }
+    .bean-anchor-link-bean a:after {
+      background-color: #47b649; }
+
 .benefits-hero,
 .local-target-benefits {
   background-color: #f4f4f4; }
@@ -242,10 +252,10 @@ hr {
 .block--views-packages-localtarget.block--grid .node {
   background-color: transparent; }
 
-.block--views-team-list .node {
+.block--views-team-list.block--grid .node {
   background-color: transparent; }
 
-.block--views-team-list .field--name-field-image img {
+.block--views-team-list.block--grid .field--name-field-image img {
   background-color: #fff;
   border-color: #eee; }
 
@@ -613,6 +623,40 @@ hr {
       .block--nav-utility .menu li:nth-child(1n) a[href^='tel:']:before {
         color: #47b649; } }
 
+.block--views-city-pages-city-hero .node {
+  background-color: #e9b404; }
+
+.block--views-city-pages-city-hero .slide-image-background:before {
+  background-color: #216e83; }
+
+.block--views-city-pages-city-hero .field--name-field-display-title {
+  color: #fff; }
+
+.block--views-city-pages-city-hero .field--name-field-intro {
+  color: #fff; }
+
+.node--city-page--alt-teaser {
+  background-color: #e9b404;
+  color: #373d38; }
+  .node--city-page--alt-teaser a {
+    color: #373d38; }
+    .node--city-page--alt-teaser a:before {
+      color: #47b649; }
+    .node--city-page--alt-teaser a:after {
+      background-color: #47b649; }
+
+.block--views-city-pages-benefits {
+  background-color: #f4f4f4; }
+  .block--views-city-pages-benefits .node__title {
+    color: #47b649; }
+    .block--views-city-pages-benefits .node__title a {
+      color: #47b649; }
+      .block--views-city-pages-benefits .node__title a:hover {
+        color: #e9b404; }
+  .block--views-city-pages-benefits .field--name-field-image img {
+    border-color: #fff;
+    background-color: #fff; }
+
 .node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] h3 {
   color: #e9b404; }
 
@@ -700,6 +744,9 @@ hr {
 
 .node--profile--full .flippy {
   border-top-color: #eee; }
+
+.paragraphs-item-city-service .field--name-field-title {
+  color: #3a933b; }
 
 .l-footer-wrap {
   background-color: #f4f4f4; }
