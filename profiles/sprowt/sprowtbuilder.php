@@ -372,6 +372,9 @@ Class SprowtBuilder {
                     $instance = field_info_instance('node', 'field_image', 'benefit');
                     $instance['settings']['default_image'] = $file->fid;
                     field_update_instance($instance);
+                    $instance = field_info_instance('node', 'field_icon', 'benefit');
+                    $instance['settings']['default_image'] = $file->fid;
+                    field_update_instance($instance);
                     $instance = field_info_instance('node', 'field_icon', 'service');
                     $instance['settings']['default_image'] = $file->fid;
                     field_update_instance($instance);

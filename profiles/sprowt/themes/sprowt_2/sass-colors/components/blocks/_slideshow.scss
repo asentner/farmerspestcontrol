@@ -25,6 +25,7 @@
 	}
 	.button {
 		background-color: $color-button-bg;
+		text-shadow: none;
 		&:hover {
 			background-color: $color-button-bg-hover;
 		}

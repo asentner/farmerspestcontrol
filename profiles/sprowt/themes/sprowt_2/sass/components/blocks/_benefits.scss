@@ -3,10 +3,9 @@
 
    padding: 40px 20px 30px;
    .view-content {
-      flex-wrap: nowrap;
-      max-width: 1160px;
-      position: relative;
-      z-index: 99;
+    max-width: 1160px;
+    position: relative;
+    z-index: 99;
    }
    .views-row {
     @include flexbox;
@@ -19,6 +18,7 @@
     margin-left: -50px;
     max-width: 350px;
   }
+   .field--name-field-icon,
    .field--name-field-image {
     align-self: center;
     z-index: 1;
@@ -26,6 +26,8 @@
     img {
        border-radius: 50%;
        border: 2px solid;
+       min-width: 98px;
+       max-width: 98px;
     }
     a > img {
       @extend %image-hover;
@@ -55,29 +57,52 @@
    }
  @include breakpoint($tab) {
     .block__content {
-      margin-top: -120px;
-    }
- }
- @include breakpoint($desk) {
-    .block__content {
-      margin-top: 0;
+      margin-top: -165px;
     }
     .view-content {
       @include flexbox;
+      flex: 0 1 auto;
       justify-content: space-around;
+      align-items: stretch;
       max-width: 1280px;
       margin-left: auto;
       margin-right: auto;
-      margin-top: -165px;
+      > * {
+        flex: 0 1 100%;
+      }
     }
     .views-row {
+      flex-direction: column;
       + .views-row {
         padding-left: 10px;
       }
     }
-    .field--name-field-image {
-      align-self: flex-start;
-      margin-top: 75px;
+    .node {
+      flex: 1 1 auto;
+      padding: 60px 20px;
+      margin-left: 0;
+      margin-top: -50px;
+      max-width: 350px;
     }
   }
+   @include breakpoint($desk) {
+     .node {
+       align-items: initial;
+       padding: 60px 35px 55px 65px;
+       margin-left: -50px;
+       margin-top: 0px;
+       max-width: 350px;
+     }
+     .view-content {
+       @include flexbox;
+       justify-content: space-around;
+       align-items: initial;
+       max-width: 1280px;
+       margin-left: auto;
+       margin-right: auto;
+     }
+     .views-row {
+       flex-direction: row;
+     }
+   }
 }

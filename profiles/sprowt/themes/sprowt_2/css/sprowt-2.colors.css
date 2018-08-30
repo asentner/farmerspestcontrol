@@ -320,7 +320,8 @@ hr {
 
 .block--views-slideshow-front .button,
 .block--views-slideshow-localtarget .button {
-  background-color: #e9b404; }
+  background-color: #e9b404;
+  text-shadow: none; }
   .block--views-slideshow-front .button:hover,
   .block--views-slideshow-localtarget .button:hover {
     background-color: #fdd244; }
