@@ -44,7 +44,7 @@ array(
         'und' => array(
           'robots' => array(
             'value' => array(
-              'index' => 0,
+              'index' => 'index',
               'follow' => 0,
               'noindex' => 0,
               'nofollow' => 0,
