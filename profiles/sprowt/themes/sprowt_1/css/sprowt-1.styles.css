@@ -2456,7 +2456,7 @@ body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links {
 
 .button, .node--teaser .field--name-body .field__item > .more-link,
 .node--alt-teaser .field--name-body .field__item > .more-link, input[type=submit], .block--views-packages-services .field--name-body .field__item .more-link,
-.block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a {
+.block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a, .not-front .block--views-services-all .view-content + .more-link a {
   display: block;
   font: inherit;
   font-size: 15px;
@@ -2470,18 +2470,18 @@ body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links {
   line-height: normal; }
   .button:hover, .node--teaser .field--name-body .field__item > .more-link:hover,
   .node--alt-teaser .field--name-body .field__item > .more-link:hover, input[type=submit]:hover, .block--views-packages-services .field--name-body .field__item .more-link:hover,
-  .block--views-packages-localtarget .field--name-body .field__item .more-link:hover, .front .block--views-services-all .view-content + .more-link a:hover {
+  .block--views-packages-localtarget .field--name-body .field__item .more-link:hover, .front .block--views-services-all .view-content + .more-link a:hover, .not-front .block--views-services-all .view-content + .more-link a:hover {
     cursor: pointer; }
   @media (min-width: 768px) {
     .button, .node--teaser .field--name-body .field__item > .more-link,
     .node--alt-teaser .field--name-body .field__item > .more-link, input[type=submit], .block--views-packages-services .field--name-body .field__item .more-link,
-    .block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a {
+    .block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a, .not-front .block--views-services-all .view-content + .more-link a {
       display: inline-block; } }
 
 @media print {
   .button, .node--teaser .field--name-body .field__item > .more-link,
   .node--alt-teaser .field--name-body .field__item > .more-link, input[type=submit], .block--views-packages-services .field--name-body .field__item .more-link,
-  .block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a {
+  .block--views-packages-localtarget .field--name-body .field__item .more-link, .front .block--views-services-all .view-content + .more-link a, .not-front .block--views-services-all .view-content + .more-link a {
     display: inline-block;
     padding: 0; } }
 
@@ -3719,20 +3719,30 @@ li.addtoany {
 .not-front .block--views-services-all div.more-link {
   display: none; }
 
-.front .block--views-services-all .field--name-field-image {
+.front .block--views-services-all .field--name-field-image,
+.front .block--views-services-all .field--name-field-icon, .not-front .block--views-services-all .field--name-field-image,
+.not-front .block--views-services-all .field--name-field-icon {
   padding-bottom: 20px; }
+  .front .block--views-services-all .field--name-field-image img,
+  .front .block--views-services-all .field--name-field-icon img, .not-front .block--views-services-all .field--name-field-image img,
+  .not-front .block--views-services-all .field--name-field-icon img {
+    border: 2px solid;
+    border-radius: 50%; }
 
-.front .block--views-services-all .view-content + .more-link {
+.front .block--views-services-all .view-content + .more-link, .not-front .block--views-services-all .view-content + .more-link {
   text-align: center;
   margin-top: 60px; }
-  .front .block--views-services-all .view-content + .more-link a {
+  .front .block--views-services-all .view-content + .more-link a, .not-front .block--views-services-all .view-content + .more-link a {
     max-width: 225px;
     width: 100%;
     margin: 0 auto; }
 
 @media (min-width: 768px) {
-  .front .block--views-services-all .field--name-field-image {
-    padding-bottom: 0; } }
+  .front .block--views-services-all .field--name-field-image,
+  .front .block--views-services-all .field--name-field-icon, .not-front .block--views-services-all .field--name-field-image,
+  .not-front .block--views-services-all .field--name-field-icon {
+    padding-bottom: 0;
+    padding-right: 40px; } }
 
 .block--views-slideshow-front,
 .block--views-slideshow-localtarget {

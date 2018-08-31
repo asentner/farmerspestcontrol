@@ -14,12 +14,17 @@
 
 
 
-// homepage service listing
+// homepage and service page service listing
 
-.front {
+.front, .not-front {
   .block--views-services-all {
-    .field--name-field-image {
+    .field--name-field-image,
+    .field--name-field-icon {
       padding-bottom: 20px;
+      img {
+        border: 2px solid;
+        border-radius: 50%;
+      }
     }
     .view-content {
       + .more-link {
@@ -34,8 +39,10 @@
       }
     }
     @include breakpoint($tab) {
-      .field--name-field-image {
+      .field--name-field-image,
+      .field--name-field-icon {
         padding-bottom: 0;
+        padding-right: 40px;
       }
     }
   }
