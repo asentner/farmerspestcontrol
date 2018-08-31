@@ -28,6 +28,7 @@ features[views_view][] = services
 features[views_view][] = slideshow
 features[views_view][] = special_offer_list_sort
 features[views_view][] = special_offers
+features[views_view][] = sprowt_weight_view
 features[views_view][] = team
 features[views_view][] = team_list_sort
 features[views_view][] = testimonials

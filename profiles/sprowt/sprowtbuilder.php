@@ -430,6 +430,53 @@ Class SprowtBuilder {
 
     node_export_import($data);
   }
+
+  function modifyDefaultNode($node) {
+      //$n = entity_metadata_wrapper('node', $node);
+      $front_page_benfit_uuids = array(
+          '1172b3dc-5937-4280-b5b5-74772dda3b49',
+          'fef4a25f-9485-44dd-b264-ba89a48b29b8',
+          '54c876bd-629b-4abc-81bf-f4fb9c8bd239'
+      );
+
+      if(in_array($node->uuid, $front_page_benfit_uuids)) {
+        $node->promote = 1;
+        switch($node->uuid) {
+            case '1172b3dc-5937-4280-b5b5-74772dda3b49':
+                $node->weight_weight = 1;
+                break;
+            case 'fef4a25f-9485-44dd-b264-ba89a48b29b8':
+                $node->weight_weight = 2;
+                break;
+            case '54c876bd-629b-4abc-81bf-f4fb9c8bd239':
+                $node->weight_weight = 3;
+                break;
+        }
+      }
+
+      $ltp_benefit_uuids = array(
+          'd7851455-0d59-4127-b0bd-28c8247f34cd',
+          '9ef2c5d3-9b00-4ec3-9523-0a66c443fa23',
+          '6732c347-4157-4171-879f-0ed849c4ef9e'
+      );
+
+      if(in_array($node->uuid, $ltp_benefit_uuids)) {
+        $node->promote = 0;
+        switch($node->uuid) {
+            case 'd7851455-0d59-4127-b0bd-28c8247f34cd':
+                $node->weight_weight = 1;
+                break;
+            case '9ef2c5d3-9b00-4ec3-9523-0a66c443fa23':
+                $node->weight_weight = 2;
+                break;
+            case '6732c347-4157-4171-879f-0ed849c4ef9e':
+                $node->weight_weight = 3;
+                break;
+        }
+      }
+
+      return $node;
+  }
     
     function node_import($nodes = array()) {
         require_once('includes/nodebuilder.php');
@@ -458,6 +505,7 @@ Class SprowtBuilder {
             $n->title = $node['title'];
             $n->promote = $node['promote'];
             //$n->menu = $node['menu'];
+            $n = $this->modifyDefaultNode($n);
             
             $instances = field_info_instances('node', $type);
             
@@ -472,7 +520,7 @@ Class SprowtBuilder {
             if($n->type == 'webform') {
 
                 foreach($node['webform']['emails'] as $k => $email) {
-                    $email['email'] = $this->data['company_info']['webform_to_email'];
+                    $email['email'] = '[sprowt:sprowt_webform_to_email]';
                     $email['from_name'] = 'default';
                     $email['from_address'] = 'default';
                     $node['webform']['emails'][$k] = $email;

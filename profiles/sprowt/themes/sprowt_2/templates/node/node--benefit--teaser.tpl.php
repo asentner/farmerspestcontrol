@@ -1,6 +1,8 @@
 <?php print render($content['field_icon']); ?>
 <?php print render($content['field_image']); ?>
 <article<?php print $attributes; ?>>
+  <?php print render($title_prefix); ?>
+  <?php print render($title_suffix); ?>
   <div<?php print $content_attributes; ?>>
       <?php
         if (isset($content['field_link'])):

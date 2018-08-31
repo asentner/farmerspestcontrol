@@ -4,6 +4,8 @@ hide($content['field_intro']);
 ?>
 <article<?php print $attributes; ?>>
   <header>
+  <?php print render($title_prefix); ?>
+  <?php print render($title_suffix); ?>
     <?php if($intro_title): ?>
       <?php print render($content['field_display_title']); ?>
       <?php print render($content['field_intro']); ?>
