@@ -1,4 +1,4 @@
-<?php hide($content['field_icon']); ?>
+<?php print render($content['field_icon']); ?>
 <?php print render($content['field_image']); ?>
 <article<?php print $attributes; ?>>
   <div<?php print $content_attributes; ?>>

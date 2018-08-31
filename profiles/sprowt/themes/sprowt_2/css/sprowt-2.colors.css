@@ -306,6 +306,10 @@ hr {
 .block--views-slideshow-localtarget .slide-image:before {
   background-color: #151616; }
 
+.block--views-slideshow-front .slide-content,
+.block--views-slideshow-localtarget .slide-content {
+  text-shadow: 0px 1px 8px rgba(0, 0, 0, 0.4); }
+
 .block--views-slideshow-front .node__title,
 .block--views-slideshow-localtarget .node__title {
   color: #fff; }
@@ -708,6 +712,9 @@ hr {
 
 .block--views-localtarget-value-prop .node {
   background-color: #151616; }
+
+.block--views-localtarget-value-prop .node__content {
+  text-shadow: 0px 1px 8px rgba(0, 0, 0, 0.4); }
 
 .block--views-localtarget-value-prop .slide-image-background:before {
   background-color: #151616; }
