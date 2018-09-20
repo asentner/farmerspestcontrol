@@ -520,3 +520,11 @@ function sprowt_update_7009() {
         variable_set('hsts_enabled', 1);
     }
 }
+
+/**
+ * Update jquery to 1.12
+ */
+function sprowt_update_7010() {
+    variable_set('jquery_update_jquery_version', '1.12');
+    variable_set('jquery_update_jquery_cdn', 'jQuery');
+}
