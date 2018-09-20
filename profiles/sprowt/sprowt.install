@@ -526,5 +526,5 @@ function sprowt_update_7009() {
  */
 function sprowt_update_7010() {
     variable_set('jquery_update_jquery_version', '1.12');
-    variable_set('jquery_update_jquery_cdn', 'jQuery');
+    variable_set('jquery_update_jquery_cdn', 'jquery');
 }
