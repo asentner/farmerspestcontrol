@@ -125,3 +125,4 @@ features_exclude[dependencies][list] = list
 features_exclude[dependencies][paragraphs] = paragraphs
 features_exclude[field_instance][taxonomy_term-concerns-field_icon_file] = taxonomy_term-concerns-field_icon_file
 no autodetect = 1
+project path = profiles/sprowt/modules/features
