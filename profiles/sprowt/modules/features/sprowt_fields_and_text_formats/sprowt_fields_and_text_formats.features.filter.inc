@@ -18,13 +18,8 @@ function sprowt_fields_and_text_formats_filter_default_formats() {
     'status' => 1,
     'weight' => -10,
     'filters' => array(
-      'block_shortcode' => array(
-        'weight' => -50,
-        'status' => 1,
-        'settings' => array(),
-      ),
       'soembed' => array(
-        'weight' => -49,
+        'weight' => -50,
         'status' => 1,
         'settings' => array(
           'soembed_maxwidth' => 500,
@@ -32,18 +27,23 @@ function sprowt_fields_and_text_formats_filter_default_formats() {
         ),
       ),
       'filter_url' => array(
-        'weight' => -48,
+        'weight' => -49,
         'status' => 1,
         'settings' => array(
           'filter_url_length' => 72,
         ),
       ),
       'filter_autop' => array(
-        'weight' => -47,
+        'weight' => -48,
         'status' => 1,
         'settings' => array(),
       ),
       'filter_htmlcorrector' => array(
+        'weight' => -47,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      'block_shortcode' => array(
         'weight' => -46,
         'status' => 1,
         'settings' => array(),
@@ -59,25 +59,25 @@ function sprowt_fields_and_text_formats_filter_default_formats() {
     'status' => 1,
     'weight' => 1,
     'filters' => array(
-      'block_shortcode' => array(
-        'weight' => -46,
-        'status' => 1,
-        'settings' => array(),
-      ),
       'filter_url' => array(
-        'weight' => -45,
+        'weight' => -50,
         'status' => 1,
         'settings' => array(
           'filter_url_length' => 72,
         ),
       ),
       'filter_autop' => array(
-        'weight' => -44,
+        'weight' => -49,
         'status' => 1,
         'settings' => array(),
       ),
       'filter_htmlcorrector' => array(
-        'weight' => -43,
+        'weight' => -48,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      'block_shortcode' => array(
+        'weight' => -47,
         'status' => 1,
         'settings' => array(),
       ),
@@ -92,24 +92,24 @@ function sprowt_fields_and_text_formats_filter_default_formats() {
     'status' => 1,
     'weight' => -9,
     'filters' => array(
-      'block_shortcode' => array(
-        'weight' => -50,
-        'status' => 1,
-        'settings' => array(),
-      ),
       'filter_url' => array(
-        'weight' => -49,
+        'weight' => -50,
         'status' => 1,
         'settings' => array(
           'filter_url_length' => 72,
         ),
       ),
       'filter_autop' => array(
-        'weight' => -48,
+        'weight' => -49,
         'status' => 1,
         'settings' => array(),
       ),
       'filter_htmlcorrector' => array(
+        'weight' => -48,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      'block_shortcode' => array(
         'weight' => -47,
         'status' => 1,
         'settings' => array(),

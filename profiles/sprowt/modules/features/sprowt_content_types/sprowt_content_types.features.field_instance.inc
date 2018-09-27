@@ -828,7 +828,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 34,
+      'default_image' => 3,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
@@ -6654,8 +6654,8 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'image_link' => 'content',
+          'image_style' => 'service',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -6814,7 +6814,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -7005,7 +7005,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
@@ -7679,7 +7679,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'special_offer',
     'default_value' => array(
       0 => array(
-        'url' => 'node/1',
+        'url' => 'node/52',
       ),
     ),
     'deleted' => 0,
@@ -8044,88 +8044,6 @@ function sprowt_content_types_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-special_offer-field_offer_price'.
-  $field_instances['node-special_offer-field_offer_price'] = array(
-    'bundle' => 'special_offer',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'The new price for this product, based on this offer. The difference (savings) will be calculated dynamically.',
-    'display' => array(
-      'alt_teaser' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => 1,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 4,
-      ),
-      'secondary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
-      ),
-      'sidebar' => array(
-        'label' => 'hidden',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => 1,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => 1,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 3,
-      ),
-      'tertiary_teaser' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 9,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_offer_price',
-    'label' => 'Offer price',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '$',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 51,
-    ),
-  );
-
   // Exported field_instance: 'node-special_offer-field_offer_subheadline'.
   $field_instances['node-special_offer-field_offer_subheadline'] = array(
     'bundle' => 'special_offer',
@@ -8184,88 +8102,6 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 47,
-    ),
-  );
-
-  // Exported field_instance: 'node-special_offer-field_original_price'.
-  $field_instances['node-special_offer-field_original_price'] = array(
-    'bundle' => 'special_offer',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'The original price, before applying the special offer.',
-    'display' => array(
-      'alt_teaser' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
-      ),
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => 1,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 3,
-      ),
-      'secondary_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'sidebar' => array(
-        'label' => 'hidden',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => 1,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => 1,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 2,
-      ),
-      'tertiary_teaser' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_original_price',
-    'label' => 'Original price',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '$',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 50,
     ),
   );
 
@@ -8502,7 +8338,7 @@ function sprowt_content_types_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_market',
     'label' => 'Market',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -8670,13 +8506,11 @@ function sprowt_content_types_field_default_field_instances() {
   t('Marking this field as "Yes" adds extra markup and design to standout in the list of other packages.');
   t('Note: Icons are not used with all themes.');
   t('Offer headline');
-  t('Offer price');
   t('Offer subheadline');
   t('Optional field to determine what state this market is in');
   t('Optional intro text for the packages block');
   t('Optional title for the packages block');
   t('Or province. <b>Abbreviation only</b>.');
-  t('Original price');
   t('Package');
   t('Package Intro');
   t('Packages Intro');
@@ -8696,8 +8530,6 @@ function sprowt_content_types_field_default_field_instances() {
   t('Street address');
   t('Subtitle');
   t('Tags');
-  t('The new price for this product, based on this offer. The difference (savings) will be calculated dynamically.');
-  t('The original price, before applying the special offer.');
   t('This is your H1 for a basic page');
   t('Upload an image to go with this article.');
   t('Use this to describe the local area. This sets the page apart from other LocalTarget pages in other service areas.');

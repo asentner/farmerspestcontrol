@@ -609,11 +609,10 @@ function sprowt_content_types_field_group_info() {
     'weight' => '1',
     'children' => array(
       0 => 'field_offer_headline',
-      1 => 'field_offer_price',
-      2 => 'field_offer_subheadline',
-      3 => 'field_original_price',
-      4 => 'field_featured_offer',
-      5 => 'field_featured_icon',
+      1 => 'field_offer_subheadline',
+      2 => 'field_featured_offer',
+      3 => 'field_featured_icon',
+      4 => 'field_disclaimer',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
