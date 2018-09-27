@@ -107,6 +107,16 @@ hr {
   .block--bean-google-reviews-block .field--name-field-review-count-text {
     color: #9ca2a4; } }
 
+.bean-anchor-link-bean {
+  background-color: #1c7e54;
+  color: #202624; }
+  .bean-anchor-link-bean a {
+    color: #202624; }
+    .bean-anchor-link-bean a:before {
+      color: #fbe23c; }
+    .bean-anchor-link-bean a:after {
+      background-color: #202624; }
+
 .block--bean-utility-header-review-score .rating .stars h4, .block--bean-utility-header-review-score .rating .stars i {
   color: #fbe23c; }
 

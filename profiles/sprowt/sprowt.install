@@ -505,3 +505,26 @@ function sprowt_update_7007(){
 function sprowt_update_7008() {
     db_query("ALTER TABLE `system` CHANGE `info` `info` LONGBLOB NULL DEFAULT NULL")->execute();
 }
+
+/**
+ * Enable HSTS (HTTP Strict Transport Security)
+ */
+function sprowt_update_7009() {
+    $enabled = variable_get('hsts_enabled');
+    $module_enabled = module_exists('hsts');
+    if(!$module_enabled) {
+        module_enable(array('hsts'));
+    }
+
+    if(empty($enabled)) {
+        variable_set('hsts_enabled', 1);
+    }
+}
+
+/**
+ * Update jquery to 1.12
+ */
+function sprowt_update_7010() {
+    variable_set('jquery_update_jquery_version', '1.12');
+    variable_set('jquery_update_jquery_cdn', 'jquery');
+}

@@ -141,9 +141,16 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
     $new_tasks = $new_tasks + $tasks;
 
     $tasks = $new_tasks;
+    
+    $tasks['install_finished']['function'] = '_sprowt_install_finished';
 
 }
 
+function _sprowt_install_finished(&$install_state) {
+    $sb = new SprowtBuilder();
+    $sb->resetLocalTargetPaths();
+    return install_finished($install_state);
+}
 
 /**
  * stolen from Kickstart

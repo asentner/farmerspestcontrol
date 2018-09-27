@@ -94,6 +94,16 @@ hr {
   .block--views-affiliates-list .block__title {
     color: #212121; }
 
+.bean-anchor-link-bean {
+  background-color: #d32c26;
+  color: #fff; }
+  .bean-anchor-link-bean a {
+    color: #fff; }
+    .bean-anchor-link-bean a:before {
+      color: #212121; }
+    .bean-anchor-link-bean a:after {
+      background-color: #212121; }
+
 .block--views-benefits-front .node,
 .local-target-benefits .node {
   background-color: #f4f4f4; }
@@ -248,10 +258,10 @@ hr {
 .block--views-packages-localtarget.block--grid .node {
   background-color: transparent; }
 
-.block--views-team-list .node {
+.block--views-team-list.block--grid .node {
   background-color: transparent; }
 
-.block--views-team-list .field--name-field-image img {
+.block--views-team-list.block--grid .field--name-field-image img {
   background-color: #fff;
   border-color: #eee; }
 
@@ -584,6 +594,35 @@ hr {
       .block--nav-utility .menu li:nth-child(1n) a[href^='tel:']:before {
         color: #d32c26; } }
 
+.block--views-city-pages-city-hero .slide-image-background:before {
+  background-color: #216e83; }
+
+.block--views-city-pages-city-hero .field--name-field-display-title {
+  color: #fff; }
+
+.block--views-city-pages-city-hero .field--name-field-intro {
+  color: #fff; }
+
+.node--city-page--alt-teaser {
+  background-color: #d32c26;
+  color: #fff; }
+  .node--city-page--alt-teaser a {
+    color: #fff; }
+    .node--city-page--alt-teaser a:before {
+      color: #212121; }
+    .node--city-page--alt-teaser a:after {
+      background-color: #212121; }
+
+.block--views-city-pages-benefits {
+  background-color: #f4f4f4; }
+  .block--views-city-pages-benefits .node__title {
+    color: #d32c26; }
+    .block--views-city-pages-benefits .node__title a {
+      color: #d32c26; }
+  .block--views-city-pages-benefits .field--name-field-image img {
+    border-color: #fff;
+    background-color: #fff; }
+
 .node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] h3 {
   color: #d32c26; }
 
@@ -657,6 +696,9 @@ hr {
 
 .node--profile--full .flippy {
   border-top-color: #eee; }
+
+.paragraphs-item-city-service .field--name-field-title {
+  color: #b1241f; }
 
 .l-region--footer-third {
   background-color: #212121; }

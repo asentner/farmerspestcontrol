@@ -33,6 +33,31 @@ function sprowt_learning_center_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_exclude_from_learning_cent'.
+  $field_bases['field_exclude_from_learning_cent'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_exclude_from_learning_cent',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => 'Exclude from Learning Center',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_identification_description'.
   $field_bases['field_identification_description'] = array(
     'active' => 1,
