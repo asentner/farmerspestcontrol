@@ -12,7 +12,7 @@ function sprowt_login_menu_alter(&$items) {
 
     $items['user']['page callback'] = '_sprowt_login_user_redirect';
 
-    $items['admin/dashboard'] = array(
+    $items['admin/sprowt-dashboard'] = array(
         'title' => 'Dashboards',
         'page callback' => '_sprowt_login_dashboards',
         'access arguments' => array('view sprowt dashboard')
