@@ -211,7 +211,8 @@
    }
 	 .node__content{
 		 text-align: left;
-		 padding-left: 10px;
+     padding-left: 10px;
+     max-width: 100%;
 	 }
    @include breakpoint($tab) {
       .view-content {

@@ -125,8 +125,7 @@
 :root .fa-rotate-270,
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical {
-  -webkit-filter: none;
-          filter: none; }
+  filter: none; }
 
 .fa-stack {
   position: relative;
@@ -2499,7 +2498,8 @@
       border: none; }
   .block--views-city-pages-benefits .node__content {
     text-align: left;
-    padding-left: 10px; }
+    padding-left: 10px;
+    max-width: 100%; }
   @media (min-width: 768px) {
     .block--views-city-pages-benefits .view-content {
       max-width: 1210px;
@@ -2607,18 +2607,21 @@
     .bean-anchor-link-bean .content .field--name-field-display-title {
       font-size: 24px;
       font-weight: 700;
-      text-transform: uppercase; }
-    .bean-anchor-link-bean .content .field--name-field-anchor-link .field__items {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
-      .bean-anchor-link-bean .content .field--name-field-anchor-link .field__items > * {
-        -ms-flex: 0 1 auto; }
-      .bean-anchor-link-bean .content .field--name-field-anchor-link .field__items .field__item {
-        -ms-flex: 1 0 50%;
-            flex: 1 0 50%;
-        padding: 7px 0; }
+      text-transform: uppercase;
+      margin: 5px 0; }
+    .bean-anchor-link-bean .content .field--name-field-anchor-link {
+      margin: 5px 0; }
+      .bean-anchor-link-bean .content .field--name-field-anchor-link .field__items {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap; }
+        .bean-anchor-link-bean .content .field--name-field-anchor-link .field__items > * {
+          -ms-flex: 0 1 auto; }
+        .bean-anchor-link-bean .content .field--name-field-anchor-link .field__items .field__item {
+          -ms-flex: 1 0 50%;
+              flex: 1 0 50%;
+          padding: 7px 0; }
     .bean-anchor-link-bean .content a {
       font-size: 16px;
       font-weight: 600;
