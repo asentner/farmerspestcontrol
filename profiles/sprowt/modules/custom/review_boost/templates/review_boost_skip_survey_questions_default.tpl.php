@@ -3,5 +3,15 @@
   <p>
     %review_links
   </p>
-  <p>Have a great day!<br><br>%company_name<br>%street %street2<br>%locality, %province %postal_code<br>%company_phone</p>
-
+  <p>
+    Have a great day!
+  </p>
+  <p>
+    <span class="co-name">%company_name</span>
+    <br>
+    %street %street2
+    <br>
+    %locality, %province %postal_code
+    <br>
+    <a href="tel:%company_phone">%company_phone</a>
+  </p>

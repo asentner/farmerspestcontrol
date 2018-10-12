@@ -1,10 +1,12 @@
+$fontDir: '../resources/assets/fonts';
+
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?867rek');
-  src:  url('../fonts/icomoon.eot?867rek#iefix') format('embedded-opentype'),
-  url('../fonts/icomoon.ttf?867rek') format('truetype'),
-  url('../fonts/icomoon.woff?867rek') format('woff'),
-  url('../fonts/icomoon.svg?867rek#icomoon') format('svg');
+  src:  url($fontDir + '/icomoon.eot?867rek');
+  src:  url($fontDir + '/icomoon.eot?867rek#iefix') format('embedded-opentype'),
+  url($fontDir + '/icomoon.ttf?867rek') format('truetype'),
+  url($fontDir + '/icomoon.woff?867rek') format('woff'),
+  url($fontDir + '/icomoon.svg?867rek#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,7 +36,7 @@
   content: "\e906";
 }
 %gplus {
-  content: "\f0d5";
+  content: "\ea88";
 }
 %facebook {
   content: "\ea90";
@@ -54,8 +56,9 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-right: -10px;
-  margin-top: -15px;
+  // margin-right: -10px;
+  // margin-top: -15px;
+  margin-bottom: 15px;
   list-style: none;
   > * {
     flex: 0 1 auto;
@@ -63,16 +66,39 @@
     margin-right: 10px;
     list-style: none;
   }
+  // a { //original styling - just icons
+  //   display: block;
+  //   &:before {
+  //     @extend %icon;
+  //     @extend %custom;
+  //     display: inline-block;
+  //     font-size: 32px;
+  //     height: 32px;
+  //     overflow: hidden;
+  //     margin-right: 5px;
+  //   }
+  // }
   a {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    border: 3px solid;
+    border-radius: 5px;
     &:before {
       @extend %icon;
       @extend %custom;
       display: inline-block;
-      font-size: 32px;
-      height: 32px;
+      font-size: 25px;
+      line-height: 1;
       overflow: hidden;
       margin-right: 5px;
+    }
+    &:after{
+      content: "Leave us a review!";
+      margin-left: 10px;
+      font-size: 20px;
+      font-weight: 600;
     }
   }
   .facebook,
@@ -90,7 +116,6 @@
       }
     }
   }
-
 
   .facebook a:before {
     @extend %facebook;
@@ -113,5 +138,21 @@
     top:-5px;
     font-size: 45px;
     height: 40px;
+  }
+}
+
+//email landing page styling
+body.page-customer-survey{
+  h1{
+    margin-bottom: 1em !important;
+  }
+  p{
+    font-size: 18px;
+    line-height: 1.35;
+  }
+  span.co-name{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
   }
 }

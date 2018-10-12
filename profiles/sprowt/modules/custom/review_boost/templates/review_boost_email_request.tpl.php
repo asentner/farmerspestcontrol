@@ -8,4 +8,14 @@
 
 <p>Thank you and have a great day.</p>
 
-<p>Sincerely,<br>%company_name<br>%street %street2<br>%locality, %province %postal_code<br>%company_phone</p>
+<p>Sincerely,</p>
+
+<p>
+  <span class="co-name">%company_name</span>
+  <br>
+  %street %street2
+  <br>
+  %locality, %province %postal_code
+  <br>
+  <a href="tel:%company_phone">%company_phone</a>
+</p>
