@@ -19,6 +19,16 @@
 
     <p>If you’d like to contact us with any further questions, please email <a href="mailto:%admin_email">%admin_email</a>.</p>
 
-    <p>Sincerely,<br>%company_name<br>%street %street2<br>%locality, %province %postal_code<br>%company_phone</p>
+    <p>Sincerely,</p>
+
+    <p>
+      <span class="co-name">%company_name</span>
+      <br>
+      %street %street2
+      <br>
+      %locality, %province %postal_code
+      <br>
+      <a href="tel:%company_phone">%company_phone</a>
+    </p>
 
 <?php endif ?>
