@@ -41,13 +41,21 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
                     $svg_html = '<svg></svg>';
                 }
                 $doc = new DOMDocument();
-                $doc->loadXML($svg_html);
+                @$doc->loadXML($svg_html);
                 $svg = $doc->getElementsByTagName('svg');
                 $svg = $svg->item(0);
                 if ($svg->hasAttribute('id')) {
                     $svg->removeAttribute('id');
                 }
                 $style = $svg->getAttribute('style');
+                
+                $titleItems = $svg->getElementsByTagName('title');
+                if($titleItems->length > 0) {
+                    foreach ($titleItems as $title) {
+                        $svg->removeChild($title);
+                    }
+                }
+                
 
                 if (empty($style)) {
                     $style = array();
