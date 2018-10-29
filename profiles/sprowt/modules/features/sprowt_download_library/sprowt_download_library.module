@@ -24,3 +24,35 @@ function sprowt_download_library_preprocess_page(&$variables) {
     $path = drupal_get_path('module', 'sprowt_download_library');
     drupal_add_css($path . '/css/sprowt_download_library.css');
 }
+
+/**
+ * Implements hook_features_post_restore().
+ */
+function sprowt_download_library_features_post_restore($op, $items)
+{
+    $module = 'sprowt_download_library';
+    $pageTitle = 'Document Library';
+
+    if($op == 'enable' && in_array($module, array_keys($items))) {
+        variable_set($module. '_being_enabled', true);
+    }
+    if($op == 'rebuild' && in_array($module, array_keys($items))) {
+        if(variable_get($module . '_being_enabled', false)) {
+            $path = drupal_get_path('module', $module);
+            $file = $path . '/node.json';
+            $json = file_get_contents($file);
+            $existing = variable_get('node_export_existing', 'new');
+            variable_set('node_export_existing', 'new');
+            node_export_import($json);
+            variable_set('node_export_existing', $existing);
+
+            $ns = json_decode($json, true);
+            $n = array_pop($ns);
+            $node = entity_uuid_load('node', array($n['uuid']));
+            $node = array_pop($node);
+
+            drupal_set_message(l($pageTitle, 'node/' . $node->nid) . ' node created!');
+            variable_del($module. '_being_enabled');
+        }
+    }
+}
