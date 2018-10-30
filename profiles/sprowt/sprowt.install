@@ -528,3 +528,20 @@ function sprowt_update_7010() {
     variable_set('jquery_update_jquery_version', '1.12');
     variable_set('jquery_update_jquery_cdn', 'jquery');
 }
+
+/**
+ * Disable progress bar on all webforms
+ */
+function sprowt_update_7011() {
+    $nids = db_query("
+        SELECT nid
+        FROM node
+        WHERE type = 'webform'
+    ")->fetchCol();
+    
+    $nodes = node_load_multiple($nids);
+    foreach($nodes as $node) {
+        $node->webform['progressbar_bar'] = false;
+        node_save($node);
+    }
+}
