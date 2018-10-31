@@ -1,7 +1,6 @@
 name = Sprowt Video Library
 core = 7.x
 package = Sprowt Features
-dependencies[] = video_modal
 features[context][] = video_library
 features[ctools][] = context:context:3
 features[ctools][] = strongarm:strongarm:1
@@ -22,6 +21,7 @@ features_exclude[dependencies][context] = context
 features_exclude[dependencies][features] = features
 features_exclude[dependencies][strongarm] = strongarm
 features_exclude[dependencies][video_embed_field] = video_embed_field
+features_exclude[dependencies][video_modal] = video_modal
 features_exclude[dependencies][views] = views
 features_exclude[variable][diff_enable_revisions_page_node_video] = diff_enable_revisions_page_node_video
 features_exclude[variable][diff_show_preview_changes_node_video] = diff_show_preview_changes_node_video

@@ -436,7 +436,7 @@ function _sprowt_settings_config_validate(&$form, &$form_state) {
     }
     
     $customer_login = $values['sprowt_customer_login'];
-    if(!drupal_valid_path($customer_login)) {
+    if(!empty($customer_login) && !drupal_valid_path($customer_login)) {
         $el = &$form['company_info']['sprowt_customer_login'];
         form_error($el, 'Customer login must be a valid url or drupal path.');
     }
