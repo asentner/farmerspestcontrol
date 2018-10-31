@@ -19,7 +19,7 @@ function sprowt_learning_center_context_default_contexts() {
   $context->conditions = array(
     'node' => array(
       'values' => array(
-        'issue' => 'issue',
+        'concern' => 'concern',
       ),
       'options' => array(
         'node_form' => '1',
