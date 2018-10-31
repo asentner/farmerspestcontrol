@@ -3138,6 +3138,15 @@ li.addtoany {
     .local-target-benefits .node__title {
       font-size: 1.5em; } }
 
+.front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
+  padding: 50px 20px 40px; }
+  @media (min-width: 768px) {
+    .front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
+      padding: 160px 20px 40px; } }
+  @media (min-width: 1024px) {
+    .front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
+      padding: 160px 20px 40px; } }
+
 .block--sprowt-settings-sprowt-copyright {
   margin: 20px 0 0;
   padding: 0 20px 20px;
@@ -3847,6 +3856,168 @@ li.addtoany {
     .block--sprowt-settings-sprowt-social-media .block__content ul {
       -ms-flex-pack: end;
           justify-content: flex-end; } }
+
+.block--sprowt-solution-finder-solution-finder {
+  max-width: 350px;
+  margin: 0 auto;
+  margin-top: -70px;
+  padding: 30px;
+  background-color: #fefefe;
+  border: solid 3px #dfe2e3; }
+  .block--sprowt-solution-finder-solution-finder .block__title {
+    font-size: 24px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.38;
+    letter-spacing: 0.2px;
+    text-align: center;
+    margin: 0 auto 30px;
+    max-width: 580px; }
+    .block--sprowt-solution-finder-solution-finder .block__title strong {
+      font-weight: 800; }
+    .block--sprowt-solution-finder-solution-finder .block__title span {
+      font-weight: 700;
+      font-style: italic;
+      border-bottom: 4px solid #333333; }
+  @media (min-width: 560px) {
+    .block--sprowt-solution-finder-solution-finder {
+      max-width: 520px; } }
+  @media (min-width: 768px) {
+    .block--sprowt-solution-finder-solution-finder {
+      max-width: 680px;
+      margin-top: -196px;
+      z-index: 5; }
+      .block--sprowt-solution-finder-solution-finder .block__title {
+        margin: 0 auto 50px; } }
+  @media (min-width: 1000px) {
+    .block--sprowt-solution-finder-solution-finder {
+      max-width: 850px;
+      position: relative;
+      margin-top: -13%; } }
+  @media (min-width: 1024px) {
+    .block--sprowt-solution-finder-solution-finder {
+      max-width: 1000px;
+      margin-top: -150px; }
+      .block--sprowt-solution-finder-solution-finder .block__title {
+        max-width: 100%; } }
+
+@media (min-width: 1024px) {
+  .front--solutions-finder .block--sprowt-solution-finder-solution-finder {
+    margin-top: -80px; } }
+
+.solution-finder-form .concerns-wrapper {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center; }
+  .solution-finder-form .concerns-wrapper > * {
+    -ms-flex: 0 1 auto; }
+
+.solution-finder-form .concern-wrap {
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 15px;
+  min-width: 125px; }
+  .solution-finder-form .concern-wrap > * {
+    -ms-flex: 0 1 auto; }
+  .solution-finder-form .concern-wrap label {
+    padding: 10px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    border: solid 3px transparent;
+    text-align: center; }
+    .solution-finder-form .concern-wrap label > * {
+      -ms-flex: 0 1 auto; }
+    .solution-finder-form .concern-wrap label .name {
+      max-width: 125px;
+      line-height: 1.3; }
+    .solution-finder-form .concern-wrap label img, .solution-finder-form .concern-wrap label svg {
+      max-height: 45px; }
+    .solution-finder-form .concern-wrap label .field--name-field-icon-file {
+      margin-bottom: 10px;
+      text-align: center; }
+    .solution-finder-form .concern-wrap label:hover, .solution-finder-form .concern-wrap label.checked {
+      border: solid 3px #dfe2e3;
+      box-shadow: 0px 11px 15.5px 2.5px rgba(85, 85, 85, 0.36); }
+    .solution-finder-form .concern-wrap label input {
+      position: absolute;
+      left: -9999;
+      top: -9999;
+      opacity: 0; }
+
+.solution-finder-form .actions {
+  margin-top: 15px; }
+  .solution-finder-form .actions .button {
+    display: block;
+    width: 100%; }
+    .solution-finder-form .actions .button + .button {
+      margin-top: 15px; }
+
+@media (min-width: 560px) {
+  .solution-finder-form .concern-wrap {
+    width: 180px;
+    margin-right: 10px; }
+    .solution-finder-form .concern-wrap label {
+      padding: 10px 20px; }
+      .solution-finder-form .concern-wrap label .name {
+        max-width: 100%; } }
+
+@media (min-width: 768px) {
+  .solution-finder-form .concern-wrap {
+    -ms-flex-align: start;
+        align-items: flex-start;
+    width: 290px; }
+    .solution-finder-form .concern-wrap label {
+      text-align: left;
+      -ms-flex-direction: row;
+          flex-direction: row;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+      font-size: 19px;
+      padding: 10px 40px; }
+      .solution-finder-form .concern-wrap label .field--name-field-icon-file {
+        margin-right: 10px;
+        margin-bottom: 0;
+        width: 45px; }
+  .solution-finder-form .actions {
+    max-width: 640px;
+    margin: 15px auto 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between; }
+    .solution-finder-form .actions > * {
+      -ms-flex: 0 1 auto; }
+    .solution-finder-form .actions .button {
+      width: 48%;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+      .solution-finder-form .actions .button + .button {
+        margin-top: 0; } }
+
+@media (min-width: 1000px) {
+  .solution-finder-form .concern-wrap {
+    width: 300px; } }
 
 .block--views-special-offers-sidebar,
 .block--views-special-offers-related-s4 {

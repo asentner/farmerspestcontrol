@@ -120,6 +120,9 @@ hr {
     border-color: #fff;
     background-color: #fff; }
 
+.front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
+  background-color: #fff; }
+
 .block--sprowt-settings-sprowt-copyright {
   color: #707972; }
   .block--sprowt-settings-sprowt-copyright a {
@@ -363,6 +366,9 @@ hr {
   background-color: #216e82; }
   .local-target-testimonial .block__content {
     color: #fff; }
+
+.front--solutions-finder .block--views-testimonials-front {
+  background-color: #f4f4f4; }
 
 .field--name-field-call-out {
   padding: 20px;

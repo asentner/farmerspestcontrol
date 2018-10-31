@@ -27,7 +27,6 @@
 }
 
 // Front page testimonial
-
 .block--views-testimonials-front,
 .local-target-testimonial {
   $color-title: palette(secondary, base);
@@ -53,4 +52,11 @@
     .block__content {
       color: $color-body;
     }
+}
+
+
+.front--solutions-finder{
+  .block--views-testimonials-front{
+    background-color: palette(neutral, wild-sand);
+  }
 }
