@@ -166,6 +166,16 @@ hr {
   .local-target-webform .node__title {
     color: #fff; }
 
+.sidebar .block--views-learning-center-issue-links h3 {
+  color: #fff; }
+  .sidebar .block--views-learning-center-issue-links h3 span {
+    color: #eee; }
+
+.sidebar .block--views-learning-center-issue-links a {
+  color: #fff; }
+  .sidebar .block--views-learning-center-issue-links a:hover {
+    color: #d32c26; }
+
 .block--views-localtarget-map-reviews h2 {
   background-color: #d32c26;
   color: #fff; }
@@ -623,6 +633,20 @@ hr {
     border-color: #fff;
     background-color: #fff; }
 
+.node-type-concern .node--concern--full .header-bar h2 {
+  color: #d32c26; }
+
+.node-type-concern .node--concern--full .header .field--name-field-icon-file {
+  background: #d32c26; }
+  .node-type-concern .node--concern--full .header .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node-type-concern .node--concern--full .field--name-field-call-out h2, .node-type-concern .node--concern--full .field--name-field-call-out h3 {
+  color: #373d38; }
+
+.node-type-concern .node--concern--full .field--name-field-call-out p {
+  color: #373d38; }
+
 .node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] h3 {
   color: #d32c26; }
 
@@ -661,6 +685,18 @@ hr {
 
 .l-main {
   background-color: #fff; }
+
+.not-front.node-type-issue .node--issue--full .node-title .node__title {
+  color: #d32c26; }
+
+.not-front.node-type-issue .node--issue--full .identifications .field--name-field-identification-title .field__item {
+  color: #fff; }
+
+.not-front.node-type-issue .node--issue--full .identifications .field-collection-container .entity-field-collection-item > .content .field--name-field-indentification-label {
+  background-color: #e1e1e1; }
+
+.block--views-learning-center-learning-list .view-learning-center .views-row {
+  border-color: #e1e1e1; }
 
 .block--views-localtarget-value-prop .node {
   background-color: #373d38; }
