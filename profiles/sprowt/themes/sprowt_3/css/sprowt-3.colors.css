@@ -131,6 +131,39 @@ hr {
     .local-target-benefits .link-wrap a:after {
       background-color: #212121; }
 
+.node--concern--alt-teaser .field--name-field-icon-file {
+  background: #d32c26; }
+  .node--concern--alt-teaser .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node--concern--alt-teaser .node__title {
+  color: #d32c26; }
+
+.node--concern--teaser .field--name-field-icon-file {
+  background: #d32c26; }
+  .node--concern--teaser .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node--concern--teaser .content .node__title a:hover {
+  color: #d32c26; }
+
+.block--views-ref-seas-blocks-seasonal-block .block__title {
+  color: #d32c26; }
+
+.block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns {
+  background-color: #d32c26;
+  border-color: #e1e1e1; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .field--name-field-icon-file {
+    background-color: transparent; }
+    .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .field--name-field-icon-file svg .cls-1 {
+      fill: #d32c26; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .node__title {
+    color: #d32c26; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file {
+    background-color: #d32c26; }
+    .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file svg .cls-1 {
+      fill: #fff; }
+
 .block--sprowt-settings-sprowt-copyright {
   color: #707972; }
   .block--sprowt-settings-sprowt-copyright a {

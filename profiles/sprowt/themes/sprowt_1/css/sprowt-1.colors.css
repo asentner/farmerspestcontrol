@@ -123,6 +123,43 @@ hr {
 .front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
   background-color: #fff; }
 
+.node--concern--alt-teaser .field--name-field-icon-file {
+  background: #80b840; }
+  .node--concern--alt-teaser .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node--concern--alt-teaser .node__title {
+  color: #80b840; }
+
+.node--concern--teaser .field--name-field-icon-file {
+  background: #80b840; }
+  .node--concern--teaser .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node--concern--teaser .content .node__title a {
+  color: #21768c; }
+  .node--concern--teaser .content .node__title a:hover {
+    color: #80b840; }
+
+.block--views-ref-seas-blocks-seasonal-block .block__title {
+  color: #80b840; }
+
+.block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns {
+  background-color: #80b840;
+  border-color: #e1e1e1; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .field--name-field-icon-file {
+    background-color: transparent; }
+    .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .field--name-field-icon-file svg .cls-1 {
+      fill: #80b840; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .node__title {
+    color: #80b840; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file {
+    background-color: #80b840; }
+    .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file svg .cls-1 {
+      fill: #fff; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .node__title {
+    color: #216e82; }
+
 .block--sprowt-settings-sprowt-copyright {
   color: #707972; }
   .block--sprowt-settings-sprowt-copyright a {

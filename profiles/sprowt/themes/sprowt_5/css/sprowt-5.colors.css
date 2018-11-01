@@ -128,6 +128,43 @@ hr {
     border-color: #239343;
     background-color: #239343; }
 
+.node--concern--alt-teaser .field--name-field-icon-file {
+  background: #239343; }
+  .node--concern--alt-teaser .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node--concern--alt-teaser .node__title {
+  color: #239343; }
+
+.node--concern--teaser .field--name-field-icon-file {
+  background: #239343; }
+  .node--concern--teaser .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node--concern--teaser .content .node__title a {
+  color: #ebe0b5; }
+  .node--concern--teaser .content .node__title a:hover {
+    color: #239343; }
+
+.block--views-ref-seas-blocks-seasonal-block .block__title {
+  color: #239343; }
+
+.block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns {
+  background-color: #239343;
+  border-color: #e1e1e1; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .field--name-field-icon-file {
+    background-color: transparent; }
+    .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .field--name-field-icon-file svg .cls-1 {
+      fill: #239343; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .node__title {
+    color: #239343; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file {
+    background-color: #239343; }
+    .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file svg .cls-1 {
+      fill: #fff; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .node__title {
+    color: #f5c505; }
+
 .block--sprowt-settings-sprowt-copyright {
   color: #707972; }
   .block--sprowt-settings-sprowt-copyright a {
