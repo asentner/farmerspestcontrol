@@ -3197,6 +3197,15 @@ li.addtoany {
       -ms-flex-direction: row;
           flex-direction: row; } }
 
+.front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
+  padding: 50px 20px 40px; }
+  @media (min-width: 768px) {
+    .front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
+      padding: 200px 20px 30px; } }
+  @media (min-width: 1024px) {
+    .front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
+      padding: 220px 20px 30px; } }
+
 .block--sprowt-settings-sprowt-copyright {
   margin: 20px 0 0;
   padding: 0 20px 20px;
@@ -4004,6 +4013,10 @@ li.addtoany {
     .block--sprowt-settings-sprowt-social-media .block__content ul {
       -ms-flex-pack: end;
           justify-content: flex-end; } }
+
+@media (min-width: 1024px) {
+  .front--solutions-finder .block--sprowt-solution-finder-solution-finder {
+    margin-top: -80px; } }
 
 .block--views-special-offers-sidebar,
 .block--views-special-offers-related-s4 {

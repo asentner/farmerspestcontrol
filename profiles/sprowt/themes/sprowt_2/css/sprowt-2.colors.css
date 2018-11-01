@@ -127,6 +127,9 @@ hr {
     .local-target-benefits .read-more:hover {
       color: #e9b404; }
 
+.front--solutions-finder .block--views-benefits-front, .front--solutions-finder .local-target-benefits, .ltp--solutions-finder .block--views-benefits-front, .ltp--solutions-finder .local-target-benefits {
+  background-color: #fff; }
+
 .node--concern--alt-teaser .field--name-field-icon-file {
   background: #47b649; }
   .node--concern--alt-teaser .field--name-field-icon-file svg .cls-1 {
@@ -499,6 +502,9 @@ hr {
   .local-target-testimonial .field--title,
   .local-target-testimonial .field--name-field-market {
     color: #fff; }
+
+.front--solutions-finder .block--views-testimonials-front {
+  background-color: #f4f4f4; }
 
 .field--name-field-call-out {
   padding: 20px;
