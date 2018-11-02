@@ -144,8 +144,10 @@ hr {
   .node--concern--teaser .field--name-field-icon-file svg .cls-1 {
     fill: #fff; }
 
-.node--concern--teaser .content .node__title a:hover {
-  color: #d32c26; }
+.node--concern--teaser .content .node__title a {
+  color: #373d38; }
+  .node--concern--teaser .content .node__title a:hover {
+    color: #d32c26; }
 
 .block--views-ref-seas-blocks-seasonal-block .block__title {
   color: #d32c26; }
@@ -163,6 +165,8 @@ hr {
     background-color: #d32c26; }
     .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file svg .cls-1 {
       fill: #fff; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .node__title {
+    color: #373d38; }
 
 .block--sprowt-settings-sprowt-copyright {
   color: #707972; }
@@ -199,15 +203,16 @@ hr {
   .local-target-webform .node__title {
     color: #fff; }
 
-.sidebar .block--views-learning-center-issue-links h3 {
-  color: #fff; }
-  .sidebar .block--views-learning-center-issue-links h3 span {
-    color: #eee; }
-
-.sidebar .block--views-learning-center-issue-links a {
-  color: #fff; }
-  .sidebar .block--views-learning-center-issue-links a:hover {
-    color: #d32c26; }
+.sidebar .block--views-learning-center-issue-links {
+  background: #373d38; }
+  .sidebar .block--views-learning-center-issue-links h3 {
+    color: #fff; }
+    .sidebar .block--views-learning-center-issue-links h3 span {
+      color: #eee; }
+  .sidebar .block--views-learning-center-issue-links a {
+    color: #fff; }
+    .sidebar .block--views-learning-center-issue-links a:hover {
+      color: #d32c26; }
 
 .block--views-localtarget-map-reviews h2 {
   background-color: #d32c26;
@@ -669,6 +674,18 @@ hr {
 .node-type-concern .node--concern--full .header-bar h2 {
   color: #d32c26; }
 
+.node-type-concern .node--concern--full h1, .node-type-concern .node--concern--full .field__label {
+  color: #212121; }
+
+.node-type-concern .node--concern--full h2 {
+  color: #373d38; }
+
+.node-type-concern .node--concern--full .field--name-body h2 {
+  color: #212121; }
+
+.node-type-concern .node--concern--full .field--name-body h2 {
+  color: #373d38; }
+
 .node-type-concern .node--concern--full .header .field--name-field-icon-file {
   background: #d32c26; }
   .node-type-concern .node--concern--full .header .field--name-field-icon-file svg .cls-1 {
@@ -722,11 +739,35 @@ hr {
 .not-front.node-type-issue .node--issue--full .node-title .node__title {
   color: #d32c26; }
 
-.not-front.node-type-issue .node--issue--full .identifications .field--name-field-identification-title .field__item {
-  color: #fff; }
+.not-front.node-type-issue .node--issue--full h1 {
+  color: #373d38; }
+
+.not-front.node-type-issue .node--issue--full h2 {
+  color: #373d38; }
+
+.not-front.node-type-issue .node--issue--full h3, .not-front.node-type-issue .node--issue--full .field--name-field-subtitle {
+  color: #373d38; }
+
+.not-front.node-type-issue .node--issue--full .field--name-body h2 {
+  color: #373d38; }
+
+.not-front.node-type-issue .node--issue--full .field--name-body h2 {
+  color: #373d38; }
+
+.not-front.node-type-issue .node--issue--full .body-content .field--name-body p {
+  color: #373d38; }
+
+.not-front.node-type-issue .node--issue--full .identifications .field--name-field-identification-title {
+  background: #373d38; }
+  .not-front.node-type-issue .node--issue--full .identifications .field--name-field-identification-title .field__item {
+    color: #fff; }
 
 .not-front.node-type-issue .node--issue--full .identifications .field-collection-container .entity-field-collection-item > .content .field--name-field-indentification-label {
+  color: #373d38;
   background-color: #e1e1e1; }
+
+.not-front.node-type-issue .node--issue--full .identifications .field-collection-container .entity-field-collection-item > .content .field--name-field-identification-description {
+  color: #373d38; }
 
 .block--views-learning-center-learning-list .view-learning-center .views-row {
   border-color: #e1e1e1; }

@@ -7,17 +7,17 @@
       }
     }
     h1, .field__label{
-      color: palette(secondary, light);
+      color: palette(black, pure);
     }
     h2{
-      color: palette(secondary, lightest);
+      color: palette(black, base);
     }
     .field--name-body{
       h2{
-        color: palette(secondary, light);
+        color: palette(black, pure);
       }
       h2{
-        color: palette(secondary, lightest);
+        color: palette(black, base);
       }
     }
     .header{
@@ -31,7 +31,7 @@
       }
       .header-content{
         // .field--name-field-intro{
-        //   color: palette(secondary, light);
+        //   color: palette(black, pure);
         // }
       }
     }
