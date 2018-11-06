@@ -3436,6 +3436,9 @@ img.mfp-img {
   max-width: 970px;
   margin: 0 auto; }
 
+body.node-type-solution .scm-modals.hidden {
+  display: none; }
+
 body.node-type-solution.admin-menu.adminimal-menu::before {
   background-color: #333;
   min-height: 60px; }
