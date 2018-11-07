@@ -19,7 +19,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/39' => 'node/39',
+        'node/39' => 'node/32',
       ),
     ),
   );
@@ -74,16 +74,16 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'postscript_second',
           'weight' => '-9',
         ),
-        'webform-client-block-88' => array(
-          'module' => 'webform',
-          'delta' => 'client-block-88',
-          'region' => 'postscript_fourth',
-          'weight' => '-10',
-        ),
         'views-affiliates-list' => array(
           'module' => 'views',
           'delta' => 'affiliates-list',
           'region' => 'postscript_fifth',
+          'weight' => '-10',
+        ),
+        'webform-client-block-57' => array(
+          'module' => 'webform',
+          'delta' => 'client-block-57',
+          'region' => 'postscript_fourth',
           'weight' => '-10',
         ),
       ),
@@ -309,22 +309,10 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'postscript_second',
           'weight' => '-9',
         ),
-        'block-1' => array(
-          'module' => 'block',
-          'delta' => '1',
-          'region' => 'postscript_third',
-          'weight' => '-9',
-        ),
         'bean-careers-block-front' => array(
           'module' => 'bean',
           'delta' => 'careers-block-front',
           'region' => 'postscript_third',
-          'weight' => '-8',
-        ),
-        'webform-client-block-88' => array(
-          'module' => 'webform',
-          'delta' => 'client-block-88',
-          'region' => 'postscript_fourth',
           'weight' => '-8',
         ),
         'views-affiliates-list' => array(
@@ -332,6 +320,18 @@ function sprowt_6_contexts_context_default_contexts() {
           'delta' => 'affiliates-list',
           'region' => 'postscript_fifth',
           'weight' => '-10',
+        ),
+        'block-' => array(
+          'module' => 'block',
+          'delta' => NULL,
+          'region' => 'postscript_third',
+          'weight' => '-9',
+        ),
+        'webform-client-block-57' => array(
+          'module' => 'webform',
+          'delta' => 'client-block-57',
+          'region' => 'postscript_fourth',
+          'weight' => '-8',
         ),
       ),
     ),
@@ -468,16 +468,16 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'postscript_second',
           'weight' => '-9',
         ),
-        'webform-client-block-88' => array(
-          'module' => 'webform',
-          'delta' => 'client-block-88',
-          'region' => 'postscript_fourth',
-          'weight' => '-10',
-        ),
         'views-affiliates-list' => array(
           'module' => 'views',
           'delta' => 'affiliates-list',
           'region' => 'postscript_fifth',
+          'weight' => '-10',
+        ),
+        'webform-client-block-57' => array(
+          'module' => 'webform',
+          'delta' => 'client-block-57',
+          'region' => 'postscript_fourth',
           'weight' => '-10',
         ),
       ),
@@ -500,7 +500,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/31' => 'node/31',
+        'node/31' => 'node/24',
       ),
     ),
   );
@@ -527,6 +527,54 @@ function sprowt_6_contexts_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'package_comparison';
+  $context->description = 'Package Comparison feature block placement';
+  $context->tag = 'Page';
+  $context->conditions = array(
+    'node' => array(
+      'values' => array(
+        'package_comparison' => 'package_comparison',
+      ),
+      'options' => array(
+        'node_form' => '1',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-package_comparison-hero' => array(
+          'module' => 'views',
+          'delta' => 'package_comparison-hero',
+          'region' => 'preface_first',
+          'weight' => '-10',
+        ),
+        'views-a7f3879ed631c4af4c738158eff61094' => array(
+          'module' => 'views',
+          'delta' => 'a7f3879ed631c4af4c738158eff61094',
+          'region' => 'content',
+          'weight' => '2',
+        ),
+        'views-package_comparison-cta' => array(
+          'module' => 'views',
+          'delta' => 'package_comparison-cta',
+          'region' => 'content',
+          'weight' => '3',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Package Comparison feature block placement');
+  t('Page');
+  $export['package_comparison'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'service';
   $context->description = 'Service node block placement';
   $context->tag = 'Page';
@@ -549,7 +597,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/32' => 'node/32',
+        'node/32' => 'node/25',
       ),
     ),
   );
@@ -598,17 +646,17 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'sidebar',
           'weight' => '-10',
         ),
-        'webform-client-block-3' => array(
-          'module' => 'webform',
-          'delta' => 'client-block-3',
-          'region' => 'sidebar',
-          'weight' => '-6',
-        ),
         'views-096cf025523abc0c052989875f4f93fe' => array(
           'module' => 'views',
           'delta' => '096cf025523abc0c052989875f4f93fe',
           'region' => 'sidebar',
           'weight' => '-7',
+        ),
+        'webform-client-block-54' => array(
+          'module' => 'webform',
+          'delta' => 'client-block-54',
+          'region' => 'sidebar',
+          'weight' => '-6',
         ),
       ),
     ),
@@ -714,6 +762,7 @@ function sprowt_6_contexts_context_default_contexts() {
       'values' => array(
         '~<front>' => '~<front>',
         '~learning-center' => '~learning-center',
+        '~media-library' => '~media-library',
       ),
     ),
   );
@@ -746,7 +795,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/34' => 'node/34',
+        'node/34' => 'node/27',
       ),
     ),
   );
@@ -794,6 +843,7 @@ function sprowt_6_contexts_context_default_contexts() {
       'values' => array(
         '~<front>' => '~<front>',
         '~learning-center' => '~learning-center',
+        '~media-library' => '~media-library',
       ),
     ),
   );
