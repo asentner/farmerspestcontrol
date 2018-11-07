@@ -16,20 +16,20 @@
       color: palette(secondary, light);
     }
     h3, .field--name-field-subtitle{
-      color: palette(secondary, lightest);
+      color: palette(secondary, dark);
     }
     .field--name-body{
       h2{
-        color: palette(secondary, light);
+        color: palette(black, base);
       }
       h2{
-        color: palette(secondary, lightest);
+        color: palette(black, base);
       }
     }
     .body-content{
       .field--name-body{
         p{
-          color: palette(secondary, light);
+          color: palette(black, base);
         }
       }
     }
@@ -44,11 +44,11 @@
         .entity-field-collection-item{
           >.content{
             .field--name-field-indentification-label{
-              color: palette(secondary, base);
+              color: palette(black, base);
               background-color: palette(neutral, mercury);
             }
             .field--name-field-identification-description{
-              color: palette(secondary, base);
+              color: palette(black, base);
               background-color: palette(neutral, gallery);
             }
           }
