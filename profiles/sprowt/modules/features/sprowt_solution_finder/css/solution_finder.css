@@ -2387,6 +2387,8 @@
   margin: 0 auto;
   margin-top: -70px;
   padding: 30px;
+  position: relative;
+  z-index: 5;
   background-color: #fefefe;
   border: solid 3px #dfe2e3; }
   .block--sprowt-solution-finder-solution-finder .block__title {
