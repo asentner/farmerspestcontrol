@@ -77,6 +77,7 @@ function sprowt_contexts_context_default_contexts() {
       'values' => array(
         '~<front>' => '~<front>',
         '~special-offers' => '~special-offers',
+        '~media-library' => '~media-library',
       ),
     ),
   );

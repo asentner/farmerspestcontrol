@@ -14,4 +14,6 @@ features[features_api][] = api:2
 features_exclude[dependencies][features] = features
 features_exclude[dependencies][strongarm] = strongarm
 features_exclude[dependencies][views] = views
+features_exclude[dependencies][sprowt_ebooking_features] = sprowt_ebooking_features
+features_exclude[dependencies][sprowt_package_comparison] = sprowt_package_comparison
 project path = profiles/sprowt/modules/features
