@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sprowt 2 Contexts feature.
+ */
+
+include_once 'sprowt_2_contexts.features.inc';
