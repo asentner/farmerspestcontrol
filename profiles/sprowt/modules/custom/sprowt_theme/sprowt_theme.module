@@ -169,5 +169,11 @@ function sprowt_theme_form_alter(&$form, &$form_state, $form_id){
         if(!$noPrivacy) {
             $form['submit']['#prefix'] = "<div class='webform-privacy-policy'><p>By submitting this form, you are agreeing to the<a href='/privacy-policy'> privacy policy</a></p></div>";
         }
+
+        if($node->uuid == '7ac2f749-f7d3-4db7-8b05-258588aba660') {
+            drupal_add_js(drupal_get_path('module', 'sprowt_theme') . '/js/URI.js');
+            drupal_add_js(drupal_get_path('module', 'sprowt_theme') . '/js/special_offers.js');
+            $form['#attributes']['class'][] = 'special-offer-form';
+        }
     }
 }
