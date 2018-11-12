@@ -2589,6 +2589,9 @@ input[type=text], input[type=email], input[type=password], textarea, select {
       .form-row .fieldset-wrapper > .form-item + .form-item {
         margin-left: 1em; } }
 
+.webform-progressbar {
+  width: auto; }
+
 .block--list .field--name-field-image img, .block--views-affiliates-list img, .block--views-benefits-front .field--name-field-image a > img,
 .benefits-hero .field--name-field-image a > img, .block--sprowt-views-sprowt-views-lt-benefits .field--name-field-image a > img,
 .local-target-benefits .field--name-field-image a > img, .block--views-benefits-front .field--name-field-icon a,

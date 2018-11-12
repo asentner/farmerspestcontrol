@@ -1776,8 +1776,8 @@ function sprowt_bean_types_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'bean-video_bean-field_video'.
-  $field_instances['bean-video_bean-field_video'] = array(
+  // Exported field_instance: 'bean-video_bean-field_video_link'.
+  $field_instances['bean-video_bean-field_video_link'] = array(
     'bundle' => 'video_bean',
     'default_value' => NULL,
     'deleted' => 0,
@@ -1791,11 +1791,11 @@ function sprowt_bean_types_field_default_field_instances() {
           'thumbnail_image_field' => 'field_video_still',
         ),
         'type' => 'video_embed_modal',
-        'weight' => 1,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'bean',
-    'field_name' => 'field_video',
+    'field_name' => 'field_video_link',
     'label' => 'Video',
     'required' => 0,
     'settings' => array(
@@ -1812,6 +1812,41 @@ function sprowt_bean_types_field_default_field_instances() {
       'module' => 'video_embed_field',
       'settings' => array(),
       'type' => 'video_embed_field_video',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'bean-video_bean-field_video_name'.
+  $field_instances['bean-video_bean-field_video_name'] = array(
+    'bundle' => 'video_bean',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_video_name',
+    'label' => 'Video Title',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'show_token_tree' => 0,
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 3,
     ),
   );
@@ -1826,7 +1861,7 @@ function sprowt_bean_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'bean',
@@ -1917,42 +1952,7 @@ function sprowt_bean_types_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'bean-video_bean-field_video_title'.
-  $field_instances['bean-video_bean-field_video_title'] = array(
-    'bundle' => 'video_bean',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'bean',
-    'field_name' => 'field_video_title',
-    'label' => 'Video Title',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'show_token_tree' => 0,
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 6,
     ),
   );
 

@@ -4019,6 +4019,10 @@ li.addtoany {
   .block--sprowt-settings-sprowt-social-media .social-description {
     display: none; }
 
+@media (min-width: 1024px) {
+  .front--solutions-finder .block--sprowt-solution-finder-solution-finder {
+    margin-top: -80px; } }
+
 .block--views-special-offers-sidebar,
 .block--views-special-offers-related-s4 {
   padding: 25px 15px;
@@ -4741,6 +4745,36 @@ li.addtoany {
     max-width: 1210px;
     margin: 0 auto; } }
 
+.node-type-page.section-special-offers.enhanced .l-main, .node-type-page.section-coupons.enhanced .l-main {
+  padding: 50px 5px;
+  margin-top: 0;
+  margin-bottom: 0; }
+
+@media (min-width: 768px) {
+  .node-type-page.section-special-offers.enhanced .l-main, .node-type-page.section-coupons.enhanced .l-main {
+    padding: 50px 5px;
+    max-width: 1210px;
+    margin-top: 0;
+    margin-bottom: 0; }
+  .node-type-page.section-special-offers.enhanced .l-content, .node-type-page.section-coupons.enhanced .l-content {
+    max-width: 1210px; } }
+
+@media (min-width: 1024px) {
+  .node-type-page.section-special-offers.enhanced .l-main, .node-type-page.section-coupons.enhanced .l-main {
+    padding: 50px 5px;
+    margin-top: 0;
+    margin-bottom: 0; } }
+
+@media (min-width: 1024px) {
+  .block--views-special-offers-all-enhanced .view-content, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-content {
+    margin: 0;
+    -ms-flex-pack: start;
+        justify-content: flex-start; }
+    .block--views-special-offers-all-enhanced .view-content .views-row, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-content .views-row {
+      -ms-flex: 1 0 31.33%;
+          flex: 1 0 31.33%;
+      max-width: 380px; } }
+
 .front .l-main {
   margin: 0 auto;
   padding: 0;
@@ -4799,6 +4833,14 @@ li.addtoany {
     padding: 150px 20px 60px; }
   .block--views-localtarget-value-prop .field--name-field-display-title {
     font-size: 3.7em; } }
+
+.section-media-library .l-main {
+  max-width: 1210px;
+  margin: 0 auto;
+  padding: 50px 0; }
+
+.section-media-library .l-content {
+  max-width: 100%; }
 
 .node--profile--full .field--name-field-image img {
   border-radius: 50%;

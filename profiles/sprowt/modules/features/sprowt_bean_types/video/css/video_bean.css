@@ -125,8 +125,7 @@
 :root .fa-rotate-270,
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical {
-  -webkit-filter: none;
-          filter: none; }
+  filter: none; }
 
 .fa-stack {
   position: relative;
@@ -2309,7 +2308,7 @@
 
 .bean-video-bean {
   position: relative; }
-  .bean-video-bean .field--name-field-video-title {
+  .bean-video-bean .field--name-field-video-name {
     color: #fff;
     width: 75%;
     text-align: center;
@@ -2332,13 +2331,13 @@
     .bean-video-bean .play-button span {
       text-transform: uppercase; }
   @media (min-width: 768px) {
-    .bean-video-bean .field--name-field-video-title {
+    .bean-video-bean .field--name-field-video-name {
       font-size: 1.875em;
       line-height: 1.25; }
     .bean-video-bean .video-modal img {
       max-width: 100%; } }
   @media (min-width: 1024px) {
-    .bean-video-bean .field--name-field-video-title {
+    .bean-video-bean .field--name-field-video-name {
       width: auto;
       font-size: 2.25em;
       top: 43%; }

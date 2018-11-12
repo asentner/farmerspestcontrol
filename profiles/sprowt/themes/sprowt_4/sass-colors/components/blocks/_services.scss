@@ -1,5 +1,4 @@
 // homepage service listing
-
 .block--views-services-front-services {
   .view-content {
     + .more-link {
@@ -23,6 +22,16 @@
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
       }
     }
+  }
+}
+
+//with solutions finder
+.front--solutions-finder{
+  .l-region--preface-second{
+    background-color: palette(neutral, gallery)
+  }
+  .block--views-services-front-services{
+    background-color: palette(neutral, gallery);
   }
 }
 

@@ -2542,6 +2542,9 @@ input[type=text], input[type=email], input[type=password], textarea, select {
       .form-row .fieldset-wrapper > .form-item + .form-item {
         margin-left: 1em; } }
 
+.webform-progressbar {
+  width: auto; }
+
 .block--list .field--name-field-image img, .block--views-affiliates-list img, .block--views-team-list.block--grid .field--name-field-image img {
   transition: 0.2s ease-out; }
   .block--list .field--name-field-image img:hover, .block--views-affiliates-list img:hover, .block--views-team-list.block--grid .field--name-field-image img:hover {
@@ -3899,6 +3902,12 @@ li.addtoany {
     .block--views-services-front-services .views-row {
       padding: 0 30px; } }
 
+@media (min-width: 1024px) {
+  .front--solutions-finder .block--views-services-front-services {
+    padding: 80px 10px 60px; }
+    .front--solutions-finder .block--views-services-front-services .views-row {
+      margin-top: 0; } }
+
 .block--views-slideshow-front,
 .block--views-slideshow-localtarget {
   text-align: center; }
@@ -3989,6 +3998,17 @@ li.addtoany {
     .block--views-slideshow-localtarget .node__title {
       font-size: 3em; } }
 
+.front--solutions-finder .block--views-slideshow-front .slide-image, .front--solutions-finder .block--views-slideshow-localtarget .slide-image {
+  min-height: 335px; }
+
+@media (min-width: 768px) {
+  .front--solutions-finder .block--views-slideshow-front .slide-image, .front--solutions-finder .block--views-slideshow-localtarget .slide-image {
+    min-height: 350px; } }
+
+@media (min-width: 1024px) {
+  .front--solutions-finder .block--views-slideshow-front .slide-image, .front--solutions-finder .block--views-slideshow-localtarget .slide-image {
+    min-height: 550px; } }
+
 .block--sprowt-settings-sprowt-social-media {
   margin: 20px 0;
   padding: 0 20px;
@@ -4028,6 +4048,14 @@ li.addtoany {
       .block--views-slideshow-localtarget .flex-direction-nav a:before,
       .block--views-slideshow-localtarget .flex-direction-nav .block--sprowt-settings-sprowt-social-media a:before, .block--sprowt-settings-sprowt-social-media .breadcrumb li:first-child a:before, .breadcrumb li:first-child .block--sprowt-settings-sprowt-social-media a:before {
         font-size: 28px; } }
+
+@media (min-width: 768px) {
+  .front--solutions-finder .block--sprowt-solution-finder-solution-finder {
+    margin-top: -75px; } }
+
+@media (min-width: 1024px) {
+  .front--solutions-finder .block--sprowt-solution-finder-solution-finder {
+    margin-top: -150px; } }
 
 .block--views-special-offers-sidebar, .block-shortcode--views-special_offers-ltp_s4 {
   padding: 25px 15px;

@@ -26,7 +26,7 @@
   .content{
     .node__title{
       a{
-        color: palette(secondary, light);
+        color: palette(secondary, base);
         &:hover{
           color: palette(primary, base);
         }

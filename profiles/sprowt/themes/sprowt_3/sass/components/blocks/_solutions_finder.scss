@@ -1,0 +1,7 @@
+.front--solutions-finder{
+  .block--sprowt-solution-finder-solution-finder{
+    @include breakpoint($desk){
+      margin-top: -80px;
+    }
+  }
+}
