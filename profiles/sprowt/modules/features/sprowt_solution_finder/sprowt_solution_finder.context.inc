@@ -50,7 +50,7 @@ function sprowt_solution_finder_context_default_contexts() {
   $export['solutions_finder_city'] = $context;
 
   $context = new stdClass();
-  $context->disabled = TRUE; /* Edit this to true to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'solutions_finder_front';
   $context->description = 'Solutions finder block placement';
