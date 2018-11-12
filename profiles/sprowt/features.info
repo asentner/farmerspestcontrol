@@ -19,5 +19,6 @@ features[] = sprowt_paragraphs
 features[] = sprowt_city_pages
 features[] = sprowt_bean_types
 features[] = sprowt_contexts
+features[] = sprowt_enhanced_offers
 ;features[] = sprowt_landing_page
 ;features[] = sprowt_ebooking_features
