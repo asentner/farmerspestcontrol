@@ -1,0 +1,27 @@
+//Enhanced Special Offers (default 11/2018)
+
+
+//full page listing view block
+.block--views-special-offers-all-enhanced, .block--views-3a8319097bcee7958bed28c69e6f77ee{
+  .view-content{
+    .views-row{
+      background: palette(white, pure);
+    }
+  }
+}
+
+//full page view block filtering
+.block--views-special-offers-all-enhanced, .block--views-3a8319097bcee7958bed28c69e6f77ee{
+  .view-filters{
+    .views-widget-filter-field_services_tid{
+      label{
+        color: palette(primary, dark);
+      }
+    }
+    .views-submit-button{
+      input{
+        border-color: palette(primary, base) !important;
+      }
+    }
+  }
+}

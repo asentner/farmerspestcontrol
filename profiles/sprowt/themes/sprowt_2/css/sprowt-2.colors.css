@@ -469,6 +469,15 @@ hr {
   .block--views-special-offers-ltp-slideshow .button:hover {
     color: #e9b404; }
 
+.block--views-special-offers-all-enhanced .view-content .views-row, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-content .views-row {
+  background: #fff; }
+
+.block--views-special-offers-all-enhanced .view-filters .views-widget-filter-field_services_tid label, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-filters .views-widget-filter-field_services_tid label {
+  color: #3a933b; }
+
+.block--views-special-offers-all-enhanced .view-filters .views-submit-button input, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-filters .views-submit-button input {
+  border-color: #47b649 !important; }
+
 .block--testimonials-sidebar, .block--views-testimonials-random {
   background-color: #fff;
   border-color: #f4f4f4; }
@@ -722,6 +731,12 @@ hr {
 .node-type-concern .node--concern--full h1, .node-type-concern .node--concern--full .field__label {
   color: #fdd244; }
 
+.node-type-concern .node--concern--full h2 {
+  color: #fdd244; }
+
+.node-type-concern .node--concern--full .field--name-body h2 {
+  color: #fdd244; }
+
 .node-type-concern .node--concern--full .field--name-body h2 {
   color: #fdd244; }
 
@@ -730,11 +745,12 @@ hr {
   .node-type-concern .node--concern--full .header .field--name-field-icon-file svg .cls-1 {
     fill: #fff; }
 
-.node-type-concern .node--concern--full .field--name-field-call-out h2, .node-type-concern .node--concern--full .field--name-field-call-out h3 {
-  color: #373d38; }
-
-.node-type-concern .node--concern--full .field--name-field-call-out p {
-  color: #373d38; }
+.node-type-concern .node--concern--full .field--name-field-call-out {
+  background-color: #f0f0f0; }
+  .node-type-concern .node--concern--full .field--name-field-call-out h2, .node-type-concern .node--concern--full .field--name-field-call-out h3 {
+    color: #373d38; }
+  .node-type-concern .node--concern--full .field--name-field-call-out p {
+    color: #373d38; }
 
 .node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] h3 {
   color: #e9b404; }
@@ -793,6 +809,12 @@ hr {
 .not-front.node-type-issue .node--issue--full h2 {
   color: #fdd244; }
 
+.not-front.node-type-issue .node--issue--full h3, .not-front.node-type-issue .node--issue--full .field--name-field-subtitle {
+  color: #fdd244; }
+
+.not-front.node-type-issue .node--issue--full .field--name-body h2 {
+  color: #fdd244; }
+
 .not-front.node-type-issue .node--issue--full .field--name-body h2 {
   color: #fdd244; }
 
@@ -809,7 +831,8 @@ hr {
   background-color: #e1e1e1; }
 
 .not-front.node-type-issue .node--issue--full .identifications .field-collection-container .entity-field-collection-item > .content .field--name-field-identification-description {
-  color: #e9b404; }
+  color: #e9b404;
+  background-color: #f0f0f0; }
 
 .node-type-page.page-node-42 .node--page--full .field--name-field-intro {
   color: #fdd244; }
@@ -859,6 +882,45 @@ hr {
 
 .node--profile--full .flippy {
   border-top-color: #eee; }
+
+.node-type-page.section-special-offers.enhanced .node--page .node__title, .node-type-page.section-coupons.enhanced .node--page .node__title {
+  color: #3a933b; }
+
+.node--special-offer--tertiary-teaser .node__content {
+  outline-color: #d4d7d9; }
+
+.node--special-offer--tertiary-teaser h2 {
+  color: #3a933b; }
+
+.node--special-offer--tertiary-teaser h3 {
+  color: #292929; }
+
+.node--special-offer--tertiary-teaser .field--name-field-button .button {
+  background-color: #3a933b;
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser .field--name-field-expiration-date {
+  color: #c80108; }
+
+.node--special-offer--tertiary-teaser.featured-offer .node__content {
+  background-color: #3a933b;
+  outline-color: rgba(255, 255, 255, 0.5); }
+
+.node--special-offer--tertiary-teaser.featured-offer h2 {
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser.featured-offer h3 {
+  color: rgba(255, 255, 255, 0.9); }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-body {
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-field-button .button {
+  background-color: #fff;
+  color: #3a933b; }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-field-expiration-date {
+  color: #fff; }
 
 .paragraphs-item-city-service .field--name-field-title {
   color: #3a933b; }

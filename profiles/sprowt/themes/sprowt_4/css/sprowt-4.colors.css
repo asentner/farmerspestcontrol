@@ -426,6 +426,15 @@ hr {
     background: #3da244;
     color: #fff; }
 
+.block--views-special-offers-all-enhanced .view-content .views-row, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-content .views-row {
+  background: #fff; }
+
+.block--views-special-offers-all-enhanced .view-filters .views-widget-filter-field_services_tid label, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-filters .views-widget-filter-field_services_tid label {
+  color: #245927; }
+
+.block--views-special-offers-all-enhanced .view-filters .views-submit-button input, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-filters .views-submit-button input {
+  border-color: #3da244 !important; }
+
 .block--testimonials-sidebar, .block--views-testimonials-random {
   background-color: #fff;
   border-color: #f4f4f4; }
@@ -845,6 +854,45 @@ hr {
 
 .node--profile--full .flippy {
   border-top-color: #eee; }
+
+.node-type-page.section-special-offers.enhanced .node--page .node__title, .node-type-page.section-coupons.enhanced .node--page .node__title {
+  color: #245927; }
+
+.node--special-offer--tertiary-teaser .node__content {
+  outline-color: #d4d7d9; }
+
+.node--special-offer--tertiary-teaser h2 {
+  color: #245927; }
+
+.node--special-offer--tertiary-teaser h3 {
+  color: #292929; }
+
+.node--special-offer--tertiary-teaser .field--name-field-button .button {
+  background-color: #245927;
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser .field--name-field-expiration-date {
+  color: #c80108; }
+
+.node--special-offer--tertiary-teaser.featured-offer .node__content {
+  background-color: #245927;
+  outline-color: rgba(255, 255, 255, 0.5); }
+
+.node--special-offer--tertiary-teaser.featured-offer h2 {
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser.featured-offer h3 {
+  color: rgba(255, 255, 255, 0.9); }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-body {
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-field-button .button {
+  background-color: #fff;
+  color: #245927; }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-field-expiration-date {
+  color: #fff; }
 
 .paragraphs-item-city-service .field--name-field-title {
   color: #245927; }
