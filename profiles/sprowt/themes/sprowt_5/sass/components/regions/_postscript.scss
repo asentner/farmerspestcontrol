@@ -27,13 +27,11 @@
 }
 
 .front .l-region--postscript-second {
-  @include breakpoint($tab) {
+  @include breakpoint($container){
     @include flexbox;
-    .block {
-      @include flexbox;
-      flex-direction: column;
-      justify-content: center;
-      width: 50%;
-    }
+    justify-content: center;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
   }
 }
