@@ -7670,7 +7670,7 @@ function sprowt_content_types_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 45,
+      'weight' => 46,
     ),
   );
 
@@ -7869,7 +7869,7 @@ function sprowt_content_types_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 46,
+      'weight' => 51,
     ),
   );
 
@@ -7979,7 +7979,7 @@ function sprowt_content_types_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 44,
+      'weight' => 54,
     ),
   );
 
@@ -8040,7 +8040,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 44,
     ),
   );
 
@@ -8101,7 +8101,7 @@ function sprowt_content_types_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 47,
+      'weight' => 45,
     ),
   );
 
@@ -8161,7 +8161,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 51,
+      'weight' => 53,
     ),
   );
 
@@ -8215,7 +8215,7 @@ function sprowt_content_types_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 50,
+      'weight' => 52,
     ),
   );
 
