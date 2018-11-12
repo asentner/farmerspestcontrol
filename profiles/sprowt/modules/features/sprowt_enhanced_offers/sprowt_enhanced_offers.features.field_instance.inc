@@ -66,7 +66,7 @@ function sprowt_enhanced_offers_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 48,
+      'weight' => 50,
     ),
   );
 
@@ -203,7 +203,7 @@ function sprowt_enhanced_offers_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 50,
+      'weight' => 49,
     ),
   );
 
@@ -265,7 +265,7 @@ function sprowt_enhanced_offers_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 49,
+      'weight' => 48,
     ),
   );
 
