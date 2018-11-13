@@ -4,8 +4,9 @@
 //special offers page
 .node-type-page.section-special-offers.enhanced, .node-type-page.section-coupons.enhanced{
   .l-main{
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
+    padding: 50px 5px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .node--page{
     max-width: 900px;
@@ -30,12 +31,13 @@
   }
   @include breakpoint($tab){
     .l-main{
-      max-width: 1250px;
-      margin-top: 2em;
-      margin-bottom: 2em;
+      padding: 50px 5px;
+      max-width: 1210px;
+      margin-top: 0;
+      margin-bottom: 0;
     }
     .l-content{
-      max-width: 1250px;
+      max-width: 1210px;
     }
     .node--page{
       .node__title{
@@ -45,9 +47,9 @@
   }
   @include breakpoint($desk){
     .l-main{
-      padding: 0 5px;
-      margin-top: 3em;
-      margin-bottom: 3em;
+      padding: 50px 5px;
+      margin-top: 0;
+      margin-bottom: 0;
     }
     .node--page{
       .node__title{
