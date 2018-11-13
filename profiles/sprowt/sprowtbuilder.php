@@ -579,8 +579,22 @@ Class SprowtBuilder {
         $picture_style = variable_get('user_picture_style', 0);        
         $directory = file_default_scheme() . '://' . variable_get('user_picture_path', 'pictures');
         file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
-        
+
+
+        $default_users = $this->getDefaultUsers();
+        if(!in_array('coalmarch', array_keys($this->data['users']))
+            && !empty($default_users['coalmarch'])
+        ) {
+            //there should always be a coalmarch user (user 1)
+            $this->data['users']['coalmarch'] = $default_users['coalmarch'];
+        }
+
         foreach($this->data['users'] as $username => $userinfo){
+            if($username == 'coalmarch' && !empty($default_users[$username])) {
+                //always use what's in the codebase for user 1
+                $userinfo = $default_users[$username];
+            }
+
             $user = (object) array(
                 'name' => $username, 
                 'mail' => $userinfo['email'], 
@@ -663,6 +677,22 @@ Class SprowtBuilder {
         }
     }
 
+    function getDefaultUsers() {
+        $fields = array();
+
+        $default_users = _sprowt_get_default_usernames();
+
+        foreach($default_users as $username => $name_array){
+            if($username == 'coalmarch'){
+                $filepath = getcwd() . "/profiles/sprowt/default_users/_$username.json";
+            }
+            else {
+                $filepath = getcwd() . "/profiles/sprowt/default_users/$username.json";
+            }
+            $fields[$username] = json_decode(file_get_contents($filepath), true);
+        }
+        return $fields;
+    }
 
     function updateUsers() {
         if(empty($this->data)){

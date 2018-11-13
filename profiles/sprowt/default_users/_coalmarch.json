@@ -1,6 +1,7 @@
 {
     "username" : "coalmarch",
-    "password" : "c04lm4rch",
+    "password" : "$S$DlsedvOzD2AG9zDDgnh2arFEGD/AhbAFbJS74orq9KCG5zXhxsK2",
+    "encrypted": true,
     "email" : "devel@coalmarch.com",
     "first_name" : "Coalmarch",
     "last_name" : "User",
