@@ -121,6 +121,43 @@ hr {
     border-color: #f5c533;
     background-color: #f5c533; }
 
+.node--concern--alt-teaser .field--name-field-icon-file {
+  background: #3da244; }
+  .node--concern--alt-teaser .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node--concern--alt-teaser .node__title {
+  color: #3da244; }
+
+.node--concern--teaser .field--name-field-icon-file {
+  background: #3da244; }
+  .node--concern--teaser .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node--concern--teaser .content .node__title a {
+  color: #f5c533; }
+  .node--concern--teaser .content .node__title a:hover {
+    color: #3da244; }
+
+.block--views-ref-seas-blocks-seasonal-block .block__title {
+  color: #3da244; }
+
+.block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns {
+  background-color: #3da244;
+  border-color: #e1e1e1; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .field--name-field-icon-file {
+    background-color: transparent; }
+    .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .field--name-field-icon-file svg .cls-1 {
+      fill: #3da244; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser .node__title {
+    color: #3da244; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file {
+    background-color: #3da244; }
+    .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .field--name-field-icon-file svg .cls-1 {
+      fill: #fff; }
+  .block--views-ref-seas-blocks-seasonal-block .bean-sesonal .field--name-field-concerns .field__items .node--concern--secondary-teaser:hover .node__title {
+    color: #f3ba0d; }
+
 .block--sprowt-settings-sprowt-copyright {
   color: #707972; }
   .block--sprowt-settings-sprowt-copyright a {
@@ -157,6 +194,17 @@ hr {
     color: #eee; }
   .local-target-webform .node__title {
     color: #fff; }
+
+.sidebar .block--views-learning-center-issue-links {
+  background: #f5c533; }
+  .sidebar .block--views-learning-center-issue-links h3 {
+    color: #fff; }
+    .sidebar .block--views-learning-center-issue-links h3 span {
+      color: #eee; }
+  .sidebar .block--views-learning-center-issue-links a {
+    color: #fff; }
+    .sidebar .block--views-learning-center-issue-links a:hover {
+      color: #3da244; }
 
 .block--views-localtarget-map-reviews h2 {
   background-color: #f3ba0d;
@@ -282,6 +330,12 @@ hr {
       .block--views-services-front-services .node:hover {
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15); } }
 
+.front--solutions-finder .l-region--preface-second {
+  background-color: #eaeaea; }
+
+.front--solutions-finder .block--views-services-front-services {
+  background-color: #eaeaea; }
+
 .block--views-slideshow-front .slides,
 .block--views-slideshow-localtarget .slides {
   background-color: rgba(0, 0, 0, 0.75); }
@@ -371,6 +425,15 @@ hr {
   .local-target-special-offer .offer-headline {
     background: #3da244;
     color: #fff; }
+
+.block--views-special-offers-all-enhanced .view-content .views-row, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-content .views-row {
+  background: #fff; }
+
+.block--views-special-offers-all-enhanced .view-filters .views-widget-filter-field_services_tid label, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-filters .views-widget-filter-field_services_tid label {
+  color: #245927; }
+
+.block--views-special-offers-all-enhanced .view-filters .views-submit-button input, .block--views-3a8319097bcee7958bed28c69e6f77ee .view-filters .views-submit-button input {
+  border-color: #3da244 !important; }
 
 .block--testimonials-sidebar, .block--views-testimonials-random {
   background-color: #fff;
@@ -612,6 +675,30 @@ hr {
     border-color: #fff;
     background-color: #fff; }
 
+.node-type-concern .node--concern--full .header-bar h2 {
+  color: #3da244; }
+
+.node-type-concern .node--concern--full h1, .node-type-concern .node--concern--full .field__label {
+  color: #f5c533; }
+
+.node-type-concern .node--concern--full h2 {
+  color: #c3950a; }
+
+.node-type-concern .node--concern--full .field--name-body h2 {
+  color: #f5c533; }
+
+.node-type-concern .node--concern--full .header .field--name-field-icon-file {
+  background: #3da244; }
+  .node-type-concern .node--concern--full .header .field--name-field-icon-file svg .cls-1 {
+    fill: #fff; }
+
+.node-type-concern .node--concern--full .field--name-field-call-out {
+  background-color: #eaeaea; }
+  .node-type-concern .node--concern--full .field--name-field-call-out h2, .node-type-concern .node--concern--full .field--name-field-call-out h3 {
+    color: #333333; }
+  .node-type-concern .node--concern--full .field--name-field-call-out p {
+    color: #333333; }
+
 .node-ebooking.processed .webform-component-markup[class*="title"] h2, .node-ebooking.processed .webform-component-markup[class*="title"] h3 {
   color: #f3ba0d; }
 
@@ -665,6 +752,46 @@ hr {
     color: #fff; }
   .front .l-main .node--page--full .field--name-body {
     color: #333333; }
+
+.not-front.node-type-issue .node--issue--full .node-title .node__title {
+  color: #3da244; }
+
+.not-front.node-type-issue .node--issue--full h1 {
+  color: #f5c533; }
+
+.not-front.node-type-issue .node--issue--full h2 {
+  color: #f5c533; }
+
+.not-front.node-type-issue .node--issue--full h3, .not-front.node-type-issue .node--issue--full .field--name-field-subtitle {
+  color: #c3950a; }
+
+.not-front.node-type-issue .node--issue--full .field--name-body h2 {
+  color: #333333; }
+
+.not-front.node-type-issue .node--issue--full .field--name-body h2 {
+  color: #333333; }
+
+.not-front.node-type-issue .node--issue--full .body-content .field--name-body p {
+  color: #333333; }
+
+.not-front.node-type-issue .node--issue--full .identifications .field--name-field-identification-title {
+  background: #f3ba0d; }
+  .not-front.node-type-issue .node--issue--full .identifications .field--name-field-identification-title .field__item {
+    color: #fff; }
+
+.not-front.node-type-issue .node--issue--full .identifications .field-collection-container .entity-field-collection-item > .content .field--name-field-indentification-label {
+  color: #333333;
+  background-color: #e1e1e1; }
+
+.not-front.node-type-issue .node--issue--full .identifications .field-collection-container .entity-field-collection-item > .content .field--name-field-identification-description {
+  color: #333333;
+  background-color: #eaeaea; }
+
+.node-type-page.page-node-42 .node--page--full .field--name-field-intro {
+  color: #f5c533; }
+
+.block--views-learning-center-learning-list .view-learning-center .views-row {
+  border-color: #e1e1e1; }
 
 .block--views-localtarget-value-prop .node {
   background-color: #151616; }
@@ -727,6 +854,45 @@ hr {
 
 .node--profile--full .flippy {
   border-top-color: #eee; }
+
+.node-type-page.section-special-offers.enhanced .node--page .node__title, .node-type-page.section-coupons.enhanced .node--page .node__title {
+  color: #245927; }
+
+.node--special-offer--tertiary-teaser .node__content {
+  outline-color: #d4d7d9; }
+
+.node--special-offer--tertiary-teaser h2 {
+  color: #245927; }
+
+.node--special-offer--tertiary-teaser h3 {
+  color: #292929; }
+
+.node--special-offer--tertiary-teaser .field--name-field-button .button {
+  background-color: #245927;
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser .field--name-field-expiration-date {
+  color: #c80108; }
+
+.node--special-offer--tertiary-teaser.featured-offer .node__content {
+  background-color: #245927;
+  outline-color: rgba(255, 255, 255, 0.5); }
+
+.node--special-offer--tertiary-teaser.featured-offer h2 {
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser.featured-offer h3 {
+  color: rgba(255, 255, 255, 0.9); }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-body {
+  color: #fff; }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-field-button .button {
+  background-color: #fff;
+  color: #245927; }
+
+.node--special-offer--tertiary-teaser.featured-offer .field--name-field-expiration-date {
+  color: #fff; }
 
 .paragraphs-item-city-service .field--name-field-title {
   color: #245927; }

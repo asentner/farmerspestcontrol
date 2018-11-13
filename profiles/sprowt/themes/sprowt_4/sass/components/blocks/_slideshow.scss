@@ -96,3 +96,21 @@
 		}
 	}
 }
+
+.front--solutions-finder{
+	.block--views-slideshow-front, .block--views-slideshow-localtarget {
+		.slide-image{
+			min-height: 335px;
+		}
+		@include breakpoint($tab){
+			.slide-image{
+				min-height: 350px;
+			}
+		}
+		@include breakpoint($desk){
+			.slide-image{
+				min-height: 550px;
+			}
+		}
+	}
+}

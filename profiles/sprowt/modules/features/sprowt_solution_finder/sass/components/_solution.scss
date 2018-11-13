@@ -7,6 +7,12 @@
 }
 
 body.node-type-solution {
+
+    .scm-modals {
+        &.hidden {
+            display: none;
+        }
+    }
     &.admin-menu.adminimal-menu::before {
         background-color: #333;
         min-height: 60px;

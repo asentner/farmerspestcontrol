@@ -1,0 +1,58 @@
+//Enhanced Special Offers (default 11/2018)
+
+//special offers page
+.node-type-page.section-special-offers.enhanced, .node-type-page.section-coupons.enhanced{
+  .node--page{
+    .node__title{
+      color: palette(primary, dark);
+    }
+  }
+}
+
+//actual special offer
+.node--special-offer--tertiary-teaser{
+  .node__content{
+    outline-color: palette(neutral, iron);
+  }
+  h2{
+    color: palette(primary, dark);
+  }
+  h3{
+    color: palette(neutral, mine-shaft);
+  }
+  .field--name-field-button{
+    .button{
+      background-color: palette(primary, dark);
+      color: palette(white, pure);
+    }
+  }
+  .field--name-field-expiration-date{
+    color: #c80108;
+  }
+}
+
+//featured offer
+.node--special-offer--tertiary-teaser.featured-offer{
+  .node__content{
+    background-color: palette(primary, dark);
+    outline-color: rgba(palette(white, pure), .5);
+  }
+  h2{
+    color: palette(white, pure);
+  }
+  h3{
+    color: rgba(palette(white, pure), .9);
+  }
+  .field--name-body{
+    color: palette(white, pure);
+  }
+  .field--name-field-button{
+    .button{
+      background-color: palette(white, pure);
+      color: palette(primary, dark);
+    }
+  }
+  .field--name-field-expiration-date{
+    color: palette(white, pure);
+  }
+}

@@ -17,11 +17,6 @@ function sprowt_contexts_context_default_contexts() {
   $context->description = 'Service page specific sidebar';
   $context->tag = 'Sidebar';
   $context->conditions = array(
-    'context' => array(
-      'values' => array(
-        '~special_offers_page' => '~special_offers_page',
-      ),
-    ),
     'node' => array(
       'values' => array(
         'service' => 'service',
@@ -34,11 +29,11 @@ function sprowt_contexts_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-special_offers-sidebar_service' => array(
+        'views-495a0e2c2c156e9bd9ea47b5a8089791' => array(
           'module' => 'views',
-          'delta' => 'special_offers-sidebar_service',
+          'delta' => '495a0e2c2c156e9bd9ea47b5a8089791',
           'region' => 'sidebar',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
       ),
     ),
@@ -55,14 +50,9 @@ function sprowt_contexts_context_default_contexts() {
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'special_offers';
-  $context->description = 'Special offers sidebar block';
+  $context->description = 'Special offers random sidebar block';
   $context->tag = 'Sidebar';
   $context->conditions = array(
-    'context' => array(
-      'values' => array(
-        '~special_offers_page' => '~special_offers_page',
-      ),
-    ),
     'node' => array(
       'values' => array(
         'package' => 'package',
@@ -77,17 +67,18 @@ function sprowt_contexts_context_default_contexts() {
       'values' => array(
         '~<front>' => '~<front>',
         '~special-offers' => '~special-offers',
+        '~media-library' => '~media-library',
       ),
     ),
   );
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-special_offers-sidebar' => array(
+        'views-7326d8f601c5b501332596fab1886280' => array(
           'module' => 'views',
-          'delta' => 'special_offers-sidebar',
+          'delta' => '7326d8f601c5b501332596fab1886280',
           'region' => 'sidebar',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
       ),
     ),
@@ -97,7 +88,7 @@ function sprowt_contexts_context_default_contexts() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Sidebar');
-  t('Special offers sidebar block');
+  t('Special offers random sidebar block');
   $export['special_offers'] = $context;
 
   $context = new stdClass();

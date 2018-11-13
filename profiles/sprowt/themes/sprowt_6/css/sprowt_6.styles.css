@@ -2587,6 +2587,9 @@ input[type=text], input[type=email], input[type=password], textarea, select {
       .form-row .fieldset-wrapper > .form-item + .form-item {
         margin-left: 1em; } }
 
+.webform-progressbar {
+  width: auto; }
+
 .block--list .field--name-field-image img, .block--views-affiliates-list img, .block--bean-reviews-call-out-front .content .field--name-field-images > .field__items > .field__item, .local-target-benefits .field--name-field-image a > img,
 .local-target-benefits .field--name-field-icon a > img, .block--logo-block-logo .block__content a img, .block--views-team-list .field--name-field-image img, .front .block--views-services-all .view-content .views-row .node--service--teaser .field--name-field-icon, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .field--name-field-icon, .node--service--quinary-teaser .field--name-field-icon, .block--views-city-pages-benefits .field--name-field-image a > img,
 .block--views-city-pages-benefits .field--name-field-icon a > img {

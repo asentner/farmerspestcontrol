@@ -520,9 +520,14 @@ function sprowt_content_types_field_group_info() {
       1 => 'field_button',
       2 => 'field_expiration_date',
       3 => 'field_image',
-      4 => 'field_package',
-      5 => 'field_services',
-      6 => 'title',
+      4 => 'field_offer_headline',
+      5 => 'field_offer_subheadline',
+      6 => 'field_package',
+      7 => 'field_services',
+      8 => 'field_disclaimer',
+      9 => 'field_featured_icon',
+      10 => 'field_featured_offer',
+      11 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -596,7 +601,7 @@ function sprowt_content_types_field_group_info() {
   $field_groups['group_content|node|webform|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_enhanced|node|special_offer|form';
   $field_group->group_name = 'group_enhanced';

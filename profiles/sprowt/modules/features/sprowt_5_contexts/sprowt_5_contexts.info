@@ -1,0 +1,10 @@
+name = Sprowt 5 Contexts
+core = 7.x
+package = Sprowt 5 Features
+features[context][] = front_sprowt_5
+features[ctools][] = context:context:3
+features[features_api][] = api:2
+features_exclude[dependencies][block] = block
+features_exclude[dependencies][context] = context
+features_exclude[dependencies][ctools] = ctools
+features_exclude[dependencies][views] = views

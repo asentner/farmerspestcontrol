@@ -1,0 +1,45 @@
+//full concern page
+.node-type-concern{
+  .node--concern--full{
+    .header-bar{
+      h2{
+        color: palette(primary, base);
+      }
+    }
+    h1, .field__label{
+      color: palette(secondary, base);
+    }
+    h2{
+      color: palette(secondary, base);
+    }
+    .field--name-body{
+      h2{
+        color: palette(secondary, base);
+      }
+    }
+    .header{
+      .field--name-field-icon-file{
+        background: palette(primary, base);
+        svg{
+          .cls-1{
+            fill: palette(white, pure);
+          }
+        }
+      }
+      .header-content{
+        // .field--name-field-intro{
+        //   color: palette(secondary, light);
+        // }
+      }
+    }
+    .field--name-field-call-out{
+      background-color: palette(neutral, gallery);
+      h2, h3{
+        color: palette(black, base);
+      }
+      p{
+        color: palette(black, base);
+      }
+    }
+  }
+}

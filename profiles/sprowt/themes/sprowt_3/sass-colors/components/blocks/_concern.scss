@@ -1,0 +1,80 @@
+//learning center cta bean reviews
+.node--concern--alt-teaser{
+  .field--name-field-icon-file{
+    background: palette(primary, base);
+    svg{
+      .cls-1{
+        fill: palette(white, pure);
+      }
+    }
+  }
+  .node__title{
+    color: palette(primary, base);
+  }
+}
+
+//learning center concern listing
+.node--concern--teaser{
+  .field--name-field-icon-file{
+    background: palette(primary, base);
+    svg{
+      .cls-1{
+        fill: palette(white, pure);
+      }
+    }
+  }
+  .content{
+    .node__title{
+      a{
+        color: palette(black, base);
+        &:hover{
+          color: palette(primary, base);
+        }
+      }
+    }
+    // .field--name-body{
+    //   color: palette(secondary, light);
+    // }
+  }
+}
+
+//seasonal block concern listing
+.block--views-ref-seas-blocks-seasonal-block{
+  .block__title{
+    color: palette(primary, base);
+  }
+  .bean-sesonal{
+    .field--name-field-concerns{
+      background-color: palette(primary, base);
+      border-color: palette(neutral, mercury);
+      .field__items{
+        .node--concern--secondary-teaser{
+          .field--name-field-icon-file{
+            background-color: transparent;
+            svg{
+              .cls-1{
+                fill: palette(primary, base);
+              }
+            }
+          }
+          .node__title{
+            color: palette(primary, base);
+          }
+          &:hover{
+            .field--name-field-icon-file{
+              background-color: palette(primary, base);
+              svg{
+                .cls-1{
+                  fill: palette(white, pure);
+                }
+              }
+            }
+            .node__title{
+              color: palette(black, base);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,165 @@
+//Enhanced Special Offers (default 11/2018)
+
+
+//special offers page
+.node-type-page.section-special-offers.enhanced, .node-type-page.section-coupons.enhanced{
+  .l-main{
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  .node--page{
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    .node__title{
+      font-size: 30px;
+      font-weight: 700;
+      text-transform: capitalize;
+      line-height: 1.1;
+      letter-spacing: .4px;
+    }
+    .field--name-field-subtitle{
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    .field--name-body{
+      margin-bottom: 45px;
+    }
+  }
+  @include breakpoint($tab){
+    .l-main{
+      max-width: 1250px;
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+    .l-content{
+      max-width: 1250px;
+    }
+    .node--page{
+      .node__title{
+        font-size: 36px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .l-main{
+      padding: 0 5px;
+      margin-top: 3em;
+      margin-bottom: 3em;
+    }
+    .node--page{
+      .node__title{
+        font-size: 42px;
+      }
+    }
+  }
+}
+
+//actual special offer
+.node--special-offer--tertiary-teaser{
+  box-shadow: 0px 5px 17px 3px rgba(51, 51, 51, 0.2);
+  position: relative;
+  .offer-link{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+  .field--name-field-featured-icon{
+    position: absolute;
+    top: -40px;
+    right: -20px;
+  }
+  .node__content{
+    padding: 55px 35px 45px;
+    outline: 5px dashed;
+    outline-offset: -15px;
+    @include flexbox;
+    flex-direction: column;
+    text-align: center;
+  }
+  h2{
+    font-size: 47px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px;
+  }
+  h3{
+    overflow: visible;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.24;
+    letter-spacing: 0.1px;
+    margin: 0 auto 15px;
+  }
+  .field--name-body{
+    margin-bottom: 15px;
+  }
+  .field--name-field-button{
+    width: 100%;
+    max-width: 210px;
+    margin: 0 auto 15px;
+    text-align: center;
+    .button{
+      padding: 13px 40px;
+    }
+  }
+  .logo{
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    img{
+      max-width: 210px;
+      height: auto;
+      width: 100%;
+    }
+  }
+  .field--name-field-expiration-date{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.2px;
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+  }
+  @include breakpoint($tab){
+
+  }
+  @include breakpoint($desk){
+    h2{
+      font-size: 58px;
+    }
+    h3{
+      font-size: 21px;
+    }
+  }
+}
+
+//sidebar special offer adjustments
+.l-region--sidebar{
+  .block--views-7326d8f601c5b501332596fab1886280, .block--views-495a0e2c2c156e9bd9ea47b5a8089791{
+    .node--special-offer--tertiary-teaser{
+      h2{
+        font-size: 36px;
+      }
+      .field--name-body{
+        display: none;
+      }
+      .field--name-field-expiration-date{
+        font-size: 14px;
+      }
+      @include breakpoint($desk){
+        h2{
+          font-size: 45px;
+        }
+      }
+    }
+  }
+}

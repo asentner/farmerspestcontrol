@@ -52,3 +52,17 @@
       }
     }
 }
+
+
+//when solutions finder on
+.front--solutions-finder, .ltp--solutions-finder{
+  .block--views-benefits-front, .local-target-benefits{
+    padding: 50px 20px 40px;
+    @include breakpoint($tab){
+      padding: 160px 20px 40px;
+    }
+    @include breakpoint($desk){
+      padding: 160px 20px 40px;
+    }
+  }
+}

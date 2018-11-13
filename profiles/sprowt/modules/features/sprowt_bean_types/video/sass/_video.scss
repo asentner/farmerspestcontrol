@@ -1,6 +1,6 @@
 .bean-video-bean{
   position: relative;
-  .field--name-field-video-title{
+  .field--name-field-video-name{
     color: #fff;
     width: 75%;
     text-align: center;
@@ -30,7 +30,7 @@
     }
   }
   @include breakpoint($tab){
-    .field--name-field-video-title{
+    .field--name-field-video-name{
       font-size: 1.875em;
       line-height: 1.25;
     }
@@ -41,7 +41,7 @@
     }
   }
   @include breakpoint($desk){
-    .field--name-field-video-title{
+    .field--name-field-video-name{
       width: auto;
       font-size: 2.25em;
       top: 43%;

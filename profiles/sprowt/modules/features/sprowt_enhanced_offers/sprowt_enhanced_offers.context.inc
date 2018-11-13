@@ -20,7 +20,7 @@ function sprowt_enhanced_offers_context_default_contexts() {
     'path' => array(
       'values' => array(
         'special-offers' => 'special-offers',
-        'node/32' => 'node/32',
+        'node/29' => 'node/29',
       ),
     ),
   );

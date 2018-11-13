@@ -1,4 +1,4 @@
-.node-type-page.section-special-offers.enhanced{
+.node-type-page.section-special-offers.enhanced, .node-type-page.section-coupons.enhanced{
   .l-main{
     margin-top: 1.5em;
     margin-bottom: 1.5em;
@@ -191,6 +191,9 @@
     max-width: 210px;
     margin: 0 auto 15px;
     text-align: center;
+    .button{
+      padding: 13px 30px;
+    }
   }
   .logo{
     @include flexbox;
@@ -221,6 +224,49 @@
     }
     h3{
       font-size: 21px;
+    }
+  }
+}
+
+.block--views-special-offers-front-enhanced, .block--views-4af2dddc855c0a4c641c4e54be140c8d{
+  max-width: $content;
+  margin: 0 auto;
+  padding: 35px 0;
+  .block__title{
+    display: none;
+  }
+  .view{
+    @include flexbox;
+    flex-direction: column;
+  }
+  .view-content{
+    @include flexbox;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .views-row{
+      margin: 0 auto 20px;
+    }
+  }
+  @include breakpoint($tab){
+    .view-content{
+      flex-direction: row;
+      margin: 0 30px;
+      .views-row{
+        flex: 1 0 50%;
+        margin: 0 12px 20px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .view-content{
+      margin: 0;
+      justify-content: flex-start;
+      .views-row{
+        flex: 1 0 31.33%;
+        max-width: 389px;
+      }
     }
   }
 }

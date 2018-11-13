@@ -1,0 +1,139 @@
+//Enhanced Special Offers (default 11/2018)
+
+
+//full page listing view block
+.block--views-special-offers-all-enhanced, .block--views-3a8319097bcee7958bed28c69e6f77ee{
+  .block__title{
+    display: none;
+  }
+  .view{
+    @include flexbox;
+    flex-direction: column;
+  }
+  .view-content{
+    @include flexbox;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .views-row{
+      margin: 0 auto 20px;
+    }
+  }
+  @include breakpoint($tab){
+    .view-content{
+      flex-direction: row;
+      margin: 0 30px;
+      .views-row{
+        flex: 1 0 50%;
+        margin: 0 12px 20px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .view-content{
+      margin: 0;
+      justify-content: flex-start;
+      .views-row{
+        flex: 1 0 31.33%;
+        max-width: 389px;
+      }
+    }
+  }
+}
+
+//full page view block filtering
+.block--views-special-offers-all-enhanced, .block--views-3a8319097bcee7958bed28c69e6f77ee{
+  .view-filters{
+    margin-bottom: 60px;
+    .views-exposed-widgets{
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .views-widget-filter-field_services_tid{
+      @include flexbox;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      label{
+        order: 1;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.5;
+        padding: 5px 0;
+        padding-right: 7px;
+      }
+      .views-widget{
+        order: 3;
+        padding: 5px 0;
+        select{
+          border-radius: 0 !important;
+          border: solid 3px;
+          font-size: 16px;
+          font-weight: 600;
+          height: 45px;
+          width: 275px;
+        }
+      }
+      .description{
+        order: 2;
+        font-size: 18px;
+        line-height: 1.5;
+        padding: 5px 0;
+        padding-right: 20px;
+      }
+    }
+    .views-submit-button{
+      input{
+        margin: 0;
+        padding: 10px 30px;
+      }
+    }
+  }
+}
+
+//front page block
+.block--views-special-offers-front-enhanced, .block--views-4af2dddc855c0a4c641c4e54be140c8d{
+  max-width: $content;
+  margin: 0 auto;
+  padding: 35px 0;
+  .block__title{
+    display: none;
+  }
+  .view{
+    @include flexbox;
+    flex-direction: column;
+  }
+  .view-content{
+    @include flexbox;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .views-row{
+      margin: 0 auto 20px;
+    }
+  }
+  @include breakpoint($tab){
+    .view-content{
+      flex-direction: row;
+      margin: 0 30px;
+      .views-row{
+        flex: 1 0 50%;
+        margin: 0 12px 20px;
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .view-content{
+      margin: 0;
+      justify-content: flex-start;
+      .views-row{
+        flex: 1 0 31.33%;
+        max-width: 389px;
+      }
+    }
+  }
+}

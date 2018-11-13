@@ -1,0 +1,17 @@
+.sidebar{
+  .block--views-learning-center-issue-links{
+    background: palette(black, base);
+    h3{
+      color: palette(white, pure);
+      span{
+        color: palette(white, base);
+      }
+    }
+    a{
+      color: palette(white, pure);
+      &:hover{
+        color: palette(primary, base);
+      }
+    }
+  }
+}

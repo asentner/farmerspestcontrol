@@ -1,0 +1,10 @@
+name = Sprowt 3 Contexts
+core = 7.x
+package = Sprowt 3 Features
+dependencies[] = block
+dependencies[] = context
+dependencies[] = ctools
+dependencies[] = views
+features[context][] = front_sprowt_3
+features[ctools][] = context:context:3
+features[features_api][] = api:2

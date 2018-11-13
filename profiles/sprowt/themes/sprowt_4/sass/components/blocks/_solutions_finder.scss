@@ -1,0 +1,10 @@
+.front--solutions-finder{
+  .block--sprowt-solution-finder-solution-finder{
+    @include breakpoint($tab){
+      margin-top: -75px;
+    }
+    @include breakpoint($desk){
+      margin-top: -150px;
+    }
+  }
+}

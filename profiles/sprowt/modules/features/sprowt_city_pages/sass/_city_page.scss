@@ -68,6 +68,21 @@
 	}
 }
 
+//solutions finder spacing
+.city--solutions-finder{
+  .block--sprowt-solution-finder-solution-finder{
+    @include breakpoint($tab){
+      margin-top: -115px;
+    }
+    @include breakpoint(1000px){
+      margin-top: -11%;
+    }
+    @include breakpoint($desk){
+      margin-top: -150px;
+    }
+  }
+}
+
 //Anchor link block
 .node--city-page--alt-teaser{
   padding: 30px 20px;
