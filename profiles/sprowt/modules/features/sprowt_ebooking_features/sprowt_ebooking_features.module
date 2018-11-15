@@ -102,10 +102,22 @@ function sprowt_ebooking_features_form_alter(&$form, &$form_state, $form_id) {
  * @param $form_state
  */
 function _sprowt_ebooking_features_form_submit($form, &$form_state) {
+    if(empty($form_state['storage'])) {
+        $form_state['storage'] = [];
+    }
+
+    $temp_storage = !empty($form_state['storage']['submitted']) ? $form_state['storage']['submitted'] : [];
+
+    $form_state['values']['submitted'] = array_merge($temp_storage, $form_state['values']['submitted']);
+    $form_state['storage']['submitted'] = $form_state['values']['submitted'];
+
     $submit_op = !empty($form['actions']['submit']['#value']) ? $form['actions']['submit']['#value'] : t('Submit');
     $token = _sprowt_ebooking_features_get_item($form_state['values'], 'payment');
     //Testing for payment token. If it exists then payment went through. So go ahead and submit.
     if(!empty($token) && preg_match('/tok_.*\:.*/', $token)) {
+        if(!empty($form_state["#conditional_values"])) {
+            $form_state['values']['submitted'] = array_merge($form_state["#conditional_values"], $form_state['values']['submitted']);
+        }
         $form_state['values']['op'] = $submit_op;
     }
 }
