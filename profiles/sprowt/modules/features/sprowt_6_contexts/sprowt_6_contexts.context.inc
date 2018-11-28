@@ -19,7 +19,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/39' => 'node/32',
+        'node/39' => 'node/37',
       ),
     ),
   );
@@ -500,7 +500,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/31' => 'node/24',
+        'node/31' => 'node/29',
       ),
     ),
   );
@@ -527,54 +527,6 @@ function sprowt_6_contexts_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'package_comparison';
-  $context->description = 'Package Comparison feature block placement';
-  $context->tag = 'Page';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'package_comparison' => 'package_comparison',
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-package_comparison-hero' => array(
-          'module' => 'views',
-          'delta' => 'package_comparison-hero',
-          'region' => 'preface_first',
-          'weight' => '-10',
-        ),
-        'views-a7f3879ed631c4af4c738158eff61094' => array(
-          'module' => 'views',
-          'delta' => 'a7f3879ed631c4af4c738158eff61094',
-          'region' => 'content',
-          'weight' => '2',
-        ),
-        'views-package_comparison-cta' => array(
-          'module' => 'views',
-          'delta' => 'package_comparison-cta',
-          'region' => 'content',
-          'weight' => '3',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 0;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Package Comparison feature block placement');
-  t('Page');
-  $export['package_comparison'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'service';
   $context->description = 'Service node block placement';
   $context->tag = 'Page';
@@ -597,7 +549,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/32' => 'node/25',
+        'node/32' => 'node/30',
       ),
     ),
   );
@@ -652,9 +604,9 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'sidebar',
           'weight' => '-7',
         ),
-        'webform-client-block-54' => array(
+        'webform-client-block-3' => array(
           'module' => 'webform',
-          'delta' => 'client-block-54',
+          'delta' => 'client-block-3',
           'region' => 'sidebar',
           'weight' => '-6',
         ),
@@ -762,7 +714,7 @@ function sprowt_6_contexts_context_default_contexts() {
       'values' => array(
         '~<front>' => '~<front>',
         '~learning-center' => '~learning-center',
-        '~media-library' => '~media-library',
+        '~special-offers' => '~special-offers',
       ),
     ),
   );
@@ -787,7 +739,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $export['special_offers'] = $context;
 
   $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->disabled = TRUE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'special_offers_list';
   $context->description = 'Special offers listing page';
@@ -795,7 +747,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/34' => 'node/27',
+        'node/34' => 'node/32',
       ),
     ),
   );
@@ -843,7 +795,7 @@ function sprowt_6_contexts_context_default_contexts() {
       'values' => array(
         '~<front>' => '~<front>',
         '~learning-center' => '~learning-center',
-        '~media-library' => '~media-library',
+        '~special-offers' => '~special-offers',
       ),
     ),
   );
