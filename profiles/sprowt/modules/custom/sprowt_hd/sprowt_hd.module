@@ -136,12 +136,16 @@ function sprowt_hd_menu()
 function sprowt_hd_form_alter(&$form, &$form_state, $form_id)
 {
     if (strpos($form_id, 'webform_client_form') !== false) {
-        if ($node = menu_get_object()) {
+        if (!empty($form['#node'])) {
+            $node = $form['#node'];
             $form_reactor_data = db_query('SELECT * FROM sprowt_hd_webform WHERE nid = :nid', array(
                 ':nid' => $node->nid,
             ))->fetchAssoc();
 
             if ($form_reactor_data) {
+
+                $form_reactor_data['customFields'] = _sprowt_hd_get_custom_fields($node->nid);
+
                 $form_state['webform']['form_reactor'] = $form_reactor_data;
                 if ($form_reactor_data['form_reactor_enabled'] && !empty($form_reactor_data['form_reactor_id'])) {
                     $form['submitted']['ctm_sid'] = array(
@@ -203,6 +207,13 @@ function _sprowt_hd_submit($form, &$form_state)
             'visitor_sid' => $values['ctm_sid'],
         );
 
+        foreach($form_reactor_data['customFields'] as $customField) {
+            if(!empty($values[$customField['field']])) {
+                $ctmData['custom_' . $customField['fieldId']] = $values[$customField['field']];
+            }
+        }
+
+
         // Compatibility with older Sprowt sites
         if (function_exists('sprowt_settings_get_phone_number')) {
             $ctmData['callback_number'] = sprowt_settings_get_phone_number();
@@ -210,6 +221,10 @@ function _sprowt_hd_submit($form, &$form_state)
         elseif (function_exists('coal_admin_get_phone_number')) {
             $ctmData['callback_number'] = coal_admin_get_phone_number();
         }
+
+
+
+
 
         // Convert the payload to query
         $payload = http_build_query($ctmData, '', '&');
@@ -269,4 +284,26 @@ function _sprowt_hd_extract_values_using_webform_components($components, $raw_va
     }
 
     return $values;
+}
+
+function _sprowt_hd_get_custom_fields($nid) {
+    $records = db_query("
+      SELECT * 
+      FROM {sprowt_hd_webform_custom_fields}
+      WHERE nid = :nid
+    ", [
+        ':nid' => $nid
+    ])->fetchAll(PDO::FETCH_ASSOC);
+
+    $fields = [];
+    if(!empty($records)) {
+        foreach ($records as $record) {
+            $fields[] = [
+                'fieldId' => trim($record['field_id']),
+                'field' => $record['webform_field']
+            ];
+        }
+    }
+
+    return $fields;
 }

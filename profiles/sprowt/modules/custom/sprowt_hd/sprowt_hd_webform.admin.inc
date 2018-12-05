@@ -119,11 +119,78 @@ function sprowt_hd_webform_form_settings($form, $form_state, $node)
         '#default_value' => (array_key_exists('form_reactor_phone_field', $formData)) ? $formData['form_reactor_phone_field'] : null,
     );
 
+    $customFields = _sprowt_hd_get_custom_fields($node->nid);
+
+    $form['form_reactor']['custom_fields_wrap'] = [
+        '#type' => 'fieldset',
+        '#title' => 'Custom Fields',
+        'custom_fields' => [
+            '#type' => 'hidden',
+            '#attributes' => [
+                'id' => 'customFields'
+            ],
+            '#default_value' => json_encode($customFields)
+        ],
+        'custom_fields_display' => [
+            '#type' => 'markup',
+            '#markup' => '<div id="customFieldsDisplay"></div>'
+        ],
+        'add_custom_field' => [
+            '#type' => 'button',
+            '#value' => 'Add Custom Field',
+            '#attributes' => [
+                'id' => 'addCustomField'
+            ]
+        ]
+    ];
+
+    $form['custom_field_template'] = [
+        '#type' => 'fieldset',
+        '#collapsible' => false,
+        '#prefix' => '<script type="javascript/template" id="customFieldTemplate">',
+        '#suffix' => '</script>',
+        '#attributes' => [
+            'class' => ['custom-field-fieldset']
+        ],
+        'fieldId' => [
+            '#type' => 'textfield',
+            '#title' => 'Custom Field ID',
+            '#description' => 'Custom field id set in the Form Reactor settings. Everything after the hash (e.g. \'field_123456\')',
+            '#attributes' => [
+                'name' => '',
+                'class' => ['field-id']
+            ]
+        ],
+        'customFieldField' => [
+            '#type' => 'select',
+            '#title' => 'Webform Field',
+            '#description' => 'Select the webform component you want to use to fill this field',
+            '#options' => array_merge(
+                [
+                    '' => '- Select -'
+                ], $options
+            ),
+            '#attributes' => [
+                'name' => '',
+                'class' => ['field-field']
+            ]
+        ],
+        'removeCustomField' => [
+            '#type' => 'button',
+            '#value' => 'Remove',
+            '#attributes' => [
+                'class' => ['field-remove']
+            ]
+        ]
+    ];
+
     $form['submit'] = array(
         '#weight' => 100,
         '#type' => 'submit',
         '#value' => ('Save Configuration'),
     );
+
+    $form['#attached']['js'][] = drupal_get_path('module', 'sprowt_hd') . '/js/webform_form.js';
 
     $form['#validate'][] = 'sprowt_hd_webform_form_settings_validate';
     $form['#limit_validation_errors'] = array();
@@ -159,4 +226,26 @@ function sprowt_hd_webform_form_settings_submit($form, &$form_state)
 
     db_insert('sprowt_hd_webform')->fields($fields)->execute();
     drupal_set_message('Form Reactor information has been saved!');
+
+    if(!empty($form_state["values"]["custom_fields"])) {
+        $fields = json_decode($form_state["values"]["custom_fields"], true);
+        if(!empty($fields)) {
+            _sprowt_hd_add_custom_fields($form_state['values']['nid'], $fields);
+        }
+    }
+
+}
+
+function _sprowt_hd_add_custom_fields($nid, $fields) {
+    db_delete('sprowt_hd_webform_custom_fields')->condition('nid', $nid)->execute();
+    foreach($fields as $field) {
+        $record = [
+            'nid' => $nid,
+            'field_id' => trim($field['fieldId']),
+            'webform_field' => $field['field']
+        ];
+        if(!empty($record['field_id']) && !empty($record['webform_field'])) {
+            drupal_write_record('sprowt_hd_webform_custom_fields', $record);
+        }
+    }
 }

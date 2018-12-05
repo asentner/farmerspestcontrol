@@ -129,7 +129,7 @@ function sprowt_settings_admin()
         '#default_value' => variable_get('sprowt_settings_map_embed'),
         '#description' => t("The embed url for the service area map"),
     );
-    
+
     $form['sprowt_ctm'] = array(
         '#type' => 'fieldset',
         '#title' => t('Call Tracking Metrics Integration'),
@@ -138,32 +138,43 @@ function sprowt_settings_admin()
         '#group' => 'sprowt_settings'
     );
 
-    $form['sprowt_ctm']['sprowt_ctm_account_id'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Account ID'),
-        '#default_value' => variable_get('sprowt_ctm_account_id'),
-        '#size' => 10,
-        '#maxlength' => 6,
-        '#description' => t("CTM Account ID for the customer. Entering the account number will automatically generate the tracking code for you. Leave blank to disable tracking code."),
-    );
+    if(!module_exists('ctm_api')) {
 
-    $form['sprowt_ctm']['sprowt_ctm_access_key'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Access Key'),
-        '#default_value' => variable_get('sprowt_ctm_access_key'),
-        '#size' => 60,
-        '#maxlength' => 128,
-        '#description' => t("API credentials required for Sprowt HD to work. The access key can be found under account settings in CTM."),
-    );
 
-    $form['sprowt_ctm']['sprowt_ctm_secret_key'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Secret Key'),
-        '#default_value' => variable_get('sprowt_ctm_secret_key'),
-        '#size' => 60,
-        '#maxlength' => 128,
-        '#description' => t("API credentials required for Sprowt HD to work. The secret key can be found under account settings in CTM."),
-    );
+        $form['sprowt_ctm']['sprowt_ctm_account_id'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Account ID'),
+            '#default_value' => variable_get('sprowt_ctm_account_id'),
+            '#size' => 10,
+            '#maxlength' => 6,
+            '#description' => t("CTM Account ID for the customer. Entering the account number will automatically generate the tracking code for you. Leave blank to disable tracking code."),
+        );
+
+        $form['sprowt_ctm']['sprowt_ctm_access_key'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Access Key'),
+            '#default_value' => variable_get('sprowt_ctm_access_key'),
+            '#size' => 60,
+            '#maxlength' => 128,
+            '#description' => t("API credentials required for Sprowt HD to work. The access key can be found under account settings in CTM."),
+        );
+
+        $form['sprowt_ctm']['sprowt_ctm_secret_key'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Secret Key'),
+            '#default_value' => variable_get('sprowt_ctm_secret_key'),
+            '#size' => 60,
+            '#maxlength' => 128,
+            '#description' => t("API credentials required for Sprowt HD to work. The secret key can be found under account settings in CTM."),
+        );
+    }
+    else {
+        $form['sprowt_ctm']['ctm_setup_link'] = array(
+            '#type' => 'markup',
+            '#title' => t('CTM API Module Installed'),
+            '#markup' => '<p>Go <a href="/admin/config/services/ctm-settings">here</a> to set up.</p>'
+        );
+    }
 
     $form['company_info']['sprowt_settings_contact'] = array(
         '#type' => 'fieldset',
@@ -436,7 +447,7 @@ function _sprowt_settings_config_validate(&$form, &$form_state) {
     }
     
     $customer_login = $values['sprowt_customer_login'];
-    if(!empty($customer_login) && !drupal_valid_path($customer_login)) {
+    if(!drupal_valid_path($customer_login)) {
         $el = &$form['company_info']['sprowt_customer_login'];
         form_error($el, 'Customer login must be a valid url or drupal path.');
     }
