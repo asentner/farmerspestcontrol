@@ -1,15 +1,15 @@
 <?php
 
-/** 
+/**
  * @file
  * Authorize.Net Webform Module Installation File
  *
  * Provide the required installation/uninstallation functions
  * for the Authorize.Net Webform module.
  */
- 
+
 /**
- * Implementation of hook_schema().
+ * Implements hook_schema().
  */
 function authorizenetwebform_schema() {
   $schema['authorizenetwebform'] = array(
@@ -38,14 +38,13 @@ function authorizenetwebform_schema() {
 }
 
 /**
- * Implementation of hook_uninstall().
+ * Implements hook_uninstall().
  */
 function authorizenetwebform_uninstall() {
-  // Remove tables.
-  drupal_uninstall_schema('authorizenetwebform');
-
   variable_del("authorizenetwebform_login");
   variable_del("authorizenetwebform_transaction");
   variable_del("authorizenetwebform_custom_fields");
   variable_del("authorizenetwebform_url");
+  variable_del('authorizenetwebform_acceptjs');
+  variable_del('authorizenetwebform_client_key');
 }

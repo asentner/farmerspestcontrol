@@ -1,14 +1,12 @@
+name = Authorize.Net Webform Payments
+description = Allows any Webform to require a Credit Card payment via Authorize.net.
 core = 7.x
-name = Authorize.Net Payment Webform
-description = Extends the Webform module to allow Webforms to be paid for using Authorize.Net
-package = Integration
 configure = admin/config/content/authorizenetwebform
 
 dependencies[] = webform
 
-; Information added by Drupal.org packaging script on 2016-06-01
-version = "7.x-1.0"
+; Information added by Drupal.org packaging script on 2018-11-25
+version = "7.x-1.1"
 core = "7.x"
 project = "authorizenetwebform"
-datestamp = "1464802240"
-
+datestamp = "1543117984"

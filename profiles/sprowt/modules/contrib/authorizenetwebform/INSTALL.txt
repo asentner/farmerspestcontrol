@@ -1,6 +1,15 @@
 Requirements
 ------------
-Drupal 6.x, Authorize.Net account, PHP + CURL enabled
+Authorize.Net account, PHP + CURL enabled
+
+
+Security
+--------
+This module should always be used with an SSL certificate. Any time you are
+collecting credit card data or other sensitive information, you should always
+transfer the sensitive data securely. Starting with version 2.0 of this module,
+it will no longer work without HTTPS / SSL.
+
 
 Installation
 ------------
@@ -10,11 +19,11 @@ Installation
 
 3. Go to "Administer" -> "site configuration" -> "Authorize.Net Payment Webform"
 
-   From the Post URL dropdown, you can select the Developer (test) server, or the Main 
+   From the Post URL dropdown, you can select the Developer (test) server, or the Main
    Authorize.Net server.  The default is the development server, so make sure to change
    the server selection when putting the module into production.
 
-   If you have any additional fields you'd like to pass to Authorize.Net, enter them into 
+   If you have any additional fields you'd like to pass to Authorize.Net, enter them into
    the 'Custom Fields' box.  Enter in the format key|description.  To find the correct key
    name, visit the AIM Implementation Guide at http://developer.authorize.net/guides/AIM/.
    Under 'Section Three - Transaction Data Requirements', in the AIM Transaction Submission
@@ -36,12 +45,12 @@ Installation
    "Site Configuration" -> "Authorize.Net Payment Webform" screen.
 
    As the last entry in the Webform, add a hidden field 'Transaction ID'.  Select 'Transaction ID'
-   as the Authorize.Net key to map to.  The transaction ID must be mapped, or the module will not 
+   as the Authorize.Net key to map to.  The transaction ID must be mapped, or the module will not
    work correctly.
 
    Save the webform.
 
 5. As your webform is submitted, the credit card information will be authorized and charged.  There will
    be a slight delay during submission while the transaction is processed.  The credit card number will
-   not be stored in your database, for security purposes.  The last 4 digits will be saved, while the 
+   not be stored in your database, for security purposes.  The last 4 digits will be saved, while the
    other digits will be replaced with x's.

@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @file 
+ * @file
  * Authorize.Net Webform Fields File
  *
  * Prepare and store the available linking fields for Authorize.Net, as well
  * as custom fields that are defined by the user.
  */
- 
+
 /**
  * Provide the required fields for Authorize.Net processing
- * 
+ *
  * @return array
  *  Provide an array containing the fields that are required by Authorize.Net
  */
 function authorizenetwebform_available_fields() {
-  return array(  
+  return array(
     //Special Field to block Processing
     0 => '--Do Not Map to an Authorize.Net field--',
 
@@ -25,10 +25,10 @@ function authorizenetwebform_available_fields() {
     'x_card_num' => 'Card Number',
     'x_card_code' => 'Card Security Code',
     'x_description' => 'Transaction Description',
-    'x_exp_date' => 'Expiration Date (Digits Only)',
-    'x_trans_id' => 'Transaction ID (Must be Mapped - Hidden Field)',
-    
-    //Cardholder Info
+    'x_exp_date' => 'Expiration Date (7 Digits YYYY-MM)',
+    'x_trans_id' => 'Transaction ID (Must be a Hidden field)',
+
+    // Cardholder Info
     'x_first_name' => 'First Name',
     'x_last_name' => 'Last Name',
     'x_address' => 'Address',
