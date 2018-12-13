@@ -17,10 +17,6 @@ projects:
         subdir: "contrib"
         patch:
             - 'https://www.drupal.org/files/issues/notice%EF%80%BA-undefined-index%EF%80%BA-term.patch'
-    admin_menu:
-        subdir: "contrib"
-        patch:
-            - 'https://www.drupal.org/files/issues/admin-menu-2929025-each-function-deprecated-php-7.2.patch'
     field_collection:
         subdir: "contrib"
         patch:
