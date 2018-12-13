@@ -1,19 +1,32 @@
 core: '7.x'
 api: '2'
 projects:
-  link:
-    subdir: "contrib"
-    patch:
-      - 'https://www.drupal.org/files/issues/2018-03-20/link_anchors_and_queries-2654246-22.patch'
-  paragraphs:
-    subdir: "contrib"
-    patch:
-      - 'https://www.drupal.org/files/issues/clonefatalerror-2897975-1.patch'
-  smtp:
-    subdir: "contrib"
-    patch:
-      - 'https://www.drupal.org/files/issues/2018-06-04/2753115-41-smtp-multiple-to-addresses-error.patch'
-  taxonomy_dupecheck:
-    subdir: "contrib"
-    patch:
-      - 'https://www.drupal.org/files/issues/notice%EF%80%BA-undefined-index%EF%80%BA-term.patch'
+    link:
+        subdir: "contrib"
+        patch:
+            - 'https://www.drupal.org/files/issues/2018-03-20/link_anchors_and_queries-2654246-22.patch'
+    paragraphs:
+        subdir: "contrib"
+        patch:
+            - 'https://www.drupal.org/files/issues/clonefatalerror-2897975-1.patch'
+    smtp:
+        subdir: "contrib"
+        patch:
+            - 'https://www.drupal.org/files/issues/2018-06-04/2753115-41-smtp-multiple-to-addresses-error.patch'
+    taxonomy_dupecheck:
+        subdir: "contrib"
+        patch:
+            - 'https://www.drupal.org/files/issues/notice%EF%80%BA-undefined-index%EF%80%BA-term.patch'
+    admin_menu:
+        subdir: "contrib"
+        patch:
+            - 'https://www.drupal.org/files/issues/admin-menu-2929025-each-function-deprecated-php-7.2.patch'
+    field_collection:
+        subdir: "contrib"
+        patch:
+            - 'https://www.drupal.org/files/issues/2018-11-21/field_collection-php72-countable-2992575-17.patch'
+            - 'https://www.drupal.org/files/issues/2018-11-23/field_collection-php72-beta11-2936874-20.patch'
+    views:
+        subdir: 'contrib'
+        patch:
+            - 'https://www.drupal.org/files/issues/2018-06-06/2977851-views-php72-count-2.patch'
