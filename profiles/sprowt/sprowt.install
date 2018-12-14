@@ -72,7 +72,10 @@ function sprowt_install_tasks(&$install_state) {
             'display_name' => t('There was an error with your Sprowt Install'),
             'type' => 'form',
         ),
-
+        'sprowt_reset_localtarget_aliases' => array(
+            'display_name' => t('Updated LocalTarget URL Aliases'),
+            'type' => 'batch',
+        )
     );
 
     if(!empty($install_state['forms']['file'])){

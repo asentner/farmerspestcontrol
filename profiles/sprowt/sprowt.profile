@@ -80,7 +80,9 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
         'sprowt_module_postinstall', //sprowt
         'sprowt_check_install',
         'install_configure_form',
-        'sprowt_configure'
+        'sprowt_configure',
+        'sprowt_setup_form',
+        'sprowt_reset_localtarget_aliases'
     );
     
     
@@ -102,7 +104,9 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
             'sprowt_module_postinstall', //sprowt
             'install_configure_form',
             'sprowt_setup',
-            'sprowt_configure'
+            'sprowt_configure',
+            'sprowt_setup_form',
+            'sprowt_reset_localtarget_aliases'
         );
     }
     
@@ -142,9 +146,50 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
 
     $tasks = $new_tasks;
     
-    $tasks['install_finished']['function'] = '_sprowt_install_finished';
+    //$tasks['install_finished']['function'] = '_sprowt_install_finished';
 
 }
+
+function sprowt_reset_localtarget_aliases() {
+    $nids = db_query("SELECT nid from node WHERE type = 'localtarget'")->fetchCol();
+    
+    $sources = array();
+    $operations = array();
+    foreach($nids as $nid) {
+        $sources[] = "node/$nid";
+        $operations[] = array(
+            '_sprowt_update_localtarget_alias', array(
+                $nid
+            )
+        );
+    }
+    
+    if(!empty($sources)) {
+        db_delete('url_alias')->condition('source', $sources, 'IN')->execute();
+    }
+    
+    $batch = array(
+        'operations' => $operations,
+        'title' => 'Updating LocalTarget URL Aliases',
+        'error_message' => 'The installation has encountered an error.',
+        'finished' => 'drupal_flush_all_caches'
+    );
+    
+    return $batch;
+    
+}
+
+function _sprowt_update_localtarget_alias($nid, &$context) {
+    $node = node_load($nid);
+    $node->path['pathauto'] = 1;
+    node_save($node);
+    
+    $context['results'][] = $nid;
+    $context['message'] = st('Updated %count localtargets.', array(
+        '%count' => count($context['results']),
+    ));
+}
+
 
 function _sprowt_install_finished(&$install_state) {
     $sb = new SprowtBuilder();
@@ -317,22 +362,8 @@ function _sprowt_save_to_table($form_name, $fields) {
  * Set up base config for pantheon
  */
 function sprowt_configure() {
-    // Set default Pantheon variables
-    variable_set('cache', 1);
-    variable_set('block_cache', 1);
-    variable_set('cache_lifetime', '0');
-    variable_set('page_cache_maximum_age', '900');
-    variable_set('page_compression', 0);
-    variable_set('preprocess_css', 1);
-    variable_set('preprocess_js', 1);
-    $search_active_modules = array(
-        'apachesolr_search' => 'apachesolr_search',
-        'user' => 'user',
-        'node' => 0
-    );
-    variable_set('search_active_modules', $search_active_modules);
-    variable_set('search_default_module', 'apachesolr_search');
-    drupal_set_message(t('Pantheon defaults configured.'));
+    require_once drupal_get_path('profile', 'pantheon') . '/pantheon.profile';
+    return pantheon_configure();
 }
 
 
