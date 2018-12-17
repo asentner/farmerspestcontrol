@@ -44,9 +44,7 @@ function sprowt_settings_update_7101() {
     ]);
     
     if (!in_array('sms', $protocols)) {
-        
         $protocols[] = 'sms';
-        
     }
     
     variable_set('filter_allowed_protocols', $protocols);
