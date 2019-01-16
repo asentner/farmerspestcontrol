@@ -7,9 +7,11 @@ function sprowt_views_block_info() {
   return array(
     'sprowt_views_testimonials' => array(
       'info' => t('Sprowt: Testimonials'),
+      'cache' => DRUPAL_NO_CACHE
     ),
     'sprowt_views_lt_benefits' => array(
     	'info' => t('Sprowt: LocalTarget Benefits'),
+        'cache' => DRUPAL_NO_CACHE
     ),
   );
 }

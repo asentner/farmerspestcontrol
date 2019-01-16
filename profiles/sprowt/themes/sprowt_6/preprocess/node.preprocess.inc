@@ -38,8 +38,14 @@ function sprowt_6_preprocess_node(&$variables) {
   }
 
   if($node->type == 'package') {
-      $nb = entity_metadata_wrapper('node', $node);
-      $link = $nb->field_block_link->value();
-      $variables['block_link_url'] = $link['url'];
+      $info = field_info_instance('node', 'field_block_link', 'package');
+      if(!empty($info)) {
+          $nb = entity_metadata_wrapper('node', $node);
+          $link = $nb->field_block_link->value();
+          $variables['block_link_url'] = $link['url'];
+      }
+      else {
+          $variables['block_link_url'] = $variables['node_url'];
+      }
   }
 }
