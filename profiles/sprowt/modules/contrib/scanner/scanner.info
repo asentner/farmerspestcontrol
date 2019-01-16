@@ -15,12 +15,16 @@ files[] = tests/ScannerUiTestCase.test
 ; Basic search & replace functionality.
 files[] = tests/ScannerBasicsTestCase.test
 
-; Field Collection integration.
+; Field Collection module integration.
 test_dependencies[] = field_collection
 files[] = tests/ScannerWithFieldCollectionTestCase.test
 
-; Information added by Drupal.org packaging script on 2018-05-19
-version = "7.x-1.0"
+; Link module integration.
+test_dependencies[] = link
+files[] = tests/ScannerWithLinkTestCase.test
+
+; Information added by Drupal.org packaging script on 2018-11-10
+version = "7.x-1.1"
 core = "7.x"
 project = "scanner"
-datestamp = "1526760786"
+datestamp = "1541817786"

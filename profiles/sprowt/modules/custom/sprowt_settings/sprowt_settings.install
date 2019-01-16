@@ -4,6 +4,8 @@ function sprowt_settings_install() {
     ->fields(array('weight' => 2))
     ->condition('name', 'sprowt_settings', '=')
     ->execute();
+    
+    sprowt_settings_update_7101();
 }
 
 /**
@@ -14,4 +16,36 @@ function sprowt_settings_update_7100(){
     if(!empty($data['company_info']['webform_to_email'])) {
         variable_set('sprowt_settings_webform_to_email', $data['company_info']['webform_to_email']);
     }
+}
+
+
+
+/**
+* Add sms to allowed protocols
+*/
+function sprowt_settings_update_7101() {
+    
+    //see drupal_strip_dangerous_protocols($uri) in common.inc
+    
+    $protocols = variable_get('filter_allowed_protocols', [
+        'ftp',
+        'http',
+        'https',
+        'irc',
+        'mailto',
+        'news',
+        'nntp',
+        'rtsp',
+        'sftp',
+        'ssh',
+        'tel',
+        'telnet',
+        'webcal'
+    ]);
+    
+    if (!in_array('sms', $protocols)) {
+        $protocols[] = 'sms';
+    }
+    
+    variable_set('filter_allowed_protocols', $protocols);
 }
