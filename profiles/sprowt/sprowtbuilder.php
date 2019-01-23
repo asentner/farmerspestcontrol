@@ -334,7 +334,7 @@ Class SprowtBuilder {
         variable_set('webform_default_from_name', $this->data['company_info']['webform_from_name']);
         variable_set('webform_email_replyto', false);
 
-        $privacy = entity_uuid_load('node', '6da1b988-5564-47a2-8404-72ec6aaa46ed');
+        $privacy = entity_uuid_load('node', ['6da1b988-5564-47a2-8404-72ec6aaa46ed']);
         if(empty($privacy)) {
             $this->importPrivacyPolicy();
         }

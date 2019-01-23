@@ -554,7 +554,7 @@ function sprowt_update_7011() {
  */
 function sprowt_update_7012() {
     $sb = new SprowtBuilder();
-    $privacy = entity_uuid_load('node', '6da1b988-5564-47a2-8404-72ec6aaa46ed');
+    $privacy = entity_uuid_load('node', ['6da1b988-5564-47a2-8404-72ec6aaa46ed']);
     if(empty($privacy)) {
         $sb->importPrivacyPolicy();
     }
