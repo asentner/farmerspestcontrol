@@ -548,3 +548,14 @@ function sprowt_update_7011() {
         node_save($node);
     }
 }
+
+/**
+ * import Privacy Policy if it doesn't exist
+ */
+function sprowt_update_7012() {
+    $sb = new SprowtBuilder();
+    $privacy = entity_uuid_load('node', ['6da1b988-5564-47a2-8404-72ec6aaa46ed']);
+    if(empty($privacy)) {
+        $sb->importPrivacyPolicy();
+    }
+}
