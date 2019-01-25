@@ -32,8 +32,7 @@ $ratingCount = !empty($bean->field_review_count[LANGUAGE_NONE][0]['value']) ?
 
 ?>
 <div <?php print $attributes; ?>>
-
-  <div class="content"<?php print $content_attributes; ?> itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+  <div class="content"<?php print $content_attributes; ?> itemscope itemtype="http://schema.org/AggregateRating">
       <?php print $itemreviewed_structured_data; ?>
     <?php if($ratingCount !== null): ?>
         <meta itemprop="reviewCount" content="<?php print $ratingCount; ?>">

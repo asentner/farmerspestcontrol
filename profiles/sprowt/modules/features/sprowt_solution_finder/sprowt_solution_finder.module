@@ -75,6 +75,7 @@ function sprowt_solution_finder_theme($existing, $type, $theme, $path)
             'path' => $path . '/theme',
             'base hook' => 'paragraphs_item',
         ),
+        'field_solution_concern_icon' => array()
     );
 }
 
@@ -131,6 +132,28 @@ function sprowt_solution_finder_block_save($delta = '', $edit = []) {
     }
 }
 
+function theme_field_solution_concern_icon($variables) {
+    $output = '';
+    
+    // Render the label, if it's not hidden.
+    if (!$variables['label_hidden']) {
+        $output .= '<span class="field__label"' . $variables['title_attributes'] . '>' . $variables['label'] . ':&nbsp;</span>';
+    }
+    
+    // Render the items.
+    $output .= '<span class="field__items"' . $variables['content_attributes'] . '>';
+    foreach ($variables['items'] as $delta => $item) {
+        $classes = 'field__item ' . ($delta % 2 ? 'odd' : 'even');
+        $output .= '<span class="' . $classes . '"' . $variables['item_attributes'][$delta] . '>' . drupal_render($item) . '</span>';
+    }
+    $output .= '</span>';
+    
+    // Render the top-level DIV.
+    $output = '<span class="' . $variables['classes'] . '"' . $variables['attributes'] . '>' . $output . '</span>';
+    
+    return $output;
+}
+
 /**
  * Implements hook_block_view().
  */
@@ -154,12 +177,17 @@ function sprowt_solution_finder_block_view($delta = '')
 
             $arrays = array();
             foreach($concerns as $concern) {
+                $iconRender = field_view_field('node', $concern, 'field_icon_file', array(
+                    'label' => 'hidden',
+                    'type' => 'solution_finder'
+                ));
+                foreach($iconRender["#items"] as &$item) {
+                    $item['solution_finder_concern'] = true;
+                }
                 $array = array(
                     'nid' => $concern->nid,
                     'name' => $concern->title,
-                    'icon' => field_view_field('node', $concern, 'field_icon_file', array(
-                        'label' => 'hidden'
-                    ))
+                    'icon' => $iconRender
                 );
                 $arrays[] = $array;
             }
@@ -437,6 +465,21 @@ function sprowt_solution_finder_preprocess_node(&$variables) {
     if($variables['view_mode'] == 'full' && $variables['node']->type == 'solution') {
         drupal_add_css(drupal_get_path('module', 'sprowt_solution_finder') . '/css/solution_finder.css');
         drupal_add_js(drupal_get_path('module', 'sprowt_solution_finder') .'/js/solutions_pages.js');
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_solution_finder_preprocess_field(&$variables) {
+    $element = &$variables['element'];
+    $parent = $element['#object'];
+    if($element['#field_name'] == 'field_icon_file') {
+        if(!empty($element["#items"][0]["solution_finder_concern"])){
+            $variables["theme_hook_suggestions"] = array_merge([
+                'field_solution_concern_icon'
+            ], $variables["theme_hook_suggestions"]);
+        }
     }
 }
 

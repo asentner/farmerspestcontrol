@@ -43,10 +43,25 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
                 $doc = new DOMDocument();
                 @$doc->loadXML($svg_html);
                 $svg = $doc->getElementsByTagName('svg');
+                
+                $removeIdsRecursively = function(&$elementList) use(&$removeIdsRecursively){
+                    $itemLength = $elementList->length;
+                    for($i = 0; $i < $itemLength; ++$i) {
+                        $elementNode = $elementList->item($i);
+                        if($elementNode instanceof DOMElement) {
+                            if ($elementNode->hasAttribute('id')) {
+                                $elementNode->removeAttribute('id');
+                            }
+                            if ($elementNode->childNodes->length > 0) {
+                                $removeIdsRecursively($elementNode->childNodes);
+                            }
+                        }
+                    }
+                };
+                
+                $removeIdsRecursively($svg);
+                
                 $svg = $svg->item(0);
-                if ($svg->hasAttribute('id')) {
-                    $svg->removeAttribute('id');
-                }
                 $style = $svg->getAttribute('style');
                 
                 $titleItems = $svg->getElementsByTagName('title');

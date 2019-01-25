@@ -19,7 +19,7 @@
                 <label for="concern-<?php print $concern['nid']; ?>">
                     <input type="checkbox" name="concerns[]" id="concern-<?php print $concern['nid']; ?>" value="<?php print $concern['nid']; ?>">
                     <?php print render($concern['icon']); ?>
-                    <div class="name"><?php print $concern['name']; ?></div>
+                    <span class="name"><?php print $concern['name']; ?></span>
                 </label>
             </div>
         <?php endforeach; ?>
@@ -31,7 +31,7 @@
                     <label for="concern-<?php print $concern['nid']; ?>">
                         <input type="checkbox" name="concerns[]" id="concern-<?php print $concern['nid']; ?>" value="<?php print $concern['nid']; ?>">
                         <?php print render($concern['icon']); ?>
-                        <div class="name"><?php print $concern['name']; ?></div>
+                        <span class="name"><?php print $concern['name']; ?></span>
                     </label>
                 </div>
             <?php endforeach; ?>
