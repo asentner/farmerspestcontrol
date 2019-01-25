@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_bean_types.bean.inc

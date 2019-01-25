@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_bean_types.features.field_instance.inc
@@ -848,9 +849,28 @@ function sprowt_bean_types_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'module' => 'advanced_text_formatter',
+        'settings' => array(
+          'allowed_html' => array(
+            0 => 'a',
+            1 => 'b',
+            2 => 'br',
+            3 => 'em',
+            4 => 'i',
+            5 => 'strong',
+            6 => 'u',
+            7 => 'span',
+          ),
+          'autop' => 0,
+          'ellipsis' => 1,
+          'filter' => 'php',
+          'format' => 'plain_text',
+          'token_replace' => 1,
+          'trim_length' => 0,
+          'use_summary' => 0,
+          'word_boundary' => 1,
+        ),
+        'type' => 'advanced_text',
         'weight' => 0,
       ),
     ),
