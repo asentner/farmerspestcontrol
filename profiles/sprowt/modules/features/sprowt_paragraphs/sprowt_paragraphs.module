@@ -58,6 +58,11 @@ function sprowt_paragraphs_theme($existing, $type, $theme, $path)
             'path' => $path . '/theme',
             'base hook' => 'paragraphs_items',
         ),
+        'paragraphs_items' => array (
+            'template' => 'paragraphs-items',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_items',
+        ),
     );
 }
 

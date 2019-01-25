@@ -3576,7 +3576,7 @@ li.addtoany {
 
 .front .block--bean-benefits-intro-block-front, .node-type-localtarget .block--bean-benefits-intro-block-front {
   padding-bottom: 40px; }
-  .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title p, .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-h1-title p {
+  .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title, .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-h1-title {
     font-size: 28px;
     line-height: 1;
     font-weight: 700; }
@@ -3587,13 +3587,13 @@ li.addtoany {
     .front .block--bean-benefits-intro-block-front, .node-type-localtarget .block--bean-benefits-intro-block-front {
       max-width: 675px;
       padding-bottom: 30px; }
-      .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title p, .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-h1-title p {
+      .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title, .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-h1-title {
         font-size: 36px; } }
   @media (min-width: 1024px) {
     .front .block--bean-benefits-intro-block-front, .node-type-localtarget .block--bean-benefits-intro-block-front {
       max-width: 650px;
       padding-bottom: 25px; }
-      .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title p, .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-h1-title p {
+      .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title, .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-h1-title {
         font-size: 42px; }
       .front .block--bean-benefits-intro-block-front .content .field--name-field-body-text p, .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-body-text p {
         font-size: 17px; } }
