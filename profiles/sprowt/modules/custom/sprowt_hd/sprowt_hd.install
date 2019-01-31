@@ -82,6 +82,18 @@ function sprowt_hd_schema() {
     return $schema;
 }
 
+/**
+ * Add tables if they don't exist
+ */
+function sprowt_hd_update_7000() {
+    $schemas = sprowt_hd_schema();
+    foreach($schemas as $table => $schema) {
+        if(!db_table_exists($table)) {
+            db_create_table($table, $schema);
+        }
+    }
+}
+
 function sprowt_hd_uninstall() {
     if (db_table_exists('sprowt_hd_webform')) {
         db_drop_table('sprowt_hd_webform');
