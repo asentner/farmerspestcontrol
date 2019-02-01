@@ -9,6 +9,7 @@ projects:
         subdir: "contrib"
         patch:
             - 'https://www.drupal.org/files/issues/clonefatalerror-2897975-1.patch'
+            - 'https://www.drupal.org/files/issues/2018-03-08/deprecated_each-2951390-2.patch'
     smtp:
         subdir: "contrib"
         patch:
@@ -17,11 +18,6 @@ projects:
         subdir: "contrib"
         patch:
             - 'https://www.drupal.org/files/issues/notice%EF%80%BA-undefined-index%EF%80%BA-term.patch'
-    field_collection:
-        subdir: "contrib"
-        patch:
-            - 'https://www.drupal.org/files/issues/2018-11-21/field_collection-php72-countable-2992575-17.patch'
-            - 'https://www.drupal.org/files/issues/2018-11-23/field_collection-php72-beta11-2936874-20.patch'
     views:
         subdir: 'contrib'
         patch:
