@@ -12,6 +12,9 @@ include_once 'sprowt_paragraphs.features.inc';
  */
 function sprowt_paragraphs_theme($existing, $type, $theme, $path)
 {
+    
+    $paragraphs_module_path = drupal_get_path('module', 'paragraphs');
+    
     return array(
         'field__field_header__paragraphs_item' => array (
             'template' => 'field--field-header--paragraphs-item',
@@ -63,6 +66,21 @@ function sprowt_paragraphs_theme($existing, $type, $theme, $path)
             'path' => $path . '/theme',
             'base hook' => 'paragraphs_items',
         ),
+        'paragraphs_item__table__original' => array (
+            'template' => 'paragraphs-item',
+            'path' => $paragraphs_module_path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
+        'paragraphs_item__table_cell__original' => array (
+            'template' => 'paragraphs-item',
+            'path' => $paragraphs_module_path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
+        'paragraphs_item__table_row__original' => array (
+            'template' => 'paragraphs-item',
+            'path' => $paragraphs_module_path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
     );
 }
 
@@ -113,6 +131,21 @@ function sprowt_paragraphs_entity_load($entities, $type)
  */
 function sprowt_paragraphs_preprocess_paragraphs_item(&$variables)
 {
+    $table_items = [
+        'paragraphs_item__table',
+        'paragraphs_item__table_cell',
+        'paragraphs_item__table_row',
+    ];
+    if(path_is_admin(current_path())) {
+        foreach($table_items as $table_item) {
+            if(in_array($table_item, $variables['theme_hook_suggestions'])) {
+                $key = array_search($table_item, $variables['theme_hook_suggestions']);
+                unset($variables['theme_hook_suggestions'][$key]);
+                $variables['theme_hook_suggestions'][] = "{$variables['theme_hook_suggestions']}__original";
+            }
+        }
+    }
+    
     $item = $variables['paragraphs_item'];
     $variables['attributes_array']['id'] = $item->html_unique_id;
     $custom_class = field_get_items('paragraphs_item', $variables['elements']['#entity'], 'field_custom_class');
