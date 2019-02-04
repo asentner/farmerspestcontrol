@@ -26,9 +26,9 @@
  * @see template_process()
  */
 ?>
-<?php print render($title_prefix); ?>
-<?php print render($title_suffix); ?>
 <div <?php print $attributes; ?>>
+    <?php print render($title_prefix); ?>
+    <?php print render($title_suffix); ?>
   <div class="content"<?php print $content_attributes; ?>>
     <?php print render($content['field_header']); ?>
       <table>
