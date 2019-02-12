@@ -2,7 +2,7 @@
 
 class UserBuilder {
 
-    function addUser(array $userinfo){
+    static function addUser(array $userinfo){
         $username = $userinfo['username'];
         $query = db_query(
             "SELECT * FROM role"
@@ -95,7 +95,28 @@ class UserBuilder {
         if(!empty($userinfo['image'])
             && $userinfo['image'] != "/profiles/sprowt/images/default.jpg")
         {
-            $dest = file_unmanaged_copy(DRUPAL_ROOT . $userinfo['image'], $directory, FILE_EXISTS_REPLACE);
+            if(strpos($userinfo['image'], 'http://') === false
+                && strpos($userinfo['image'], 'https://') === false
+            ) {
+                $userinfo['image'] = DRUPAL_ROOT . $userinfo['image'];
+                $filename = basename($userinfo['image']);
+            }
+            else {
+                $filename = $userinfo['username'];
+                switch(exif_imagetype($userinfo['image'])) {
+                    case IMAGETYPE_GIF:
+                        $filename .= '.gif';
+                        break;
+                    case IMAGETYPE_JPEG:
+                        $filename .= '.jpg';
+                        break;
+                    case IMAGETYPE_PNG:
+                        $filename .= '.png';
+                        break;
+                }
+            }
+    
+            $dest = file_unmanaged_save_data(file_get_contents($userinfo['image']), $directory . "/$filename", FILE_EXISTS_REPLACE);
             $file = new stdClass();
             $file->uri = $dest;
             $file->filename = drupal_basename($dest);
@@ -125,13 +146,15 @@ class UserBuilder {
 
     function addCoalmarchUser($username, $password = '') {
         require_once DRUPAL_ROOT . '/includes/password.inc';
-        $filepath = getcwd() . "/profiles/sprowt/coalmarch_users/$username.json";
-        if(!file_exists($filepath)) {
+        
+        $user = _sprowt_get_coalmarch_user($username);
+        
+        if(empty($user)) {
             return false;
         }
         else {
-            $json = file_get_contents($filepath);
-            $userinfo = json_decode($json, true);
+            $userinfo = $user;
+            $userinfo['roles'] = ['administrator'];
             if(!empty($password)) {
                 if(!empty($userinfo['encrypted'])) {
                     unset($userinfo['encrypted']);
@@ -142,7 +165,7 @@ class UserBuilder {
                 $userinfo['encrypted'] = true;
                 $userinfo['password'] = user_hash_password(rand() . time());
             }
-            return $this->addUser($userinfo);
+            return self::addUser($userinfo);
         }
     }
 

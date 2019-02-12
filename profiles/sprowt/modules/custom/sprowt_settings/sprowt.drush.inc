@@ -189,12 +189,11 @@ function drush_sprowt_cm_add(){
     $username = drush_get_option('name');
     $password = drush_get_option('password');
     if(empty($username)) {
-        $files = glob(drupal_get_path('profile', 'sprowt') . '/coalmarch_users/*.json');
-        $options = array();
-        foreach($files as $file) {
-            $filename = basename($file);
-            $user = str_replace('.json', '', $filename);
-            $options[$user] = $user;
+        
+        $options = [];
+        $users = _sprowt_get_users_from_forgely();
+        foreach($users as $user) {
+            $options[$user['username']] = $user['username'];
         }
 
         $username = drush_choice($options, dt('Which user would you like to add?'));

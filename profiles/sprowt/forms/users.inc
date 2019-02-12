@@ -17,14 +17,22 @@ function sprowt_users($form, &$form_state, &$install_state){
     $form['#attached']['css'][] = drupal_get_path('profile', 'sprowt') . "/css/sprowt.css";
 
     $users = _sprowt_get_default_usernames();
-
-    $coalmarch_user_files = glob(drupal_get_path('profile', 'sprowt') . '/coalmarch_users/*.json');
-    $coalmarch_users = array();
-
-    foreach($coalmarch_user_files as $cu_file) {
-        $coalmarch_user = json_decode(file_get_contents($cu_file), true);
-        $coalmarch_users[$cu_file] = $coalmarch_user['first_name'] . " " . $coalmarch_user['last_name'];
+    
+    $coalmarch_users = _sprowt_get_users_from_forgely();
+    
+    $userInfo = [];
+    foreach($coalmarch_users as $coalmarch_user) {
+        $coalmarch_user['roles'] = ['administrator'];
+        $userInfo[$coalmarch_user['username']] = $coalmarch_user;
     }
+    
+    $form['user_info'] = array(
+        '#type' => 'hidden',
+        '#attributes' => array(
+            'id' => 'user-info'
+        ),
+        '#value' => json_encode($userInfo)
+    );
 
     ob_start();
     include drupal_get_path('profile', 'sprowt') . '/includes/users.tpl.php';
@@ -135,24 +143,6 @@ function sprowt_users_submit($form, &$form_state){
     require_once DRUPAL_ROOT . '/includes/password.inc';
     $fields = array();
     $users = json_decode($form['hidden_values']['additional_users']['#value'], true);
-
-    $default_users = _sprowt_get_default_usernames();
-
-    foreach($default_users as $username => $name_array){
-        if($username == 'coalmarch'
-            || $form['default_users']['users'][$username]['#checked']
-            || !empty($form_state['add_defaults'])
-        )
-        {
-            if($username == 'coalmarch'){
-                $filepath = getcwd() . "/profiles/sprowt/default_users/_$username.json";
-            }
-            else {
-                $filepath = getcwd() . "/profiles/sprowt/default_users/$username.json";
-            }
-            $fields[$username] = file_get_contents($filepath);
-        }
-    }
 
     foreach($users as $user){
         unset($user['id']);

@@ -56,8 +56,8 @@
     <div class="user-button-wrap">
         <select id="user-drop-down" class="form-select">
             <option value="0">New User</option>
-            <?php foreach($coalmarch_users as $value => $text): ?>
-                <option value="/<?php print $value; ?>"><?php print $text; ?></option>
+            <?php foreach($users as $value => $textArray): ?>
+                <option value="<?php print $value; ?>"><?php print implode(' ', $textArray); ?></option>
             <?php endforeach; ?>
         </select>
         <button type="button" id="addUser" class="button">Add User</button>

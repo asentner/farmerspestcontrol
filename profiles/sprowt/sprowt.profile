@@ -315,22 +315,88 @@ function sprowt_setup_tables($install_state){
 
 }
 
+function _sprowt_curl($uri, $payload = array()) {
+    $ch = curl_init();
+    $accessKey = '93f258dace70208b4b5d38de7266570dc48a7572';
+    $secretKey = 'a0ZkBetAFbDwW89HXF260jF2Iut6iMpph95v';
+    
+    $base = 'https://forge.ly';
+    if(strpos($_SERVER['HTTP_HOST'], '.test') !== false) {
+        $base = 'http://dev.forge.ly';
+    }
+    
+    $base .= '/api/v1';
+    
+    if(strpos($uri, '/') !== 0) {
+        $uri = "/$uri";
+    }
+    
+    curl_setopt($ch, CURLOPT_URL, $base . $uri);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    curl_setopt($ch, CURLOPT_USERPWD, $accessKey . ':' . $secretKey);
+    
+    curl_setopt($ch, CURLOPT_COOKIE, 'XDEBUG_SESSION=forgelyapitest');
+    
+    if (count($payload)) {
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload, '', '&'));
+    }
+    
+    $output = curl_exec($ch);
+    
+    $httpInfo = curl_getinfo($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+    curl_close($ch);
+    
+    return array(
+        'info' => $httpInfo,
+        'code' => $httpcode,
+        'result' => $output
+    );
+}
 
+function _sprowt_get_users_from_forgely() {
+    $res =  _sprowt_curl('/users/sprowt');
+    $response = json_decode($res['result'], true);
+    
+    if($res['code'] != 200) {
+        if(empty($response)) {
+            $response = $res['result'];
+        }
+        watchdog('error', 'Sprowt Curl Error: <pre>%response</pre>', [
+            '%response' => json_encode($response, JSON_PRETTY_PRINT)
+        ]);
+        return [];
+    }
+    
+    return $response['data'];
+}
+
+function _sprowt_get_coalmarch_user($username){
+    $users = _sprowt_get_users_from_forgely();
+    foreach($users as $user) {
+        if($user['username'] == $username) {
+            return $user;
+        }
+    }
+    
+    return false;
+}
 
 /**
  * Function for getting the user names of the default users
  */
 function _sprowt_get_default_usernames(){
-    $glob = getcwd() . "default_users/*.json";
-    $json_files = glob(getcwd() . "/profiles/sprowt/default_users/*.json");
-
-    $names = array();
-    foreach($json_files as $file){
-        $json = file_get_contents($file);
-        $user = json_decode($json, true);
+    $users = _sprowt_get_users_from_forgely();
+    $names = [];
+    foreach($users as $user) {
         $names[$user['username']] = array($user['first_name'],$user['last_name']);
     }
-
+    
     return $names;
 }
 
@@ -611,21 +677,12 @@ function _sprowt_form_default($field_name, $default = '') {
                     return json_encode($markets);
                     break;
                 case 'additional_users':
+                    $me = _sprowt_get_coalmarch_user('wmcmillian');
+                    $me['roles'] = [
+                        'administrator'
+                    ];
                     $users = array (
-                        array (
-                            'username' => 'wmcmillian',
-                            'password' => '',
-                            'email' => 'wmcmillian@coalmarch.com',
-                            'first_name' => 'Will',
-                            'last_name' => 'McMillian',
-                            'position' => 'PHP Developer',
-                            'roles' =>
-                                array (
-                                    'administrator',
-                                ),
-                            'image' => '/profiles/sprowt/images/coalmarch/wmcmillian.jpg',
-                            'id' => 'wmcmillian',
-                        ),
+                        $me
                     );
                     return json_encode($users);
                     break;

@@ -15,6 +15,11 @@
                 $(v).addClass('error');
             });
         }
+
+        var getUser = function(username) {
+            var userInfo = JSON.parse($('#user-info').val());
+            return userInfo[username];
+        }
         
         $('#addUser').click(function(){
             var userFile = $('#user-drop-down').val();
@@ -22,11 +27,8 @@
                 $.users.addUser();
             }
             else {
-                $.getJSON(userFile, function(userObj){
-                    userObj.id = userObj.username;
-                    userObj.password = '';
-                    $.users.addUser(userObj);
-                });
+                var userObj = getUser(userFile);
+                $.users.addUser(userObj);
             }
         });
         
@@ -85,6 +87,10 @@
                     id: "user-" + $.users.nextItem($('.user')),
                     image: $.users.default_image,
                 };
+            }
+
+            if(UserObj.id == undefined) {
+                UserObj.id = "user-" + $.users.nextItem($('.user'));
             }
             
             if (UserObj.image == undefined) {
