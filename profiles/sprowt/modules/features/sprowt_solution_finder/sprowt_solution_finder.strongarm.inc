@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_solution_finder.strongarm.inc
@@ -71,6 +72,15 @@ function sprowt_solution_finder_strongarm() {
         'custom_settings' => FALSE,
       ),
       'quinary_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'landing_page' => array(
+        'custom_settings' => TRUE,
+      ),
+      'landing_page_compact' => array(
+        'custom_settings' => TRUE,
+      ),
+      'modal' => array(
         'custom_settings' => FALSE,
       ),
     ),

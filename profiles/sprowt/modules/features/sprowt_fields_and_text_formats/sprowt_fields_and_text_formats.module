@@ -193,6 +193,15 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
     
         $variables['item_attributes_array'] = $item_attributes_array;
     }
+
+    if($element['#field_name'] == 'field_subtitle') {
+        foreach($variables['items'] as $delta => $item) {
+            $item['#markup'] = token_replace($item['#markup'], [], [
+                'sanitize' => false
+            ]);
+            $variables['items'][$delta] = $item;
+        }
+    }
 }
 
 /**

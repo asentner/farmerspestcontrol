@@ -465,6 +465,21 @@ function sprowt_solution_finder_preprocess_node(&$variables) {
     if($variables['view_mode'] == 'full' && $variables['node']->type == 'solution') {
         drupal_add_css(drupal_get_path('module', 'sprowt_solution_finder') . '/css/solution_finder.css');
         drupal_add_js(drupal_get_path('module', 'sprowt_solution_finder') .'/js/solutions_pages.js');
+        $header_classes = [
+            'solution--full--header'
+        ];
+
+        $first = !empty($variables["field_content"][0]["value"]) ? $variables["field_content"][0]["value"] : null;
+        if(!empty($first)) {
+            $first = entity_load('paragraphs_item', [$first]);
+            $first = entity_metadata_wrapper('paragraphs_item', array_shift($first));
+            if($first->getBundle() == 'overlap') {
+                $header_classes[] = 'overlap-in-first';
+            }
+
+        }
+
+        $variables['header_classes'] = $header_classes;
     }
 }
 
@@ -483,8 +498,7 @@ function sprowt_solution_finder_preprocess_field(&$variables) {
     }
 }
 
-function _sprowt_solution_finder_sample_nodes() {
-    require_once DRUPAL_ROOT . '/includes/utility.inc';
+function _sprowt_solution_finder_sample_concerns() {
     $path = drupal_get_path('module', 'sprowt_solution_finder');
     $file = $path . '/nodes/concerns.json';
     $json = file_get_contents($file);
@@ -497,8 +511,42 @@ function _sprowt_solution_finder_sample_nodes() {
             node_export_import(json_encode(array($concernArray)));
         }
     }
+    variable_set('node_export_existing', $existing);
+}
 
-    $exportFile = $path . '/nodes/solution.export';
+function _sprowt_solution_finder_sample_webforms() {
+    $path = drupal_get_path('module', 'sprowt_solution_finder');
+    $file = $path . '/nodes/webform.json';
+    $json = file_get_contents($file);
+    $existing = variable_get('node_export_existing', 'new');
+    variable_set('node_export_existing', 'new');
+    $webformArray = json_decode($json, true);
+    foreach($webformArray as $webformJson) {
+        $uuid = $webformJson['uuid'];
+        if(empty(entity_get_id_by_uuid('node', array($uuid)))) {
+            node_export_import(json_encode(array($webformJson)));
+        }
+    }
+    variable_set('node_export_existing', $existing);
+}
+
+function _sprowt_solution_finder_sample_nodes() {
+    _sprowt_solution_finder_sample_concerns();
+    _sprowt_solution_finder_sample_webforms();
+    _sprowt_solution_finder_sample_solution('solution.export');
+    _sprowt_solution_finder_sample_solution('solution2.export');
+    _sprowt_solution_finder_sample_set_testimonial_field('solution.export');
+    _sprowt_solution_finder_sample_set_testimonial_field('solution2.export');
+}
+
+
+
+function _sprowt_solution_finder_sample_solution($solutionFileName) {
+    require_once DRUPAL_ROOT . '/includes/utility.inc';
+    $path = drupal_get_path('module', 'sprowt_solution_finder');
+    $existing = variable_get('node_export_existing', 'new');
+
+    $exportFile = $path . '/nodes/' . $solutionFileName;
     $export = file_get_contents($exportFile);
 
     $array = [];
@@ -510,6 +558,7 @@ function _sprowt_solution_finder_sample_nodes() {
         }
         _sprowt_solution_finder_convert_entity_refrence_fields($obj);
         _sprowt_solution_finder_convert_blockreference_fields($obj);
+        //_sprowt_solution_finder_set_testimonial_fields($obj, '', $testimonial_nids);
     }
 
     if(!empty($array)) {
@@ -533,6 +582,29 @@ function _sprowt_solution_finder_sample_nodes() {
             ")->fetchCol();
         $n->field_concerns = $concern_nids;
 
+        $n->save();
+    }
+    variable_set('node_export_existing', $existing);
+}
+
+function _sprowt_solution_finder_sample_set_testimonial_field($solutionFileName) {
+    require_once DRUPAL_ROOT . '/includes/utility.inc';
+    $path = drupal_get_path('module', 'sprowt_solution_finder');
+    $exportFile = $path . '/nodes/' . $solutionFileName;
+    $export = file_get_contents($exportFile);
+
+    $array = [];
+    eval('$array = ' . $export . ';');
+
+    foreach($array as $key => $obj) {
+        $ids = entity_get_id_by_uuid('node', array($obj->uuid));
+        if(empty($ids)) {
+            return false;
+        }
+
+        $id = array_shift($ids);
+        $node = node_load($id);
+
         $testimonial_nids = db_query("
             SELECT nid
             FROM node
@@ -540,11 +612,73 @@ function _sprowt_solution_finder_sample_nodes() {
             AND status = 1
             LIMIT 3
         ")->fetchCol();
-        $n->field_testimonial_ref = $testimonial_nids;
-        $n->save();
 
+        _sprowt_solution_finder_set_all_field_values('node', $node, 'field_testimonial_ref', $testimonial_nids);
     }
-    variable_set('node_export_existing', $existing);
+
+}
+
+function _sprowt_solution_finder_set_all_field_values($entity_type, $entity, $field_name, $value) {
+    $e = entity_metadata_wrapper($entity_type, $entity);
+    $instance = field_info_instance($entity_type, $field_name, $e->getBundle());
+    if(!empty($instance)) {
+        $e->{$field_name}->set($value);
+        $e->save();
+    }
+
+    $paragraph_ids = _sprowt_solution_finder_find_all_paragraph_ids($entity_type, $e->getIdentifier());
+
+    $paragraphs = entity_load('paragraphs_item', $paragraph_ids);
+    foreach($paragraphs as $paragraph) {
+        $e = entity_metadata_wrapper('paragraphs_item', $paragraph);
+        $instance = field_info_instance('paragraphs_item', $field_name, $e->getBundle());
+        if(!empty($instance)) {
+            $e->{$field_name}->set($value);
+            $e->save();
+        }
+    }
+
+}
+
+
+
+function _sprowt_solution_finder_find_all_paragraph_ids($entity_type, $entity_id, &$ids = []) {
+    $paragraph_fields = _sprowt_solution_finder_get_paragraph_field_names();
+
+    $FromSql = '';
+
+    foreach($paragraph_fields as $i => $field_name) {
+        if(!empty($FromSql)) {
+            $FromSql .= "\nUNION\n";
+        }
+
+        $alias = "t$i";
+
+        $FromSql .= "
+            SELECT entity_type, entity_id as 'parent_id', {$field_name}_value as 'item_id'
+            FROM field_data_{$field_name} $alias
+        ";
+    }
+
+    $firstLevelIds = db_query("
+        SELECT item_id
+        FROM ($FromSql) fs
+        WHERE entity_type = :entity_type
+        AND parent_id = :entity_id
+    ", [
+        ':entity_type' => $entity_type,
+        ':entity_id' => $entity_id
+    ])->fetchCol();
+
+    if(!empty($firstLevelIds)) {
+        $ids = array_merge($ids, $firstLevelIds);
+        foreach($firstLevelIds as $p_id) {
+            _sprowt_solution_finder_find_all_paragraph_ids('paragraphs_item', $p_id, $ids);
+        }
+    }
+
+    return $ids;
+
 }
 
 function _sprowt_solution_finder_convert_blockreference_fields(&$var, $field_name = '') {
@@ -577,6 +711,31 @@ function _sprowt_solution_finder_convert_blockreference_fields(&$var, $field_nam
     });
 }
 
+function _sprowt_solution_finder_get_paragraph_field_names($reset = false) {
+    $fields = &drupal_static(__FUNCTION__);
+    if(!isset($fields) || $reset) {
+        $fields = db_query("
+            SELECT field_name
+            FROM field_config
+            WHERE type = 'paragraphs'
+        ")->fetchCol();
+    }
+
+    return $fields;
+}
+
+function _sprowt_solution_finder_get_field_collection_field_names($reset = false) {
+    $fields = &drupal_static(__FUNCTION__);
+    if(!isset($fields) || $reset) {
+        $fields = db_query("
+            SELECT field_name
+            FROM field_config
+            WHERE type = 'field_collection'
+        ")->fetchCol();
+    }
+
+    return $fields;
+}
 
 function _sprowt_solution_finder_get_entity_refrence_field_names($reset = false) {
     $fields = &drupal_static(__FUNCTION__);
@@ -713,6 +872,15 @@ function sprowt_solution_finder_features_post_restore($op, $items)
                 drupal_set_message("Example Solution with example concerns added. Solution: " . $link . '!');
             }
             variable_del('sprowt_solution_finder_being_enabled');
+        }
+    }
+}
+
+function sprowt_solution_finder_preprocess_block(&$variables) {
+    if($variables["block"]->module == 'webform') {
+        $node = $variables["elements"]["#node"];
+        if($node->uuid == 'd6a5c04b-84bb-4bff-ac0b-0bf90767fd24') { //solution webform
+            $variables["block"]->subject = '<none>';
         }
     }
 }

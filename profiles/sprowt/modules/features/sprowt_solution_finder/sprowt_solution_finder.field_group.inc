@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_solution_finder.field_group.inc
@@ -85,6 +86,8 @@ function sprowt_solution_finder_field_group_info() {
       0 => 'field_content',
       1 => 'field_hero_image',
       2 => 'field_learn_more_link',
+      3 => 'field_learn_more_text',
+      4 => 'field_subtitle',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

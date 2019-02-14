@@ -79,14 +79,19 @@
  */
 ?>
 <article<?php print $attributes; ?>>
-    <header class="solution--full--header" style="background-image: url('<?php print render($content['field_hero_image']); ?>');">
+    <header class="<?php echo implode(' ', $header_classes); ?>" style="background-image: url('<?php print render($content['field_hero_image']); ?>');">
         <div class="interior">
             <div class="pre-title">Your Recommended Solution Is</div>
             <?php print render($title_prefix); ?>
             <h1<?php print $title_attributes; ?>><?php print $title; ?></h1>
             <?php print render($title_suffix); ?>
+            <?php print render($content['field_subtitle']); ?>
             <div class="post-title">
+                <?php if(empty($field_learn_more_text)): ?>
                 <div class="learn-more">Learn More About <?php print $title; ?></div>
+                <?php else: ?>
+                    <div class="learn-more"><?php print render($content['field_learn_more_text']); ?></div>
+                <?php endif; ?>
                 <?php print render($content['field_learn_more_link']); ?>
             </div>
         </div>

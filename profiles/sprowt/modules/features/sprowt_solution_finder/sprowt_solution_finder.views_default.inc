@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_solution_finder.views_default.inc

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_paragraphs.features.inc
@@ -18,6 +19,11 @@ function sprowt_paragraphs_ctools_plugin_api($module = NULL, $api = NULL) {
  */
 function sprowt_paragraphs_paragraphs_info() {
   $items = array(
+    'aggregate_review_testimonial' => array(
+      'name' => 'Aggregate Review Testimonial',
+      'bundle' => 'aggregate_review_testimonial',
+      'locked' => '1',
+    ),
     'annotated_image' => array(
       'name' => 'Annotated Image',
       'bundle' => 'annotated_image',
@@ -33,6 +39,11 @@ function sprowt_paragraphs_paragraphs_info() {
       'bundle' => 'body',
       'locked' => '1',
     ),
+    'cta' => array(
+      'name' => 'CTA',
+      'bundle' => 'cta',
+      'locked' => '1',
+    ),
     'image_break' => array(
       'name' => 'Image Break',
       'bundle' => 'image_break',
@@ -46,6 +57,11 @@ function sprowt_paragraphs_paragraphs_info() {
     'modal' => array(
       'name' => 'Modal',
       'bundle' => 'modal',
+      'locked' => '1',
+    ),
+    'overlap' => array(
+      'name' => 'Overlap',
+      'bundle' => 'overlap',
       'locked' => '1',
     ),
     'paragraphs' => array(

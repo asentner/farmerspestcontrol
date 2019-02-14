@@ -81,6 +81,11 @@ function sprowt_paragraphs_theme($existing, $type, $theme, $path)
             'path' => $paragraphs_module_path . '/theme',
             'base hook' => 'paragraphs_item',
         ),
+        'paragraphs_item__aggregate_review_testimonial__full' => array (
+            'template' => 'paragraphs-item--aggregate-review-testimonial--full',
+            'path' => $path . '/theme',
+            'base hook' => 'paragraphs_item',
+        ),
     );
 }
 
@@ -188,6 +193,38 @@ function sprowt_paragraphs_preprocess_paragraphs_item(&$variables)
         drupal_add_js(drupal_get_path('module', 'sprowt_paragraphs') . '/js/modal.js');
     }
 
+    if($variables['elements']['#bundle'] == 'aggregate_review_testimonial') {
+        $paragraph = entity_metadata_wrapper('paragraphs_item', $item);
+        $icon = $paragraph->field_service_icon->value();
+        $icon_other = $paragraph->field_service_icon_other->value();
+        $variables['rating'] = $paragraph->field_rating->value();
+        $variables['review_count'] = $paragraph->field_review_count->value();
+        $testimonials = $paragraph->field_testimonial_ref->value();
+        $variables['testimonial'] = null;
+        if(!empty($testimonials)) {
+            $randKey = rand(0, (count($testimonials) - 1));
+            $testimonialItem = $testimonials[$randKey];
+            $t = entity_metadata_wrapper('node', $testimonialItem);
+            $testimonial = $t->body->value();
+            $variables['testimonial'] = $testimonial['value'];
+        }
+        $variables['icon_class'] = [];
+        if(!empty($icon_other)) {
+            $icon_other = trim($icon_other);
+            if(preg_match('/\s/', $icon_other)) {
+                $variables['icon_class'] = preg_split('/\s/', $icon_other);
+                $variables['icon_class'][] = 'fa-' . $variables['icon_class'][0];
+            }
+            else {
+                $variables['icon_class'][] = 'fa-' . $icon_other;
+            }
+        }
+        else if (!empty($icon)){
+            $variables['icon_class'][] = 'fa-' . $icon;
+        }
+
+
+    }
 }
 
 /**
@@ -236,9 +273,8 @@ function sprowt_paragraphs_preprocess_field(&$variables)
         
         
         foreach($items as $delta => $item) {
-            $classes = array(
-                'field__item'
-            );
+            $classes = !empty($variables['items_classes_array'][$delta]) ? $variables['items_classes_array'][$delta] : [];
+            $classes[] = 'field__item';
             $classes[] = ($delta + 1) % 2 ? 'odd' : 'even';
             foreach($item['entity']['paragraphs_item'] as $paragraph) {
                 $custom_class = field_get_items('paragraphs_item', $paragraph['#entity'], 'field_custom_class');
@@ -254,9 +290,26 @@ function sprowt_paragraphs_preprocess_field(&$variables)
                 $bundle = $paragraph['#bundle'];
                 $wrap_class = 'paragraphs-item-' . drupal_clean_css_identifier($bundle);
                 $classes[] = $wrap_class . '--wrap';
+
+                if($bundle == 'overlap') {
+                    if($delta != 0) {
+                        if(empty($variables['items_classes_array'][$delta - 1])) {
+                            $variables['items_classes_array'][$delta - 1] = [];
+                        }
+                        $variables['items_classes_array'][$delta - 1][] = 'overlap-item--ahead';
+                    }
+                    if($delta != (count($items) - 1)) {
+                        if(empty($variables['items_classes_array'][$delta + 1])) {
+                            $variables['items_classes_array'][$delta + 1] = [];
+                        }
+                        $variables['items_classes_array'][$delta + 1][] = 'overlap-item--behind';
+                    }
+                }
+
             }
 
             $variables['items_classes_array'][$delta] = $classes;
+
         }
     }
 }
