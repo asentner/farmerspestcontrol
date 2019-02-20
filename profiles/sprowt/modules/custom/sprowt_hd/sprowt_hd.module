@@ -169,7 +169,7 @@ function _sprowt_hd_submit($form, &$form_state)
     // If any of the variables are empty, no need to continue.
     if (empty($account_id) || empty($access_key) || empty($secret_key)) {
         // Let the developer know we are missing something
-        watchdog('error', 'Sprowt SpeedLead form reactor cannot communicate with CTM because the account id, access key and/or secret, key is not set', array(), WATCHDOG_ERROR);
+        watchdog('SpeedLead', 'Sprowt SpeedLead form reactor cannot communicate with CTM because the account id, access key and/or secret, key is not set', array(), WATCHDOG_ERROR);
         return;
     }
     
@@ -245,11 +245,12 @@ function _sprowt_hd_submit($form, &$form_state)
         curl_close($ch);
 
         if (is_array($response)) {
-            if ($response['status'] == 'error') {
-                if (isset($response['text'])) {
-                    watchdog('error', 'Sprowt SpeedLead form reactor failed due to an error. Here is the response from CTM: %message', array('%message' => $response['text']), WATCHDOG_ERROR);
-                }
+            if (empty($response['status']) || (!empty($response['status']) && $response['status'] != 'success')) {
+                watchdog('SpeedLead', 'Sprowt SpeedLead form reactor failed due to an error. Here is the response from CTM: %message', array('%message' => '<pre>' . print_r($response, true) . '</pre>'), WATCHDOG_ERROR);
             }
+        }
+        else {
+            watchdog('SpeedLead', 'Sprowt SpeedLead form reactor failed due to an error. Here is the response from CTM: %message', array('%message' => '<pre>' . print_r($response, true) . '</pre>'), WATCHDOG_ERROR);
         }
     }
 }
