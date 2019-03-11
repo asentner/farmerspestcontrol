@@ -831,6 +831,9 @@ function _sprowt_settings_get_address(){
         ORDER BY n.created ASC
     ")->fetchField();
     
+    if(empty($nid)) {
+        return [];
+    }
     $location = new NodeBuilder(node_load($nid));
     
     $location_array = array(
