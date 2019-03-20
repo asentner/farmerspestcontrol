@@ -39,6 +39,23 @@ function sprowt_custom_colors_preprocess_node(&$variables)
 
 
 /**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_custom_colors_preprocess_field(&$variables)
+{
+    $fields = [
+        'field_colors',
+        'field_lp_package_colors'
+    ];
+
+    $element = $variables["element"];
+    if(in_array($element["#field_name"], $fields)) {
+        $variables["label_hidden"] = true;
+        $variables["label"] = null;
+    }
+}
+
+/**
  * Implements hook_entity_load().
  */
 function sprowt_custom_colors_entity_load($entities, $type)
@@ -93,6 +110,10 @@ function sprowt_custom_colors_preprocess_paragraphs_item(&$variables)
     $variables['attributes_array']['id'] = $item->html_unique_id;
     $current_path = current_path();
     if($variables['elements']['#bundle'] == 'colors' && !path_is_admin($current_path)) {
+
+        $variables['theme_hook_suggestions'] = [
+          'paragraphs_items__field_colors'
+        ];
 
         $parent = $item->hostEntity();
         $parentType = $item->hostEntityType();
