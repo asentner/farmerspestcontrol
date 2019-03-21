@@ -1142,7 +1142,26 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
                 $replacements[$original] = variable_get('sprowt_settings_webform_to_email', '');
         }
     }
-    
+    if($type == 'sprowt') {
+        foreach($tokens as $name => $original) {
+            switch($name) {
+                case 'company_name':
+                    $replacements[$original] = variable_get('sprowt_settings_company_name', '');
+                    break;
+                case 'sprowt_phone':
+                    $replacements[$original] = '<a href="tel:+1'.sprowt_settings_get_phone_number('$1$2$3').'">'.sprowt_settings_get_phone_number().'</a>';
+                    break;
+                case 'sprowt_phone:text_only':
+                    $replacements[$original] = sprowt_settings_get_phone_number();
+                    break;
+                case 'sprowt_phone:unformatted':
+                    $replacements[$original] = sprowt_settings_get_phone_number('$1$2$3');
+                    break;
+                case 'sprowt_webform_to_email':
+                    $replacements[$original] = variable_get('sprowt_settings_webform_to_email', '');
+            }
+        }
+    }
     
     // Site tokens.
     if ($type == 'site') {
