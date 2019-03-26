@@ -112,7 +112,7 @@ function _webform_zipcode_restriction_autocomplete($nid, $cid, $str = '') {
     $comp = $components[$cid];
     $rests = $comp['extra']['restrictions'];
     $rests = explode("\n", $rests);
-    $rests = array_filter($rests, function($v, $k) use($str){
+    $rests = array_filter($rests, function($v) use($str){
         return strpos($v, $str) === 0;
     });
     
