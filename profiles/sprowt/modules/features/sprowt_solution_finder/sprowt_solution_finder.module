@@ -523,6 +523,9 @@ function _sprowt_solution_finder_sample_webforms() {
     $webformArray = json_decode($json, true);
     foreach($webformArray as $webformJson) {
         $uuid = $webformJson['uuid'];
+        if(module_exists('authorizenetwebform')) {
+            $webformJson['use_authorizenet'] = 0;
+        }
         if(empty(entity_get_id_by_uuid('node', array($uuid)))) {
             node_export_import(json_encode(array($webformJson)));
         }

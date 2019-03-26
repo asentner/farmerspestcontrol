@@ -56,7 +56,10 @@ function paragraphs_disable_disable($entity) {
  *
  * @return mixed
  */
-function paragraphs_disable_enable($entity) {
+function paragraphs_disable_enable($entity = null) {
+    if(null === $entity) {
+        return $entity;
+    }
     if(paragraphs_disable_paragraph_is_disabled($entity)) {
         db_delete('paragraphs_disable')
             ->condition('item_id', $entity-> item_id)
