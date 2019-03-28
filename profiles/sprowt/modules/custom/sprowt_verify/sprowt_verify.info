@@ -1,0 +1,6 @@
+name = Sprowt Verify
+description = Allows you to upload a file for verification purposes
+core = 7.x
+version = "7.x-1.0"
+package = Sprowt
+configure = admin/config/sprowt/sprowt-verify

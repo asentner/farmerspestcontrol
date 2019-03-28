@@ -1,0 +1,165 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function sprowt_verify_menu() {
+
+    $items = [];
+
+    $items['sprowt-veryify/%'] = [
+        'page callback' => '_sprowt_verify_display_file',
+        'page arguments' => [1],
+        'access callback' => true,
+        'type' => MENU_CALLBACK
+    ];
+
+    $items['admin/config/sprowt/sprowt-verify'] = [
+        'title' => 'Sprowt Verify',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => ['_sprowt_verify_admin_form'],
+        'access arguments' => array('administer site configuration'),
+    ];
+
+    return $items;
+
+}
+
+
+function _sprowt_verify_admin_form($form, &$form_state) {
+    global $base_url;
+
+    $files = variable_get('sprowt_verify_files', []);
+
+    if(!empty($files)) {
+        $form['files'] = [
+            '#type' => 'fieldset',
+            '#title' => 'Verification Files'
+        ];
+    }
+
+    foreach($files as $fid => $file) {
+        $form['files']['fieldset_' . $file['fid']] = [
+            '#prefix' => '<div>',
+            '#suffix' => '</div>',
+            'link' => [
+                '#type' => 'markup',
+                '#markup' => l(_sprowt_veryify_create_url($file), _sprowt_veryify_create_url($file), [
+                    'attributes' => [
+                        'target' => '_blank'
+                    ]
+                ]),
+                '#prefix' => '<span style="margin-right: 20px; display: inline-block">',
+                '#suffix' => '</span>'
+            ],
+            'remove' => [
+                '#type' => 'submit',
+                '#value' => 'Remove',
+                '#name' => 'remove_' . $fid,
+                '#submit' => ['_sprowt_verify_admin_form_remove']
+            ]
+        ];
+    }
+
+    $form['html_file'] = [
+        '#type' => 'file',
+        '#title' => 'Upload a file to be verified',
+    ];
+
+    $form['html_file_path'] = [
+        '#type' => 'textfield',
+        '#title' => 'File path',
+        '#description' => 'Add an optional path that file should be located at. e.g. "/verify/",the file would then be located at ' . $base_url . '/verify/verification_file.html',
+
+    ];
+
+    $form['submit'] = [
+        '#type' => 'submit',
+        '#value' => 'Save',
+        '#submit' => ['_sprowt_verify_admin_form_submit']
+    ];
+
+    return $form;
+
+}
+
+function _sprowt_veryify_create_url($file) {
+    $path = !empty($file['path']) ? $file['path'] : '/';
+    $name = $file['name'];
+
+    return $path . $name;
+}
+
+function _sprowt_verify_admin_form_submit($form, $form_state) {
+    $values = $form_state['values'];
+
+    $file = file_save_upload('html_file', [
+        'file_validate_extensions' => []
+    ]);
+
+    $file = file_move($file, 'public://');
+    $file->status = FILE_STATUS_PERMANENT;
+    file_save($file);
+    file_usage_add($file, 'sprowt_verify', 'sprowt_verify', $file->fid);
+
+    $files = variable_get('sprowt_verify_files', []);
+
+    $path = trim($values['html_file_path'], '/');
+    $path = trim($path);
+
+    $path = "/$path/";
+
+
+    $fileVal = [
+        'fid' => $file->fid,
+        'path' => ($path === '//') ? null : $path,
+        'name' => $file->filename
+    ];
+
+    $alias = _sprowt_veryify_create_url($fileVal);
+    $alias = ltrim($alias, '/');
+
+    $path = [
+        'source' => 'sprowt-veryify/' . $file->fid,
+        'alias' => $alias
+    ];
+
+    path_save($path);
+
+    $fileVal['alias'] = $alias;
+
+    $files[$file->fid] = $fileVal;
+    variable_set('sprowt_verify_files', $files);
+}
+
+function _sprowt_verify_admin_form_remove($form, $form_state) {
+    $values = $form_state['values'];
+
+    foreach($values as $key => $val) {
+        if(strpos($key, 'remove_') !== false) {
+            $fid = str_replace('remove_', '', $key);
+        }
+    }
+
+    if(!empty($fid)) {
+        $file = file_load($fid);
+        file_delete($file);
+        file_usage_delete($file, 'sprowt_verify');
+        $files = variable_get('sprowt_verify_files', []);
+        unset($files[$fid]);
+        variable_set('sprowt_verify_files', $files);
+    }
+
+}
+
+function _sprowt_verify_display_file($fid) {
+    $files = variable_get('sprowt_verify_files', []);
+    if(empty($files[$fid])) {
+        return drupal_access_denied();
+    }
+
+    $file = file_load($fid);
+    $path = drupal_realpath($file->uri);
+
+    echo file_get_contents($path);
+}
