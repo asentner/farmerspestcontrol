@@ -1,0 +1,6 @@
+name = Tech Forms
+description = Provides webform integration with PestPac.
+core = 7.x
+version = 7.x-1.0
+package = Sprowt
+dependencies[]=pestpac_api

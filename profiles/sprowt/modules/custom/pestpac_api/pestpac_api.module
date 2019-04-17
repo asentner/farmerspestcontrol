@@ -1,0 +1,19 @@
+<?php
+
+require_once drupal_get_path('module', 'pestpac_api') . '/PestPacApi.php';
+require_once drupal_get_path('module', 'pestpac_api') . '/PestPacOauth.php';
+
+function pestpac_api_menu(){
+    $items['admin/config/services/pestpac-settings'] = array(
+      'title' => 'PestPac API Settings',
+      'description' => 'PestPac Api Settings',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('pestpac_api_admin'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_NORMAL_ITEM,
+      'file' => 'pestpac_api.pages.inc',
+      'position' => 'left'
+    );
+    
+    return $items;
+}

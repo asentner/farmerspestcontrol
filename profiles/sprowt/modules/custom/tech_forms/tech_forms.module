@@ -1,0 +1,135 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function tech_forms_menu() {
+  $items = array();
+  $items['node/%webform_menu/webform/configure-tech-forms'] = array(
+    'title' => 'Tech Forms Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tech_forms_webform_settings', 1),
+    'access callback' => 'node_access',
+    'access arguments' => array('update', 1),
+    'weight' => 10,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+function tech_forms_form_alter(&$form, &$form_state, $form_id){
+  if (strpos($form_id, 'webform_client_form_') !== false) {
+    $form['#submit'][] = '_onWebformSubmit';
+  }
+}
+
+/**
+ * Checks if the global array tech_forms contains a specific nid.
+ * If the array contains the nid, it fetches the associated saved field data
+ * for the particular node.
+ * If no nid is present (i.e. you are enabling a new webform) it sets the values to
+ * their defaults for that nid.
+ *
+ * @param $nid
+ *
+ * @return array
+
+ */
+function _tech_forms_admin_value($nid) {
+  $tech_forms = variable_get('tech_forms', array());
+  $values = array(
+    'tech_forms_enabled' => false,
+  );
+  if(!empty($tech_forms[$nid])) {
+    $values = $tech_forms[$nid];
+  }
+
+  return $values;
+}
+
+function techFormComponents(){
+  $components = [
+    [
+      'name' => 'LocationID',
+      'form_key' => 'locationid',
+      'type' => 'textfield',
+      'mandatory' => 0,
+      'weight' => 0,
+      'pid' => 0,
+      'value' => '',
+    ],
+    [
+      'name' => 'First Name',
+      'form_key' => 'first_name',
+      'type' => 'textfield',
+      'mandatory' => 0,
+      'weight' => 0,
+      'pid' => 0,
+      'value' => '',
+    ],
+    [
+      'name' => 'Email',
+      'form_key' => 'email',
+      'type' => 'email',
+      'mandatory' => 0,
+      'weight' => 0,
+      'pid' => 0,
+      'value' => '',
+    ]
+  ];
+
+  return $components;
+
+}
+
+function syncTechFormComponents($node,$components){
+/*
+ * will grab existing form components and check to see if any of the components to be synced are already present
+ * if the fields aren't present, it will insert the webform component into the current form.
+ */
+}
+
+function tech_forms_webform_settings($form, $form_state, $node){
+  module_load_include('inc', 'webform', 'includes/webform.components');
+  $admin_values = _tech_forms_admin_value($node->nid);
+
+  $form['nid'] = array(
+    '#type' => 'hidden',
+    '#value' => $node->nid,
+  );
+
+  $form['tech_forms_enabled'] = array(
+    '#title' => t('Enable Tech Form Integration'),
+    '#type' => 'checkbox',
+    '#weight' => 0,
+    '#default_value' => $admin_values['tech_forms_enabled'],
+  );
+
+  $form['submit'] = array(
+    '#weight' => 100,
+    '#type' => 'submit',
+    '#value' => ('Save Configuration'),
+  );
+
+
+  $form['#submit'][] = 'tech_forms_webform_settings_submit';
+
+  return $form;
+
+}
+
+
+function tech_forms_webform_settings_submit($form, $form_state) {
+  $values = $form_state['values'];
+
+  $nid = $values['nid'];
+  unset($values['nid']);
+
+  $tech_forms = variable_get('tech_forms', array());
+  $tech_forms[$nid] = $values;
+
+  variable_set('tech_forms', $tech_forms);
+}
+
+
