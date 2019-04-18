@@ -1,5 +1,7 @@
 <?php
-
+require_once drupal_get_path('module', 'pestpac_api') . '/PestPacApi.php';
+require_once drupal_get_path('module', 'pestpac_api') . '/PestPacOauth.php';
+require_once drupal_get_path('module', 'pestpac_api') . '/PestPac.php';
 /**
  * Implements hook_menu().
  */
@@ -20,8 +22,39 @@ function tech_forms_menu() {
 
 function tech_forms_form_alter(&$form, &$form_state, $form_id){
   if (strpos($form_id, 'webform_client_form_') !== false) {
-    $form['#submit'][] = '_onWebformSubmit';
+    $form['#prefix'] = '<div id="tech-form-results">';
+    $form['#suffix'] = '</div>';
+    $form['actions']['submit']['#value'] = t('Publish');
+    if(!empty($form["submitted"]["locationid"])){
+      $form["submitted"]["locationid"]["#ajax"] = [
+        "callback" => "tech_forms_locationid_callback",
+        'wrapper' => 'tech-form-results'
+      ];
+    }
   }
+}
+
+//todo add more validation
+function tech_forms_locationid_callback($form, $form_state){
+  if(!empty($form["submitted"]["locationid"]["#value"])){
+    $locationID = $form["submitted"]["locationid"]["#value"];
+    $pp = new PestPac();
+    $entity = [
+      "name" => "Locations",
+      "id" => $locationID
+    ];
+
+    $ppLocation = $pp->get($entity);
+    $form["submitted"]["name"]["first_name"]["#value"] = $ppLocation["FirstName"];
+    $form["submitted"]["name"]["last_name"]["#value"] = $ppLocation["LastName"];
+    $form["submitted"]["contact"]["email"]["#value"] = $ppLocation["EMail"];
+
+  }else{
+    form_set_error("Location ID is required!");
+  }
+
+  $form_state['rebuild'] = true;
+  return $form;
 }
 
 /**
@@ -84,14 +117,31 @@ function techFormComponents(){
 }
 
 function syncTechFormComponents($node,$components){
-/*
- * will grab existing form components and check to see if any of the components to be synced are already present
- * if the fields aren't present, it will insert the webform component into the current form.
- */
+  module_load_include('inc', 'webform', 'includes/webform.components');
+  if(!empty($node)){
+    $currComponents = $node->webform['components'];
+
+    foreach($components as $cKey => $cVal){
+      $found = false;
+      foreach($currComponents as $currKey => $currVal){
+        if($cVal["form_key"] === $currVal["form_key"]){
+          $found = true; //component found so we won't add it to the webform
+        }
+      }
+      if(!$found){
+        $cVal['nid'] = $node->nid;
+        $cVal['machine_name'] = "__".$cVal["form_key"];
+        $node->webform['components'][] = $cVal;
+        webform_component_insert($cVal);
+      }
+    }
+  }
+
+
 }
 
 function tech_forms_webform_settings($form, $form_state, $node){
-  module_load_include('inc', 'webform', 'includes/webform.components');
+
   $admin_values = _tech_forms_admin_value($node->nid);
 
   $form['nid'] = array(
@@ -122,8 +172,9 @@ function tech_forms_webform_settings($form, $form_state, $node){
 
 function tech_forms_webform_settings_submit($form, $form_state) {
   $values = $form_state['values'];
-
   $nid = $values['nid'];
+  $node = node_load($nid);
+  syncTechFormComponents($node,techFormComponents());
   unset($values['nid']);
 
   $tech_forms = variable_get('tech_forms', array());
