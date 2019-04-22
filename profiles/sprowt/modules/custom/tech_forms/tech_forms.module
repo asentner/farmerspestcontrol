@@ -6,86 +6,99 @@ require_once drupal_get_path('module', 'pestpac_api') . '/PestPac.php';
  * Implements hook_menu().
  */
 function tech_forms_menu() {
-  $items = array();
-  $items['node/%webform_menu/webform/configure-tech-forms'] = array(
+  $items = [];
+  $items['node/%webform_menu/webform/configure-tech-forms'] = [
     'title' => 'Tech Forms Settings',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('tech_forms_webform_settings', 1),
+    'page arguments' => ['tech_forms_webform_settings', 1],
     'access callback' => 'node_access',
-    'access arguments' => array('update', 1),
+    'access arguments' => ['update', 1],
     'weight' => 10,
     'type' => MENU_LOCAL_TASK,
-  );
+  ];
 
   return $items;
 }
 
-function tech_forms_form_alter(&$form, &$form_state, $form_id){
-  if (strpos($form_id, 'webform_client_form_') !== false) {
+function tech_forms_webform_settings($form, $form_state, $node) {
+
+  $admin_values = _tech_forms_admin_value($node->nid);
+
+  $form['nid'] = [
+    '#type' => 'hidden',
+    '#value' => $node->nid,
+  ];
+
+  $form['tech_forms_enabled'] = [
+    '#title' => t('Enable Tech Form Integration'),
+    '#type' => 'checkbox',
+    '#weight' => 0,
+    '#default_value' => $admin_values['tech_forms_enabled'],
+  ];
+
+  $form['submit'] = [
+    '#weight' => 100,
+    '#type' => 'submit',
+    '#value' => ('Save Configuration'),
+  ];
+
+
+  $form['#submit'][] = 'tech_forms_webform_settings_submit';
+
+  return $form;
+
+}
+
+function tech_forms_form_alter(&$form, &$form_state, $form_id) {
+  if (strpos($form_id, 'webform_client_form_') !== FALSE) {
     $form['#prefix'] = '<div id="tech-form-results">';
     $form['#suffix'] = '</div>';
-    $form['actions']['submit']['#value'] = t('Publish');
-    if(!empty($form["submitted"]["locationid"])){
+    if (!empty($form["submitted"]["locationid"])) {
       $form["submitted"]["locationid"]["#ajax"] = [
         "callback" => "tech_forms_locationid_callback",
-        'wrapper' => 'tech-form-results'
+        'wrapper' => 'tech-form-results',
       ];
     }
   }
-}
-
-//todo add more validation
-function tech_forms_locationid_callback($form, $form_state){
-  if(!empty($form["submitted"]["locationid"]["#value"])){
-    $locationID = $form["submitted"]["locationid"]["#value"];
-    $pp = new PestPac();
-    $entity = [
-      "name" => "Locations",
-      "id" => $locationID
-    ];
-
-    $ppLocation = $pp->get($entity);
-    $form["submitted"]["name"]["first_name"]["#value"] = $ppLocation["FirstName"];
-    $form["submitted"]["name"]["last_name"]["#value"] = $ppLocation["LastName"];
-    $form["submitted"]["contact"]["email"]["#value"] = $ppLocation["EMail"];
-
-  }else{
-    form_set_error("Location ID is required!");
-  }
-
-  $form_state['rebuild'] = true;
-  return $form;
 }
 
 /**
  * Checks if the global array tech_forms contains a specific nid.
  * If the array contains the nid, it fetches the associated saved field data
  * for the particular node.
- * If no nid is present (i.e. you are enabling a new webform) it sets the values to
- * their defaults for that nid.
+ * If no nid is present (i.e. you are enabling a new webform) it sets the
+ * values to their defaults for that nid.
  *
  * @param $nid
  *
  * @return array
-
  */
 function _tech_forms_admin_value($nid) {
-  $tech_forms = variable_get('tech_forms', array());
-  $values = array(
-    'tech_forms_enabled' => false,
-  );
-  if(!empty($tech_forms[$nid])) {
+  $tech_forms = variable_get('tech_forms', []);
+  $values = [
+    'tech_forms_enabled' => FALSE,
+  ];
+  if (!empty($tech_forms[$nid])) {
     $values = $tech_forms[$nid];
   }
 
   return $values;
 }
 
-function techFormComponents(){
+function techFormComponents() {
   $components = [
     [
       'name' => 'LocationID',
       'form_key' => 'locationid',
+      'type' => 'textfield',
+      'mandatory' => 1,
+      'weight' => -50,
+      'pid' => 0,
+      'value' => '',
+    ],
+    [
+      'name' => 'First Name',
+      'form_key' => 'first_name',
       'type' => 'textfield',
       'mandatory' => 0,
       'weight' => 0,
@@ -93,8 +106,8 @@ function techFormComponents(){
       'value' => '',
     ],
     [
-      'name' => 'First Name',
-      'form_key' => 'first_name',
+      'name' => 'Last Name',
+      'form_key' => 'last_name',
       'type' => 'textfield',
       'mandatory' => 0,
       'weight' => 0,
@@ -109,28 +122,28 @@ function techFormComponents(){
       'weight' => 0,
       'pid' => 0,
       'value' => '',
-    ]
+    ],
   ];
 
   return $components;
 
 }
 
-function syncTechFormComponents($node,$components){
+function syncTechFormComponents($node, $components) {
   module_load_include('inc', 'webform', 'includes/webform.components');
-  if(!empty($node)){
+  if (!empty($node)) {
     $currComponents = $node->webform['components'];
 
-    foreach($components as $cKey => $cVal){
-      $found = false;
-      foreach($currComponents as $currKey => $currVal){
-        if($cVal["form_key"] === $currVal["form_key"]){
-          $found = true; //component found so we won't add it to the webform
+    foreach ($components as $cKey => $cVal) {
+      $found = FALSE;
+      foreach ($currComponents as $currKey => $currVal) {
+        if ($cVal["form_key"] === $currVal["form_key"]) {
+          $found = TRUE; //component found so we won't add it to the webform
         }
       }
-      if(!$found){
+      if (!$found) {
         $cVal['nid'] = $node->nid;
-        $cVal['machine_name'] = "__".$cVal["form_key"];
+        $cVal['machine_name'] = "__" . $cVal["form_key"];
         $node->webform['components'][] = $cVal;
         webform_component_insert($cVal);
       }
@@ -140,33 +153,59 @@ function syncTechFormComponents($node,$components){
 
 }
 
-function tech_forms_webform_settings($form, $form_state, $node){
+function tech_forms_locationid_callback($form, $form_state) {
+  if (!empty($form["submitted"]["locationid"]["#value"])) {
+    $locationID = $form["submitted"]["locationid"]["#value"];
+    $hasNameFieldSet = FALSE;
+    $hasContactFieldSet = FALSE;
 
-  $admin_values = _tech_forms_admin_value($node->nid);
+    //set first name (because the first name field may not be under the "name" fieldset
+    if ($form["submitted"]["name"]) {
+      $hasNameFieldSet = TRUE;
+    }
+    if ($form["submitted"]["contact"]) {
+      $hasContactFieldSet = TRUE;
+    }
 
-  $form['nid'] = array(
-    '#type' => 'hidden',
-    '#value' => $node->nid,
-  );
+    $pp = new PestPac();
+    $entity = [
+      "name" => "Locations",
+      "id" => $locationID,
+    ];
 
-  $form['tech_forms_enabled'] = array(
-    '#title' => t('Enable Tech Form Integration'),
-    '#type' => 'checkbox',
-    '#weight' => 0,
-    '#default_value' => $admin_values['tech_forms_enabled'],
-  );
+    $ppLocation = $pp->get($entity);
+    if (!$ppLocation["code"]) {
 
-  $form['submit'] = array(
-    '#weight' => 100,
-    '#type' => 'submit',
-    '#value' => ('Save Configuration'),
-  );
+      //check if name fieldset exists
+      if ($hasNameFieldSet) {
+        $form["submitted"]["name"]["first_name"]["#value"] = $ppLocation["FirstName"];
+        $form["submitted"]["name"]["last_name"]["#value"] = $ppLocation["LastName"];
+      }
+      else {
+        $form["submitted"]["first_name"]["#value"] = $ppLocation["FirstName"];
+        $form["submitted"]["last_name"]["#value"] = $ppLocation["LastName"];
+      }
 
+      //check if contact fieldset exists
+      if ($hasContactFieldSet) {
+        $form["submitted"]["contact"]["email"]["#value"] = $ppLocation["EMail"];
+      }
+      else {
+        $form["submitted"]["email"]["#value"] = $ppLocation["EMail"];
+      }
 
-  $form['#submit'][] = 'tech_forms_webform_settings_submit';
+    }
+    else {
+      form_set_error("Tech Forms Error", "Invalid Location ID!");
+    }
 
+  }
+  else {
+    form_set_error("Tech Forms Error", "Location ID is required!");
+  }
+
+  $form_state['rebuild'] = TRUE;
   return $form;
-
 }
 
 
@@ -174,10 +213,10 @@ function tech_forms_webform_settings_submit($form, $form_state) {
   $values = $form_state['values'];
   $nid = $values['nid'];
   $node = node_load($nid);
-  syncTechFormComponents($node,techFormComponents());
+  syncTechFormComponents($node, techFormComponents());
   unset($values['nid']);
 
-  $tech_forms = variable_get('tech_forms', array());
+  $tech_forms = variable_get('tech_forms', []);
   $tech_forms[$nid] = $values;
 
   variable_set('tech_forms', $tech_forms);
