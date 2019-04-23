@@ -1,0 +1,31 @@
+.tech-form{
+  .l-main{
+    margin-top:2em;
+  }
+  .l-breadcrumb{
+    display:none;
+  }
+  .block--logo-block-logo{
+    display:none;
+  }
+  .webform-privacy-policy{
+    display:none;
+  }
+  .block--nav-mobile-utility{
+    display:none;
+  }
+  .block--nav-utility-footer{
+    display:none;
+  }
+  .block--nav-main{
+    display:none;
+  }
+  .block--nav-utility{
+    display:none;
+  }
+  @include breakpoint($desk){
+    .l-region--header-first{
+      padding:0;
+    }
+  }
+}

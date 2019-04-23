@@ -1,0 +1,8 @@
+.block--nav-mobile-tech .menu li:nth-of-type(odd) {
+  background-color: #3a4648; }
+
+.block--nav-mobile-tech .menu li:nth-of-type(even) {
+  background-color: #516164; }
+
+.block--nav-mobile-tech .menu li a {
+  color: #fff; }

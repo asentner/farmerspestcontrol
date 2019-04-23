@@ -48,6 +48,56 @@ function tech_forms_webform_settings($form, $form_state, $node) {
 
 }
 
+/**
+ * Implements hook_preprocess_page
+ * Checks to see if the tech_forms module has been enabled on the node
+ * If it has, check to see if some menus are set. If the menus are set, unset them
+ * and set the breadcrumbs to an empty string.
+ *
+ * @param $variables
+ */
+function tech_forms_preprocess_page(&$variables){
+  $nid = $variables["node"]->nid;
+  $hasTechForms = variable_get('tech_forms',[]);
+
+  if($hasTechForms[$nid]){
+    if(isset($variables["page"]["header_first"]["menu_menu-mobile-utility"])){
+      unset($variables["page"]["header_first"]["menu_menu-mobile-utility"]);
+    }
+    if(isset($variables["page"]["footer_third"]["menu_menu-mobile-footer"])){
+      unset($variables["page"]["footer_third"]["menu_menu-mobile-footer"]);
+    }
+    if(isset($variables["page"]["header_first"]["menu_block_1"])){
+      unset($variables["page"]["header_first"]["menu_block_1"]);
+    }
+    if(isset($variables["page"]["header_first"]["menu_block_2"])){
+      unset($variables["page"]["header_first"]["menu_block_2"]);
+    }
+
+    $variables["breadcrumb"] = "";
+
+  }
+}
+
+/**
+ * Implements hook_preprocess_html
+ * Checks to see if the tech_forms module has been enabled on the node.
+ * If it has, add 'tech-form' to the body class and add custom nav styling.
+ *
+ * @param $variables
+ */
+function tech_forms_preprocess_html(&$variables){
+  $node = menu_get_object();
+  $nid = $node->nid;
+  $hasTechForms = variable_get('tech_forms',[]);
+  if($hasTechForms[$nid]){
+    $path = drupal_get_path('module', 'tech_forms');
+    $variables["classes_array"][] = "tech-form";
+    drupal_add_css($path . '/css/tech_forms.styles.css');
+    drupal_add_css($path . '/css/tech_forms.colors.css');
+  }
+}
+
 function tech_forms_form_alter(&$form, &$form_state, $form_id) {
   if (strpos($form_id, 'webform_client_form_') !== FALSE) {
     $form['#prefix'] = '<div id="tech-form-results">';
