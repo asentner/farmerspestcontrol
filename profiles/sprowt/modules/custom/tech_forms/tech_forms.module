@@ -1,7 +1,6 @@
 <?php
 require_once drupal_get_path('module', 'pestpac_api') . '/PestPacApi.php';
 require_once drupal_get_path('module', 'pestpac_api') . '/PestPacOauth.php';
-require_once drupal_get_path('module', 'pestpac_api') . '/PestPac.php';
 /**
  * Implements hook_menu().
  */
@@ -53,9 +52,9 @@ function tech_forms_form_alter(&$form, &$form_state, $form_id) {
   if (strpos($form_id, 'webform_client_form_') !== FALSE) {
     $form['#prefix'] = '<div id="tech-form-results">';
     $form['#suffix'] = '</div>';
-    if (!empty($form["submitted"]["locationid"])) {
-      $form["submitted"]["locationid"]["#ajax"] = [
-        "callback" => "tech_forms_locationid_callback",
+    if (!empty($form["submitted"]["location_number"])) {
+      $form["submitted"]["location_number"]["#ajax"] = [
+        "callback" => "tech_forms_location_number_callback",
         'wrapper' => 'tech-form-results',
       ];
     }
@@ -88,13 +87,15 @@ function _tech_forms_admin_value($nid) {
 function techFormComponents() {
   $components = [
     [
-      'name' => 'LocationID',
-      'form_key' => 'locationid',
+      'name' => 'Location Number',
+      'form_key' => 'location_number',
       'type' => 'textfield',
       'mandatory' => 1,
       'weight' => -50,
       'pid' => 0,
       'value' => '',
+      'required' => 1,
+      'disabled' => 0
     ],
     [
       'name' => 'First Name',
@@ -104,6 +105,9 @@ function techFormComponents() {
       'weight' => 0,
       'pid' => 0,
       'value' => '',
+      'extra' => [
+        'disabled' => 1
+      ]
     ],
     [
       'name' => 'Last Name',
@@ -113,15 +117,21 @@ function techFormComponents() {
       'weight' => 0,
       'pid' => 0,
       'value' => '',
+      'extra' => [
+        'disabled' => 1
+      ]
     ],
     [
-      'name' => 'Email',
-      'form_key' => 'email',
+      'name' => 'Customer Email',
+      'form_key' => 'customer_email',
       'type' => 'email',
       'mandatory' => 0,
       'weight' => 0,
       'pid' => 0,
       'value' => '',
+      'extra' => [
+        'disabled' => 1
+      ]
     ],
   ];
 
@@ -153,9 +163,32 @@ function syncTechFormComponents($node, $components) {
 
 }
 
-function tech_forms_locationid_callback($form, $form_state) {
-  if (!empty($form["submitted"]["locationid"]["#value"])) {
-    $locationID = $form["submitted"]["locationid"]["#value"];
+/**
+ * Takes a Location Number associated with a PestPac location and returns
+ * the location array.
+ *
+ * @param $locationNum
+ *  An INT containing a PestPac Location Code (location number)
+ * @return array|mixed
+ *  An array containing a PestPac Location
+ */
+function fetchPestPacLocationByNum($locationNum){
+  $pp = new PestPacApi();
+  $existingLoc = end($pp->checkLocationExists($locationNum));
+  $locID = $existingLoc["LocationID"];
+  $entity = [
+    "name" => "Locations",
+    "id" => $locID
+  ];
+
+  $location = $pp->get($entity);
+
+  return $location;
+}
+
+function tech_forms_location_number_callback($form, $form_state) {
+  if (!empty($form["submitted"]["location_number"]["#value"])) {
+    $locationNum = $form["submitted"]["location_number"]["#value"];
     $hasNameFieldSet = FALSE;
     $hasContactFieldSet = FALSE;
 
@@ -167,13 +200,7 @@ function tech_forms_locationid_callback($form, $form_state) {
       $hasContactFieldSet = TRUE;
     }
 
-    $pp = new PestPac();
-    $entity = [
-      "name" => "Locations",
-      "id" => $locationID,
-    ];
-
-    $ppLocation = $pp->get($entity);
+    $ppLocation = fetchPestPacLocationByNum($locationNum);
     if (!$ppLocation["code"]) {
 
       //check if name fieldset exists
@@ -188,20 +215,23 @@ function tech_forms_locationid_callback($form, $form_state) {
 
       //check if contact fieldset exists
       if ($hasContactFieldSet) {
-        $form["submitted"]["contact"]["email"]["#value"] = $ppLocation["EMail"];
+        $form["submitted"]["contact"]["customer_email"]["#value"] = $ppLocation["EMail"];
       }
       else {
-        $form["submitted"]["email"]["#value"] = $ppLocation["EMail"];
+        $form["submitted"]["customer_email"]["#value"] = $ppLocation["EMail"];
       }
 
     }
+    else if($ppLocation["code"] && $ppLocation["code"] === 401){
+      form_set_error("Tech Forms Authenticate","We had to authenticate with PestPac. Please try again.");
+    }
     else {
-      form_set_error("Tech Forms Error", "Invalid Location ID!");
+      form_set_error("Tech Forms Error", "Invalid Location Number!");
     }
 
   }
   else {
-    form_set_error("Tech Forms Error", "Location ID is required!");
+    form_set_error("Tech Forms Error", "Location Number is required!");
   }
 
   $form_state['rebuild'] = TRUE;
