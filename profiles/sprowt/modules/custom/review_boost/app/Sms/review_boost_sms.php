@@ -20,14 +20,14 @@ class ReviewBoostSMS {
     $account_id,
     $phone,
     $twilio_admin_phone,
-    $googleAPIKey,
+    $rebrandlyApiKey,
     $formToken;
 
   public function __construct($formToken = '') {
     $this->account_id = variable_get('twilio_admin_account_id');
     $this->auth_token = variable_get('twilio_admin_auth_token');
     $this->twilio_admin_phone = variable_get('twilio_admin_phone');
-    $this->googleAPIKey = 'AIzaSyDbpRFE6lP5WGIT07GlcAe-3XQ7MZS9AnI'; //limited to 1,000,000 requests per day.
+    $this->rebrandlyApiKey = '36aa75d6854f440a9f192cf4274e45cf'; //limited to 5k clicks tracked per month.
     $this->formToken = $formToken;
   }
 
@@ -158,9 +158,15 @@ class ReviewBoostSMS {
    * Shortens URL
    */
   public function shortenURL($url) {
-    $googer = new ReviewBoostUrlApi($this->googleAPIKey);
-    $shortUrl = $googer->shorten($url);
-    return $shortUrl;
+    $urlShortener = new ReviewBoostUrlApi($this->rebrandlyApiKey);
+    $shortUrl = $urlShortener->shorten($url);
+    if($shortUrl["shortUrl"]){
+      return $shortUrl["shortUrl"];
+    }
+    else{
+      watchdog("ReviewBoost_Error","There was an error shortening the url: %d",array("%d"=>print_r($shortUrl,true)));
+      return null;
+    }
   }
 
   public function getImageToggleStatus() {

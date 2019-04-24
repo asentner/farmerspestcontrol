@@ -1,5 +1,7 @@
 <?php
 
+use ReviewBoost\Libs\ReviewBoostUrlApi;
+
 function review_boost_drush_command() {
     $items = array();
 
@@ -36,8 +38,24 @@ function review_boost_drush_command() {
             'drush queue-delete review_boost_email_worker',
         ),
     );
+    $items['shorten-url'] = array(
+      'description' => "Shortens a URL",
+      "arguments" => array(
+        "url" => "URL to be shortened"
+      ),
+      "examples" => array(
+        "drush shorten-url https://coalmarch.com"
+      )
+    );
 
     return $items;
+}
+
+function drush_review_boost_shorten_url($url){
+  $key = '36aa75d6854f440a9f192cf4274e45cf';
+  $shortener = new ReviewBoostUrlApi($key);
+  $response = $shortener->shorten($url);
+  print_r($response);
 }
 
 function drush_review_boost_queue_delete($queue) {
