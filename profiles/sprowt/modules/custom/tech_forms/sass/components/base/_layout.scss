@@ -23,12 +23,28 @@
   .block--nav-utility{
     display:none;
   }
+  .node-title{
+    display:none !important;
+  }
   .not-front.node-type-webform .node--webform--full .node-title{
-    display:none;
+    display:none !important;
+  }
+  .block--bean-utility-header-review-score{
+    display:none !important;
+  }
+  .block--bean-google-reviews-block{
+    display:none !important;
   }
   @include breakpoint($desk){
     .l-region--header-first{
       padding:0;
     }
   }
+}
+
+.node-title{
+  display:none !important;
+}
+.not-front.node-type-webform .node--webform--full .node-title{
+  display:none !important;
 }

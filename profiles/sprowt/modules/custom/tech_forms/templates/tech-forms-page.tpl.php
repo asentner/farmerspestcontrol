@@ -28,11 +28,6 @@
   </div>
 
   <div class="l-footer-wrap">
-    <footer class="l-footer">
-      <?php print render($page['footer_first']); ?>
-      <?php print render($page['footer_second']); ?>
-      <?php print render($page['footer_third']); ?>
-    </footer>
   </div>
 
 </div>
