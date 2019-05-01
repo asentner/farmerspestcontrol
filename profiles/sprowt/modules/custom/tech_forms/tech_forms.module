@@ -48,19 +48,35 @@ function tech_forms_webform_settings($form, $form_state, $node) {
 
 }
 
+function tech_forms_theme(){
+  $template_path = drupal_get_path('module','tech_forms') . '/templates';
+  return array(
+    'tech_forms_page' => [
+      'base hook' => 'page',
+      'template' => 'tech-forms-page',
+      'path' => $template_path
+    ]
+  );
+}
+
 /**
  * Implements hook_preprocess_page
  * Checks to see if the tech_forms module has been enabled on the node
- * If it has, check to see if some menus are set. If the menus are set, unset them
- * and set the breadcrumbs to an empty string.
+ * If it has, check to see if some menus are set. If the menus are set, unset them.
+ *
  *
  * @param $variables
  */
 function tech_forms_preprocess_page(&$variables){
+
   $nid = $variables["node"]->nid;
   $hasTechForms = variable_get('tech_forms',[]);
 
   if($hasTechForms[$nid]){
+
+    //it's a tech form. override the default page.tpl.php with our new one.
+    $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'],array('tech_forms_page'));
+
     if(isset($variables["page"]["header_first"]["menu_menu-mobile-utility"])){
       unset($variables["page"]["header_first"]["menu_menu-mobile-utility"]);
     }
@@ -73,8 +89,6 @@ function tech_forms_preprocess_page(&$variables){
     if(isset($variables["page"]["header_first"]["menu_block_2"])){
       unset($variables["page"]["header_first"]["menu_block_2"]);
     }
-
-    $variables["breadcrumb"] = "";
 
   }
 }
