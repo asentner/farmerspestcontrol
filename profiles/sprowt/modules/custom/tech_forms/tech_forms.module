@@ -1,7 +1,7 @@
 <?php
 require_once drupal_get_path('module', 'pestpac_api') . '/PestPacApi.php';
 require_once drupal_get_path('module', 'pestpac_api') . '/PestPacOauth.php';
-require_once drupal_get_path('module', 'pestpac_api') . '/PestPac.php';
+
 /**
  * Implements hook_menu().
  */
@@ -144,7 +144,7 @@ function tech_forms_webform_submit(&$form,&$form_state){
 
   }
 }
-
+//todo fix target pest not syncing, salesperson, validation message (if successful or not), and what the heck is form field???
 //where does technician phone go?
 function mapLeadFields($form,$nid){
   $fields = new StdClass();
@@ -243,7 +243,7 @@ function createLead($fields) {
     "PendingEventDate" => $fields->pendingDate,
     "TimeRange" => "",
     "Duration" => "0",
-    "Comment" => "",
+    "Comment" => $fields->webformLink,
     "UserDefinedFields" => [
       [
         "Caption" => "NA",
