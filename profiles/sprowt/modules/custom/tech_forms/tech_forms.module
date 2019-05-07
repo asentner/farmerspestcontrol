@@ -1,6 +1,7 @@
 <?php
 require_once drupal_get_path('module', 'pestpac_api') . '/PestPacApi.php';
 require_once drupal_get_path('module', 'pestpac_api') . '/PestPacOauth.php';
+require_once drupal_get_path('module', 'pestpac_api') . '/PestPac.php';
 /**
  * Implements hook_menu().
  */
@@ -121,8 +122,150 @@ function tech_forms_form_alter(&$form, &$form_state, $form_id) {
         "callback" => "tech_forms_location_number_callback",
         'wrapper' => 'tech-form-results',
       ];
+      $form['#submit'][]='tech_forms_webform_submit';
     }
   }
+  return $form;
+}
+
+function tech_forms_webform_submit(&$form,&$form_state){
+ $nid = $form["#node"]->nid;
+ $test = $form_state;
+  $hasTechForms = variable_get('tech_forms',[]);
+  if($hasTechForms[$nid]){
+    $keepOrPass = $form["submitted"]["keep_or_pass"]["#value"];
+    $createLead = $form["submitted"]["create_a_lead"]["#value"];
+
+    if($createLead === "yes"){
+      $fields = mapLeadFields($form,$nid);
+      $lead = createLead($fields);
+      drupal_set_message("Lead Has Been Created In PestPac!");
+    }
+
+  }
+}
+
+//where does technician phone go?
+function mapLeadFields($form,$nid){
+  $fields = new StdClass();
+  $fields->firstName = $form["submitted"]["first_name"]["#value"];
+  $fields->lastName = $form["submitted"]["last_name"]["#value"];
+  $fields->email = $form["submitted"]["customer_email"]["#value"];
+  $fields->name = $fields->firstName . " " . $fields->lastName;
+  $fields->tPest = $form["submitted"]["issues_and_location"]["select"]["#value"];
+  $fields->source = $form["submitted"]["lead_source"]["#value"];
+  $fields->service = $form["submitted"]["recommended_solution"]["#value"];
+  $fields->pendingEvent = $form["submitted"]["pending_event"]["#value"];
+
+  /*
+   * if keep, pop salesperson and lead form field
+   * if pass, pop lead form field
+   */
+  $fields->salesPerson = $form["submitted"]["technician_crm_username"]["#value"]; //crm username
+  $fields->day = $form["submitted"]["follow_up_date_pending_date"]["#value"]["day"];
+  $fields->month = $form["submitted"]["follow_up_date_pending_date"]["#value"]["month"];
+  $fields->year = $form["submitted"]["follow_up_date_pending_date"]["#value"]["year"];
+  $date = formatDate($fields->year,$fields->month,$fields->day);
+  $fields->pendingDate = $date;
+  $fields->webformLink = $GLOBALS['base_url']."/".$nid;
+  $fields->notes = $form["submitted"]["notes"]["#value"];
+
+  return $fields;
+}
+
+/**
+ * Takes a given year, month, and day and returns an ISO 8601 date timestamp
+ * with the current server time and timezone
+ * Notes: PestPac requires an ISO 8601 date timestamp in order to successfully create a resource.
+ *
+ * @param $year
+ *  String containing a year
+ * @param $month
+ *  String containing a month
+ * @param $day
+ *  String containing a day
+ *
+ * @return false|string
+ *  Returns a string containing the formatted date and time
+ */
+function formatDate($year,$month,$day){
+  $date = date_parse($year."-".$month."-".$day);
+  $time = date("H:i:s");
+  $time = date_parse($time);
+
+  $formattedTime = date('c',mktime($time["hour"],$time["minute"],$time["second"],$date["month"],$date["day"],$date["year"]));
+
+  return $formattedTime;
+
+}
+
+function createLead($fields) {
+  $ppLoc = variable_get("pp_location");
+
+
+  //change CreateLocation to true when ready
+  $ppLead = [
+    "LeadID" => 0,
+    "LocationID" => $ppLoc["LocationID"],
+    "CreateLocation" => FALSE,
+    "Branch" => "Charlotte",
+    "LeadType" => "Lead",
+    "WonStatus" => "New",
+    "DateReceived" => date(DATE_ATOM),
+    "DateClosed" => "",
+    "CloseReason" => "",
+    "Name" => $fields->name,
+    "Company" => "",
+    "Address" => $ppLoc["Address"],
+    "Address2" => "",
+    "City" => $ppLoc["City"],
+    "State" => $ppLoc["State"],
+    "Zip" => $ppLoc["Zip"],
+    "Country" => "US",
+    "Phone" => $ppLoc["Phone"],
+    "PhoneExtension" => "",
+    "Fax" => "",
+    "FaxExtension" => "",
+    "AlternatePhone" => "",
+    "AlternatePhoneExtension" => "",
+    "MobilePhone" => "",
+    "MobilePhoneExtension" => "",
+    "EMail" => $fields->email,
+    "LocationType" => "",
+    "Source" => $fields->source,
+    "LeadCost" => "0",
+    "ServiceCode" => "",
+    "Salesperson" => $fields->salesPerson,
+    "TargetPest" => $fields->tPest,
+    "ProposalValue" => "0",
+    "SalesStatus" => "",
+    "PendingEvent" => $fields->pendingEvent,
+    "PendingEventDate" => $fields->pendingDate,
+    "TimeRange" => "",
+    "Duration" => "0",
+    "Comment" => "",
+    "UserDefinedFields" => [
+      [
+        "Caption" => "NA",
+        "Value" => "NA",
+      ],
+    ],
+    "Latitude" => $ppLoc["Latitude"],
+    "Longitude" => $ppLoc["Longitude"]
+  ];
+  $ppc = new PestPacOauth('password');
+
+  $pp = new PestPacApi();
+  $request = null;
+  try {
+    $request = $pp->leadResource("/Leads", $ppLead);
+
+  } catch (Exception $e) {
+    watchdog('CTM_PestPac_Sync_Error', 'Trouble creating lead in pestpac. More info: %e', [
+      '%e' => $e,
+    ]);
+  }
+  return $request;
 }
 
 /**
@@ -240,6 +383,7 @@ function fetchPestPacLocationByNum($locationNum){
   $pp = new PestPacApi();
   $existingLoc = end($pp->checkLocationExists($locationNum));
   $locID = $existingLoc["LocationID"];
+  variable_set("pp_location",$existingLoc);
   $entity = [
     "name" => "Locations",
     "id" => $locID
