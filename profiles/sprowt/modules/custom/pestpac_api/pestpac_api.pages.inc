@@ -67,7 +67,6 @@ function pestpac_api_admin(){
         '#title' => t('Default Branch'),
         '#default_value' => variable_get('pestpac_default_branch'),
         '#size' => 60,
-        "#required" => true,
         '#maxlength' => 128,
         '#description' => t("OPTIONAL- Enter a custom branch here to default to this branch for all initial call creations in PestPac."),
     );

@@ -207,6 +207,7 @@ function mapLeadFields($form,$nid){
   $fields->source = $form["submitted"]["lead_source"]["#value"];
   $fields->service = $form["submitted"]["recommended_solution"]["#value"];
   $fields->pendingEvent = $form["submitted"]["pending_event"]["#value"];
+  $fields->branch = $form["submitted"]["branch"]["#value"];
 
   /*
    * if keep, pop salesperson and lead form field
@@ -260,7 +261,7 @@ function createLead($fields) {
     "LeadID" => 0,
     "LocationID" => $ppLoc["LocationID"],
     "CreateLocation" => FALSE,
-    "Branch" => variable_get('pestpac_default_branch'),
+    "Branch" => $fields->branch,
     "LeadType" => "Lead",
     "WonStatus" => "New",
     "DateReceived" => date(DATE_ATOM),
