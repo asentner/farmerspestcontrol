@@ -260,7 +260,7 @@ function createLead($fields) {
     "LeadID" => 0,
     "LocationID" => $ppLoc["LocationID"],
     "CreateLocation" => FALSE,
-    "Branch" => "Charlotte",
+    "Branch" => variable_get('pestpac_default_branch'),
     "LeadType" => "Lead",
     "WonStatus" => "New",
     "DateReceived" => date(DATE_ATOM),
