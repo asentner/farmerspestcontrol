@@ -46,6 +46,13 @@ function tech_forms_webform_settings($form, $form_state, $node) {
     '#weight' => 0,
     '#default_value' => $admin_values['tech_forms_enabled'],
   ];
+  $form['add_tech_form_fields'] = [
+    '#title' => t('Add Additional Tech Form Fields'),
+    '#type' => 'checkbox',
+    '#weight' => 0,
+    '#description' => t("Check to add additional webform fields to the form."),
+    '#default_value' => $admin_values['add_tech_form_fields'],
+  ];
 
   $form['submit'] = [
     '#weight' => 100,
@@ -366,6 +373,7 @@ function _tech_forms_admin_value($nid) {
   $tech_forms = variable_get('tech_forms', []);
   $values = [
     'tech_forms_enabled' => FALSE,
+    'add_tech_form_fields' => FALSE,
   ];
   if (!empty($tech_forms[$nid])) {
     $values = $tech_forms[$nid];
@@ -531,16 +539,37 @@ function tech_forms_location_number_callback($form, $form_state) {
 
 
 function tech_forms_webform_settings_submit($form, $form_state) {
+
+  //first, we check if tech forms have previously been enabled on the node
   $values = $form_state['values'];
+  $tech_forms = variable_get('tech_forms', []);
   $nid = $values['nid'];
   $node = node_load($nid);
-  syncTechFormComponents($node, techFormComponents());
+
+  if($tech_forms[$nid]){
+    //it's been enabled
+    if(!$values['tech_forms_enabled']){
+      //form has been disabled. removed from node
+      unset($tech_forms[$nid]);
+    }else{
+      //tech forms is enabled.
+      if($values["add_tech_form_fields"]){
+        syncTechFormComponents($node, techFormComponents());
+        $tech_forms[$nid] = $values;
+      }
+    }
+  }else{
+    //let's create everything
+    $tech_forms[$nid] = $values;
+    if($values["add_tech_form_fields"]){
+      syncTechFormComponents($node, techFormComponents());
+    }
+  }
+
   unset($values['nid']);
 
-  $tech_forms = variable_get('tech_forms', []);
-  $tech_forms[$nid] = $values;
-
   variable_set('tech_forms', $tech_forms);
+
 }
 
 
