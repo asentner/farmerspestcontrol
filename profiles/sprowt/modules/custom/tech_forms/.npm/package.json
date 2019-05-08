@@ -22,7 +22,10 @@
     "gulp-sass-lint": "^1.1.0",
     "gulp-livereload": "^3.8.1",
     "gulp-notify": "^2.2.0",
-    "gulp-sourcemaps": "^1.6.0"
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-concat": "^2.6.1",
+    "papaparse": "^4.6.1",
+    "bulma": "^0.7.2"
   },
   "license": "MIT"
 }

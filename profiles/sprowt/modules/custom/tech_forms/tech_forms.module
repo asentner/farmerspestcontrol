@@ -17,6 +17,17 @@ function tech_forms_menu() {
     'type' => MENU_LOCAL_TASK,
   ];
 
+  if(!module_exists("ctm_pestpac_sync")){
+    $items['admin/config/services/pestpac-settings/format-lookup-tables'] = [
+      'title' => 'Format Lookup Tables',
+      'description' => 'Application for formatting PestPac lookup tables to integrate into CTM.',
+      'page callback' => '_tech_forms_format_lookup_tables',
+      'access arguments' => ['administer site configuration'],
+      'type' => MENU_NORMAL_ITEM,
+    ];
+  }
+
+
   return $items;
 }
 
@@ -51,13 +62,42 @@ function tech_forms_webform_settings($form, $form_state, $node) {
 
 function tech_forms_theme(){
   $template_path = drupal_get_path('module','tech_forms') . '/templates';
-  return array(
-    'tech_forms_page' => [
-      'base hook' => 'page',
-      'template' => 'tech-forms-page',
-      'path' => $template_path
-    ]
-  );
+
+
+    if(!module_exists("ctm_pestpac_sync")){
+      $theme = array(
+        'tech_forms_page' => [
+          'base hook' => 'page',
+          'template' => 'tech-forms-page',
+          'path' => $template_path
+        ],
+        'tech_forms_format_lookup_tables' => [
+          'template' => 'tech-forms-format-lookup-tables',
+          'path' => $template_path,
+        ],
+      );
+      return $theme;
+    }else{
+      $theme = array(
+        'tech_forms_page' => [
+          'base hook' => 'page',
+          'template' => 'tech-forms-page',
+          'path' => $template_path
+        ]
+      );
+      return $theme;
+    }
+}
+
+function _tech_forms_format_lookup_tables(){
+  $basePath = drupal_get_path('module', 'tech_forms');
+  $conf['preprocess_js'] = FALSE;
+  drupal_page_is_cacheable(FALSE);
+  drupal_add_css($basePath . '/dist/css/parsepestpactables.styles.css');
+  drupal_add_js('https://code.jquery.com/jquery-3.3.1.min.js');
+  drupal_add_js($basePath . '/dist/js/app.js');
+
+  return theme('tech_forms_format_lookup_tables');
 }
 
 /**
@@ -138,8 +178,19 @@ function tech_forms_webform_submit(&$form,&$form_state){
 
     if($createLead === "yes"){
       $fields = mapLeadFields($form,$nid);
+      if($keepOrPass !== "keep"){
+        $fields->salesPerson = "";
+      }
+
       $lead = createLead($fields);
-      drupal_set_message("Lead Has Been Created In PestPac!");
+
+      if(!isset($lead["code"])){
+        createNoteOnLead($fields,$lead);
+        drupal_set_message("Lead Has Been Created In PestPac!");
+      }else{
+        drupal_set_message("There was an error creating a lead in PestPac!","error");
+      }
+
     }
 
   }
@@ -152,7 +203,7 @@ function mapLeadFields($form,$nid){
   $fields->lastName = $form["submitted"]["last_name"]["#value"];
   $fields->email = $form["submitted"]["customer_email"]["#value"];
   $fields->name = $fields->firstName . " " . $fields->lastName;
-  $fields->tPest = $form["submitted"]["issues_and_location"]["select"]["#value"];
+  $fields->tPest = $form["submitted"]["issues_and_location"]["select"]["pest"]["#value"];
   $fields->source = $form["submitted"]["lead_source"]["#value"];
   $fields->service = $form["submitted"]["recommended_solution"]["#value"];
   $fields->pendingEvent = $form["submitted"]["pending_event"]["#value"];
@@ -162,9 +213,10 @@ function mapLeadFields($form,$nid){
    * if pass, pop lead form field
    */
   $fields->salesPerson = $form["submitted"]["technician_crm_username"]["#value"]; //crm username
-  $fields->day = $form["submitted"]["follow_up_date_pending_date"]["#value"]["day"];
-  $fields->month = $form["submitted"]["follow_up_date_pending_date"]["#value"]["month"];
-  $fields->year = $form["submitted"]["follow_up_date_pending_date"]["#value"]["year"];
+  $fields->leadForm = $form["submitted"]["technician_crm_username"]["#value"];
+  $fields->day = $form["submitted"]["follow_up_date_pending_date"]["day"]["#value"];
+  $fields->month = $form["submitted"]["follow_up_date_pending_date"]["month"]["#value"];
+  $fields->year = $form["submitted"]["follow_up_date_pending_date"]["year"]["#value"];
   $date = formatDate($fields->year,$fields->month,$fields->day);
   $fields->pendingDate = $date;
   $fields->webformLink = $GLOBALS['base_url']."/".$nid;
@@ -234,7 +286,7 @@ function createLead($fields) {
     "LocationType" => "",
     "Source" => $fields->source,
     "LeadCost" => "0",
-    "ServiceCode" => "",
+    "ServiceCode" => $fields->service,
     "Salesperson" => $fields->salesPerson,
     "TargetPest" => $fields->tPest,
     "ProposalValue" => "0",
@@ -246,8 +298,8 @@ function createLead($fields) {
     "Comment" => $fields->webformLink,
     "UserDefinedFields" => [
       [
-        "Caption" => "NA",
-        "Value" => "NA",
+        "Caption" => "Lead Form",
+        "Value" => $fields->leadForm,
       ],
     ],
     "Latitude" => $ppLoc["Latitude"],
@@ -265,6 +317,36 @@ function createLead($fields) {
       '%e' => $e,
     ]);
   }
+  return $request;
+}
+
+function createNoteOnLead($fields,$lead){
+  $ppLoc = variable_get("pp_location");
+  $pp = new PestPacApi();
+  $ppNote = [
+    "NoteID" => "",
+    "NoteDate" => date(DATE_ATOM),
+    "NoteCode" => "tech_form", //either ctmCallID or user selected id from CTM picker in call panel
+    "Note" => $fields->notes,
+    "CreatedByUser" => $fields->leadForm, //the crm_username
+    "AlertExpirationDate" => "",
+    "showOnPortal" => true,
+    "Associations" => [
+      [
+        "LocationID" => $ppLoc["LocationID"],
+        "ContactID" => "",
+        "BillToID" => "",
+        "TaskID" => "",
+        "OrderID" => "",
+        "SalesLeadID" => "",
+        "InvoiceID" => "",
+        "CallID" => "",
+      ],
+    ],
+  ];
+
+  $uri = "/Leads/".$lead["LeadID"]."/notes";
+  $request = $pp->leadResource($uri,$ppNote,'post');
   return $request;
 }
 

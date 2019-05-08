@@ -1,0 +1,32 @@
+.content-container{
+  .columns{
+    padding:2em 1em;
+  }
+  .textarea:not([rows]){
+    max-height:100%;
+    min-height:175px;
+    height:auto;
+    z-index:2;
+    @include breakpoint($tab){
+      min-height:550px;
+    }
+  }
+}
+
+.copied{
+  position: absolute;
+  padding: .5em;
+  font-size: 14px;
+  transition: .25s ease-in;
+  top: 3em;
+  left: 10em;
+  z-index: -1;
+  opacity:0;
+
+  &.active{
+    opacity:1;
+    top:-1em;
+    z-index:1;
+    transition:.25s ease-out;
+  }
+}

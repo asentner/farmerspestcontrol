@@ -1,0 +1,6 @@
+@mixin flexbox {
+  display: flex;
+  > * {
+    -ms-flex: 0 1 auto;
+  }
+}

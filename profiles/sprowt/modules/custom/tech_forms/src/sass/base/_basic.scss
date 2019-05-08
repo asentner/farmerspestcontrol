@@ -1,0 +1,18 @@
+.breadcrumb a{
+  display:inline;
+}
+.content-container{
+  height:100%;
+  width:100%;
+  position:relative;
+}
+textarea{
+  min-height:500px;
+  height:auto;
+}
+.wrap{
+  height:300px;
+  @include breakpoint($tab){
+    height:675px;
+  }
+}

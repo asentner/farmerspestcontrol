@@ -1,0 +1,10 @@
+#parse-results.hightlight::selection{
+
+  font-weight:bold;
+}
+#parse-results.hightlight{
+  &::selection{
+    background-color:$light-green;
+    color:$white;
+  }
+}

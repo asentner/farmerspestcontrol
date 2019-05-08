@@ -111,6 +111,7 @@ class PestPacApi extends PestPacOauth {
     curl_close($ch);
     if($httpcode === 401){
       $auth = $this->authenticate();
+
       if($auth){
         watchdog("CTM_PestPac_Sync_Error","Error authenticating PestPac credentials! API was re-authenticated! Here's the data that was coming in: %d",array(
           "%d" => print_r($result,true)
@@ -120,18 +121,21 @@ class PestPacApi extends PestPacOauth {
           "%d" => print_r($result,true)
         ));
       }
+      return $this->curl($url,$data,$headers,$method,$debug,$json);
 
-      return false;
     }
-
-    if($httpcode === 500){
-      watchdog("CTM_PestPac_Sync_Error","500 Error while attempting a curl resource.");
+    else{
+      if($httpcode === 500){
+        $auth = $this->authenticate();
+        return $this->curl($url,$data,$headers,$method,$debug,$json);
+        //watchdog("CTM_PestPac_Sync_Error","500 Error while attempting a curl resource.");
+      }else{
+        return array(
+          'code' => $httpcode,
+          'response' => $result
+        );
+      }
     }
-
-    return array(
-      'code' => $httpcode,
-      'response' => $result
-    );
   }
 
   /**
