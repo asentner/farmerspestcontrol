@@ -17,6 +17,7 @@ class PestPacApi extends PestPacOauth {
   protected $apiKey;
   protected $baseUrl;
   protected $tenantId;
+  protected $errors;
 
   function __construct(){
 
@@ -47,6 +48,14 @@ class PestPacApi extends PestPacOauth {
       return variable_get('pestpac_access_token');
     }
     return false;
+  }
+
+  function setErrors($type,$code, $error){
+    $this->errors[][$type] = ['code'=>$code,'error'=>$error];
+  }
+
+  function getErrors(){
+    return $this->errors;
   }
 
 
@@ -110,8 +119,8 @@ class PestPacApi extends PestPacOauth {
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
     if($httpcode === 401){
+      $this->setErrors("auth_error",$httpcode,$result);
       $auth = $this->authenticate();
-
       if($auth){
         watchdog("CTM_PestPac_Sync_Error","Error authenticating PestPac credentials! API was re-authenticated! Here's the data that was coming in: %d",array(
           "%d" => print_r($result,true)
@@ -121,21 +130,19 @@ class PestPacApi extends PestPacOauth {
           "%d" => print_r($result,true)
         ));
       }
-      return $this->curl($url,$data,$headers,$method,$debug,$json);
 
+      return false;
     }
-    else{
-      if($httpcode === 500){
-        $auth = $this->authenticate();
-        return $this->curl($url,$data,$headers,$method,$debug,$json);
-        //watchdog("CTM_PestPac_Sync_Error","500 Error while attempting a curl resource.");
-      }else{
-        return array(
-          'code' => $httpcode,
-          'response' => $result
-        );
-      }
+
+    if($httpcode === 500){
+      $this->setErrors("resource_error",$httpcode,$result);
+      watchdog("CTM_PestPac_Sync_Error","500 Error while attempting a curl resource.");
     }
+
+    return array(
+      'code' => $httpcode,
+      'response' => $result
+    );
   }
 
   /**
