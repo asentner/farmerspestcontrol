@@ -219,7 +219,7 @@ function mapLeadFields($form,$nid){
   $fields->year = $form["submitted"]["follow_up_date_pending_date"]["year"]["#value"];
   $date = formatDate($fields->year,$fields->month,$fields->day);
   $fields->pendingDate = $date;
-  $fields->webformLink = $GLOBALS['base_url']."/".$nid;
+  $fields->webformLink = $GLOBALS['base_url']."/node".$nid;
   $fields->notes = $form["submitted"]["notes"]["#value"];
 
   return $fields;
