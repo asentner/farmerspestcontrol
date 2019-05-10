@@ -1,9 +1,9 @@
 <article<?php print $attributes; ?>>
 
-<?php if(!empty($content['field_icon']['#items'][0]['width'])) {
+<?php if(!empty($content['field_icon'])) {
     print render($content['field_icon']);
   }
-  elseif(!empty($content['field_image'][0]['#item']['uri'])) {
+  elseif(!empty($content['field_image'])) {
     print render($content['field_image']);
   };
 ?>
