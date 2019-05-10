@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_content_types.flexslider_default_preset.inc

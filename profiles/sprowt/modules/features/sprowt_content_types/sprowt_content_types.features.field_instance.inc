@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_content_types.features.field_instance.inc
@@ -816,7 +817,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => '',
+          'image_style' => 'benefits__front_page_',
         ),
         'type' => 'image',
         'weight' => 0,

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_image_styles_features.features.inc
@@ -35,25 +36,6 @@ function sprowt_image_styles_features_image_default_styles() {
         'data' => array(
           'width' => 300,
           'height' => 150,
-          'focal_point_advanced' => array(
-            'shift_x' => '',
-            'shift_y' => '',
-          ),
-        ),
-        'weight' => 1,
-      ),
-    ),
-  );
-
-  // Exported image style: benefits__front_page_.
-  $styles['benefits__front_page_'] = array(
-    'label' => 'Benefits (Front Page)',
-    'effects' => array(
-      5 => array(
-        'name' => 'focal_point_scale_and_crop',
-        'data' => array(
-          'width' => 185,
-          'height' => 185,
           'focal_point_advanced' => array(
             'shift_x' => '',
             'shift_y' => '',

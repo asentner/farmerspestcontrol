@@ -43,7 +43,6 @@
   @include breakpoint($nav){
     .menu{
       padding-right: 0;
-      flex-direction: row;
       li{
         flex-direction: column;
         a, .nolink{

@@ -5,7 +5,6 @@ dependencies[] = image
 features[features_api][] = api:2
 features[image][] = affiliation_image
 features[image][] = benefits
-features[image][] = benefits__front_page_
 features[image][] = focal_point_scale_and_crop_100x100
 features[image][] = focal_point_scale_and_crop_185x150
 features[image][] = focal_point_scale_and_crop_250x250

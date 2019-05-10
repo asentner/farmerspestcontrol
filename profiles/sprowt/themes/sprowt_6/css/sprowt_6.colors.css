@@ -1456,7 +1456,3 @@ div.entity-paragraphs-item.paragraphs-item-table tbody tr.even td {
 
 .front .l-region--preface-fourth {
   background-color: #eaebeb; }
-
-@media (min-width: 1024px) {
-  .front .l-region--preface-third, .node-type-localtarget .l-region--preface-third {
-    background-color: rgba(255, 255, 255, 0.7); } }

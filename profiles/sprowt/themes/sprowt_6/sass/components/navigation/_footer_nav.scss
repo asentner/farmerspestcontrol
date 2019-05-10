@@ -34,14 +34,15 @@
     }
   }
   @include breakpoint($desk){
-    padding: 30px 0 80px;
+    padding: 0 0 50px;
     .menu-block-wrapper{
       >.menu{ //first level
         @include flexbox;
         flex-direction: row;
         align-items: flex-start;
+        justify-content: center;
         >li{
-          flex: 1 0 20%;
+          flex: 0 1 auto;
           >a{
             font-size: 18px;
             font-weight: 600;
@@ -50,6 +51,9 @@
             margin-bottom: 25px;
             padding-bottom: 5px;
             border-bottom: solid 8px;
+          }
+          &:last-child > a {
+            margin-right: 0;
           }
           >.menu{ //second level
             display: block;

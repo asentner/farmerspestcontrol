@@ -3360,7 +3360,7 @@ li.addtoany {
 
 @media (min-width: 1024px) {
   .block--bean-careers-block-front .bean-generic-bean {
-    padding: 40px 0;
+    padding: 40px 20px;
     background-image: url("../images/employment-cta.jpg");
     background-size: cover;
     background-position: center center; }
@@ -3624,81 +3624,95 @@ li.addtoany {
       .node-type-localtarget .block--bean-benefits-intro-block-ltp .block__content .field--name-field-body-text p {
         font-size: 17px; } }
 
-.block--views-benefits-front .view-content {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
-  -ms-flex-pack: justify;
-      justify-content: space-between; }
-  .block--views-benefits-front .view-content > * {
-    -ms-flex: 0 1 auto; }
-  .block--views-benefits-front .view-content .views-row .node--benefit--teaser {
-    max-width: 300px;
-    margin: 0 auto;
+.block--views-benefits-front {
+  position: relative; }
+  .block--views-benefits-front:after {
+    content: url("../images/benefits-bg.jpg");
+    position: absolute;
+    right: -115px;
+    bottom: -465px;
+    margin: auto;
+    transform: scale(0.7); }
+  .block--views-benefits-front .view-content {
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: row;
-        flex-direction: row;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
-    -ms-flex-align: center;
-        align-items: center; }
-    .block--views-benefits-front .view-content .views-row .node--benefit--teaser > * {
-      -ms-flex: 0 1 auto; }
-    .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon {
-      min-width: 100px;
-      text-align: center; }
-      .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon img {
-        height: 50px;
-        width: auto;
-        max-width: none; }
-    .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content {
-      padding-left: 15px; }
-      .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .node__title {
-        font-size: 17px;
-        font-weight: 700;
-        line-height: 1.41; }
-      .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .field--name-body p {
-        font-size: 15px;
-        font-style: italic;
-        line-height: 1.44; }
-  .block--views-benefits-front .view-content .views-row:first-of-type {
-    padding-bottom: 40px; }
-
-@media (min-width: 768px) {
-  .block--views-benefits-front .view-content {
-    -ms-flex-direction: row;
-        flex-direction: row;
-    -ms-flex-align: center;
-        align-items: center;
-    -ms-flex-pack: distribute;
-        justify-content: space-around; }
-    .block--views-benefits-front .view-content .views-row .node--benefit--teaser {
-      margin: 0; }
-      .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon {
-        min-width: 65px; }
-        .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon img {
-          height: auto;
-          width: 65px;
-          max-width: none; }
-      .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .field--name-body p {
-        font-size: 16px; }
-    .block--views-benefits-front .view-content .views-row:first-of-type {
-      padding-bottom: 0; } }
-
-@media (min-width: 1024px) {
-  .block--views-benefits-front .view-content {
+    -ms-flex-direction: column;
+        flex-direction: column;
     -ms-flex-pack: justify;
         justify-content: space-between; }
+    .block--views-benefits-front .view-content > * {
+      -ms-flex: 0 1 auto; }
     .block--views-benefits-front .view-content .views-row .node--benefit--teaser {
-      max-width: 370px; }
+      max-width: 300px;
+      margin: 0 auto;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: row;
+          flex-direction: row;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+      -ms-flex-align: center;
+          align-items: center; }
+      .block--views-benefits-front .view-content .views-row .node--benefit--teaser > * {
+        -ms-flex: 0 1 auto; }
       .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon {
-        min-width: auto; }
+        min-width: 100px;
+        text-align: center; }
         .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon img {
           height: 50px;
           width: auto;
-          max-width: none; } }
+          max-width: none; }
+      .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content {
+        padding-left: 15px; }
+        .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .node__title {
+          font-size: 17px;
+          font-weight: 700;
+          line-height: 1.41; }
+        .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .field--name-body p {
+          font-size: 15px;
+          font-style: italic;
+          line-height: 1.44; }
+    .block--views-benefits-front .view-content .views-row:first-of-type {
+      padding-bottom: 40px; }
+  @media (min-width: 768px) {
+    .block--views-benefits-front:after {
+      right: -450px;
+      bottom: -125px; }
+    .block--views-benefits-front .view-content {
+      -ms-flex-direction: row;
+          flex-direction: row;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+      .block--views-benefits-front .view-content .views-row .node--benefit--teaser {
+        margin: 0; }
+        .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon {
+          min-width: 65px; }
+          .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon img {
+            height: auto;
+            width: 65px;
+            max-width: none; }
+        .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .field--name-body p {
+          font-size: 16px; }
+      .block--views-benefits-front .view-content .views-row:first-of-type {
+        padding-bottom: 0; } }
+  @media (min-width: 1024px) {
+    .block--views-benefits-front:after {
+      right: -595px;
+      bottom: -125px;
+      transform: scale(1); }
+    .block--views-benefits-front .view-content {
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+      .block--views-benefits-front .view-content .views-row .node--benefit--teaser {
+        max-width: 370px; }
+        .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon {
+          min-width: auto; }
+          .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon img {
+            height: 50px;
+            width: auto;
+            max-width: none; } }
 
 .local-target-benefits {
   padding: 20px 20px 40px;
@@ -4688,7 +4702,8 @@ li.addtoany {
     .block--logo-block-logo {
       margin-left: 45px;
       padding: 15px 20px;
-      padding-left: 0; }
+      padding-left: 0;
+      width: auto; }
       .block--logo-block-logo .block__content {
         margin: 0; }
         .block--logo-block-logo .block__content a img {
@@ -5810,195 +5825,254 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
       .block--sprowt-settings-sprowt-social-media .block__content li + li {
         margin-left: 40px; } }
 
-.block--views-special-offers-front2 {
-  padding: 0 20px; }
-  .block--views-special-offers-front2 .view {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column; }
-    .block--views-special-offers-front2 .view > * {
-      -ms-flex: 0 1 auto; }
-  .block--views-special-offers-front2 .view-header {
-    max-width: 375px;
-    margin: 0 auto;
-    text-align: left;
-    padding-bottom: 35px; }
-    .block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header .field--name-field-intro + h1, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header
-    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
-    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header em {
-      font-size: 26px;
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: 3px;
-      text-transform: uppercase; }
-    .block--views-special-offers-front2 .view-header p + p {
-      margin-top: 40px; }
-    .block--views-special-offers-front2 .view-header p {
-      font-size: 18px;
-      line-height: 1.67; }
-      .block--views-special-offers-front2 .view-header p a {
-        text-transform: uppercase;
-        font-weight: 600;
-        font-size: 20px;
-        letter-spacing: .2px; }
-        .block--views-special-offers-front2 .view-header p a:after {
-          font-family: "FontAwesome";
-          font-weight: normal;
-          content: "";
-          padding-left: 7px; }
-  .block--views-special-offers-front2 .view-content {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column; }
-    .block--views-special-offers-front2 .view-content > * {
-      -ms-flex: 0 1 auto; }
-    .block--views-special-offers-front2 .view-content .views-row {
-      box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18);
-      padding: 10px; }
-      .block--views-special-offers-front2 .view-content .views-row .node {
-        padding: 25px 10px;
-        min-height: 419px;
-        position: relative;
-        border: 5px dashed; }
-        .block--views-special-offers-front2 .view-content .views-row .node .offer-link {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 10; }
-        .block--views-special-offers-front2 .view-content .views-row .node .node__content {
-          display: -ms-flexbox;
-          display: flex;
-          -ms-flex-direction: column;
-              flex-direction: column;
-          text-align: center; }
-          .block--views-special-offers-front2 .view-content .views-row .node .node__content > * {
-            -ms-flex: 0 1 auto; }
-        .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em {
-          font-size: 47px;
-          font-weight: 800;
-          line-height: 1;
-          letter-spacing: 1.5px;
-          margin: 0 0 10px; }
-        .block--views-special-offers-front2 .view-content .views-row .node h3, .block--views-special-offers-front2 .view-content .views-row .node .block--views-team-list .node__title, .block--views-team-list .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block--views-services-all .node__title, .block--views-services-all .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block--views-services-all-mobile .node__title, .block--views-services-all-mobile .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block-special-offers-intro .block__title, .block-special-offers-intro .block--views-special-offers-front2 .view-content .views-row .node .block__title, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment h2, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + h1, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-display-title, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field-item, .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment em, div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps h2,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + h1,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-display-title,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .field-item,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field-item, .field--name-field-intro + .field--name-field-seo-title
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta em,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps em, div.entity-paragraphs-item.cta
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta .field--name-field-header, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-header {
-          height: 43px;
-          overflow: visible;
-          font-size: 18px;
-          font-weight: 700;
-          line-height: 1.24;
-          letter-spacing: 0.1px;
-          max-width: 300px;
-          margin: 0 auto; }
-        .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-button {
-          margin-top: 20px; }
-        .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-expiration-date {
-          font-size: 18px;
-          font-weight: 700;
-          line-height: 1;
-          letter-spacing: 0.2px;
-          position: absolute;
-          left: 20px;
-          bottom: 40px; }
-        .block--views-special-offers-front2 .view-content .views-row .node .logo {
-          position: absolute;
-          bottom: 80px;
-          right: 20px; }
-          .block--views-special-offers-front2 .view-content .views-row .node .logo img {
-            max-width: 105px;
-            max-height: 105px;
-            height: 100%;
-            width: 100%; }
-  @media (min-width: 768px) {
-    .block--views-special-offers-front2 {
-      padding: 0; }
-      .block--views-special-offers-front2 .view-header {
-        margin: 0 50px;
-        max-width: 580px; }
-        .block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header .field--name-field-intro + h1, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header em {
-          font-size: 26px; }
-      .block--views-special-offers-front2 .view-content {
-        -ms-flex-direction: row;
-            flex-direction: row;
-        margin: 0 30px; }
-        .block--views-special-offers-front2 .view-content .views-row {
-          width: 390px;
-          min-height: 425px;
-          margin: 0 9px; }
-          .block--views-special-offers-front2 .view-content .views-row .node .logo img {
-            max-width: 105px; } }
-  @media (min-width: 1024px) {
-    .block--views-special-offers-front2 .view {
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-      -ms-flex-align: center;
-          align-items: center; }
-    .block--views-special-offers-front2 .view-header {
-      max-width: 375px;
-      margin: 0;
-      text-align: left;
-      padding-bottom: 0;
-      padding-left: 10px; }
+.block--views-special-offers-front2 .view {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column; }
+  .block--views-special-offers-front2 .view > * {
+    -ms-flex: 0 1 auto; }
+
+.block--views-special-offers-front2 .view-header {
+  max-width: 375px;
+  text-align: left;
+  padding-bottom: 35px; }
+  .block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header .field--name-field-intro + h1, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header em {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.1;
+    letter-spacing: 3px;
+    text-transform: uppercase; }
+    @media (min-width: 768px) {
       .block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header .field--name-field-intro + h1, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header
       body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
       body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header em {
-        font-size: 30px; }
+        font-size: 30px; } }
+  .block--views-special-offers-front2 .view-header h3, .block--views-special-offers-front2 .view-header .block--views-team-list .node__title, .block--views-team-list .block--views-special-offers-front2 .view-header .node__title, .block--views-special-offers-front2 .view-header .block--views-services-all .node__title, .block--views-services-all .block--views-special-offers-front2 .view-header .node__title, .block--views-special-offers-front2 .view-header .block--views-services-all-mobile .node__title, .block--views-services-all-mobile .block--views-special-offers-front2 .view-header .node__title, .block--views-special-offers-front2 .view-header .block-special-offers-intro .block__title, .block-special-offers-intro .block--views-special-offers-front2 .view-header .block__title, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment h2, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + h1, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field--name-field-intro + h1, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-display-title, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field-item, .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header em, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment em, div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header em, .block--views-special-offers-front2 .view-header
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps h2,
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + h1,
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field--name-field-intro + h1, .block--views-special-offers-front2 .view-header
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-display-title,
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-header
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .field-item,
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-seo-title
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field-item, .field--name-field-intro + .field--name-field-seo-title
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta em,
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header em, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps em, div.entity-paragraphs-item.cta
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header em, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta .field--name-field-header, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header .field--name-field-header {
+    text-transform: capitalize;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: .89;
+    margin-top: 40px; }
+    @media (min-width: 768px) {
+      .block--views-special-offers-front2 .view-header h3, .block--views-special-offers-front2 .view-header .block--views-team-list .node__title, .block--views-team-list .block--views-special-offers-front2 .view-header .node__title, .block--views-special-offers-front2 .view-header .block--views-services-all .node__title, .block--views-services-all .block--views-special-offers-front2 .view-header .node__title, .block--views-special-offers-front2 .view-header .block--views-services-all-mobile .node__title, .block--views-services-all-mobile .block--views-special-offers-front2 .view-header .node__title, .block--views-special-offers-front2 .view-header .block-special-offers-intro .block__title, .block-special-offers-intro .block--views-special-offers-front2 .view-header .block__title, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment h2, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + h1, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field--name-field-intro + h1, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-display-title, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field-item, .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header em, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment em, div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-header em, .block--views-special-offers-front2 .view-header
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps h2,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + h1,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field--name-field-intro + h1, .block--views-special-offers-front2 .view-header
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-display-title,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-header
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .field-item,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header .field--name-field-intro + .field--name-field-seo-title
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field-item, .field--name-field-intro + .field--name-field-seo-title
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field-item, .block--views-special-offers-front2 .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header .field__label, .block--views-special-offers-front2 .view-header
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta em,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header em, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps em, div.entity-paragraphs-item.cta
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-header em, .block--views-special-offers-front2 .view-header div.entity-paragraphs-item.cta .field--name-field-header, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-header .field--name-field-header {
+        font-size: 51px; } }
+  .block--views-special-offers-front2 .view-header p + p {
+    margin-top: 40px; }
+  .block--views-special-offers-front2 .view-header p {
+    font-size: 18px;
+    line-height: 1.67; }
+    .block--views-special-offers-front2 .view-header p a {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: .2px; }
+      .block--views-special-offers-front2 .view-header p a:after {
+        font-family: "FontAwesome";
+        font-weight: normal;
+        content: "";
+        padding-left: 7px; }
+
+.block--views-special-offers-front2 .view-content {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column; }
+  .block--views-special-offers-front2 .view-content > * {
+    -ms-flex: 0 1 auto; }
+  .block--views-special-offers-front2 .view-content .views-row {
+    box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18); }
+    .block--views-special-offers-front2 .view-content .views-row .node {
+      padding: 25px 10px;
+      min-height: 380px;
+      position: relative; }
+      .block--views-special-offers-front2 .view-content .views-row .node .offer-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10; }
+      .block--views-special-offers-front2 .view-content .views-row .node .node__content {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+            flex-direction: column;
+        text-align: center; }
+        .block--views-special-offers-front2 .view-content .views-row .node .node__content > * {
+          -ms-flex: 0 1 auto; }
+      .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em {
+        font-size: 47px;
+        font-weight: 800;
+        text-transform: uppercase;
+        line-height: 1;
+        letter-spacing: 1.5px;
+        margin: 0 0 10px; }
+      .block--views-special-offers-front2 .view-content .views-row .node h3, .block--views-special-offers-front2 .view-content .views-row .node .block--views-team-list .node__title, .block--views-team-list .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block--views-services-all .node__title, .block--views-services-all .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block--views-services-all-mobile .node__title, .block--views-services-all-mobile .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block-special-offers-intro .block__title, .block-special-offers-intro .block--views-special-offers-front2 .view-content .views-row .node .block__title, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment h2, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + h1, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-display-title, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field-item, .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment em, div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps h2,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + h1,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-display-title,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .field-item,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field-item, .field--name-field-intro + .field--name-field-seo-title
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta em,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps em, div.entity-paragraphs-item.cta
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta .field--name-field-header, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-header {
+        height: 43px;
+        overflow: visible;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.24;
+        letter-spacing: 0.1px;
+        max-width: 300px;
+        margin: 0 auto; }
+      .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-button {
+        margin-top: 20px; }
+        .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-button .button {
+          border: none;
+          border-radius: 0px; }
+      .block--views-special-offers-front2 .view-content .views-row .node .field--name-body {
+        font-size: 15px;
+        text-align: left;
+        line-height: 1.4;
+        max-width: 209px;
+        margin: 25px 0 10px 10px; }
+      .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-disclaimer {
+        font-size: 15px;
+        text-align: left;
+        line-height: 1.4;
+        max-width: 225px;
+        font-style: italic;
+        margin: 25px 0 0px 10px; }
+      .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-expiration-date {
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 0.2px;
+        position: absolute;
+        left: 20px;
+        bottom: 55px; }
+      .block--views-special-offers-front2 .view-content .views-row .node .logo {
+        position: absolute;
+        bottom: 20px;
+        right: 20px; }
+        .block--views-special-offers-front2 .view-content .views-row .node .logo img {
+          min-width: 70px;
+          max-width: 70px;
+          height: auto; }
+
+@media (min-width: 768px) {
+  .block--views-special-offers-front2 {
+    padding: 0; }
+    .block--views-special-offers-front2 .view-header {
+      max-width: 580px; }
     .block--views-special-offers-front2 .view-content {
-      margin: 0; }
+      -ms-flex-direction: row;
+          flex-direction: row; }
       .block--views-special-offers-front2 .view-content .views-row {
-        box-shadow: none; }
-        .block--views-special-offers-front2 .view-content .views-row:hover {
-          box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18); }
-        .block--views-special-offers-front2 .view-content .views-row:first-of-type {
-          margin-left: 0; }
-        .block--views-special-offers-front2 .view-content .views-row:last-of-type {
-          margin-right: 0; }
-        .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em {
-          font-size: 58px; }
-        .block--views-special-offers-front2 .view-content .views-row .node h3, .block--views-special-offers-front2 .view-content .views-row .node .block--views-team-list .node__title, .block--views-team-list .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block--views-services-all .node__title, .block--views-services-all .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block--views-services-all-mobile .node__title, .block--views-services-all-mobile .block--views-special-offers-front2 .view-content .views-row .node .node__title, .block--views-special-offers-front2 .view-content .views-row .node .block-special-offers-intro .block__title, .block-special-offers-intro .block--views-special-offers-front2 .view-content .views-row .node .block__title, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment h2, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + h1, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-display-title, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field-item, .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment em, div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps h2,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node h2, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + h1,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-display-title,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .field-item,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-intro + .field--name-field-seo-title
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field-item, .field--name-field-intro + .field--name-field-seo-title
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field-item, .block--views-special-offers-front2 .view-content .views-row .node body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node .field__label, .block--views-special-offers-front2 .view-content .views-row .node
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta em,
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps em, div.entity-paragraphs-item.cta
-        body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node em, .block--views-special-offers-front2 .view-content .views-row .node div.entity-paragraphs-item.cta .field--name-field-header, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-header {
-          font-size: 21px; }
-        .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-button {
-          margin-top: 40px; }
+        width: 390px;
+        min-height: 380px;
+        margin: 0 9px; }
+        .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-expiration-date {
+          font-size: 15px; }
         .block--views-special-offers-front2 .view-content .views-row .node .logo {
-          bottom: 20px; } }
+          bottom: 40px; }
+          .block--views-special-offers-front2 .view-content .views-row .node .logo img {
+            min-width: 90px;
+            max-width: 90px; } }
+
+@media (min-width: 1024px) {
+  .block--views-special-offers-front2 .view-content .views-row:hover {
+    box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18); }
+  .block--views-special-offers-front2 .view-content .views-row:first-of-type {
+    margin-left: 0; }
+  .block--views-special-offers-front2 .view-content .views-row:last-of-type {
+    margin-right: 0; }
+  .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser {
+    min-height: 400px; }
+    .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser h2, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field-item, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field__label, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field__label, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser em {
+      font-size: 58px;
+      text-transform: uppercase; }
+    .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser h3, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .block--views-team-list .node__title, .block--views-team-list .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .node__title, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .block--views-services-all .node__title, .block--views-services-all .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .node__title, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .block--views-services-all-mobile .node__title, .block--views-services-all-mobile .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .node__title, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .block-special-offers-intro .block__title, .block-special-offers-intro .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .block__title, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-treatment h2, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser h2, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + h1, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-display-title, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field-item, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field-item, .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field-item, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field__label, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser em, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment em, div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser em, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps h2,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser h2, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + h1,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + h1, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-display-title,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .field-item,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field-item, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-intro + .field--name-field-seo-title
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field-item, .field--name-field-intro + .field--name-field-seo-title
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field-item, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field__label, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta em,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser em, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser div.entity-paragraphs-item.cta
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps em, div.entity-paragraphs-item.cta
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser em, .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser div.entity-paragraphs-item.cta .field--name-field-header, div.entity-paragraphs-item.cta .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-header {
+      font-size: 21px; }
+    .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-button {
+      margin-top: 40px; }
+    .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .logo {
+      bottom: 25px; }
+    .block--views-special-offers-front2 .view-content .views-row .node.node--special-offer--secondary-teaser .field--name-field-expiration-date {
+      bottom: 45px; } }
+
+@media (min-width: 1170px) {
+  .block--views-special-offers-front2 .view {
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: center;
+        align-items: center; }
+  .block--views-special-offers-front2 .view-header {
+    max-width: 415px;
+    margin: 0;
+    text-align: left;
+    padding-bottom: 0;
+    padding-right: 5px; }
+  .block--views-special-offers-front2 .view-content {
+    margin: 0; }
+    .block--views-special-offers-front2 .view-content .views-row {
+      width: 390px; } }
 
 .block-special-offers-intro {
   max-width: 700px;
@@ -6176,9 +6250,8 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     .block-front-testimonials .block__content .view-content .views-row .node--testimonial--teaser {
       padding: 15px 30px;
       max-width: 380px;
-      height: 305px;
-      border: solid 3px;
-      box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18); }
+      min-height: 305px;
+      border: solid 3px; }
       .block-front-testimonials .block__content .view-content .views-row .node--testimonial--teaser .reviewer {
         display: -ms-flexbox;
         display: flex; }
@@ -6215,7 +6288,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
       text-align: center; }
     .block-front-testimonials .block__content .view-content .views-row .node--testimonial--teaser {
       max-width: 340px;
-      height: 315px;
+      min-height: 315px;
       margin: 0 10px; }
       .block-front-testimonials .block__content .view-content .views-row .node--testimonial--teaser .reviewer {
         display: block;
@@ -6235,11 +6308,11 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
       body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block-front-testimonials .block__content .view-header .field__label, .block-front-testimonials .block__content .view-header div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block-front-testimonials .block__content .view-header em {
         font-size: 50px; }
       .block-front-testimonials .block__content .view-content {
-        -ms-flex-pack: justify;
-            justify-content: space-between; }
+        -ms-flex-pack: distribute;
+            justify-content: space-around; }
         .block-front-testimonials .block__content .view-content .views-row .node--testimonial--teaser {
-          max-width: 380px;
-          height: 305px;
+          max-width: 340px;
+          min-height: 305px;
           margin: 0;
           box-shadow: none; }
           .block-front-testimonials .block__content .view-content .views-row .node--testimonial--teaser:hover {
@@ -6450,9 +6523,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
       display: block; } }
   @media (min-width: 1030px) {
     .block--menu-menu-ctm-utility-menu .menu {
-      padding-right: 0;
-      -ms-flex-direction: row;
-          flex-direction: row; }
+      padding-right: 0; }
       .block--menu-menu-ctm-utility-menu .menu li {
         -ms-flex-direction: column;
             flex-direction: column; }
@@ -6492,19 +6563,21 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
           letter-spacing: .2px; }
   @media (min-width: 1024px) {
     .footer-nav {
-      padding: 30px 0 80px; }
+      padding: 0 0 50px; }
       .footer-nav .menu-block-wrapper > .menu {
         display: -ms-flexbox;
         display: flex;
         -ms-flex-direction: row;
             flex-direction: row;
         -ms-flex-align: start;
-            align-items: flex-start; }
+            align-items: flex-start;
+        -ms-flex-pack: center;
+            justify-content: center; }
         .footer-nav .menu-block-wrapper > .menu > * {
           -ms-flex: 0 1 auto; }
         .footer-nav .menu-block-wrapper > .menu > li {
-          -ms-flex: 1 0 20%;
-              flex: 1 0 20%; }
+          -ms-flex: 0 1 auto;
+              flex: 0 1 auto; }
           .footer-nav .menu-block-wrapper > .menu > li > a {
             font-size: 18px;
             font-weight: 600;
@@ -6513,6 +6586,8 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
             margin-bottom: 25px;
             padding-bottom: 5px;
             border-bottom: solid 8px; }
+          .footer-nav .menu-block-wrapper > .menu > li:last-child > a {
+            margin-right: 0; }
           .footer-nav .menu-block-wrapper > .menu > li > .menu {
             display: block; } }
 
@@ -7411,7 +7486,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
         font-size: 38px; } }
   @media (min-width: 1024px) {
     .front .l-main .l-content .block--system-main {
-      padding: 130px 0 100px; }
+      padding: 130px 20px 100px; }
       .front .l-main .l-content .block--system-main .node__title {
         font-size: 30px; }
       .front .l-main .l-content .block--system-main .field--name-body h2, .front .l-main .l-content .block--system-main .field--name-body .field--name-field-intro + h1, .front .l-main .l-content .block--system-main .field--name-body .field--name-field-intro + .field--name-field-display-title, .front .l-main .l-content .block--system-main .field--name-body .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .front .l-main .l-content .block--system-main .field--name-body .field-item, .front .l-main .l-content .block--system-main .field--name-body body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .l-main .l-content .block--system-main .field--name-body .field__label, .front .l-main .l-content .block--system-main .field--name-body
@@ -8639,7 +8714,8 @@ div.entity-paragraphs-item.paragraphs-item-table td {
         -ms-flex-align: center;
             align-items: center;
         max-width: 1210px;
-        margin: 0 auto; }
+        margin: 0 auto;
+        padding: 0 15px; }
         .l-header .l-region--header-first .block--nav-utility {
           margin-left: auto; } }
 
@@ -8647,7 +8723,7 @@ div.entity-paragraphs-item.paragraphs-item-table td {
   margin-top: 0; }
 
 .front .l-postscript .l-wrap--postscript-second, .node-type-city-page .l-postscript .l-wrap--postscript-second {
-  padding: 70px 0; }
+  padding: 70px 20px; }
   .front .l-postscript .l-wrap--postscript-second .l-region--postscript-second, .node-type-city-page .l-postscript .l-wrap--postscript-second .l-region--postscript-second {
     max-width: 1210px;
     margin: 0 auto; }
@@ -8679,7 +8755,7 @@ div.entity-paragraphs-item.paragraphs-item-table td {
 
 .node-type-localtarget .l-postscript .l-wrap--postscript-second {
   background-image: url("../images/bg-webform.jpg");
-  padding: 70px 0; }
+  padding: 70px 20px; }
   .node-type-localtarget .l-postscript .l-wrap--postscript-second .l-region--postscript-second {
     max-width: 1210px;
     margin: 0 auto; }
@@ -8708,10 +8784,7 @@ div.entity-paragraphs-item.paragraphs-item-table td {
 
 .front .preface-third-wrap, .node-type-localtarget .preface-third-wrap {
   padding: 40px 20px 375px;
-  background-image: url("../images/benefits-bg-mobile.jpg");
-  background-position-x: -50%;
-  background-position-y: 100%;
-  background-repeat: no-repeat; }
+  overflow: hidden; }
   .front .preface-third-wrap .benefits-wrapper, .node-type-localtarget .preface-third-wrap .benefits-wrapper {
     max-width: 1210px;
     margin: 0 auto; }
@@ -8725,19 +8798,13 @@ div.entity-paragraphs-item.paragraphs-item-table td {
         margin: 0 auto; } }
   @media (min-width: 1024px) {
     .front .preface-third-wrap, .node-type-localtarget .preface-third-wrap {
-      padding: 90px 0;
-      background-image: url("../images/benefits-bg.jpg");
-      background-position: center right;
-      background-repeat: no-repeat; }
+      padding: 90px 20px; }
       .front .preface-third-wrap .l-region--preface-third, .node-type-localtarget .preface-third-wrap .l-region--preface-third {
         margin: 0; } }
 
 .front.front--solutions-finder .preface-third-wrap {
   padding: 40px 20px 375px;
-  background-image: url("../images/benefits-bg-mobile.jpg");
-  background-position-x: -50%;
-  background-position-y: 100%;
-  background-repeat: no-repeat; }
+  overflow: hidden; }
   .front.front--solutions-finder .preface-third-wrap .benefits-wrapper {
     max-width: 1210px;
     margin: 0 auto; }
@@ -8750,7 +8817,4 @@ div.entity-paragraphs-item.paragraphs-item-table td {
   @media (min-width: 1024px) {
     .front.front--solutions-finder .preface-third-wrap {
       margin-top: -90px;
-      padding: 180px 0 90px;
-      background-image: url("../images/benefits-bg.jpg");
-      background-position: bottom right;
-      background-repeat: no-repeat; } }
+      padding: 180px 20px 90px; } }

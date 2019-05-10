@@ -264,43 +264,49 @@ Class SprowtBuilder {
         $this->addDefaultImages();
         $default_images = $this->default_images;
         $image_dest = 'public://default_node_images';
-        
-        foreach($nodes as $key => $node){
-            $uuids[$node['nid']] = $node['uuid'];
-            if(!empty($node['field_image']['und'][0]['fid'])){
-                switch($node['type']) {
-                    case 'slide':
-                        $file = $default_images['slideshow-placeholder.png'];
-                        break;
-                    case 'benefit':
-                    case 'affiliation':
-                    case 'special_offer':
-                        $file = $default_images['icon-placeholder.png'];
-                        break;
-                    case 'profile':
-                        $file = $default_images['profile-placeholder.png'];
-                        break;
-                    default:
-                        $file = $default_images['service-placeholder.png'];
-                        break;
-                }
 
-                $file = file_copy($file, $image_dest);
+        $fields = [
+            'field_image'
+        ];
 
-                $field_info = field_info_instance('node', 'field_image', $node['type']);
+        foreach($fields as $field) {
+            foreach($nodes as $key => $node){
+                $uuids[$node['nid']] = $node['uuid'];
+                if(!empty($node[$field]['und'][0]['fid'])){
+                    switch($node['type']) {
+                        case 'slide':
+                            $file = $default_images['slideshow-placeholder.png'];
+                            break;
+                        case 'benefit':
+                        case 'affiliation':
+                        case 'special_offer':
+                            $file = $default_images['icon-placeholder.png'];
+                            break;
+                        case 'profile':
+                            $file = $default_images['profile-placeholder.png'];
+                            break;
+                        default:
+                            $file = $default_images['service-placeholder.png'];
+                            break;
+                    }
 
-                foreach($field_info['display'] as $display){
-                    if(!empty($display['settings']['image_style'])){
-                        $image_style = $display['settings']['image_style'];
-                        if(!empty($image_style)){
-                            image_style_create_derivative(image_style_load($image_style), $file->uri, image_style_path($image_style, $file->uri));
+                    $field_info = field_info_instance('node', $field, $node['type']);
+                    if(!empty($field_info)) {
+                        $file = file_copy($file, $image_dest);
+                        foreach($field_info['display'] as $display){
+                            if(!empty($display['settings']['image_style'])){
+                                $image_style = $display['settings']['image_style'];
+                                if(!empty($image_style)){
+                                    image_style_create_derivative(image_style_load($image_style), $file->uri, image_style_path($image_style, $file->uri));
+                                }
+                            }
                         }
+                        if(!empty($file)) {
+                            $node[$field]['und'][0]= array('fid' => $file->fid, 'focal_point' => $node['field_image']['und'][0]['focal_point']);
+                        }
+                        $nodes[$key] = $node;
                     }
                 }
-                if(!empty($file)) {
-                    $node['field_image']['und'][0]= array('fid' => $file->fid, 'focal_point' => $node['field_image']['und'][0]['focal_point']);
-                }
-                $nodes[$key] = $node;
             }
         }
         
@@ -906,6 +912,9 @@ Class SprowtBuilder {
             $blockBuilder->setFromFile($blockFile);
             $blockBuilder->handleContexts();
         }
+
+        //update default images
+        $this->addNodeDefaultImages();
     }
 
     function setUpSprowtStarter() {

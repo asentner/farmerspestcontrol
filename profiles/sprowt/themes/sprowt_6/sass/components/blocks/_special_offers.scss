@@ -1,21 +1,33 @@
 // homepage
 .block--views-special-offers-front2{
-  padding: 0 20px;
   .view{
     @include flexbox;
     flex-direction: column;
   }
   .view-header{
     max-width: 375px;
-    margin: 0 auto;
+    // margin: 0 20px;
     text-align: left;
     padding-bottom: 35px;
     h2{
-      font-size: 26px;
-      font-weight: 700;
+      font-size: 22px;
+      font-weight: bold;
       line-height: 1.1;
       letter-spacing: 3px;
       text-transform: uppercase;
+      @include breakpoint($tab) {
+        font-size: 30px;
+      }
+    }
+    h3 {
+      text-transform: capitalize;
+      font-size: 32px;
+      font-weight: bold;
+      line-height: .89;
+      margin-top: 40px;
+      @include breakpoint($tab) {
+        font-size: 51px;
+      }
     }
     p + p{
       margin-top: 40px;
@@ -38,14 +50,13 @@
   .view-content{
     @include flexbox;
     flex-direction: column;
+    // margin: 0 20px;
     .views-row{
       box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18);
-      padding: 10px;
       .node{
         padding: 25px 10px;
-        min-height: 419px;
+        min-height: 380px;
         position: relative;
-        border: 5px dashed;
         .offer-link{
           position: absolute;
           top: 0;
@@ -62,6 +73,7 @@
         h2{
           font-size: 47px;
           font-weight: 800;
+          text-transform: uppercase;
           line-height: 1;
           letter-spacing: 1.5px;
           margin: 0 0 10px;
@@ -78,25 +90,43 @@
         }
         .field--name-field-button{
           margin-top: 20px;
+          .button {
+            border: none;
+            border-radius: 0px;
+          }
+        }
+        .field--name-body {
+          font-size: 15px;
+          text-align: left;
+          line-height: 1.4;
+          max-width: 209px;
+          margin: 25px 0 10px 10px;
+        }
+        .field--name-field-disclaimer {
+          font-size: 15px;
+          text-align: left;
+          line-height: 1.4;
+          max-width: 225px;
+          font-style: italic;
+          margin: 25px 0 0px 10px;
         }
         .field--name-field-expiration-date{
-          font-size: 18px;
+          font-size: 12px;
           font-weight: 700;
           line-height: 1;
           letter-spacing: 0.2px;
           position: absolute;
           left: 20px;
-          bottom: 40px;
+          bottom: 55px;
         }
         .logo{
           position: absolute;
-          bottom: 80px;
+          bottom: 20px;
           right: 20px;
           img{
-            max-width: 105px;
-            max-height: 105px;
-            height: 100%;
-            width: 100%;
+            min-width: 70px;
+            max-width: 70px;
+            height: auto;
           }
         }
       }
@@ -105,23 +135,24 @@
   @include breakpoint($tab) {
     padding: 0;
     .view-header{
-      margin: 0 50px;
+      // margin: 0 50px;
       max-width: 580px;
-      h2{
-        font-size: 26px;
-      }
     }
     .view-content{
       flex-direction: row;
-      margin: 0 30px;
       .views-row{
         width: 390px;
-        min-height: 425px;
+        min-height: 380px;
         margin: 0 9px;
-        .node{
-          .logo{
+        .node {
+          .field--name-field-expiration-date {
+            font-size: 15px;
+          }
+          .logo {
+            bottom: 40px;
             img{
-              max-width: 105px;
+              min-width: 90px;
+              max-width: 90px;
             }
           }
         }
@@ -129,25 +160,9 @@
     }
   }
   @include breakpoint($desk){
-    .view{
-      flex-direction: row-reverse;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .view-header{
-      max-width: 375px;
-      margin: 0;
-      text-align: left;
-      padding-bottom: 0;
-      padding-left: 10px;
-      h2{
-        font-size: 30px;
-      }
-    }
     .view-content{
-      margin: 0;
+      // margin: 0 50px;
       .views-row{
-        box-shadow: none;
         &:hover{
           box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18);
         }
@@ -157,9 +172,11 @@
         &:last-of-type{
           margin-right: 0;
         }
-        .node{
+        .node.node--special-offer--secondary-teaser{
+          min-height: 400px;
           h2{
             font-size: 58px;
+            text-transform: uppercase;
           }
           h3{
             font-size: 21px;
@@ -168,9 +185,32 @@
             margin-top: 40px;
           }
           .logo{
-            bottom: 20px;
+            bottom: 25px;
+          }
+          .field--name-field-expiration-date {
+            bottom: 45px;
           }
         }
+      }
+    }
+  }
+  @include breakpoint(1170px) {
+    .view{
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .view-header{
+      max-width: 415px;
+      margin: 0;
+      text-align: left;
+      padding-bottom: 0;
+      padding-right: 5px;
+    }
+    .view-content {
+      margin: 0;
+      .views-row {
+        width: 390px;
       }
     }
   }

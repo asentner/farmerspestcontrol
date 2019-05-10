@@ -68,7 +68,7 @@
     @include breakpoint($desk){
       .l-content{
         .block--system-main{
-          padding: 130px 0 100px;
+          padding: 130px 20px 100px;
           .node__title{
             font-size: 30px;
           }

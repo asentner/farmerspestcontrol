@@ -20,10 +20,11 @@
 .front, .node-type-localtarget{
   .preface-third-wrap{
     padding: 40px 20px 375px;
-    background-image: url('../images/benefits-bg-mobile.jpg');
-    background-position-x: -50%;
-    background-position-y: 100%;
-    background-repeat: no-repeat;
+    overflow: hidden;
+    // background-image: url('../images/benefits-bg-mobile.jpg');
+    // background-position-x: -50%;
+    // background-position-y: 100%;
+    // background-repeat: no-repeat;
     .benefits-wrapper{
       max-width: $container;
       margin: 0 auto;
@@ -39,10 +40,10 @@
       }
     }
     @include breakpoint($desk){
-      padding: 90px 0;
-      background-image: url('../images/benefits-bg.jpg');
-      background-position: center right;
-      background-repeat: no-repeat;
+      padding: 90px 20px;
+      // background-image: url('../images/benefits-bg.jpg');
+      // background-position: center right;
+      // background-repeat: no-repeat;
       .l-region--preface-third{
         margin: 0;
       }
@@ -53,10 +54,11 @@
 .front.front--solutions-finder{
   .preface-third-wrap{
     padding: 40px 20px 375px;
-    background-image: url('../images/benefits-bg-mobile.jpg');
-    background-position-x: -50%;
-    background-position-y: 100%;
-    background-repeat: no-repeat;
+    overflow: hidden;
+    // background-image: url('../images/benefits-bg-mobile.jpg');
+    // background-position-x: -50%;
+    // background-position-y: 100%;
+    // background-repeat: no-repeat;
     .benefits-wrapper{
       max-width: $container;
       margin: 0 auto;
@@ -70,10 +72,10 @@
     }
     @include breakpoint($desk){
       margin-top: -90px;
-      padding: 180px 0 90px;
-      background-image: url('../images/benefits-bg.jpg');
-      background-position: bottom right;
-      background-repeat: no-repeat;
+      padding: 180px 20px 90px;
+      // background-image: url('../images/benefits-bg.jpg');
+      // background-position: bottom right;
+      // background-repeat: no-repeat;
     }
   }
 }

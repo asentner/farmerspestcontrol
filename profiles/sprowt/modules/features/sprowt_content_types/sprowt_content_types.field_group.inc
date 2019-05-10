@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_content_types.field_group.inc

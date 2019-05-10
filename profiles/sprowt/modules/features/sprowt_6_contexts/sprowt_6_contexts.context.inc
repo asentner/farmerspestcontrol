@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_6_contexts.context.inc
@@ -19,7 +20,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/39' => 'node/37',
+        'our-blog' => 'our-blog',
       ),
     ),
   );
@@ -80,9 +81,9 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'postscript_fifth',
           'weight' => '-10',
         ),
-        'webform-client-block-57' => array(
+        'webform-client-block-' => array(
           'module' => 'webform',
-          'delta' => 'client-block-57',
+          'delta' => 'client-block-',
           'region' => 'postscript_fourth',
           'weight' => '-10',
         ),
@@ -309,21 +310,15 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'postscript_second',
           'weight' => '-9',
         ),
+        'block-1' => array(
+          'module' => 'block',
+          'delta' => '1',
+          'region' => 'postscript_third',
+          'weight' => '-10',
+        ),
         'bean-careers-block-front' => array(
           'module' => 'bean',
           'delta' => 'careers-block-front',
-          'region' => 'postscript_third',
-          'weight' => '-8',
-        ),
-        'views-affiliates-list' => array(
-          'module' => 'views',
-          'delta' => 'affiliates-list',
-          'region' => 'postscript_fifth',
-          'weight' => '-10',
-        ),
-        'block-' => array(
-          'module' => 'block',
-          'delta' => NULL,
           'region' => 'postscript_third',
           'weight' => '-9',
         ),
@@ -331,7 +326,13 @@ function sprowt_6_contexts_context_default_contexts() {
           'module' => 'webform',
           'delta' => 'client-block-57',
           'region' => 'postscript_fourth',
-          'weight' => '-8',
+          'weight' => '-10',
+        ),
+        'views-affiliates-list' => array(
+          'module' => 'views',
+          'delta' => 'affiliates-list',
+          'region' => 'postscript_fifth',
+          'weight' => '-10',
         ),
       ),
     ),
@@ -474,9 +475,9 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'postscript_fifth',
           'weight' => '-10',
         ),
-        'webform-client-block-57' => array(
+        'webform-client-block-' => array(
           'module' => 'webform',
-          'delta' => 'client-block-57',
+          'delta' => 'client-block-',
           'region' => 'postscript_fourth',
           'weight' => '-10',
         ),
@@ -500,7 +501,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/31' => 'node/29',
+        'meet-our-trusted-team' => 'meet-our-trusted-team',
       ),
     ),
   );
@@ -549,7 +550,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/32' => 'node/30',
+        'our-pest-control-services' => 'our-pest-control-services',
       ),
     ),
   );
@@ -604,9 +605,9 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'sidebar',
           'weight' => '-7',
         ),
-        'webform-client-block-3' => array(
+        'webform-client-block-54' => array(
           'module' => 'webform',
-          'delta' => 'client-block-3',
+          'delta' => 'client-block-54',
           'region' => 'sidebar',
           'weight' => '-6',
         ),
@@ -747,7 +748,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/34' => 'node/32',
+        'node/34' => 'node/25',
       ),
     ),
   );

@@ -235,7 +235,7 @@
   }
   @include breakpoint($desk){
     .bean-generic-bean{
-      padding: 40px 0;
+      padding: 40px 20px;
       background-image: url('../images/employment-cta.jpg');
       background-size: cover;
       background-position: center center;

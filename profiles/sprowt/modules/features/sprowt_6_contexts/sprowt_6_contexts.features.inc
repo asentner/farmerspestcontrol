@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_6_contexts.features.inc

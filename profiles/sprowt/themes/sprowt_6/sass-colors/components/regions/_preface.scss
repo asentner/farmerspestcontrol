@@ -3,11 +3,3 @@
     background-color: palette(neutral, haze);
   }
 }
-
-.front, .node-type-localtarget{
-  @include breakpoint($desk){
-    .l-region--preface-third{
-      background-color: rgba(palette(white, pure), .7);
-    }
-  }
-}
