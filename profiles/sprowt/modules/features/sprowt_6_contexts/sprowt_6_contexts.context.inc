@@ -605,9 +605,9 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'sidebar',
           'weight' => '-7',
         ),
-        'webform-client-block-47' => array(
+        'webform-client-block-40' => array(
           'module' => 'webform',
-          'delta' => 'client-block-47',
+          'delta' => 'client-block-40',
           'region' => 'sidebar',
           'weight' => '-6',
         ),
@@ -748,7 +748,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/34' => 'node/18',
+        'node/34' => 'node/11',
       ),
     ),
   );
