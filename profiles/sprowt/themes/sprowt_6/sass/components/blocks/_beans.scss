@@ -179,6 +179,18 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    // tech
+    &:after {
+      content: url('../images/employment-woman.png');
+      position: absolute;
+      right: 0;
+      bottom: -410px;
+      height: auto;
+      width: 100%;
+      transform: scale(.7);
+      display: none;
+    }
     .field--name-field-body-text{
       h3{
         font-size: 22px;
@@ -219,6 +231,13 @@
     .content{
       flex-direction: column-reverse;
       align-items: flex-start;
+      // tech
+      &:after {
+        display: block;
+        right: -490px;
+        bottom: -80px;
+        transform: scale(1);
+      }
       .field--name-field-body-text{
         max-width: 525px;
         h3{
@@ -242,6 +261,11 @@
     .content{
       flex-direction: row;
       align-items: center;
+      // tech
+      &:after {
+        right: -110%;
+        bottom: -62px;
+      }
       .field--name-field-body-text{
         max-width: 600px;
         h3{

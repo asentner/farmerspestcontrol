@@ -605,9 +605,9 @@ function sprowt_6_contexts_context_default_contexts() {
           'region' => 'sidebar',
           'weight' => '-7',
         ),
-        'webform-client-block-54' => array(
+        'webform-client-block-47' => array(
           'module' => 'webform',
-          'delta' => 'client-block-54',
+          'delta' => 'client-block-47',
           'region' => 'sidebar',
           'weight' => '-6',
         ),
@@ -740,7 +740,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $export['special_offers'] = $context;
 
   $context = new stdClass();
-  $context->disabled = TRUE; /* Edit this to true to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'special_offers_list';
   $context->description = 'Special offers listing page';
@@ -748,7 +748,7 @@ function sprowt_6_contexts_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/34' => 'node/25',
+        'node/34' => 'node/18',
       ),
     ),
   );

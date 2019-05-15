@@ -237,6 +237,7 @@
   }
   @include breakpoint($tab){
     flex-direction: row;
+    justify-content: flex-start;
     header{
       margin-right: 30px;
     }
