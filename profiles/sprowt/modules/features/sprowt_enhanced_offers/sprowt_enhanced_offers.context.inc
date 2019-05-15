@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_enhanced_offers.context.inc
@@ -20,7 +21,6 @@ function sprowt_enhanced_offers_context_default_contexts() {
     'path' => array(
       'values' => array(
         'special-offers' => 'special-offers',
-        'node/29' => 'node/29',
       ),
     ),
   );

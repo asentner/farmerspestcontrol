@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_views_feature.views_default.inc
@@ -1655,7 +1656,8 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['link_display'] = 'custom_url';
   $handler->display->display_options['link_url'] = 'node/uuid/c1c20802-54d4-49c2-ad31-61784e121b9f';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
   $handler->display->display_options['pager']['options']['offset'] = '';
   $handler->display->display_options['block_description'] = 'List of all services';
 
@@ -2430,7 +2432,8 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<h2>Save money today!</h2>
+  $handler->display->display_options['header']['area']['content'] = '<h2>Special Offers</h2>
+<h3>Save money today!</h3>
 <p>We know that choosing a pest control service is an important decision. Let us make it easy for you to get started with us with these exclusive special offers!</p>
 <p><a href="/special-offers">View All Savings</a></p>';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
@@ -2463,9 +2466,10 @@ function sprowt_views_feature_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<h2>Save some money today!</h2>
+  $handler->display->display_options['header']['area']['content'] = '<h2>Special Offers</h2>
+<h3>Save money today!</h3>
 <p>We know that choosing a pest control service is an important decision. Let us make it easy for you to get started with us with these exclusive special offers!</p>
-<p><a href="/">View All Savings</a></p>';
+<p><a href="/special-offers">View All Savings</a></p>';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Weight: Weight */

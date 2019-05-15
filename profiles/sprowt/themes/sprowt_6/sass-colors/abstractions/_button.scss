@@ -1,15 +1,12 @@
-@mixin button-color($bg:palette(primary, base), $fg:palette(white, pure), $bg-hover:palette(white, pure), $fg-hover:palette(primary, dark)) {
+@mixin button-color($bg:palette(primary, base), $fg:palette(white, pure), $bg-hover:palette(secondary, base), $fg-hover:palette(white, pure)) {
   background-color: $bg;
   color: $fg;
-  border-color: $bg;
   &:hover,
   &:focus {
     @if $bg-hover != null {
       background-color: $bg-hover;
-      border-color: $fg-hover;
     } @else {
       background-color: darken($bg, 10);
-      border-color: darken($bg, 10);
     }
     @if $fg-hover != null {
       color: $fg-hover;

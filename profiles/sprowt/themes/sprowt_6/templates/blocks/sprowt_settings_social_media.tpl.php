@@ -38,10 +38,10 @@
   <?php if ($gplus = variable_get('sprowt_settings_gplus_url', FALSE)) : ?>
     <li>
       <a class="gplus" href="<?php print $gplus; ?> " target="_blank">
-        <i class="fa fa-fw fa-google-plus"></i>
+        <i class="fa fa-fw fa-google"></i>
         <span class="social-description social-description-gplus">
           <?php
-            print variable_get('sprowt_settings_gplus_description', FALSE) ? variable_get('sprowt_settings_gplus_description', FALSE) : "Google+";
+            print variable_get('sprowt_settings_gplus_description', FALSE) ? variable_get('sprowt_settings_gplus_description', FALSE) : "Google";
           ?>
         </span>
       </a>

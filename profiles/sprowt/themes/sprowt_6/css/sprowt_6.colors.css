@@ -9,12 +9,10 @@ a {
 
 .button {
   background-color: #1c7e54;
-  color: #fff;
-  border-color: #1c7e54; }
+  color: #fff; }
   .button:hover, .button:focus {
-    background-color: #fff;
-    border-color: #1d5f47;
-    color: #1d5f47; }
+    background-color: #202624;
+    color: #fff; }
 
 @media print {
   .button, .node--teaser .field--name-body .field__item > .more-link,
@@ -25,14 +23,12 @@ a {
 .node--teaser .field--name-body .field__item > .more-link,
 .node--alt-teaser .field--name-body .field__item > .more-link {
   background-color: #1c7e54;
-  color: #fff;
-  border-color: #1c7e54; }
+  color: #fff; }
   .node--teaser .field--name-body .field__item > .more-link:hover, .node--teaser .field--name-body .field__item > .more-link:focus,
   .node--alt-teaser .field--name-body .field__item > .more-link:hover,
   .node--alt-teaser .field--name-body .field__item > .more-link:focus {
-    background-color: #fff;
-    border-color: #1d5f47;
-    color: #1d5f47; }
+    background-color: #202624;
+    color: #fff; }
 
 .flexslider {
   background-color: transparent; }
@@ -45,12 +41,10 @@ input, textarea, select {
 
 input[type=submit] {
   background-color: #1c7e54;
-  color: #fff;
-  border-color: #1c7e54; }
+  color: #fff; }
   input[type=submit]:hover, input[type=submit]:focus {
-    background-color: #fff;
-    border-color: #1d5f47;
-    color: #1d5f47; }
+    background-color: #202624;
+    color: #fff; }
 
 table {
   background-color: #ddd; }
@@ -328,12 +322,10 @@ hr {
     color: inherit; }
   .l-region--postscript-third .block--sprowt-block-cta .button {
     background-color: #1c7e54;
-    color: #fff;
-    border-color: #1c7e54; }
+    color: #fff; }
     .l-region--postscript-third .block--sprowt-block-cta .button:hover, .l-region--postscript-third .block--sprowt-block-cta .button:focus {
-      background-color: #fff;
-      border-color: #1d5f47;
-      color: #1d5f47; }
+      background-color: #202624;
+      color: #fff; }
 
 .front .block--webform .block__content .webform-client-form .form-actions input, .node-type-city-page .block--webform .block__content .webform-client-form .form-actions input, .node-type-localtarget .block--webform .block__content .webform-client-form .form-actions input {
   background-color: #1d5f47;
@@ -675,48 +667,29 @@ hr {
 .solution-finder-form .concern-wrap label:hover svg path, .solution-finder-form .concern-wrap label.checked svg path {
   fill: #1c7e54; }
 
-.block--views-special-offers-front2 .view-header h2, .block--views-special-offers-front2 .view-header h3 {
-  color: #1d5f47; }
+.block--views-special-offers-front2 .view-header h2 {
+  color: #1c7e54; }
+
+.block--views-special-offers-front2 .view-header h3 {
+  color: #353639; }
 
 .block--views-special-offers-front2 .view-header p a {
   color: #1d5f47; }
   .block--views-special-offers-front2 .view-header p a:after {
     color: #2e3834; }
   .block--views-special-offers-front2 .view-header p a:hover {
-    color: #e89e00; }
+    color: #202624; }
     .block--views-special-offers-front2 .view-header p a:hover:after {
-      color: #1c7e54; }
+      color: #202624; }
 
 .block--views-special-offers-front2 .view-content .views-row {
   background: #fff; }
-  .block--views-special-offers-front2 .view-content .views-row .node {
-    border-color: #e0e0e1; }
-    .block--views-special-offers-front2 .view-content .views-row .node h2 {
-      color: #1d5f47; }
-    .block--views-special-offers-front2 .view-content .views-row .node h3 {
-      color: #333333; }
-    .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-button .button {
-      background-color: #1d5f47;
-      color: #fff; }
-    .block--views-special-offers-front2 .view-content .views-row .node .field--name-field-expiration-date {
-      color: #c80108; }
 
 .block-special-offers-intro .block__title {
   color: #202624; }
 
 .block--views-special-offers-sidebar-sec .view-content .views-row, .block--views-096cf025523abc0c052989875f4f93fe .view-content .views-row {
   background: #fff; }
-  .block--views-special-offers-sidebar-sec .view-content .views-row .node, .block--views-096cf025523abc0c052989875f4f93fe .view-content .views-row .node {
-    border-color: #e0e0e1; }
-    .block--views-special-offers-sidebar-sec .view-content .views-row .node h2, .block--views-096cf025523abc0c052989875f4f93fe .view-content .views-row .node h2 {
-      color: #1d5f47; }
-    .block--views-special-offers-sidebar-sec .view-content .views-row .node h3, .block--views-096cf025523abc0c052989875f4f93fe .view-content .views-row .node h3 {
-      color: #333333; }
-    .block--views-special-offers-sidebar-sec .view-content .views-row .node .field--name-field-button .button, .block--views-096cf025523abc0c052989875f4f93fe .view-content .views-row .node .field--name-field-button .button {
-      background-color: #1d5f47;
-      color: #fff; }
-    .block--views-special-offers-sidebar-sec .view-content .views-row .node .field--name-field-expiration-date, .block--views-096cf025523abc0c052989875f4f93fe .view-content .views-row .node .field--name-field-expiration-date {
-      color: #c80108; }
 
 .block--views-special-offers-list .node {
   border-color: #e1e1e1; }
@@ -981,11 +954,11 @@ hr {
       .block--nav-utility .menu li:nth-child(1) a {
         background: transparent; }
         .block--nav-utility .menu li:nth-child(1) a:hover {
-          color: #fbe23c; }
+          color: #1c7e54; }
         .block--nav-utility .menu li:nth-child(1) a:before {
           color: #1c7e54; }
       .block--nav-utility .menu li:nth-child(2) a:hover {
-        color: #fbe23c; }
+        color: #1c7e54; }
       .block--nav-utility .menu li:nth-child(2) a:before {
         color: #1c7e54; } }
 
@@ -1213,12 +1186,10 @@ hr {
 
 .block--views-package-comparison-cta .button {
   background-color: #1c7e54;
-  color: #fff;
-  border-color: #1c7e54; }
+  color: #fff; }
   .block--views-package-comparison-cta .button:hover, .block--views-package-comparison-cta .button:focus {
-    background-color: #fff;
-    border-color: #1d5f47;
-    color: #1d5f47; }
+    background-color: #202624;
+    color: #fff; }
 
 .node--profile--full .field--name-field-image img {
   background-color: #fff;
@@ -1279,6 +1250,18 @@ body.node-type-solution .scm-modal-container .controls .button {
 
 body.node-type-solution .l-footer:before {
   display: none; }
+
+.node--special-offer--secondary-teaser {
+  border-color: #e0e0e1; }
+  .node--special-offer--secondary-teaser h2 {
+    color: #1d5f47; }
+  .node--special-offer--secondary-teaser h3 {
+    color: #333333; }
+  .node--special-offer--secondary-teaser .field--name-field-button .button {
+    background-color: #1d5f47;
+    color: #fff; }
+  .node--special-offer--secondary-teaser .field--name-field-expiration-date {
+    color: #c80108; }
 
 .paragraphs-item-faq .content h3 {
   color: #1c7e54; }

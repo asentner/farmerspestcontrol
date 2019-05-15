@@ -1,0 +1,20 @@
+// secondary teaser
+// front page and sidebar offers by default
+.node--special-offer--secondary-teaser{
+    border-color: palette(neutral, iron);
+    h2{
+        color: palette(primary, dark);
+    }
+    h3{
+        color: palette(neutral, mine-shaft);
+    }
+    .field--name-field-button{
+        .button{
+        background-color: palette(primary, dark);
+        color: palette(white, pure);
+        }
+    }
+    .field--name-field-expiration-date{
+        color: #c80108;
+    }
+}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_enhanced_offers.views_default.inc

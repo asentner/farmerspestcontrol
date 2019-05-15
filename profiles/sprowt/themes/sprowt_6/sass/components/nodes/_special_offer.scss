@@ -3,3 +3,273 @@
     margin-top: 1em;
   }
 }
+
+// tertiary teaser offers
+// full page listing offers by default
+.node--special-offer--tertiary-teaser{
+  box-shadow: 0px 5px 17px 3px rgba(51, 51, 51, 0.2);
+  position: relative;
+  .offer-link{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+  .field--name-field-featured-icon{
+    position: absolute;
+    top: -40px;
+    right: -20px;
+  }
+  .node__content{
+    padding: 55px 35px 45px;
+    outline: 5px dashed;
+    outline-offset: -15px;
+    @include flexbox;
+    flex-direction: column;
+    text-align: center;
+  }
+  h2{
+    font-size: 47px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px;
+  }
+  h3{
+    overflow: visible;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.24;
+    letter-spacing: 0.1px;
+    margin: 0 auto 15px;
+  }
+  .field--name-body{
+    margin-bottom: 15px;
+  }
+  .field--name-field-button{
+    width: 100%;
+    max-width: 210px;
+    margin: 0 auto 15px;
+    text-align: center;
+    .button{
+      padding: 13px 30px;
+    }
+  }
+  .logo{
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    img{
+      max-width: 210px;
+      height: auto;
+      width: 100%;
+    }
+  }
+  .field--name-field-expiration-date{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.2px;
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+  }
+  @include breakpoint($tab){
+
+  }
+  @include breakpoint($desk){
+    h2{
+      font-size: 58px;
+    }
+    h3{
+      font-size: 21px;
+    }
+  }
+}
+
+// full page listing if using secondary teaser
+.section-special-offers {
+  .node--special-offer--secondary-teaser {
+    
+  }
+}
+
+
+// secondary teaser
+// front page offers by default
+.node--special-offer--secondary-teaser{
+  padding: 25px 10px;
+  min-height: 380px;
+  position: relative;
+  .offer-link{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+  .node__content{
+    @include flexbox;
+    flex-direction: column;
+    text-align: center;
+  }
+  h2{
+    font-size: 47px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px;
+  }
+  h3{
+    height: 43px;
+    overflow: visible;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.24;
+    letter-spacing: 0.1px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .field--name-field-button{
+    margin-top: 20px;
+    .button {
+      border: none;
+      border-radius: 0px;
+    }
+  }
+  .field--name-body {
+    font-size: 15px;
+    text-align: left;
+    line-height: 1.4;
+    max-width: 209px;
+    margin: 25px 0 10px 10px;
+  }
+  .field--name-field-disclaimer {
+    font-size: 15px;
+    text-align: left;
+    line-height: 1.4;
+    max-width: 225px;
+    font-style: italic;
+    margin: 25px 0 0px 10px;
+  }
+  .field--name-field-expiration-date{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.2px;
+    position: absolute;
+    left: 20px;
+    bottom: 55px;
+  }
+  .logo{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    img{
+      min-width: 70px;
+      max-width: 70px;
+      height: auto;
+    }
+  }
+  @include breakpoint($tab) {
+    .field--name-field-expiration-date {
+      font-size: 15px;
+    }
+    .logo {
+      bottom: 40px;
+      img{
+        min-width: 90px;
+        max-width: 90px;
+      }
+    }
+  }
+  @include breakpoint($desk) {
+    min-height: 400px;
+    h2{
+      font-size: 58px;
+      text-transform: uppercase;
+    }
+    h3{
+      font-size: 21px;
+    }
+    .field--name-field-button{
+      margin-top: 40px;
+    }
+    .logo{
+      bottom: 25px;
+    }
+    .field--name-field-expiration-date {
+      bottom: 45px;
+    }
+  }
+}
+
+// secondary teaser
+// sidebar offers by default
+.block--views-special-offers-sidebar-sec {
+  .node--special-offer--secondary-teaser{
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.18);
+    padding: 25px 15px;
+    min-height: 419px;
+    position: relative;
+    .offer-link{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+    }
+    .node__content{
+      @include flexbox;
+      flex-direction: column;
+      text-align: center;
+    }
+    h2{
+      font-size: 47px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 1.5px;
+      margin: 0 0 10px;
+    }
+    h3{
+      height: 43px;
+      overflow: visible;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.24;
+      letter-spacing: 0.1px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .field--name-field-button{
+      margin-top: 20px;
+    }
+    .field--name-field-expiration-date{
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.2px;
+      position: absolute;
+      left: 20px;
+      bottom: 40px;
+    }
+    .logo{
+      position: absolute;
+      bottom: 80px;
+      right: 20px;
+      img{
+        max-width: 105px;
+        max-height: 105px;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+

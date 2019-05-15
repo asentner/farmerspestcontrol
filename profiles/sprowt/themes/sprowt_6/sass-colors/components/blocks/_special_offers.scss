@@ -1,8 +1,11 @@
 // homepage
 .block--views-special-offers-front2{
   .view-header{
-    h2, h3{
-      color: palette(primary, dark);
+    h2 {
+      color: palette(primary, base);
+    }
+    h3{
+      color: palette(black, base);
     }
     p{
       a{
@@ -11,9 +14,9 @@
           color: palette(secondary, light);
         }
         &:hover{
-          color: palette(tertiary, dark);
+          color: palette(secondary, base);
           &:after{
-            color: palette(primary, base);
+            color: palette(secondary, base);
           }
         }
       }
@@ -22,24 +25,6 @@
   .view-content{
     .views-row{
       background: palette(white, pure);
-      .node{
-        border-color: palette(neutral, iron);
-        h2{
-          color: palette(primary, dark);
-        }
-        h3{
-          color: palette(neutral, mine-shaft);
-        }
-        .field--name-field-button{
-          .button{
-            background-color: palette(primary, dark);
-            color: palette(white, pure);
-          }
-        }
-        .field--name-field-expiration-date{
-          color: #c80108;
-        }
-      }
     }
   }
 }
@@ -57,24 +42,6 @@
   .view-content{
     .views-row{
       background: palette(white, pure);
-      .node{
-        border-color: palette(neutral, iron);
-        h2{
-          color: palette(primary, dark);
-        }
-        h3{
-          color: palette(neutral, mine-shaft);
-        }
-        .field--name-field-button{
-          .button{
-            background-color: palette(primary, dark);
-            color: palette(white, pure);
-          }
-        }
-        .field--name-field-expiration-date{
-          color: #c80108;
-        }
-      }
     }
   }
 }

@@ -214,7 +214,7 @@
     .bean-generic-bean{
       background-position-x: 160%;
       background-position-y: bottom;
-      padding: 40px;
+      padding: 40px 20px;
     }
     .content{
       flex-direction: column-reverse;
@@ -235,7 +235,6 @@
   }
   @include breakpoint($desk){
     .bean-generic-bean{
-      padding: 40px 20px;
       background-image: url('../images/employment-cta.jpg');
       background-size: cover;
       background-position: center center;
