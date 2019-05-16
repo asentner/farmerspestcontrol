@@ -97,39 +97,44 @@ function _sprowt_verify_admin_form_submit($form, $form_state) {
         'file_validate_extensions' => []
     ]);
 
-    $file = file_move($file, 'public://');
-    $file->status = FILE_STATUS_PERMANENT;
-    file_save($file);
-    file_usage_add($file, 'sprowt_verify', 'sprowt_verify', $file->fid);
+    if(!empty($file)) {
+        $file = file_move($file, 'public://');
+        $file->status = FILE_STATUS_PERMANENT;
+        file_save($file);
+        file_usage_add($file, 'sprowt_verify', 'sprowt_verify', $file->fid);
 
-    $files = variable_get('sprowt_verify_files', []);
+        $files = variable_get('sprowt_verify_files', []);
 
-    $path = trim($values['html_file_path'], '/');
-    $path = trim($path);
+        $path = trim($values['html_file_path'], '/');
+        $path = trim($path);
 
-    $path = "/$path/";
+        $path = "/$path/";
 
 
-    $fileVal = [
-        'fid' => $file->fid,
-        'path' => ($path === '//') ? null : $path,
-        'name' => $file->filename
-    ];
+        $fileVal = [
+            'fid' => $file->fid,
+            'path' => ($path === '//') ? null : $path,
+            'name' => $file->filename
+        ];
 
-    $alias = _sprowt_veryify_create_url($fileVal);
-    $alias = ltrim($alias, '/');
+        $alias = _sprowt_veryify_create_url($fileVal);
+        $alias = ltrim($alias, '/');
 
-    $path = [
-        'source' => 'sprowt-veryify/' . $file->fid,
-        'alias' => $alias
-    ];
+        $path = [
+            'source' => 'sprowt-veryify/' . $file->fid,
+            'alias' => $alias
+        ];
 
-    path_save($path);
+        path_save($path);
 
-    $fileVal['alias'] = $alias;
+        $fileVal['alias'] = $alias;
 
-    $files[$file->fid] = $fileVal;
-    variable_set('sprowt_verify_files', $files);
+        $files[$file->fid] = $fileVal;
+        variable_set('sprowt_verify_files', $files);
+    }
+    else {
+        form_error($form["html_file"], 'Verification File Required');
+    }
 }
 
 function _sprowt_verify_admin_form_remove($form, $form_state) {
