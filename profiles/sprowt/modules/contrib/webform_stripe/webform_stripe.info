@@ -4,9 +4,10 @@ package = Webform
 core = 7.x
 dependencies[] = libraries
 dependencies[] = webform (>= 4.x)
+configure = admin/config/services/webform-stripe
 
-; Information added by Drupal.org packaging script on 2018-07-16
-version = "7.x-1.14"
+; Information added by Drupal.org packaging script on 2019-04-23
+version = "7.x-1.15"
 core = "7.x"
 project = "webform_stripe"
-datestamp = "1531770524"
+datestamp = "1556058204"
