@@ -14,6 +14,13 @@ function forgely_menu()
         'page arguments' => array('_forgely_google_hire_settings_form'),
         'access arguments' => array('administer forgely')
     );
+    
+    $items['all-opportunities'] = array(
+        'title' => t('All Current Opportunities'),
+        'description' => t('All Current Opportunities'),
+        'page callback' => '_opportunities_feature_opportunity_list',
+        'access callback' => true
+    );
 
     return $items;
 }
@@ -145,6 +152,18 @@ function _forgely_google_hire_settings_form($form, &$form_state) {
         '#title' => 'Company Website',
         '#default_value' => variable_get('google_hire_company_website', $GLOBALS['base_url'])
     );
+    
+    $form['company_info']['google_hire_company_logo_fid'] = array(
+        '#type' => 'managed_file',
+        '#title' => 'Company Logo',
+        '#description' => 'Defaults to the site logo. But update this if you want something different. Be sure to follow <a href="https://developers.google.com/search/docs/data-types/logo#logo-property" target="_blank">these guidelines</a>.',
+        '#default_value' => variable_get('google_hire_company_logo_fid'),
+        '#upload_location' => 'public://',
+    );
+    
+    $form['#validate'] = empty($form['#validate']) ? [] : $form['#validate'];
+    $form['#validate'][] = '_opportunities_feature_validate_logo';
+    $form['#submit'][] = '_opportunities_feature_submit_logo';
     
     $form = system_settings_form($form);
     
@@ -295,10 +314,42 @@ function _forgely_build_schema_org_array($node) {
     $company_site = variable_get('google_hire_company_website');
     
     
+    $fid = variable_get('google_hire_company_logo_fid');
+    if(!empty($fid)) {
+        $file = file_load($fid);
+        $logo = file_create_url($file->uri);
+    }
+    else {
+        $logo = theme_get_setting('logo');
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $type = finfo_buffer($finfo, file_get_contents($logo));
+        
+        
+        $accepted_mimes = [
+            'image/png',
+            'image/gif',
+            'image/jpeg'
+        ];
+        
+        if(!in_array($type, $accepted_mimes)) {
+            $logo = null;
+        }
+        else {
+            list($width, $height) = getimagesize($logo);
+            if($width < 112 || $height < 112) {
+                $logo = null;
+            }
+        }
+    }
+    
     $schema['hiringOrganization'] = array(
         '@type' => 'Organization',
         'name' => $company_name
     );
+    
+    if(!empty($logo)) {
+        $schema['hiringOrganization']['logo'] = $logo;
+    }
     
     if(!empty($company_site)) {
         $schema['hiringOrganization']['sameAs'] = $company_site;
@@ -402,5 +453,149 @@ function forgely_preprocess_page(&$vars) {
         $vars['page']['content']['schema'] = array(
             '#markup' => $markup
         );
+    }
+}
+
+function forgely_preprocess_node(&$vars) {
+    if(!empty($vars['node']) && $vars['node']->type == 'opportunity') {
+        drupal_add_css(drupal_get_path('module', 'forgely') . '/css/opportunity.css');
+    }
+}
+
+function _opportunities_feature_validate_logo(&$form, &$form_state) {
+    $values = $form_state['values'];
+    $fid = $values["google_hire_company_logo_fid"];
+    
+    $accepted_mimes = [
+        'image/png',
+        'image/gif',
+        'image/jpeg'
+    ];
+    
+    if(!empty($fid)) {
+        $file = file_load($fid);
+        if(!in_array($file->filemime, $accepted_mimes)) {
+            form_error($form["company_info"], 'Invalid image type. Please use a jpg, gif, or png');
+        }
+        else {
+            $path = file_create_url($file->uri);
+            $size = getimagesize($path);
+            $width = $size[0];
+            $height = $size[1];
+            if($width < 112 || $height < 112) {
+                form_error($form["company_info"], 'Invalid image size. Image must be at least 112px x 112px.');
+            }
+        }
+    }
+    
+}
+
+function _opportunities_feature_submit_logo(&$form, &$form_state) {
+    $values = $form_state['values'];
+    $fid = $values["google_hire_company_logo_fid"];
+    $oldFid = variable_get('google_hire_company_logo_fid');
+    if(empty($fid) || $oldFid != $fid) {
+        $oldFile = file_load($oldFid);
+        if($oldFile) {
+            file_delete($oldFile);
+        }
+    }
+    
+    if(!empty($fid)) {
+        $file = file_load($fid);
+        $file->status = FILE_STATUS_PERMANENT;
+        file_save($file);
+        file_usage_add($file, 'opportunities_feature', 'logo', $fid);
+    }
+    
+    opportunities_feature_ping_google();
+}
+
+function opportunities_feature_ping_google() {
+    global $base_url;
+    $sitemap = $base_url . '/sitemap.xml';
+    $stats = drupal_http_request($sitemap);
+    if($stats->code == 200) {
+        if(!preg_match('/\.test$/', $base_url)) {
+            drupal_http_request('http://www.google.com/ping?sitemap='. $sitemap);
+        }
+    }
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function forgely_node_delete($node) {
+    if($node->type == 'opportunity') {
+        opportunities_feature_ping_google();
+    }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function forgely_node_update($node) {
+    if($node->type == 'opportunity') {
+        opportunities_feature_ping_google();
+    }
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function forgely_node_insert($node) {
+    if($node->type == 'opportunity') {
+        opportunities_feature_ping_google();
+    }
+}
+
+function _opportunities_feature_opportunity_list() {
+    drupal_set_title('All Current Opportunities');
+    $markup = '<h1 style="text-align: center; padding: 0 30px;">' . 'All Current Opportunities' . '</h1>';
+    $markup .= '<div class="block--views-opportunities-block">';
+    $markup .= '<ul>';
+    
+    $nids = db_query("
+        SELECT nid
+        FROM node
+        WHERE type = 'opportunity'
+        AND status = '1'
+        ORDER BY title ASC
+    ")->fetchCol();
+    if(!empty($nids)) {
+        foreach (node_load_multiple($nids) as $node) {
+            $markup .= '<li>';
+            $markup .= l($node->title, 'node/' . $node->nid);
+            $markup .= '</li>';
+        }
+    }
+    
+    $markup .= '</ul>';
+    $markup .= '</div>';
+    
+    return $markup;
+}
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function forgely_views_pre_view(&$view, &$display_id, &$args) {
+    if($view->name == 'opportunities' && $view->current_display == 'block') {
+        // View's header declaration.
+        $item = array(
+            'id' => 'area',
+            'table' => 'views',
+            'field' => 'area',
+            'relationship' => 'none',
+            'group_type' => 'group',
+            'ui_name' => '',
+            'label' => '',
+            'empty' => 0,
+            'content' => '<div class="all-link" style="text-align: right; font-size: .8em; text-transform: uppercase;">' . l('All Opportunities', 'all-opportunities', ['attributes' => ['target' => '_blank']]) . '</div>',
+            'format' => 'full_html',
+            'tokenize' => 0,
+        );
+        // Render the footer.
+        $view->set_item($display_id, 'footer', 'area', $item);
     }
 }
