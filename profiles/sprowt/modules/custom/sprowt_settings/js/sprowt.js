@@ -38,4 +38,47 @@
             });
         }
     }
+
+    Drupal.behaviors.sprowt_devel = {
+        attach: function(context, settings) {
+            // rework krumo events to work with dom generated krumo (e.g. from ajax)
+            // see devel/devel_krumo.js
+            var selector = '.krumo-element';
+            //undo the events from devel_krumo to avoid double bubble
+            // $(selector).off('click');
+            // $(selector).off('mouseover');
+            // $(selector).off('mouseout');
+
+            $(document).on('click', selector, function(e) {
+                var events = $(this).data('events');
+                if(!events) {
+                    events = $._data(this).events;
+                }
+                if(!events || !events.click) {
+                    krumo.toggle(this);
+                }
+            });
+
+            $(document).on('mouseover', selector, function(e) {
+                var events = $(this).data('events');
+                if(!events) {
+                    events = $._data(this).events;
+                }
+                if(!events || !events.mouseover) {
+                    krumo.over(this);
+                }
+            });
+
+            $(document).on('mouseout', selector, function(e) {
+                var events = $(this).data('events');
+                if(!events) {
+                    events = $._data(this).events;
+                }
+                if(!events || !events.mouseout) {
+                    krumo.out(this);
+                }
+            });
+        }
+    }
+
 }(jQuery);
