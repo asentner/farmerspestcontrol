@@ -581,21 +581,29 @@ function _opportunities_feature_opportunity_list() {
  */
 function forgely_views_pre_view(&$view, &$display_id, &$args) {
     if($view->name == 'opportunities' && $view->current_display == 'block') {
-        // View's header declaration.
-        $item = array(
-            'id' => 'area',
-            'table' => 'views',
-            'field' => 'area',
-            'relationship' => 'none',
-            'group_type' => 'group',
-            'ui_name' => '',
-            'label' => '',
-            'empty' => 0,
-            'content' => '<div class="all-link" style="text-align: right; font-size: .8em; text-transform: uppercase;">' . l('All Opportunities', 'all-opportunities', ['attributes' => ['target' => '_blank']]) . '</div>',
-            'format' => 'full_html',
-            'tokenize' => 0,
-        );
-        // Render the footer.
-        $view->set_item($display_id, 'footer', 'area', $item);
+        $count = db_query("
+            SELECT count(*)
+            FROM node
+            WHERE type = 'opportunity'
+            AND status = 1
+        ")->fetchField();
+        if($count > 0) {
+            // View's header declaration.
+            $item = [
+                'id'           => 'area',
+                'table'        => 'views',
+                'field'        => 'area',
+                'relationship' => 'none',
+                'group_type'   => 'group',
+                'ui_name'      => '',
+                'label'        => '',
+                'empty'        => 0,
+                'content'      => '<div class="all-link" style="text-align: right; font-size: .8em; text-transform: uppercase;">' . l('All Opportunities', 'all-opportunities', ['attributes' => ['target' => '_blank']]) . '</div>',
+                'format'       => 'full_html',
+                'tokenize'     => 0,
+            ];
+            // Render the footer.
+            $view->set_item($display_id, 'footer', 'area', $item);
+        }
     }
 }
