@@ -11,13 +11,13 @@ require_once DRUPAL_ROOT . '/profiles/sprowt/includes/menubuilder.php';
 require_once DRUPAL_ROOT . '/profiles/sprowt/includes/userbuilder.php';
 
 Class SprowtBuilder {
-    
+
     public $data = array();
     public $default_images = array();
 
     private $node_json;
-    
-    
+
+
     function __construct() {
         if(!defined('MAINTENANCE_MODE')){
             define('MAINTENANCE_MODE', "install");
@@ -33,7 +33,7 @@ Class SprowtBuilder {
 
         $this->paths = $paths;
     }
-    
+
     /**
      * Gets all the data from the sprowt_setup table
      *
@@ -45,32 +45,32 @@ Class SprowtBuilder {
         $query = db_query(
             "SELECT * FROM sprowt_setup"
         );
-        
+
         if(empty($query)){
             throw new Exception('Sprowt Setup Table empty!!!');
             die;
         }
-        
+
         $result = $query->fetchAll( PDO::FETCH_ASSOC);
         foreach($result as $row){
             if(empty($this->data[$row['form_name']])){
                 $this->data[$row['form_name']] = array();
             }
-            
+
             if($row['form_name'] == 'market_setup'
                 || $row['form_name'] == 'users'
                 || $row['form_name'] == 'locations')
             {
                 $row['field_value'] = json_decode($row['field_value'], true);
             }
-            
-            
+
+
             $this->data[$row['form_name']][$row['form_field']] = $row['field_value'];
         }
-        
+
         return $this->data;
     }
-    
+
     function saveData($data) {
         db_truncate('sprowt_setup')->execute();
         $insert = db_insert('sprowt_setup')
@@ -80,7 +80,7 @@ Class SprowtBuilder {
                     'form_field',
                     'field_value',
                 ));
-        
+
         foreach($data as $form_name => $fields) {
             foreach($fields as $field_name => $field_value) {
                 if($form_name == 'market_setup'
@@ -89,7 +89,7 @@ Class SprowtBuilder {
                 {
                     $field_value = json_encode($field_value);
                 }
-    
+
                 $insert->values(array(
                     'form_name' => $form_name,
                     'form_field' => $field_name,
@@ -97,22 +97,22 @@ Class SprowtBuilder {
                 ));
             }
         }
-    
+
         return $insert->execute();
     }
-    
+
     function is_starter() {
         if(empty($this->data)){
             $this->getData();
         }
-        
+
         return isset($this->data['starter']['is_starter']) ? $this->data['starter']['is_starter'] : null;
     }
-    
+
     static function isStarter() {
-    
+
     }
-    
+
     /**
      *Adds integrations to site
      */
@@ -120,30 +120,30 @@ Class SprowtBuilder {
         if(empty($this->data)){
             $this->getData();
         }
-        
+
         if(!empty($this->data['integrations']['google_analytics'])){
             module_enable(array('googleanalytics'));
             variable_set('googleanalytics_account', $this->data['integrations']['google_analytics']);
         }
-        
+
         if(!empty($this->data['integrations']['gtm'])){
             module_enable(array('google_tag'));
             variable_set('google_tag_container_id', $this->data['integrations']['gtm']);
         }
-        
+
         if(!empty($this->data['integrations']['optimizely_id'])){
             variable_set('optimizely_id', $this->data['integrations']['optimizely_id']);
         }
-        
+
         if(!empty($this->data['integrations']['ac_newsletter_api_url'])){
             variable_set('ac_newsletter_api_url',$this->data['integrations']['ac_newsletter_api_url']);
         }
-        
+
         if(!empty($this->data['integrations']['ac_newsletter_api_key'])){
             variable_set('ac_newsletter_api_key', $this->data['integrations']['ac_newsletter_api_key']);
         }
     }
-    
+
     /**
      *Adds company info to site
      */
@@ -151,33 +151,33 @@ Class SprowtBuilder {
         if(empty($this->data)){
             $this->getData();
         }
-        
+
         if(!empty($this->data['social_media']['facebook'])){
             variable_set('sprowt_settings_facebook_url', $this->data['social_media']['facebook']);
         }
-        
+
         if(!empty($this->data['social_media']['twitter'])){
             variable_set('sprowt_settings_twitter_handle', $this->data['social_media']['twitter']);
         }
-        
+
         if(!empty($this->data['social_media']['linkedin'])){
             variable_set('sprowt_settings_linkedin_url', $this->data['social_media']['linkedin']);
         }
-        
+
         if(!empty($this->data['social_media']['yelp'])){
             variable_set('sprowt_settings_yelp_url', $this->data['social_media']['yelp']);
         }
-        
+
         if(!empty($this->data['social_media']['bbb'])){
             variable_set('sprowt_settings_bbb_url', $this->data['social_media']['bbb']);
         }
-        
+
         if(!empty($this->data['social_media']['gplus'])){
             variable_set('sprowt_settings_gplus_url', $this->data['social_media']['gplus']);
         }
-        
+
     }
-    
+
     /**
      * Adds social media urls to site
      */
@@ -185,42 +185,42 @@ Class SprowtBuilder {
         if(empty($this->data)){
             $this->getData();
         }
-        
+
         variable_set('sprowt_settings_company_name', $this->data['company_info']['company_name']);
         variable_set('sprowt_settings_phone_number', $this->cleanPhone($this->data['company_info']['company_phone']));
         if(!empty($this->data['company_info']['contact_phone'])){
             variable_set('sprowt_settings_contact_phone', $this->cleanPhone($this->data['company_info']['contact_phone']));
         }
-        
+
         if(!empty($this->data['company_info']['contact_name'])){
             variable_set('sprowt_settings_contact_name', $this->data['company_info']['contact_name']);
         }
-        
+
         if(!empty($this->data['company_info']['contact_email'])){
             variable_set('sprowt_settings_contact_email', $this->data['company_info']['contact_email']);
         }
-    
+
         if(!empty($this->data['company_info']['company_type'])){
             variable_set('sprowt_settings_company_type', $this->data['company_info']['company_type']);
         }
-        
+
         if(!empty($this->data['company_info']['customer_login'])) {
             variable_set('sprowt_customer_login', $this->data['company_info']['customer_login']);
         }
-        
+
         variable_set('sprowt_settings_webform_to_email', $this->data['company_info']['webform_to_email']);
 
         if(function_exists('_sprowt_login_create_sprowt_company_alias')) {
             _sprowt_login_create_sprowt_company_alias();
         }
     }
-    
+
     function cleanPhone($phone) {
         $phone = preg_replace('/[^\d]/',"", $phone);
         return $phone;
     }
-    
-    
+
+
     function addReview() {
         if(empty($this->data)){
             $this->getData();
@@ -234,7 +234,7 @@ Class SprowtBuilder {
             }
         }
     }
-    
+
     /**
      * Pulls in nodes form sprowt and adds them, hopefully
      *
@@ -244,23 +244,29 @@ Class SprowtBuilder {
 
         $sprowt_path = drupal_get_path('profile', 'sprowt');
         $theme_path = drupal_get_path('theme', $this->data['branding']['theme']);
-        $json_filename = "sprowt_export.json";
-        if(file_exists($theme_path . "/$json_filename")) {
-            $json_file = $theme_path . "/$json_filename";
-        }
-        else {
-            $json_file = $sprowt_path . "/$json_filename";
-        }
 
+        //deprecated in favor of fetching from a URL
 
-        //run this command to generate a json file of all pages: drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
-        $node_json = file_get_contents($json_file);
+//        $json_filename = "sprowt_export.json";
+//        if(file_exists($theme_path . "/$json_filename")) {
+//            $json_file = $theme_path . "/$json_filename";
+//        }
+//        else {
+//            $json_file = $sprowt_path . "/$json_filename";
+//        }
+//
+//
+//        //run this command to generate a json file of all pages: drush ne-export --format=json --file=profiles/sprowt/sprowt_export.json --type=affiliation,benefit,blog,cta,page,profile,slide,special_offer,webform
+//        $node_json = file_get_contents($json_file);
+//        $this->node_json = $node_json;
+
+        $sync = new SprowtNodeSync();
+        $node_json = $sync->fetch([], true);
         $this->node_json = $node_json;
-        
-        
+
         $nodes = json_decode($node_json,true);
         $uuids = array();
-        
+
         $this->addDefaultImages();
         $default_images = $this->default_images;
         $image_dest = 'public://default_node_images';
@@ -309,29 +315,29 @@ Class SprowtBuilder {
                 }
             }
         }
-        
+
         require_once DRUPAL_ROOT . '/profiles/sprowt/modules/contrib/node_export/formats/json.inc';
-        
+
         //$result = $this->node_export_import($node_json);
-        
+
         $result = $this->node_import($nodes);
-        
+
         $nid_array = entity_get_id_by_uuid('node', $uuids);
-        
+
         $fourofour = $nid_array['e6e64b98-71d8-4eb3-9c9c-dc1c573c13cb'];
         $fourothree = $nid_array['9512a22e-11e7-47f5-a63d-e8861401302a'];
         $home = $nid_array['3c0659bb-655d-415d-bb4e-822b9a4e4218'];
-        
+
         variable_set('site_frontpage', "node/$home");
         variable_set('site_403', "node/$fourothree");
         variable_set('site_404', "node/$fourofour");
         variable_set('weight_frontpage', 0);
-        
+
         $menu = db_query("SELECT * FROM menu_links WHERE menu_name = :main", array(':main' => 'main-menu'))->fetchAll(PDO::FETCH_ASSOC);
         foreach($menu as $link){
             _menu_delete_item($link);
         }
-        
+
         $this->update_display();
 
         $this->import_menus();
@@ -346,7 +352,7 @@ Class SprowtBuilder {
             $this->importPrivacyPolicy();
         }
     }
-    
+
     function addDefaultImages() {
         $image_dest = 'public://default_node_images';
         file_prepare_directory($image_dest, FILE_CREATE_DIRECTORY);
@@ -359,17 +365,17 @@ Class SprowtBuilder {
             $file = file_save_data($handle, $dest, FILE_EXISTS_REPLACE);
             $default_images[$filename] = $file;
         }
-    
+
         $styles = image_styles();
         foreach($styles as $style_name => $style) {
             foreach($default_images as $filename => $file) {
                 image_style_create_derivative($style, $file->uri, image_style_path($style_name, $file->uri));
             }
         }
-        
+
         $this->default_images = $default_images;
     }
-    
+
     function addNodeDefaultImages() {
         $default_images = array();
         foreach($this->default_images as $file) {
@@ -392,7 +398,7 @@ Class SprowtBuilder {
                     field_update_instance($instance);
             }
         }
-    
+
         $styles = image_styles();
         foreach($styles as $style_name => $style) {
             foreach($default_images as $filename => $file) {
@@ -426,7 +432,7 @@ Class SprowtBuilder {
             }
         }
     }
-    
+
     function update_display(){
         $objs = node_type_get_types();
         foreach($objs as $obj) {
@@ -434,62 +440,64 @@ Class SprowtBuilder {
         }
     }
 
-  function importPrivacyPolicy(){
-    $fName = 'profiles/sprowt/privacypolicy.txt';
+    function importPrivacyPolicy(){
+        $fName = 'profiles/sprowt/privacypolicy.txt';
 
-    $handle = fopen($fName,'r');
-    $data = fread($handle,filesize($fName));
+        $handle = fopen($fName,'r');
+        $data = fread($handle,filesize($fName));
 
-    node_export_import($data);
-  }
+        node_export_import($data);
+    }
 
-  function modifyDefaultNode($node) {
-      //$n = entity_metadata_wrapper('node', $node);
-      $front_page_benfit_uuids = array(
-          '1172b3dc-5937-4280-b5b5-74772dda3b49',
-          'fef4a25f-9485-44dd-b264-ba89a48b29b8',
-          '54c876bd-629b-4abc-81bf-f4fb9c8bd239'
-      );
+    function modifyDefaultNode($node) {
+        //$n = entity_metadata_wrapper('node', $node);
+        $front_page_benfit_uuids = array(
+            '1172b3dc-5937-4280-b5b5-74772dda3b49',
+            'fef4a25f-9485-44dd-b264-ba89a48b29b8',
+            '54c876bd-629b-4abc-81bf-f4fb9c8bd239'
+        );
 
-      if(in_array($node->uuid, $front_page_benfit_uuids)) {
-        $node->promote = 1;
-        switch($node->uuid) {
-            case '1172b3dc-5937-4280-b5b5-74772dda3b49':
-                $node->weight_weight = 1;
-                break;
-            case 'fef4a25f-9485-44dd-b264-ba89a48b29b8':
-                $node->weight_weight = 2;
-                break;
-            case '54c876bd-629b-4abc-81bf-f4fb9c8bd239':
-                $node->weight_weight = 3;
-                break;
+        if(in_array($node->uuid, $front_page_benfit_uuids)) {
+            $node->promote = 1;
+            switch($node->uuid) {
+                case '1172b3dc-5937-4280-b5b5-74772dda3b49':
+                    $node->weight_weight = 1;
+                    break;
+                case 'fef4a25f-9485-44dd-b264-ba89a48b29b8':
+                    $node->weight_weight = 2;
+                    break;
+                case '54c876bd-629b-4abc-81bf-f4fb9c8bd239':
+                    $node->weight_weight = 3;
+                    break;
+            }
         }
-      }
 
-      $ltp_benefit_uuids = array(
-          'd7851455-0d59-4127-b0bd-28c8247f34cd',
-          '9ef2c5d3-9b00-4ec3-9523-0a66c443fa23',
-          '6732c347-4157-4171-879f-0ed849c4ef9e'
-      );
+        $ltp_benefit_uuids = array(
+            'd7851455-0d59-4127-b0bd-28c8247f34cd',
+            '9ef2c5d3-9b00-4ec3-9523-0a66c443fa23',
+            '6732c347-4157-4171-879f-0ed849c4ef9e'
+        );
 
-      if(in_array($node->uuid, $ltp_benefit_uuids)) {
-        $node->promote = 0;
-        switch($node->uuid) {
-            case 'd7851455-0d59-4127-b0bd-28c8247f34cd':
-                $node->weight_weight = 1;
-                break;
-            case '9ef2c5d3-9b00-4ec3-9523-0a66c443fa23':
-                $node->weight_weight = 2;
-                break;
-            case '6732c347-4157-4171-879f-0ed849c4ef9e':
-                $node->weight_weight = 3;
-                break;
+        if(in_array($node->uuid, $ltp_benefit_uuids)) {
+            $node->promote = 0;
+            switch($node->uuid) {
+                case 'd7851455-0d59-4127-b0bd-28c8247f34cd':
+                    $node->weight_weight = 1;
+                    break;
+                case '9ef2c5d3-9b00-4ec3-9523-0a66c443fa23':
+                    $node->weight_weight = 2;
+                    break;
+                case '6732c347-4157-4171-879f-0ed849c4ef9e':
+                    $node->weight_weight = 3;
+                    break;
+            }
         }
-      }
 
-      return $node;
-  }
-    
+        return $node;
+    }
+
+
+
     function node_import($nodes = array()) {
         require_once('includes/nodebuilder.php');
 
@@ -498,9 +506,9 @@ Class SprowtBuilder {
 
         foreach($nodes as $node){
             $type = $node['type'];
-            
+
             $nid_array = entity_get_id_by_uuid('node', array($node['uuid']));
-            
+
             if(!empty($nid_array[$node['uuid']])){
                 $n = node_load($nid_array[$node['uuid']]);
                 $loaded = true;
@@ -512,15 +520,15 @@ Class SprowtBuilder {
                 $n->language = LANGUAGE_NONE;
                 $loaded = false;
             }
-            
+
             $n->status = $node['status'];
             $n->title = $node['title'];
             $n->promote = $node['promote'];
             //$n->menu = $node['menu'];
             $n = $this->modifyDefaultNode($n);
-            
+
             $instances = field_info_instances('node', $type);
-            
+
             foreach($instances as $instance => $i_info) {
                 if(!empty($node[$instance])) {
                     $n->$instance = $node[$instance];
@@ -547,16 +555,16 @@ Class SprowtBuilder {
                     'pathauto' => false
                 );
             }
-            
+
             if(!$loaded){
                 node_object_prepare($n);
                 $n = node_submit($n);
             }
-            
+
             node_save($n);
         }
     }
-    
+
     /**
      * Adds users from the sprowt_setup table
      *
@@ -567,28 +575,28 @@ Class SprowtBuilder {
         if(empty($this->data)){
             $this->getData();
         }
-        
+
         $query = db_query(
             "SELECT * FROM role"
         );
-        
+
         $roles = array();
-        
+
         foreach($query->fetchAll( PDO::FETCH_ASSOC) as $row){
             $roles[$row['name']] = $row['rid'];
         }
-        
+
         $query = db_query(
             "SELECT * FROM users"
         );
-        
+
         $current_users = array();
-        
+
         foreach($query->fetchAll( PDO::FETCH_ASSOC) as $row){
             $current_users[$row['name']] = $row['uid'];
         }
-        
-        $picture_style = variable_get('user_picture_style', 0);        
+
+        $picture_style = variable_get('user_picture_style', 0);
         $directory = file_default_scheme() . '://' . variable_get('user_picture_path', 'pictures');
         file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
 
@@ -606,7 +614,7 @@ Class SprowtBuilder {
                 //always use what's in the codebase for user 1
                 $userinfo = $default_users[$username];
             }
-            
+
             UserBuilder::addUser($userinfo);
         }
     }
@@ -637,7 +645,7 @@ Class SprowtBuilder {
 
         require_once DRUPAL_ROOT . '/includes/password.inc';
         $fields = array();
-    
+
         $default_users = [
             'coalmarch' => ['Coal', 'March']
         ];
@@ -654,32 +662,32 @@ Class SprowtBuilder {
         $this->data['users'] = $fields;
         $this->addUsers();
     }
-    
+
     /**
      * Sets up branding
      */
-    
+
     function addBranding(){
         if(empty($this->data)){
             $this->getData();
         }
-        
+
         require_once('includes/themebuilder.php');
-        
+
         $ThemeBuilder = new ThemeBuilder();
 
         $branding = $this->data['branding'];
 
         $ThemeBuilder->enable($branding['theme']);
-        
+
         //make double sure blocks import correctly
         db_delete('block')->condition('theme', $branding['theme'])->execute();
         $ThemeBuilder->import_blocks($branding['theme'], $branding['theme']);
-        
-        
+
+
         theme_enable(array('adminimal'));
     }
-    
+
     /**
      * Adding market, region, service taxonomy
      */
@@ -687,20 +695,20 @@ Class SprowtBuilder {
         if(empty($this->data)){
             $this->getData();
         }
-        
+
         require_once('includes/taxonomybuilder.php');
-        
+
         $services = new TaxonomyBuilder('services');
         $markets = new TaxonomyBuilder('markets');
         $regions = new TaxonomyBuilder('regions');
-        
+
         foreach($this->data['market_setup']['services'] as $key=>$service){
             $service = $services->add_term($service);
             if($key == 0){
                 $t_service = $service;
             }
         }
-        
+
         foreach($this->data['market_setup']['regions'] as $region => $region_markets){
             $market_terms = array();
             foreach($region_markets as $key=>$market){
@@ -709,67 +717,67 @@ Class SprowtBuilder {
                     $t_market = $market;
                 }
             }
-            
+
             $region_term = array(
                 'name' => $region,
                 'field_markets' => array(
                     LANGUAGE_NONE => array()
                 ),
             );
-            
+
             foreach($market_terms as $market_term){
                 $region_term['field_markets'][LANGUAGE_NONE][] = array('tid' => $market_term->tid);
             }
-            
+
             $region_term = $regions->add_term($region_term);
         }
-        
+
         $this->publishMarketsandServices();
-        
+
         //add one testimonial
-        
+
         require_once('includes/nodebuilder.php');
         $node = new NodeBuilder('testimonial');
-        
+
         $node-> title = "Testimonial Person";
         $body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec nisi libero. Nunc efficitur hendrerit gravida.";
-        
+
         if(!empty($t_service->tid)){
             $node->field_service->set($t_service->tid);
         }
-        
+
         if(!empty($t_market->tid)){
             $node->field_market = array($t_market->tid);
         }
-        
+
         if(!empty($t_service->name) && !empty($t_market->name)){
             $body = "{$t_service->name} in {$t_market->name} is Great!\n$body";
         }
-        
+
         $node->body->value->set($body);
         $node->save();
-}
-    
+    }
+
     /**
      * Publishes service, regions, and markets
-     * 
+     *
      * @return void
      */
     function publishMarketsandServices(){
         $mnses = db_query("SELECT nid,type FROM node WHERE type IN (:service, :region, :market) ORDER BY type", array(
-                        ':service' => 'service',
-                        ':region' => 'region',
-                        ':market' => 'market',
-                        ))->fetchAll(PDO::FETCH_ASSOC);
-        
+            ':service' => 'service',
+            ':region' => 'region',
+            ':market' => 'market',
+        ))->fetchAll(PDO::FETCH_ASSOC);
+
         $regions = array();
         $services = array();
         $markets = array();
-        
+
         foreach($mnses as $mns){
             $node = node_load($mns['nid']);
             $node->status = 1;
-            
+
             switch($mns['type']){
                 case 'service':
                     $services[] = $node;
@@ -782,7 +790,7 @@ Class SprowtBuilder {
                     break;
             }
         }
-        
+
         foreach ($regions as $region){
             node_save($region);
             if(count($regions) > 1 && empty($region_added)){
@@ -799,16 +807,16 @@ Class SprowtBuilder {
                 $region_added = true;
             }
         }
-        
+
         foreach ($markets as $market){
             node_save($market);
         }
-        
+
         foreach ($services as $service){
             node_save($service);
         }
     }
-    
+
     /**
      * Adding locations
      */
@@ -816,39 +824,39 @@ Class SprowtBuilder {
         if(empty($this->data)){
             $this->getData();
         }
-        
+
         require_once('includes/nodebuilder.php');
-        
+
         foreach($this->data['locations'] as $location){
             $nb = new NodeBuilder('location');
-            
+
             $nb->title = $location['name'];
             $nb->field_phone_number = $location['phone'];
             $nb->field_street_address = $location['address'];
             $nb->field_locality = $location['city'];
             $nb->field_state = $location['state'];
             $nb->field_postal_code = $location['zip'];
-            
+
             if(!empty($location['email'])){
                 $nb->field_email = $location['email'];
             }
-            
+
             if(!empty($location['gplus'])){
                 $nb->field_google_url = $location['glpus'];
             }
-            
+
             $nb->save();
         }
-        
+
     }
-    
+
     /**
      * Revert all features
      */
-    
+
     function revertFeatures() {
         $features = _sprowt_get_features();
-        
+
         foreach($features as $feature) {
             features_revert_module($feature);
         }
@@ -885,23 +893,23 @@ Class SprowtBuilder {
             $NB->field_button = $link;
             $NB->save();
         }
-        
+
         //handle webforms
         $nids = db_query("SELECT nid FROM node WHERE type='webform'")->fetchCol();
         foreach(node_load_multiple($nids) as $node) {
-          if(in_array($node->uuid, array_keys($this->paths))) {
-            $node->path = array(
-              'alias' => $this->paths[$node->uuid],
-              'pathauto' => false
-            );
-          }
-          else {
-            $node->path = array(
-              'pathauto' => true
-            );
-          }
-          
-          node_save($node);
+            if(in_array($node->uuid, array_keys($this->paths))) {
+                $node->path = array(
+                    'alias' => $this->paths[$node->uuid],
+                    'pathauto' => false
+                );
+            }
+            else {
+                $node->path = array(
+                    'pathauto' => true
+                );
+            }
+
+            node_save($node);
         }
 
         //update contexts
@@ -928,7 +936,7 @@ Class SprowtBuilder {
 
         $excludedNids = entity_get_id_by_uuid('node', array('e6e64b98-71d8-4eb3-9c9c-dc1c573c13cb','9512a22e-11e7-47f5-a63d-e8861401302a'));
         $excludedNids = array_values($excludedNids);
-        
+
         $landing_page_nids = db_query("
             SELECT nid
             FROM node
@@ -965,30 +973,30 @@ Class SprowtBuilder {
         }
 
         variable_set('site_frontpage', "node/$homeNid");
-    
+
         sprowt_custom_colors_set_colors(
             !empty($branding['primary-color']) ? $branding['primary-color'] : null,
             !empty($branding['secondary-color']) ? $branding['secondary-color'] : null,
             !empty($branding['tertiary-color']) ? $branding['tertiary-color'] : null
         );
     }
-    
+
     function resetLocalTargetPaths() {
         $nids = db_query("SELECT nid from node WHERE type = 'localtarget'")->fetchCol();
         $nodes = node_load_multiple($nids);
-        
+
         $sources = array();
         foreach($nodes as $node) {
             $sources[] = "node/{$node->nid}";
         }
-        
+
         db_delete('url_alias')->condition('source', $sources, 'IN')->execute();
-        
-        
+
+
         foreach($nodes as $node) {
             $node->path['pathauto'] = 1;
             node_save($node);
         }
-        
+
     }
 }

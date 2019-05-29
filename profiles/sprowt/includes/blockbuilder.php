@@ -461,10 +461,20 @@ class BlockBuilder {
                             foreach($items as $item_delta => &$item) {
                                 $target_id = entity_get_id_by_uuid($info['settings']['target_type'], array($item['uuid']));
                                 if(!empty($target_id)) {
-                                    $target_id = array_pop($target);
-                                    $item = array(
-                                        'target_id' => $target_id
-                                    );
+                                    foreach($target_id as $id) {
+                                        if(!empty($id)) {
+                                            $target_id = $id;
+                                            break;
+                                        }
+                                    }
+                                    if(!empty($target_id)) {
+                                        $item = array(
+                                            'target_id' => $target_id
+                                        );
+                                    }
+                                    else {
+                                        unset($items[$item_delta]);
+                                    }
                                 }
                                 else {
                                     unset($items[$item_delta]);

@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/SprowtNodeSync.php';
+
 /**
  * Implements hook_boot().
  */
@@ -87,6 +89,29 @@ function sprowt_settings_menu()
     //        'file' => 'sprowt_settings.pages.inc'
     //    );
     
+    
+    $items['sprowt/request-nodes'] = array(
+        'page callback' => '_sprowt_settings_request_nodes',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['sprowt/request-nodes/rollout'] = array(
+        'page callback' => '_sprowt_settings_request_nodes_rollout',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+
+    $items['admin/config/sprowt/sprowt-rollout-settings'] = array(
+        'title' => 'Sprowt Rollout Settings',
+        'description' => 'Select which nodes will be requested on rollout.',
+        'page callback' => '_sprowt_settings_rollout',
+        'access callback' => '_sprowt_settings_rollout_access',
+        'type' => MENU_NORMAL_ITEM,
+        'weight' => -50
+    );
+
     return $items;
 }
 
@@ -115,6 +140,8 @@ function sprowt_settings_form_alter(&$form, &$form_state) {
                 '#weight' => -1
             );
         }
+
+        _sprowt_settings_node_sync_alter($form, $form_state);
     }
 }
 
@@ -149,6 +176,11 @@ function sprowt_settings_theme()
         'sprowt_settings_copyright' => array(
             'variables' => array(),
             'template' => 'sprowt_settings_copyright',
+            'path' => drupal_get_path('module', 'sprowt_settings') . '/theme',
+        ),
+        'sprowt_settings_rollout_admin' => array(
+            'variables' => array(),
+            'template' => 'sprowt_settings_rollout_admin',
             'path' => drupal_get_path('module', 'sprowt_settings') . '/theme',
         ),
     );
@@ -1260,6 +1292,243 @@ function sprowt_settings_preprocess_field(&$variables)
                     $item['#element']['url'] = 'tel:+1' . $phone;
                 }
             }
+        }
+    }
+}
+
+/**
+ * Implements hook_node_export_access_export_alter().
+ */
+function sprowt_settings_node_export_access_export_alter(&$access, $node) {
+    $isSync = drupal_static('sprowt_sync', false);
+    if($isSync) {
+        $access = true;
+    }
+}
+
+/**
+ * Implements hook_node_export_access_import_alter().
+ */
+function sprowt_settings_node_export_access_import_alter(&$access, $node) {
+    $isSync = drupal_static('sprowt_sync', false);
+    if($isSync) {
+        $access = true;
+    }
+}
+
+function _sprowt_settings_request_nodes() {
+    $opts = $_POST;
+
+    
+    if(!empty($_GET['debug']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
+        $opts = $_GET;
+    }
+
+    $sync = new SprowtNodeSync($opts);
+
+    $valid = $sync->validate($opts['secret']);
+
+    if(empty($valid)) {
+        drupal_access_denied();
+    }
+
+    $format = empty($opts['format']) ? 'json' : $opts['format'];
+    
+    $data = [
+        'code' => $sync->export($format)
+    ];
+    
+    if(!empty($_GET['debug_output']) && $format = 'json') {
+        $data['code'] = json_decode($data['code'], true);
+    }
+    
+    drupal_json_output($data);
+}
+
+function _sprowt_settings_request_nodes_rollout() {
+    $opts = [
+        'uuids' => variable_get('sprowt_rollout_uuids', [])
+    ];
+
+    $sync = new SprowtNodeSync($opts);
+
+    $valid = $sync->validate($_POST['secret']);
+
+    if(empty($valid)) {
+        drupal_access_denied();
+    }
+
+
+
+    $format = empty($opts['format']) ? 'json' : $opts['format'];
+
+    $data = [
+        'code' => $sync->export($format)
+    ];
+
+    if(!empty($_GET['debug_output']) && $format = 'json') {
+        $data['code'] = json_decode($data['code'], true);
+    }
+
+    drupal_json_output($data);
+
+}
+
+function _sprowt_settings_rollout_access() {
+    global $base_url;
+    if(strpos($base_url, 'sprowt-dummy') !== false) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function sprowt_settings_js_alter(&$javascript) {
+    //do nothing
+}
+
+function _sprowt_settings_rollout_form($form, $form_state) {
+
+    $nodes = db_query("
+        SELECT n.nid, n.uuid, n.title, n.type, n.status, t.name as 'type_name'
+        FROM node n
+        LEFT JOIN node_type t on t.type = n.type
+        ORDER BY t.name ASC, n.title ASC
+    ")->fetchAll(PDO::FETCH_ASSOC);
+
+    $form['all_nodes'] = [
+        '#type' => 'hidden',
+        '#attributes' => [
+            'id' => 'all-nodes'
+        ],
+        '#value' => json_encode($nodes)
+    ];
+
+    $uuids = variable_get('sprowt_rollout_uuids', []);
+
+    $form['rollout_uuids'] = [
+        '#type' => 'hidden',
+        '#attributes' => [
+            'id' => 'rollout-uuids'
+        ],
+        '#default_value' => json_encode($uuids)
+    ];
+
+    $form['#submit'] = ['_sprowt_settings_rollout_admin_form_submit'];
+
+    $form['actions'] = [
+        'submit' => [
+            '#type' => 'submit',
+            '#value' => 'Save'
+        ]
+    ];
+
+    return $form;
+}
+
+function _sprowt_settings_rollout_admin_form_submit($form, $form_state) {
+    $values = $form_state['values'];
+
+    $uuids = json_decode($values['rollout_uuids'], true);
+    variable_set('sprowt_rollout_uuids', $uuids);
+}
+
+
+function _sprowt_settings_rollout() {
+    drupal_add_js('https://code.jquery.com/jquery-3.3.1.js');
+    drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/jsviews/1.0.3/jsviews.min.js');
+    drupal_add_js(drupal_get_path('module', 'sprowt_settings') . '/js/rollout.js');
+    drupal_add_js('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js');
+    drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css', 'external');
+
+    return theme('sprowt_settings_rollout_admin', [
+        'form' => drupal_get_form('_sprowt_settings_rollout_form')
+    ]);
+}
+
+/**
+ * Implements hook_node_load().
+ */
+function sprowt_settings_node_load($nodes, $types) {
+    $uuids = variable_get('sprowt_rollout_uuids', []);
+
+    foreach($nodes as $node) {
+        if(in_array($node->uuid, $uuids)) {
+            $node->sprowt_rollout = true;
+        }
+    }
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function sprowt_settings_node_insert($node) {
+    $uuids = variable_get('sprowt_rollout_uuids', []);
+
+    if(!in_array($node->uuid, $uuids)) {
+        if(!empty($node->sprowt_rollout)) {
+            $uuids[] = $node->uuid;
+            variable_set('sprowt_rollout_uuids', $uuids);
+        }
+    }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function sprowt_settings_node_update($node) {
+    $uuids = variable_get('sprowt_rollout_uuids', []);
+
+    if(!empty($node->sprowt_rollout)) {
+        if(!in_array($node->uuid, $uuids)) {
+            $uuids[] = $node->uuid;
+            variable_set('sprowt_rollout_uuids', $uuids);
+        }
+    }
+    else {
+        if(in_array($node->uuid, $uuids)) {
+            unset($uuids[array_search($node->uuid, $uuids)]);
+            variable_set('sprowt_rollout_uuids', array_values($uuids));
+        }
+    }
+
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function sprowt_settings_node_delete($node) {
+    $uuids = variable_get('sprowt_rollout_uuids', []);
+    if(in_array($node->uuid, $uuids)) {
+        unset($uuids[array_search($node->uuid, $uuids)]);
+        variable_set('sprowt_rollout_uuids', array_values($uuids));
+    }
+}
+
+function _sprowt_settings_node_sync_alter(&$form, $form_state) {
+    if(_sprowt_settings_rollout_access()) {
+        $form['options']['sprowt_rollout'] = [
+            '#type' => 'checkbox',
+            '#title' => 'Include in Sprowt Rollout',
+            '#default_value' => !empty($form['#node']) ? !empty($form['#node']->sprowt_rollout) ? true : false : false
+        ];
+    }
+}
+
+/**
+ * Implements hook_node_submit().
+ */
+function sprowt_settings_node_submit($node, $form, &$form_state) {
+    $values = $form_state['values'];
+    if(_sprowt_settings_rollout_access()) {
+        if(!empty($values['sprowt_rollout'])) {
+            $node->sprowt_rollout = true;
+        }
+        else {
+            $node->sprowt_rollout = false;
         }
     }
 }
