@@ -16,7 +16,7 @@ function paragraphs_export_clone_node_alter(&$node, $context) {
     }
 }
 
- /**
+/**
  * Modified copy of paragraphs_clone_items. Meant to fix the original function.
  */
 function paragraphs_export_clone_items($entity_type, &$entity, $field_name, $language = LANGUAGE_NONE) {
@@ -24,22 +24,22 @@ function paragraphs_export_clone_items($entity_type, &$entity, $field_name, $lan
     if (!is_array($old_items)) {
         $old_items = array($old_items);
     }
-    
+
     unset($entity->{$field_name}[$language]);
-    
+
     foreach ($old_items as $old_item_array) {
         $old_item = entity_load('paragraphs_item', array($old_item_array['value']));
         $old_item = array_pop($old_item);
         if (!isset($old_item->bundle)) {
             continue;
         }
-        
+
         list( , , $bundle) = entity_extract_ids('paragraphs_item', $old_item);
-        
+
         /* @var $new_item ParagraphsItemEntity */
         $new_item = entity_create('paragraphs_item', array('bundle' => $bundle, 'field_name' => $field_name));
         $new_item->setHostEntity($entity_type, $entity, $language);
-        
+
         // Check if any of the fields in the newly cloned fc item is a paragraph.
         foreach (field_info_instances('paragraphs_item', $bundle) as $new_field_name => $new_field_instance) {
             if (!empty($old_item->{$new_field_name})) {
@@ -86,7 +86,7 @@ function _paragraphs_export_node_clone_prepopulate_entity_after_extractions(&$en
  * Implements hook_node_export_node_alter().
  */
 function paragraphs_export_node_export_node_alter(&$node, $original_node) {
-  paragraphs_export_extract_paragraphs($node, $original_node, 'node');
+    paragraphs_export_extract_paragraphs($node, $original_node, 'node');
 }
 
 
@@ -94,50 +94,93 @@ function paragraphs_export_node_export_node_alter(&$node, $original_node) {
  * Implements hook_node_export_node_import_alter().
  */
 function paragraphs_export_node_export_node_import_alter(&$node, $original_node, $save) {
-  paragraphs_export_import_paragraphs($node, $original_node);
+    paragraphs_export_import_paragraphs($node, $original_node);
+}
+
+
+function _paragraphs_export_normalize_array_keys(&$array) {
+    foreach($array as $key => $value) {
+        unset($array[$key]);
+        $newKey = ltrim(ltrim(ltrim($key), '*'));
+        $array[$newKey] = is_array($value) ? _paragraphs_export_normalize_array_keys($value) : $value;
+    }
+
+    return $array;
+}
+
+/**
+ * This function fixes the fact that node_export doesn't import entities as entities but as stdClasses
+ *
+ * @param stdClass $stdClass
+ * @return stdClass
+ */
+function _paragraphs_export_stdClass_to_entity($stdClass) {
+    if(!is_object($stdClass)) {
+        return $stdClass;
+    }
+
+    $array = (array) $stdClass;
+    _paragraphs_export_normalize_array_keys($array);
+
+    if(empty($array["entityInfo"])) { //not an entity originally
+        return $stdClass;
+    }
+
+    if($stdClass instanceof $array["entityInfo"]["entity class"]) {// already a full entity
+        return $stdClass;
+    }
+
+    $entity = entity_create($array["entityType"], $array);
+
+    if($entity === false) { //entity_create failed
+        return $stdClass;
+    }
+
+    return $entity;
 }
 
 function paragraphs_export_import_paragraphs(&$element, $original) {
-  if(!empty($original->paragraph_fields)) {
-    $paragraph_fields = $original->paragraph_fields;
-    
-    foreach ($paragraph_fields as $field_name => $array) {
-      foreach($array as $lang => $items) {
-        $element->{$field_name}[$lang] = array();
-        foreach($items as $paragraphs_item) {
-          $original_item = clone $paragraphs_item;
-          paragraphs_export_file_field_import($paragraphs_item, $original_item, 'paragraphs_item');
-          if(function_exists('field_collection_export_import_field_collection')) {
-              field_collection_export_import_field_collection($paragraphs_item, $original_item, 'paragraphs_item');
-          }
-          paragraphs_export_import_paragraphs($paragraphs_item, $original_item);
-          $existing = variable_get('node_export_existing', 'new');
-          $paragraphs_item->item_id = null;
-          $paragraphs_item->revision_id = null;
-          switch ($existing) {
-            case 'new':
-              $paragraphs_item->is_new = TRUE;
-              unset($paragraphs_item->uuid);
-              $paragraphs_item->save(true);
-              break;
-            case 'revision':
-                _paragraphs_export_entity_uuid_save('paragraphs_item', $paragraphs_item);
-              break;
-            case 'skip':
-              break;
-          }
+    if(!empty($original->paragraph_fields)) {
+        $paragraph_fields = $original->paragraph_fields;
 
-          
-          if(!empty($paragraphs_item->item_id)) {
-            $element->{$field_name}[$lang][] = array(
-              'value' => $paragraphs_item->item_id,
-              'revision_id' => $paragraphs_item->revision_id
-            );
-          }
+        foreach ($paragraph_fields as $field_name => $array) {
+            foreach($array as $lang => $items) {
+                $element->{$field_name}[$lang] = array();
+                foreach($items as $paragraphs_item) {
+                    $paragraphs_item = _paragraphs_export_stdClass_to_entity($paragraphs_item);
+                    $original_item = clone $paragraphs_item;
+                    paragraphs_export_file_field_import($paragraphs_item, $original_item, 'paragraphs_item');
+                    if(function_exists('field_collection_export_import_field_collection')) {
+                        field_collection_export_import_field_collection($paragraphs_item, $original_item, 'paragraphs_item');
+                    }
+                    paragraphs_export_import_paragraphs($paragraphs_item, $original_item);
+                    $existing = variable_get('node_export_existing', 'new');
+                    $paragraphs_item->item_id = null;
+                    $paragraphs_item->revision_id = null;
+                    switch ($existing) {
+                        case 'new':
+                            $paragraphs_item->is_new = TRUE;
+                            unset($paragraphs_item->uuid);
+                            $paragraphs_item->save(true);
+                            break;
+                        case 'revision':
+                            _paragraphs_export_entity_uuid_save('paragraphs_item', $paragraphs_item);
+                            break;
+                        case 'skip':
+                            break;
+                    }
+
+
+                    if(!empty($paragraphs_item->item_id)) {
+                        $element->{$field_name}[$lang][] = array(
+                            'value' => $paragraphs_item->item_id,
+                            'revision_id' => $paragraphs_item->revision_id
+                        );
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 function paragraphs_export_extract_paragraphs(&$element, $original, $element_type) {
@@ -147,36 +190,36 @@ function paragraphs_export_extract_paragraphs(&$element, $original, $element_typ
     else {
         $bundle = $original->bundle;
     }
-  $instances = field_info_instances($element_type, $bundle);
-  $paragraph_fields = array();
-  foreach($instances as $field_name => $instance) {
-    if($instance['widget']['module'] == 'paragraphs') {
-      $paragraph_fields[$field_name] = $instance;
-    }
-  }
-  if(!empty($paragraph_fields)) {
-    $element->paragraph_fields = array();
-    foreach ($paragraph_fields as $field_name => $instance) {
-      $element->paragraph_fields[$field_name] = array();
-      
-      foreach ($element->{$field_name} as $lang => &$items) {
-        $paragraph_ids = array();
-        foreach($items as $key => &$item) {
-          $paragraph_ids[] = $item['value'];
-          unset($items[$key]);
+    $instances = field_info_instances($element_type, $bundle);
+    $paragraph_fields = array();
+    foreach($instances as $field_name => $instance) {
+        if($instance['widget']['module'] == 'paragraphs') {
+            $paragraph_fields[$field_name] = $instance;
         }
-        $element->paragraph_fields[$field_name][$lang] = entity_load('paragraphs_item', $paragraph_ids);
-        foreach($element->paragraph_fields[$field_name][$lang] as &$entity) {
-          $original_entity = $entity;
-          paragraphs_export_file_field_export($entity, $original_entity, 'paragraphs_item');
-            if(function_exists('field_collection_export_extract_field_collection')) {
-                field_collection_export_extract_field_collection($entity, $original_entity, 'paragraphs_item');
+    }
+    if(!empty($paragraph_fields)) {
+        $element->paragraph_fields = array();
+        foreach ($paragraph_fields as $field_name => $instance) {
+            $element->paragraph_fields[$field_name] = array();
+
+            foreach ($element->{$field_name} as $lang => &$items) {
+                $paragraph_ids = array();
+                foreach($items as $key => &$item) {
+                    $paragraph_ids[] = $item['value'];
+                    unset($items[$key]);
+                }
+                $element->paragraph_fields[$field_name][$lang] = entity_load('paragraphs_item', $paragraph_ids);
+                foreach($element->paragraph_fields[$field_name][$lang] as &$entity) {
+                    $original_entity = $entity;
+                    paragraphs_export_file_field_export($entity, $original_entity, 'paragraphs_item');
+                    if(function_exists('field_collection_export_extract_field_collection')) {
+                        field_collection_export_extract_field_collection($entity, $original_entity, 'paragraphs_item');
+                    }
+                    paragraphs_export_extract_paragraphs($entity, $original_entity, 'paragraphs_item');
+                }
             }
-          paragraphs_export_extract_paragraphs($entity, $original_entity, 'paragraphs_item');
         }
-      }
     }
-  }
 }
 
 /**
@@ -184,119 +227,119 @@ function paragraphs_export_extract_paragraphs(&$element, $original, $element_typ
  * Copy of node_export_file_field_export adapted for paragraphs_items
  */
 function paragraphs_export_file_field_export(&$entity, $original_entity, $type) {
-  if($type == 'node' || $type == 'field_collection') {
-    node_export_file_field_export($entity, $original_entity);
-    return true;
-  }
-  
-  $entity_info = array(
-    'type' => $type,
-    'bundle' => $entity->bundle
-  );
-  
-  $types = array_filter(variable_get('node_export_file_types', array()));
-  if ($entity_info['type'] != 'node' || in_array($entity->type, $types)) {
-    $assets_path = variable_get('node_export_file_assets_path', '');
-    $export_mode = variable_get('node_export_file_mode', 'inline');
-    
-    switch ($export_mode) {
-      case 'local':
-        $export_var = 'node_export_file_path';
-        break;
-      case 'remote':
-        $export_var = 'node_export_file_url';
-        break;
-      default:
-      case 'inline':
-        $export_var = 'node_export_file_data';
-        break;
+    if($type == 'node' || $type == 'field_collection') {
+        node_export_file_field_export($entity, $original_entity);
+        return true;
     }
-    
-    // If files are supposed to be copied to the assets path.
-    if ($export_mode == 'local' && $assets_path) {
-      // Ensure the assets path is created
-      if (!is_dir($assets_path) && mkdir($assets_path, 0777, TRUE) == FALSE) {
-        drupal_set_message(t("Could not create assets path! '!path'", array('!path' => $assets_path)), 'error');
-        // Don't continue if the assets path is not ready
-        return;
-      }
-      
-      // Ensure it is writable
-      if (!is_writable($assets_path)) {
-        drupal_set_message(t("Assets path is not writable! '!path'", array('!path' => $assets_path)), 'error');
-        // Don't continue if the assets path is not ready
-        return;
-      }
-    }
-    
-    // get all fields from this node type
-    $fields = field_info_instances($entity_info['type'],
-      $entity_info['bundle']);
-    foreach($fields as $field_instance) {
-      // load field infos to check the type
-      $field = &$entity->{$field_instance['field_name']};
-      $info = field_info_field($field_instance['field_name']);
-      
-      $supported_fields = array_map('trim', explode(',', variable_get('node_export_file_supported_fields', 'file, image')));
-      
-      // check if this field should implement file import/export system
-      if (in_array($info['type'], $supported_fields)) {
-        
-        // we need to loop into each language because i18n translation can build
-        // fields with different language than the node one.
-        foreach($field as $language => $files) {
-          if (is_array($files)) {
-            foreach($files as $i => $file) {
-              
-              // convert file to array to stay into the default node_export_file format
-              $file = (object) $file;
-              
-              // media field type doesn't load file the whole file on node_load
-              // it loads only fid, title and data associated with file, so in this case we need
-              // to load it by ourselves.
-              if (empty($file->uri) && !empty($file->fid) && $file = file_load($file->fid)) {
-                $field[$language][$i] = (array) $file;
-              }
-              
-              // Check the file
-              if (!isset($file->uri) || !is_file($file->uri)) {
-                drupal_set_message(t("File field found on node, but file doesn't exist on disk? '!path'", array('!path' => $file->uri)), 'error');
-                continue;
-              }
-              
-              if ($export_mode == 'local') {
-                if ($assets_path) {
-                  $export_data = $assets_path . '/' . basename($file->uri);
-                  if (!copy($file->uri, $export_data)) {
-                    drupal_set_message(t("Export file error, could not copy '%filepath' to '%exportpath'.", array('%filepath' => $file->uri, '%exportpath' => $export_data)), 'error');
-                    return FALSE;
-                  }
-                }
-                else {
-                  $export_data = $file->uri;
-                }
-              }
-              // Remote export mode
-              elseif ($export_mode == 'remote') {
-                // NOTE: This is patched with info from https://drupal.org/node/2046431
-                $export_data = file_create_url($file->uri);
-              }
-              // Default is 'inline' export mode
-              else {
-                $export_data = base64_encode(file_get_contents($file->uri));
-              }
-              
-              // build the field again, and remove fid to be sure that imported node
-              // will rebuild the file again, or keep an existing one with a different fid
-              $field[$language][$i]['fid'] = NULL;
-              $field[$language][$i][$export_var] = $export_data;
-              
-            }
-          }
+
+    $entity_info = array(
+        'type' => $type,
+        'bundle' => $entity->bundle
+    );
+
+    $types = array_filter(variable_get('node_export_file_types', array()));
+    if ($entity_info['type'] != 'node' || in_array($entity->type, $types)) {
+        $assets_path = variable_get('node_export_file_assets_path', '');
+        $export_mode = variable_get('node_export_file_mode', 'inline');
+
+        switch ($export_mode) {
+            case 'local':
+                $export_var = 'node_export_file_path';
+                break;
+            case 'remote':
+                $export_var = 'node_export_file_url';
+                break;
+            default:
+            case 'inline':
+                $export_var = 'node_export_file_data';
+                break;
         }
-      }
+
+        // If files are supposed to be copied to the assets path.
+        if ($export_mode == 'local' && $assets_path) {
+            // Ensure the assets path is created
+            if (!is_dir($assets_path) && mkdir($assets_path, 0777, TRUE) == FALSE) {
+                drupal_set_message(t("Could not create assets path! '!path'", array('!path' => $assets_path)), 'error');
+                // Don't continue if the assets path is not ready
+                return;
+            }
+
+            // Ensure it is writable
+            if (!is_writable($assets_path)) {
+                drupal_set_message(t("Assets path is not writable! '!path'", array('!path' => $assets_path)), 'error');
+                // Don't continue if the assets path is not ready
+                return;
+            }
+        }
+
+        // get all fields from this node type
+        $fields = field_info_instances($entity_info['type'],
+            $entity_info['bundle']);
+        foreach($fields as $field_instance) {
+            // load field infos to check the type
+            $field = &$entity->{$field_instance['field_name']};
+            $info = field_info_field($field_instance['field_name']);
+
+            $supported_fields = array_map('trim', explode(',', variable_get('node_export_file_supported_fields', 'file, image')));
+
+            // check if this field should implement file import/export system
+            if (in_array($info['type'], $supported_fields)) {
+
+                // we need to loop into each language because i18n translation can build
+                // fields with different language than the node one.
+                foreach($field as $language => $files) {
+                    if (is_array($files)) {
+                        foreach($files as $i => $file) {
+
+                            // convert file to array to stay into the default node_export_file format
+                            $file = (object) $file;
+
+                            // media field type doesn't load file the whole file on node_load
+                            // it loads only fid, title and data associated with file, so in this case we need
+                            // to load it by ourselves.
+                            if (empty($file->uri) && !empty($file->fid) && $file = file_load($file->fid)) {
+                                $field[$language][$i] = (array) $file;
+                            }
+
+                            // Check the file
+                            if (!isset($file->uri) || !is_file($file->uri)) {
+                                drupal_set_message(t("File field found on node, but file doesn't exist on disk? '!path'", array('!path' => $file->uri)), 'error');
+                                continue;
+                            }
+
+                            if ($export_mode == 'local') {
+                                if ($assets_path) {
+                                    $export_data = $assets_path . '/' . basename($file->uri);
+                                    if (!copy($file->uri, $export_data)) {
+                                        drupal_set_message(t("Export file error, could not copy '%filepath' to '%exportpath'.", array('%filepath' => $file->uri, '%exportpath' => $export_data)), 'error');
+                                        return FALSE;
+                                    }
+                                }
+                                else {
+                                    $export_data = $file->uri;
+                                }
+                            }
+                            // Remote export mode
+                            elseif ($export_mode == 'remote') {
+                                // NOTE: This is patched with info from https://drupal.org/node/2046431
+                                $export_data = file_create_url($file->uri);
+                            }
+                            // Default is 'inline' export mode
+                            else {
+                                $export_data = base64_encode(file_get_contents($file->uri));
+                            }
+
+                            // build the field again, and remove fid to be sure that imported node
+                            // will rebuild the file again, or keep an existing one with a different fid
+                            $field[$language][$i]['fid'] = NULL;
+                            $field[$language][$i][$export_var] = $export_data;
+
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
 /**
@@ -308,48 +351,48 @@ function paragraphs_export_file_field_export(&$entity, $original_entity, $type) 
  *   Unused...
  */
 function paragraphs_export_file_field_import(&$entity, $original_entity, $type) {
-  if($type == 'node' || $type == 'field_collection') {
-    node_export_file_field_import($entity, $original_entity);
-    return true;
-  }
-  
-  $entity_info = array(
-    'type' => $type,
-    'bundle' => $entity->bundle
-  );
-  
-  // Get all fields from this node type.
-  $fields = field_info_instances($entity_info['type'], $entity_info['bundle']);
-  foreach($fields as $field_instance) {
-    // Load field info to check the type.
-    $field = &$entity->{$field_instance['field_name']};
-    $info = field_info_field($field_instance['field_name']);
-    
-    $supported_fields = array_map('trim', explode(',', variable_get('node_export_file_supported_fields', 'file, image')));
-    
-    // Check if this field should implement file import/export system.
-    if (in_array($info['type'], $supported_fields)) {
-      
-      // We need to loop into each language because i18n translation can build
-      // fields with different language than the node one.
-      foreach($field as $language => $files) {
-        if (is_array($files)) {
-          foreach($files as $i => $field_value) {
-            
-            $file = (object) $field_value;
-            
-            $result = _node_export_file_field_import_file($file);
-            
-            // The file was saved successfully, update the file field (by reference).
-            if ($result == TRUE && isset($file->fid)) {
-              // Retain any special properties from the original field value.
-              $field[$language][$i] = array_merge($field_value, (array) $file);
-            }
-          }
-        }
-      }
+    if($type == 'node' || $type == 'field_collection') {
+        node_export_file_field_import($entity, $original_entity);
+        return true;
     }
-  }
+
+    $entity_info = array(
+        'type' => $type,
+        'bundle' => $entity->bundle
+    );
+
+    // Get all fields from this node type.
+    $fields = field_info_instances($entity_info['type'], $entity_info['bundle']);
+    foreach($fields as $field_instance) {
+        // Load field info to check the type.
+        $field = &$entity->{$field_instance['field_name']};
+        $info = field_info_field($field_instance['field_name']);
+
+        $supported_fields = array_map('trim', explode(',', variable_get('node_export_file_supported_fields', 'file, image')));
+
+        // Check if this field should implement file import/export system.
+        if (in_array($info['type'], $supported_fields)) {
+
+            // We need to loop into each language because i18n translation can build
+            // fields with different language than the node one.
+            foreach($field as $language => $files) {
+                if (is_array($files)) {
+                    foreach($files as $i => $field_value) {
+
+                        $file = (object) $field_value;
+
+                        $result = _node_export_file_field_import_file($file);
+
+                        // The file was saved successfully, update the file field (by reference).
+                        if ($result == TRUE && isset($file->fid)) {
+                            // Retain any special properties from the original field value.
+                            $field[$language][$i] = array_merge($field_value, (array) $file);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 /**

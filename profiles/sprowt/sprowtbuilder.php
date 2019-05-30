@@ -16,6 +16,7 @@ Class SprowtBuilder {
     public $default_images = array();
 
     private $node_json;
+    private $uuidMap = [];
 
 
     function __construct() {
@@ -320,6 +321,8 @@ Class SprowtBuilder {
 
         //$result = $this->node_export_import($node_json);
 
+        $this->buildUuidMap($nodes);
+
         $result = $this->node_import($nodes);
 
         $nid_array = entity_get_id_by_uuid('node', $uuids);
@@ -496,16 +499,79 @@ Class SprowtBuilder {
         return $node;
     }
 
+    function modify_nodes($nodes = []) {
+
+        $noIndexUnpublish = [
+            '9689e757-b8b7-424c-92e2-cbe6973e2b8c',
+            '9d9e355f-2748-4146-906b-5d352ded78b7',
+            '98a36e38-d9b0-4d82-b8cb-8a2ac0c7c8f4',
+            'aaed225c-73ed-4920-aa47-b14e096491fd',
+            'dde62ef5-78c2-4ab9-9800-30f4704f3664',
+            '3bfa987c-ead4-4b83-9b02-dd0922d9db22',
+            '4dbc6ac9-3409-4bd6-808a-a7cdc51af733',
+            '4907444d-86fa-46cf-812e-767397d37563',
+            'e645ab25-f709-4bf2-86ec-4f63ab8c5d09',
+        ];
+
+        foreach($nodes as $nodeArray) {
+            $type = $nodeArray['type'];
+            $uuid = $nodeArray['uuid'];
 
 
-    function node_import($nodes = array()) {
+            if($type == 'issue' || $type == 'concern' || in_array($uuid, $noIndexUnpublish)) {
+                $node = entity_uuid_load('node', [$uuid]);
+                $node = array_pop($node);
+
+                $node->status = 0;
+                $node->metatags[LANGUAGE_NONE]['robots']['value']['noindex'] = 'noindex';
+                entity_uuid_save('node', $node);
+            }
+
+            if($type == 'webform') {
+                $node = entity_uuid_load('node', [$uuid]);
+                $node = array_pop($node);
+
+                $node->webform['progress_bar'] = 0;
+                entity_uuid_save('node', $node);
+            }
+
+        }
+    }
+
+    function buildUuidMap($nodes) {
+        $map = [];
+        foreach($nodes as $nodeArray) {
+            $map[$nodeArray['nid']] = $nodeArray['uuid'];
+        }
+
+        $this->uuidMap = $map;
+    }
+
+    function node_import($nodes = array(), $later = false) {
         require_once('includes/nodebuilder.php');
 
         $paths = $this->paths;
 
 
+        $saveForLater = [];
+        $modify = [];
+
+        $sync = new SprowtNodeSync();
+
         foreach($nodes as $node){
             $type = $node['type'];
+
+            if($type == 'issue' && !$later) {
+                $saveForLater[] = $node;
+                continue;
+            }
+            else {
+                $modify[] = $node;
+                $nodeString = $node;
+                unset($nodeString['menu']);
+
+                $output = $sync->import(json_encode([$nodeString]), 'revision');
+            }
 
             $nid_array = entity_get_id_by_uuid('node', array($node['uuid']));
 
@@ -519,6 +585,16 @@ Class SprowtBuilder {
                 $n->uuid = $node['uuid'];
                 $n->language = LANGUAGE_NONE;
                 $loaded = false;
+
+                $instances = field_info_instances('node', $type);
+
+                foreach($instances as $instance => $i_info) {
+                    if(!empty($node[$instance])) {
+                        $n->$instance = $node[$instance];
+                    }
+                }
+
+                node_export_file_field_import($n, clone $n);
             }
 
             $n->status = $node['status'];
@@ -526,16 +602,6 @@ Class SprowtBuilder {
             $n->promote = $node['promote'];
             //$n->menu = $node['menu'];
             $n = $this->modifyDefaultNode($n);
-
-            $instances = field_info_instances('node', $type);
-
-            foreach($instances as $instance => $i_info) {
-                if(!empty($node[$instance])) {
-                    $n->$instance = $node[$instance];
-                }
-            }
-
-            node_export_file_field_import($n, clone $n);
 
             if($n->type == 'webform') {
 
@@ -561,7 +627,69 @@ Class SprowtBuilder {
                 $n = node_submit($n);
             }
 
+            $this->addReferencestoEntity($n, 'node', $type);
+
             node_save($n);
+        }
+
+        $this->modify_nodes($modify);
+
+        if(!empty($saveForLater) && !$later) {
+            $this->node_import($saveForLater, true);
+        }
+    }
+
+    function addReferencestoEntity(&$entity, $entity_type, $bundle) {
+        $instances = field_info_instances($entity_type, $bundle);
+        foreach($instances as $bundle_field_name => $instance) {
+            $info = field_info_field($bundle_field_name);
+
+            switch($info['type']) {
+                case 'entityreference':
+                    if(!empty($entity->{$bundle_field_name})) {
+                        foreach($entity->{$bundle_field_name} as $lang => &$items) {
+                            foreach($items as $item_delta => &$item) {
+                                if(!empty($item['uuid'])) {
+                                    $uuid = $item['uuid'];
+                                }
+                                else if(!empty($item['target_id']) && !empty($this->uuidMap[$item['target_id']])) {
+                                    $uuid = $this->uuidMap[$item['target_id']];
+                                }
+
+                                if(!empty($uuid)) {
+                                    $target_id = entity_get_id_by_uuid($info['settings']['target_type'], array($uuid));
+                                }
+                                else {
+                                    $target_id = null;
+                                }
+
+                                if(!empty($target_id)) {
+                                    foreach($target_id as $id) {
+                                        if(!empty($id)) {
+                                            $target_id = $id;
+                                            break;
+                                        }
+                                    }
+                                    if(!empty($target_id)) {
+                                        $item = array(
+                                            'target_id' => $target_id
+                                        );
+                                    }
+                                    else {
+                                        unset($items[$item_delta]);
+                                    }
+                                }
+                                else {
+                                    unset($items[$item_delta]);
+                                }
+                            }
+                        }
+                        if(empty($items)) {
+                            unset($entity->{$bundle_field_name}[$lang]);
+                        }
+                    }
+                    break;
+            }
         }
     }
 

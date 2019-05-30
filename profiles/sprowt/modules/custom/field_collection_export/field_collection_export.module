@@ -67,6 +67,48 @@ function field_collection_export_node_export_node_import_alter(&$node, $original
     field_collection_export_import_field_collection($node, $original_node);
 }
 
+function _field_collection_normalize_array_keys(&$array) {
+    foreach($array as $key => $value) {
+        unset($array[$key]);
+        $newKey = ltrim(ltrim(ltrim($key), '*'));
+        $array[$newKey] = is_array($value) ? _field_collection_normalize_array_keys($value) : $value;
+    }
+
+    return $array;
+}
+
+
+/**
+ * This function fixes the fact that node_export doesn't import entities as entities but as stdClasses
+ *
+ * @param stdClass $stdClass
+ * @return stdClass
+ */
+function _field_collection_stdClass_to_entity($stdClass) {
+    if(!is_object($stdClass)) {
+        return $stdClass;
+    }
+
+    $array = (array) $stdClass;
+    _field_collection_normalize_array_keys($array);
+
+    if(empty($array["entityInfo"])) { //not an entity originally
+        return $stdClass;
+    }
+
+    if($stdClass instanceof $array["entityInfo"]["entity class"]) {// already a full entity
+        return $stdClass;
+    }
+
+    $entity = entity_create($array["entityType"], $array);
+
+    if($entity === false) { //entity_create failed
+        return $stdClass;
+    }
+
+    return $entity;
+}
+
 function field_collection_export_import_field_collection(&$element, $original, $entity_type = 'node') {
     if(!empty($original->fc_fields)) {
         $fc_fields = $original->fc_fields;
@@ -74,6 +116,7 @@ function field_collection_export_import_field_collection(&$element, $original, $
             foreach($array as $lang => $items) {
                 $element->{$field_name}[$lang] = array();
                 foreach($items as $field_collection_item) {
+                    $field_collection_item = _field_collection_stdClass_to_entity($field_collection_item);
                     $original_item = clone $field_collection_item;
                     node_export_file_field_import($field_collection_item, $original_item);
                     if(function_exists('paragraphs_export_import_paragraphs')) {
