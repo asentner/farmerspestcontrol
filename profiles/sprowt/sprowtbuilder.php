@@ -29,7 +29,8 @@ Class SprowtBuilder {
         $paths = array(
             '934b332a-a247-41eb-ae2e-09dfe144aed3' => 'contact',
             '616bbe72-80a0-43ec-b5a3-838d2b60f1e5' => 'free-quote',
-            'b8f3a9e5-f431-4428-b5b2-9ce69f6b437c' => 'refer-friend'
+            'b8f3a9e5-f431-4428-b5b2-9ce69f6b437c' => 'refer-friend',
+            'c1c20802-54d4-49c2-ad31-61784e121b9f' => 'our-pest-control-services',
         );
 
         $this->paths = $paths;
@@ -511,6 +512,7 @@ Class SprowtBuilder {
             '4dbc6ac9-3409-4bd6-808a-a7cdc51af733',
             '4907444d-86fa-46cf-812e-767397d37563',
             'e645ab25-f709-4bf2-86ec-4f63ab8c5d09',
+            'dc37f1bb-706c-410c-8b15-bb34555ff74c'
         ];
 
         foreach($nodes as $nodeArray) {
@@ -611,6 +613,9 @@ Class SprowtBuilder {
                     $email['from_address'] = 'default';
                     $node['webform']['emails'][$k] = $email;
                 }
+
+                $node['webform']['progress_bar'] = 0;
+
 
                 $n->webform = $node['webform'];
             }
