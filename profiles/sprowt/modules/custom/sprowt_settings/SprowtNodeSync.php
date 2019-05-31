@@ -13,24 +13,24 @@ class SprowtNodeSync {
     private $types = [];
     private $uuids = [];
     
-    const SPROWT_DATA_URL = 'https://dev-sprowt-dummy.pantheonsite.io';
+    const SPROWT_DATA_URL = 'http://dev-sprowt-dummy.pantheonsite.io';
     const SPROWT_SECRET = 'Roads... where we\'re going we don\'t NEED roads.';
     
     function __construct($opts = []) {
-        $this->nids = $this->testSet($opts['nids']);
-        $this->types = $this->testSet($opts['types']);
-        $this->uuids = $this->testSet($opts['uuids']);
+        $this->nids = $this->testSet($opts, 'nids');
+        $this->types = $this->testSet($opts, 'types');
+        $this->uuids = $this->testSet($opts, 'uuids');
     
         $this->addNidsByUuids($this->uuids);
         $this->addNidsByTypes($this->types);
     }
     
-    private function testSet($val) {
-        if(empty($val)) {
+    private function testSet($val, $key) {
+        if(empty($val[$key])) {
             return [];
         }
         
-        return $val;
+        return $val[$key];
     }
 
     //from here: https://gist.github.com/joashp/a1ae9cb30fa533f4ad94
