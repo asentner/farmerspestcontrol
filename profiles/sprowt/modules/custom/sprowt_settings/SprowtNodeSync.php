@@ -13,7 +13,7 @@ class SprowtNodeSync {
     private $types = [];
     private $uuids = [];
     
-    const SPROWT_DATA_URL = 'http://sprowt-dummy.test';
+    const SPROWT_DATA_URL = 'https://dev-sprowt-dummy.pantheonsite.io';
     const SPROWT_SECRET = 'Roads... where we\'re going we don\'t NEED roads.';
     
     function __construct($opts = []) {
