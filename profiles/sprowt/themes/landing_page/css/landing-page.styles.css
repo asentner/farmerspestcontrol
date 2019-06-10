@@ -2405,6 +2405,9 @@ input[type=submit] {
     -ms-flex: 1 1 auto;
         flex: 1 1 auto; }
 
+.hidden {
+  display: none; }
+
 .entity-paragraphs-item {
   padding: 30px 20px; }
   .entity-paragraphs-item > .content {
@@ -2601,7 +2604,8 @@ span.dollar {
     overflow: hidden;
     margin-top: 30px; }
     .paragraphs-item-landing-page-areas-we-service .field--name-field-market ul {
-      columns: 2;
+      -webkit-columns: 2;
+              columns: 2;
       margin: 0 auto; }
     .paragraphs-item-landing-page-areas-we-service .field--name-field-market li {
       padding-left: 0.88235em; }
@@ -2791,7 +2795,8 @@ span.dollar {
   .paragraphs-item-landing-page-features .field--name-field-button {
     margin-top: 30px; }
   .paragraphs-item-landing-page-features.inline .field--name-field-features-list ul {
-    columns: auto;
+    -webkit-columns: auto;
+            columns: auto;
     text-align: center; }
     .paragraphs-item-landing-page-features.inline .field--name-field-features-list ul li {
       display: inline-block;
@@ -2807,14 +2812,16 @@ span.dollar {
       margin-left: auto;
       margin-right: auto; }
       .paragraphs-item-landing-page-features .field--name-field-features-list ul {
-        columns: 2; }
+        -webkit-columns: 2;
+                columns: 2; }
         .paragraphs-item-landing-page-features .field--name-field-features-list ul li:first-child {
           margin-top: 0; }
     .paragraphs-item-landing-page-features.inline .field--name-field-features-list {
       margin-top: 40px; } }
   @media (min-width: 1024px) {
     .paragraphs-item-landing-page-features.three_columns .field--name-field-features-list ul {
-      columns: 3; } }
+      -webkit-columns: 3;
+              columns: 3; } }
 
 .paragraphs-item-landing-page-header-footer {
   text-align: center;
@@ -2826,7 +2833,8 @@ span.dollar {
     margin-bottom: 10px; }
     .paragraphs-item-landing-page-header-footer .field--name-field-landing-page-logo img {
       max-width: 220px;
-      height: auto; }
+      height: 100%;
+      width: 100%; }
 
 .l-header .paragraphs-item-landing-page-header-footer .field--name-field-cta-text {
   margin: 0 auto;
@@ -2930,7 +2938,8 @@ span.dollar {
     .paragraphs-item-landing-page-hero .paragraphs-item-landing-page-features {
       width: 430px; }
       .paragraphs-item-landing-page-hero .paragraphs-item-landing-page-features .field--name-field-features-list ul {
-        columns: 1; }
+        -webkit-columns: 1;
+                columns: 1; }
         .paragraphs-item-landing-page-hero .paragraphs-item-landing-page-features .field--name-field-features-list ul li:first-child {
           margin-top: 15px; } }
 
