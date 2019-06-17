@@ -73,6 +73,13 @@ function sprowt_theme_theme($existing, $type, $theme, $path) {
                 'localbusiness_structured_data' => null
             ),
         ),
+        'sprowt_privacy_policy_prefix' => [
+            'variables' => [
+                'privacyPolicyUrl' => url('privacy-policy')
+            ],
+            'template' => 'sprowt_privacy_policy_prefix',
+            'path' => drupal_get_path('module', 'sprowt_theme') . '/theme'
+        ]
     );
 }
 
@@ -167,7 +174,7 @@ function sprowt_theme_form_alter(&$form, &$form_state, $form_id){
             $noPrivacy = true;
         }
         if(!$noPrivacy) {
-            $form['submit']['#prefix'] = "<div class='webform-privacy-policy'><p>By submitting this form, you are agreeing to the<a href='/privacy-policy'> privacy policy</a></p></div>";
+            $form['submit']['#prefix'] = theme('sprowt_privacy_policy_prefix');
         }
 
         if($node->uuid == '7ac2f749-f7d3-4db7-8b05-258588aba660') {

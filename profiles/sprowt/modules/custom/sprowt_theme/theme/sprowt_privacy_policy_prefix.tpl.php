@@ -1,0 +1,1 @@
+<div class="webform-privacy-policy"><p>By submitting this form, you are agreeing to the <a href="<?php print $privacyPolicyUrl; ?>">privacy policy</a>.</p></div>
