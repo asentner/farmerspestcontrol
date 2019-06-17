@@ -3,8 +3,8 @@ description = A more efficient browser for the Token module.
 core = 7.x
 dependencies[] = token
 
-; Information added by Drupal.org packaging script on 2019-04-30
-version = "7.x-1.4"
+; Information added by Drupal.org packaging script on 2019-05-29
+version = "7.x-1.5"
 core = "7.x"
 project = "fast_token_browser"
-datestamp = "1556582884"
+datestamp = "1559153385"
