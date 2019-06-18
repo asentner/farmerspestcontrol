@@ -119,6 +119,54 @@ function sprowt_hd_webform_form_settings($form, $form_state, $node)
         '#default_value' => (array_key_exists('form_reactor_phone_field', $formData)) ? $formData['form_reactor_phone_field'] : null,
     );
 
+  $form['form_reactor']['address_field'] = array(
+    '#type' => 'select',
+    '#title' => 'Address Field',
+    '#description' => 'Select the webform component you use for the address',
+    '#options' => array_merge(
+      array(
+        '' => '- Select -'
+      ), $options
+    ),
+    '#default_value' => (array_key_exists('form_reactor_address_field', $formData)) ? $formData['form_reactor_address_field'] : null,
+  );
+
+  $form['form_reactor']['city_field'] = array(
+    '#type' => 'select',
+    '#title' => 'City Field',
+    '#description' => 'Select the webform component you use for the city',
+    '#options' => array_merge(
+      array(
+        '' => '- Select -'
+      ), $options
+    ),
+    '#default_value' => (array_key_exists('form_reactor_city_field', $formData)) ? $formData['form_reactor_city_field'] : null,
+  );
+
+  $form['form_reactor']['state_field'] = array(
+    '#type' => 'select',
+    '#title' => 'State Field',
+    '#description' => 'Select the webform component you use for the State',
+    '#options' => array_merge(
+      array(
+        '' => '- Select -'
+      ), $options
+    ),
+    '#default_value' => (array_key_exists('form_reactor_state_field', $formData)) ? $formData['form_reactor_state_field'] : null,
+  );
+
+  $form['form_reactor']['zip_field'] = array(
+    '#type' => 'select',
+    '#title' => 'Zip Field',
+    '#description' => 'Select the webform component you use for the Zip',
+    '#options' => array_merge(
+      array(
+        '' => '- Select -'
+      ), $options
+    ),
+    '#default_value' => (array_key_exists('form_reactor_zip_field', $formData)) ? $formData['form_reactor_zip_field'] : null,
+  );
+
     $customFields = _sprowt_hd_get_custom_fields($node->nid);
 
     $form['form_reactor']['custom_fields_wrap'] = [
@@ -222,6 +270,10 @@ function sprowt_hd_webform_form_settings_submit($form, &$form_state)
         'form_reactor_last_name_field' => $form_state['values']['last_name_field'],
         'form_reactor_email_field' => $form_state['values']['email_field'],
         'form_reactor_phone_field' => $form_state['values']['phone_field'],
+        'form_reactor_address_field' => $form_state['values']['address_field'],
+        'form_reactor_city_field' => $form_state['values']['city_field'],
+        'form_reactor_state_field' => $form_state['values']['state_field'],
+        'form_reactor_zip_field' => $form_state['values']['zip_field'],
     );
 
     db_insert('sprowt_hd_webform')->fields($fields)->execute();

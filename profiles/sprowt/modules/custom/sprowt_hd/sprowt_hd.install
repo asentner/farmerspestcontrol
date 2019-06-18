@@ -38,6 +38,22 @@ function sprowt_hd_schema() {
                 'type' => 'varchar',
                 'length' => 128,
             ),
+          'form_reactor_address_field' => array(
+            'type' => 'varchar',
+            'length' => 128,
+          ),
+          'form_reactor_city_field' => array(
+            'type' => 'varchar',
+            'length' => 128,
+          ),
+          'form_reactor_state_field' => array(
+            'type' => 'varchar',
+            'length' => 128,
+          ),
+          'form_reactor_zip_field' => array(
+            'type' => 'varchar',
+            'length' => 128,
+          ),
         ),
         'indexes' => array(
             'nid' => array(
@@ -58,6 +74,22 @@ function sprowt_hd_schema() {
                     'form_reactor_phone_field',
                     128
                 ),
+              array(
+                'form_reactor_address_field',
+                128
+              ),
+              array(
+                'form_reactor_city_field',
+                128
+              ),
+              array(
+                'form_reactor_state_field',
+                128
+              ),
+              array(
+                'form_reactor_zip_field',
+                128
+              ),
             )
         ),
     );
@@ -80,6 +112,54 @@ function sprowt_hd_schema() {
         ]
     ];
     return $schema;
+}
+
+
+/**
+ * Add city column to database
+ */
+function sprowt_hd_update_7002(){
+  $table = 'sprowt_hd_webform';
+  $city = array(
+    'type' => 'varchar',
+    'length' => 128,
+  );
+
+  if(!db_field_exists($table,'form_reactor_city_field')){
+    db_add_field($table,'form_reactor_city_field',$city);
+  }
+}
+
+/**
+ * Add Address, State, and Zip columns to db
+ */
+function sprowt_hd_update_7001(){
+  $table = 'sprowt_hd_webform';
+  $address = array(
+    'type' => 'varchar',
+    'length' => 128,
+  );
+  $state = array(
+    'type' => 'varchar',
+    'length' => 128,
+  );
+  $zip = array(
+    'type' => 'varchar',
+    'length' => 128,
+  );
+
+  if(!db_field_exists($table,'form_reactor_address_field')){
+    db_add_field($table,'form_reactor_address_field',$address);
+  }
+
+  if(!db_field_exists($table,'form_reactor_state_field')){
+    db_add_field($table,'form_reactor_state_field',$state);
+  }
+
+  if(!db_field_exists($table,'form_reactor_zip_field')){
+    db_add_field($table,'form_reactor_zip_field',$zip);
+  }
+
 }
 
 /**

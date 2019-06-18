@@ -198,6 +198,26 @@ function _sprowt_hd_submit($form, &$form_state)
             $customer_name = (array_key_exists($form_reactor_data['form_reactor_first_name_field'], $values)) ? $values[$form_reactor_data['form_reactor_first_name_field']] : 'Unknown';
         }
 
+        //Set the Organic Fields so we can update the recently created call in CTM
+        $organicFields = [];
+
+        if(array_key_exists($form_reactor_data['form_reactor_address_field'],$values)){
+          $organicFields['street'] = $values[$form_reactor_data['form_reactor_address_field']];
+        }
+
+      if(array_key_exists($form_reactor_data['form_reactor_state_field'],$values)){
+        $organicFields['state'] = $values[$form_reactor_data['form_reactor_state_field']];
+      }
+
+      if(array_key_exists($form_reactor_data['form_reactor_zip_field'],$values)){
+        $organicFields['postal_code'] = $values[$form_reactor_data['form_reactor_zip_field']];
+      }
+
+      if(array_key_exists($form_reactor_data['form_reactor_city_field'],$values)){
+        $organicFields['city'] = $values[$form_reactor_data['form_reactor_city_field']];
+      }
+
+
         // Build an array of the payload for the Curl POST
         $ctmData = array(
             'caller_name' => $customer_name,
@@ -223,9 +243,6 @@ function _sprowt_hd_submit($form, &$form_state)
         }
 
 
-
-
-
         // Convert the payload to query
         $payload = http_build_query($ctmData, '', '&');
 
@@ -242,6 +259,11 @@ function _sprowt_hd_submit($form, &$form_state)
 
         $response = json_decode(curl_exec($ch), true);
 
+        //set values for fetching the call in CTM
+        $trackbackID = $response['trackback_id'];
+        handleCtmOrganicFields($trackbackID,$organicFields);//get the recently created call and update it with the forms city,state,address,and zip.
+
+
         curl_close($ch);
 
         if (is_array($response)) {
@@ -253,6 +275,111 @@ function _sprowt_hd_submit($form, &$form_state)
             watchdog('SpeedLead', 'Sprowt SpeedLead form reactor failed due to an error. Here is the response from CTM: %message', array('%message' => '<pre>' . print_r($response, true) . '</pre>'), WATCHDOG_ERROR);
         }
     }
+}
+
+function handleCtmOrganicFields($trackbackID,$fields){
+  if(!empty($fields) && $trackbackID !== null){
+    $account_id = variable_get('sprowt_ctm_account_id');
+    $filterEndpoint = "https://api.calltrackingmetrics.com/api/v1/accounts/".$account_id."/calls.json?filter=".$trackbackID;
+
+    //first we fetch the call based on the trackback_id. We'll get the most recent item in the array which should be the most recent created call for the form
+    $curlGet = curlHandler($filterEndpoint,[],'get');
+
+    //check for errors
+    if(!empty($curlGet['code'])){
+      watchdog('CTM_ERROR', 'Error getting the CTM resource. Here is the response from CTM: %message', array('%message' => '<pre>' . print_r($curlGet, true) . '</pre>'), WATCHDOG_ERROR);
+      return null;
+    }
+
+    $call = $curlGet['calls'][0];
+    $currTime = time();
+    $formSubmittedTime = $call['unix_time'];
+    $timeDiff = $currTime - $formSubmittedTime;
+
+    //since ctm is slow to update the calls list, we are going to use recursion to check if the most recent call is less than 30 seconds old. If it is, we fetch that call id
+    if($timeDiff >=30){
+      return handleCtmOrganicFields($trackbackID,$fields);
+    }else{
+      $callID = $call['id'];
+      $modifyEndpoint = "https://api.calltrackingmetrics.com/api/v1/accounts/".$account_id."/calls/".$callID."/modify";
+      $curlPost = curlHandler($modifyEndpoint,$fields,'post');
+
+      if(!empty($curlPost['code'])){
+        watchdog('CTM_ERROR', 'Error posting the resource to CTM. Here is the response from CTM: %message', array('%message' => '<pre>' . print_r($curlPost, true) . '</pre>'), WATCHDOG_ERROR);
+        return null;
+      }
+
+      return $curlPost;//success
+    }
+  }
+  else{
+    return null;
+  }
+}
+
+function curlHandler($endpoint,$data,$method){
+  $access_key = variable_get('sprowt_ctm_access_key');
+  $secret_key = variable_get('sprowt_ctm_secret_key');
+
+  // Convert the payload to query
+  $payload = http_build_query($data, '', '&');
+
+  // Begin the Curl Request
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $endpoint);
+  curl_setopt($ch, CURLOPT_USERPWD, $access_key . ':' . $secret_key);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+  switch($method) {
+    case 'post':
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+      break;
+    case 'put':
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+      break;
+    case 'patch':
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+      break;
+    case 'delete':
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+      break;
+    default:
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+  }
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_HEADER, false);
+  curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+
+  $response = curl_exec($ch);
+  $httpInfo = curl_getinfo($ch);
+  $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+
+  if(empty($response)){
+    $httpInfo['error'] = curl_error($ch);
+    $httpInfo['errorno'] = curl_errno($ch);
+  }
+  curl_close($ch);
+
+  if($httpcode === 200 || $httpcode === 201){
+    $result = json_decode($response,true);
+    return $result;
+  }
+  else{
+    return array(
+      'info' => $httpInfo,
+      'code' => $httpcode,
+      'result' => $response,
+      'response' => $response
+    );
+  }
+
+
+
 }
 
 function _sprowt_hd_extract_values_from_form_state($form, $form_state) {
