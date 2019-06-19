@@ -200,6 +200,7 @@ function _sprowt_hd_submit($form, &$form_state)
 
         //Set the Organic Fields so we can update the recently created call in CTM
         $organicFields = [];
+        $mappedCustomFields = [];
 
         if(array_key_exists($form_reactor_data['form_reactor_address_field'],$values)){
           $organicFields['street'] = $values[$form_reactor_data['form_reactor_address_field']];
@@ -229,7 +230,16 @@ function _sprowt_hd_submit($form, &$form_state)
 
         foreach($form_reactor_data['customFields'] as $customField) {
             if(!empty($values[$customField['field']])) {
+
+              //we check for the fieldId first. If it exists then we know this custom field will posted via the form reactor endpoint
+              if(!empty($customField['fieldId'])){
                 $ctmData['custom_' . $customField['fieldId']] = $values[$customField['field']];
+              }
+              //no fieldId exists which means we are mapping this field to a custom field. We will use the call/modify endpoint for these.
+              else{
+                $mappedCustomFields[$customField['mapToField']."___".$customField['field']] = $values[$customField['field']];
+              }
+
             }
         }
 
@@ -261,7 +271,7 @@ function _sprowt_hd_submit($form, &$form_state)
 
         //set values for fetching the call in CTM
         $trackbackID = $response['trackback_id'];
-        handleCtmOrganicFields($trackbackID,$organicFields);//get the recently created call and update it with the forms city,state,address,and zip.
+        handleCtmFields($trackbackID,$organicFields,$mappedCustomFields);//get the recently created call and update it with the forms city,state,address,and zip.
 
 
         curl_close($ch);
@@ -277,8 +287,8 @@ function _sprowt_hd_submit($form, &$form_state)
     }
 }
 
-function handleCtmOrganicFields($trackbackID,$fields){
-  if(!empty($fields) && $trackbackID !== null){
+function handleCtmFields($trackbackID,$oFields,$cFields){
+  if(!empty($oFields) && $trackbackID !== null || !empty($cFields) && $trackbackID !==null){
     $account_id = variable_get('sprowt_ctm_account_id');
     $filterEndpoint = "https://api.calltrackingmetrics.com/api/v1/accounts/".$account_id."/calls.json?filter=".$trackbackID;
 
@@ -298,10 +308,15 @@ function handleCtmOrganicFields($trackbackID,$fields){
 
     //since ctm is slow to update the calls list, we are going to use recursion to check if the most recent call is less than 30 seconds old. If it is, we fetch that call id
     if($timeDiff >=30){
-      return handleCtmOrganicFields($trackbackID,$fields);
+      return handleCtmFields($trackbackID,$oFields,$cFields);
     }else{
       $callID = $call['id'];
       $modifyEndpoint = "https://api.calltrackingmetrics.com/api/v1/accounts/".$account_id."/calls/".$callID."/modify";
+
+      //handle custom fields
+      $formattedCFields = handleCtmCustomFields($cFields);
+      $fields = array_merge_recursive($oFields,$formattedCFields);
+
       $curlPost = curlHandler($modifyEndpoint,$fields,'post');
 
       if(!empty($curlPost['code'])){
@@ -315,6 +330,50 @@ function handleCtmOrganicFields($trackbackID,$fields){
   else{
     return null;
   }
+}
+
+function handleCtmCustomFields($cFields){
+  $customFields = [];
+  if(!empty($cFields)){
+    foreach($cFields as $cKey => $cVal){
+      $parsed = explode("___",$cKey);
+      if(!empty($customFields["custom_fields"])){
+        if(array_key_exists($parsed[0],$customFields["custom_fields"])){
+          $customFields["custom_fields"][$parsed[0]] .= ",\n".$parsed[1].":".$cVal;
+        }
+        else{
+          if(canBeFormatted($parsed[0])){
+            $customFields["custom_fields"][$parsed[0]] = $parsed[1].":".$cVal;
+          }
+          else{
+            $customFields["custom_fields"][$parsed[0]] = $cVal;
+          }
+
+        }
+      }
+      else{
+        if(canBeFormatted($parsed[0])){
+          $customFields["custom_fields"][$parsed[0]] = $parsed[1].":".$cVal;
+        }
+        else{
+          $customFields["custom_fields"][$parsed[0]] = $cVal;
+        }
+      }
+    }
+  }
+
+  return $customFields;
+
+}
+
+function canBeFormatted($key){
+  $format = false;
+  switch($key){
+    case "webform_comments":
+      $format = true;
+      break;
+  }
+  return $format;
 }
 
 function curlHandler($endpoint,$data,$method){
@@ -428,7 +487,8 @@ function _sprowt_hd_get_custom_fields($nid) {
         foreach ($records as $record) {
             $fields[] = [
                 'fieldId' => trim($record['field_id']),
-                'field' => $record['webform_field']
+                'field' => $record['webform_field'],
+                'mapToField' =>$record['map_to_field'],
             ];
         }
     }

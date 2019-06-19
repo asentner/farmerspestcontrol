@@ -223,6 +223,15 @@ function sprowt_hd_webform_form_settings($form, $form_state, $node)
                 'class' => ['field-field']
             ]
         ],
+      'mapToField' => [
+        '#type'=>'textfield',
+        '#title' => 'Map To Field',
+        '#description' => "Enter the custom field id you'd like to map this custom field too.",
+        '#attributes' => [
+          'name' => '',
+          'class'=> ['map-to-field']
+        ]
+      ],
         'removeCustomField' => [
             '#type' => 'button',
             '#value' => 'Remove',
@@ -294,9 +303,10 @@ function _sprowt_hd_add_custom_fields($nid, $fields) {
         $record = [
             'nid' => $nid,
             'field_id' => trim($field['fieldId']),
-            'webform_field' => $field['field']
+            'webform_field' => $field['field'],
+            'map_to_field' => $field['mapToField'],
         ];
-        if(!empty($record['field_id']) && !empty($record['webform_field'])) {
+        if(!empty($record['field_id']) && !empty($record['webform_field']) || !empty($record['webform_field'] && !empty($record['map_to_field']))) {
             drupal_write_record('sprowt_hd_webform_custom_fields', $record);
         }
     }

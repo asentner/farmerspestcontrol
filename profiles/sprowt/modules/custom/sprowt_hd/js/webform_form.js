@@ -1,5 +1,5 @@
 (function($){
-    var addCustomField = function(fieldId, field) {
+    var addCustomField = function(fieldId, field,mapToField) {
         if(fieldId) {
             var id = fieldId.toLowerCase().replace(/[^a-z-]/, '-');
         }
@@ -10,6 +10,7 @@
         $fieldset.attr('id', id);
         $fieldset.find('.field-id').val(fieldId);
         $fieldset.find('.field-field').val(field);
+        $fieldset.find('.map-to-field').val(mapToField);
         $('#customFieldsDisplay').append($fieldset);
     }
 
@@ -19,14 +20,16 @@
             customfields.push({
                 fieldId: $(this).find('.field-id').val(),
                 field: $(this).find('.field-field').val(),
+                mapToField: $(this).find('.map-to-field').val(),
             });
         });
         $('#customFields').val(JSON.stringify(customfields));
+
     };
 
     $(document).on('click', '#addCustomField', function(e){
         e.preventDefault();
-        addCustomField(null, null);
+        addCustomField(null, null,null);
     });
 
     $(document).on('click', '.field-remove', function(e) {
@@ -43,6 +46,10 @@
         updateCustomFields();
     });
 
+    $(document).on('keyup', '.map-to-field', function(){
+        updateCustomFields();
+    });
+
     $(document).ready(function(){
         var customFields = $('#customFields').val();
         if(customFields) {
@@ -51,7 +58,7 @@
 
         if(customFields) {
             $.each(customFields, function(i,v) {
-                addCustomField(v.fieldId, v.field);
+                addCustomField(v.fieldId, v.field,v.mapToField);
             });
         }
     });

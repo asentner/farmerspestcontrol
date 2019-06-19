@@ -108,13 +108,30 @@ function sprowt_hd_schema() {
             'webform_field' => [
                 'type' => 'varchar',
                 'length' => 1000,
-            ]
+            ],
+            'map_to_field' => [
+              'type' => 'varchar',
+              'length' => 1000,
+            ],
         ]
     ];
     return $schema;
 }
 
+/**
+ * Add map_to_field column in db
+ */
+function sprowt_hd_update_7003(){
+  $table = 'sprowt_hd_webform_custom_fields';
+  $mapToField = array(
+    'type' => 'varchar',
+    'length'=>1000,
+  );
 
+  if(!db_field_exists($table,'map_to_field')){
+    db_add_field($table,'map_to_field',$mapToField);
+  }
+}
 /**
  * Add city column to database
  */
