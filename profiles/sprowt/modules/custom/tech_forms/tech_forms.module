@@ -152,7 +152,7 @@ function tech_forms_preprocess_html(&$variables){
   $node = menu_get_object();
   $nid = $node->nid;
   $hasTechForms = variable_get('tech_forms',[]);
-  if($hasTechForms[$nid]){
+  if(!empty($hasTechForms[$nid])){
     $path = drupal_get_path('module', 'tech_forms');
     $variables["classes_array"][] = "tech-form";
     drupal_add_css($path . '/css/tech_forms.styles.css');
@@ -178,7 +178,7 @@ function tech_forms_form_alter(&$form, &$form_state, $form_id) {
 function tech_forms_webform_submit(&$form,&$form_state){
  $nid = $form["#node"]->nid;
   $hasTechForms = variable_get('tech_forms',[]);
-  if($hasTechForms[$nid]){
+  if(!empty($hasTechForms[$nid])){
     $keepOrPass = $form["submitted"]["keep_or_pass"]["#value"];
 
     $fields = mapLeadFields($form,$nid);
