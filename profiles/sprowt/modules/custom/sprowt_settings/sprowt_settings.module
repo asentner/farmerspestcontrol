@@ -68,6 +68,16 @@ function sprowt_settings_menu()
         'position' => 'left',
     );
     
+    $items['admin/config/sprowt/sprowt-install-file'] = array(
+        'title' => 'Get Sprowt Install File',
+        'description' => 'Download install file.',
+        'page callback' => 'sprowt_install_file',
+        'access arguments' => array('administer site configuration'),
+        'type' => MENU_NORMAL_ITEM,
+        'file' => 'sprowt_settings.pages.inc',
+        'weight' => -50
+    );
+    
     $items['admin/config/sprowt/sprowt-settings'] = array(
         'title' => 'Sprowt Settings',
         'description' => 'Company specific settings for the Sprowt platform. Including address, company name, and social media accounts.',
