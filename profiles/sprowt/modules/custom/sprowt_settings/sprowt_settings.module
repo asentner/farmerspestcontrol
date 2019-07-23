@@ -125,7 +125,7 @@ function sprowt_settings_menu()
     return $items;
 }
 
-function sprowt_settings_form_alter(&$form, &$form_state) {
+function sprowt_settings_form_alter(&$form, &$form_state, $form_id) {
     if(!empty($form['#node_edit_form'])) {
         $paths = variable_get('sprowt_settings_paths', array());
         if(!empty($form['#node'])) {
@@ -152,6 +152,17 @@ function sprowt_settings_form_alter(&$form, &$form_state) {
         }
 
         _sprowt_settings_node_sync_alter($form, $form_state);
+    }
+    
+    if($form_id == 'mailgun_admin_settings') {
+        //resort domains for easier access
+        $opts = $form['mailgun_domain']['#options'];
+        $optKeys = array_keys($opts);
+        $firstKey = $optKeys[0];
+        $firstValue = array_shift($opts);
+        ksort($opts);
+        $opts = array_merge([$firstKey => $firstValue], $opts);
+        $form['mailgun_domain']['#options'] = $opts;
     }
 }
 
@@ -1385,12 +1396,8 @@ function _sprowt_settings_request_nodes_rollout() {
 }
 
 function _sprowt_settings_rollout_access() {
-    global $base_url;
-    if(strpos($base_url, 'sprowt-dummy') !== false) {
-        return true;
-    }
-
-    return false;
+    $ns = new SprowtNodeSync();
+    return $ns->isDataSite();
 }
 
 /**

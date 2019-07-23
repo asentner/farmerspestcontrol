@@ -13,7 +13,7 @@ class SprowtNodeSync {
     private $types = [];
     private $uuids = [];
     
-    const SPROWT_DATA_URL = 'http://dev-sprowt-dummy.pantheonsite.io';
+    const SPROWT_DATA_URL = 'https://sprowt-source.coalmarch.com';
     const SPROWT_SECRET = 'Roads... where we\'re going we don\'t NEED roads.';
     
     function __construct($opts = []) {
@@ -33,6 +33,15 @@ class SprowtNodeSync {
         return $val[$key];
     }
 
+    function isDataSite() {
+        global $base_url;
+        $domain = preg_replace('/https?:\/\//', '', $this::SPROWT_DATA_URL);
+        if(strpos($base_url, $domain) !== false) {
+            return true;
+        }
+        return false;
+    }
+    
     //from here: https://gist.github.com/joashp/a1ae9cb30fa533f4ad94
     function encrypt_decrypt($action, $string) {
         $output = false;
