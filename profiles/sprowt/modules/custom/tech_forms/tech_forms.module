@@ -116,28 +116,32 @@ function _tech_forms_format_lookup_tables(){
  * @param $variables
  */
 function tech_forms_preprocess_page(&$variables){
+  $nid = "";
+  if(!empty($variables["node"])){
+    $nid = $variables["node"]->nid;
+  }
 
-  $nid = $variables["node"]->nid;
   $hasTechForms = variable_get('tech_forms',[]);
+  if(!empty($hasTechForms[$nid])){
+    if($hasTechForms[$nid]){
 
-  if($hasTechForms[$nid]){
+      //it's a tech form. override the default page.tpl.php with our new one.
+      $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'],array('tech_forms_page'));
 
-    //it's a tech form. override the default page.tpl.php with our new one.
-    $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'],array('tech_forms_page'));
+      if(isset($variables["page"]["header_first"]["menu_menu-mobile-utility"])){
+        unset($variables["page"]["header_first"]["menu_menu-mobile-utility"]);
+      }
+      if(isset($variables["page"]["footer_third"]["menu_menu-mobile-footer"])){
+        unset($variables["page"]["footer_third"]["menu_menu-mobile-footer"]);
+      }
+      if(isset($variables["page"]["header_first"]["menu_block_1"])){
+        unset($variables["page"]["header_first"]["menu_block_1"]);
+      }
+      if(isset($variables["page"]["header_first"]["menu_block_2"])){
+        unset($variables["page"]["header_first"]["menu_block_2"]);
+      }
 
-    if(isset($variables["page"]["header_first"]["menu_menu-mobile-utility"])){
-      unset($variables["page"]["header_first"]["menu_menu-mobile-utility"]);
     }
-    if(isset($variables["page"]["footer_third"]["menu_menu-mobile-footer"])){
-      unset($variables["page"]["footer_third"]["menu_menu-mobile-footer"]);
-    }
-    if(isset($variables["page"]["header_first"]["menu_block_1"])){
-      unset($variables["page"]["header_first"]["menu_block_1"]);
-    }
-    if(isset($variables["page"]["header_first"]["menu_block_2"])){
-      unset($variables["page"]["header_first"]["menu_block_2"]);
-    }
-
   }
 }
 
@@ -150,7 +154,11 @@ function tech_forms_preprocess_page(&$variables){
  */
 function tech_forms_preprocess_html(&$variables){
   $node = menu_get_object();
-  $nid = $node->nid;
+  $nid = "";
+  if(!empty($node->nid)){
+    $nid = $node->nid;
+  }
+
   $hasTechForms = variable_get('tech_forms',[]);
   if(!empty($hasTechForms[$nid])){
     $path = drupal_get_path('module', 'tech_forms');
@@ -467,7 +475,8 @@ function syncTechFormComponents($node, $components) {
  */
 function fetchPestPacLocationByNum($locationNum){
   $pp = new PestPacApi();
-  $existingLoc = end($pp->checkLocationExists($locationNum));
+  $newLoc = $pp->checkLocationExists($locationNum);
+  $existingLoc = end($newLoc);
   $locID = $existingLoc["LocationID"];
   variable_set("pp_location",$existingLoc);
   $entity = [
@@ -487,15 +496,15 @@ function tech_forms_location_number_callback($form, $form_state) {
     $hasContactFieldSet = FALSE;
 
     //set first name (because the first name field may not be under the "name" fieldset
-    if ($form["submitted"]["name"]) {
+    if (!empty($form["submitted"]["name"])) {
       $hasNameFieldSet = TRUE;
     }
-    if ($form["submitted"]["contact"]) {
+    if (!empty($form["submitted"]["contact"])) {
       $hasContactFieldSet = TRUE;
     }
 
     $ppLocation = fetchPestPacLocationByNum($locationNum);
-    if (!$ppLocation["code"]) {
+    if (empty($ppLocation["code"])) {
 
       //check if name fieldset exists
       if ($hasNameFieldSet) {

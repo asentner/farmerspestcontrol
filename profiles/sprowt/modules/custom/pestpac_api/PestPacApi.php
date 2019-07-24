@@ -131,7 +131,11 @@ class PestPacApi extends PestPacOauth {
         ));
       }
 
-      return false;
+      return array(
+        'code' => $httpcode,
+        'response' => $result
+      );
+
     }
 
     if($httpcode === 500){
@@ -187,7 +191,30 @@ class PestPacApi extends PestPacOauth {
       $json_output = json_decode($response['response'], true);
       return $json_output;
     }
-    return $response;
+    elseif($response['code'] === 401){
+      $json_output = json_decode($response['response'], true);
+      $this->authenticate();
+
+      //normally triggered if there is an invalid clientid or secret
+      if(!empty($json_output['error'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid api key
+      elseif(!empty($json_output['fault'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid tenant id.
+      elseif(empty($json_output) && empty($response['response'])){ //this should be a fail safe so we don't get any endless loops
+        return $response;
+      }
+      else{
+        return $this->get($entity,$all);
+      }
+
+    }
+    else{
+      return $response;
+    }
   }
 
   function webhookResource($method,$postfields=array(),$webhookUri = ""){
@@ -254,7 +281,30 @@ class PestPacApi extends PestPacOauth {
       $json_output = json_decode($response['response'], true);
       return $json_output;
     }
-    return $response;
+    elseif($response['code'] === 401){
+      $json_output = json_decode($response['response'], true);
+      $this->authenticate();
+
+      //normally triggered if there is an invalid clientid or secret
+      if(!empty($json_output['error'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid api key
+      elseif(!empty($json_output['fault'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid tenant id.
+      elseif(empty($json_output) && empty($response['response'])){ //this should be a fail safe so we don't get any endless loops
+        return $response;
+      }
+      else{
+        return $this->callResource($uri,$postfields,$method);
+      }
+
+    }
+    else{
+      return $response;
+    }
 
   }
 
@@ -272,7 +322,31 @@ class PestPacApi extends PestPacOauth {
       $json_output = json_decode($response['response'], true);
       return $json_output;
     }
-    return $response;
+    elseif($response['code'] === 401){
+      $json_output = json_decode($response['response'], true);
+      $this->authenticate();
+
+      //normally triggered if there is an invalid clientid or secret
+      if(!empty($json_output['error'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid api key
+      elseif(!empty($json_output['fault'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid tenant id.
+      elseif(empty($json_output) && empty($response['response'])){ //this should be a fail safe so we don't get any endless loops
+        return $response;
+      }
+      else{
+        return $this->leadResource($uri,$postfields,$method);
+      }
+
+    }
+    else{
+      return $response;
+    }
+
   }
 
   function createLocation($postfields,$method='post'){
@@ -290,7 +364,30 @@ class PestPacApi extends PestPacOauth {
       $json_output = json_decode($response['response'], true);
       return $json_output;
     }
-    return false;
+    elseif($response['code'] === 401){
+      $json_output = json_decode($response['response'], true);
+      $this->authenticate();
+
+      //normally triggered if there is an invalid clientid or secret
+      if(!empty($json_output['error'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid api key
+      elseif(!empty($json_output['fault'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid tenant id.
+      elseif(empty($json_output) && empty($response['response'])){ //this should be a fail safe so we don't get any endless loops
+        return $response;
+      }
+      else{
+        return $this->createLocation($postfields,$method);
+      }
+
+    }
+    else{
+      return $response;
+    }
   }
 
   function checkLocationExists($phone){
@@ -307,7 +404,30 @@ class PestPacApi extends PestPacOauth {
       $json_output = json_decode($response['response'], true);
       return $json_output;
     }
-    return false;
+    elseif($response['code'] === 401){
+      $json_output = json_decode($response['response'], true);
+      $this->authenticate();
+
+      //normally triggered if there is an invalid clientid or secret
+      if(!empty($json_output['error'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid api key
+      elseif(!empty($json_output['fault'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid tenant id.
+      elseif(empty($json_output) && empty($response['response'])){ //this should be a fail safe so we don't get any endless loops
+        return $response;
+      }
+      else{
+        return $this->checkLocationExists($phone);
+      }
+
+    }
+    else{
+      return $response;
+    }
   }
 
   function checkBillTosExists($phone){
@@ -377,7 +497,29 @@ class PestPacApi extends PestPacOauth {
       $json_output = json_decode($response['response'], true);
       return $json_output;
     }
-    return $response;
-  }
+    elseif($response['code'] === 401){
+      $json_output = json_decode($response['response'], true);
+      $this->authenticate();
 
+      //normally triggered if there is an invalid clientid or secret
+      if(!empty($json_output['error'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid api key
+      elseif(!empty($json_output['fault'])){
+        return $response;
+      }
+      //normally triggered if there is an invalid tenant id.
+      elseif(empty($json_output) && empty($response['response'])){ //this should be a fail safe so we don't get any endless loops
+        return $response;
+      }
+      else{
+        return $this->locationResource($uri,$postfields,$method);
+      }
+
+    }
+    else{
+      return $response;
+    }
+  }
 }

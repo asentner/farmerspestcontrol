@@ -17,3 +17,25 @@ function pestpac_api_menu(){
     
     return $items;
 }
+
+//Add an authenticate button for re-authenticating with pestpac
+function pestpac_api_form_alter(&$form, &$form_state, $form_id){
+  if($form["#form_id"] === "pestpac_api_admin"){
+    $form["authenticate_pestpac"] = array(
+      '#type'=>'submit',
+      '#value'=>t("Re-Authenticate PestPac"),
+      '#submit'=>array('authenticate_pestpac_submit'),
+    );
+  }
+}
+
+function authenticate_pestpac_submit(){
+  $pp = new PestPacApi();
+  $auth = $pp->authenticate();
+  if($auth){
+    drupal_set_message("PestPac Authenticated Successfully!","status");
+  }
+  else{
+    drupal_set_message("There was an error authenticating with PestPac","error");
+  }
+}
