@@ -460,8 +460,25 @@ function syncTechFormComponents($node, $components) {
       }
     }
   }
+}
 
-
+/*
+ * Remove tech form components from a given webform
+ */
+function removeTechFormComponents($node,$components){
+  if(!empty($node)){
+    $currComponents = $node->webform["components"];
+    //loop through the webforms current components
+    foreach($currComponents as $currComponent){
+      //loop through the tech forms components list
+      foreach($components as $component){
+        //if we find a match, delete the component
+        if($currComponent['form_key'] === $component['form_key']){
+          webform_component_delete($node,$currComponent);
+        }
+      }
+    }
+  }
 }
 
 /**
@@ -550,10 +567,11 @@ function tech_forms_webform_settings_submit($form, $form_state) {
   $nid = $values['nid'];
   $node = node_load($nid);
 
-  if($tech_forms[$nid]){
+  if(!empty($tech_forms[$nid])){
     //it's been enabled
     if(!$values['tech_forms_enabled']){
-      //form has been disabled. removed from node
+      //form has been disabled. remove from node and remove all tech form components
+      removeTechFormComponents($node,techFormComponents());
       unset($tech_forms[$nid]);
     }else{
       //tech forms is enabled.
