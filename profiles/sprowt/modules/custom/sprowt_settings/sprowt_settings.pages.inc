@@ -458,3 +458,21 @@ function _sprowt_settings_config_validate(&$form, &$form_state) {
 function sprowt_settings_add_coalmarch_user($form, &$form_state) {
     
 }
+
+function sprowt_install_file() {
+    require_once drupal_get_path('profile', 'sprowt') . '/sprowtbuilder.php';
+    $sprowtbuilder = new SprowtBuilder();
+    
+    $data = $sprowtbuilder->getData();
+    
+    
+    $filename = strtolower($data['company_info']['company_name']);
+    $filename = preg_replace('/[^a-z0-9_]+/', '_', $filename);
+    trim($filename, '_');
+    $filename .= "__sprowt_setup.json";
+    
+    header('Content-disposition: attachment; filename=' . $filename);
+    header('Content-type: application/json');
+    
+    echo json_encode($data, JSON_PRETTY_PRINT);
+}
