@@ -7,7 +7,7 @@
             </div>
             <div class="block-wrap">
                 <h2>Log In to my Sprowt console</h2>
-                <?php print render($page['content']); ?>
+                <?php print render($userForm); ?>
             </div>
         </div>
     </div>

@@ -127,8 +127,7 @@
 :root .fa-rotate-270,
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical {
-  -webkit-filter: none;
-          filter: none; }
+  filter: none; }
 
 .fa-stack {
   position: relative;
@@ -2441,7 +2440,7 @@
             text-transform: uppercase;
             font-weight: 500;
             font-size: 14px; }
-        .not-logged-in.page-sprowt .l-page .l-main .l-content #edit-actions {
+        .not-logged-in.page-sprowt .l-page .l-main .l-content .form-actions {
           margin-top: 1.15em;
           margin-bottom: 0; }
         .not-logged-in.page-sprowt .l-page .l-main .l-content .form-submit {

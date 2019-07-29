@@ -68,7 +68,8 @@ function _sprowt_login_login_page() {
     
     drupal_add_html_head($tag, 'sprowt_no_index');
     
-    return drupal_get_form('user_login_block');
+    $form = drupal_get_form('user_login_block');
+    return [];
 }
 
 function _sprowt_login_get_dashboard_nodes() {
@@ -144,6 +145,7 @@ function sprowt_login_preprocess_page(&$variables) {
     if(current_path() == 'sprowt') {
         $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'], array('sprowt_login_page'));
         $variables['coalmarch_logo_stacked'] = $path . '/images/stacked-logo.png';
+        $variables['userForm'] = drupal_get_form('user_login_block');
         drupal_add_css($path . '/css/sprowt_login.css');
     }
 
