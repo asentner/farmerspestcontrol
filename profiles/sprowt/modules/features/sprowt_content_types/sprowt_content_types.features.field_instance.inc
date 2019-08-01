@@ -2129,7 +2129,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'quaternary_teaser' => array(
         'label' => 'hidden',
@@ -2216,7 +2216,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'quaternary_teaser' => array(
         'label' => 'hidden',
@@ -2291,7 +2291,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 4,
       ),
       'quaternary_teaser' => array(
         'label' => 'hidden',
@@ -2360,7 +2360,7 @@ function sprowt_content_types_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -2452,7 +2452,7 @@ function sprowt_content_types_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'quaternary_teaser' => array(
         'label' => 'hidden',
@@ -2557,10 +2557,9 @@ function sprowt_content_types_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'quaternary_teaser' => array(
         'label' => 'above',
@@ -2873,7 +2872,7 @@ function sprowt_content_types_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'quaternary_teaser' => array(
         'label' => 'hidden',
