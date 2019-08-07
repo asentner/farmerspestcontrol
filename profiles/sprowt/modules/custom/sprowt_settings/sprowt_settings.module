@@ -25,40 +25,40 @@ function sprowt_settings_boot() {
 function sprowt_settings_menu()
 {
     $items = array();
-    
+
     $items['<phone_number>'] = array(
         'page callback' => 'drupal_not_found',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-    
+
     $items['<phone_number_sms>'] = array(
         'page callback' => 'drupal_not_found',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-    
+
     $items['<sprowt_customer_login>'] = array(
         'page callback' => 'drupal_not_found',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-    
+
     $items['node/uuid/%'] = array(
         'page callback' => '_sprowt_settings_node_uuid_redirect',
         'page arguments' => array(2),
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-    
+
     $items['node/uuid/%/%'] = array(
         'page callback' => '_sprowt_settings_node_uuid_redirect',
         'page arguments' => array(2, 3),
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-    
-    
+
+
     $items['admin/config/sprowt'] = array(
         'title' => 'Sprowt',
         'description' => 'Sprowt',
@@ -67,7 +67,7 @@ function sprowt_settings_menu()
         'file' => 'sprowt_settings.pages.inc',
         'position' => 'left',
     );
-    
+
     $items['admin/config/sprowt/sprowt-install-file'] = array(
         'title' => 'Get Sprowt Install File',
         'description' => 'Download install file.',
@@ -77,7 +77,7 @@ function sprowt_settings_menu()
         'file' => 'sprowt_settings.pages.inc',
         'weight' => -50
     );
-    
+
     $items['admin/config/sprowt/sprowt-settings'] = array(
         'title' => 'Sprowt Settings',
         'description' => 'Company specific settings for the Sprowt platform. Including address, company name, and social media accounts.',
@@ -98,8 +98,8 @@ function sprowt_settings_menu()
     //        'type' => MENU_NORMAL_ITEM,
     //        'file' => 'sprowt_settings.pages.inc'
     //    );
-    
-    
+
+
     $items['sprowt/request-nodes'] = array(
         'page callback' => '_sprowt_settings_request_nodes',
         'access callback' => TRUE,
@@ -130,7 +130,7 @@ function sprowt_settings_form_alter(&$form, &$form_state, $form_id) {
         $paths = variable_get('sprowt_settings_paths', array());
         if(!empty($form['#node'])) {
             $uuid = $form['#node']->uuid;
-            
+
             if(in_array($uuid, array_keys($paths))) {
                 $form['path']['pathauto']['#value'] = false;
                 $form['path']['pathauto']['#disabled'] = true;
@@ -138,7 +138,7 @@ function sprowt_settings_form_alter(&$form, &$form_state, $form_id) {
                 $form['path']['alias']['#value'] = $paths[$uuid];
                 unset($form['path']['alias']['#states']);
             }
-            
+
             $form['uuid_link'] = array(
                 '#type' => 'textfield',
                 '#title' => 'Universal Sprowt Alias',
@@ -153,7 +153,7 @@ function sprowt_settings_form_alter(&$form, &$form_state, $form_id) {
 
         _sprowt_settings_node_sync_alter($form, $form_state);
     }
-    
+
     if($form_id == 'mailgun_admin_settings') {
         //resort domains for easier access
         $opts = $form['mailgun_domain']['#options'];
@@ -225,7 +225,7 @@ function sprowt_settings_block_info()
     $blocks['sprowt_copyright'] = array(
         'info' => t('Sprowt: Footer copyright'),
     );
-    
+
     return $blocks;
 }
 
@@ -235,7 +235,7 @@ function sprowt_settings_block_info()
 function sprowt_settings_block_view($delta = '')
 {
     $block = array();
-    
+
     switch ($delta) {
         case 'sprowt_social_media':
             $block['content'] = theme('sprowt_settings_social_media');
@@ -251,7 +251,7 @@ function sprowt_settings_block_view($delta = '')
             $block['content'] = _sprowt_settings_copyright_block();
             break;
     }
-    
+
     return $block;
 }
 
@@ -279,7 +279,7 @@ function sprowt_settings_block_configure($delta = '') {
             );
             break;
     }
-    
+
     return $form;
 }
 
@@ -298,11 +298,11 @@ function _sprowt_settings_copyright_block(){
         'value' => '',
         'format' => 'full_html'
     ));
-    
+
     if(empty($htmlField['value'])) {
         $htmlField['value'] = theme('sprowt_settings_copyright');
     }
-    
+
     return $htmlField['value'];
 }
 
@@ -312,11 +312,11 @@ function sprowt_settings_get_phone_number($replace = null)
     if (function_exists('sprowt_geoip_get_phone')) {
         $phone = sprowt_geoip_get_phone();
     }
-    
+
     if (empty($phone)) {
         $phone = variable_get('sprowt_settings_phone_number', '');
     }
-    
+
     return sprowt_settings_format_phone($phone, $replace);
 }
 
@@ -330,7 +330,7 @@ function sprowt_settings_format_phone($phone, $replace = null) {
     if (null === $replace) {
         drupal_alter('sprowt_phone_pattern', $replace);
     }
-    
+
     if(empty($replace)) {
         $replace = "$1-$2-$3";
     }
@@ -354,17 +354,17 @@ function _sprowt_settings_shortcode_replace($string)
         '[current-year]' => date('Y'),
         '[webform-to-email]' => variable_get('sprowt_settings_webform_to_email'),
     );
-    
+
     //you can add other shortcodes via HOOK_sprowt_shortcode_replace_alter(&$shortcodes)
     drupal_alter('sprowt_shortcode_replace', $shortcodes);
-    
+
     foreach ($shortcodes as $code => $value) {
         $string = str_replace($code, $value, $string);
     }
-    
+
     $maps_found = preg_match_all('/((<p>)?\[map[\s]?(.*?)\](<\/p>)?)/', $string, $maps);
-    
-    
+
+
     if($maps_found){
         foreach($maps[0] as $map) {
             if(preg_match('/((?:<p>)?\[map[\s]?(.*?)\](?:<\/p>)?)/', $map, $m)) {
@@ -374,12 +374,12 @@ function _sprowt_settings_shortcode_replace($string)
                 else {
                     $link = variable_get('sprowt_settings_map_embed', '');
                 }
-                
+
                 if (preg_match('/.*google.*maps.*[\?|\&]mid=([^\&\"]+)/', $link, $l)) {
                     $mid = $l[1];
                     $link = '//www.google.com/maps/d/embed?mid=' . $mid;
                 }
-                
+
                 if (preg_match('/.*google.*\/maps\/place\/(.*)\/@([\d\.-]+),([\d\.-]+),/', $link, $l)) {
                     $key = 'AIzaSyAdbUlxjFZ56MzUB_E8I3x1nSn0mJ-YCKI';
                     $link = "https://www.google.com/maps/embed/v1/place?key=$key&q={$l[1]}&center={$l[2]},{$l[3]}";
@@ -387,35 +387,35 @@ function _sprowt_settings_shortcode_replace($string)
                         $link .= '&zoom=15';
                     }
                 }
-                
+
                 if(empty($link)) {
                     $html = '';
-                    
+
                     global $user;
                     if($user->uid) {
                         $html = "<div style=\"text-align: center; padding: 20px;\">[[  Map link missing. Go <a href=\"/admin/config/system/sprowt-settings\">here</a> to set it.  ]]</div>";
                     }
-                    
+
                     $string = str_replace($m[1], $html, $string);
                     return $string;
                 }
-                
+
                 if (!empty($m[2])) {
-                    
+
                     if (preg_match('/src=([^\s\]]+)/', $m[2], $s)) {
-                        
+
                         $src_parts = explode('?', $s[1]);
-                        
+
                         $src_params = explode('&',str_replace('&amp;','&',$src_parts[1]));
-                        
+
                         if(!empty($src_params[1])) {
                             unset($src_params[0]);
                             $m[2] .= ' ' . implode(' ',$src_params);
                         }
-                        
+
                         $m[2] = str_replace('src=' . $s[1], '', $m[2]);
                     }
-                    
+
                     $params = trim(str_replace(" ", "&", trim($m[2])), "&");
                     if(!empty($params)) {
                         if (strpos($link, '?') !== FALSE) {
@@ -426,15 +426,15 @@ function _sprowt_settings_shortcode_replace($string)
                         }
                     }
                 }
-                
+
                 $html = '<div class="media_embed map-embed"><iframe src="' . $link . '"></iframe></div>';
                 $string = str_replace($m[1], $html, $string);
             }
         }
     }
-    
+
     $hook = 'sprowt_shortcode_replace';
-    
+
     // this allows for custom shortcode replacement functionality
     foreach (module_implements($hook) as $module) {
         $function = $module . '_' . $hook;
@@ -445,7 +445,7 @@ function _sprowt_settings_shortcode_replace($string)
             $string = $function($string);
         }
     }
-    
+
     return $string;
 }
 
@@ -454,14 +454,14 @@ function _sprowt_settings_map_embed_link_to_iframe($link) {
         $mid = $l[1];
         $link = '//www.google.com/maps/d/embed?mid=' . $mid;
     }
-    
+
     if (preg_match('/.*google.*\/maps\/place\/(.*)\/@([\d\.-]+),([\d\.-]+),/', $link, $l)) {
         $key = 'AIzaSyAdbUlxjFZ56MzUB_E8I3x1nSn0mJ-YCKI';
         $link = "https://www.google.com/maps/embed/v1/place?key=$key&q={$l[1]}&center={$l[2]},{$l[3]}";
     }
-    
+
     $html = '<div class="media_embed map-embed"><iframe src="' . $link . '"></iframe></div>';
-    
+
     return $html;
 }
 
@@ -500,18 +500,18 @@ function _sprowt_settings_node_market()
 function _sprowt_settings_can_replace() {
     $current_path = current_path();
     $current_alias = drupal_get_path_alias($current_path);
-    
+
     $yes = !path_is_admin($current_path);
-    
+
     $paths = array(
         'node/*/*'
     );
-    
+
     foreach($paths as $path) {
         $yes = $yes && !drupal_match_path($current_path, $path);
         $yes = $yes && !drupal_match_path($current_alias, $path);
     }
-    
+
     return $yes;
 }
 
@@ -530,7 +530,7 @@ function sprowt_settings_preprocess_page(&$variables)
                 [
                     ':types' => ['localtarget']
                 ])->fetchCol();
-            
+
             foreach (node_load_multiple($nids) as $node) {
                 $node->path['pathauto'] = TRUE;
                 node_save($node);
@@ -558,7 +558,7 @@ function sprowt_settings_preprocess_node(&$variables)
         if (!empty($variables['title'])) {
             $variables['title'] = _sprowt_settings_shortcode_replace($variables['title']);
         }
-        
+
         if (!empty($variables['content']['body']['0']['#markup'])) {
             $variables['content']['body']['0']['#markup'] = _sprowt_settings_shortcode_replace($variables['content']['body']['0']['#markup']);
         }
@@ -568,7 +568,7 @@ function sprowt_settings_preprocess_node(&$variables)
 function sprowt_settings_tokens_alter(&$replacements, $context)
 {
     $options = $context['options'];
-    
+
     if (isset($options['language'])) {
         $url_options['language'] = $options['language'];
         $language_code = $options['language']->language;
@@ -577,10 +577,10 @@ function sprowt_settings_tokens_alter(&$replacements, $context)
         $language_code = NULL;
     }
     $sanitize = !empty($options['sanitize']);
-    
+
     if ($context['type'] == 'node' && !empty($context['data']['node'])) {
         $node = $context['data']['node'];
-        
+
         $tokens_replace = array(
             'title',
             'summary',
@@ -674,17 +674,17 @@ function sprowt_settings_filter_info_alter(&$filters) {
 function _sprowt_settings_filter_url($text, $filter){
     // Tags to skip and not recurse into.
     $ignore_tags = 'a|script|style|code|pre';
-    
+
     // Pass length to regexp callback.
     _filter_url_trim(NULL, $filter->settings ['filter_url_length']);
-    
+
     // Create an array which contains the regexps for each type of link.
     // The key to the regexp is the name of a function that is used as
     // callback function to process matches of the regexp. The callback function
     // is to return the replacement for the match. The array is used and
     // matching/replacement done below inside some loops.
     $tasks = array();
-    
+
     // Prepare protocols pattern for absolute URLs.
     // check_url() will replace any bad protocols with HTTP, so we need to support
     // the identical list. While '//' is technically optional for MAILTO only,
@@ -693,7 +693,7 @@ function _sprowt_settings_filter_url($text, $filter){
     // @see filter_xss_bad_protocol()
     $protocols = variable_get('filter_allowed_protocols', array('ftp', 'http', 'https', 'irc', 'mailto', 'news', 'nntp', 'rtsp', 'sftp', 'ssh', 'tel', 'telnet', 'webcal'));
     $protocols = implode(':(?://)?|', $protocols) . ':(?://)?';
-    
+
     // Prepare domain name pattern.
     // The ICANN seems to be on track towards accepting more diverse top level
     // domains, so this pattern has been "future-proofed" to allow for TLDs
@@ -702,28 +702,28 @@ function _sprowt_settings_filter_url($text, $filter){
     $ip = '(?:[0-9]{1,3}\.){3}[0-9]{1,3}';
     $auth = '[a-zA-Z0-9:%_+*~#?&=.,/;-]+@';
     $trail = '[a-zA-Z0-9:%_+*~#&\[\]=/;?!\.,-]*[a-zA-Z0-9:%_+*~#&\[\]=/;-]';
-    
+
     // Prepare pattern for optional trailing punctuation.
     // Even these characters could have a valid meaning for the URL, such usage is
     // rare compared to using a URL at the end of or within a sentence, so these
     // trailing characters are optionally excluded.
     $punctuation = '[\.,?!]*?';
-    
+
     // Match absolute URLs.
     $url_pattern = "(?:$auth)?(?:$domain|$ip)/?(?:$trail)?";
     $pattern = "`((?:$protocols)(?:$url_pattern))($punctuation)`";
     $tasks ['_filter_url_parse_full_links'] = $pattern;
-    
+
     // Match e-mail addresses.
     $url_pattern = "[A-Za-z0-9._-]{1,254}@(?:$domain)";
     $pattern = "`($url_pattern)`";
     $tasks ['_filter_url_parse_email_links'] = $pattern;
-    
+
     // Match www domains.
     $url_pattern = "www\.(?:$domain)/?(?:$trail)?";
     $pattern = "`($url_pattern)($punctuation)`";
     $tasks ['_filter_url_parse_partial_links'] = $pattern;
-    
+
     // Each type of URL needs to be processed separately. The text is joined and
     // re-split after each task, since all injected HTML tags must be correctly
     // protected before the next task.
@@ -733,7 +733,7 @@ function _sprowt_settings_filter_url($text, $filter){
         // them back later.
         _filter_url_escape_comments('', TRUE);
         $text = preg_replace_callback('`<!--(.*?)-->`s', '_filter_url_escape_comments', $text);
-        
+
         // Split at all tags; ensures that no tags or attributes are processed.
         $chunks = preg_split('/(<.+?>)/is', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
         // PHP ensures that the array consists of alternating delimiters and
@@ -744,28 +744,28 @@ function _sprowt_settings_filter_url($text, $filter){
         // removed when the closing tag is found. Until the closing tag is found,
         // no replacements are made.
         $open_tag = '';
-        
+
         for ($i = 0; $i < count($chunks); $i++) {
             if ($chunk_type == 'text') {
                 // Only process this text if there are no unclosed $ignore_tags.
                 if ($open_tag == '') {
                     // If there is a match, inject a link into this chunk via the callback
                     // function contained in $task.
-                    
-                    
+
+
                     //Pull out content in brackets temporarily so it can be ignored
                     if(preg_match_all('/(\[[^\]]+\])/',$chunks[$i],$b)) {
                         $brackets = array();
                         foreach($b as $bi => $bracket){
-                            
+
                             $brackets["[[$bi]]"] = $bracket[0];
-                            
+
                             $chunks[$i] = str_replace($bracket[0],"[[$bi]]", $chunks[$i]);
                         }
                     }
-                    
+
                     $chunks [$i] = preg_replace_callback($pattern, $task, $chunks [$i]);
-                    
+
                     //reinsert our bracket info
                     if(!empty($brackets)) {
                         foreach($brackets as $replace=>$bracket) {
@@ -794,13 +794,13 @@ function _sprowt_settings_filter_url($text, $filter){
                 $chunk_type = 'text';
             }
         }
-        
+
         $text = implode($chunks);
         // Revert back to the original comment contents
         _filter_url_escape_comments('', FALSE);
         $text = preg_replace_callback('`<!--(.*?)-->`', '_filter_url_escape_comments', $text);
     }
-    
+
     return $text;
 }
 
@@ -825,15 +825,13 @@ function _sprowt_settings_link(array $variables) {
     if (in_array($variables['path'], array('<phone_number>'))) {
         $phone = sprowt_settings_get_phone_number('$1$2$3');
         $variables['path'] = "tel:+1$phone";
-        $variables['options']['attributes']['target'] = '_blank';
     }
-    
+
     if (in_array($variables['path'], array('<phone_number_sms>'))) {
         $phone = sprowt_settings_get_phone_number('$1$2$3');
         $variables['path'] = "sms:+1$phone";
-        $variables['options']['attributes']['target'] = '_blank';
     }
-    
+
     if (in_array($variables['path'], array('<sprowt_customer_login>'))) {
         $link = variable_get('sprowt_customer_login');
         if(empty($link)) {
@@ -841,10 +839,9 @@ function _sprowt_settings_link(array $variables) {
         }
         else {
             $variables['path'] = $link;
-            $variables['options']['attributes']['target'] = '_blank';
         }
     }
-    
+
     // Call the original theme function for normal menu link.
     return theme('sprowt_settings_link_default', $variables);
 }
@@ -857,15 +854,15 @@ function sprowt_settings_form_menu_edit_item_alter(&$form, &$form_state) {
     // Some menu items have a pre-defined path which cannot be modified hence no default_value
     if (isset($form['link_path']['#default_value'])) {
         $default_value = $form['link_path']['#default_value'];
-        
+
         if (preg_match('/^<phone_number>\/[0-9]+$/', $default_value)) {
             $default_value = '<phone_number>';
         }
-        
+
         $form['link_path']['#default_value'] = $default_value;
         $form['link_path']['#description'] .= '<p>Other values available:<br>';
         $list = '<ul>';
-    
+
         $list .=  t('<li>Enter %p to automatically populate with a tel link using site\'s phone number.</li>', array('%p' => '<phone_number>'));
         $list .=  t('<li>Enter %p to automatically populate with an sms link using site\'s phone number.</li>', array('%p' => '<phone_number_sms>'));
         $list .=  t('<li>Enter %p to automatically populate with the customer login link set in <a href="/admin/config/sprowt/sprowt-settings" target="_blank">Sprowt Settings</a>.</li>', array('%p' => '<sprowt_customer_login>'));
@@ -883,19 +880,19 @@ function _sprowt_settings_get_address(){
         AND n.status = 1
         ORDER BY n.created ASC
     ")->fetchField();
-    
+
     if(empty($nid)) {
         return [];
     }
     $location = new NodeBuilder(node_load($nid));
-    
+
     $location_array = array(
         'street' => $location->field_street_address->value(),
         'locality' => $location->field_locality->value(),
         'province' => $location->field_state->value(),
         'postal_code' => $location->field_postal_code->value(),
     );
-    
+
     return $location_array;
 }
 
@@ -911,9 +908,9 @@ function _sprowt_settings_get_main_menu_nodes() {
     foreach($nodes as $node) {
         $nodes_array[$node['uuid']] = $node;
     }
-    
+
     $data = _sprowt_get_data();
-    
+
     $sprowt_path = drupal_get_path('profile', 'sprowt');
     $theme_path = drupal_get_path('theme', $data['branding']['theme']);
     $filename = 'main-menu_link_export.json';
@@ -925,11 +922,11 @@ function _sprowt_settings_get_main_menu_nodes() {
         $json = file_get_contents("$sprowt_path/$filename");
         $menu = json_decode($json, true);
     }
-    
+
     if(empty($menu)) {
         return false;
     }
-    
+
     $return = array();
     foreach($menu['menu_links'] as $m) {
         $nid = str_replace('node/','', $m['link_path']);
@@ -938,7 +935,7 @@ function _sprowt_settings_get_main_menu_nodes() {
             $return[] = $nodes_array[$uuid];
         }
     }
-    
+
     return $return;
 }
 
@@ -950,14 +947,14 @@ function _sprowt_settings_get_main_menu_nodes() {
 function sprowt_settings_cb_identifier_list() {
     $identifiers = array();
     $nodes = _sprowt_settings_get_main_menu_nodes();
-    
+
     foreach($nodes as $node) {
         if($node['type'] == 'page') {
             $identifiers['<' . _sprowt_settings_machine_name($node['title']) . '>'] = t('Corresponds to imported basic page with title: ' . $node['title']);
         }
     }
-    
-    
+
+
     return $identifiers;
 }
 
@@ -972,7 +969,7 @@ function sprowt_settings_cb_identifier_list() {
 function sprowt_settings_cb_identifier_values($identifier, $obj) {
     $crumb_items = NULL;
     $nodes = _sprowt_settings_get_main_menu_nodes();
-    
+
     foreach($nodes as $node) {
         $id = '<' . _sprowt_settings_machine_name($node['title']) . '>';
         if($id == $identifier) {
@@ -987,7 +984,7 @@ function sprowt_settings_cb_identifier_values($identifier, $obj) {
             $crumb_items[] = $crumb_item;
         }
     }
-    
+
     return $crumb_items;
 }
 
@@ -996,22 +993,22 @@ function sprowt_settings_cb_identifier_values($identifier, $obj) {
  */
 function sprowt_settings_webform_select_options_info() {
     $items = array();
-    
+
     $items['services'] = array(
         'title' => t('Sprowt Services'),
         'options callback' => '_sprowt_settings_webform_options_services',
     );
-    
+
     $items['markets'] = array(
         'title' => t('Sprowt Markets'),
         'options callback' => '_sprowt_settings_webform_options_markets',
     );
-    
+
     $items['market_states'] = array(
         'title' => t('Sprowt Market States'),
         'options callback' => '_sprowt_settings_webform_options_market_states',
     );
-    
+
     return $items;
 }
 
@@ -1024,11 +1021,11 @@ function _sprowt_settings_webform_options_services() {
         AND n.status = 1
         ORDER BY n.title ASC
     ")->fetchCol();
-    
+
     foreach($services as $service) {
         $options[$service] = $service;
     }
-    
+
     return $options;
 }
 
@@ -1041,11 +1038,11 @@ function _sprowt_settings_webform_options_markets() {
         AND n.status = 1
         ORDER BY n.title ASC
     ")->fetchCol();
-    
+
     foreach($markets as $market) {
         $options[$market] = $market;
     }
-    
+
     return $options;
 }
 
@@ -1056,11 +1053,11 @@ function _sprowt_settings_webform_options_market_states() {
     FROM field_data_field_state
     ORDER BY field_state_value
   ")->fetchCol();
-    
+
     foreach($states as $state) {
         $options[$state] = $state;
     }
-    
+
     return $options;
 }
 
@@ -1069,9 +1066,9 @@ function _sprowt_settings_node_uuid_redirect($uuid, $op = '') {
     if(empty($array)) {
         return drupal_not_found();
     }
-    
+
     $nid = $array[$uuid];
-    
+
     if(!empty($op)) {
         drupal_goto("node/$nid/$op");
     }
@@ -1095,7 +1092,7 @@ function sprowt_settings_token_info() {
         '[node-service]' => _sprowt_settings_node_service(),
         '[current-year]' => date('Y'),
     );
-    
+
     $types = array(
         'sprowt' => array(
             'name' => 'Sprowt',
@@ -1112,8 +1109,8 @@ function sprowt_settings_token_info() {
             'description' => 'Variables from the $_SERVER global.'
         ),
     );
-    
-    
+
+
     $tokens = array(
         'sprowt' => array(
             'company_name' => array(
@@ -1151,7 +1148,7 @@ function sprowt_settings_token_info() {
             ),
         ),
     );
-    
+
     $tokens['site']['sprowt'] = array(
         'name' => 'Sprowt',
         'description' => 'Sprowt specific tokens',
@@ -1215,7 +1212,7 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
             }
         }
     }
-    
+
     // Site tokens.
     if ($type == 'site') {
         foreach ($tokens as $name => $original) {
@@ -1227,7 +1224,7 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
                         $replacements[$original] = theme('image', array('path' => $uri));
                     }
                     break;
-                
+
                 case 'logo-url':
                     $replacements[$original] = '';
                     if ($uri = theme_get_setting('logo')) {
@@ -1235,7 +1232,7 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
                     }
                     break;
             }
-            
+
             // [site:logo-url:*] chained tokens.
             if ($url_tokens = token_find_with_prefix($tokens, 'logo-url')) {
                 $uri = theme_get_setting('logo');
@@ -1243,7 +1240,7 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
             }
         }
     }
-    
+
     if ($type == 'server') {
         foreach ($tokens as $name => $original) {
             switch ($name) {
@@ -1253,7 +1250,7 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
                         $replacements[$original] = filter_xss($replacements[$original]);
                     }
                     break;
-                
+
                 case 'HTTP_USER_AGENT':
                     $replacements[$original] = $_SERVER['HTTP_USER_AGENT'];
                     if ($sanitize) {
@@ -1263,7 +1260,7 @@ function sprowt_settings_tokens($type, $tokens, array $data = array(), array $op
             }
         }
     }
-    
+
     return $replacements;
 }
 
@@ -1279,9 +1276,9 @@ function sprowt_settings_field_widget_color_field_plain_text_form_alter(&$elemen
     $element['rgb']['#attached']['js'][] = $path . "/js/spectrum.js";
     $element['rgb']['#attached']['js'][] = drupal_get_path('module', 'sprowt_settings') . "/js/sprowt_colorfield.js";
     $element['rgb']['#attached']['css'][] = drupal_get_path('module', 'sprowt_settings') . "/css/sprowt_colorfield.css";
-    
+
     $id = drupal_html_id('colorfield-spectrum');
-    
+
     $spectrum_addition = array(
         '#attributes' => array(
             'class' => array('color'),
@@ -1300,7 +1297,7 @@ function sprowt_settings_preprocess_field(&$variables)
 {
     $element = &$variables['element'];
     $parent = &$element['#object'];
-    
+
     if($element['#field_type'] == 'link_field') {
         foreach($variables['items'] as &$item) {
             $url = $item['#element']['url'];
@@ -1340,7 +1337,7 @@ function sprowt_settings_node_export_access_import_alter(&$access, $node) {
 function _sprowt_settings_request_nodes() {
     $opts = $_POST;
 
-    
+
     if(!empty($_GET['debug']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
         $opts = $_GET;
     }
@@ -1354,15 +1351,15 @@ function _sprowt_settings_request_nodes() {
     }
 
     $format = empty($opts['format']) ? 'json' : $opts['format'];
-    
+
     $data = [
         'code' => $sync->export($format)
     ];
-    
+
     if(!empty($_GET['debug_output']) && $format = 'json') {
         $data['code'] = json_decode($data['code'], true);
     }
-    
+
     drupal_json_output($data);
 }
 
