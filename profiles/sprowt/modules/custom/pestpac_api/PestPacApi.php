@@ -17,7 +17,7 @@ class PestPacApi extends PestPacOauth {
   protected $apiKey;
   protected $baseUrl;
   protected $tenantId;
-  protected $errors;
+  protected $errors = [];
 
   function __construct(){
 
@@ -59,7 +59,7 @@ class PestPacApi extends PestPacOauth {
   }
 
 
-  function curl($url, $data = array(), $headers = array(), $method = 'get', $debug = false,$json = false){
+  function curl($url, $data = array(), $headers = array(), $method = 'get', $debug = false, $json = false){
     if(!empty($data)) {
       if($json){
         $param_string = json_encode($data);
