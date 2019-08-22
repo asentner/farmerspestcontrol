@@ -60,35 +60,35 @@ function sprowt_hd_schema() {
                 'nid',
                 array(
                     'form_reactor_first_name_field',
-                    128
+                    100
                 ),
                 array(
                     'form_reactor_last_name_field',
-                    128
+                    100
                 ),
                 array(
                     'form_reactor_email_field',
-                    128
+                    100
                 ),
                 array(
                     'form_reactor_phone_field',
-                    128
+                    100
                 ),
               array(
                 'form_reactor_address_field',
-                128
+                100
               ),
               array(
                 'form_reactor_city_field',
-                128
+                100
               ),
               array(
                 'form_reactor_state_field',
-                128
+                100
               ),
               array(
                 'form_reactor_zip_field',
-                128
+                100
               ),
             )
         ),
