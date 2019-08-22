@@ -323,7 +323,7 @@ function _sprowt_solution_finder_find_default_solution_nid() {
         AND n.type = 'solution'
         AND d.field_is_default_value IS NOT NULL
         AND d.field_is_default_value != '0'
-        ORDER BY n.changed DESC 
+        ORDER BY n.changed DESC
         LIMIT 1
     ")->fetchField();
 
@@ -333,7 +333,17 @@ function _sprowt_solution_finder_find_default_solution_nid() {
 
     $nids = entity_get_id_by_uuid('node', array('934b332a-a247-41eb-ae2e-09dfe144aed3'));
 
-    return array_shift($nids);
+    $contact_nid = array_shift($nids);
+    if(!empty($contact_nid)) {
+        return $contact_nid;
+    }
+    
+    $contact_path = drupal_get_normal_path('contact');
+    if(!empty($contact_path)) {
+        return str_replace('node/', '', $contact_path);
+    }
+    
+    return '/uuid/934b332a-a247-41eb-ae2e-09dfe144aed3';
 }
 
 /**
