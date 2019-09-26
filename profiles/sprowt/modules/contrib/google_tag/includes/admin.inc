@@ -252,7 +252,7 @@ function _google_tag_assets_create() {
       $keys = variable_realm_keys($realm_name);
       foreach ($keys as $key_name => $key_title) {
         drupal_set_message(t('realm:key = @realm:@key', array('@realm' => $realm_name, '@key' => $key_name)));
-        variable_realm_switch($realm_name, $key_name);
+        variable_realm_switch($realm_name, $key_name, FALSE);
         if (_google_tag_directory_prepare($realm_name)) {
           _google_tag_snippets_save($realm_name, $key_name);
           _google_tag_classes_save($realm_name, $key_name);
@@ -468,12 +468,22 @@ function _google_tag_is_executable($uri) {
     if ($realpath = $wrapper->realpath($uri)) {
       // The URI is a local stream wrapper.
       // Use local path since PHP only checks ACLs on its local file wrapper.
-      return is_executable($realpath);
+      // Remove the OS check if PHP is_executable() is changed to not return FALSE
+      // simply because the URI points to a directory (not a file) on Windows.
+      return _google_tag_is_windows() || is_executable($realpath);
     }
 
     // The URI is a remote stream wrapper.
     if (!($stat = $wrapper->url_stat($uri, 0))) {
       return FALSE;
+    }
+
+    if (!function_exists('posix_getuid') || !function_exists('posix_getgid')) {
+      // These functions are never defined on Windows and the extension that
+      // provides them may not be included on a Linux distribution.
+      // If directory is not searchable, then fault the site deployment process.
+      // @todo Is it worse to return true or false at this point?
+      return TRUE;
     }
 
     // Determine the appropriate permissions bit mask as an octal.
@@ -492,6 +502,17 @@ function _google_tag_is_executable($uri) {
     // The URI is a local path.
     return is_executable($uri);
   }
+}
+
+/**
+ * Determines whether the operating system is Windows.
+ *
+ * @return bool
+ *   Whether the operating system is Windows.
+ */
+function _google_tag_is_windows() {
+  return (defined('PHP_OS_FAMILY') && PHP_OS_FAMILY == 'Windows') ||
+    (defined('PHP_OS') && strcasecmp(substr(PHP_OS, 0, 3), 'win') == 0);
 }
 
 /**
