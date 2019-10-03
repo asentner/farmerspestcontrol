@@ -1,5 +1,9 @@
 (function ($) {
 
+    function $$(selector) {
+        return $('.sprowt-ebooking-form').find(selector);
+    }
+
     function empty(val) {
         return typeof val === 'undefined'
             || val === null
@@ -51,7 +55,7 @@
   Drupal.behaviors.sprowtEbooking = {
     attach: function (context, settings) {
       var $target = $('.node-ebooking').not('.page-node-edit');
-      var $fieldsets = $('fieldset.panel');
+      var $fieldsets = $$('fieldset.panel');
 
       // add previous, next, etc buttons and validation error message
       if ($target.length && !($target.hasClass('processed'))) {
@@ -86,7 +90,7 @@
         var stepNumber = 1;
         $fieldsets.each(function(){
           $(this).prepend('<div class="validation-error"><span>Submission Error: Please correct the information below.</span></div>');
-          $('.validation-error').hide(); // hide the validation error messages
+          $$('.validation-error').hide(); // hide the validation error messages
           $(this).prepend('<h3 class="step-number">Step ' + stepNumber + ' of ' + ($fieldsets.length+1) + '</h3>');
           stepNumber++;
         });
@@ -97,7 +101,7 @@
         };
 
         // make the 'pop-ups' closeable
-        $('[class*=if-business]').prepend('<span class="close-popup">Close</span>');
+        $$('[class*=if-business]').prepend('<span class="close-popup">Close</span>');
 
         $('.close-popup').click(function(){
           $('input.business-disable').prop('checked', false);
@@ -111,7 +115,7 @@
       if ($target.length) {
 
         // next button validation and functionality
-        $('.button-next').click(function(e){
+        $$('.button-next').click(function(e){
           e.preventDefault();
           // make sure all of the answers have been filled out
           var $webformComponents = $(this).siblings('.fieldset-wrapper').find('.webform-component');
@@ -133,7 +137,7 @@
 
 
         // make the previous buttons work
-        $('.button-prev').click(function(e){
+        $$('.button-prev').click(function(e){
           e.preventDefault();
           if($(this).parent('fieldset').hasClass('active')) {
             $(this).parent('fieldset').removeClass('active').addClass('right');
@@ -144,30 +148,30 @@
         });
 
         // make the validation error dissapear when a user makes a selection (not just 'next step')
-        $('input:radio').change(function(){
+        $$('input:radio').change(function(){
           $(this).parents('.fieldset-wrapper').siblings('.validation-error').hide();
             $(this).closest('.webform-component').removeClass('error');
         });
-        $('select').change(function(){
+        $$('select').change(function(){
           $(this).parents('.fieldset-wrapper').siblings('.validation-error').hide();
             $(this).closest('.webform-component').removeClass('error');
         });
-        $('input:text').change(function(){
+        $$('input:text').change(function(){
           $(this).parents('.fieldset-wrapper').siblings('.validation-error').hide();
             $(this).closest('.webform-component').removeClass('error');
         });
-        $('input').filter('[type=email]').change(function(){
+        $$('input').filter('[type=email]').change(function(){
           $(this).parents('.fieldset-wrapper').siblings('.validation-error').hide();
             $(this).closest('.webform-component').removeClass('error');
         });
 
         // prevent default action of inactive previous button on first panel
-        $('.button.inactive').click(function(e){
+        $$('.button.inactive').click(function(e){
           e.preventDefault();
         });
 
         // clicking on a date select box opens the date picker calendar instead
-        var $datePicker = $('.webform-datepicker').find('select');
+        var $datePicker = $$('.webform-datepicker').find('select');
         // prevent the default behavior of the date select box
         $datePicker.on('mousedown', function(e){
           e.preventDefault();
@@ -180,14 +184,14 @@
         });
 
         // make the checkout button work
-        $('select[id*=time]').change(function(){
+        $$('select[id*=time]').change(function(){
           $('.button-checkout').addClass('button-disable');
           $('.button-checkout').delay(1000).queue(function(){
             $(this).removeClass('button-disable').dequeue();
           });
         });
 
-        $('.button-checkout').click(function(e){
+        $$('.button-checkout').click(function(e){
           if(!$(this).hasClass('button-disable')) {
             e.preventDefault();
 
@@ -244,7 +248,7 @@
       }; // endif
 
       function panelScroll(delay) {
-        if($('.panel.active').offset().top - $(window).scrollTop() < 50) {
+        if($$('.panel.active').offset().top - $(window).scrollTop() < 50) {
           $('html, body').delay(delay).animate({
               scrollTop: $("#panel").offset().top - 50
             }, 1000);
@@ -288,17 +292,17 @@
       };
 
       // move the form-actions inside the the checkout panel
-      if( $('fieldset.ebooking_summary').length && !($('.form-actions').hasClass('moved')) ) {
-        $('.form-actions').append('<a class="button payment">Proceed to Checkout</a>');
-        $('.form-actions').find('.webform-submit').hide();
-        $('.form-actions').detach().appendTo('fieldset.ebooking_summary > .fieldset-wrapper');
-        $('.form-actions').addClass('moved');
+      if( $('fieldset.ebooking_summary').length && !($$('.form-actions').hasClass('moved')) ) {
+        $$('.form-actions').append('<a class="button payment">Proceed to Checkout</a>');
+        $$('.form-actions').find('.webform-submit').hide();
+        $$('.form-actions').detach().appendTo('fieldset.ebooking_summary > .fieldset-wrapper');
+        $$('.form-actions').addClass('moved');
       };
 
       // perform validation on the form submit button
-      $('.button.payment').click(function(e){
+      $$('.button.payment').click(function(e){
         // var validation = true;
-        $webformComponents = $('.webform-component');
+        $webformComponents = $$('.webform-component');
         var validation = validate($webformComponents);
 
         if(validation == true) {
