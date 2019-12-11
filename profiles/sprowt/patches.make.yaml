@@ -1,10 +1,6 @@
 core: '7.x'
 api: '2'
 projects:
-    link:
-        subdir: "contrib"
-        patch:
-            - 'https://www.drupal.org/files/issues/2018-03-20/link_anchors_and_queries-2654246-22.patch'
     paragraphs:
         subdir: "contrib"
         patch:
