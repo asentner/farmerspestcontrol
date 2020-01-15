@@ -9,7 +9,7 @@
   // build the buttons for the bottom of the table if ebooking_link is provided
   if(!empty($content['field_ebooking_link'][0]['#element']['url'])) {
     $ebooking_link = $content['field_ebooking_link'][0]['#element'];
-    $ebooking_link_url = $ebooking_link['url'];
+    $ebooking_link_url = url($ebooking_link['url']);
     $ebooking_link_title = 'Get Your Price';
     $ebooking_button = '<a class="button" href="'.$ebooking_link_url.'">'.$ebooking_link_title.'</a>';
   };
@@ -96,6 +96,7 @@
               if(!empty($package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'])
                 && $package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'] != '[node:url]') {
                 $button_url = $package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'];
+                $button_url = url($button_url);
               };
               if(!empty($package->field_package['und'][0]['entity']->field_table_link['und'][0]['title'])) {
                 $button_title = $package->field_package['und'][0]['entity']->field_table_link['und'][0]['title'];

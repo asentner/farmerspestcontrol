@@ -21,6 +21,7 @@
   }
   if(!empty($content['field_block_link']['#items'][0]['url'])) {
     $node_url = $content['field_block_link']['#items'][0]['url'];
+    $node_url = url($node_url);
   };
 ?>
 
