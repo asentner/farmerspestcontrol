@@ -6,7 +6,7 @@
 function paragraphs_edit_menu() {
     global $user;
     $items = array();
-    
+
     $items['paragraphs-edit/%paragraphs_item'] = array(
         'title' => 'Edit Paragraph',
         'page callback' => 'drupal_get_form',
@@ -16,15 +16,15 @@ function paragraphs_edit_menu() {
         'type' => MENU_LOCAL_ACTION,
         'context' => MENU_CONTEXT_INLINE,
     );
-    
+
     // To use local task menu items, there must be a parent page.
     $items['paragraphs-edit'] = array(
         'title' => 'Edit Paragraph',
         'page callback' => 'paragraphs_edit_page',
         'page arguments' => array(1),
-        'access arguments' => TRUE,
+        'access callback' => TRUE,
     );
-    
+
     return $items;
 }
 
@@ -44,27 +44,27 @@ function _paragraphs_edit_form($form, &$form_state, $paragraphs_item) {
     if (!$paragraphs_item) {
         drupal_not_found();
     }
-    
+
     $p = entity_metadata_wrapper('paragraphs_item', $paragraphs_item);
-    
-    
+
+
     $instance = field_info_instance('paragraphs_item', 'field_label', $paragraphs_item->bundle);
     if(!empty($instance)) {
         $title = $p->field_label->value();
     }
-    
+
     if(empty($title)) {
         $bundle = paragraphs_bundle_load($paragraphs_item->bundle);
         $title = $bundle->name;
     }
-    
+
     drupal_set_title(t('Edit !title paragraph', array('!title' => $title)));
-    
+
     $form['paragraphs_item'] = array(
         '#type' => 'value',
         '#value' => $paragraphs_item,
     );
-    
+
     $form['actions'] = array('#type' => 'actions');
     $form['actions']['submit'] = array(
         '#type' => 'submit',
@@ -72,15 +72,15 @@ function _paragraphs_edit_form($form, &$form_state, $paragraphs_item) {
         '#value' => t('Save'),
         '#submit' => array('_paragraphs_edit_form_submit_button')
     );
-    
+
     $form['actions']['cancel'] = array(
         '#type' => 'submit',
         '#weight' => 10001,
         '#value' => t('Cancel'),
     );
-    
+
     field_attach_form('paragraphs_item', $paragraphs_item, $form, $form_state);
-    
+
     return $form;
 }
 
@@ -104,7 +104,7 @@ function paragraphs_edit_admin_paths() {
         'paragraphs-edit' => true,
         'paragraphs-edit/*' => true
     );
-    
+
     return $paths;
 }
 
