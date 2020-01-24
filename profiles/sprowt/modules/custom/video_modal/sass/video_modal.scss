@@ -1,7 +1,7 @@
 // libraries
 @import "../.npm/node_modules/breakpoint-sass/stylesheets/breakpoint";
 $fa-font-path:"//netdna.bootstrapcdn.com/font-awesome/4.5.0/fonts" !default; // for referencing Bootstrap CDN font files directly
-@import "../.npm/node_modules/font-awesome/scss/font-awesome";
+@import "../.npm/node_modules/font-awesome/scss/variables";
 
 @import 'magnific';
 @import 'initial';
