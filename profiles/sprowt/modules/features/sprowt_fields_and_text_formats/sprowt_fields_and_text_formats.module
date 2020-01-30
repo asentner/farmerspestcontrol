@@ -35,15 +35,17 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
     if($element['#field_name'] == 'field_icon_file') {
         $items = &$variables['items'];
         foreach($items as &$item) {
-            if(strpos($item['#file']->filemime, 'svg') !== false) {
-                $svg_html = file_get_contents(drupal_realpath($item['#file']->uri));
-                if(empty($svg_html)) {
-                    $svg_html = '<svg></svg>';
-                }
+            $svg_html = file_get_contents(drupal_realpath($item['#file']->uri));
+            if(empty($svg_html)) {
+                $svg_html = '<svg></svg>';
+            }
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $mime = $finfo->buffer($svg_html);
+            if(strpos($mime, 'svg') !== false) {
                 $doc = new DOMDocument();
                 @$doc->loadXML($svg_html);
                 $svg = $doc->getElementsByTagName('svg');
-                
+
                 $removeIdsRecursively = function(&$elementList) use(&$removeIdsRecursively){
                     $itemLength = $elementList->length;
                     for($i = 0; $i < $itemLength; ++$i) {
@@ -58,19 +60,19 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
                         }
                     }
                 };
-                
+
                 $removeIdsRecursively($svg);
-                
+
                 $svg = $svg->item(0);
                 $style = $svg->getAttribute('style');
-                
+
                 $titleItems = $svg->getElementsByTagName('title');
                 if($titleItems->length > 0) {
                     foreach ($titleItems as $title) {
                         $svg->removeChild($title);
                     }
                 }
-                
+
 
                 if (empty($style)) {
                     $style = array();
@@ -120,11 +122,11 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
             );
         }
     }
-    
+
     if($element['#field_name'] == 'field_annotations') {
         $item_attributes_array = (!empty($variables['item_attributes_array'])) ?
             $variables['item_attributes_array'] : array();
-        
+
         foreach($variables['items'] as $delta => $item) {
             $attributes_array = (!empty($item_attributes_array[$delta])) ?
                 $item_attributes_array[$delta] : array();
@@ -134,10 +136,10 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
             $attributes_array['id'] = $id;
             $item_attributes_array[$delta] = $attributes_array;
         }
-    
+
         $variables['item_attributes_array'] = $item_attributes_array;
     }
-    
+
     if($element['#field_name'] == 'field_image_annotated') {
         drupal_add_css(drupal_get_path('module', 'sprowt_fields_and_text_formats') . '/css/annotated-image.css');
         drupal_add_js(drupal_get_path('module', 'sprowt_fields_and_text_formats') . '/js/image-annotated.js');
@@ -161,14 +163,14 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
                 }
             }
         }
-    
+
         $item_attributes_array = (!empty($variables['item_attributes_array'])) ?
             $variables['item_attributes_array'] : array();
-    
+
         foreach($variables['items'] as $delta => $item) {
             $attributes_array = (!empty($item_attributes_array[$delta])) ?
                 $item_attributes_array[$delta] : array();
-            
+
             $style = array();
             $file = $item['#item'];
 
@@ -186,11 +188,11 @@ function sprowt_fields_and_text_formats_preprocess_field(&$variables)
                 $style[] = 'width:' . $info['width'] . 'px';
                 $style[] = 'height:auto';
             }
-            
+
             $attributes_array['style'] = implode(';', $style);
             $item_attributes_array[$delta] = $attributes_array;
         }
-    
+
         $variables['item_attributes_array'] = $item_attributes_array;
     }
 
