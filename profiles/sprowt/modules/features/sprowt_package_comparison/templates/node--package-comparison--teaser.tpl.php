@@ -40,8 +40,11 @@
           </th>
           <?php
             foreach ($packages as $package) {
-              $package_title = $package->field_package['und'][0]['entity']->title;
-              $package_id = $package->field_package['und'][0]['target_id'];
+              $f = entity_metadata_wrapper('field_collection_item', $package);
+              $node = $f->field_package->value();
+              $p = entity_metadata_wrapper('node', $f->field_package->value());
+              $package_title = $node->title;
+              $package_id = $node->nid;
               $package_url = drupal_get_path_alias('node/'.$package_id);
               print('<th scope="col">'.$package_title.'</th>');
             };
@@ -50,13 +53,16 @@
         <tr>
           <?php
             foreach ($packages as $package) {
+              $f = entity_metadata_wrapper('field_collection_item', $package);
+              $node = $f->field_package->value();
+              $p = entity_metadata_wrapper('node', $f->field_package->value());
               print('<td>');
-              if(!empty($package->field_package['und'][0]['entity']->field_starting_price['und'][0]['value'])) {
-                $package_price = $package->field_package['und'][0]['entity']->field_starting_price['und'][0]['value'];
-                print('<span><span class="package-price">'.$package_price.'</span>/per month!</span>');
+              $startingPrice = $p->field_starting_price->value();
+              if(!empty($startingPrice)) {
+                print('<span><span class="package-price">'.$startingPrice.'</span>/per month!</span>');
               };
-              if(!empty($package->field_package['und'][0]['entity']->field_initial_fee['und'][0]['value'])) {
-                $initial_fee = $package->field_package['und'][0]['entity']->field_initial_fee['und'][0]['value'];
+              $initial_fee = $p->field_initial_fee->value();
+              if(!empty($initial_fee)) {
                 print('<span class="initial-fee">'.$initial_fee.'</span>');
               };
               print('</td>');
@@ -72,10 +78,14 @@
             // loop through each package to see if it has this feature selected
             $feature_tid = $feature['tid'];
             foreach ($packages as $package) {
+              $f = entity_metadata_wrapper('field_collection_item', $package);
+              $node = $f->field_package->value();
+              $p = entity_metadata_wrapper('node', $f->field_package->value());
               $has_package = FALSE;
-              if(!empty($package->field_package['und'][0]['entity']->field_package_features['und'])) {
-                foreach($package->field_package['und'][0]['entity']->field_package_features['und'] as $package_feature) {
-                  if($feature_tid == $package_feature['tid']) { $has_package = TRUE; };
+              $packageFeatures = $p->field_package_features->value();
+              if(!empty($packageFeatures)) {
+                foreach($packageFeatures as $package_feature) {
+                  if($feature_tid == $package_feature->tid) { $has_package = TRUE; };
                 };
               };
               if($has_package) { print('<td><i class="fa fa-check"></i></td>'); }
@@ -90,16 +100,19 @@
             // if package table links/titles are provided, use them for the buttons
             // else link to package content
             foreach ($packages as $package) {
-              $package_id = $package->field_package['und'][0]['target_id'];
+              $f = entity_metadata_wrapper('field_collection_item', $package);
+              $node = $f->field_package->value();
+              $p = entity_metadata_wrapper('node', $f->field_package->value());
+              $package_id = $node->nid;
               $button_url = drupal_get_path_alias('node/'.$package_id);
               $button_title = '';
-              if(!empty($package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'])
-                && $package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'] != '[node:url]') {
-                $button_url = $package->field_package['und'][0]['entity']->field_table_link['und'][0]['url'];
-                $button_url = url($button_url);
+              $tableLink = $p->field_table_link->value();
+              if(is_array($tableLink) && !empty($tableLink['url'])
+                && $tableLink['url'] != '[node:url]') {
+                $button_url = url($tableLink['url']);
               };
-              if(!empty($package->field_package['und'][0]['entity']->field_table_link['und'][0]['title'])) {
-                $button_title = $package->field_package['und'][0]['entity']->field_table_link['und'][0]['title'];
+              if(is_array($tableLink) && !empty($tableLink['title'])) {
+                $button_title = $tableLink['title'];
               };
               if(!empty($button_title)) {
                   print('<td><a class="button" href="' . $button_url . '">' . $button_title . '</a></td>');
