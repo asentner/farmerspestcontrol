@@ -2783,7 +2783,7 @@ p, table, ol, ul, .two-column {
           flex: 1 1 50%;
       padding-left: 10px;
       padding-right: 10px;
-      margin-left: 0;
+      margin-left: 0 !important;
       margin-top: .5em; } }
 
 h1, .field--name-field-display-title, h2, .field--name-field-intro + h1, .field--name-field-intro + .field--name-field-display-title, .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label,
@@ -4360,7 +4360,7 @@ li.addtoany {
       font-size: 18px; } }
   @media (min-width: 1024px) {
     .node-type-localtarget.ltp--solutions-finder .bean-hero .content-wrap {
-      min-height: 520px; }
+      min-height: 475px; }
     .node-type-localtarget.ltp--solutions-finder .bean-hero .content {
       padding: 80px 25px 30px; }
       .node-type-localtarget.ltp--solutions-finder .bean-hero .content:after {
@@ -5771,7 +5771,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     .block--views-slideshow-localtarget .node__title {
       font-size: 30px; }
     .block--views-slideshow-localtarget .field--name-field-subtitle {
-      font-size: 60px; }
+      font-size: 56px; }
     .block--views-slideshow-localtarget .field--name-body {
       padding-top: 20px;
       font-size: 21px; } }
