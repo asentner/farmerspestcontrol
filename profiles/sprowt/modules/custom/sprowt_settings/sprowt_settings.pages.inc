@@ -14,11 +14,11 @@ function _sprowt_admin_menu_block(){
 function sprowt_settings_admin()
 {
     $form = array();
-    
+
     $form['sprowt_settings'] = array(
         '#type' => 'vertical_tabs'
     );
-    
+
     $form['company_info'] = array(
         '#type' => 'fieldset',
         '#title' => 'Company Info',
@@ -26,7 +26,7 @@ function sprowt_settings_admin()
         '#collapsed' => false,
         '#group' => 'sprowt_settings'
     );
-    
+
     $form['company_info']['sprowt_settings_company_name'] = array(
         '#type' => 'textfield',
         '#title' => t('Company Name'),
@@ -45,7 +45,7 @@ function sprowt_settings_admin()
         '#maxlength' => 1000,
         '#description' => t("Email typically used as the 'to' email in webforms."),
     );
-    
+
     $form['company_info']['sprowt_settings_company_type'] = array(
         '#type' => 'radios',
         '#title' => t('Company Type'),
@@ -54,54 +54,6 @@ function sprowt_settings_admin()
         '#default_value' => variable_get('sprowt_settings_company_type', 'home_services'),
         '#options' => _sprowt_company_types()
     );
-    
-    /*
-     * We no longer use site wide locations
-     *
-    $form['sprowt_settings_address'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Company Address'),
-    );
-    $form['sprowt_settings_address']['sprowt_settings_address_street'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Address 1'),
-      '#default_value' => variable_get('sprowt_settings_address_street'),
-      '#size' => 60,
-      '#maxlength' => 255,
-    );
-
-    $form['sprowt_settings_address']['sprowt_settings_address_additional'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Address 2'),
-      '#default_value' => variable_get('sprowt_settings_address_additional'),
-      '#size' => 60,
-      '#maxlength' => 255,
-    );
-    $form['sprowt_settings_address']['sprowt_settings_address_locality'] = array(
-      '#type' => 'textfield',
-      '#title' => t('City'),
-      '#default_value' => variable_get('sprowt_settings_address_locality'),
-      '#size' => 20,
-      '#maxlength' => 255,
-    );
-    $form['sprowt_settings_address']['sprowt_settings_address_province'] = array(
-      '#type' => 'select',
-      '#title' => t('State'),
-      '#default_value' => variable_get('sprowt_settings_address_province'),
-      '#options' => ___get_states(),
-    );
-
-    $form['sprowt_settings_address']['sprowt_settings_address_postal_code'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Zip Code'),
-      '#default_value' => variable_get('sprowt_settings_address_postal_code'),
-      '#size' => 5,
-      '#maxlength' => 10,
-    );
-
-    drupal_add_css(".form-item-coal-admin-address-locality, .form-item-coal-admin-address-province, .form-item-coal-admin-address-postal-code { float: left; margin: 0 10px 10px 0 !important; } .form-item-coal-admin-phone-number { clear: both; }", 'inline');
-
-    */
 
     $form['company_info']['sprowt_settings_phone_number'] = array(
         '#type' => 'textfield',
@@ -113,7 +65,7 @@ function sprowt_settings_admin()
         '#required' => TRUE,
         '#element_validate' => array('element_validate_integer_positive'),
     );
-    
+
     $form['company_info']['sprowt_customer_login'] = array(
         '#type' => 'textfield',
         '#title' => t('Customer Login/My Account link'),
@@ -122,7 +74,7 @@ function sprowt_settings_admin()
         '#maxlength' => 1000,
         '#description' => t("Customer login link used throughout site."),
     );
-    
+
     $form['company_info']['sprowt_settings_map_embed'] = array(
         '#type' => 'textarea',
         '#title' => t('Company Area Map Embed URL'),
@@ -217,120 +169,150 @@ function sprowt_settings_admin()
         '#group' => 'sprowt_settings'
     );
 
-    $form['sprowt_settings_social']['sprowt_settings_social_facebook'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Facebook'),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_facebook']['sprowt_settings_facebook_url'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Company Facebook URL'),
-        '#default_value' => variable_get('sprowt_settings_facebook_url'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Begins with \"http\"."),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_facebook']['sprowt_settings_facebook_description'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Link Description'),
-        '#default_value' => variable_get('sprowt_settings_facebook_description'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Descriptive text for Facebook link. Ex. 'Be our friend'"),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_twitter'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Twitter'),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_twitter']['sprowt_settings_twitter_handle'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Company Twitter Handle'),
-        '#default_value' => variable_get('sprowt_settings_twitter_handle'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Company twitter handle (do not include the @)."),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_twitter']['sprowt_settings_twitter_description'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Link Description'),
-        '#default_value' => variable_get('sprowt_settings_twitter_description'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Descriptive text for Twitter link. Ex. 'Follow us'"),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_gplus'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Google+'),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_gplus']['sprowt_settings_gplus_url'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Company Google+ URL'),
-        '#default_value' => variable_get('sprowt_settings_gplus_url'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Begins with \"http\"."),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_gplus']['sprowt_settings_gplus_description'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Link Description'),
-        '#default_value' => variable_get('sprowt_settings_gplus_description'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Descriptive text for Google+ link. Ex. 'Add to circles'"),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_linkedin'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('LinkedIn'),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_linkedin']['sprowt_settings_linkedin_url'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Company LinkedIn URL'),
-        '#default_value' => variable_get('sprowt_settings_linkedin_url'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Begins with \"http\"."),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_linkedin']['sprowt_settings_linkedin_description'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Link Description'),
-        '#default_value' => variable_get('sprowt_settings_linkedin_description'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Descriptive text for LinkedIn link. Ex. 'Connect with us'"),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_instagram'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Instagram'),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_instagram']['sprowt_settings_instagram_handle'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Company Instagram Handle'),
-        '#default_value' => variable_get('sprowt_settings_instagram_handle'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Company instagram handle (do not include the @)."),
-    );
-
-    $form['sprowt_settings_social']['sprowt_settings_social_instagram']['sprowt_settings_instagram_description'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Link Description'),
-        '#default_value' => variable_get('sprowt_settings_instagram_description'),
-        '#size' => 60,
-        '#maxlength' => 255,
-        '#description' => t("Descriptive text for Instagram link. Ex. 'Follow us'"),
-    );
+    $form['sprowt_settings_social'] = _sprowt_settings_socialmedia_form($form['sprowt_settings_social'], []);
+    $form['#validate'] = is_array($form['#validate']) ? array_merge($form['#validate'], $form['sprowt_settings_social']['#validate']) : $form['sprowt_settings_social']['#validate'];
+    $form['#submit'] = is_array($form['#submit']) ? array_merge($form['#submit'], $form['sprowt_settings_social']['#submit']) : $form['sprowt_settings_social']['#submit'];
+    unset($form['sprowt_settings_social']['#validate']);
+    unset($form['sprowt_settings_social']['#submit']);
+//    $form['sprowt_settings_social']['sprowt_settings_social_template'] = array(
+//        '#type' => 'fieldset',
+//        '#title' => t('Facebook'),
+//        '#prefix' => '<script type="text/html-template" id="socialTemplate">',
+//        '#suffix' => '</script>',
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_template']['sprowt_settings_facebook_url'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Company Facebook URL'),
+//        '#default_value' => variable_get('sprowt_settings_facebook_url'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Begins with \"http\"."),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_template']['sprowt_settings_facebook_description'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Link Description'),
+//        '#default_value' => variable_get('sprowt_settings_facebook_description'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Descriptive text for Facebook link. Ex. 'Be our friend'"),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_facebook'] = array(
+//        '#type' => 'fieldset',
+//        '#title' => t('Facebook'),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_facebook']['sprowt_settings_facebook_url'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Company Facebook URL'),
+//        '#default_value' => variable_get('sprowt_settings_facebook_url'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Begins with \"http\"."),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_facebook']['sprowt_settings_facebook_description'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Link Description'),
+//        '#default_value' => variable_get('sprowt_settings_facebook_description'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Descriptive text for Facebook link. Ex. 'Be our friend'"),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_twitter'] = array(
+//        '#type' => 'fieldset',
+//        '#title' => t('Twitter'),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_twitter']['sprowt_settings_twitter_handle'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Company Twitter Handle'),
+//        '#default_value' => variable_get('sprowt_settings_twitter_handle'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Company twitter handle (do not include the @)."),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_twitter']['sprowt_settings_twitter_description'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Link Description'),
+//        '#default_value' => variable_get('sprowt_settings_twitter_description'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Descriptive text for Twitter link. Ex. 'Follow us'"),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_gplus'] = array(
+//        '#type' => 'fieldset',
+//        '#title' => t('Google+'),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_gplus']['sprowt_settings_gplus_url'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Company Google+ URL'),
+//        '#default_value' => variable_get('sprowt_settings_gplus_url'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Begins with \"http\"."),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_gplus']['sprowt_settings_gplus_description'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Link Description'),
+//        '#default_value' => variable_get('sprowt_settings_gplus_description'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Descriptive text for Google+ link. Ex. 'Add to circles'"),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_linkedin'] = array(
+//        '#type' => 'fieldset',
+//        '#title' => t('LinkedIn'),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_linkedin']['sprowt_settings_linkedin_url'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Company LinkedIn URL'),
+//        '#default_value' => variable_get('sprowt_settings_linkedin_url'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Begins with \"http\"."),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_linkedin']['sprowt_settings_linkedin_description'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Link Description'),
+//        '#default_value' => variable_get('sprowt_settings_linkedin_description'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Descriptive text for LinkedIn link. Ex. 'Connect with us'"),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_instagram'] = array(
+//        '#type' => 'fieldset',
+//        '#title' => t('Instagram'),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_instagram']['sprowt_settings_instagram_handle'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Company Instagram Handle'),
+//        '#default_value' => variable_get('sprowt_settings_instagram_handle'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Company instagram handle (do not include the @)."),
+//    );
+//
+//    $form['sprowt_settings_social']['sprowt_settings_social_instagram']['sprowt_settings_instagram_description'] = array(
+//        '#type' => 'textfield',
+//        '#title' => t('Link Description'),
+//        '#default_value' => variable_get('sprowt_settings_instagram_description'),
+//        '#size' => 60,
+//        '#maxlength' => 255,
+//        '#description' => t("Descriptive text for Instagram link. Ex. 'Follow us'"),
+//    );
 
     $form['sprowt_settings_reviews'] = array(
         '#type' => 'fieldset',
@@ -445,7 +427,7 @@ function _sprowt_settings_config_validate(&$form, &$form_state) {
     if(preg_match('/<iframe.*src="([^"]+)"/', $map, $i)) {
         $form_state['values']['sprowt_settings_map_embed'] = $i[1];
     }
-    
+
     $customer_login = $values['sprowt_customer_login'];
     if(!empty($customer_login)) {
         if (!drupal_valid_path($customer_login)) {
@@ -456,23 +438,23 @@ function _sprowt_settings_config_validate(&$form, &$form_state) {
 }
 
 function sprowt_settings_add_coalmarch_user($form, &$form_state) {
-    
+
 }
 
 function sprowt_install_file() {
     require_once drupal_get_path('profile', 'sprowt') . '/sprowtbuilder.php';
     $sprowtbuilder = new SprowtBuilder();
-    
+
     $data = $sprowtbuilder->getData();
-    
-    
+
+
     $filename = strtolower($data['company_info']['company_name']);
     $filename = preg_replace('/[^a-z0-9_]+/', '_', $filename);
     trim($filename, '_');
     $filename .= "__sprowt_setup.json";
-    
+
     header('Content-disposition: attachment; filename=' . $filename);
     header('Content-type: application/json');
-    
+
     echo json_encode($data, JSON_PRETTY_PRINT);
 }

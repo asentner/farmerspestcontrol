@@ -1,7 +1,7 @@
 <?php
 
 class SprowtException extends \Exception {
-    
+
     /**
      * Constructs a SprowtException.
      *
@@ -11,7 +11,7 @@ class SprowtException extends \Exception {
     public function __construct($message) {
         parent::__construct($message);
     }
-    
+
 }
 
 require_once('sprowtbuilder.php');
@@ -31,18 +31,18 @@ foreach(glob(drupal_get_path('profile', 'sprowt') . "/forms/*.inc") as $include)
  */
 
 function sprowt_install_tasks_alter(&$tasks, &$install_state) {
-    
+
     drupal_add_js(drupal_get_path('profile', 'sprowt') . '/js/empty.js');
-    
+
     //maybe this is getting unset somewhere?
     $install_state['parameters']['profile'] = 'sprowt';
-    
+
     if(empty($GLOBALS['conf']['maintenance_theme']) || $GLOBALS['conf']['maintenance_theme'] != 'adminimal') {
         _sprowt_set_maintenance_theme("adminimal");
     }
 
     $tasks['install_select_locale']['function'] = 'sprowt_locale_selection';
-    
+
     if(!isset($install_state['storage'])) {
         $install_state['storage'] = array();
     }
@@ -84,8 +84,8 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
         'sprowt_setup_form',
         'sprowt_reset_localtarget_aliases'
     );
-    
-    
+
+
     if(!empty($install_state['forms']['file'])){
         $task_map = array(
             'install_select_profile',
@@ -109,7 +109,7 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
             'sprowt_reset_localtarget_aliases'
         );
     }
-    
+
     $new_tasks = array();
 
     $setup_tasks = array(
@@ -128,7 +128,7 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
     foreach($task_map as $task){
         $new_tasks[$task] = $tasks[$task];
         unset($tasks[$task]);
-        
+
         if($task == 'sprowt_starter_choose_page' && empty($install_state['storage']['is_starter'])) {
             $new_tasks[$task]['run'] = INSTALL_TASK_SKIP;
         }
@@ -145,14 +145,14 @@ function sprowt_install_tasks_alter(&$tasks, &$install_state) {
     $new_tasks = $new_tasks + $tasks;
 
     $tasks = $new_tasks;
-    
+
     //$tasks['install_finished']['function'] = '_sprowt_install_finished';
 
 }
 
 function sprowt_reset_localtarget_aliases() {
     $nids = db_query("SELECT nid from node WHERE type = 'localtarget'")->fetchCol();
-    
+
     $sources = array();
     $operations = array();
     foreach($nids as $nid) {
@@ -163,27 +163,27 @@ function sprowt_reset_localtarget_aliases() {
             )
         );
     }
-    
+
     if(!empty($sources)) {
         db_delete('url_alias')->condition('source', $sources, 'IN')->execute();
     }
-    
+
     $batch = array(
         'operations' => $operations,
         'title' => 'Updating LocalTarget URL Aliases',
         'error_message' => 'The installation has encountered an error.',
         'finished' => 'drupal_flush_all_caches'
     );
-    
+
     return $batch;
-    
+
 }
 
 function _sprowt_update_localtarget_alias($nid, &$context) {
     $node = node_load($nid);
     $node->path['pathauto'] = 1;
     node_save($node);
-    
+
     $context['results'][] = $nid;
     $context['message'] = st('Updated %count localtargets.', array(
         '%count' => count($context['results']),
@@ -319,18 +319,18 @@ function _sprowt_curl($uri, $payload = array()) {
     $ch = curl_init();
     $accessKey = '93f258dace70208b4b5d38de7266570dc48a7572';
     $secretKey = 'a0ZkBetAFbDwW89HXF260jF2Iut6iMpph95v';
-    
+
     $base = 'https://forge.ly';
-    if(strpos($_SERVER['HTTP_HOST'], '.test') !== false) {
-        $base = 'http://dev.forge.ly';
+    if(strpos($_SERVER['HTTP_HOST'], '.test') !== false && !empty($_GET['debug'])) {
+        $base = 'http://dev.forge.ly:8080';
     }
-    
+
     $base .= '/api/v1';
-    
+
     if(strpos($uri, '/') !== 0) {
         $uri = "/$uri";
     }
-    
+
     curl_setopt($ch, CURLOPT_URL, $base . $uri);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -338,20 +338,20 @@ function _sprowt_curl($uri, $payload = array()) {
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     curl_setopt($ch, CURLOPT_USERPWD, $accessKey . ':' . $secretKey);
-    
+
     curl_setopt($ch, CURLOPT_COOKIE, 'XDEBUG_SESSION=forgelyapitest');
-    
+
     if (count($payload)) {
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload, '', '&'));
     }
-    
+
     $output = curl_exec($ch);
-    
+
     $httpInfo = curl_getinfo($ch);
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    
+
     curl_close($ch);
-    
+
     return array(
         'info' => $httpInfo,
         'code' => $httpcode,
@@ -362,7 +362,7 @@ function _sprowt_curl($uri, $payload = array()) {
 function _sprowt_get_users_from_forgely() {
     $res =  _sprowt_curl('/users/sprowt');
     $response = json_decode($res['result'], true);
-    
+
     if($res['code'] != 200) {
         if(empty($response)) {
             $response = $res['result'];
@@ -372,7 +372,7 @@ function _sprowt_get_users_from_forgely() {
         ]);
         return [];
     }
-    
+
     return $response['data'];
 }
 
@@ -383,7 +383,7 @@ function _sprowt_get_coalmarch_user($username){
             return $user;
         }
     }
-    
+
     return false;
 }
 
@@ -396,7 +396,7 @@ function _sprowt_get_default_usernames(){
     foreach($users as $user) {
         $names[$user['username']] = array($user['first_name'],$user['last_name']);
     }
-    
+
     return $names;
 }
 
@@ -440,16 +440,16 @@ function sprowt_configure() {
 function _sprowt_get_features(){
     $data = _sprowt_get_data();
     $theme = $data['branding']['theme'];
-    
+
     $sprowt_info = drupal_get_path('profile', 'sprowt') . '/features.info';
     $theme_info = drupal_get_path('theme', $theme) . '/features.info';
-    
+
     $features = array();
     if(file_exists($sprowt_info)) {
         $info = drupal_parse_info_file($sprowt_info);
         $features = (!empty($info['features'])) ? $info['features'] : array();
     }
-    
+
     if(file_exists($theme_info)) {
         $info = drupal_parse_info_file($theme_info);
         $theme_features = (!empty($info['features'])) ? $info['features'] : array();
@@ -466,7 +466,7 @@ function _sprowt_get_features(){
             unset($features[$key]);
         }
     }
-    
+
     return $features;
 }
 
@@ -516,27 +516,27 @@ function sprowt_drush_presetup(&$install_state) {
         $file = $install_state['forms']['file'];
         $json = file_get_contents($file);
         $data = json_decode($json, true);
-        
+
         if(json_last_error() !== JSON_ERROR_NONE) {
             throw new SprowtException("[$file] File is not a JSON file.");
         }
-        
+
         if(!isset($data['company_info'])) {
             throw new SprowtException("Invalid File.");
         }
-        
+
         $company_name = $data['company_info']['company_name'];
         if(empty($company_name)) {
             throw new SprowtException("Company Name Required.");
         }
-        
+
         $database = preg_replace('/[a-z0-9_]/', '_', strtolower($company_name));
         $database = trim($database, '_');
         $install_state['forms']['install_settings_form']['mysql']['database'] = $database;
-    
+
         $install_state['forms']['install_configure_form']['site_name'] = $data['company_info']['company_name'];
         $install_state['forms']['install_configure_form']['site_mail'] = $data['company_info']['webform_from_email'];
-        
+
         $install_state['forms']['install_configure_form']['account']['name'] = 'coalmarch';
         $install_state['forms']['install_configure_form']['account']['mail'] = 'devel@coalmarch.com';
         $install_state['forms']['install_configure_form']['account']['pass']['pass1'] = 'c04lm4rch';
@@ -553,11 +553,11 @@ function sprowt_drush_setup(&$install_state) {
         $file = $install_state['forms']['file'];
         $json = file_get_contents($file);
         $data = json_decode($json, true);
-    
+
         if(json_last_error() !== JSON_ERROR_NONE) {
             throw new SprowtException("[$file] File is not a JSON file.");
         }
-    
+
         if(!isset($data['company_info'])) {
             throw new SprowtException("Invalid File.");
         }
@@ -574,7 +574,7 @@ function sprowt_setup(&$install_state){
     $sb = new SprowtBuilder();
     $data = $sb->getData();
     $id = md5(serialize($data));
-    
+
     if(!empty($install_state['forms']['file'])){
         $actions = array(
             'getData' => "Getting Sprowt Data...",
@@ -590,11 +590,11 @@ function sprowt_setup(&$install_state){
             'revertFeatures' => "Revert Features...",
             'addNodeDefaultImages' => "Updating Default Images..."
         );
-    
+
         if(!empty($data['starter']['is_starter'])) {
             $actions['setUpSprowtStarter'] = 'Setting Up Sprowt Starter Specific Settings...';
         }
-    
+
         foreach($actions as $method => $message) {
             $sb->$method();
         }
@@ -603,7 +603,7 @@ function sprowt_setup(&$install_state){
     else {
         return false;
     }
-    
+
     variable_set('site_name', $data['company_info']['company_name']);
     variable_set('site_mail', 'devel@coalmarch.com');
 }
@@ -714,6 +714,51 @@ function _sprowt_form_default($field_name, $default = '') {
                 case 'gplus':
                     return 'http://gplusurl.com';
                     break;
+                case 'social_media_accounts':
+                    return [
+                        [
+                            'type' => 'facebook',
+                            'machineName' => 'facebook',
+                            'iconClass' => 'facebook',
+                            'link' =>  'http://facebook.com',
+                            'description' => ''
+                        ],
+                        [
+                            'type' => 'twitter',
+                            'machineName' => 'twitter',
+                            'iconClass' => 'twitter',
+                            'link' =>  'twitterhandle',
+                            'description' => ''
+                        ],
+                        [
+                            'type' => 'instagram',
+                            'machineName' => 'instagram',
+                            'iconClass' => 'instagram',
+                            'link' =>  'instahandle',
+                            'description' => ''
+                        ],
+                        [
+                            'type' => 'gplus',
+                            'machineName' => 'gplus',
+                            'iconClass' => 'google-plus',
+                            'link' =>  'http://gplusurl.com',
+                            'description' => ''
+                        ],
+                        [
+                            'type' => 'linkedin',
+                            'machineName' => 'linkedin',
+                            'iconClass' => 'linkedin',
+                            'link' =>  'http://linkedin.com',
+                            'description' => ''
+                        ],
+                        [
+                            'type' => 'pinterest',
+                            'machineName' => 'pinterest',
+                            'iconClass' => 'pinterest-p',
+                            'link' =>  'http://pinterest.com/examplecompany',
+                            'description' => ''
+                        ]
+                    ];
                 case 'sprowt_settings_yelp_url':
                     return 'http://yelp.com';
                     break;
@@ -778,15 +823,15 @@ function sprowt_is_sprowt_theme($theme) {
     sprowt_require_class('themebuilder');
     $TB = new ThemeBuilder();
     $sprowt_themes = $TB->sprowt_themes();
-    
+
     return in_array($theme, array_keys($sprowt_themes));
 }
 
 function sprowt_add_cm_user($username, $password = '') {
     require_once drupal_get_path('profile', 'sprowt') . '/includes/userbuilder.php';
-    
+
     $UB = new UserBuilder();
-    
+
     if($account = $UB->addCoalmarchUser($username, $password)) {
         if(empty($password)) {
             _user_mail_notify('register_admin_created', $account);

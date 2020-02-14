@@ -1546,3 +1546,358 @@ function sprowt_settings_node_submit($node, $form, &$form_state) {
         }
     }
 }
+
+function _sprowt_settings_get_social_media_accounts() {
+    $accounts = variable_get('sprowt_settings_social_media', []);
+    if(!is_array($accounts)) {
+        $accounts = json_decode($accounts, true);
+    }
+    if(!is_array($accounts)) {
+        $accounts = [];
+    }
+
+    $inAccounts = function($machineName) use ($accounts) {
+        $filtered = array_filter($accounts, function($account) use ($machineName) {
+            return $account['machineName'] == $machineName;
+        });
+
+        return !empty($filtered);
+    };
+
+    $legacy = [
+        'facebook' => [
+            'type' => 'facebook',
+            'machineName' => 'facebook',
+            'iconClass' => 'facebook',
+            'link' =>  variable_get('sprowt_settings_facebook_url', null),
+            'description' => variable_get('sprowt_settings_facebook_description', null)
+        ],
+        'twitter' => [
+            'type' => 'twitter',
+            'machineName' => 'twitter',
+            'iconClass' => 'twitter',
+            'link' =>  variable_get('sprowt_settings_twitter_handle', null),
+            'description' => variable_get('sprowt_settings_twitter_description', null)
+        ],
+        'instagram' => [
+            'type' => 'instagram',
+            'machineName' => 'instagram',
+            'iconClass' => 'instagram',
+            'link' => variable_get('sprowt_settings_instagram_handle', null),
+            'description' => variable_get('sprowt_settings_instagram_description', null)
+        ],
+        'gplus' => [
+            'type' => 'gplus',
+            'machineName' => 'gplus',
+            'iconClass' => 'google-plus',
+            'link' => variable_get('sprowt_settings_gplus_url', null),
+            'description' => variable_get('sprowt_settings_gplus_description', null)
+        ],
+        'linkedin' => [
+            'type' => 'linkedin',
+            'machineName' => 'linkedin',
+            'iconClass' => 'linkedin',
+            'link' => variable_get('sprowt_settings_linkedin_url', null),
+            'description' => variable_get('sprowt_settings_linkedin_description', null)
+        ]
+    ];
+
+    foreach($legacy as $legacyItem) {
+        if(!empty($legacyItem['link']) && !$inAccounts($legacyItem['machineName'])) {
+            $accounts[] = $legacyItem;
+        }
+    }
+
+    return $accounts;
+}
+
+function _sprowt_settings_set_social_media_accounts($accounts) {
+    variable_set('sprowt_settings_social_media', $accounts);
+    $legacy = [
+        'facebook' => [
+            'linkVar' =>  'sprowt_settings_facebook_url',
+            'descriptionVar' => 'sprowt_settings_facebook_description'
+        ],
+        'twitter' => [
+            'linkVar' =>  'sprowt_settings_twitter_handle',
+            'descriptionVar' => 'sprowt_settings_twitter_description'
+        ],
+        'instagram' => [
+            'linkVar' => 'sprowt_settings_instagram_handle',
+            'descriptionVar' => 'sprowt_settings_instagram_description'
+        ],
+        'gplus' => [
+            'linkVar' => 'sprowt_settings_gplus_url',
+            'descriptionVar' => 'sprowt_settings_gplus_description'
+        ],
+        'linkedin' => [
+            'linkVar' => 'sprowt_settings_linkedin_url',
+            'descriptionVar' => 'sprowt_settings_linkedin_description'
+        ]
+    ];
+    $found = [];
+    foreach($accounts as $account) {
+        if(!empty($legacy[$account['machineName']])) {
+            $vars = $legacy[$account['machineName']];
+            variable_set($vars['linkVar'], $account['link']);
+            variable_set($vars['descriptionVar'], $account['description']);
+            $found[] = $account['machineName'];
+        }
+    }
+
+    foreach($legacy as $machineName => $vars) {
+        if(!in_array($machineName, $found)) {
+            foreach($vars as $var) {
+                variable_del($var);
+            }
+        }
+    }
+
+    return $accounts;
+}
+
+function _sprowt_settings_socialmedia_form($form, $form_state) {
+
+    $socialMedia = [];
+    $socialMedia[] = [
+        'name' => 'Facebook',
+        'machineName' => 'facebook',
+        'iconClass' => 'facebook',
+        'linkTitle' => 'Company Facebook URL',
+        'linkPlaceholder' => 'http://facebook.com/examplecompany'
+    ];
+
+    $socialMedia[] = [
+        'name' => 'Twitter',
+        'machineName' => 'twitter',
+        'iconClass' => 'twitter',
+        'linkTitle' => 'Company Twitter Handle',
+        'linkDescription' => 'Company twitter handle (do not include the @).',
+        'linkPlaceholder' => 'examplecompany'
+    ];
+
+    $socialMedia[] = [
+        'name' => 'Google+',
+        'machineName' => 'gplus',
+        'iconClass' => 'google-plus',
+        'linkTitle' => 'Company Google+ URL',
+        'linkPlaceholder' => 'http://gplusurl.com'
+    ];
+
+    $socialMedia[] = [
+        'name' => 'LinkedIn',
+        'machineName' => 'linkedin',
+        'iconClass' => 'linkedin',
+        'linkTitle' => 'Company LinkedIn URL',
+        'linkPlaceholder' => 'https://www.linkedin.com/company/example-company'
+    ];
+
+    $socialMedia[] = [
+        'name' => 'Instagram',
+        'machineName' => 'instagram',
+        'iconClass' => 'instagram',
+        'linkTitle' => 'Company Instagram Handle',
+        'linkDescription' => 'Company instagram handle (do not include the @).',
+        'linkPlaceholder' => 'examplecompany'
+    ];
+
+    $socialMedia[] = [
+        'name' => 'Pinterest',
+        'machineName' => 'pinterest',
+        'iconClass' => 'pinterest-p',
+        'linkTitle' => 'Company Pinterest URL',
+        'linkPlaceholder' => 'https://www.pinterest.com/example_company'
+    ];
+
+    $socialMediaDefault = [
+        'linkDescription' => 'Begins with "http"',
+        'linkDescriptionTitle' => 'Link Description',
+        'linkDescriptionDescription' => 'Descriptive text for this service, e.g. "Be our friend", "Follow us", "Pin us", etc.',
+        'hide' => [
+            '.account-name',
+            '.account-machine-name',
+            '.account-icon'
+        ]
+    ];
+
+    foreach($socialMedia as &$sm) {
+        $sm += $socialMediaDefault;
+    }
+
+    $form['sprowt_settings_social_template'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Account Name'),
+        '#prefix' => '<script type="text/html-template" id="socialTemplate" data-social-media-settings="'.htmlentities(json_encode($socialMedia)).'">',
+        '#suffix' => '</script>',
+//        '#prefix' => '<div type="text/html-template" id="socialTemplate" data-social-media-settings="'.htmlentities(json_encode($socialMedia)).'">',
+//        '#suffix' => '</div>',
+        '#attributes' => [
+            'class' => ['account-set']
+        ]
+    );
+
+    $form['sprowt_settings_social_template']['name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Account Type'),
+        '#size' => 60,
+        '#maxlength' => 255,
+        '#description' => t('Name of the type of account (e.g. "Facebook")'),
+        '#prefix' => '<div class="account-name">',
+        '#suffix' => '</div>',
+    );
+
+    $form['sprowt_settings_social_template']['machineName'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Account Machine Name'),
+        '#required' => true,
+        '#size' => 60,
+        '#maxlength' => 255,
+        '#description' => t('Machine name of the type of account (e.g. "facebook"). Should be all lowercase with numbers, letters, and underscores. No spaces. Should also be unique.'),
+        '#prefix' => '<div class="account-machine-name">',
+        '#suffix' => '</div>',
+        '#attributes' => [
+            'required' => 'required'
+        ]
+    );
+
+    $form['sprowt_settings_social_template']['icon'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Account FontAwesome Icon'),
+        '#size' => 60,
+        '#maxlength' => 255,
+        '#description' => 'The icon name for this account. Found <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">here</a>. Use the icon name (should be all lowercase with dashes). DO NOT INCLUDE the "fa-"',
+        '#prefix' => '<div class="account-icon">',
+        '#suffix' => '</div>',
+    );
+
+    $form['sprowt_settings_social_template']['link'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Account URL'),
+        '#required' => true,
+        '#size' => 60,
+        '#maxlength' => 255,
+        '#description' => t('The URL being linked to'),
+        '#prefix' => '<div class="account-link">',
+        '#suffix' => '</div>',
+        '#attributes' => [
+            'required' => 'required'
+        ]
+    );
+
+    $form['sprowt_settings_social_template']['description'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Link Description'),
+        '#default_value' => variable_get('sprowt_settings_facebook_description'),
+        '#size' => 60,
+        '#maxlength' => 255,
+        '#description' => t("Descriptive text for the link. E.g. 'Be our friend'"),
+        '#prefix' => '<div class="account-description">',
+        '#suffix' => '</div>',
+    );
+
+    $form['sprowt_settings_social_template']['removeButton'] = array(
+        '#type' => 'button',
+        '#value' => 'Remove',
+        '#attributes' => [
+            'class' => ['remove-button']
+        ]
+    );
+
+    $accounts = _sprowt_settings_get_social_media_accounts();
+
+    $form['sprowt_settings_social_media'] = [
+        '#type' => 'hidden',
+        '#default_value' => json_encode($accounts),
+        '#attributes' => [
+            'id' => 'sprowt_settings_social_media'
+        ]
+    ];
+
+    $form['sprowt_settings_social_media_account_wrapper'] = [
+        '#type' => 'markup',
+        '#markup' => '<div id="sprowt-settings-social-media-accounts"></div>'
+    ];
+
+    $selectOptions = [
+        '' => '- Select -'
+    ];
+
+    foreach($socialMedia as $media) {
+        $selectOptions[$media['machineName']] = $media['name'];
+    }
+
+    $selectOptions['other'] = 'Other';
+
+    $form['sprowt_settings_social_media_add'] = [
+        '#type' => 'select',
+        '#title' => 'Add Account',
+        '#options' => $selectOptions,
+        '#suffix' => '<input id="sprowt-settings-social-media-add-button" type="button" class="button form-submit" value="Add"/>',
+        '#attributes' => [
+            'class' => ['sprowt_settings_social_media_add']
+        ]
+    ];
+
+    $form['#attached']['js'][] = drupal_get_path('module', 'sprowt_settings') . '/js/social_media.js';
+
+    $form['#validate'][] = '_sprowt_settings_socialmedia_form_validate';
+    $form['#submit'][] = '_sprowt_settings_socialmedia_form_submit';
+
+    return $form;
+}
+
+function _sprowt_settings_socialmedia_form_validate(&$form, &$form_state) {
+    $values = &$form_state['values'];
+    $removeKeys = [
+        'sprowt_settings_social_media_add',
+        'sprowt_settings_social_template',
+        'name',
+        'machineName',
+        'icon',
+        'link',
+        'description',
+        'removeButton'
+    ];
+
+    foreach($removeKeys as $key) {
+        if(isset($values[$key])) {
+            unset($values[$key]);
+        }
+    }
+
+
+    $accounts = json_decode($values['sprowt_settings_social_media'], true);
+
+    $machineNames = [];
+    $error = false;
+    foreach($accounts as $media) {
+        if(in_array($media['machineName'], $machineNames)) {
+            form_set_error('sprowt_settings_social_media--machineNameUnique', 'Social media machine name must be unique.');
+            $error = true;
+        }
+        else if(empty($media['machineName'])) {
+            form_set_error('sprowt_settings_social_media--machineNameRequired', 'Social media machine name is required.');
+            $error = true;
+        }
+        else if(!preg_match('/^[a-z0-9_]+$/', $media['machineName'])) {
+            form_set_error('sprowt_settings_social_media--machineNameAccurate', 'Social media machine name must be only lowercase letters, numbers, and underscores.');
+            $error =  true;
+        }
+
+        if(empty($media['link'])) {
+            form_set_error('sprowt_settings_social_media--linkRequired', 'Social media machine URL is required.');
+            $error = true;
+        }
+        $machineNames[] = $media['machineName'];
+    }
+
+    if(!$error) {
+        $values['sprowt_settings_social_media'] = $accounts;
+    }
+}
+
+function _sprowt_settings_socialmedia_form_submit(&$form, &$form_state) {
+    $values = $form_state['values'];
+    $accounts = $values['sprowt_settings_social_media'];
+    _sprowt_settings_set_social_media_accounts($accounts);
+}

@@ -36,6 +36,16 @@ Class SprowtBuilder {
         $this->paths = $paths;
     }
 
+    function decodeVal($string) {
+        $decoded = json_decode($string, true);
+        if(json_last_error() == JSON_ERROR_NONE) {
+            return $decoded;
+        }
+        return $string;
+    }
+
+
+
     /**
      * Gets all the data from the sprowt_setup table
      *
@@ -59,15 +69,8 @@ Class SprowtBuilder {
                 $this->data[$row['form_name']] = array();
             }
 
-            if($row['form_name'] == 'market_setup'
-                || $row['form_name'] == 'users'
-                || $row['form_name'] == 'locations')
-            {
-                $row['field_value'] = json_decode($row['field_value'], true);
-            }
 
-
-            $this->data[$row['form_name']][$row['form_field']] = $row['field_value'];
+            $this->data[$row['form_name']][$row['form_field']] = $this->decodeVal($row['field_value']);
         }
 
         return $this->data;
@@ -85,10 +88,8 @@ Class SprowtBuilder {
 
         foreach($data as $form_name => $fields) {
             foreach($fields as $field_name => $field_value) {
-                if($form_name == 'market_setup'
-                    || $form_name == 'users'
-                    || $form_name == 'locations')
-                {
+
+                if(is_object($field_value) || is_array($field_value)) {
                     $field_value = json_encode($field_value);
                 }
 
@@ -150,6 +151,7 @@ Class SprowtBuilder {
      *Adds company info to site
      */
     function addSocial(){
+        require_once drupal_get_path('module', 'sprowt_settings') . '/sprowt_settings.module';
         if(empty($this->data)){
             $this->getData();
         }
@@ -178,6 +180,9 @@ Class SprowtBuilder {
             variable_set('sprowt_settings_gplus_url', $this->data['social_media']['gplus']);
         }
 
+        if(!empty($this->data['social_media']['accounts'])) {
+            _sprowt_settings_set_social_media_accounts($this->data['social_media']['accounts']);
+        }
     }
 
     /**

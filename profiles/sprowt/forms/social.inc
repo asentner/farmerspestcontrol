@@ -1,58 +1,34 @@
-<?php 
+<?php
 /**
   * Social Panel
   */
- 
+
+require_once drupal_get_path('module', 'sprowt_settings') . '/sprowt_settings.module';
+
  function sprowt_social($form, &$form_state, &$install_state){
   drupal_set_title(st('Configure Social Media'));
-  
-  $form['social_media']['facebook'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Facebook URL',
-    '#default_value' => _sprowt_form_default('facebook')
-  );
-  
-  $form['social_media']['twitter'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Twitter Handle',
-    '#default_value' => _sprowt_form_default('twitter')
-  );
-  
-  $form['social_media']['linkedin'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Linked In URL',
-    '#default_value' => _sprowt_form_default('linkedin')
-  );
-  
-  $form['social_media']['gplus'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Google+ URL',
-    '#description' => 'Site wide Google+ URL. Also used for site Publisher markup',
-    '#default_value' => _sprowt_form_default('gplus')
-  );
-  
-  $form['actions']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Save'),
-  );
-  
+
+     $form['#attached']['js'][] = "https://code.jquery.com/jquery-1.11.2.min.js"; //I don't wanna use drupal's old as dirt jQuery
+
+  $form = _sprowt_settings_socialmedia_form($form, $form_state);
+  $default = _sprowt_form_default('social_media_accounts');
+
+  $form['sprowt_settings_social_media']['#default_value'] = !empty($default) ? json_encode($default) : '[]';
+
+     $form['actions']['submit'] = array(
+         '#type' => 'submit',
+         '#value' => t('Save'),
+     );
+
+     $form['#submit'] = ['sprowt_social_submit'];
+
   return $form;
  }
- 
+
  function sprowt_social_submit($form, &$form_state){
-  $fields = array(
-    'facebook' => $form['social_media']['facebook']['#value'],
-    'twitter' => $form['social_media']['twitter']['#value'],
-    'linkedin' => $form['social_media']['linkedin']['#value'],
-    'gplus' => $form['social_media']['gplus']['#value'],
-  );
-  
-  foreach($fields as $index=>$value){
-    if(empty($value)){
-      unset($fields[$index]);
-    }
-  }
-  
-  _sprowt_save_to_table('social_media', $fields);
-  
+     $values = $form_state['values'];
+     $accounts = $values['sprowt_settings_social_media'];
+     _sprowt_save_to_table('social_media', [
+         'accounts' => json_encode($accounts, true)
+     ]);
  }
