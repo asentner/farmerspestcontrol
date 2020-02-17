@@ -12,4 +12,18 @@ function sprowt_theme_preprocess_html(&$variables) {
   }
 
 	$variables['base_path'] = base_path() . path_to_theme();
+
+	$path = current_path();
+	if(preg_match('#^user(/|$)#', $path)) {
+	    $noIndexUser = [
+	        '#type' => 'html_tag',
+            '#tag' => 'meta',
+            '#attributes' => [
+                'name' => 'robots',
+                'content' => 'noindex'
+            ]
+        ];
+
+	    drupal_add_html_head($noIndexUser, 'sprowt_user_noindex');
+    }
 }
