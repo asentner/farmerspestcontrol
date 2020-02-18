@@ -46,7 +46,7 @@ function block_shortcode_filter_block_shortcode_process($text, $filter, $format,
  */
 function block_shortcode_filter_block_shortcode_tips($filter, $format, $long) {
 
-    return t('[block module:some_module delta:123] - embed a block with given 
+    return t('[block module:some_module delta:123] - embed a block with given
             identification (module and delta). See block\'s edit page for a specific example.'
     );
 
@@ -80,15 +80,31 @@ function _block_shortcode_style_make_replacements($matches) {
     $module = $matches[1];
     $delta = $matches[2];
     $block_item = block_load($module, $delta);
+    $block_item->block_shortcode = true;
     $rendered_array = _block_render_blocks(array($block_item));
     $renderable = _block_get_renderable_array($rendered_array);
-    foreach ($renderable as &$element) {
-        if(is_array($element)) {
-            $element['attributes_array']['id'] = 'block-shortcode--' . $module . '-' . $delta;
-            $element['classes_array'][] = 'block-shortcode';
-            $element['classes_array'][] = 'block-shortcode--' . $module . '-' . $delta;
-        }
-    }
+//    if($module !== 'bean') {
+//        foreach ($renderable as &$element) {
+//            if (is_array($element)) {
+//                $element['attributes_array']['id'] = 'block-shortcode--' . $module . '-' . $delta;
+//                $element['classes_array'][] = 'block-shortcode';
+//                $element['classes_array'][] = 'block-shortcode--' . $module . '-' . $delta;
+//            }
+//        }
+//    }
+//    else {
+//        foreach ($renderable as &$element) {
+//            if (is_array($element)) {
+//                $element['#attributes'] = [
+//                    'id' => 'block-shortcode--' . $module . '-' . $delta,
+//                    'class' => [
+//                        'block-shortcode',
+//                        'block-shortcode--' . $module . '-' . $delta
+//                    ]
+//                ];
+//            }
+//        }
+//    }
 
     $html = render($renderable);
 
@@ -99,8 +115,11 @@ function _block_shortcode_style_make_replacements($matches) {
 }
 
 function block_shortcode_preprocess_block(&$variables) {
-    $elements = $variables['elements'];
-    if(!empty($elements['attributes_array']['id']) && strpos($elements['attributes_array']['id'], 'block-shortcode') !== false) {
-        $variables['classes_array'] = array_merge($variables['classes_array'], $elements['classes_array']);
+    $block = $variables['block'];
+    if(!empty($block->block_shortcode)) {
+        $module = $block->module;
+        $delta = $block->delta;
+        $variables['classes_array'][] = 'block-shortcode';
+        $variables['classes_array'][] = 'block-shortcode--' . $module . '-' . $delta;
     }
 }
