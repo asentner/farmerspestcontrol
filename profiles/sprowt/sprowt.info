@@ -99,6 +99,7 @@ dependencies[] = node_export
 dependencies[] = clone
 dependencies[] = optimizely
 dependencies[] = rabbit_hole
+dependencies[] = redirect
 dependencies[] = rh_node
 dependencies[] = site_map
 dependencies[] = smart_trim
