@@ -8,7 +8,7 @@
 
       $('#block-logo-block-logo').once().append('<div class="mobile-menu-toggle"><i class="fa fa-bars"></i></div>');
 
-      $('#block-logo-block-logo').on('click', '.tablet-menu-toggle', function(){
+      $('#block-logo-block-logo').on('click', '.tablet-menu-toggle', function () {
         $('.block--nav-main').toggleClass('open');
       });
 
@@ -16,13 +16,13 @@
       $('.block--nav-main', context).once('menu', function () {
         var $block = $(this);
         // whole menu toggle
-        $(this).children('.block__title').click(function(e) {
+        $(this).children('.block__title').click(function (e) {
           e.preventDefault();
           $(this).next().slideToggle();
           $block.toggleClass('open');
         });
 
-        $('.mobile-menu-toggle').click(function(e){
+        $('.mobile-menu-toggle').click(function (e) {
           e.preventDefault();
           $('.block--nav-main .block__content').slideToggle();
           $(this).toggleClass('open');
@@ -32,7 +32,7 @@
         $(this).find('.expanded .menu').before('<a href="#" class="menu-child-toggle">Toggle children</a>');
 
         // toggle the children
-        $('.menu-child-toggle').click(function(e) {
+        $('.menu-child-toggle').click(function (e) {
           e.preventDefault();
           $(this).toggleClass('open');
           $(this).siblings('a').toggleClass('open');
@@ -55,15 +55,15 @@
       var lastScrollTop = 0;
       var navbarHeight = menu.outerHeight(true);
 
-      $(window).scroll(function(e) {
-          didScroll = true;
+      $(window).scroll(function (e) {
+        didScroll = true;
       });
 
-      setInterval(function() {
-          if (didScroll) {
-              hasScrolled();
-              didScroll = false;
-          }
+      setInterval(function () {
+        if (didScroll) {
+          hasScrolled();
+          didScroll = false;
+        }
       }, 0);
 
       function hasScrolled() {
@@ -75,8 +75,8 @@
         }
         else {
           // Scroll Up
-          if(st + $(window).height() < $(document).height()) {
-          menu.removeClass('hidden').addClass('visible');
+          if (st + $(window).height() < $(document).height()) {
+            menu.removeClass('hidden').addClass('visible');
           }
         }
         lastScrollTop = st;
@@ -84,10 +84,10 @@
     }
   };
 
-Drupal.behaviors.sprowtAccordions = {
+  Drupal.behaviors.sprowtAccordions = {
     attach: function (context, settings) {
       // find div's with class = accordion and turn them in to accordions
-      var $accordions = $('div.accordion').each(function(){
+      var $accordions = $('div.accordion').each(function () {
         $(this).find('h3').first().addClass('accordion-header');
         $(this).children().not('.accordion-header').wrapAll('<div class="accordion-content"></div>');
       });
@@ -96,7 +96,7 @@ Drupal.behaviors.sprowtAccordions = {
       $('.accordion-content').hide();
 
       // make the accordions work
-      $('.accordion-header').click(function(){
+      $('.accordion-header').click(function () {
         $(this).toggleClass('open');
         $(this).siblings('.accordion-content').slideToggle();
       });
@@ -109,10 +109,10 @@ Drupal.behaviors.sprowtAccordions = {
       settings.mapmouseover = false;
       var map = undefined;
 
-      $('iframe').each(function(){
-        if($(this).attr('src').indexOf('map') > -1) {
+      $('iframe').each(function () {
+        if ($(this).attr('src').indexOf('map') > -1) {
           //if the map isnt wrapped with a div.media_embed, wrap in one
-          if($(this).parent('.media_embed').length < 1) {
+          if ($(this).parent('.media_embed').length < 1) {
             $(this).wrap('<div class="media_embed"></div>');
           };
 
@@ -120,14 +120,14 @@ Drupal.behaviors.sprowtAccordions = {
           map = $(this);
 
           var wrap = map.closest('.media_embed');
-          wrap.css('position','relative');
+          wrap.css('position', 'relative');
           wrap.prepend('<div class="map-disable" style="position:absolute; top: 0; left: 0; right: 0; bottom: 0;z-index:20;"></div>');
 
-          wrap.click(function(){
+          wrap.click(function () {
             wrap.find('.map-disable').hide();
           });
 
-          wrap.mouseleave(function(){
+          wrap.mouseleave(function () {
             wrap.find('.map-disable').show();
           });
 
@@ -191,6 +191,41 @@ Drupal.behaviors.sprowtAccordions = {
         // The anchor is then appended to the current element.
         $anchor.appendTo(this);
       });
+    }
+  };
+
+
+  Drupal.behaviors.sprowt6ContactLock = {
+    attach: function (context, settings) {
+
+      $lockBox = $('.lock-form--wrap');
+
+      window.addEventListener('resize', function () {
+        wS = $(this).scrollTop();
+        hT = $lockBox.offset().top;
+        if (wS > hT) {
+          $lockBox.addClass('fix-box');
+        }
+      });
+
+      $(window).scroll(function () {
+        wS = $(this).scrollTop();
+        hT = $lockBox.offset().top;
+        hH = $lockBox.outerHeight();
+        if (wS > hT) {
+          $lockBox.addClass('fix-box');
+          $lockBox.css('height', hH + 'px');
+        } else {
+          $lockBox.removeClass('fix-box');
+          $lockBox.css('height', 'inherit');
+        }
+        if (wS > (hT + hH)) {
+          $lockBox.addClass('shrink-box');
+        } else {
+          $lockBox.removeClass('shrink-box');
+        }
+      });
+
     }
   };
 

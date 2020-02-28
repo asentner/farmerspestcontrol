@@ -8523,6 +8523,102 @@ div.entity.solution-body {
       div.entity.solution-body h4 {
         font-size: 26px; } }
 
+.lock-form--wrap .lock-form {
+  width: 100%;
+  max-width: 100%; }
+
+.lock-form--wrap .content {
+  max-width: 1210px;
+  margin: 0 auto; }
+  .lock-form--wrap .content .node__title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: normal;
+    max-height: 100px;
+    transition: margin 0.5s ease-in-out, max-height 0.5s ease-in-out; }
+    @media (min-width: 768px) {
+      .lock-form--wrap .content .node__title {
+        font-weight: 48px; } }
+  .lock-form--wrap .content .field--name-body {
+    text-align: center;
+    max-height: 100px;
+    transition: margin 0.5s ease-in-out, max-height 0.5s ease-in-out; }
+  .lock-form--wrap .content .webform-client-form {
+    margin-top: 20px;
+    transition: margin 0.5s ease-in-out; }
+    .lock-form--wrap .content .webform-client-form > div {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+    .lock-form--wrap .content .webform-client-form .form-item {
+      width: 100%;
+      margin: 8px 0;
+      transition: margin 0.5s ease-in-out; }
+      @media (min-width: 768px) {
+        .lock-form--wrap .content .webform-client-form .form-item {
+          -ms-flex: 1 1 calc(50% - 30px);
+              flex: 1 1 calc(50% - 30px);
+          margin: 15px 12px; } }
+      @media (min-width: 1024px) {
+        .lock-form--wrap .content .webform-client-form .form-item {
+          -ms-flex: 1;
+              flex: 1; } }
+    .lock-form--wrap .content .webform-client-form .webform-privacy-policy {
+      display: none;
+      width: 100%;
+      text-align: center; }
+    .lock-form--wrap .content .webform-client-form .form-actions {
+      margin: 20px 12px;
+      text-align: center;
+      transition: margin 0.5s ease-in-out; }
+    .lock-form--wrap .content .webform-client-form input[type='text'],
+    .lock-form--wrap .content .webform-client-form input[type='email'],
+    .lock-form--wrap .content .webform-client-form input[type='submit'] {
+      padding: 18px 15px;
+      border: none;
+      border-radius: 0;
+      transition: padding 0.5s ease-in-out; }
+    .lock-form--wrap .content .webform-client-form input[type='text'],
+    .lock-form--wrap .content .webform-client-form input[type='email'],
+    .lock-form--wrap .content .webform-client-form input[type='submit'] {
+      border: 1px solid rgba(0, 0, 0, 0.1); }
+    .lock-form--wrap .content .webform-client-form input[type='submit'] {
+      padding: 18px 30px; }
+
+@media (min-width: 768px) {
+  .lock-form--wrap.fix-box > div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 110;
+    transition: padding 0.5s ease-in-out; }
+  .lock-form--wrap.shrink-box > div {
+    padding: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); }
+  .lock-form--wrap.shrink-box .node__title,
+  .lock-form--wrap.shrink-box .field--name-body {
+    max-height: 0;
+    margin: 0;
+    overflow: hidden; }
+  .lock-form--wrap.shrink-box .webform-client-form {
+    margin-top: 0; }
+    .lock-form--wrap.shrink-box .webform-client-form .form-item {
+      margin-top: 5px;
+      margin-bottom: 5px; }
+    .lock-form--wrap.shrink-box .webform-client-form .form-actions {
+      margin-top: 5px;
+      margin-bottom: 12px; }
+    .lock-form--wrap.shrink-box .webform-client-form input[type='text'],
+    .lock-form--wrap.shrink-box .webform-client-form input[type='email'],
+    .lock-form--wrap.shrink-box .webform-client-form input[type='submit'] {
+      padding-top: 10px;
+      padding-bottom: 10px; } }
+
 div.entity-paragraphs-item.cta {
   max-width: 100%;
   padding: 50px 20px;

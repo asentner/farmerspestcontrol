@@ -1,0 +1,139 @@
+$boxduration: 0.5s ease-in-out;
+
+.lock-form--wrap {
+
+  .lock-form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .content {
+    max-width: $container;
+    margin: 0 auto;
+
+    .node__title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: normal;
+      max-height: 100px;
+      transition: margin $boxduration, max-height $boxduration;
+
+      @include breakpoint($tab) {
+        font-weight: 48px;
+      }
+    }
+
+    .field--name-body {
+      text-align: center;
+      max-height: 100px;
+      transition: margin $boxduration, max-height $boxduration;
+    }
+
+    .webform-client-form {
+      margin-top: 20px;
+      transition: margin $boxduration;
+
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .form-item {
+        width: 100%;
+        margin: 8px 0;
+        transition: margin $boxduration;
+
+        @include breakpoint($tab) {
+          flex: 1 1 calc(50% - 30px);
+          margin: 15px 12px;
+        }
+
+        @include breakpoint($desk) {
+          flex: 1;
+        }
+      }
+      .webform-privacy-policy {
+        display: none;
+        width: 100%;
+        text-align: center;
+      }
+      .form-actions {
+        margin: 20px 12px;
+        text-align: center;
+        transition: margin $boxduration;
+      }
+
+      input[type='text'],
+      input[type='email'],
+      input[type='submit'] {
+        padding: 18px 15px;
+        border: none;
+        border-radius: 0;
+        transition: padding $boxduration;
+      }
+
+      input[type='text'],
+      input[type='email'],
+      input[type='submit'] {
+        border: 1px solid rgba(0,0,0,0.1);
+      }
+
+      input[type='submit'] {
+        padding: 18px 30px;
+      }
+    }
+  }
+}
+
+.lock-form--wrap {
+
+  @include breakpoint($tab) {
+    &.fix-box {
+
+      > div {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 110;
+        transition: padding $boxduration;
+      }
+    }
+    &.shrink-box {
+  
+      > div {
+        padding: 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      }
+
+      .node__title,
+      .field--name-body {
+        max-height: 0;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .webform-client-form {
+        margin-top: 0;
+
+        .form-item {
+          margin-top: 5px;
+          margin-bottom: 5px;
+        }
+
+        .form-actions {
+          margin-top: 5px;
+          margin-bottom: 12px;
+        }
+
+        input[type='text'],
+        input[type='email'],
+        input[type='submit'] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+}
