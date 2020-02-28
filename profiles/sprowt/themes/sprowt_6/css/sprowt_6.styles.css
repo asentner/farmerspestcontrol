@@ -2458,6 +2458,7 @@ body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links {
   text-align: center;
   padding: 15px 30px;
   border-radius: 5px;
+  border-style: solid;
   outline: 0;
   line-height: normal;
   letter-spacing: .2px; }
