@@ -902,13 +902,15 @@ function sprowt_solution_finder_preprocess_block(&$variables) {
  * Implements hook_preprocess_HOOK().
  */
 function sprowt_solution_finder_preprocess_html(&$variables) {
-    $containsSolutionFinder = _sprowt_solution_finder_page_contains_solution_finder($variables['page']);
-    if(!empty($containsSolutionFinder)) {
-        $variables['attributes_array']['class'][] = 'has-solution-finder';
+    if(!path_is_admin(current_path())) {
+        $containsSolutionFinder = _sprowt_solution_finder_page_contains_solution_finder($variables['page']);
+        if (!empty($containsSolutionFinder)) {
+            $variables['attributes_array']['class'][] = 'has-solution-finder';
+        }
     }
 }
 
-function _sprowt_solution_finder_page_contains_solution_finder($variables) {
+function _sprowt_solution_finder_page_contains_solution_finder($variables, $maxDepth = 3, $depth = 0) {
     if(is_array($variables)
         && !empty($variables['#block'])
         && is_object($variables['#block'])
@@ -916,11 +918,12 @@ function _sprowt_solution_finder_page_contains_solution_finder($variables) {
     ) {
         return true;
     }
-    if(is_array($variables)) {
+    if(is_array($variables) && $depth <= $maxDepth) {
+        $newDepth = $depth + 1;
         foreach ($variables as $variable) {
             $return = false;
             if (is_array($variable)) {
-                $return = _sprowt_solution_finder_page_contains_solution_finder($variable);
+                $return = _sprowt_solution_finder_page_contains_solution_finder($variable, $maxDepth, $newDepth);
             }
 
             if (!empty($return)) {
