@@ -1,5 +1,4 @@
 <?php
-
 /**
  * modified copy of paragraphs_clone_node_alter()
  */
@@ -87,6 +86,7 @@ function _paragraphs_export_node_clone_prepopulate_entity_after_extractions(&$en
  */
 function paragraphs_export_node_export_node_alter(&$node, $original_node) {
     paragraphs_export_extract_paragraphs($node, $original_node, 'node');
+    paragraphs_export_relationships_extract($node, $original_node, 'node');
 }
 
 
@@ -97,6 +97,295 @@ function paragraphs_export_node_export_node_import_alter(&$node, $original_node,
     paragraphs_export_import_paragraphs($node, $original_node);
 }
 
+function _paragraphs_export_extract_block_reference_info($module, $delta) {
+    $info = [];
+    switch($module) {
+        //I only need to handle webforms for right now
+        case 'webform':
+            $nid = str_replace('client-block-', '', $delta);
+            $info['webform'] = [
+                'nid' => $nid
+            ];
+            $uuid = entity_get_uuid_by_id('node', [$nid]);
+            $info['webform']['uuid'] = array_shift($uuid);
+            break;
+    }
+
+    return $info;
+}
+
+function _paragraphs_export_handle_block_reference_info($info, $module, $delta) {
+    $value = null;
+    switch($module) {
+        //I only need to handle webforms for right now
+        case 'webform':
+            $uuid = $info['webform']['uuid'];
+            $nid = entity_get_id_by_uuid('node', [$uuid]);
+            if(!empty($nid)) {
+                $nid = array_shift($nid);
+                $newDelta = 'client-block-' . $nid;
+                $value = [
+                    'moddelta' => $module . ':' . $newDelta
+                ];
+            }
+            break;
+    }
+    return $value;
+}
+
+function paragraphs_export_relationships_extract(&$element, $original, $element_type = 'node') {
+    if($element_type == 'node' || $element_type == 'bean') {
+        $bundle = $original->type;
+    }
+    else {
+        $bundle = $original->bundle;
+    }
+    $instances = field_info_instances($element_type, $bundle);
+    $wrapper = entity_metadata_wrapper($element_type, $element);
+
+    $references = [];
+    foreach($instances as $instance) {
+        $info = field_info_field($instance["field_name"]);
+        switch($info['type']) {
+            case 'paragraphs':
+                if(!empty($element->paragraph_fields)) {
+                    $value = [];
+                    foreach($element->paragraph_fields as $paragraph_field_name => &$paragraph_field) {
+                        foreach($paragraph_field as $lang => &$items) {
+                            foreach($items as &$item) {
+                                $original_item = $item;
+                                paragraphs_export_relationships_extract($item, $original_item, 'paragraphs_item');
+                            }
+                        }
+                    }
+                }
+                break;
+            case 'field_collection':
+                if(!empty($element->fc_fields)) {
+                    $value = [];
+                    foreach($element->fc_fields as $fc_field_name => &$fc_field) {
+                        foreach($fc_field as $lang => &$items) {
+                            foreach($items as &$item) {
+                                $original_item = $item;
+                                paragraphs_export_relationships_extract($item, $original_item, 'field_collection_item');
+                            }
+                        }
+                    }
+                }
+                break;
+            case 'blockreference':
+                $references[$instance["field_name"]] = [
+                    'field_type' => 'blockreference',
+                    'value' => null
+                ];
+                $value = $wrapper->{$instance["field_name"]}->value();
+                if(!empty($value) && !empty($value['moddelta'])) {
+                    $parts = explode(':', $value['moddelta']);
+                    $module = $parts[0];
+                    $delta = $parts[1];
+                    $references[$instance["field_name"]]['value'] = [
+                        'module' => $module,
+                        'delta' => $delta,
+                        'info' => _paragraphs_export_extract_block_reference_info($module, $delta)
+                    ];
+                }
+                elseif (!empty($value)) {
+                    $references[$instance["field_name"]]['value'] = [];
+                    foreach($value as $v) {
+                        $parts = explode(':', $v['moddelta']);
+                        $module = $parts[0];
+                        $delta = $parts[1];
+                        $references[$instance["field_name"]]['value'][] = [
+                            'module' => $module,
+                            'delta' => $delta,
+                            'info' => _paragraphs_export_extract_block_reference_info($module, $delta)
+                        ];
+                    }
+                }
+                break;
+                $element->{$instance["field_name"]} = null;
+            case 'entityreference':
+                $references[$instance["field_name"]] = [
+                    'field_type' => 'entityreference',
+                    'target_type' => $info["settings"]["target_type"],
+                    'value' => null
+                ];
+
+                $value = $wrapper->{$instance["field_name"]}->value();
+                if(!empty($value) && !is_array($value)) {
+                    $vMeta = entity_metadata_wrapper($info["settings"]["target_type"], $value);
+                    $uuids = entity_get_uuid_by_id($info["settings"]["target_type"], [$vMeta->getIdentifier()]);
+                    $uuid = array_shift($uuids);
+                    $references[$instance["field_name"]]['value'] = [
+                        'entity_type' => $info["settings"]["target_type"],
+                        'target_uuid' => $uuid
+                    ];
+                }
+                elseif (!empty($value)) {
+                    $references[$instance["field_name"]]['value'] = [];
+                    foreach($value as $v) {
+                        $vMeta = entity_metadata_wrapper($info["settings"]["target_type"], $v);
+                        $uuids = entity_get_uuid_by_id($info["settings"]["target_type"], [$vMeta->getIdentifier()]);
+                        $uuid = array_shift($uuids);
+                        $references[$instance["field_name"]]['value'][] = [
+                            'entity_type' => $info["settings"]["target_type"],
+                            'target_uuid' => $uuid
+                        ];
+                    }
+                }
+                $element->{$instance["field_name"]} = null;
+                break;
+            case 'taxonomy_term_reference':
+                $value = $wrapper->{$instance["field_name"]}->value();
+                $references[$instance["field_name"]] = [
+                    'field_type' => 'taxonomy_term_reference',
+                    'value' => null
+                ];
+                if(!empty($value) && !is_array($value)) {
+                    $references[$instance["field_name"]]['value'] = [
+                        'entity_type' => 'taxonomy_term',
+                        'target_uuid' => $value->uuid
+                    ];
+                }
+                elseif (!empty($value)) {
+                    $references[$instance["field_name"]]['value'] = [];
+                    foreach($value as $v) {
+                        $references[$instance["field_name"]]['value'][] = [
+                            'entity_type' => 'taxonomy_term',
+                            'target_uuid' => $v->uuid
+                        ];
+                    }
+                }
+                $element->{$instance["field_name"]} = null;
+                break;
+        }
+    }
+
+    if(!empty($references)) {
+        $element->extracted_references = $references;
+    }
+}
+
+/**
+ * Implements hook_node_export_after_import_alter().
+ */
+function paragraphs_export_node_export_after_import_alter(&$nodes, $format, $save) {
+    foreach($nodes as $nid => $node) {
+        paragraphs_export_import_references($node, 'node', $nid);
+    }
+}
+
+function paragraphs_export_import_references($entity, $entity_type, $entity_id) {
+    if(!empty($entity->paragraph_fields)) {
+        foreach($entity->paragraph_fields as $paragraph_field_name => &$paragraph_field) {
+            foreach($paragraph_field as $lang => $items) {
+                foreach($items as $delta => $item) {
+                    $pid = entity_get_id_by_uuid('paragraphs_item', [$item->uuid]);
+                    $pid = array_shift($pid);
+                    paragraphs_export_import_references($item, 'paragraphs_item', $pid);
+                }
+            }
+        }
+    }
+    if(!empty($entity->fc_fields)) {
+        foreach($entity->fc_fields as $fc_field_name => &$fc_field) {
+            foreach($fc_field as $lang => $items) {
+                foreach($items as $item) {
+                    $fid = entity_get_id_by_uuid('field_collection_item', [$item->uuid]);
+                    $fid = array_shift($fid);
+                    paragraphs_export_import_references($item, 'field_collection_item', $fid);
+                }
+            }
+        }
+    }
+    if(!empty($entity->extracted_references)) {
+        $loaded = entity_load($entity_type, [$entity_id]);
+        $loaded = array_shift($loaded);
+        $wrapper = entity_metadata_wrapper($entity_type, $loaded);
+        $save = false;
+        foreach ($entity->extracted_references as $field_name => $reference) {
+            $value = null;
+            switch($reference['field_type']) {
+                case 'blockreference':
+                    if(!empty($reference['value']) && !empty($reference['value']['module'])) {
+                        $value = _paragraphs_export_handle_block_reference_info($reference['value']['info'], $reference['value']['module'], $reference['value']['delta']);
+                    }
+                    elseif (!empty($reference['value'])) {
+                        $value = [];
+                        foreach($reference['value'] as $info) {
+                            $value[] = _paragraphs_export_handle_block_reference_info($info['info'], $info['module'], $info['delta']);
+                        }
+                    }
+                    if(!empty($value)) {
+                        $wrapper->{$field_name} = $value;
+                        $save = true;
+                    }
+                    break;
+                case 'taxonomy_term_reference':
+                    if(($reference['value']['target_uuid'])) {
+                        $referencedEntity = entity_uuid_load($reference['value']['entity_type'], [$reference['value']['target_uuid']]);
+                        if(!empty($referencedEntity)) {
+                            $referencedEntity = array_shift($referencedEntity);
+                            $referencedWrapper = entity_metadata_wrapper($reference['value']['entity_type'], $referencedEntity);
+                            $value = [
+                                'tid' => $referencedWrapper->getIdentifier()
+                            ];
+                        }
+                    }
+                    elseif (!empty($reference['value'])) {
+                        $value = [];
+                        foreach($reference['value'] as $referenceInfo) {
+                            $referencedEntity = entity_uuid_load($referenceInfo['entity_type'], [$referenceInfo['target_uuid']]);
+                            if(!empty($referencedEntity)) {
+                                $referencedEntity = array_shift($referencedEntity);
+                                $referencedWrapper = entity_metadata_wrapper($referenceInfo['entity_type'], $referencedEntity);
+                                $value[] = [
+                                    'tid' => $referencedWrapper->getIdentifier()
+                                ];
+                            }
+                        }
+                    }
+                    if(!empty($value)) {
+                        $wrapper->{$field_name}->set($value);
+                        $save = true;
+                    }
+                    break;
+                case 'entityreference':
+                    if(($reference['value']['target_uuid'])) {
+                        $referencedEntity = entity_uuid_load($reference['value']['entity_type'], [$reference['value']['target_uuid']]);
+                        if(!empty($referencedEntity)) {
+                            $referencedEntity = array_shift($referencedEntity);
+                            $referencedWrapper = entity_metadata_wrapper($reference['value']['entity_type'], $referencedEntity);
+                            $value = [
+                                'target_id' => $referencedWrapper->getIdentifier()
+                            ];
+                        }
+                    }
+                    elseif (!empty($reference['value'])) {
+                        $value = [];
+                        foreach($reference['value'] as $referenceInfo) {
+                            $referencedEntity = entity_uuid_load($referenceInfo['entity_type'], [$referenceInfo['target_uuid']]);
+                            if(!empty($referencedEntity)) {
+                                $referencedEntity = array_shift($referencedEntity);
+                                $referencedWrapper = entity_metadata_wrapper($referenceInfo['entity_type'], $referencedEntity);
+                                $value[] = [
+                                    'target_id' => $referencedWrapper->getIdentifier()
+                                ];
+                            }
+                        }
+                    }
+                    if(!empty($value)) {
+                        $wrapper->{$field_name}->set($value);
+                        $save = true;
+                    }
+                    break;
+            }
+        }
+        if(!empty($save)) {
+            $wrapper->save();
+        }
+    }
+}
 
 function _paragraphs_export_normalize_array_keys(&$array) {
     foreach($array as $key => $value) {
