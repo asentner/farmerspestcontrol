@@ -117,7 +117,7 @@ function sprowt_solution_finder_block_configure($delta = '') {
             );
             break;
     }
-    
+
     return $form;
 }
 
@@ -134,12 +134,12 @@ function sprowt_solution_finder_block_save($delta = '', $edit = []) {
 
 function theme_field_solution_concern_icon($variables) {
     $output = '';
-    
+
     // Render the label, if it's not hidden.
     if (!$variables['label_hidden']) {
         $output .= '<span class="field__label"' . $variables['title_attributes'] . '>' . $variables['label'] . ':&nbsp;</span>';
     }
-    
+
     // Render the items.
     $output .= '<span class="field__items"' . $variables['content_attributes'] . '>';
     foreach ($variables['items'] as $delta => $item) {
@@ -147,10 +147,10 @@ function theme_field_solution_concern_icon($variables) {
         $output .= '<span class="' . $classes . '"' . $variables['item_attributes'][$delta] . '>' . drupal_render($item) . '</span>';
     }
     $output .= '</span>';
-    
+
     // Render the top-level DIV.
     $output = '<span class="' . $variables['classes'] . '"' . $variables['attributes'] . '>' . $output . '</span>';
-    
+
     return $output;
 }
 
@@ -191,7 +191,7 @@ function sprowt_solution_finder_block_view($delta = '')
                 );
                 $arrays[] = $array;
             }
-            
+
             if(empty($arrays)) {
                 return array();
             }
@@ -213,7 +213,7 @@ function sprowt_solution_finder_block_view($delta = '')
                     ),
                 ),
             );
-            
+
             $html_title = variable_get('solution_finder_html_title');
             if(!empty($html_title)) {
                 $block['subject'] = $html_title;
@@ -337,12 +337,12 @@ function _sprowt_solution_finder_find_default_solution_nid() {
     if(!empty($contact_nid)) {
         return $contact_nid;
     }
-    
+
     $contact_path = drupal_get_normal_path('contact');
     if(!empty($contact_path)) {
         return str_replace('node/', '', $contact_path);
     }
-    
+
     return '/uuid/934b332a-a247-41eb-ae2e-09dfe144aed3';
 }
 
@@ -378,7 +378,7 @@ function sprowt_solution_finder_sprowt_shortcode_replace_alter(&$shortcodes)
 
     $all = false;
     $single = false;
-    
+
     if($solution && $solution->type == 'solution') {
         $solution_concerns = !empty($solution->field_concerns[LANGUAGE_NONE]) ? $solution->field_concerns[LANGUAGE_NONE] : array();
         if(count($solution_concerns) == 1) {
@@ -896,4 +896,38 @@ function sprowt_solution_finder_preprocess_block(&$variables) {
             $variables["block"]->subject = '<none>';
         }
     }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sprowt_solution_finder_preprocess_html(&$variables) {
+    $containsSolutionFinder = _sprowt_solution_finder_page_contains_solution_finder($variables['page']);
+    if(!empty($containsSolutionFinder)) {
+        $variables['attributes_array']['class'][] = 'has-solution-finder';
+    }
+}
+
+function _sprowt_solution_finder_page_contains_solution_finder($variables) {
+    if(is_array($variables)
+        && !empty($variables['#block'])
+        && is_object($variables['#block'])
+        && $variables['#block']->bid == 'sprowt_solution_finder-solution_finder'
+    ) {
+        return true;
+    }
+    if(is_array($variables)) {
+        foreach ($variables as $variable) {
+            $return = false;
+            if (is_array($variable)) {
+                $return = _sprowt_solution_finder_page_contains_solution_finder($variable);
+            }
+
+            if (!empty($return)) {
+                return $return;
+            }
+        }
+    }
+
+    return false;
 }
