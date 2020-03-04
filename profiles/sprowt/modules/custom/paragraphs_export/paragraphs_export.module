@@ -129,6 +129,11 @@ function _paragraphs_export_handle_block_reference_info($info, $module, $delta) 
                 ];
             }
             break;
+        default:
+            $value = [
+                'moddelta' => $module . ':' . $delta
+            ];
+            break;
     }
     return $value;
 }
@@ -342,8 +347,13 @@ function paragraphs_export_import_references($entity, $entity_type, $entity_id) 
         $loaded = entity_load($entity_type, [$entity_id]);
         $loaded = array_shift($loaded);
         $wrapper = entity_metadata_wrapper($entity_type, $loaded);
+        $bundle = $wrapper->getBundle();
         $save = false;
         foreach ($entity->extracted_references as $field_name => $reference) {
+            $instance = field_info_instance($entity_type, $field_name, $bundle);
+            if(empty($instance)) {
+                continue;
+            }
             $value = null;
             switch($reference['field_type']) {
                 case 'blockreference':
@@ -480,10 +490,10 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
     if(!empty($original->paragraph_fields)) {
         $paragraph_fields = $original->paragraph_fields;
 
-        foreach ($paragraph_fields as $field_name => $array) {
+        foreach ($paragraph_fields as $field_name => &$array) {
             foreach($array as $lang => $items) {
                 $element->{$field_name}[$lang] = array();
-                foreach($items as $paragraphs_item) {
+                foreach($items as $delta => $paragraphs_item) {
                     $paragraphs_item = _paragraphs_export_stdClass_to_entity($paragraphs_item);
                     $original_item = clone $paragraphs_item;
                     paragraphs_export_file_field_import($paragraphs_item, $original_item, 'paragraphs_item');
@@ -499,6 +509,8 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
                             $paragraphs_item->is_new = TRUE;
                             unset($paragraphs_item->uuid);
                             $paragraphs_item->save(true);
+                            $paragraphs_item->new_paragraph = true;
+                            $element->paragraph_fields[$field_name][$lang][$delta] = $paragraphs_item;
                             break;
                         case 'revision':
                             _paragraphs_export_entity_uuid_save('paragraphs_item', $paragraphs_item);

@@ -24,16 +24,16 @@ function field_collection_export_clone_items($entity_type, &$entity, $field_name
     if (!is_array($old_items)) {
         $old_items = array($old_items);
     }
-    
+
     unset($entity->{$field_name}[$language]);
-    
+
     foreach ($old_items as $old_item_array) {
         $old_item = entity_load('field_collection_item', array($old_item_array['value']));
         $old_item = array_pop($old_item);
         /* @var $new_item ParagraphsItemEntity */
         $new_item = entity_create('field_collection_item', array('field_name' => $field_name));
         $new_item->setHostEntity($entity_type, $entity, $language);
-        
+
         // Check if any of the fields in the newly cloned fc item is a paragraph.
         foreach (field_info_instances('field_collection_item', $field_name) as $new_field_name => $new_field_instance) {
             if (!empty($old_item->{$new_field_name})) {
@@ -115,7 +115,7 @@ function field_collection_export_import_field_collection(&$element, $original, $
         foreach ($fc_fields as $field_name => $array) {
             foreach($array as $lang => $items) {
                 $element->{$field_name}[$lang] = array();
-                foreach($items as $field_collection_item) {
+                foreach($items as $delta => $field_collection_item) {
                     $field_collection_item = _field_collection_stdClass_to_entity($field_collection_item);
                     $original_item = clone $field_collection_item;
                     node_export_file_field_import($field_collection_item, $original_item);
@@ -141,6 +141,7 @@ function field_collection_export_import_field_collection(&$element, $original, $
                             $field_collection_item->is_new = TRUE;
                             unset($field_collection_item->uuid);
                             $field_collection_item->save(true);
+                            $element->fc_fields[$field_name][$lang][$delta] = $field_collection_item;
                             break;
                         case 'revision':
                             _field_collection_export_entity_uuid_save('field_collection_item', $field_collection_item);

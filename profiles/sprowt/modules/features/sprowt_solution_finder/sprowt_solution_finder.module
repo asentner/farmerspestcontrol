@@ -509,48 +509,101 @@ function sprowt_solution_finder_preprocess_field(&$variables) {
 }
 
 function _sprowt_solution_finder_sample_concerns() {
-    $path = drupal_get_path('module', 'sprowt_solution_finder');
-    $file = $path . '/nodes/concerns.json';
-    $json = file_get_contents($file);
-    $existing = variable_get('node_export_existing', 'new');
-    variable_set('node_export_existing', 'new');
-    $concernsArray = json_decode($json, true);
-    foreach($concernsArray as $concernArray) {
-        $uuid = $concernArray['uuid'];
-        if(empty(entity_get_id_by_uuid('node', array($uuid)))) {
-            node_export_import(json_encode(array($concernArray)));
+    $sync = new SprowtNodeSync();
+    $rolloutNodeArrays = &drupal_static('sprowt_solution_rollout_nodes');
+    if(empty($rolloutNodeArrays)) {
+        $rollout = $sync->fetch([], true);
+        $rolloutNodeArrays = json_decode($rollout, true);
+    }
+    $import = [];
+    $return = [];
+    foreach($rolloutNodeArrays as $nodeArray) {
+        if($nodeArray['type'] == 'concern') {
+            $uuid = $nodeArray['uuid'];
+            $exists = entity_get_id_by_uuid('node', [$uuid]);
+            if(!empty($exists)) {
+                continue;
+            }
+            $return[] = $uuid;
+            $import[] = $nodeArray;
+        }
+        else {
+            continue;
         }
     }
-    variable_set('node_export_existing', $existing);
+
+    if(!empty($import)) {
+        $sync->import(json_encode($import));
+    }
+
+    return $return;
 }
 
 function _sprowt_solution_finder_sample_webforms() {
-    $path = drupal_get_path('module', 'sprowt_solution_finder');
-    $file = $path . '/nodes/webform.json';
-    $json = file_get_contents($file);
-    $existing = variable_get('node_export_existing', 'new');
-    variable_set('node_export_existing', 'new');
-    $webformArray = json_decode($json, true);
-    foreach($webformArray as $webformJson) {
-        $uuid = $webformJson['uuid'];
-        if(module_exists('authorizenetwebform')) {
-            $webformJson['use_authorizenet'] = 0;
-        }
-        if(empty(entity_get_id_by_uuid('node', array($uuid)))) {
-            node_export_import(json_encode(array($webformJson)));
+    $uuids = [
+        'd6a5c04b-84bb-4bff-ac0b-0bf90767fd24'
+    ];
+
+    foreach($uuids as $key => $uuid) {
+        $exists = entity_get_id_by_uuid('node', [$uuid]);
+        if(!empty($exists)) {
+            unset($uuids[$key]);
         }
     }
-    variable_set('node_export_existing', $existing);
+
+    $uuids = array_values($uuids);
+
+    if(!empty($uuids)) {
+        $sync = new SprowtNodeSync();
+        $code = $sync->fetch([
+            'uuids' => $uuids
+        ]);
+        $sync->import($code);
+    }
+
+    return $uuids;
 }
 
 function _sprowt_solution_finder_sample_nodes() {
     _sprowt_solution_finder_sample_concerns();
     _sprowt_solution_finder_sample_webforms();
-    _sprowt_solution_finder_sample_solution('solution.export');
-    _sprowt_solution_finder_sample_solution('solution2.export');
-    _sprowt_solution_finder_sample_set_testimonial_field('solution.export');
-    _sprowt_solution_finder_sample_set_testimonial_field('solution2.export');
+    $solution_uuids = _sprowt_soluttion_finder_sample_solutions();
+    if(!empty($solution_uuids)) {
+        _sprowt_solution_finder_sample_set_testimonial_field($solution_uuids);
+    }
 }
+
+function _sprowt_soluttion_finder_sample_solutions() {
+    $sync = new SprowtNodeSync();
+    $rolloutNodeArrays = &drupal_static('sprowt_solution_rollout_nodes');
+    if(empty($rolloutNodeArrays)) {
+        $rollout = $sync->fetch([], true);
+        $rolloutNodeArrays = json_decode($rollout, true);
+    }
+    $import = [];
+    $return = [];
+    foreach($rolloutNodeArrays as $nodeArray) {
+        if($nodeArray['type'] == 'solution') {
+            $uuid = $nodeArray['uuid'];
+            $exists = entity_get_id_by_uuid('node', [$uuid]);
+            if(!empty($exists)) {
+                continue;
+            }
+            $return[] = $uuid;
+            $import[] = $nodeArray;
+        }
+        else {
+            continue;
+        }
+    }
+
+    if(!empty($import)) {
+        $sync->import(json_encode($import));
+    }
+
+    return $return;
+}
+
 
 
 
@@ -600,17 +653,9 @@ function _sprowt_solution_finder_sample_solution($solutionFileName) {
     variable_set('node_export_existing', $existing);
 }
 
-function _sprowt_solution_finder_sample_set_testimonial_field($solutionFileName) {
-    require_once DRUPAL_ROOT . '/includes/utility.inc';
-    $path = drupal_get_path('module', 'sprowt_solution_finder');
-    $exportFile = $path . '/nodes/' . $solutionFileName;
-    $export = file_get_contents($exportFile);
-
-    $array = [];
-    eval('$array = ' . $export . ';');
-
-    foreach($array as $key => $obj) {
-        $ids = entity_get_id_by_uuid('node', array($obj->uuid));
+function _sprowt_solution_finder_sample_set_testimonial_field($uuids) {
+    foreach($uuids as $uuid) {
+        $ids = entity_get_id_by_uuid('node', [$uuid]);
         if(empty($ids)) {
             return false;
         }
