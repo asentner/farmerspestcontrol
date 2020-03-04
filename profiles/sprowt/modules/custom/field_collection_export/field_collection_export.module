@@ -241,11 +241,15 @@ function _field_collection_export_entity_uuid_save($entity_type, $entity) {
     // But since using entity_uuid_save() usually means you're trying to manage
     // entities remotely we do respect this variable here to make it work as the
     // node form, but only if we explicitly haven't set $node->revision already.
-    if ($entity_type == 'node' && !isset($entity->revision) && in_array('revision', variable_get('node_options_' . $entity->type, array()))) {
+    if (($entity_type == 'node' || $entity_type == 'field_collection_item') && !isset($entity->revision) && in_array('revision', variable_get('node_options_' . $entity->type, array()))) {
         $entity->revision = 1;
     }
 
     entity_make_entity_local($entity_type, $entity);
+
+    if(empty($entity->revision_id)) {
+        $entity->revision_id = $entity->item_id;
+    }
 
     // Save the entity.
     $result = $entity->save(true);

@@ -502,6 +502,9 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
                     }
                     paragraphs_export_import_paragraphs($paragraphs_item, $original_item);
                     $existing = variable_get('node_export_existing', 'new');
+                    if($paragraphs_item->uuid == 'f104088f-c21c-4bec-8374-86d22fbcff07') {
+                        $stop = true;
+                    }
                     $paragraphs_item->item_id = null;
                     $paragraphs_item->revision_id = null;
                     switch ($existing) {

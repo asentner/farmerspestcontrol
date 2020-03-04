@@ -540,13 +540,14 @@ function _sprowt_solution_finder_sample_concerns() {
 }
 
 function _sprowt_solution_finder_sample_webforms() {
+    $initial = variable_get('sprowt_initial_revert', false);
     $uuids = [
         'd6a5c04b-84bb-4bff-ac0b-0bf90767fd24'
     ];
 
     foreach($uuids as $key => $uuid) {
         $exists = entity_get_id_by_uuid('node', [$uuid]);
-        if(!empty($exists)) {
+        if(!empty($exists) && empty($initial)) {
             unset($uuids[$key]);
         }
     }
@@ -558,7 +559,7 @@ function _sprowt_solution_finder_sample_webforms() {
         $code = $sync->fetch([
             'uuids' => $uuids
         ]);
-        $sync->import($code);
+        $sync->import($code, !empty($initial) ? 'revision': 'new');
     }
 
     return $uuids;
@@ -567,13 +568,31 @@ function _sprowt_solution_finder_sample_webforms() {
 function _sprowt_solution_finder_sample_nodes() {
     _sprowt_solution_finder_sample_concerns();
     _sprowt_solution_finder_sample_webforms();
-    $solution_uuids = _sprowt_soluttion_finder_sample_solutions();
+    $solution_uuids = _sprowt_solution_finder_sample_solutions();
     if(!empty($solution_uuids)) {
         _sprowt_solution_finder_sample_set_testimonial_field($solution_uuids);
     }
 }
 
-function _sprowt_soluttion_finder_sample_solutions() {
+function _find_paragraph($entity, $uuid) {
+    if(!empty($entity['uuid']) && $entity['uuid'] === $uuid) {
+        return $entity;
+    }
+
+    if(is_array($entity)) {
+        foreach($entity as $var) {
+            $return = _find_paragraph($var, $uuid);
+            if(!empty($return)) {
+                return $return;
+            }
+        }
+    }
+
+    return false;
+}
+
+function _sprowt_solution_finder_sample_solutions() {
+    $initial = variable_get('sprowt_initial_revert', false);
     $sync = new SprowtNodeSync();
     $rolloutNodeArrays = &drupal_static('sprowt_solution_rollout_nodes');
     if(empty($rolloutNodeArrays)) {
@@ -586,7 +605,7 @@ function _sprowt_soluttion_finder_sample_solutions() {
         if($nodeArray['type'] == 'solution') {
             $uuid = $nodeArray['uuid'];
             $exists = entity_get_id_by_uuid('node', [$uuid]);
-            if(!empty($exists)) {
+            if(!empty($exists) && empty($initial)) {
                 continue;
             }
             $return[] = $uuid;
@@ -598,13 +617,40 @@ function _sprowt_soluttion_finder_sample_solutions() {
     }
 
     if(!empty($import)) {
-        $sync->import(json_encode($import));
+        $sync->import(json_encode($import), !empty($initial) ? 'revision' : 'new');
     }
 
     return $return;
 }
 
+function _sprowt_solution_finder_sample_nodes_legacy() {
+    require_once DRUPAL_ROOT . '/includes/utility.inc';
+    $path = drupal_get_path('module', 'sprowt_solution_finder');
+    $sync = new SprowtNodeSync();
+    $concernJson = file_get_contents($path . '/nodes/concerns.json');
+    $webformJson = file_get_contents($path . '/nodes/webform.json');
 
+    $importNodes = [];
+    $concernsArray = json_decode($concernJson, true);
+    $webformsArray = json_decode($webformJson, true);
+    $nodeArrays = array_merge($concernsArray, $webformsArray);
+    foreach($nodeArrays as $nodeArray) {
+        $uuid = $nodeArray['uuid'];
+        $exists = entity_get_id_by_uuid('node', [$uuid]);
+        if(empty($exists)) {
+            $importNodes[] = $nodeArray;
+        }
+    }
+
+    if(!empty($importNodes)) {
+        $sync->import(json_encode($importNodes));
+    }
+
+    $uuids = [];
+    $uuids[] = _sprowt_solution_finder_sample_solution('solution.export');
+    $uuids[] = _sprowt_solution_finder_sample_solution('solution2.export');
+    _sprowt_solution_finder_sample_set_testimonial_field($uuids);
+}
 
 
 function _sprowt_solution_finder_sample_solution($solutionFileName) {
@@ -634,6 +680,7 @@ function _sprowt_solution_finder_sample_solution($solutionFileName) {
         $obj = array_shift($array);
         $nodes = entity_uuid_load('node', array($obj->uuid));
         $node = array_pop($nodes);
+        $node->uid = 1;
         $n = entity_metadata_wrapper('node', $node);
         $concern_nids = db_query("
                 SELECT n.nid
@@ -651,6 +698,7 @@ function _sprowt_solution_finder_sample_solution($solutionFileName) {
         $n->save();
     }
     variable_set('node_export_existing', $existing);
+    return $n->value()->uuid;
 }
 
 function _sprowt_solution_finder_sample_set_testimonial_field($uuids) {

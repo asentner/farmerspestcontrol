@@ -993,6 +993,7 @@ Class SprowtBuilder {
      */
 
     function revertFeatures() {
+        variable_set('sprowt_initial_revert', true);
         $features = _sprowt_get_features();
 
         foreach($features as $feature) {
@@ -1061,6 +1062,10 @@ Class SprowtBuilder {
 
         //update default images
         $this->addNodeDefaultImages();
+
+        //reimport solutions
+        _sprowt_solution_finder_sample_nodes();
+        variable_del('sprowt_initial_revert');
     }
 
     function setUpSprowtStarter() {
