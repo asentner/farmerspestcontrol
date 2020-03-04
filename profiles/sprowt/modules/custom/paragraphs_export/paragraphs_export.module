@@ -179,10 +179,28 @@ function paragraphs_export_relationships_extract(&$element, $original, $element_
                     'value' => null
                 ];
                 $value = $wrapper->{$instance["field_name"]}->value();
+                $bids = [];
+                $theme = variable_get('theme_default', null);
                 if(!empty($value) && !empty($value['moddelta'])) {
                     $parts = explode(':', $value['moddelta']);
                     $module = $parts[0];
                     $delta = $parts[1];
+                    if(!empty($theme)) {
+                        $bid = db_query("
+                            SELECT bid
+                            FROM block
+                            WHERE module = :module
+                            AND delta = :delta
+                            AND theme = :theme
+                        ", [
+                            'module' => $module,
+                            'delta' => $delta,
+                            'theme' => $theme
+                        ])->fetchField();
+                        if(!empty($bid)) {
+                            $bids[] = $bid;
+                        }
+                    }
                     $references[$instance["field_name"]]['value'] = [
                         'module' => $module,
                         'delta' => $delta,
@@ -195,6 +213,22 @@ function paragraphs_export_relationships_extract(&$element, $original, $element_
                         $parts = explode(':', $v['moddelta']);
                         $module = $parts[0];
                         $delta = $parts[1];
+                        if(!empty($theme)) {
+                            $bid = db_query("
+                            SELECT bid
+                            FROM block
+                            WHERE module = :module
+                            AND delta = :delta
+                            AND theme = :theme
+                        ", [
+                                'module' => $module,
+                                'delta' => $delta,
+                                'theme' => $theme
+                            ])->fetchField();
+                            if(!empty($bid)) {
+                                $bids[] = $bid;
+                            }
+                        }
                         $references[$instance["field_name"]]['value'][] = [
                             'module' => $module,
                             'delta' => $delta,
@@ -202,8 +236,14 @@ function paragraphs_export_relationships_extract(&$element, $original, $element_
                         ];
                     }
                 }
-                break;
+
+                if(!empty($bids) && !empty($theme)) {
+                    sprowt_require_class('blockbuilder');
+                    $bb = new BlockBuilder($bids);
+                    $references[$instance["field_name"]]['export'] = $bb->export($theme);
+                }
                 $element->{$instance["field_name"]} = null;
+                break;
             case 'entityreference':
                 $references[$instance["field_name"]] = [
                     'field_type' => 'entityreference',
@@ -307,6 +347,14 @@ function paragraphs_export_import_references($entity, $entity_type, $entity_id) 
             $value = null;
             switch($reference['field_type']) {
                 case 'blockreference':
+                    if(!empty($reference['export'])) {
+                        $theme = variable_get('theme_default', null);
+                        if(!empty($theme)) {
+                            sprowt_require_class('blockbuilder');
+                            $bb = new BlockBuilder();
+                            $bb->import($reference['export'], $theme);
+                        }
+                    }
                     if(!empty($reference['value']) && !empty($reference['value']['module'])) {
                         $value = _paragraphs_export_handle_block_reference_info($reference['value']['info'], $reference['value']['module'], $reference['value']['delta']);
                     }
