@@ -78,12 +78,10 @@ function sprowt_noindex_preprocess_html(&$variables) {
             '#attributes' => [
                 'name' => 'robots',
                 'content' => 'noindex'
-            ]
+            ],
+            '#prefix' => '<!-- no indexed by sprowt noindex -->' . "\n"
         ];
 
         drupal_add_html_head($noIndex, 'sprowt_noindex_meta');
-        if(user_is_logged_in()) {
-            drupal_set_message('This page ('.$_GET['q'].') is set to be "no indexed" by Sprowt No Index');
-        }
     }
 }
