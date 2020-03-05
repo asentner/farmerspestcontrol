@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function sprowt_noindex_install() {
+    $defaultPaths = [
+        'node',
+        'user',
+        'user/*',
+        'markets/term/*',
+        'projects/term/*',
+        'regions/term/*',
+        'services/term/*',
+        'tags/term/*',
+        'taxonomy/term/*'
+    ];
+
+    variable_set('sprowt_noindex_paths', $defaultPaths);
+}
