@@ -574,7 +574,7 @@ function _sprowt_solution_finder_sample_nodes() {
     }
 }
 
-function _find_paragraph($entity, $uuid) {
+function _sprowt_solution_finder_find_paragraph($entity, $uuid) {
     if(!empty($entity['uuid']) && $entity['uuid'] === $uuid) {
         return $entity;
     }
@@ -589,6 +589,34 @@ function _find_paragraph($entity, $uuid) {
     }
 
     return false;
+}
+
+function _sprowt_solution_finder_test() {
+    $uuids = [
+        'd6a5c04b-84bb-4bff-ac0b-0bf90767fd24',
+        '21891ec0-8c6a-4057-afb2-99af4d3f4e49',
+        'ca009b61-d7f5-4f95-8f62-af50531258e4',
+        '9507e61e-e034-4cc0-af6d-41d8d19f4a7a'
+    ];
+
+    foreach($uuids as $key => $uuid) {
+        $exists = entity_get_id_by_uuid('node', [$uuid]);
+        if(!empty($exists) && empty($initial)) {
+            unset($uuids[$key]);
+        }
+    }
+
+    $uuids = array_values($uuids);
+
+    if(!empty($uuids)) {
+        $sync = new SprowtNodeSync();
+        $code = $sync->fetch([
+            'uuids' => $uuids
+        ]);
+        $sync->import($code, !empty($initial) ? 'revision': 'new');
+    }
+
+    return $uuids;
 }
 
 function _sprowt_solution_finder_sample_solutions() {
