@@ -1906,3 +1906,16 @@ function _sprowt_settings_socialmedia_form_submit(&$form, &$form_state) {
     $accounts = $values['sprowt_settings_social_media'];
     _sprowt_settings_set_social_media_accounts($accounts);
 }
+
+function _sprowt_settings_unlock_hardcoded_url_alias($alias) {
+    $paths = variable_get('sprowt_settings_paths', array());
+    $foundUuid = null;
+    foreach($paths as $uuid => $pathAlias) {
+        if($alias == $pathAlias) {
+            unset($paths[$uuid]);
+            $foundUuid = $uuid;
+        }
+    }
+    variable_set('sprowt_settings_paths', $paths);
+    db_delete('url_alias')->condition('alias', $alias)->execute();
+}

@@ -1,0 +1,5 @@
+name = Sprowt No Index
+description = Allows you to set certain pages to no index by path
+core = 7.x
+version = 7.0.0
+package = Sprowt

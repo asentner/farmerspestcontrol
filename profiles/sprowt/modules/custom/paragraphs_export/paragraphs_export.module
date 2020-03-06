@@ -129,6 +129,11 @@ function _paragraphs_export_handle_block_reference_info($info, $module, $delta) 
                 ];
             }
             break;
+        default:
+            $value = [
+                'moddelta' => $module . ':' . $delta
+            ];
+            break;
     }
     return $value;
 }
@@ -179,10 +184,28 @@ function paragraphs_export_relationships_extract(&$element, $original, $element_
                     'value' => null
                 ];
                 $value = $wrapper->{$instance["field_name"]}->value();
+                $bids = [];
+                $theme = variable_get('theme_default', null);
                 if(!empty($value) && !empty($value['moddelta'])) {
                     $parts = explode(':', $value['moddelta']);
                     $module = $parts[0];
                     $delta = $parts[1];
+                    if(!empty($theme)) {
+                        $bid = db_query("
+                            SELECT bid
+                            FROM block
+                            WHERE module = :module
+                            AND delta = :delta
+                            AND theme = :theme
+                        ", [
+                            'module' => $module,
+                            'delta' => $delta,
+                            'theme' => $theme
+                        ])->fetchField();
+                        if(!empty($bid)) {
+                            $bids[] = $bid;
+                        }
+                    }
                     $references[$instance["field_name"]]['value'] = [
                         'module' => $module,
                         'delta' => $delta,
@@ -195,6 +218,22 @@ function paragraphs_export_relationships_extract(&$element, $original, $element_
                         $parts = explode(':', $v['moddelta']);
                         $module = $parts[0];
                         $delta = $parts[1];
+                        if(!empty($theme)) {
+                            $bid = db_query("
+                            SELECT bid
+                            FROM block
+                            WHERE module = :module
+                            AND delta = :delta
+                            AND theme = :theme
+                        ", [
+                                'module' => $module,
+                                'delta' => $delta,
+                                'theme' => $theme
+                            ])->fetchField();
+                            if(!empty($bid)) {
+                                $bids[] = $bid;
+                            }
+                        }
                         $references[$instance["field_name"]]['value'][] = [
                             'module' => $module,
                             'delta' => $delta,
@@ -202,8 +241,14 @@ function paragraphs_export_relationships_extract(&$element, $original, $element_
                         ];
                     }
                 }
-                break;
+
+                if(!empty($bids) && !empty($theme)) {
+                    sprowt_require_class('blockbuilder');
+                    $bb = new BlockBuilder($bids);
+                    $references[$instance["field_name"]]['export'] = $bb->export($theme);
+                }
                 $element->{$instance["field_name"]} = null;
+                break;
             case 'entityreference':
                 $references[$instance["field_name"]] = [
                     'field_type' => 'entityreference',
@@ -302,11 +347,24 @@ function paragraphs_export_import_references($entity, $entity_type, $entity_id) 
         $loaded = entity_load($entity_type, [$entity_id]);
         $loaded = array_shift($loaded);
         $wrapper = entity_metadata_wrapper($entity_type, $loaded);
+        $bundle = $wrapper->getBundle();
         $save = false;
         foreach ($entity->extracted_references as $field_name => $reference) {
+            $instance = field_info_instance($entity_type, $field_name, $bundle);
+            if(empty($instance)) {
+                continue;
+            }
             $value = null;
             switch($reference['field_type']) {
                 case 'blockreference':
+                    if(!empty($reference['export'])) {
+                        $theme = variable_get('theme_default', null);
+                        if(!empty($theme)) {
+                            sprowt_require_class('blockbuilder');
+                            $bb = new BlockBuilder();
+                            $bb->import($reference['export'], $theme);
+                        }
+                    }
                     if(!empty($reference['value']) && !empty($reference['value']['module'])) {
                         $value = _paragraphs_export_handle_block_reference_info($reference['value']['info'], $reference['value']['module'], $reference['value']['delta']);
                     }
@@ -432,10 +490,10 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
     if(!empty($original->paragraph_fields)) {
         $paragraph_fields = $original->paragraph_fields;
 
-        foreach ($paragraph_fields as $field_name => $array) {
+        foreach ($paragraph_fields as $field_name => &$array) {
             foreach($array as $lang => $items) {
                 $element->{$field_name}[$lang] = array();
-                foreach($items as $paragraphs_item) {
+                foreach($items as $delta => $paragraphs_item) {
                     $paragraphs_item = _paragraphs_export_stdClass_to_entity($paragraphs_item);
                     $original_item = clone $paragraphs_item;
                     paragraphs_export_file_field_import($paragraphs_item, $original_item, 'paragraphs_item');
@@ -444,6 +502,9 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
                     }
                     paragraphs_export_import_paragraphs($paragraphs_item, $original_item);
                     $existing = variable_get('node_export_existing', 'new');
+                    if($paragraphs_item->uuid == 'f104088f-c21c-4bec-8374-86d22fbcff07') {
+                        $stop = true;
+                    }
                     $paragraphs_item->item_id = null;
                     $paragraphs_item->revision_id = null;
                     switch ($existing) {
@@ -451,6 +512,8 @@ function paragraphs_export_import_paragraphs(&$element, $original) {
                             $paragraphs_item->is_new = TRUE;
                             unset($paragraphs_item->uuid);
                             $paragraphs_item->save(true);
+                            $paragraphs_item->new_paragraph = true;
+                            $element->paragraph_fields[$field_name][$lang][$delta] = $paragraphs_item;
                             break;
                         case 'revision':
                             _paragraphs_export_entity_uuid_save('paragraphs_item', $paragraphs_item);

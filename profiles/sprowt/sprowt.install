@@ -541,7 +541,7 @@ function sprowt_update_7011() {
         FROM node
         WHERE type = 'webform'
     ")->fetchCol();
-    
+
     $nodes = node_load_multiple($nids);
     foreach($nodes as $node) {
         $node->webform['progressbar_bar'] = false;
@@ -558,4 +558,11 @@ function sprowt_update_7012() {
     if(empty($privacy)) {
         $sb->importPrivacyPolicy();
     }
+}
+
+/**
+ * enable noindex module
+ */
+function sprowt_update_7013() {
+    module_enable(['sprowt_noindex']);
 }

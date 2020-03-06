@@ -173,6 +173,7 @@ dependencies[] = sprowt_taxonomy_engine
 dependencies[] = sprowt_theme
 dependencies[] = sprowt_theme_copy
 dependencies[] = sprowt_views
+dependencies[] = sprowt_noindex
 
 ; Add in the .profile
 
