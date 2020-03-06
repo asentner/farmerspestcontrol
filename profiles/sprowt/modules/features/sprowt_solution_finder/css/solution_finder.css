@@ -1262,6 +1262,10 @@ body.node-type-solution .solution--full--header {
     @media (min-width: 768px) {
       .lock-form--wrap .content .node__title {
         font-weight: 48px; } }
+  .lock-form--wrap .content .field--name-field-header {
+    text-align: center;
+    max-height: 100px;
+    transition: margin 0.5s ease-in-out, max-height 0.5s ease-in-out; }
   .lock-form--wrap .content .field--name-body {
     text-align: center;
     max-height: 100px;
@@ -1324,6 +1328,7 @@ body.node-type-solution .solution--full--header {
     padding: 0;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); }
   .lock-form--wrap.shrink-box .node__title,
+  .lock-form--wrap.shrink-box .field--name-field-header,
   .lock-form--wrap.shrink-box .field--name-body {
     max-height: 0;
     margin: 0;

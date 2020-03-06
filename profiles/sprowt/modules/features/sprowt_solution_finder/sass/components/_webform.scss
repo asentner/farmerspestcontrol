@@ -30,6 +30,12 @@ $boxduration: 0.5s ease-in-out;
       }
     }
 
+    .field--name-field-header {
+      text-align: center;
+      max-height: 100px;
+      transition: margin $boxduration, max-height $boxduration;
+    }
+
     .field--name-body {
       text-align: center;
       max-height: 100px;
@@ -115,6 +121,7 @@ $boxduration: 0.5s ease-in-out;
       }
 
       .node__title,
+      .field--name-field-header,
       .field--name-body {
         max-height: 0;
         margin: 0;
