@@ -48,4 +48,8 @@ function sprowt_6_preprocess_node(&$variables) {
           $variables['block_link_url'] = $variables['node_url'];
       }
   }
+
+    if($variables['view_mode'] == 'full' && empty($variables['page'])) {
+        $variables['page'] = true; //this is false when logged in for some reason
+    }
 }

@@ -17,4 +17,8 @@ function sprowt_2_preprocess_node(&$variables) {
   {
     $variables['intro_title'] = TRUE;
   }
+
+    if($variables['view_mode'] == 'full' && empty($variables['page'])) {
+        $variables['page'] = true; //this is false when logged in for some reason
+    }
 }
