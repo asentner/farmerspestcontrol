@@ -112,6 +112,11 @@ function sprowt_settings_menu()
         'type' => MENU_CALLBACK,
     );
 
+    $items['sprowt/request-nodes/menu'] = array(
+        'page callback' => '_sprowt_settings_request_nodes_menu',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
     $items['admin/config/sprowt/sprowt-rollout-settings'] = array(
         'title' => 'Sprowt Rollout Settings',
@@ -910,41 +915,11 @@ function _sprowt_settings_machine_name($name) {
 
 
 function _sprowt_settings_get_main_menu_nodes() {
-    $path = drupal_get_path('profile', 'sprowt');
-    $nodes = json_decode(file_get_contents($path . '/sprowt_export.json'),true);
-    $nodes_array = array();
-    foreach($nodes as $node) {
-        $nodes_array[$node['uuid']] = $node;
-    }
 
-    $data = _sprowt_get_data();
+    $sync = new SprowtNodeSync();
+    $code = $sync->fetch([], 'sprowt/request-nodes/menu');
 
-    $sprowt_path = drupal_get_path('profile', 'sprowt');
-    $theme_path = drupal_get_path('theme', $data['branding']['theme']);
-    $filename = 'main-menu_link_export.json';
-    if(file_exists("$theme_path/$filename")) {
-        $json = file_get_contents("$theme_path/$filename");
-        $menu = json_decode($json, true);
-    }
-    else if(file_exists("$sprowt_path/$filename")) {
-        $json = file_get_contents("$sprowt_path/$filename");
-        $menu = json_decode($json, true);
-    }
-
-    if(empty($menu)) {
-        return false;
-    }
-
-    $return = array();
-    foreach($menu['menu_links'] as $m) {
-        $nid = str_replace('node/','', $m['link_path']);
-        $uuid = $menu['uuid_map'][$nid];
-        if(!empty($nodes_array[$uuid])) {
-            $return[] = $nodes_array[$uuid];
-        }
-    }
-
-    return $return;
+    return json_decode($code, true);
 }
 
 /**
@@ -1398,6 +1373,44 @@ function _sprowt_settings_request_nodes_rollout() {
 
     drupal_json_output($data);
 
+}
+
+function _sprowt_settings_request_nodes_menu() {
+    $vars = $_POST;
+    if(!empty($_GET['debug']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
+        $vars = $_GET;
+    }
+
+    $menuName = $vars['menu'];
+    $menuLinks = menu_tree($menuName);
+    $nids = [];
+    foreach($menuLinks as $link) {
+        $path = drupal_get_normal_path($link['#href']);
+        if(!empty($path) && strpos($path, 'node/') === 0) {
+            $nids[] = str_replace('node/', '', $path);
+        }
+    }
+    $sync = new  SprowtNodeSync([
+        'nids' => $nids
+    ]);
+
+    $valid = $sync->validate($_POST['secret']);
+
+    if(empty($valid)) {
+        drupal_access_denied();
+    }
+
+    $format = empty($vars['format']) ? 'json' : $vars['format'];
+
+    $data = [
+        'code' => $sync->export($format)
+    ];
+
+    if(!empty($_GET['debug_output']) && $format = 'json') {
+        $data['code'] = json_decode($data['code'], true);
+    }
+
+    drupal_json_output($data);
 }
 
 function _sprowt_settings_rollout_access() {

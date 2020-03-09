@@ -2,7 +2,7 @@
 
 
 class SprowtNodeSyncError extends Exception {
-    
+
     public function __construct($message = "", $code = 0, $previous = null) {
         parent::__construct($message, $code, $previous);
     }
@@ -12,24 +12,24 @@ class SprowtNodeSync {
     private $nids = [];
     private $types = [];
     private $uuids = [];
-    
+
     const SPROWT_DATA_URL = 'https://sprowt-source.coalmarch.com';
     const SPROWT_SECRET = 'Roads... where we\'re going we don\'t NEED roads.';
-    
+
     function __construct($opts = []) {
         $this->nids = $this->testSet($opts, 'nids');
         $this->types = $this->testSet($opts, 'types');
         $this->uuids = $this->testSet($opts, 'uuids');
-    
+
         $this->addNidsByUuids($this->uuids);
         $this->addNidsByTypes($this->types);
     }
-    
+
     private function testSet($val, $key) {
         if(empty($val[$key])) {
             return [];
         }
-        
+
         return $val[$key];
     }
 
@@ -41,7 +41,7 @@ class SprowtNodeSync {
         }
         return false;
     }
-    
+
     //from here: https://gist.github.com/joashp/a1ae9cb30fa533f4ad94
     function encrypt_decrypt($action, $string) {
         $output = false;
@@ -81,7 +81,7 @@ class SprowtNodeSync {
     public function getNids() {
         return $this->nids;
     }
-    
+
     /**
      * @param array $nids
      *
@@ -91,14 +91,14 @@ class SprowtNodeSync {
         $this->nids = $nids;
         return $this;
     }
-    
+
     /**
      * @return array
      */
     public function getTypes() {
         return $this->types;
     }
-    
+
     /**
      * @param array $types
      *
@@ -108,14 +108,14 @@ class SprowtNodeSync {
         $this->types = $types;
         return $this;
     }
-    
+
     /**
      * @return array
      */
     public function getUuids() {
         return $this->uuids;
     }
-    
+
     /**
      * @param array $uuids
      *
@@ -125,7 +125,7 @@ class SprowtNodeSync {
         $this->uuids = $uuids;
         return $this;
     }
-    
+
     function addNidsByUuids($uuids = []) {
         if(empty($uuids)) {
             return;
@@ -136,38 +136,38 @@ class SprowtNodeSync {
         catch(Exception $e) {
             throw new SprowtNodeSyncError($e->getMessage(), $e->getCode(), $e);
         }
-        
+
         $this->nids = array_merge($this->nids, array_values($nidArray));
     }
-    
+
     function addNidsByNids($nids = []) {
         if(empty($nids)) {
             return;
         }
         $this->nids = array_merge($this->nids, $nids);
     }
-    
+
     function addNidsByTypes($types = []) {
         if(empty($types)) {
             return;
         }
-        
+
         $dbTypes = db_query("
             SELECT type
             FROM node_type
         ")->fetchCol();
-        
+
         $notFound = [];
         foreach($types as $type) {
             if(!in_array($type, $dbTypes)) {
                 $notFound[] = $type;
             }
         }
-        
+
         if(!empty($notFound)) {
             throw new SprowtNodeSyncError('Node type(s) not found! Types: ' . implode(', ', $notFound));
         }
-        
+
         $nids = db_query("
             SELECT nid
             FROM node
@@ -175,12 +175,12 @@ class SprowtNodeSync {
         ",[
             ':types' => $types
         ])->fetchCol();
-        
+
         if(!empty($nids)) {
             $this->nids = array_merge($this->nids, $nids);
         }
     }
-    
+
     function filterByStatus($status = 1) {
         $nids = db_query("
             SELECT nid
@@ -191,17 +191,17 @@ class SprowtNodeSync {
             ':status' => $status,
             ':nids' => $this->nids
         ])->fetchCol();
-        
+
         $this->nids = $nids;
     }
-    
+
     function export($format = 'json') {
         $isSync = &drupal_static('sprowt_sync', false);
         $isSync = true;
-    
+
         $export_mode = variable_get('node_export_file_mode', 'inline');
         variable_set('node_export_file_mode', 'inline');
-        
+
         try {
             $output = node_export($this->nids, $format);
         }
@@ -212,21 +212,21 @@ class SprowtNodeSync {
         }
         variable_set('node_export_file_mode', $export_mode);
         $isSync = false;
-        
+
         if(empty($output['success'])) {
             throw new SprowtNodeSyncError('Error with export: ' . print_r($output, true));
         }
-        
+
         return $output['output'];
     }
-    
+
     function import($code, $importSetting = 'new') {
         $isSync = &drupal_static('sprowt_sync', false);
         $isSync = true;
-    
+
         $existing = variable_get('node_export_existing', 'new');
         variable_set('node_export_existing', $importSetting);
-        
+
         try {
             $ret = node_export_import($code);
         }
@@ -235,21 +235,21 @@ class SprowtNodeSync {
             variable_set('node_export_existing', $existing);
             throw new SprowtNodeSyncError($e->getMessage(), $e->getCode(), $e);
         }
-    
+
         $isSync = false;
         variable_set('node_export_existing', $existing);
-        
+
         if(empty($ret['success'])) {
             throw new SprowtNodeSyncError('Sprowt sync import error: ' . print_r($ret, true));
         }
-        
+
         return $ret;
     }
-    
-    
+
+
     function curl($url, $payload = array()) {
         $ch = curl_init();
-        
+
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -257,39 +257,44 @@ class SprowtNodeSync {
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 100);
         curl_setopt($ch, CURLOPT_TIMEOUT, 100);
         curl_setopt($ch, CURLOPT_POST, true);
-        
+
         //curl_setopt($ch, CURLOPT_COOKIE, 'XDEBUG_SESSION=forgelyapitest');
-        
+
         if (count($payload)) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload, '', '&'));
         }
-        
+
         $output = curl_exec($ch);
-        
+
         $httpInfo = curl_getinfo($ch);
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        
+
         curl_close($ch);
-        
+
         return array(
             'info' => $httpInfo,
             'code' => $httpcode,
             'result' => $output
         );
     }
-    
-    function fetch($opts = [], $rollout = false) {
+
+    function fetch($opts = [], $uriOverride = false) {
         $url = variable_get('sprowt_data_url', self::SPROWT_DATA_URL);
-        
+
         $uri = 'sprowt/request-nodes';
 
-        if($rollout) {
+        if(!empty($uriOverride)) {
             $opts = [];
-            $uri = 'sprowt/request-nodes/rollout';
+            if(is_bool($uriOverride)) {
+                $uri = 'sprowt/request-nodes/rollout';
+            }
+            else {
+                $uri = $uriOverride;
+            }
         }
-        
+
         $opts['secret'] = $this->encrypt_decrypt('encrypt', self::SPROWT_SECRET);
-        
+
         try {
             $response = $this->curl($url . '/' . $uri, $opts);
         }
@@ -306,7 +311,7 @@ class SprowtNodeSync {
 
         return $result['code'];
     }
-    
+
     function addNodes($opts, $importSetting = 'new') {
         $code = $this->fetch($opts);
         $this->import($code, $importSetting);
@@ -316,5 +321,5 @@ class SprowtNodeSync {
         $code = $this->fetch([], true);
         $this->import($code, 'revision');
     }
-    
+
 }
