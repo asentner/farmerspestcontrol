@@ -915,11 +915,40 @@ function _sprowt_settings_machine_name($name) {
 
 
 function _sprowt_settings_get_main_menu_nodes() {
+    $path = drupal_get_path('profile', 'sprowt');
+    $data = _sprowt_get_data();
 
-    $sync = new SprowtNodeSync();
-    $code = $sync->fetch([], 'sprowt/request-nodes/menu');
+    $sprowt_path = drupal_get_path('profile', 'sprowt');
+    $theme_path = drupal_get_path('theme', $data['branding']['theme']);
+    $filename = 'main-menu_link_export.json';
+    if(file_exists("$theme_path/$filename")) {
+        $json = file_get_contents("$theme_path/$filename");
+        $menu = json_decode($json, true);
+    }
+    else if(file_exists("$sprowt_path/$filename")) {
+        $json = file_get_contents("$sprowt_path/$filename");
+        $menu = json_decode($json, true);
+    }
 
-    return json_decode($code, true);
+    if(empty($menu)) {
+        return false;
+    }
+
+    $return = [];
+    foreach($menu['menu_links'] as $m) {
+        $nid = str_replace('node/','', $m['link_path']);
+        $uuids = [$menu['uuid_map'][$nid]];
+        $node = entity_uuid_load('node', $uuids);
+        if(!empty($node)) {
+            $node = array_shift($node);
+            $return[$menu['uuid_map'][$nid]] = [
+                'title' => $m['link_title'],
+                'node' => $node
+            ];
+        }
+    }
+
+    return $return;
 }
 
 /**
@@ -929,11 +958,11 @@ function _sprowt_settings_get_main_menu_nodes() {
 
 function sprowt_settings_cb_identifier_list() {
     $identifiers = array();
-    $nodes = _sprowt_settings_get_main_menu_nodes();
+    $links = _sprowt_settings_get_main_menu_nodes();
 
-    foreach($nodes as $node) {
-        if($node['type'] == 'page') {
-            $identifiers['<' . _sprowt_settings_machine_name($node['title']) . '>'] = t('Corresponds to imported basic page with title: ' . $node['title']);
+    foreach($links as $link) {
+        if($link['node']->type == 'page') {
+            $identifiers['<' . _sprowt_settings_machine_name($link['title']) . '>'] = t('Corresponds to imported basic page with title: ' . $link['node']->title);
         }
     }
 
@@ -951,14 +980,13 @@ function sprowt_settings_cb_identifier_list() {
  */
 function sprowt_settings_cb_identifier_values($identifier, $obj) {
     $crumb_items = NULL;
-    $nodes = _sprowt_settings_get_main_menu_nodes();
+    $links = _sprowt_settings_get_main_menu_nodes();
 
-    foreach($nodes as $node) {
-        $id = '<' . _sprowt_settings_machine_name($node['title']) . '>';
+    foreach($links as $link) {
+        $node = $link['node'];
+        $id = '<' . _sprowt_settings_machine_name($link['title']) . '>';
         if($id == $identifier) {
-            $n = entity_uuid_load('node', array($node['uuid']));
-            $n = array_pop($n);
-            $path = drupal_get_path_alias('node/' . $n->nid);
+            $path = drupal_get_path_alias('node/' . $node->nid);
             $crumb_item = array(
                 'crumb' => l($obj['title'], $path),
                 'title' => $obj['title'],

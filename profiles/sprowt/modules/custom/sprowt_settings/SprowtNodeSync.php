@@ -284,8 +284,8 @@ class SprowtNodeSync {
         $uri = 'sprowt/request-nodes';
 
         if(!empty($uriOverride)) {
-            $opts = [];
             if(is_bool($uriOverride)) {
+                $opts = [];
                 $uri = 'sprowt/request-nodes/rollout';
             }
             else {
