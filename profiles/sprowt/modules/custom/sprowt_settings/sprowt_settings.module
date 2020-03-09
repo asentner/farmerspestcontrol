@@ -122,6 +122,14 @@ function sprowt_settings_menu()
         'weight' => -50
     );
 
+    $items['admin/config/sprowt/unlock-hardcoded'] = [
+        'title' => 'Change Hardcoded Path Alias',
+        'description' => 'Change a hardcoded path alias',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => ['_sprowt_settings_unlock_alias_form'],
+        'access arguments' => array('access administration pages'),
+    ];
+
     return $items;
 }
 
@@ -1940,10 +1948,17 @@ function _sprowt_settings_change_hardcoded_url_alias($alias, $newAlias) {
     variable_set('sprowt_settings_paths', $paths);
     db_delete('url_alias')->condition('alias', $alias)->execute();
 
-    $node = entity_uuid_load('node', $foundUuid);
+    $node = entity_uuid_load('node', [$foundUuid]);
     if(!empty($node)) {
         $node = array_shift($node);
-        pathauto_create_alias('node', 'update', 'node/' . $node->nid, $newAlias);
+        $node->path = [
+            'pathauto' => 0,
+            'alias' => $newAlias
+        ];
+        db_delete('url_alias')->condition('source', 'node/' . $node->nid)->execute();
+        path_node_update($node);
+        pathauto_node_update($node);
+
     }
 
     $contexts = context_load(NULL, TRUE);
@@ -1964,3 +1979,46 @@ function _sprowt_settings_change_hardcoded_url_alias($alias, $newAlias) {
     }
 }
 
+function _sprowt_settings_unlock_alias_form($form, &$form_state) {
+    $paths = variable_get('sprowt_settings_paths', array());
+    drupal_set_title('Change Hardcoded URL Alias');
+
+    $pathOptions = [];
+    foreach($paths as $path) {
+        $pathOptions[$path] = $path;
+    }
+
+    $form['alias'] = [
+        '#type' => 'select',
+        '#title' => 'Old Alias',
+        '#options' => $pathOptions,
+        '#required' => true
+    ];
+
+    $form['newAlias'] = [
+        '#type' => 'textfield',
+        '#title' => 'New Alias',
+        '#description' => 'New alias you want to use.',
+        '#required' => true
+    ];
+
+    $form['actions'] = [
+        'submit' => [
+            '#type' => 'submit',
+            '#value' => 'Save',
+            '#submit' => ['_sprowt_settings_unlock_alias_form_submit']
+        ]
+    ];
+
+    return $form;
+
+}
+
+function _sprowt_settings_unlock_alias_form_submit($form,  &$form_state) {
+    $values = $form_state['values'];
+    $alias = $values['alias'];
+    $newAlias = rawurlencode(ltrim($values['newAlias'], '/'));
+    _sprowt_settings_change_hardcoded_url_alias($alias, $newAlias);
+    $newUrl = url($newAlias);
+    drupal_set_message("New <a href=\"{$newUrl}\" target=\"_blank\">alias</a> created!");
+}
