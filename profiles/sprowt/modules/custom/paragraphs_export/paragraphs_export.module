@@ -384,10 +384,7 @@ function paragraphs_export_import_references($entity, $entity_type, $entity_id) 
                         $referencedEntity = entity_uuid_load($reference['value']['entity_type'], [$reference['value']['target_uuid']]);
                         if(!empty($referencedEntity)) {
                             $referencedEntity = array_shift($referencedEntity);
-                            $referencedWrapper = entity_metadata_wrapper($reference['value']['entity_type'], $referencedEntity);
-                            $value = [
-                                'tid' => $referencedWrapper->getIdentifier()
-                            ];
+                            $value = $referencedEntity->tid;
                         }
                     }
                     elseif (!empty($reference['value'])) {
@@ -396,9 +393,8 @@ function paragraphs_export_import_references($entity, $entity_type, $entity_id) 
                             $referencedEntity = entity_uuid_load($referenceInfo['entity_type'], [$referenceInfo['target_uuid']]);
                             if(!empty($referencedEntity)) {
                                 $referencedEntity = array_shift($referencedEntity);
-                                $referencedWrapper = entity_metadata_wrapper($referenceInfo['entity_type'], $referencedEntity);
                                 $value[] = [
-                                    'tid' => $referencedWrapper->getIdentifier()
+                                    'tid' => $referencedEntity->tid
                                 ];
                             }
                         }
