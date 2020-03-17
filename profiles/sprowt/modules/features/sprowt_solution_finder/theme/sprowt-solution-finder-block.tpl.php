@@ -39,8 +39,8 @@
     <?php endif; ?>
     <div class="actions">
         <?php if (!empty($hidden_concerns)): ?>
-            <button type="button" class="show-hide-button button">More Options</button>
+            <button type="button" class="show-hide-button button"><?php print $optionsButtonText; ?></button>
         <?php endif; ?>
-        <button type="submit" class="submit-button button">Get My Solution</button>
+        <button type="submit" class="submit-button button"><?php print $submitButtonText; ?></button>
     </div>
 </form>

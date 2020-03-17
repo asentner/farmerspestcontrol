@@ -107,6 +107,8 @@ function sprowt_solution_finder_block_configure($delta = '') {
     $form = array();
     switch($delta) {
         case 'solution_finder':
+            $optionsButtonText = variable_get('sprowt_solution_finder_options_button_text', 'More Options');
+            $submitButtonText = variable_get('sprowt_solution_finder_submit_button_text', 'Get My Solution');
             $form['html_title'] = array(
                 '#type' => 'textfield',
                 '#text_format' => 'full_html',
@@ -115,6 +117,16 @@ function sprowt_solution_finder_block_configure($delta = '') {
                 '#description' => t('An alternate version of the block title, accepts HTML by way of the full_html text format.<br><strong>&lt;strong&gt;</strong> tags will be <strong>bold</strong>. <strong>&lt;em&gt;</strong> tags will be <em>italic</em>. <strong>&lt;span&gt;</strong> tags will be <strong>bold</strong>, <em>italic</em>, and <span style="border-bottom: 2px solid;">underlined</span>.'),
                 '#default_value' => variable_get('solution_finder_html_title')
             );
+            $form['options_button_text'] = [
+                '#type' => 'textfield',
+                '#title' => 'Expand Button Text',
+                '#default_value' => $optionsButtonText
+            ];
+            $form['submit_button_text'] = [
+                '#type' => 'textfield',
+                '#title' => 'Submit Button Text',
+                '#default_value' => $submitButtonText
+            ];
             break;
     }
 
@@ -128,6 +140,8 @@ function sprowt_solution_finder_block_save($delta = '', $edit = []) {
     switch($delta) {
         case 'solution_finder':
             variable_set('solution_finder_html_title', $edit['html_title']);
+            variable_set('sprowt_solution_finder_options_button_text', $edit['options_button_text']);
+            variable_set('sprowt_solution_finder_submit_button_text', $edit['submit_button_text']);
             break;
     }
 }
@@ -198,11 +212,16 @@ function sprowt_solution_finder_block_view($delta = '')
 
             $id = drupal_html_id('solution-finder-form');
 
+            $optionsButtonText = variable_get('sprowt_solution_finder_options_button_text', 'More Options');
+            $submitButtonText = variable_get('sprowt_solution_finder_submit_button_text', 'Get My Solution');
+
             $block['content'] = array(
                 '#markup' => theme('sprowt_solution_finder_block', array(
                     'concerns' => $arrays,
                     'shown' => 6,
-                    'form_id' => $id
+                    'form_id' => $id,
+                    'optionsButtonText' => $optionsButtonText,
+                    'submitButtonText' => $submitButtonText
                 )),
                 '#attached' => array(
                     'css' => array(
