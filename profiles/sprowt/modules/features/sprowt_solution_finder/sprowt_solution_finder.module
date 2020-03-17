@@ -1035,7 +1035,9 @@ function _sprowt_solution_finder_page_contains_solution_finder($variables, $maxD
     if(is_array($variables)
         && !empty($variables['#block'])
         && is_object($variables['#block'])
-        && $variables['#block']->bid == 'sprowt_solution_finder-solution_finder'
+        && ($variables['#block']->bid == 'sprowt_solution_finder-solution_finder'
+            || ($variables['#block']->module == 'sprowt_solution_finder'
+                && $variables['#block']->delta == 'solution_finder'))
     ) {
         return true;
     }
