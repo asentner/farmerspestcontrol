@@ -139,9 +139,24 @@ function sprowt_solution_finder_block_configure($delta = '') {
 function sprowt_solution_finder_block_save($delta = '', $edit = []) {
     switch($delta) {
         case 'solution_finder':
-            variable_set('solution_finder_html_title', $edit['html_title']);
-            variable_set('sprowt_solution_finder_options_button_text', $edit['options_button_text']);
-            variable_set('sprowt_solution_finder_submit_button_text', $edit['submit_button_text']);
+            if(!empty($edit['html_title'])) {
+                variable_set('solution_finder_html_title', $edit['html_title']);
+            }
+            else {
+                variable_del('solution_finder_html_title');
+            }
+            if(!empty($edit['options_button_text'])) {
+                variable_set('sprowt_solution_finder_options_button_text', $edit['options_button_text']);
+            }
+            else {
+                variable_del('sprowt_solution_finder_options_button_text');
+            }
+            if(!empty($edit['submit_button_text'])) {
+                variable_set('sprowt_solution_finder_submit_button_text', $edit['submit_button_text']);
+            }
+            else {
+                variable_del('sprowt_solution_finder_submit_button_text');
+            }
             break;
     }
 }
