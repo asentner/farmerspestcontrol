@@ -629,5 +629,10 @@ function sprowt_update_7014() {
             ]);
             $sync->import($code, 'new');
         }
+
+        $nodes = entity_uuid_load('node', $uuids);
+        $node = array_shift($nodes);
+        $node->status = 0;
+        entity_uuid_save('node', $node);
     }
 }
