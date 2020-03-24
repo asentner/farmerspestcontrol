@@ -566,3 +566,68 @@ function sprowt_update_7012() {
 function sprowt_update_7013() {
     module_enable(['sprowt_noindex']);
 }
+
+/**
+ * Import custom solutions page to select sites
+ */
+function sprowt_update_7014() {
+    $continue = false;
+    $sites = [
+        'antipesto2018',
+        'bog-lawn-2019',
+        'bog-pest-2019',
+        'eastside-exterminators',
+        'enviroconpest',
+        'fw-pest-control',
+        'greenleafpc',
+        'herbi-systems',
+        'hofferpest',
+        'larue',
+        'invader',
+        'miller-pest',
+        'natural-state-2019',
+        'callpauls2019',
+        'pestmasters-2018',
+        'precision-pest-management',
+        'rottler',
+        'terminix-triad2018',
+        'bugman2019',
+        'jointhegreenteam',
+        'tradsofjacksonville',
+        'tpc-2017',
+        'wedocreepy'
+    ];
+    if(!empty($_SERVER['PANTHEON_SITE_NAME'])) {
+        $continue = in_array($_SERVER['PANTHEON_SITE_NAME'], $sites);
+    }
+    else {
+        if(preg_match('/\.test$/', $_SERVER['HTTP_HOST'])) {
+            $site = str_replace('.test', '', $_SERVER['HTTP_HOST']);
+        }
+        if(php_sapi_name() == 'cli') {
+            $site = basename(DRUPAL_ROOT);
+        }
+        if(!empty($site)) {
+            $continue = in_array($site, $sites);
+        }
+    }
+    if($continue) {
+        if(!module_exists('sprowt_solution_finder')) {
+            module_enable(['sprowt_solution_finder']);
+        }
+        _sprowt_revert_solutions_finder();
+
+        _sprowt_solution_finder_sample_webforms();
+        $uuids = [
+            '21891ec0-8c6a-4057-afb2-99af4d3f4e49'
+        ];
+
+        if(!empty($uuids)) {
+            $sync = new SprowtNodeSync();
+            $code = $sync->fetch([
+                'uuids' => $uuids
+            ]);
+            $sync->import($code, 'new');
+        }
+    }
+}

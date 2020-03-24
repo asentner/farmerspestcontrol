@@ -841,3 +841,74 @@ function sprowt_add_cm_user($username, $password = '') {
         throw new SprowtException('Coalmarch user, '.$username.',  could not be created');
     }
 }
+
+
+/**
+ * Rebuilds a field base in a feature
+ */
+function sprowt_field_base_features_rebuild_per_field($module, $field_name) {
+    module_load_include('inc', 'features', 'features.export');
+    if ($fields = features_get_default('field_base', $module)) {
+        field_info_cache_clear();
+
+        // Load all the existing field bases up-front so that we don't
+        // have to rebuild the cache all the time.
+        $existing_fields = field_info_fields();
+
+        foreach ($fields as $field) {
+            if ($field['field_name'] == $field_name) {
+                // Create or update field.
+                if (isset($existing_fields[$field['field_name']])) {
+                    $existing_field = $existing_fields[$field['field_name']];
+                    $array_diff_result = features_array_diff_assoc_recursive($field + $existing_field, $existing_field);
+                    if (!empty($array_diff_result)) {
+                        try {
+                            field_update_field($field);
+                        } catch (FieldException $e) {
+                            watchdog('features', 'Attempt to update field %label failed: %message', array('%label' => $field['field_name'], '%message' => $e->getMessage()), WATCHDOG_ERROR);
+                        }
+                    }
+                }
+                else {
+                    try {
+                        field_create_field($field);
+                    } catch (FieldException $e) {
+                        watchdog('features', 'Attempt to create field %label failed: %message', array('%label' => $field['field_name'], '%message' => $e->getMessage()), WATCHDOG_ERROR);
+                    }
+                    $existing_fields[$field['field_name']] = $field;
+                }
+                variable_set('menu_rebuild_needed', TRUE);
+                break;
+            }
+        }
+    }
+}
+
+function _sprowt_features_field_base_map() {
+    $features_dir = drupal_get_path('profile', 'sprowt') . '/modules/features';
+    $map = [];
+    module_load_include('inc', 'features', 'features.export');
+    foreach(scandir($features_dir) as $feature) {
+        if ($fields = features_get_default('field_base', $feature)) {
+            foreach($fields as $field) {
+                $map[$field['field_name']] = $feature;
+            }
+        }
+    }
+
+    return $map;
+}
+
+function _sprowt_revert_solutions_finder() {
+    $feature = 'sprowt_solution_finder';
+    module_load_include('inc', 'features', 'features.export');
+    $fieldMap = _sprowt_features_field_base_map();
+    if ($instances = features_get_default('field_instance', $feature)) {
+        foreach($instances as $instance) {
+            $module = $fieldMap[$instance['field_name']];
+            sprowt_field_base_features_rebuild_per_field($module, $instance['field_name']);
+        }
+    }
+
+    features_revert_module($feature);
+}
