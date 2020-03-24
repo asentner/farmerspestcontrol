@@ -1,4 +1,69 @@
 @charset "UTF-8";
+#admin-menu {
+  z-index: 99999999; }
+
+body.adminimal-menu #admin-menu .admin-menu-search input {
+  min-height: 0; }
+
+body.admin-menu.adminimal-menu.node-type-solution:before {
+  background-color: #333;
+  min-height: 65px; }
+
+body.admin-menu.adminimal-menu.node-type-solution .slicknav_menu {
+  position: relative;
+  z-index: 999; }
+
+body.admin-menu.adminimal-menu.node-type-solution .tabs {
+  display: block;
+  width: 100%;
+  background-color: #333;
+  border-bottom: none;
+  z-index: 999;
+  margin-bottom: 0; }
+  body.admin-menu.adminimal-menu.node-type-solution .tabs li {
+    float: none;
+    margin-right: 0; }
+  body.admin-menu.adminimal-menu.node-type-solution .tabs li.active a {
+    background-color: #454545; }
+  body.admin-menu.adminimal-menu.node-type-solution .tabs a {
+    background-color: #333;
+    color: white;
+    font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif; }
+    body.admin-menu.adminimal-menu.node-type-solution .tabs a:hover {
+      background-color: #333;
+      color: white;
+      text-decoration: underline; }
+
+body.admin-menu.adminimal-menu.node-type-solution .action-links {
+  right: 20px;
+  z-index: 999;
+  margin-top: 0; }
+  body.admin-menu.adminimal-menu.node-type-solution .action-links a {
+    display: block;
+    background-color: #333;
+    padding: 0.3em 0.8em;
+    color: white;
+    font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif; }
+    body.admin-menu.adminimal-menu.node-type-solution .action-links a:hover {
+      color: white;
+      text-decoration: underline; }
+
+@media (min-width: 768px) {
+  body.admin-menu.adminimal-menu.node-type-solution .tabs {
+    position: fixed;
+    top: 29px;
+    left: 0;
+    right: 0; }
+    body.admin-menu.adminimal-menu.node-type-solution .tabs li {
+      float: left;
+      margin-right: 1em; }
+  body.admin-menu.adminimal-menu.node-type-solution .action-links {
+    position: fixed;
+    top: 33px;
+    right: 20px; }
+    body.admin-menu.adminimal-menu.node-type-solution .action-links a {
+      padding: 0; } }
+
 .entity-paragraphs-item.solution-annotated-image {
   padding: 30px 20px;
   text-align: center;
@@ -1134,45 +1199,6 @@ img.mfp-img {
 body.node-type-solution .scm-modals.hidden {
   display: none; }
 
-body.node-type-solution.admin-menu.adminimal-menu::before {
-  background-color: #333;
-  min-height: 60px; }
-
-body.node-type-solution .tabs {
-  display: block;
-  width: 100%;
-  background-color: #333;
-  border-bottom: none;
-  z-index: 999;
-  margin-bottom: 0; }
-  body.node-type-solution .tabs li {
-    float: none;
-    margin-right: 0; }
-  body.node-type-solution .tabs li.active a {
-    background-color: #454545; }
-  body.node-type-solution .tabs a {
-    background-color: #333;
-    color: white;
-    font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif; }
-    body.node-type-solution .tabs a:hover {
-      background-color: #333;
-      color: white;
-      text-decoration: underline; }
-
-body.node-type-solution .action-links {
-  right: 20px;
-  z-index: 999;
-  margin-top: 0; }
-  body.node-type-solution .action-links a {
-    display: block;
-    background-color: #333;
-    padding: 0.3em 0.8em;
-    color: white;
-    font-family: Open Sans, "Segoe UI", "Helvetica", sans-serif; }
-    body.node-type-solution .action-links a:hover {
-      color: white;
-      text-decoration: underline; }
-
 body.node-type-solution .l-main {
   max-width: 100%;
   margin: 0;
@@ -1221,17 +1247,6 @@ body.node-type-solution .solution--full--header {
       opacity: 1; }
 
 @media (min-width: 768px) {
-  body.node-type-solution .tabs {
-    position: fixed;
-    margin-top: -32px; }
-    body.node-type-solution .tabs li {
-      float: left;
-      margin-right: 1em; }
-  body.node-type-solution .action-links {
-    position: fixed;
-    margin-top: -26px; }
-    body.node-type-solution .action-links a {
-      padding: 0; }
   body.node-type-solution .solution--full--header .interior {
     padding: 70px 30px 65px; }
   body.node-type-solution .solution--full--header h1 {
