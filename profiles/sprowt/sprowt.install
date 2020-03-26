@@ -593,7 +593,6 @@ function sprowt_update_7014() {
         'bugman2019',
         'jointhegreenteam',
         'tradsofjacksonville',
-        'tpc-2017',
         'wedocreepy'
     ];
     if(!empty($_SERVER['PANTHEON_SITE_NAME'])) {
