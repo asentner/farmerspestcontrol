@@ -222,7 +222,9 @@ function sprowt_content_types_field_default_field_instances() {
       'alt_teaser' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 2,
       ),
@@ -829,7 +831,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 3,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
@@ -987,7 +989,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 3,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -1048,7 +1050,9 @@ function sprowt_content_types_field_default_field_instances() {
       'default' => array(
         'label' => 'above',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 3,
       ),
@@ -3078,7 +3082,9 @@ function sprowt_content_types_field_default_field_instances() {
       'tertiary_teaser' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 7,
       ),
@@ -3847,7 +3853,9 @@ function sprowt_content_types_field_default_field_instances() {
       'default' => array(
         'label' => 'above',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 8,
       ),
@@ -3866,7 +3874,9 @@ function sprowt_content_types_field_default_field_instances() {
       'tertiary_teaser' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 6,
       ),
@@ -6656,7 +6666,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 3,
+      'default_image' => 4,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg svg',
       'max_filesize' => '',
@@ -6816,7 +6826,7 @@ function sprowt_content_types_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => TRUE,
-      'default_image' => 5,
+      'default_image' => 6,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -7662,7 +7672,7 @@ function sprowt_content_types_field_default_field_instances() {
     'bundle' => 'special_offer',
     'default_value' => array(
       0 => array(
-        'url' => 'node/36',
+        'url' => 'node/38',
       ),
     ),
     'deleted' => 0,
@@ -7683,21 +7693,27 @@ function sprowt_content_types_field_default_field_instances() {
       'secondary_teaser' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 5,
       ),
       'tertiary_teaser' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 6,
       ),

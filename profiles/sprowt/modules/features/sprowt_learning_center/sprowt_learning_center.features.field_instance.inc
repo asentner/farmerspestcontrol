@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_learning_center.features.field_instance.inc
@@ -119,7 +120,9 @@ function sprowt_learning_center_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 4,
       ),
@@ -761,6 +764,7 @@ function sprowt_learning_center_field_default_field_instances() {
           'delete' => '',
           'description' => 0,
           'edit' => '',
+          'translate' => 'Translate',
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_view',

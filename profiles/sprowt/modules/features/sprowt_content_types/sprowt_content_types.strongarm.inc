@@ -15,70 +15,70 @@ function sprowt_content_types_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_affiliation';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_affiliation'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_benefit';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_benefit'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_cta';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_cta'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_location';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_location'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_market';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_market'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_profile';
-  $strongarm->value = 'edit-xmlsitemap';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_profile'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_region';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_region'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_slide';
-  $strongarm->value = 'edit-rabbit-hole';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_slide'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_special_offer';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_special_offer'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_testimonial';
-  $strongarm->value = 'edit-linkchecker';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_testimonial'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -196,6 +196,13 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_cta';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_cta'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_faq';
   $strongarm->value = 1;
   $export['diff_enable_revisions_page_node_faq'] = $strongarm;
@@ -259,6 +266,27 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_slide';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_slide'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_special_offer';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_special_offer'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_testimonial';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_testimonial'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_webform';
   $strongarm->value = 1;
   $export['diff_enable_revisions_page_node_webform'] = $strongarm;
@@ -283,6 +311,13 @@ function sprowt_content_types_strongarm() {
   $strongarm->name = 'diff_show_preview_changes_node_blog';
   $strongarm->value = 1;
   $export['diff_show_preview_changes_node_blog'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_cta';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_cta'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -350,6 +385,27 @@ function sprowt_content_types_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_slide';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_slide'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_special_offer';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_special_offer'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_testimonial';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_testimonial'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'diff_show_preview_changes_node_webform';
   $strongarm->value = 1;
   $export['diff_show_preview_changes_node_webform'] = $strongarm;
@@ -374,6 +430,13 @@ function sprowt_content_types_strongarm() {
   $strongarm->name = 'diff_view_mode_preview_node_blog';
   $strongarm->value = 'full';
   $export['diff_view_mode_preview_node_blog'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_cta';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_cta'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -437,6 +500,27 @@ function sprowt_content_types_strongarm() {
   $strongarm->name = 'diff_view_mode_preview_node_service';
   $strongarm->value = 'full';
   $export['diff_view_mode_preview_node_service'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_slide';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_slide'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_special_offer';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_special_offer'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_testimonial';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_testimonial'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -2642,6 +2726,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_affiliation'] = $strongarm;
 
@@ -2652,6 +2737,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_benefit'] = $strongarm;
 
@@ -2662,6 +2748,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_blog'] = $strongarm;
 
@@ -2672,6 +2759,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_cta'] = $strongarm;
 
@@ -2682,6 +2770,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_faq'] = $strongarm;
 
@@ -2692,6 +2781,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_localtarget'] = $strongarm;
 
@@ -2702,6 +2792,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_location'] = $strongarm;
 
@@ -2712,6 +2803,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_market'] = $strongarm;
 
@@ -2721,6 +2813,7 @@ example.org';
   $strongarm->name = 'node_options_package';
   $strongarm->value = array(
     0 => 'status',
+    1 => 'revision',
   );
   $export['node_options_package'] = $strongarm;
 
@@ -2730,6 +2823,7 @@ example.org';
   $strongarm->name = 'node_options_page';
   $strongarm->value = array(
     0 => 'status',
+    1 => 'revision',
   );
   $export['node_options_page'] = $strongarm;
 
@@ -2739,6 +2833,7 @@ example.org';
   $strongarm->name = 'node_options_profile';
   $strongarm->value = array(
     0 => 'status',
+    1 => 'revision',
   );
   $export['node_options_profile'] = $strongarm;
 
@@ -2749,6 +2844,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_region'] = $strongarm;
 
@@ -2759,6 +2855,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_service'] = $strongarm;
 
@@ -2769,6 +2866,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_slide'] = $strongarm;
 
@@ -2779,6 +2877,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_special_offer'] = $strongarm;
 
@@ -2789,6 +2888,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_testimonial'] = $strongarm;
 
@@ -2799,6 +2899,7 @@ example.org';
   $strongarm->value = array(
     0 => 'status',
     1 => 'promote',
+    2 => 'revision',
   );
   $export['node_options_webform'] = $strongarm;
 
@@ -3016,7 +3117,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_slide';
-  $strongarm->value = '0';
+  $strongarm->value = 0;
   $export['node_submitted_slide'] = $strongarm;
 
   $strongarm = new stdClass();

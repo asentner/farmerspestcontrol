@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_city_pages.features.field_instance.inc
@@ -20,7 +21,9 @@ function sprowt_city_pages_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 1,
       ),
@@ -172,7 +175,9 @@ function sprowt_city_pages_field_default_field_instances() {
       'alt_teaser' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 1,
       ),
@@ -1010,7 +1015,9 @@ function sprowt_city_pages_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 2,
       ),

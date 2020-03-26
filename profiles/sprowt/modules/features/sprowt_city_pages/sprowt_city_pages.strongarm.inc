@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_city_pages.strongarm.inc
@@ -150,7 +151,9 @@ function sprowt_city_pages_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_city_page';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'revision',
+  );
   $export['node_options_city_page'] = $strongarm;
 
   $strongarm = new stdClass();

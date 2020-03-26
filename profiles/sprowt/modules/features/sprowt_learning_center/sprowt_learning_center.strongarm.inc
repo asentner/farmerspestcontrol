@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_learning_center.strongarm.inc
@@ -125,6 +126,7 @@ function sprowt_learning_center_strongarm() {
   $strongarm->name = 'node_options_issue';
   $strongarm->value = array(
     0 => 'status',
+    1 => 'revision',
   );
   $export['node_options_issue'] = $strongarm;
 

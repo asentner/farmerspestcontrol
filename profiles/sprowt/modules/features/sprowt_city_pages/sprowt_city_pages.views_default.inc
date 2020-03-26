@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_city_pages.views_default.inc
@@ -99,12 +100,12 @@ function sprowt_city_pages_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'benefit' => 'benefit',
   );
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
-  /* Filter criterion: Content: Promoted to front page */
+  /* Filter criterion: Content: Promoted to front page status */
   $handler->display->display_options['filters']['promote']['id'] = 'promote';
   $handler->display->display_options['filters']['promote']['table'] = 'node';
   $handler->display->display_options['filters']['promote']['field'] = 'promote';
