@@ -146,6 +146,7 @@ dependencies[] = insert
 dependencies[] = filefield_sources
 dependencies[] = context
 dependencies[] = context_ui
+dependencies[] = context_respect
 dependencies[] = paragraphs
 dependencies[] = iframe
 dependencies[] = quicktabs
