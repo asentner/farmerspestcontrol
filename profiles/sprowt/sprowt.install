@@ -634,3 +634,18 @@ function sprowt_update_7014() {
         entity_uuid_save('node', $node);
     }
 }
+
+/**
+ * Turn on revisioning for all content types
+ */
+function sprowt_update_7015() {
+    $types = array_keys(node_type_get_names());
+    foreach($types as $type) {
+        $varKey = 'node_options_' . $type;
+        $options = variable_get($varKey, []);
+        if(!in_array('revision', $options)) {
+            $options[] = 'revision';
+        }
+        variable_set($varKey, $options);
+    }
+}
