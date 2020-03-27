@@ -528,7 +528,6 @@ Class SprowtBuilder {
             if($type == 'issue' || $type == 'concern' || in_array($uuid, $noIndexUnpublish)) {
                 $node = entity_uuid_load('node', [$uuid]);
                 $node = array_pop($node);
-
                 $node->status = 0;
                 $node->metatags[LANGUAGE_NONE]['robots']['value']['noindex'] = 'noindex';
                 entity_uuid_save('node', $node);
