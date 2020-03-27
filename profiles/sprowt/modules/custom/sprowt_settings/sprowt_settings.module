@@ -383,6 +383,7 @@ function _sprowt_settings_shortcode_replace($string)
             if(preg_match('/((?:<p>)?\[map[\s]?(.*?)\](?:<\/p>)?)/', $map, $m)) {
                 if (preg_match('/src=([^\s\]]+)/', $m[2], $s)) {
                     $link = $s[1];
+                    $link = html_entity_decode($link); //just in case it's htmlentity-ified
                 }
                 else {
                     $link = variable_get('sprowt_settings_map_embed', '');
