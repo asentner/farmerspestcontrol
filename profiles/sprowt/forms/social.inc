@@ -3,7 +3,7 @@
   * Social Panel
   */
 
-require_once drupal_get_path('module', 'sprowt_settings') . '/sprowt_settings.module';
+require_once __DIR__ . '/../modules/custom/sprowt_settings/sprowt_settings.module';
 
  function sprowt_social($form, &$form_state, &$install_state){
   drupal_set_title(st('Configure Social Media'));
