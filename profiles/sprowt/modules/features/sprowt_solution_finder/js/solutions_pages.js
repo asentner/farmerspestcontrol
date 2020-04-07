@@ -18,29 +18,33 @@
     var $lockBox = $('.lock-form--wrap');
 
     window.addEventListener('resize', function () {
-      wS = $(this).scrollTop();
-      hT = $lockBox.offset().top;
-      if (wS > hT) {
-        $lockBox.addClass('fix-box');
-      }
+        if($lockBox.length > 0) {
+            wS = $(this).scrollTop();
+            hT = $lockBox.offset().top;
+            if (wS > hT) {
+                $lockBox.addClass('fix-box');
+            }
+        }
     });
 
     $(window).scroll(function () {
-      wS = $(this).scrollTop();
-      hT = $lockBox.offset().top;
-      hH = $lockBox.outerHeight();
-      if (wS > hT) {
-        $lockBox.addClass('fix-box');
-        $lockBox.css('height', hH + 'px');
-      } else {
-        $lockBox.removeClass('fix-box');
-        $lockBox.css('height', 'inherit');
-      }
-      if (wS > (hT + hH)) {
-        $lockBox.addClass('shrink-box');
-      } else {
-        $lockBox.removeClass('shrink-box');
-      }
+        if($lockBox.length > 0) {
+            wS = $(this).scrollTop();
+            hT = $lockBox.offset().top;
+            hH = $lockBox.outerHeight();
+            if (wS > hT) {
+                $lockBox.addClass('fix-box');
+                $lockBox.css('height', hH + 'px');
+            } else {
+                $lockBox.removeClass('fix-box');
+                $lockBox.css('height', 'inherit');
+            }
+            if (wS > (hT + hH)) {
+                $lockBox.addClass('shrink-box');
+            } else {
+                $lockBox.removeClass('shrink-box');
+            }
+        }
     });
 
   });
