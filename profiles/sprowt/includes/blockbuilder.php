@@ -149,30 +149,54 @@ class BlockBuilder {
             FROM node
         ")->fetchAllKeyed();
         $trans = array();
+
+        $updateClass = function($original, $newClasses) {
+            if(empty($original)) {
+                $original = [];
+            }
+            else {
+                $original = explode(' ', $original);
+            }
+            $return = [];
+            foreach($original as $ov) {
+                if(!empty($ov)) {
+                    $ov = trim($ov);
+                    if(!in_array($ov, $return)) {
+                        $return[] = $ov;
+                    }
+                }
+            }
+            foreach($newClasses as $class) {
+                if(!empty($class)) {
+                    $class = trim($class);
+                    if(!in_array($class, $return)) {
+                        $return[] = $class;
+                    }
+                }
+            }
+            return implode(' ', $return);
+        };
+
         foreach($this->block as $current_row) {
             $row = $current_row;
             unset($row['bid']);
             switch ($row['module']) {
                 case 'block':
                     $row['delta'] = $this->block_custom_map[$current_row['delta']];
-                    if (strpos($row['css_class'], 'sprowt-block-imported') === false) {
-                        $row['css_class'] .= ' sprowt-block-imported';
-                    }
+                    $row['css_class'] = $updateClass($row['css_class'], ['sprowt-block-imported']);
                     break;
                 case 'multiblock':
                     $row['delta'] = $this->multiblock_map[$current_row['delta']];
-                    if (strpos($row['css_class'], 'sprowt-block-imported') === false) {
-                        $row['css_class'] .= ' sprowt-block-imported';
-                    }
+                    $row['css_class'] = $updateClass($row['css_class'], ['sprowt-block-imported']);
                     break;
                 case 'sprowt_block_cta':
                     $nid = str_replace('sprowt_block_cta_', '', $row['delta']);
                     $uuid = empty($this->uuid_map[$nid]) ? 0 : $this->uuid_map[$nid];
                     if (!empty($nid_map[$uuid])) {
-                        if (strpos($row['css_class'], 'sprowt-block-imported') === false) {
-                            $row['css_class'] .= ' sprowt-block-imported';
-                        }
-                        $row['css_class'] .= ' block--sprowt-block-cta-sprowt-block-cta-' . $nid;
+                        $row['css_class'] = $updateClass($row['css_class'], [
+                            'sprowt-block-imported',
+                            'block--sprowt-block-cta-sprowt-block-cta-' . $nid
+                        ]);
                         $row['delta'] = 'sprowt_block_cta_' . $nid_map[$uuid];
                     }
                     else {
