@@ -362,7 +362,7 @@ function paragraphs_export_import_references($entity, $entity_type, $entity_id) 
                         if(!empty($theme)) {
                             sprowt_require_class('blockbuilder');
                             $bb = new BlockBuilder();
-                            $bb->import($reference['export'], $theme);
+                            $bb->import($reference['export'], $theme, false);
                         }
                     }
                     if(!empty($reference['value']) && !empty($reference['value']['module'])) {

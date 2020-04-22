@@ -908,7 +908,7 @@ class BlockBuilder {
         }
     }
 
-    function import($array, $theme = null) {
+    function import($array, $theme = null, $translateNids = true) {
         $this->setFromArray($array);
         if(!empty($theme)) {
             $this->setTheme($theme);
@@ -921,12 +921,14 @@ class BlockBuilder {
         $this->writeMultiblock();
         $this->writeBean();
         $this->writeBlock();
-        $this->setNids();
+        if($translateNids) {
+            $this->setNids();
+        }
         $this->writeMenublock();
     }
 
-    function importJson($json, $theme = null) {
-        $this->import(json_decode($json, true), $theme);
+    function importJson($json, $theme = null, $translateNids = true) {
+        $this->import(json_decode($json, true), $theme, $translateNids);
     }
 
     function export($theme) {
@@ -961,7 +963,7 @@ class BlockBuilder {
         fclose($handle);
     }
 
-    function importFromFile($filepath, $theme = null) {
+    function importFromFile($filepath, $theme = null, $translateNids = true) {
         $json = file_get_contents($filepath);
         $array = json_decode($json, true);
         if(empty($array)) {
@@ -969,7 +971,7 @@ class BlockBuilder {
             return false;
         }
 
-        $this->import($array, $theme);
+        $this->import($array, $theme, $translateNids);
     }
 }
 
