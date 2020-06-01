@@ -70,7 +70,7 @@ function _webform_date_restriction_date_form(&$form, &$form_state) {
   if (!isset($form_state['daysoyear'])) {
     $form_state['daysoyear'] = empty($rests['daysoyear']) ? array() : $rests['daysoyear'];
   }
-  
+
   if (!isset($form_state['phpval'])) {
     $form_state['phpval'] = empty($rests['phpval']) ? array() : $rests['phpval'];
   }
@@ -266,9 +266,9 @@ function _webform_date_restriction_date_form(&$form, &$form_state) {
     );
     $daysoyear['daysoyear_' . $i] = array_merge($daysoyear['daysoyear_' . $i], $remove);
   }
-  
+
   $phpfields = array();
-  
+
   foreach ($form_state['phpval'] as $i => $phpval) {
     $remove = array(
       'remove' => array(
@@ -306,15 +306,15 @@ function _webform_date_restriction_date_form(&$form, &$form_state) {
         ),
       ),
     );
-    
+
     $phpfield = array(
       '#type' => 'textfield',
     );
-    
+
     if (!empty($phpval)) {
       $phpfield['#default_value'] = $phpval;
     }
-  
+
     $phpfields['phpval_' . $i] = array(
       '#type' => 'container',
       '#attributes' => array(
@@ -396,7 +396,7 @@ function _webform_date_restriction_date_form(&$form, &$form_state) {
       ),
     ),
   );
-  
+
   $restriction['phpval_container'] = array(
     '#type' => 'item',
     '#title' => t('Restrict By Relative Value'),
@@ -489,14 +489,14 @@ function _webform_date_restriction_cleanup_values($form, &$form_state) {
       $vals['daysoyear'][] = $dayoyear['dayoyear'];
     }
   }
-  
+
   $phpval = empty($restriction['phpval_container']['phpval_wrap']['phpvals']) ? array() : $restriction['phpval_container']['phpval_wrap']['phpvals'];
   foreach ($phpval as $php) {
     if (empty($php['remove'])) {
       $vals['phpval'][] = $php['phpval'];
     }
   }
-  
+
   $form_state['values']['restriction'] = $vals;
 }
 
@@ -762,7 +762,14 @@ function _webform_date_restriction_get_date_restrictions($nid, $cid) {
   foreach ($raw as $row) {
     $restrictions[$row['type']][] = $row['value'];
   }
-  
+
+  $context = [
+      'nid' => $nid,
+      'cid' => $cid
+  ];
+
+  drupal_alter('webform_date_restrictions', $restrictions, $context);
+
   return $restrictions;
 }
 
@@ -827,7 +834,7 @@ function _webform_date_restriction_date_validate($form, &$form_state) {
           }
         }
       }
-  
+
       if (!empty($rests['phpval'])) {
         foreach ($rests['phpval'] as $php) {
           try {
