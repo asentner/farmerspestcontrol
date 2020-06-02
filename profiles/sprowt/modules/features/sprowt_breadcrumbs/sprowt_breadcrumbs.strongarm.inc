@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_breadcrumbs.strongarm.inc

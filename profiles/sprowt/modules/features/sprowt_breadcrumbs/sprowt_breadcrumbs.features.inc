@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_breadcrumbs.features.inc
@@ -49,7 +50,7 @@ Our Blog',
     'titles' => 'About
 Meet the Team',
     'paths' => '<about>
-<meet_our_trusted_team>',
+<meet_the_team>',
     'visibility_php' => '',
     'node_type' => 'profile',
     'language' => '',
@@ -60,7 +61,7 @@ Meet the Team',
   $custom_breadcrumbs['service'] = array(
     'name' => 'Service',
     'titles' => 'Our Services',
-    'paths' => '<our_pest_control_services>',
+    'paths' => '<services>',
     'visibility_php' => '',
     'node_type' => 'service',
     'language' => '',
