@@ -649,3 +649,41 @@ function sprowt_update_7015() {
         variable_set($varKey, $options);
     }
 }
+
+/**
+ * Fix custom breadcrumbs
+ */
+function sprowt_update_7016() {
+    $breadcrumbArray = [];
+    foreach (module_implements('cb_breadcrumb_info') as $module) {
+        $breadcrumbs = custom_breadcrumbs_load_breadcrumbs($module);
+        if (!empty($breadcrumbs)) {
+            $breadcrumbArray[$module] = $breadcrumbs;
+        }
+    }
+
+    foreach($breadcrumbArray as $module => $breadcrumbs) {
+        foreach($breadcrumbs as $breadcrumb) {
+            if(!empty($breadcrumb->paths)) {
+                $paths = explode("\n", $breadcrumb->paths);
+                $changed = false;
+                foreach($paths as $key => $path) {
+                    if($path == '<meet_our_trusted_team>') {
+                        $paths[$key] = '<meet_the_team>';
+                        $changed = true;
+                    }
+                    if($path == '<our_pest_control_services>') {
+                        $paths[$key] = '<services>';
+                        $changed = true;
+                    }
+                }
+                if($changed) {
+                    $breadcrumb->paths = $paths;
+                    $breadcrumb->titles = explode("\n", $breadcrumb->titles);
+                    $key = $breadcrumb->breadcrumb_type;
+                    _custom_breadcrumbs_save_breadcrumb($module, $key, $breadcrumb);
+                }
+            }
+        }
+    }
+}
