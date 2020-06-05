@@ -1,0 +1,16 @@
+name = Sprowt 6 Local Target Legacy
+core = 7.x
+package = Sprowt 6 Features
+dependencies[] = bean
+dependencies[] = context
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = sprowt_content_types
+dependencies[] = strongarm
+dependencies[] = views
+dependencies[] = webform
+features[context][] = local_target
+features[ctools][] = context:context:3
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+project path = profiles/sprowt/modules/features

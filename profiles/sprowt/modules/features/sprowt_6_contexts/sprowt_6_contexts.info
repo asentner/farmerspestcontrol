@@ -23,7 +23,6 @@ features[context][] = flippy
 features[context][] = footer
 features[context][] = front
 features[context][] = header
-features[context][] = local_target
 features[context][] = meet_team
 features[context][] = service
 features[context][] = service_listing
