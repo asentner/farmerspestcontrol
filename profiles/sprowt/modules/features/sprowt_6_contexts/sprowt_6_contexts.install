@@ -1,8 +1,0 @@
-<?php
-
-/**
- * Install local target legacy feature
- */
-function sprowt_6_contexts_update_7001() {
-    module_enable(['sprowt_6_local_target_legacy']);
-}
