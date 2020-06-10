@@ -315,6 +315,12 @@ function sprowt_content_types_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -403,6 +409,12 @@ function sprowt_content_types_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => -1,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'landing_page' => array(
         'label' => 'above',
@@ -520,6 +532,12 @@ function sprowt_content_types_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 10,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'landing_page' => array(
         'label' => 'above',

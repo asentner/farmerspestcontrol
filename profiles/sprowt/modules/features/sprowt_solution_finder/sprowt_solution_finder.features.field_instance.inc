@@ -34,6 +34,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 4,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -114,6 +120,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 8,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -188,6 +200,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         ),
         'type' => 'paragraphs_view',
         'weight' => 2,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'landing_page' => array(
         'label' => 'above',
@@ -277,6 +295,12 @@ function sprowt_solution_finder_field_default_field_instances() {
           'url_type' => 1,
         ),
         'type' => 'image_url',
+        'weight' => 0,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'landing_page' => array(
@@ -427,6 +451,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -501,6 +531,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 3,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'landing_page' => array(
         'label' => 'above',
@@ -579,6 +615,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 4,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -655,6 +697,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 6,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -727,6 +775,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'landing_page' => array(
         'label' => 'above',
@@ -803,6 +857,12 @@ function sprowt_solution_finder_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 5,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'landing_page' => array(
         'label' => 'above',

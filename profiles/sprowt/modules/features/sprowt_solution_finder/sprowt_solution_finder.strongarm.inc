@@ -144,7 +144,7 @@ function sprowt_solution_finder_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_solution';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['node_submitted_solution'] = $strongarm;
 
   $strongarm = new stdClass();

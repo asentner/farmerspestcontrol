@@ -294,6 +294,12 @@ function sprowt_learning_center_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 6,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -375,6 +381,12 @@ function sprowt_learning_center_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 2,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -454,6 +466,12 @@ function sprowt_learning_center_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'landing_page' => array(
@@ -537,6 +555,12 @@ function sprowt_learning_center_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 3,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -615,6 +639,12 @@ function sprowt_learning_center_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 1,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'landing_page' => array(
         'label' => 'above',
@@ -770,6 +800,12 @@ function sprowt_learning_center_field_default_field_instances() {
         'type' => 'field_collection_view',
         'weight' => 4,
       ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'landing_page' => array(
         'label' => 'above',
         'settings' => array(),
@@ -841,6 +877,12 @@ function sprowt_learning_center_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 5,
+      ),
+      'hero' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'landing_page' => array(
         'label' => 'above',

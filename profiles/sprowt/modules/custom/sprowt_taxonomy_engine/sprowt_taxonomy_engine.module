@@ -636,25 +636,27 @@ function _sprowt_taxonomy_engine_build_node($type = '', $properties = array()) {
 }
 
 function _sample_ltp_node() {
-    require_once drupal_get_path('module', 'node_export') . '/formats/json.inc';
-    $sync = new SprowtNodeSync();
-    $sampleJson = $sync->fetch([
-        'uuids' => [
-            '07a261fe-0ea2-45c8-955d-82f965f4f557'
-        ]
-    ]);
-    //$sampleJson = file_get_contents(drupal_get_path('module', 'sprowt_taxonomy_engine') . '/sample.json');
-    if(!empty($sampleJson)) {
-        $sampleJsonParsed = json_decode($sampleJson, true);
-    }
-    if(!empty($sampleJsonParsed)) {
-        $sample = node_export_json_decode_objects($sampleJsonParsed);
-        if(is_array($sample)) {
-            $sample = array_shift($sample);
+    $sample = &drupal_static(__FUNCTION__);
+    if(!isset($sample)) {
+        require_once drupal_get_path('module', 'node_export') . '/formats/json.inc';
+        $sync = new SprowtNodeSync();
+        $sampleJson = $sync->fetch([
+            'uuids' => [
+                '07a261fe-0ea2-45c8-955d-82f965f4f557'
+            ]
+        ]);
+        //$sampleJson = file_get_contents(drupal_get_path('module', 'sprowt_taxonomy_engine') . '/sample.json');
+        if (!empty($sampleJson)) {
+            $sampleJsonParsed = json_decode($sampleJson, true);
         }
-        return $sample;
+        if (!empty($sampleJsonParsed)) {
+            $sample = node_export_json_decode_objects($sampleJsonParsed);
+            if (is_array($sample)) {
+                $sample = array_shift($sample);
+            }
+        }
     }
-    return null;
+    return $sample;
 }
 
 /**

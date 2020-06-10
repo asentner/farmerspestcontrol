@@ -198,7 +198,7 @@
     }
 }
 
-.ltp--solutions-finder {
+.node-type-localtarget.has-solution-finder {
     .node--localtarget--hero {
         padding-bottom: 100px;
         @include breakpoint($tab) {

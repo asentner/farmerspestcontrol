@@ -42,9 +42,9 @@ function sprowt_6_local_target_context_context_default_contexts() {
           'region' => 'preface_second',
           'weight' => '-10',
         ),
-        'webform-client-block-144' => array(
+        'webform-client-block-78' => array(
           'module' => 'webform',
-          'delta' => 'client-block-144',
+          'delta' => 'client-block-78',
           'region' => 'preface_third',
           'weight' => '-10',
         ),
