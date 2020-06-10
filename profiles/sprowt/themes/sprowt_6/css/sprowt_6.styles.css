@@ -7850,6 +7850,12 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
           justify-content: flex-end;
       text-align: right; } }
 
+.ltp--solutions-finder .node--localtarget--hero {
+  padding-bottom: 100px; }
+  @media (min-width: 768px) {
+    .ltp--solutions-finder .node--localtarget--hero {
+      padding-bottom: 260px; } }
+
 .not-front.node-type-localtarget .preface-third-wrap {
   padding: 0; }
   .not-front.node-type-localtarget .preface-third-wrap .benefits-wrapper {

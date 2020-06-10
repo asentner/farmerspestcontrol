@@ -198,6 +198,15 @@
     }
 }
 
+.ltp--solutions-finder {
+    .node--localtarget--hero {
+        padding-bottom: 100px;
+        @include breakpoint($tab) {
+            padding-bottom: 260px;
+        }
+    }
+}
+
 .not-front.node-type-localtarget .preface-third-wrap {
     padding: 0;
     .benefits-wrapper {
