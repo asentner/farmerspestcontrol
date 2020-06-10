@@ -207,17 +207,14 @@ function sprowt_content_types_field_group_info() {
     'children' => array(
       0 => 'body',
       1 => 'field_call_out',
-      2 => 'field_display_title',
-      3 => 'field_hero_image',
-      4 => 'field_image',
-      5 => 'field_local_content',
-      6 => 'field_market',
-      7 => 'field_packages_intro',
-      8 => 'field_packages_title',
-      9 => 'field_seo_title',
-      10 => 'field_service',
-      11 => 'field_intro',
-      12 => 'title',
+      2 => 'field_market',
+      3 => 'field_packages_intro',
+      4 => 'field_packages_title',
+      5 => 'field_service',
+      6 => 'field_image_insert',
+      7 => 'title',
+      8 => 'group_hero',
+      9 => 'group_local',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -635,6 +632,38 @@ function sprowt_content_types_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_hero|node|localtarget|form';
+  $field_group->group_name = 'group_hero';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'localtarget';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_content';
+  $field_group->data = array(
+    'label' => 'Hero',
+    'weight' => '74',
+    'children' => array(
+      0 => 'field_display_title',
+      1 => 'field_hero_image',
+      2 => 'field_intro',
+      3 => 'field_content_location',
+      4 => 'field_background_image_color',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-hero field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_hero|node|localtarget|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_locale|node|location|teaser';
   $field_group->group_name = 'group_locale';
   $field_group->entity_type = 'node';
@@ -665,6 +694,36 @@ function sprowt_content_types_field_group_info() {
     ),
   );
   $field_groups['group_locale|node|location|teaser'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_local|node|localtarget|form';
+  $field_group->group_name = 'group_local';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'localtarget';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_content';
+  $field_group->data = array(
+    'label' => 'Local Content',
+    'weight' => '75',
+    'children' => array(
+      0 => 'field_image',
+      1 => 'field_local_content',
+      2 => 'field_seo_title',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-local field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_local|node|localtarget|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -701,6 +760,8 @@ function sprowt_content_types_field_group_info() {
   t('Call Out');
   t('Content');
   t('Enhanced Content');
+  t('Hero');
+  t('Local Content');
   t('Locale');
   t('Social and Map');
 

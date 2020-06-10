@@ -2,6 +2,7 @@
 ;features[] = example_feature
 
 features[] = sprowt_6_contexts
+features[] = sprowt_6_local_target_context
 
 ;list all features you want enabled instead of a sprowt feature in this format:
 ;overrides[sprowt_feature] = example_feature

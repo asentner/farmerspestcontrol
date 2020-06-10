@@ -52,4 +52,47 @@ function sprowt_6_preprocess_node(&$variables) {
     if($variables['view_mode'] == 'full' && empty($variables['page'])) {
         $variables['page'] = true; //this is false when logged in for some reason
     }
+
+    if($node->type == 'localtarget') {
+        $n = entity_metadata_wrapper('node', $node);
+        if($variables['view_mode'] == 'hero') {
+            $heroImage = $n->field_hero_image->value();
+            $contentLocation = $n->field_content_location->value();
+            $backgroundImageColor = $n->field_background_image_color->value();
+            if(empty($backgroundImageColor)) {
+                $backgroundImageColor = 'light';
+            }
+            $variables['classes_array'][] = 'background--' . $backgroundImageColor;
+            if(!empty($contentLocation)) {
+                $variables['classes_array'][] = 'content-' . $contentLocation;
+            }
+            else {
+                $variables['classes_array'][] = 'content-center';
+            }
+            if(!empty($heroImage)) {
+                global $base_url;
+                if (!empty($variables["content"]["field_hero_image"][0]["#image_style"])) {
+                    $heroImageUrl = image_style_url($variables["content"]["field_hero_image"][0]["#image_style"], $heroImage['uri']);
+                }
+                else {
+                    $heroImageUrl = file_create_url($heroImage['uri']);
+                }
+                $heroImageUrl = str_replace($base_url, '', $heroImageUrl);
+            }
+            else {
+                $heroImageUrl = '/' . drupal_get_path('profile', 'sprowt') . '/images/node_default/slideshow-placeholder.png';
+            }
+
+            if(!empty($variables['attributes_array']['style'])) {
+                $style = explode(';', $variables['attributes_array']['style']);
+            }
+            else {
+                $style = [];
+            }
+            $style[] = 'background-image: url(\''.$heroImageUrl.'\')';
+            $variables['attributes_array']['style'] = implode(';', $style) . ';';
+        }
+
+    }
+
 }

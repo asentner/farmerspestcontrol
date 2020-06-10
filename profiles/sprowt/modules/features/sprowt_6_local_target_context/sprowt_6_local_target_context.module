@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Sprowt 6 Local Target Context feature.
+ */
+
+include_once 'sprowt_6_local_target_context.features.inc';

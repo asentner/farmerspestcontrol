@@ -14,7 +14,7 @@ function sprowt_taxonomy_engine_menu(){
 		'file' => 'sprowt_taxonomy_engine.pages.inc',
 		'type' =>  MENU_NORMAL_ITEM
 	);
-    
+
     $items['admin/config/sprowt/unlock-types'] = array(
         'title' => 'Unlock URL Aliases',
         'page callback' => 'drupal_get_form',
@@ -23,7 +23,7 @@ function sprowt_taxonomy_engine_menu(){
         'file' => 'sprowt_taxonomy_engine.pages.inc',
         'type' =>  MENU_NORMAL_ITEM
     );
-    
+
 
 	return $items;
 }
@@ -31,7 +31,7 @@ function sprowt_taxonomy_engine_menu(){
 /**
  * Implements hook_form_alter().
  *
- * This function disables typical manipulation of the content types 
+ * This function disables typical manipulation of the content types
  * so that they can be controlled by taxonomy terms exclusively.
  */
 function sprowt_taxonomy_engine_form_alter(&$form, &$form_state) {
@@ -77,7 +77,7 @@ function sprowt_taxonomy_engine_form_alter(&$form, &$form_state) {
 			$form['field_market']['#disabled'] = TRUE;
 			break;
 	}
-	
+
 	//If users reach delete confirmation page for service/local target page, redirect them with error message
 	$error_type = '';
 	if ($form['#form_id'] == 'node_delete_confirm' && isset($form['#node']->type)) {
@@ -86,8 +86,8 @@ function sprowt_taxonomy_engine_form_alter(&$form, &$form_state) {
 		}
 	}
 	//Account for a batch delete
-	elseif ($form['#form_id'] =='node_admin_content' && 
-		$form['#theme'] == 'confirm_form' && 
+	elseif ($form['#form_id'] =='node_admin_content' &&
+		$form['#theme'] == 'confirm_form' &&
 		$form['operation']['#value'] == 'delete' &&
 		isset($form['nodes'])) {
 		foreach ($form['nodes'] as $nid_key => $nid) {
@@ -171,9 +171,9 @@ function sprowt_taxonomy_engine_form_alter(&$form, &$form_state) {
 			}
 		}
 	}
-	
+
 	//Pathauto settings
-	
+
 	if($form['#form_id'] == 'pathauto_patterns_form') {
 		$form['node']['pathauto_node_localtarget_pattern']['#disabled'] = true;
 		$form['node']['pathauto_node_localtarget_pattern']['#value'] = variable_get('pathauto_node_localtarget_pattern','[node:title]');
@@ -221,10 +221,10 @@ function sprowt_taxonomy_engine_taxonomy_term_update($term) {
 		$ltp_lookup_table = $ltp_data['ltp_lookup_table'];
 
 		foreach (node_load_multiple($nids) as $node) {
-			if ($term->vocabulary_machine_name == 'services') {	
+			if ($term->vocabulary_machine_name == 'services') {
 				if (isset($node->field_service['und'][0]['tid'])) {
 					//If node has saved tid, update the title if necessary
-					if ($node->field_service['und'][0]['tid'] == $term->tid) {				
+					if ($node->field_service['und'][0]['tid'] == $term->tid) {
 						$title_tokens = explode(' in ', $node->title);
 						if ($title_tokens[0] != $term->name) {
 							$node->title = $term->name.' in '.$title_tokens[1];
@@ -240,7 +240,7 @@ function sprowt_taxonomy_engine_taxonomy_term_update($term) {
 			elseif ($term->vocabulary_machine_name == 'markets') {
 				if (isset($node->field_market['und'][0]['tid'])) {
 					//If node has saved tid, update the title if necessary
-					if ($node->field_market['und'][0]['tid'] == $term->tid) {				
+					if ($node->field_market['und'][0]['tid'] == $term->tid) {
 						$title_tokens = explode(' in ', $node->title);
 						if ($title_tokens[1] != $term->name) {
 							$node->title = $title_tokens[0].' in '.$term->name;
@@ -391,11 +391,11 @@ function sprowt_taxonomy_engine_taxonomy_term_insert($term) {
 					else { //function returns NULL if malformed!
 						watchdog('sprowt_taxonomy_engine', 'Failed to create LocalTarget node (title: '.$properties['title'].'). Check node properties.', array(), WATCHDOG_ERROR);
 						return;
-					}					
+					}
 				}
 			}
 		}
-	}	
+	}
 }
 
 /**
@@ -490,11 +490,11 @@ function _sprowt_taxonomy_engine_get_associated_nids_by_tid($type, $tid) {
 		}
 		$result = db_query("SELECT n.nid from {node} n
 			LEFT JOIN {$table} $table_alias ON n.nid=$table_alias.entity_id
-			WHERE n.type=:type AND $table_alias.$tid_column=:tid", 
+			WHERE n.type=:type AND $table_alias.$tid_column=:tid",
 			array(':type'=>$type, ':tid'=>$tid));
 		$nids = $result->fetchCol();
 	}
-	
+
 	return $nids;
 }
 
@@ -590,6 +590,42 @@ function _sprowt_taxonomy_engine_build_node($type = '', $properties = array()) {
 				else {
 					return NULL;
 				}
+
+				$fieldInstances = field_info_instances('node', 'localtarget');
+				$sample = _sample_ltp_node();
+				if(empty($sample)) {
+				    $sample = new stdClass();
+                }
+				$skipfields = [
+				    'field_service',
+                    'field_market'
+                ];
+				foreach($fieldInstances as $fieldName => $fieldInstance) {
+				    if(!empty($sample->{$fieldName}) && !in_array($fieldName, $skipfields)) {
+				        switch($fieldInstance['widget']['module']) {
+                            case 'file':
+                            case 'image':
+                                $value = [];
+                                foreach ($sample->{$fieldName} as $lang => $items) {
+                                    $value[$lang] = [];
+                                    foreach ($items as $i => $item) {
+                                        $file = (object)$item;
+                                        $result = _node_export_file_field_import_file($file);
+                                        if ($result == TRUE && isset($file->fid)) {
+                                            $value[$lang][$i] = array_merge($item, (array)$file);
+                                        }
+                                    }
+                                }
+                                break;
+                            default:
+                                $value = $sample->{$fieldName};
+                                break;
+                        }
+                        if(!empty($value)) {
+                            $node->{$fieldName} = $value;
+                        }
+                    }
+                }
 				break;
 		}
 		return $node;
@@ -599,17 +635,39 @@ function _sprowt_taxonomy_engine_build_node($type = '', $properties = array()) {
 	}
 }
 
+function _sample_ltp_node() {
+    require_once drupal_get_path('module', 'node_export') . '/formats/json.inc';
+    $sync = new SprowtNodeSync();
+    $sampleJson = $sync->fetch([
+        'uuids' => [
+            '07a261fe-0ea2-45c8-955d-82f965f4f557'
+        ]
+    ]);
+    //$sampleJson = file_get_contents(drupal_get_path('module', 'sprowt_taxonomy_engine') . '/sample.json');
+    if(!empty($sampleJson)) {
+        $sampleJsonParsed = json_decode($sampleJson, true);
+    }
+    if(!empty($sampleJsonParsed)) {
+        $sample = node_export_json_decode_objects($sampleJsonParsed);
+        if(is_array($sample)) {
+            $sample = array_shift($sample);
+        }
+        return $sample;
+    }
+    return null;
+}
+
 /**
  * Implements hook_node_update(). Hooks into when the node is being updated.
  * This is for moving a service, market, region, or localtarget into and out
  * of the main menu when published.
- * 
+ *
  * @param Node $node The node object
- * 
+ *
  * @return void
  */
 function sprowt_taxonomy_engine_node_update($node) {
-    
+
     //This WAs the menu update
 //	$allowable_node_types = array('region', 'service', 'market', 'localtarget');
 //	if (in_array($node->type, $allowable_node_types) && $node->original->status != $node->status) {
@@ -707,9 +765,9 @@ function sprowt_taxonomy_engine_node_update($node) {
 
 /**
  * Returns the node object for the parent region of a market
- * 
+ *
  * @param int $nid Market nid
- * 
+ *
  * @return Node    node object of the parent region;
  */
 function _sprowt_taxonomy_engine_get_market_parent_region($nid){
@@ -725,7 +783,7 @@ function _sprowt_taxonomy_engine_get_market_parent_region($nid){
 		AND r.bundle = 'region'
 		AND n.status = 1
 	", array(':nid' => $nid))->fetchAll(PDO::FETCH_ASSOC);
-	
+
 	$nids = array();
 	foreach($q as $row){
 		$nids[] = $row['entity_id'];
@@ -735,9 +793,9 @@ function _sprowt_taxonomy_engine_get_market_parent_region($nid){
 
 /**
  * Returns the node object for the parent market of a localtarget
- * 
+ *
  * @param int $nid Localtarget nid
- * 
+ *
  * @return Node    node object of the parent market;
  */
 function _sprowt_taxonomy_engine_get_localtarget_parent_market($nid){
@@ -752,7 +810,7 @@ function _sprowt_taxonomy_engine_get_localtarget_parent_market($nid){
 		AND l.bundle = 'localtarget'
 		AND n.status = 1
 	", array(':nid' => $nid))->fetchAll(PDO::FETCH_ASSOC);
-	
+
 	$nids = array();
 	foreach($q as $row){
 		$nids[] = $row['entity_id'];
@@ -762,9 +820,9 @@ function _sprowt_taxonomy_engine_get_localtarget_parent_market($nid){
 
 /**
  * Adds menu info to a node object
- * 
+ *
  * @param Node $node node object
- * 
+ *
  * @return Node Node object with menu info added
  */
 function _sprowt_taxonomy_engine_add_menu_info($node){
@@ -772,7 +830,7 @@ function _sprowt_taxonomy_engine_add_menu_info($node){
 		$menu = db_query("SELECT * FROM {menu_links} WHERE link_path = :link", array(':link' => "node/{$node->nid}"))->fetchAssoc();
 		$node->menu = $menu;
 	}
-	
+
 	return $node;
 }
 
@@ -817,7 +875,7 @@ function _sprowt_service_node_from_tid($tid) {
         return new stdClass();
     }
 	$nid = $map[$tid];
-	
+
 	return node_load($nid);
 }
 
@@ -829,9 +887,9 @@ function _sprowt_market_node_from_tid($tid) {
     if(empty($map[$tid])) {
         return new stdClass();
     }
-    
+
 	$nid = $map[$tid];
-	
+
 	return node_load($nid);
 }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_fields_and_text_formats.features.field_base.inc
@@ -135,6 +136,31 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'file',
+  );
+
+  // Exported field_base: 'field_background_image_color'.
+  $field_bases['field_background_image_color'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_background_image_color',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'light' => 'Light',
+        'dark' => 'Dark',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_big_text'.
@@ -390,6 +416,32 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_content_location'.
+  $field_bases['field_content_location'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_content_location',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'center' => 'Center',
+        'left' => 'Left',
+        'right' => 'Right',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_description'.
@@ -660,7 +712,7 @@ function sprowt_fields_and_text_formats_field_default_field_bases() {
     'locked' => 0,
     'module' => 'image',
     'settings' => array(
-      'default_image' => 0,
+      'default_image' => FALSE,
       'uri_scheme' => 'public',
     ),
     'translatable' => 0,

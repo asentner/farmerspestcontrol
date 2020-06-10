@@ -9,17 +9,6 @@
  ?>
 
 <div<?php print $attributes; ?> itemscope itemtype="http://schema.org/Service">
-
-    <header>
-      <?php if (isset($content['field_display_title'])): ?>
-        <?php print render($content['field_display_title']); ?>
-      <?php else: ?>
-        <h2><?php print $title; ?></h2>
-      <?php endif; ?>
-
-        <?php print render($content['field_intro']); ?>
-
-    </header>
     <meta itemprop="serviceType" content="<?php print $service_name; ?>">
     <span itemprop="provider" itemscope itemtype="http://schema.org/LocalBusiness">
       <meta itemprop="name" content="<?php print variable_get('site_name'); ?>">

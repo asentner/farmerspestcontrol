@@ -1,6 +1,9 @@
 //local target full node
 .node-type-localtarget{
 	.l-content{
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 30px;
 		.block__content{
 			max-width: $content;
 		}
@@ -55,8 +58,7 @@
 
 //local content
 .block--views-localtarget-ltp-local{
-	background-image: url('../images/bg-texture.png');
-	padding: 60px 20px;
+	padding: 60px 30px;
 	.view-display-id-ltp_local{
 		max-width: 1100px;
 		margin: 0 auto;
@@ -74,8 +76,6 @@
 			}
 		}
 		.teaser-content{
-			max-width: 700px;
-			width: 100%;
 			h1{
 				text-align: center;
 				font-size: 42px;
@@ -103,12 +103,13 @@
 	}
 	@include breakpoint($desk){
 		.node--localtarget--quaternary-teaser{
-			flex-direction: row;
+			flex-direction: row-reverse;
 			.field--name-field-image{
 				padding-bottom: 0;
 			}
 			.teaser-content{
-				padding-left: 35px;
+                flex: 1 1 auto;
+				padding-right: 35px;
 				h1{
 					text-align: left;
 				}
@@ -154,4 +155,127 @@
 			}
 		}
 	}
+}
+
+.node--localtarget--hero {
+    padding: 60px 30px;
+    @include flexbox;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    header {
+        max-width: 670px;
+        text-align: center;
+    }
+    @include breakpoint($tab) {
+        padding: 80px 30px 30px;
+    }
+
+
+    &.content-left,
+    &.content-right {
+        header {
+            max-width: 1100px;
+            @include breakpoint($tab) {
+                @include flexbox;
+                justify-content: flex-start;
+                text-align: left;
+                .content {
+                    width: 50%;
+                }
+            }
+        }
+    }
+    &.content-right {
+        header {
+            @include breakpoint($tab) {
+                justify-content: flex-end;
+                text-align: right;
+            }
+        }
+    }
+}
+
+.not-front.node-type-localtarget .preface-third-wrap {
+    padding: 0;
+    .benefits-wrapper {
+        margin: 0;
+        max-width: 100%;
+    }
+    .l-region--preface-third {
+        max-width: 100%;
+    }
+
+    .block--webform {
+        border: none;
+        padding: 30px;
+        max-width: 100%;
+        .block__title {
+            @extend h3;
+            margin: 0 auto 20px;
+            padding: 0;
+        }
+
+        .block__content {
+            padding: 0;
+        }
+        .webform-client-form {
+            max-width: 100%;
+        }
+        .ltp-free-quote-form {
+            .webform-privacy-policy {
+                margin-top: 1em;
+                text-align: center;
+            }
+        }
+    }
+
+    @include breakpoint($tab) {
+        .block--webform {
+            border: none;
+            padding: 30px;
+            max-width: 100%;
+        }
+        .ltp-free-quote-form {
+            > div {
+                @include flexbox;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-left: -10px;
+                margin-top: -20px;
+                > .form-item {
+                    @include flexbox;
+                    margin: 0;
+                    margin-top: 20px;
+                    margin-left: 10px;
+                    width: 180px;
+                    &.webform-component--zip-code {
+                        width: 120px;
+                    }
+                    input {
+                        padding: 15px 10px;
+                    }
+                }
+                > .form-actions {
+                    @include flexbox;
+                    padding: 0;
+                    margin: 0;
+                    margin-top: 20px;
+                    margin-left: 10px;
+                    width: 100px;
+                    input {
+                        margin: 0;
+                        width: 100%;
+                        min-width: 100%;
+                        padding: 15px 10px;
+                    }
+                }
+                > .webform-privacy-policy {
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
