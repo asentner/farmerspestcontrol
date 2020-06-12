@@ -194,4 +194,70 @@
     }
   };
 
+
+  $(document).ready(function(){
+      var stickyBlocks = [
+          $('.node-type-localtarget .ltp-free-quote-form').closest('.block--webform'),
+          $('.sticky-block')
+      ];
+
+      $('body').data('original-padding', $('body').css('padding-top'));
+
+      $.each(stickyBlocks, function(sti, $blocks) {
+          $blocks.each(function() {
+              var $lockBoxInterior = $(this);
+              $lockBox = $('<div class="block--lockbox"></div>');
+              $lockBoxInterior.before($lockBox);
+              $lockBox.append($lockBoxInterior);
+              window.addEventListener('resize', function () {
+                  if($lockBox.length > 0) {
+                      var wS = $(this).scrollTop();
+                      var hT = $lockBox.offset().top;
+                      var hH = $lockBox.outerHeight();
+                      var bodyPadding = $('body').data('original-padding');
+                      if (wS > hT) {
+                          $lockBox.addClass('fix-box');
+                          $('body').css({
+                              paddingTop: bodyPadding + hH
+                          });
+                      }
+                      else {
+                          $('body').css({
+                              paddingTop: ''
+                          });
+                      }
+                  }
+              });
+
+              $(window).scroll(function () {
+                  if($lockBox.length > 0) {
+                      var wS = $(this).scrollTop();
+                      var hT = $lockBox.offset().top;
+                      var hH = $lockBox.outerHeight();
+                      var bodyPadding = $('body').data('original-padding');
+                      if (wS > hT) {
+                          $lockBox.addClass('fix-box');
+                          $lockBox.css('height', hH + 'px');
+                          $('body').css({
+                              paddingTop: bodyPadding + hH
+                          });
+                      } else {
+                          $lockBox.removeClass('fix-box');
+                          $lockBox.css('height', 'inherit');
+                          $('body').css({
+                              paddingTop: ''
+                          });
+                      }
+                      if (wS > (hT + hH)) {
+                          $lockBox.addClass('shrink-box');
+                      } else {
+                          $lockBox.removeClass('shrink-box');
+                      }
+                  }
+              });
+          });
+      });
+
+  });
+
 })(jQuery);

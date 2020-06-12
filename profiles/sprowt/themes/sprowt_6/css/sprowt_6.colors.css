@@ -1185,6 +1185,9 @@ hr {
     color: #333333; }
   .not-front.node-type-localtarget .preface-third-wrap .ltp-free-quote-form input::placeholder {
     color: #333333; }
+  .not-front.node-type-localtarget .preface-third-wrap .block--lockbox > div {
+    background: #202624;
+    color: #fff; }
 
 .block--views-package-comparison-hero .node {
   background-color: #202624; }

@@ -1,0 +1,56 @@
+.block--lockbox {
+
+    @include breakpoint($tab) {
+        &.fix-box {
+            > div {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 110;
+                transition: padding 0.3s, height .3s;
+                width: 100%;
+            }
+            .block__title,
+            .node__title,
+            .field--name-field-header,
+            .field--name-body {
+                transition: height .3s, max-height .3s;
+            }
+        }
+        &.shrink-box {
+            > div {
+                padding: 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            .block__title,
+            .node__title,
+            .field--name-field-header,
+            .field--name-body {
+                max-height: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+
+            .webform-client-form {
+                margin-top: 0;
+
+                .form-item {
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }
+
+                .form-actions {
+                    margin-top: 5px;
+                    margin-bottom: 12px;
+                }
+
+                input[type='text'],
+                input[type='email'],
+                input[type='submit'] {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+            }
+        }
+    }
+}

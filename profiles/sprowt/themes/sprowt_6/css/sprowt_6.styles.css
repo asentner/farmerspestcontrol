@@ -6126,6 +6126,43 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
           flex: 1 0 31.33%;
       max-width: 389px; } }
 
+@media (min-width: 768px) {
+  .block--lockbox.fix-box > div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 110;
+    transition: padding 0.3s, height .3s;
+    width: 100%; }
+  .block--lockbox.fix-box .block__title,
+  .block--lockbox.fix-box .node__title,
+  .block--lockbox.fix-box .field--name-field-header,
+  .block--lockbox.fix-box .field--name-body {
+    transition: height .3s, max-height .3s; }
+  .block--lockbox.shrink-box > div {
+    padding: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); }
+  .block--lockbox.shrink-box .block__title,
+  .block--lockbox.shrink-box .node__title,
+  .block--lockbox.shrink-box .field--name-field-header,
+  .block--lockbox.shrink-box .field--name-body {
+    max-height: 0;
+    margin: 0;
+    overflow: hidden; }
+  .block--lockbox.shrink-box .webform-client-form {
+    margin-top: 0; }
+    .block--lockbox.shrink-box .webform-client-form .form-item {
+      margin-top: 5px;
+      margin-bottom: 5px; }
+    .block--lockbox.shrink-box .webform-client-form .form-actions {
+      margin-top: 5px;
+      margin-bottom: 12px; }
+    .block--lockbox.shrink-box .webform-client-form input[type='text'],
+    .block--lockbox.shrink-box .webform-client-form input[type='email'],
+    .block--lockbox.shrink-box .webform-client-form input[type='submit'] {
+      padding-top: 10px;
+      padding-bottom: 10px; } }
+
 .block-front-testimonials {
   padding: 55px 20px;
   max-width: 1210px;

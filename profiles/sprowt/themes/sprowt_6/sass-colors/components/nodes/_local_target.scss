@@ -80,4 +80,10 @@
             color: palette(neutral, mine-shaft);
         }
     }
+    .block--lockbox {
+        > div {
+            background: palette(secondary, base);
+            color: palette(white, pure);
+        }
+    }
 }
