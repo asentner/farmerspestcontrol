@@ -18,7 +18,7 @@ if(!module_exists('sprowt_settings')) {
             'file' => 'sprowt_settings.pages.inc',
             'position' => 'left',
         );
-    
+
         $items['admin/config/sprowt/speedlead-settings'] = array(
             'title' => 'SpeedLead Settings',
             'description' => 'SpeedLead settings',
@@ -29,7 +29,7 @@ if(!module_exists('sprowt_settings')) {
             'weight' => -50
         );
     }
-    
+
     function _sprowt_admin_menu_block(){
         $item = menu_get_item();
         if ($content = system_admin_menu_block($item)) {
@@ -40,14 +40,14 @@ if(!module_exists('sprowt_settings')) {
         }
         return $output;
     }
-    
+
     function sprowt_hd_settings_admin() {
         $form = array();
-    
+
         $form['sprowt_settings'] = array(
             '#type' => 'vertical_tabs'
         );
-    
+
         $form['sprowt_ctm'] = array(
             '#type' => 'fieldset',
             '#title' => t('Call Tracking Metrics Integration'),
@@ -55,7 +55,7 @@ if(!module_exists('sprowt_settings')) {
             '#collapsed' => false,
             '#group' => 'sprowt_settings'
         );
-    
+
         $form['sprowt_ctm']['sprowt_ctm_account_id'] = array(
             '#type' => 'textfield',
             '#title' => t('Account ID'),
@@ -64,7 +64,7 @@ if(!module_exists('sprowt_settings')) {
             '#maxlength' => 6,
             '#description' => t("CTM Account ID for the customer. Entering the account number will automatically generate the tracking code for you. Leave blank to disable tracking code."),
         );
-    
+
         $form['sprowt_ctm']['sprowt_ctm_access_key'] = array(
             '#type' => 'textfield',
             '#title' => t('Access Key'),
@@ -73,7 +73,7 @@ if(!module_exists('sprowt_settings')) {
             '#maxlength' => 128,
             '#description' => t("API credentials required for Sprowt HD to work. The access key can be found under account settings in CTM."),
         );
-    
+
         $form['sprowt_ctm']['sprowt_ctm_secret_key'] = array(
             '#type' => 'textfield',
             '#title' => t('Secret Key'),
@@ -82,11 +82,11 @@ if(!module_exists('sprowt_settings')) {
             '#maxlength' => 128,
             '#description' => t("API credentials required for Sprowt HD to work. The secret key can be found under account settings in CTM."),
         );
-    
+
         return system_settings_form($form);
     }
-    
-    
+
+
     /**
      * Implements hook_init().
      */
@@ -98,7 +98,7 @@ if(!module_exists('sprowt_settings')) {
             )
         ), 'setting');
     }
-    
+
     /**
      * Implements hook_preprocess_HOOK().
      */
@@ -161,6 +161,10 @@ function sprowt_hd_form_alter(&$form, &$form_state, $form_id)
 
 function _sprowt_hd_submit($form, &$form_state)
 {
+    if(empty($form_state["values"]["details"]["sid"])) {
+        //only process after the submission has saved
+        return;
+    }
     // Grab the variables for CTM. These can be set in the Sprowt Settings
     $account_id = variable_get('sprowt_ctm_account_id');
     $access_key = variable_get('sprowt_ctm_access_key');
@@ -172,13 +176,13 @@ function _sprowt_hd_submit($form, &$form_state)
         watchdog('SpeedLead', 'Sprowt SpeedLead form reactor cannot communicate with CTM because the account id, access key and/or secret, key is not set', array(), WATCHDOG_ERROR);
         return;
     }
-    
+
     $form_reactor_data = $form_state['webform']['form_reactor'];
 
     $apiUrl = 'https://api.calltrackingmetrics.com/api/v1/formreactor/' . $form_reactor_data['form_reactor_id'];
-    
+
     $values = _sprowt_hd_extract_values_from_form_state($form, $form_state);
-    
+
 
     // Check to see if the submission has a phone number
     if (array_key_exists($form_reactor_data['form_reactor_phone_field'], $values)) {
@@ -269,16 +273,16 @@ function _sprowt_hd_submit($form, &$form_state)
 
         $response = json_decode(curl_exec($ch), true);
 
-        //set values for fetching the call in CTM
-        $trackbackID = $response['trackback_id'];
-        handleCtmFields($trackbackID,$organicFields,$mappedCustomFields);//get the recently created call and update it with the forms city,state,address,and zip.
-
-
         curl_close($ch);
 
         if (is_array($response)) {
             if (empty($response['status']) || (!empty($response['status']) && $response['status'] != 'success')) {
                 watchdog('SpeedLead', 'Sprowt SpeedLead form reactor failed due to an error. Here is the response from CTM: %message', array('%message' => '<pre>' . print_r($response, true) . '</pre>'), WATCHDOG_ERROR);
+            }
+            else {
+                //set values for fetching the call in CTM
+                $trackbackID = $response['trackback_id'];
+                handleCtmFields($trackbackID,$organicFields,$mappedCustomFields);//get the recently created call and update it with the forms city,state,address,and zip.
             }
         }
         else {
@@ -475,7 +479,7 @@ function _sprowt_hd_extract_values_using_webform_components($components, $raw_va
 
 function _sprowt_hd_get_custom_fields($nid) {
     $records = db_query("
-      SELECT * 
+      SELECT *
       FROM {sprowt_hd_webform_custom_fields}
       WHERE nid = :nid
     ", [
