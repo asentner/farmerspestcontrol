@@ -692,5 +692,5 @@ function sprowt_update_7016() {
  * Enable webform_phone
  */
 function sprowt_update_7017() {
-    module_enable(['webform_phone']);
+    module_enable(['phone', 'webform_phone']);
 }
