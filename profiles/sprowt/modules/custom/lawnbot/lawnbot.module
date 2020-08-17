@@ -1,0 +1,501 @@
+<?php
+
+
+/**
+ * Implements hook_menu().
+ */
+function lawnbot_menu()
+{
+    $items = [];
+    $items['node/%webform_menu/webform/lawnbot-integration'] = array(
+        'title' => 'LawnBot Integration',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('lawnbot_webform_settings', 1),
+        'access callback' => 'node_access',
+        'access arguments' => array('update', 1),
+        'weight' => 10,
+        'type' => MENU_LOCAL_TASK,
+    );
+
+    $items['admin/config/services/lawnbot'] = [
+        'title' => 'LawnBot Global Settings',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => ['lawnbot_global_settings'],
+        'access callback' => true,
+        'description' => 'Lawnbot settings'
+    ];
+
+    $items['instantquote'] = [
+        'title' => 'Instant Quote',
+        'page callback' => 'lawnbot_instantquote',
+        'access callback' => true,
+        'type' => MENU_CALLBACK
+    ];
+
+    return $items;
+}
+
+
+function lawnbot_global_settings($form, $form_state) {
+
+    $defaultValue = function($key, $default = null) {
+        return variable_get($key, $default);
+    };
+
+    $form['lawnbot_enable_integration'] = [
+        '#title' => t('Enable LawnBot Integration'),
+        '#type' => 'checkbox',
+        '#weight' => 0,
+        '#default_value' => $defaultValue('lawnbot_enable_integration')
+    ];
+
+    $form['lawnbot_customerId'] = [
+        '#title' => 'Customer Id',
+        '#type' => 'textfield',
+        '#default_value' => $defaultValue('lawnbot_customerId')
+    ];
+
+    $form['lawnbot_botId'] = [
+        '#title' => 'Bot Id',
+        '#type' => 'textfield',
+        '#default_value' => $defaultValue('lawnbot_botId')
+    ];
+
+    $form['lawnbot_page_title'] = [
+        '#title' => 'Page Title',
+        '#type' => 'textfield',
+        '#default_value' => $defaultValue('lawnbot_page_title', 'Instant Quote'),
+        '#description' => 'The title tag value on the instant quote page.'
+    ];
+
+    $form = system_settings_form($form);
+
+    $form['#attached']['js'][] = drupal_get_path('module', 'lawnbot') . '/js/global-settings.js';
+    $form['#validate'][] = 'lawnbot_global_settings_validate';
+
+    return $form;
+}
+
+function lawnbot_global_settings_validate(&$form, &$form_state) {
+    $values = $form_state['values'];
+    $required = [
+        'lawnbot_customerId',
+        'lawnbot_botId'
+    ];
+    if(!empty($values['lawnbot_enable_integration'])) {
+        foreach($required as $key) {
+            if(empty($values[$key])) {
+                form_error($form[$key], 'Value is required.');
+            }
+        }
+    }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function lawnbot_theme($existing, $type, $theme, $path)
+{
+    return [
+        'page__instantquote' => [
+            'base hook' => 'page',
+            'path' => $path . '/theme',
+            'template' => 'page--instantquote'
+        ]
+    ];
+}
+
+function lawnbot_instantquote() {
+    return '';
+}
+
+/**
+ * Implements hook_css_alter().
+ */
+function lawnbot_css_alter(&$css)
+{
+    if(current_path() === 'instantquote') {
+        foreach($css as $key => $value) {
+            $isLawnBot = false;
+            if(is_array($value)
+                && $value['type'] == 'inline'
+                && strpos($value['data'], 'LawnBot') !== false
+            ) {
+                $isLawnBot = true;
+            }
+            if(!$isLawnBot) {
+                $css[$key] = false;
+            }
+        }
+    }
+}
+
+function lawnbot_get_global_settings() {
+    $defaultValue = function($key, $default = null) {
+        return variable_get($key, $default);
+    };
+
+    return [
+        'enabled' => $defaultValue('lawnbot_enable_integration', false),
+        'customerId' => $defaultValue('lawnbot_customerId'),
+        'botId' => $defaultValue('lawnbot_botId'),
+        'page_title' => $defaultValue('lawnbot_page_title', 'Instant Quote')
+    ];
+}
+
+function lawnbot_is_enabled($nid = null) {
+    $enabled = lawnbot_global_enabled();
+    if(!empty($nid)) {
+        $settings = variable_get('lawnbot_integration__' . $nid, []);
+        $enabled &= !empty($settings['enable_lawnbot_integration']);
+    }
+    return $enabled;
+}
+
+function lawnbot_global_enabled() {
+    $enabled = true;
+    $settings = lawnbot_get_global_settings();
+    $enabled &= !empty($settings['enabled']);
+    $enabled &= !empty($settings['botId']);
+    $enabled &= !empty($settings['customerId']);
+
+    return $enabled;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function lawnbot_preprocess_page(&$variables)
+{
+    if(in_array('page__instantquote', $variables['theme_hook_suggestions'])) {
+        $enabled = lawnbot_global_enabled();
+        if(empty($enabled)) {
+            drupal_not_found();
+        }
+        else {
+            $settings = lawnbot_get_global_settings();
+
+            $botConfig = [
+                'customerId' => $settings['customerId'],
+                'botId' => $settings['botId']
+            ];
+            $variables['botConfig'] = $botConfig;
+
+            drupal_add_css('
+                .slicknav_menu,
+                #admin-menu,
+                a[href="#main-content"] { display: none;}
+                .LawnBotFullPage, .LawnBotFullPage-container {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 1000;
+                }
+        ', 'inline');
+            drupal_set_title($settings['page_title']);
+        }
+    }
+}
+
+function lawnbot_webform_settings($form, $form_state, $node) {
+    $nid = $node->nid;
+
+    $global_enabled = lawnbot_global_enabled();
+
+    $settings = variable_get('lawnbot_integration__' . $nid, []);
+
+    // Grab the current webform components
+    $options = array();
+    if (count($node->webform['components'])) {
+        foreach($node->webform['components'] as $component) {
+            if($component['type'] != 'fieldset') {
+                $options[$component['form_key']] = t($component['name']);
+            }
+        }
+    }
+
+    $form['nid'] = array(
+        '#type' => 'hidden',
+        '#value' => $node->nid,
+    );
+
+    $form['description'] = [
+        '#type' => 'markup',
+        '#markup' => '<p>This form enables and sets up the LawnBot integration. Below you can map out any values sent to the lawnbot page after the form is submitted.</p>'
+    ];
+
+    if(empty($global_enabled)) {
+        drupal_set_message('You must <a href="/admin/config/services/lawnbot">enable lawnbot global settings</a> before you can edit these settings.', 'warning');
+    }
+
+    $form['enable_lawnbot_integration'] = [
+        '#title' => t('Enable LawnBot Integration'),
+        '#type' => 'checkbox',
+        '#weight' => 0,
+        '#default_value' => $settings['enable_lawnbot_integration'],
+        '#disabled' => empty($global_enabled)
+    ];
+
+    $defaultValue = function($val) {
+        return !empty($val) ? $val : null;
+    };
+
+    $form['first_or_full_name_key'] = [
+        '#title' => 'First or Full Name Field',
+        '#type' => 'select',
+        '#description' => 'Select a value for either the first name or full name component',
+        '#options' => array_merge(
+            array(
+                '' => '- Select -'
+            ), $options
+        ),
+        '#default_value' => $defaultValue($settings['first_or_full_name_key']),
+        '#disabled' => empty($global_enabled)
+    ];
+
+    $form['last_name_key'] = [
+        '#title' => 'Last Name Field',
+        '#type' => 'select',
+        '#description' => 'Leave empty if there is only a full name',
+        '#options' => array_merge(
+            array(
+                '' => '- Select -'
+            ), $options
+        ),
+        '#default_value' => $defaultValue($settings['last_name_key']),
+        '#disabled' => empty($global_enabled)
+    ];
+
+    $form['phone_key'] = [
+        '#title' => 'Phone number Field',
+        '#type' => 'select',
+        '#options' => array_merge(
+            array(
+                '' => '- Select -'
+            ), $options
+        ),
+        '#default_value' => $defaultValue($settings['phone_key']),
+        '#disabled' => empty($global_enabled)
+    ];
+
+    $form['email_key'] = [
+        '#title' => 'Email Field',
+        '#type' => 'select',
+        '#options' => array_merge(
+            array(
+                '' => '- Select -'
+            ), $options
+        ),
+        '#default_value' => $defaultValue($settings['email_key']),
+        '#disabled' => empty($global_enabled)
+    ];
+
+    $form['address_key'] = [
+        '#title' => 'Street Address Field',
+        '#type' => 'select',
+        '#options' => array_merge(
+            array(
+                '' => '- Select -'
+            ), $options
+        ),
+        '#default_value' => $defaultValue($settings['address_key']),
+        '#disabled' => empty($global_enabled)
+    ];
+
+    $form['zip_key'] = [
+        '#title' => 'Zip Field',
+        '#type' => 'select',
+        '#options' => array_merge(
+            array(
+                '' => '- Select -'
+            ), $options
+        ),
+        '#default_value' => $defaultValue($settings['zip_key']),
+        '#disabled' => empty($global_enabled)
+    ];
+
+    $form['submit'] = array(
+        '#weight' => 100,
+        '#type' => 'submit',
+        '#value' => ('Save Configuration'),
+    );
+
+    $form['#validate'][] = 'lawnbot_webform_settings_validate';
+    $form['#submit'][] = 'lawnbot_webform_settings_submit';
+
+    $form['#attached']['js'][] = drupal_get_path('module', 'lawnbot') . '/js/webform-settings.js';
+
+    return $form;
+}
+
+function lawnbot_webform_settings_validate(&$form, &$form_state) {
+    $requiredKeys = [
+        'first_or_full_name_key',
+        'phone_key',
+        'email_key',
+        'address_key',
+        'zip_key'
+    ];
+
+    $values = $form_state['values'];
+    $enabled = !empty($values['enable_lawnbot_integration']);
+    if($enabled) {
+        foreach($requiredKeys as $key) {
+            if(empty($values[$key])) {
+                form_error($form[$key], 'Value is required.');
+            }
+        }
+    }
+}
+
+function lawnbot_webform_settings_submit($form, &$form_state) {
+    $values = $form_state['values'];
+    $nid = $values['nid'];
+    variable_set('lawnbot_integration__' . $nid, $values);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function lawnbot_form_alter(&$form, &$form_state, $form_id)
+{
+    if (strpos($form_id, 'webform_client_form_') !== false) {
+        $node = !empty($form['#node']) ? $form['#node'] : false;
+        if($node) {
+            $nid = $node->nid;
+            if(lawnbot_is_enabled($nid)) {
+                _lawnbot_alter_webform($form);
+                $form['#submit'][] = '_lawnbot_webform_submit';
+            }
+        }
+    }
+}
+
+function _lawnbot_alter_webform(&$form) {
+
+    $requiredKeys = [
+        'first_or_full_name_key',
+        'last_name_key',
+        'phone_key',
+        'email_key',
+        'address_key',
+        'zip_key'
+    ];
+
+    $node = !empty($form['#node']) ? $form['#node'] : false;
+    if (!empty($node)) {
+        $nid = $node->nid;
+        $lawnbotSettings = variable_get('lawnbot_integration__' . $nid, []);
+        if(!empty($lawnbotSettings['enable_lawnbot_integration'])) {
+            foreach($lawnbotSettings as $key => $formKey) {
+                if(in_array($key, $requiredKeys) && !empty($formKey)) {
+                    $makeRequired = function(&$v, $k) use ($formKey, &$makeRequired) {
+                        if($k === $formKey) {
+                            $v['#required'] = true;
+                        }
+                        elseif (is_array($v)) {
+                            array_walk($v, $makeRequired);
+                        }
+                    };
+                    array_walk($form, $makeRequired);
+                }
+            }
+        }
+    }
+}
+
+function _lawnbot_webform_submit(&$form, &$form_state) {
+    $node = !empty($form['#node']) ? $form['#node'] : false;
+    if (!empty($node)) {
+        $nid = $node->nid;
+        $lawnbotSettings = variable_get('lawnbot_integration__' . $nid, []);
+
+        $raw_values = $form_state['values']['submitted'];
+        $webform = $node->webform;
+        $webform_componenents = $webform['components'];
+        $components = array();
+        foreach($webform_componenents as $cid => $v) {
+            $components[$cid] = $v['form_key'];
+        }
+
+        $values = array();
+        foreach($raw_values as $cid => $v) {
+            if(!empty($components[$cid])) {
+                $values[$components[$cid]] = $v;
+            }
+            else {
+                $values[$cid] = $v;
+            }
+            if(is_array($v)) {
+                foreach($v as $cid => $val) {
+                    if(!empty($components[$cid])) {
+                        $values[$components[$cid]] = $val;
+                    }
+                    else {
+                        $values[$cid] = $val;
+                    }
+                }
+            }
+        }
+
+
+        if($node && !empty($lawnbotSettings['enable_lawnbot_integration'])) {
+
+            $admin_values = _sprowt_forms_admin_value($node->nid);
+
+            $new_customer_key = $admin_values['sprowt_forms_new_customer_key'];
+            $option_yes = $admin_values['sprowt_forms_option_yes'];
+            $option_no = $admin_values['sprowt_forms_option_no'];
+            $current_query_value = $admin_values['sprowt_forms_current_query'];
+            $new_query_value = $admin_values['sprowt_forms_new_query'];
+
+
+
+            $redirect = 'instantquote';
+
+            $query = [
+                'lawnbotIntegration' => 1,
+                'nid' => $nid,
+            ];
+            if(!empty($lawnbotSettings['phone_key'])
+                && !empty($lawnbotSettings['first_or_full_name_key'])
+                && !empty($lawnbotSettings['email_key'])
+                && !empty($lawnbotSettings['address_key'])
+                && !empty($lawnbotSettings['zip_key'])
+                && !empty($values[$lawnbotSettings['phone_key']])
+                && !empty($values[$lawnbotSettings['first_or_full_name_key']])
+                && !empty($values[$lawnbotSettings['email_key']])
+                && !empty($values[$lawnbotSettings['address_key']])
+                && !empty($values[$lawnbotSettings['zip_key']])
+            ) {
+                $query += [
+                    'source' => 'contactForm',
+                    'phonenumber' => $values[$lawnbotSettings['phone_key']],
+                    'customerName' => $values[$lawnbotSettings['first_or_full_name_key']],
+                    'customerEmail' => $values[$lawnbotSettings['email_key']],
+                    'customerAddress' => $values[$lawnbotSettings['address_key']],
+                    'customerZip' => $values[$lawnbotSettings['zip_key']]
+                ];
+            }
+
+            if(!empty($lawnbotSettings['last_name_key']) && !empty($query['customerName'])) {
+                $query['customerName'] .= ' ' . $values[$lawnbotSettings['last_name_key']];
+            }
+
+            if(in_array($new_customer_key, array_values($components))
+                && !empty($admin_values['sprowt_forms_enabled']))
+            {
+                if (!empty($values[$new_customer_key]) && $values[$new_customer_key] == $option_yes) {
+                    $query['t'] = $current_query_value;
+                }
+                elseif (!empty($values[$new_customer_key]) && $values[$new_customer_key] == $option_no) {
+                    $query['t'] = $new_query_value;
+                }
+            }
+
+            $form_state['redirect'] = array($redirect, array('query' => $query));
+        }
+    }
+}

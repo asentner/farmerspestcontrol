@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function lawnbot_install()
+{
+    db_update('system')
+        ->fields([
+            'weight' => 15
+        ])
+        ->condition('name', 'lawnbot')
+        ->execute();
+}
