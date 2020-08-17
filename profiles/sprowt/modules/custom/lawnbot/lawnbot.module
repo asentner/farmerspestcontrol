@@ -242,6 +242,7 @@ function lawnbot_webform_settings($form, $form_state, $node) {
         '#title' => t('Lawnbot URL'),
         '#type' => 'textfield',
         '#weight' => 0,
+        '#required' => true,
         '#default_value' => !empty($settings['lawnbot_url']) ? $settings['lawnbot_url'] : 'instantquote',
         '#disabled' => empty($global_enabled),
         '#description' => 'URL where the lawnbot is located. Don\'t change unless you want to redirect away from the site to another lawnbot.'
