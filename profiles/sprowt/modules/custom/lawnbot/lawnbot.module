@@ -238,6 +238,15 @@ function lawnbot_webform_settings($form, $form_state, $node) {
         '#disabled' => empty($global_enabled)
     ];
 
+    $form['lawnbot_url'] = [
+        '#title' => t('Lawnbot URL'),
+        '#type' => 'textfield',
+        '#weight' => 0,
+        '#default_value' => !empty($settings['lawnbot_url']) ? $settings['lawnbot_url'] : 'instantquote',
+        '#disabled' => empty($global_enabled),
+        '#description' => 'URL where the lawnbot is located. Don\'t change unless you want to redirect away from the site to another lawnbot.'
+    ];
+
     $defaultValue = function($val) {
         return !empty($val) ? $val : null;
     };
@@ -352,6 +361,9 @@ function lawnbot_webform_settings_validate(&$form, &$form_state) {
 
 function lawnbot_webform_settings_submit($form, &$form_state) {
     $values = $form_state['values'];
+    if($values['lawnbot_url'] == 'instantquote') {
+        unset($values['lawnbot_url']);
+    }
     $nid = $values['nid'];
     variable_set('lawnbot_integration__' . $nid, $values);
 }
@@ -453,7 +465,7 @@ function _lawnbot_webform_submit(&$form, &$form_state) {
 
 
 
-            $redirect = 'instantquote';
+            $redirect = !empty($lawnbotSettings['lawnbot_url']) ? $lawnbotSettings['lawnbot_url'] : 'instantquote';
 
             $query = [
                 'lawnbotIntegration' => 1,
