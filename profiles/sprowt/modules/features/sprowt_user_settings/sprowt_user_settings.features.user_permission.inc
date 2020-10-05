@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * sprowt_user_settings.features.user_permission.inc
@@ -505,16 +506,6 @@ function sprowt_user_settings_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'xmlsitemap',
-  );
-
-  // Exported permission: 'assign node weight'.
-  $permissions['assign node weight'] = array(
-    'name' => 'assign node weight',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'content admin' => 'content admin',
-    ),
-    'module' => 'weight',
   );
 
   // Exported permission: 'block IP addresses'.

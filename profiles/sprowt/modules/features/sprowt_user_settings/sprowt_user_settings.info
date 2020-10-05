@@ -80,7 +80,6 @@ features[user_permission][] = administer uuid
 features[user_permission][] = administer video styles
 features[user_permission][] = administer views
 features[user_permission][] = administer xmlsitemap
-features[user_permission][] = assign node weight
 features[user_permission][] = block IP addresses
 features[user_permission][] = bypass honeypot protection
 features[user_permission][] = bypass node access
