@@ -1,33 +1,16 @@
 Overview
 --------
-This module provides a weight field for enabled content types. The default
-frontpage is overridden to sort nodes first by sticky, then weight, then created
-date. Nodes with a lower weight will be positioned before those with higher
-weights.
+This module provides a weight field that can be added to any fieldable entity.
+The weight field can be used to provide customized sorting.
 
 Installation
 ------------
 This module can be installed by following the instructions at
 http://drupal.org/node/70151.
 
-Configuration
+Configuration options
 -------------
-To enable Weight for a content type, go to Administration > Structure > Content
-types and select the content type you want to enable Weight for. Select the Weight
-vertical tab, choose your desired settings, and click the Save button.
+  - Range: The range is set when adding a weight field to an entity. It defines 
+    that fields available weight range. For example, a range of 20 will allow 
+    you to select a weight between -20 and 20.
 
-Set a node weight
------------------
-To set the weight for a node, go to that node's edit page, select the Weight
-vertical tab, and choose the desired weight. If the content type is set to use
-menu weight, the weight selector will be disabled.
-
-Views
------
-Weight includes a default view that provides a drag-and-drop interface for
-reordering nodes. Go to Administration > Structure > Views, locate the disabled
-Weight view, and click enable. This view can now be edited as normal to fit your
-needs. Note that the Weight field can’t be the first field in the view.
-
-Node weights can also be used in new or existing views as Filters, Sorts, or
-Arguments.
