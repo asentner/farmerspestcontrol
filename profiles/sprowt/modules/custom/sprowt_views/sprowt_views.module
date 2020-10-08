@@ -72,7 +72,7 @@ function _sprowt_views_testimonials() {
 		dpq($relatedQuery);
 	}
 
-	$relatedNids = $relatedQuery->execute()->fetchCol(); 
+	$relatedNids = $relatedQuery->execute()->fetchCol();
 
 	if (count($relatedNids) && ($service_set || $market_set)) { //If related testimonial was found and it used one of the related fields, no further queries necessary
 		$nids = $relatedNids;
@@ -86,7 +86,7 @@ function _sprowt_views_testimonials() {
 			if ($DEBUG) {
 				dsm('Related Service Query:');
 				dpq($relatedServiceQuery);
-			}	
+			}
 			$relatedServiceNids = $relatedServiceQuery->execute()->fetchCol();
 		}
 
@@ -130,34 +130,34 @@ function _sprowt_views_lt_benefits() {
 	if (!empty($node) && $node->type == 'localtarget') {
 		// First, grab 3 default localtarget nodes
 		$weight_map = db_query('
-			SELECT w.weight, n.nid FROM {node} n
-			LEFT JOIN {weight_weights} w ON w.entity_id = n.nid
+			SELECT w.field_weight_value, n.nid FROM {node} n
+			LEFT JOIN {field_data_field_weight} w ON w.entity_id = n.nid
 			LEFT JOIN {field_data_field_service} s ON s.entity_id = n.nid
 			LEFT JOIN {field_data_field_market} m ON m.entity_id = n.nid
 			WHERE n.type = :type
-				AND n.status = 1 
-				AND n.promote = 0 
+				AND n.status = 1
+				AND n.promote = 0
 				AND s.field_service_tid IS NULL
 				AND m.field_market_tid IS NULL
-				ORDER BY w.weight ASC 
-				LIMIT '.$limit, 
+				ORDER BY w.weight ASC
+				LIMIT '.$limit,
 			array(':type' => 'benefit'))->fetchAllKeyed();
 
 		if ($DEBUG) { dsm($weight_map); }
 
 		if (!empty($node->field_market)) {
 			$market_weight_map = db_query('
-				SELECT w.weight, n.nid FROM {node} n
-				LEFT JOIN {weight_weights} w ON w.entity_id = n.nid
+				SELECT w.field_weight_value, n.nid FROM {node} n
+				LEFT JOIN {field_data_field_weight} w ON w.entity_id = n.nid
 				LEFT JOIN {field_data_field_service} s ON s.entity_id = n.nid
 				LEFT JOIN {field_data_field_market} m ON m.entity_id = n.nid
-				WHERE n.type = :type 
-					AND n.status = 1 
-					AND n.promote = 0 
+				WHERE n.type = :type
+					AND n.status = 1
+					AND n.promote = 0
 					AND s.field_service_tid IS NULL
 					AND m.field_market_tid = '.$node->field_market['und'][0]['tid'].'
-					ORDER BY w.weight ASC 
-					LIMIT '.$limit, 
+					ORDER BY w.weight ASC
+					LIMIT '.$limit,
 				array(':type' => 'benefit'))->fetchAllKeyed();
 				if ($DEBUG) { dsm($market_weight_map); }
 				if (!empty($market_weight_map)) {
@@ -167,17 +167,17 @@ function _sprowt_views_lt_benefits() {
 
 		if (!empty($node->field_service) && !empty($node->field_market)) {
 			$service_market_weight_map = db_query('
-				SELECT w.weight, n.nid FROM {node} n
-				LEFT JOIN {weight_weights} w ON w.entity_id = n.nid
+				SELECT w.field_weight_value, n.nid FROM {node} n
+				LEFT JOIN {field_data_field_weight} w ON w.entity_id = n.nid
 				LEFT JOIN {field_data_field_service} s ON s.entity_id = n.nid
 				LEFT JOIN {field_data_field_market} m ON m.entity_id = n.nid
-				WHERE n.type = :type 
-					AND n.status = 1 
-					AND n.promote = 0 
+				WHERE n.type = :type
+					AND n.status = 1
+					AND n.promote = 0
 					AND s.field_service_tid = '.$node->field_service['und'][0]['tid'].'
 					AND m.field_market_tid = '.$node->field_market['und'][0]['tid'].'
-					ORDER BY w.weight ASC 
-					LIMIT '.$limit, 
+					ORDER BY w.weight ASC
+					LIMIT '.$limit,
 				array(':type' => 'benefit'))->fetchAllKeyed();
 				if ($DEBUG) { dsm($service_market_weight_map); }
 				if (!empty($service_market_weight_map)) {
@@ -188,7 +188,7 @@ function _sprowt_views_lt_benefits() {
 		// Sort (potentially overwritten) default weight map by key (weight)
 		ksort($weight_map);
 		$count = count($weight_map);
-		
+
 		if ($DEBUG) { dsm($weight_map); }
 
 		if ($count) {
@@ -198,7 +198,7 @@ function _sprowt_views_lt_benefits() {
 			else {
 				$weight_map = array_slice($weight_map, 0, $limit);
 			}
-			
+
 			$items = array();
 			foreach(node_load_multiple(array_values($weight_map)) as $node) {
 			  $node_view = node_view($node, 'teaser');

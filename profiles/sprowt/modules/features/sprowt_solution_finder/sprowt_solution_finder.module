@@ -195,12 +195,12 @@ function sprowt_solution_finder_block_view($delta = '')
             $concern_nids = db_query("
                 SELECT n.nid
                 FROM node n
-                LEFT JOIN weight_weights w on w.entity_type = 'node' AND w.entity_id = n.nid
+                LEFT JOIN field_data_field_weight w on w.entity_type = 'node' AND w.entity_id = n.nid
                 LEFT JOIN field_data_field_include_in_solution_finder i on i.entity_id = n.nid AND i.entity_type = 'node'
                 WHERE n.type = 'concern'
                 AND n.status = 1
                 AND i.field_include_in_solution_finder_value = 1
-                ORDER BY w.weight ASC
+                ORDER BY w.field_weight_value ASC
             ")->fetchCol();
             $concerns = node_load_multiple($concern_nids);
 
@@ -747,12 +747,12 @@ function _sprowt_solution_finder_sample_solution($solutionFileName) {
         $concern_nids = db_query("
                 SELECT n.nid
                 FROM node n
-                LEFT JOIN weight_weights w on w.entity_type = 'node' AND w.entity_id = n.nid
+                LEFT JOIN field_data_field_weight w on w.entity_type = 'node' AND w.entity_id = n.nid
                 LEFT JOIN field_data_field_include_in_solution_finder i on i.entity_id = n.nid AND i.entity_type = 'node'
                 WHERE n.type = 'concern'
                 AND n.status = 1
                 AND i.field_include_in_solution_finder_value = 1
-                ORDER BY w.weight ASC
+                ORDER BY w.field_weight_value ASC
                 LIMIT 3
             ")->fetchCol();
         $n->field_concerns = $concern_nids;
