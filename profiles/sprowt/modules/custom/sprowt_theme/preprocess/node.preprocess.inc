@@ -1,7 +1,7 @@
 <?php
 
 function sprowt_theme_preprocess_node(&$variables) {
-  
+
   if ($variables['view_mode'] != 'full') {
     $variables['theme_hook_suggestions'][] = 'node__'.$variables['view_mode'];
     $variables['theme_hook_suggestions'][] = 'node__'.$variables['type'].'__'.$variables['view_mode'];
@@ -83,5 +83,9 @@ function sprowt_theme_preprocess_node(&$variables) {
           );
       }
     }
-    
+
+    if(!empty($variables['content']['field_weight'])) {
+        hide($variables['content']['field_weight']);
+    }
+
 }
