@@ -581,7 +581,7 @@ function sprowt_update_7014() {
         'fw-pest-control',
         'greenleafpc',
         'herbi-systems',
-        'hofferpest',
+        //'hofferpest',
         'larue',
         'miller-pest',
         'natural-state-2019',
