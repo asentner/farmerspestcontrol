@@ -183,7 +183,7 @@ function authorizenetwebform_node_insert($node) {
     db_insert('authorizenetwebform')
       ->fields(array(
         'nid' => $node->nid,
-        'enabled' => $node->use_authorizenet,
+        'enabled' => !empty($node->use_authorizenet)? 1 : 0,
       ))
       ->execute();
   }
