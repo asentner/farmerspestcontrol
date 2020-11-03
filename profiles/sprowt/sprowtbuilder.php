@@ -73,6 +73,13 @@ Class SprowtBuilder {
             $this->data[$row['form_name']][$row['form_field']] = $this->decodeVal($row['field_value']);
         }
 
+        //disabling comment module
+        //moved here because Pantheon sucks
+
+        if(module_exists('comment')) {
+            module_disable(array('comment'));
+        }
+
         return $this->data;
     }
 

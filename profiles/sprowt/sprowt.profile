@@ -501,10 +501,6 @@ function sprowt_module_postinstall(){
 
     variable_set('features_rebuild_on_module_install', true);
 
-    //disabling comment module
-
-    module_disable(array('comment'));
-
     //hopefully this fixes the weird issues we get on a fresh Pantheon rollout
 //    variable_set('install_profile', 'sprowt');
 //    system_list_reset();
