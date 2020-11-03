@@ -21,7 +21,7 @@
       attach: function (context, settings) {
         $('#progress', context).once('batch', function () {
             var holder = $(this);
-      
+
             // Success: redirect to the summary.
             var updateCallback = function (progress, status, pb) {
                 if (progress == 100) {
@@ -30,12 +30,26 @@
                   $('#sprowt-setup-form').submit();
                 }
             };
-      
+
             var errorCallback = function (pb) {
               holder.prepend($('<p class="error"></p>').html("ERROR!"));
               $('#wait').hide();
+              $.ajax({
+                  url: '/profiles/sprowt/ajax_setup.php',
+                  dataType: 'json',
+                  success: function(data) {
+                      if(data.status) {
+                          holder.prepend($('<p class="error"></p>').html("Something went wrong"));
+                      }
+                      else {
+                          holder.prepend($('<pre class="error"></pre>').html(data.data));
+                      }
+                      console.log(data);
+                  },
+                  error: console.error
+              });
             };
-      
+
             var progress = new Drupal.progressBar('updateprogress', updateCallback, 'POST', errorCallback);
             progress.setProgress(-1, "initialize");
             holder.append(progress.element);
@@ -72,7 +86,7 @@
 
 
             $.ajax(ajax_ops);
-          
+
         });
       }
     };
