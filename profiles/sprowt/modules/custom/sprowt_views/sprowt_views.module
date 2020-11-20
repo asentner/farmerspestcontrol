@@ -139,7 +139,7 @@ function _sprowt_views_lt_benefits() {
 				AND n.promote = 0
 				AND s.field_service_tid IS NULL
 				AND m.field_market_tid IS NULL
-				ORDER BY w.weight ASC
+				ORDER BY w.field_weight_value ASC
 				LIMIT '.$limit,
 			array(':type' => 'benefit'))->fetchAllKeyed();
 
@@ -156,7 +156,7 @@ function _sprowt_views_lt_benefits() {
 					AND n.promote = 0
 					AND s.field_service_tid IS NULL
 					AND m.field_market_tid = '.$node->field_market['und'][0]['tid'].'
-					ORDER BY w.weight ASC
+					ORDER BY w.field_weight_value ASC
 					LIMIT '.$limit,
 				array(':type' => 'benefit'))->fetchAllKeyed();
 				if ($DEBUG) { dsm($market_weight_map); }
@@ -176,7 +176,7 @@ function _sprowt_views_lt_benefits() {
 					AND n.promote = 0
 					AND s.field_service_tid = '.$node->field_service['und'][0]['tid'].'
 					AND m.field_market_tid = '.$node->field_market['und'][0]['tid'].'
-					ORDER BY w.weight ASC
+					ORDER BY w.field_weight_value ASC
 					LIMIT '.$limit,
 				array(':type' => 'benefit'))->fetchAllKeyed();
 				if ($DEBUG) { dsm($service_market_weight_map); }
