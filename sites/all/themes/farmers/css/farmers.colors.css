@@ -92,14 +92,13 @@ hr {
   color: #fff; }
 
 .block--bean-google-reviews-block .field--name-field-rating {
-  color: #7f776f; }
+  color: #fff; }
+
+.block--bean-google-reviews-block .fa-star {
+  color: #ffcc00; }
 
 .block--bean-google-reviews-block .field--name-field-review-count-text {
-  color: #eee; }
-
-@media (min-width: 768px) {
-  .block--bean-google-reviews-block .field--name-field-review-count-text {
-    color: #9ca2a4; } }
+  color: #fff; }
 
 .bean-anchor-link-bean {
   background-color: #0e4d82;
@@ -321,12 +320,17 @@ hr {
   text-align: center;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover; }
+  background-size: cover;
+  background-color: #5d9732; }
+  .bean-hero .content-wrap:before {
+    background-color: #000; }
   .bean-hero .content:after {
     color: #fff; }
   .bean-hero .block__title {
     color: #fff;
     text-shadow: none; }
+  .bean-hero .field--name-field-title {
+    color: #5d9732; }
   .bean-hero .field--name-field-subtitle {
     color: #fff;
     text-shadow: none; }
@@ -336,7 +340,8 @@ hr {
   .bean-hero .button {
     background-color: #5d9732; }
     .bean-hero .button:hover {
-      background-color: #0e4d82; }
+      background-color: #fff;
+      color: #0e4d82; }
 
 .sidebar .block--views-learning-center-issue-links h3 {
   color: #fff; }
@@ -391,14 +396,15 @@ hr {
     .block--views-locations-list .node--location--teaser .field-phone-number a:before {
       color: #fff; }
 
-.block--logo-block-logo .mobile-menu-toggle i {
-  color: #0e4d82; }
-
-@media (min-width: 768px) {
-  .block--logo-block-logo .tablet-menu-toggle {
-    color: #555555; }
-    .block--logo-block-logo .tablet-menu-toggle i {
-      color: #0e4d82; } }
+.block--logo-block-logo {
+  background-color: #fff; }
+  .block--logo-block-logo .mobile-menu-toggle i {
+    color: #0e4d82; }
+  @media (min-width: 768px) {
+    .block--logo-block-logo .tablet-menu-toggle {
+      color: #555555; }
+      .block--logo-block-logo .tablet-menu-toggle i {
+        color: #0e4d82; } }
 
 .block--views-packages-services .block__title,
 .block--views-packages-localtarget .block__title {
@@ -709,6 +715,12 @@ hr {
         .not-front .l-breadcrumb a:hover {
           color: #5d9732; } }
 
+.block--menu-menu-ctm-utility-menu .menu li:first-of-type .nolink {
+  color: #5d9732; }
+
+.block--menu-menu-ctm-utility-menu .menu li a {
+  color: #7f776f; }
+
 .footer-nav .menu-block-wrapper > .menu > li > a {
   color: #fff;
   border-color: #0e4d82; }
@@ -749,8 +761,8 @@ hr {
   .block--nav-main .menu-block-wrapper > .menu > li.expanded > a:hover:before {
     color: #0e4d82; }
   .block--nav-main .menu-block-wrapper > .menu > li:hover > a {
-    background-color: #fff;
-    color: #0e4d82; }
+    background-color: #5d9732;
+    color: #fff; }
     .block--nav-main .menu-block-wrapper > .menu > li:hover > a:before {
       color: #0e4d82; }
   .block--nav-main .menu-block-wrapper > .menu > li.active a,
@@ -758,7 +770,7 @@ hr {
     color: #fff; }
   .block--nav-main .menu-block-wrapper > .menu > li.active:hover a,
   .block--nav-main .menu-block-wrapper > .menu > li.active-trail:hover a {
-    color: #0e4d82; }
+    color: #fff; }
   .block--nav-main .menu-block-wrapper > .menu > li:hover > .menu {
     border-top-color: #0e4d82; }
     .block--nav-main .menu-block-wrapper > .menu > li:hover > .menu > li > a {
@@ -862,15 +874,25 @@ hr {
           .block--nav-utility .menu-block-wrapper a[href^='tel:']:hover {
             color: #0e4d82; }
       .block--nav-utility .menu li:nth-child(1) a {
-        background: transparent; }
-        .block--nav-utility .menu li:nth-child(1) a:hover {
-          color: #0e4d82; }
+        background-color: #5d9732; }
         .block--nav-utility .menu li:nth-child(1) a:before {
+          color: #fff;
+          transition: .3s; }
+        .block--nav-utility .menu li:nth-child(1) a:hover {
+          background-color: #fff;
           color: #0e4d82; }
-      .block--nav-utility .menu li:nth-child(2) a:hover {
-        color: #0e4d82; }
-      .block--nav-utility .menu li:nth-child(2) a:before {
-        color: #0e4d82; } }
+          .block--nav-utility .menu li:nth-child(1) a:hover:before {
+            color: #0e4d82; }
+      .block--nav-utility .menu li:nth-child(2) a {
+        background-color: #5d9732; }
+        .block--nav-utility .menu li:nth-child(2) a:before {
+          color: #fff;
+          transition: .3s; }
+        .block--nav-utility .menu li:nth-child(2) a:hover {
+          background-color: #fff;
+          color: #0e4d82; }
+          .block--nav-utility .menu li:nth-child(2) a:hover:before {
+            color: #0e4d82; } }
 
 .block--views-city-pages-city-hero .node {
   background-color: #5d9732; }

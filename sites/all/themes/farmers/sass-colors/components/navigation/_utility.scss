@@ -35,23 +35,33 @@
       li {
         &:nth-child(1) {
           a{
-            background: transparent;
-            &:hover{
-              // background: palette(primary, base);
-              color: palette(primary, base);
-            }
+            background-color: palette(secondary, base);
             &:before{
+              color: palette(white, pure);
+              transition: .3s;
+            }
+            &:hover{
+              background-color: palette(white, pure);
               color: palette(primary, base);
+              &:before{
+                color: palette(primary, base);
+              }
             }
           }
         }
         &:nth-child(2){
           a{
-            &:hover{
-              color: palette(primary, base);
-            }
+            background-color: palette(secondary, base);
             &:before{
+              color: palette(white, pure);
+              transition: .3s;
+            }
+            &:hover{
+              background-color: palette(white, pure);
               color: palette(primary, base);
+              &:before{
+                color: palette(primary, base);
+              }
             }
           }
         }

@@ -46,9 +46,9 @@
   @include breakpoint($tab) {
 
     $color-link-bg: palette(secondary, base);
-    $color-link-bg-hover: palette(white, pure);
+    $color-link-bg-hover: palette(secondary, base);
     $color-link-fg: palette(white, pure);
-    $color-link-fg-hover: palette(primary, base);
+    $color-link-fg-hover: palette(white, pure);
     $color-link-drop: palette(white, pure);
     $color-link-drop-hover: palette(primary, dark);
 

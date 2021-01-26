@@ -3124,14 +3124,14 @@ li.addtoany {
       padding: 0;
       padding-right: 45px; }
       .block--bean-google-reviews-block .content {
-        -ms-flex-direction: column;
-            flex-direction: column;
-        -ms-flex-align: start;
-            align-items: flex-start; }
+        -ms-flex-direction: row;
+            flex-direction: row;
+        -ms-flex-align: center;
+            align-items: center; }
       .block--bean-google-reviews-block .field--name-field-rating {
         font-size: 18px; }
       .block--bean-google-reviews-block .field--name-field-review-count-text {
-        padding-left: 0; } }
+        padding-left: 3px; } }
 
 .block--bean-bbb-accredited {
   display: none;
@@ -4258,7 +4258,7 @@ li.addtoany {
   .front .bean-hero div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta
   .front .bean-hero em {
     font-size: 34px;
-    font-weight: 800;
+    font-weight: bold;
     line-height: 1.2;
     text-transform: capitalize;
     max-width: 360px;
@@ -4267,16 +4267,16 @@ li.addtoany {
   .front .bean-hero .block__title {
     margin-bottom: 0; }
   .front .bean-hero .field--name-field-title {
+    line-height: 1.1;
     margin-top: 0;
     margin-bottom: 20px; }
   .front .bean-hero h2.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + h1.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + .field--name-field-subtitle.field--name-field-display-title, .front .bean-hero .field--name-field-intro + .field--name-field-seo-title .field--name-field-subtitle.field-item, .field--name-field-intro + .field--name-field-seo-title .front .bean-hero .field--name-field-subtitle.field-item, .front .bean-hero body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-subtitle.field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero
   body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-subtitle.field__label,
   body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero div.entity-paragraphs-item.cta em.field--name-field-subtitle, div.entity-paragraphs-item.cta .front .bean-hero em.field--name-field-subtitle {
-    font-size: 21px;
-    font-weight: 600;
-    font-style: italic;
-    line-height: 1.2;
-    letter-spacing: 0.3px;
+    font-size: 21.5px;
+    font-weight: normal;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
     margin: 0;
     position: relative;
     z-index: 1; }
@@ -4295,18 +4295,6 @@ li.addtoany {
     max-width: 210px;
     width: 100%;
     display: inline-block; }
-  .front .bean-hero .field--name-field-button-extension {
-    font-size: 16px;
-    font-weight: 600;
-    position: relative; }
-    .front .bean-hero .field--name-field-button-extension:after {
-      content: url("../images/arrow@2x.png");
-      position: absolute;
-      right: -80px;
-      bottom: -90px;
-      transform: scale(0.5);
-      transition: 2s;
-      animation: arrowBounce 2s linear infinite; }
   @media (min-width: 768px) {
     .front .bean-hero {
       background-image: none; }
@@ -4315,9 +4303,10 @@ li.addtoany {
         .front .bean-hero .content-wrap:after {
           content: url("../images/hero-desktop-wide.jpg");
           position: absolute;
+          left: -360px;
           top: 0;
           bottom: 0;
-          right: -500px; }
+          right: 0; }
       .front .bean-hero .content {
         padding: 100px 25px 160px;
         max-width: 1000px; }
@@ -4342,20 +4331,18 @@ li.addtoany {
       .front .bean-hero h2.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + h1.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + .field--name-field-subtitle.field--name-field-display-title, .front .bean-hero .field--name-field-intro + .field--name-field-seo-title .field--name-field-subtitle.field-item, .field--name-field-intro + .field--name-field-seo-title .front .bean-hero .field--name-field-subtitle.field-item, .front .bean-hero body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-subtitle.field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero
       body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-subtitle.field__label,
       body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero div.entity-paragraphs-item.cta em.field--name-field-subtitle, div.entity-paragraphs-item.cta .front .bean-hero em.field--name-field-subtitle {
-        font-size: 24px;
+        font-size: 22px;
         max-width: 390px; } }
   @media (min-width: 1024px) {
-    .front .bean-hero .content-wrap {
-      min-height: 620px; }
-      .front .bean-hero .content-wrap:after {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: -270px; }
+    .front .bean-hero .content-wrap:after {
+      top: 0;
+      bottom: 0;
+      left: -80px;
+      right: 0; }
     .front .bean-hero .content {
       padding: 0 30px;
       position: absolute;
-      top: 40%;
+      top: 52%;
       left: 40%;
       transform: translateY(-50%) translateX(-50%);
       max-width: 820px; }
@@ -4373,15 +4360,18 @@ li.addtoany {
     .front .bean-hero .field__label,
     .front .bean-hero div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta
     .front .bean-hero em {
-      font-size: 60px;
+      font-size: 63px;
       max-width: 850px; }
     .front .bean-hero h2.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + h1.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + .field--name-field-subtitle.field--name-field-display-title, .front .bean-hero .field--name-field-intro + .field--name-field-seo-title .field--name-field-subtitle.field-item, .field--name-field-intro + .field--name-field-seo-title .front .bean-hero .field--name-field-subtitle.field-item, .front .bean-hero body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-subtitle.field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-subtitle.field__label,
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero div.entity-paragraphs-item.cta em.field--name-field-subtitle, div.entity-paragraphs-item.cta .front .bean-hero em.field--name-field-subtitle {
-      max-width: 100%; } }
-  @media (min-width: 1260px) {
+      max-width: 660px; } }
+  @media (min-width: 1130px) {
     .front .bean-hero .content {
-      max-width: 1000px; } }
+      max-width: 900px; } }
+  @media (min-width: 1430px) {
+    .front .bean-hero .content {
+      max-width: 995px; } }
 
 .node-type-localtarget.ltp--solutions-finder .bean-hero {
   text-align: center;
@@ -4774,13 +4764,10 @@ li.addtoany {
   width: 100%; }
   .block--logo-block-logo > * {
     -ms-flex: 0 1 auto; }
-  .block--logo-block-logo .block__content {
-    margin-right: 65px; }
-    .block--logo-block-logo .block__content a img {
-      max-width: 360px;
-      max-height: 93px;
-      height: auto;
-      width: 206px; }
+  .block--logo-block-logo .block__content a img {
+    max-width: 160px;
+    min-width: 160px;
+    height: auto; }
   .block--logo-block-logo .mobile-menu-toggle {
     display: -ms-flexbox;
     display: flex;
@@ -4800,15 +4787,14 @@ li.addtoany {
     display: none; }
   @media (min-width: 768px) {
     .block--logo-block-logo {
-      margin-left: 45px;
       padding: 15px 20px;
       padding-left: 0;
-      width: auto; }
-      .block--logo-block-logo .block__content {
-        margin: 0; }
-        .block--logo-block-logo .block__content a img {
-          height: auto;
-          width: 300px; }
+      width: auto;
+      padding: 15px 15px 25px;
+      margin-bottom: -85px; }
+      .block--logo-block-logo .block__content a img {
+        max-width: 170px;
+        min-width: 170px; }
       .block--logo-block-logo .mobile-menu-toggle {
         display: none; }
       .block--logo-block-logo .tablet-menu-toggle {
@@ -4825,18 +4811,16 @@ li.addtoany {
         .block--logo-block-logo .tablet-menu-toggle i {
           font-size: 1.25em;
           margin-right: 15px; } }
-  @media (min-width: 1030px) {
+  @media (min-width: 1024px) {
     .block--logo-block-logo {
       display: block;
       margin-left: 0;
-      width: auto; }
-      .block--logo-block-logo .block__content {
-        margin-right: 100px; }
-        .block--logo-block-logo .block__content a img {
-          min-width: 360px;
-          min-height: 93px;
-          height: 100%;
-          width: 100%; }
+      width: auto;
+      padding: 15px 20px 25px;
+      margin-bottom: -90px; }
+      .block--logo-block-logo .block__content a img {
+        max-width: 260px;
+        min-width: 260px; }
       .block--logo-block-logo .tablet-menu-toggle {
         display: none; } }
 
@@ -6549,9 +6533,10 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
           font-size: 24px; }
         .block--menu-menu-ctm-utility-menu .menu li .nolink {
           margin-top: 5px;
+          margin-bottom: 10px;
           font-size: 24px;
-          font-weight: bold;
-          text-transform: uppercase; }
+          font-weight: 600;
+          text-transform: capitalize; }
         .block--menu-menu-ctm-utility-menu .menu .ctm-wrapper {
           display: -ms-flexbox;
           display: flex;
@@ -6564,10 +6549,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     .block--menu-menu-ctm-utility-menu .menu li a {
       font-size: 32px; }
     .block--menu-menu-ctm-utility-menu .menu li .nolink {
-      margin-top: 5px;
-      font-size: 27px;
-      font-weight: bold;
-      text-transform: uppercase; } }
+      margin-top: 5px; } }
 
 .footer-nav {
   max-width: 1210px;
@@ -6804,7 +6786,8 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
         text-transform: uppercase;
         text-align: center; }
         .block--nav-main .menu-block-wrapper > .menu > li > a:first-child {
-          padding-bottom: 35px; }
+          padding-bottom: 25px;
+          padding-top: 25px; }
     .block--nav-main .menu-block-wrapper > .menu > li:hover > .menu {
       display: block !important;
       position: absolute;
@@ -7062,7 +7045,6 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
       margin-top: 1px; }
   @media (min-width: 768px) {
     .block--nav-utility {
-      padding-right: 20px;
       display: block; }
       .block--nav-utility .menu-block-wrapper a {
         padding: 25px 30px; }
@@ -7084,7 +7066,8 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
               align-items: center;
           text-transform: none;
           line-height: 1;
-          padding: 15px 25px; }
+          padding: 15px 25px;
+          border-radius: 25px; }
           .block--nav-utility .menu li a > * {
             -ms-flex: 0 1 auto; }
         .block--nav-utility .menu li a:before {
@@ -7102,34 +7085,32 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
             font-weight: normal;
             content: ""; } }
   @media (min-width: 1024px) {
-    .block--nav-utility {
-      padding-right: 0; }
-      .block--nav-utility .menu-block-wrapper a {
-        text-transform: none;
-        font-weight: bold; }
-        .block--nav-utility .menu-block-wrapper a[href^='tel:'] {
-          padding: 0;
-          text-transform: none; }
-          .block--nav-utility .menu-block-wrapper a[href^='tel:']:before {
-            font-family: "FontAwesome";
-            font-weight: normal;
-            content: "";
-            margin-right: .5em; }
-      .block--nav-utility .menu {
-        margin: 10px 0; }
-        .block--nav-utility .menu li:nth-child(1n) a {
-          font-size: 17px;
-          text-transform: none; }
-        .block--nav-utility .menu li:nth-child(1n) a:before {
-          font-size: 18px;
-          margin-right: 7px; }
-        .block--nav-utility .menu li:nth-child(1n) a[href^='tel:']:before {
-          display: inline-block;
+    .block--nav-utility .menu-block-wrapper a {
+      text-transform: none;
+      font-weight: bold; }
+      .block--nav-utility .menu-block-wrapper a[href^='tel:'] {
+        padding: 0;
+        text-transform: none; }
+        .block--nav-utility .menu-block-wrapper a[href^='tel:']:before {
           font-family: "FontAwesome";
           font-weight: normal;
           content: "";
-          margin-right: .5em;
-          font-size: 16px; } }
+          margin-right: .5em; }
+    .block--nav-utility .menu {
+      margin: 10px 0; }
+      .block--nav-utility .menu li:nth-child(1n) a {
+        font-size: 17px;
+        text-transform: none; }
+      .block--nav-utility .menu li:nth-child(1n) a:before {
+        font-size: 18px;
+        margin-right: 7px; }
+      .block--nav-utility .menu li:nth-child(1n) a[href^='tel:']:before {
+        display: inline-block;
+        font-family: "FontAwesome";
+        font-weight: normal;
+        content: "";
+        margin-right: .5em;
+        font-size: 16px; } }
 
 .block--views-city-pages-city-hero .node {
   background-position: center center;
@@ -9244,9 +9225,11 @@ div.entity-paragraphs-item.paragraphs-item-table td {
             align-items: center;
         max-width: 1210px;
         margin: 0 auto;
-        padding: 0 15px; }
+        padding: 10px 15px; }
         .l-header .l-region--header-first .block--nav-utility {
-          margin-left: auto; } }
+          margin-left: auto; }
+      .l-header .header-third-wrap {
+        padding: 10px 20px 15px; } }
 
 .logged-in .l-header {
   margin-top: 0; }

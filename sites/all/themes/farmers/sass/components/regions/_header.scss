@@ -29,10 +29,13 @@
       flex-direction: row;
       align-items: center;
       @include container;
-      padding: 0 15px;
+      padding: 10px 15px;
       .block--nav-utility {
         margin-left: auto;
       }
+    }
+    .header-third-wrap {
+      padding: 10px 20px 15px;
     }
   }
 }

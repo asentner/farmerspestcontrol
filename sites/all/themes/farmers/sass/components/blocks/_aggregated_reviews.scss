@@ -37,14 +37,14 @@
     padding: 0;
     padding-right: 45px;
     .content{
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row;
+      align-items: center;
     }
     .field--name-field-rating{
       font-size: 18px;
     }
     .field--name-field-review-count-text{
-      padding-left: 0;
+      padding-left: 3px;
     }
   }
 }

@@ -2,18 +2,13 @@
   .menu{
     li{
       &:first-of-type{
-        a{
-          &:before{
-            color: palette(primary, dark);
-          }
+        .nolink{
+          color: palette(secondary, base);
         }
-      }
-      .nolink{
-        color: palette(primary, dark);
       }
 
       a{
-        color: palette(secondary, light);
+        color: palette(tertiary, base);
         &:hover{
           color: palette(primary, dark);
         }

@@ -4,10 +4,10 @@
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color: palette(secondary, light);
+	background-color: palette(secondary, base);
 	.content-wrap {
 		&:before{
-			background-color: palette(secondary, light);
+			background-color: palette(black, pure);
 		}
 	}
 	.content{
@@ -16,12 +16,15 @@
 		}
 	}
 	.block__title {
-    color: palette(white, pure);
-    text-shadow: none;
+		color: palette(white, pure);
+		text-shadow: none;
+	}
+	.field--name-field-title {
+		color: palette(secondary, base);
 	}
 	.field--name-field-subtitle{
-    color: palette(white, pure);
-    text-shadow: none;
+		color: palette(white, pure);
+		text-shadow: none;
 	}
 	.field--name-field-body-text{
 		color: palette(white, pure);
@@ -30,7 +33,8 @@
 	.button {
 		background-color: palette(secondary, base);
 		&:hover {
-			background-color: palette(primary, base);
+			background-color: palette(white, pure);
+			color: palette(primary, base);
 		}
 	}
 }
