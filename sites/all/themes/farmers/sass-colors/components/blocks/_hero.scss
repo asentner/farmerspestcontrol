@@ -1,0 +1,36 @@
+//Use this styling if loading a hero image on the homepage
+.bean-hero{
+	text-align: center;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: palette(secondary, light);
+	.content-wrap {
+		&:before{
+			background-color: palette(secondary, light);
+		}
+	}
+	.content{
+		&:after{
+			color: palette(white, pure);
+		}
+	}
+	.block__title {
+    color: palette(white, pure);
+    text-shadow: none;
+	}
+	.field--name-field-subtitle{
+    color: palette(white, pure);
+    text-shadow: none;
+	}
+	.field--name-field-body-text{
+		color: palette(white, pure);
+		text-shadow: none;
+	}
+	.button {
+		background-color: palette(secondary, base);
+		&:hover {
+			background-color: palette(primary, base);
+		}
+	}
+}

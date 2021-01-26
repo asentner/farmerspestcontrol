@@ -1,0 +1,14 @@
+.paragraphs-items-field-city-services{
+  .field--name-field-city-services{
+    >.field__items{
+      >.field__item{
+        border-color: palette(neutral, haze);
+        .paragraphs-item-city-service{
+          .field--name-field-title{
+            color: palette(neutral, mine-shaft);
+          }
+        }
+      }
+    }
+  }
+}

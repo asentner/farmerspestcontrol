@@ -1,0 +1,89 @@
+//local target full node
+.node-type-localtarget{
+  .l-content{
+    .field--name-field-display-title{
+      color: palette(primary, dark);
+    }
+    .field--name-field-seo-title{
+      color: palette(primary, dark);
+		}
+    h2, h3, h4{
+      color: palette(neutral, mine-shaft);
+    }
+    .field--name-field-call-out{
+      background-color: palette(neutral, haze);
+      h2, h3, h4, h5, h6, p{
+        color: palette(neutral, mine-shaft);
+      }
+    }
+  }
+}
+
+//local content
+.block--views-localtarget-ltp-local{
+  .node--localtarget--quaternary-teaser{
+    .field--name-field-image{
+      img{
+        border-color: palette(neutral, mercury);
+      }
+      .teaser-content{
+        h3{
+          color: palette(secondary, light);
+        }
+      }
+    }
+  }
+}
+
+//other services sidebar
+.ltp_other_services{
+  background-color: palette(neutral, haze);
+  .view-header{
+    h4{
+      color: palette(primary, dark);
+    }
+  }
+  .view-content{
+    a{
+      color: palette(primary, dark);
+      &:before{
+        color: palette(primary, dark);
+      }
+      &:hover{
+        color: palette(secondary, base);
+        &:before{
+          color: palette(tertiary, dark);
+        }
+      }
+    }
+  }
+}
+
+.node--localtarget--hero {
+    text-shadow: 0 0 29px rgba(0, 0, 0, 0.24);
+    &.background--dark {
+        color: palette(white, pure);
+        h2, h3, h4{
+            color: palette(white, pure);
+        }
+    }
+}
+
+.not-front.node-type-localtarget .preface-third-wrap {
+    background: palette(secondary, base);
+    color: palette(white, pure);
+    h2, h3, h4{
+        color: palette(white, pure);
+    }
+    .ltp-free-quote-form {
+        input::placeholder {
+            color: palette(neutral, mine-shaft);
+        }
+    }
+    .block--lockbox {
+        > div {
+            background: palette(secondary, base);
+            color: palette(white, pure);
+        }
+    }
+}

@@ -1,0 +1,50 @@
+.block--bean-google-reviews-block {
+  // display: none;
+  padding: 10px;
+  .content{
+    @include flexbox;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .field--name-field-rating {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.67;
+    .field-items {
+      @include flexbox;
+      align-items: center;
+      .stars {
+        @include flexbox;
+        font-size: 15px;
+        font-style: italic;
+        line-height: 1;
+        .fa-star {
+          padding-left: 5px;
+          display: block;
+        }
+      }
+    }
+  }
+  .field--name-field-review-count-text {
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1;
+    padding-left: 7px;
+  }
+  @include breakpoint($tab) {
+    display: block;
+    padding: 0;
+    padding-right: 45px;
+    .content{
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .field--name-field-rating{
+      font-size: 18px;
+    }
+    .field--name-field-review-count-text{
+      padding-left: 0;
+    }
+  }
+}

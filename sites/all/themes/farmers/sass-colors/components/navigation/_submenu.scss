@@ -1,0 +1,61 @@
+.block--nav-submenu {
+
+  // general menu properties
+  $color-menu-bg: palette(white, pure);
+  // menu background color, should match the bg color of the sidebar region
+
+
+  // top level link properties
+  $color-link-fg: palette(neutral, mine-shaft); // top level link fg color
+  $color-active-link-bg: palette(neutral, wild-sand);  // top level active link bg
+  $color-link-accent: palette(primary, base); // arrow/chevron and left border color
+
+  // 2nd level link properties
+  $color-child-fg: palette(neutral, xanadu); // second level link color
+  $color-child-active-fg: palette(neutral, lunar-green); // second level active link
+  $color-child-bg: palette(neutral, alabaster); // bg color for child links
+
+  background-color: $color-menu-bg;
+  .menu-block-wrapper {
+    > .menu {
+      > li { // first level
+        + li {
+          border-top-color: $color-active-link-bg;
+        }
+        a,
+        .nolink {
+          color: $color-link-fg;
+          border-left-color: $color-menu-bg;
+          &:before {
+            color: $color-link-accent;
+          }
+          &:hover {
+            border-left-color: $color-link-accent;
+          }
+        }
+        &.active-trail {
+          background-color: $color-active-link-bg;
+          a,
+          .nolink {
+            border-left-color: $color-link-accent;
+          }
+        }
+      }
+      .menu { // second level
+        background-color: $color-child-bg;
+        li {
+          a,
+          .nolink {
+            color: $color-child-fg;
+            &:hover {
+              color: $color-link-fg;
+            }
+          }
+          &.active a {
+            color: $color-child-active-fg;
+          }
+        }
+      }
+    }
+  }
+}

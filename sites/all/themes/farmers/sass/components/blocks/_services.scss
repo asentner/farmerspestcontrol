@@ -1,0 +1,255 @@
+.block--views-services-all, .block--views-services-all-mobile {
+  .node__title {
+    @extend h3;
+  }
+}
+
+.not-front {
+  .block--views-services-all {
+    div.more-link {
+      display: none;
+    }
+  }
+}
+
+// homepage service listing
+.front {
+  .block--views-services-all, .block--views-services-all-mobile {
+    margin: 0 auto;
+    padding: 20px;
+    overflow: hidden;
+    .block__title{
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .view-header{
+      h3{
+        font-family: $font-headings;
+        font-size: 36px;
+        font-weight: 800;
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
+    .view-content {
+      @include flexbox;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: -30px;
+      // align-items: center;
+      .views-row{
+        max-width: 275px;
+        flex: 1 1 50%;
+        margin-top: 30px;
+        .node--service--teaser, .node--service--alt-teaser{
+          padding: 15px;
+          @include flexbox;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          header{
+            @include flexbox;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          .field--name-field-icon{
+            @include flexbox;
+            justify-content: center;
+            align-items: center;
+            @extend %image-hover;
+            .field__item{
+              img{
+                max-height: 160px;
+                width: auto;
+              }
+            }
+          }
+          .node__title{
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 1.36;
+            letter-spacing: .1px;
+            margin-bottom: 15px;
+          }
+          .field--name-body{
+            font-size: 16px;
+            line-height: 1.75;
+            letter-spacing: .1px;
+            .more-link{
+              font-size: 18px;
+              font-weight: 600;
+              text-align: center;
+              text-transform: uppercase;
+              padding-top: 40px;
+              &:after{
+                @include faicon('\f101');
+                font-size: 19px;
+                margin-left: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .view-footer{
+      text-align: center;
+      padding-top: 45px;
+      a{
+        padding: 20px 80px;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: .2px;
+      }
+    }
+    @include breakpoint($tab){
+      max-width: 1350px;
+      .block__title{
+        font-size: 30px
+      }
+      .view-header{
+        h3{
+          font-size: 51px;
+        }
+      }
+      .view-content{
+        padding: 0;
+        margin-left: -20px;
+        .views-row{
+          padding-top: 65px;
+          margin-left: 20px;
+          .node--service--teaser, .node--service--alt-teaser{
+            min-height: 415px;
+            header{
+              margin-top: -65px;
+            }
+          }
+        }
+      }
+    }
+    @include breakpoint($desk) {
+      .view-content{
+        .views-row{
+          max-width: 290px;
+          .node--service--teaser, .node--service--alt-teaser{
+            min-height: auto;
+            .node__title{
+              font-size: 21px;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+    @include breakpoint(1160px){
+      .view-content{
+        .views-row{
+          flex: 1 1 auto;
+        }
+      }
+    }
+  }
+}
+
+.front {
+  .block--views-services-all.block--list, .block--views-services-all-mobile.block--list {
+    .views-row {
+      margin-top: 30px;
+      border-top: none;
+    }
+  }
+}
+
+//our services listing
+.block--views-services-our-services{
+  .view-content{
+    .views-row{
+      padding: 40px 0;
+      border-bottom: 2px solid;
+      &:last-of-type{
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.node--service--quinary-teaser{
+  @include flexbox;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  header{
+    @include flexbox;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .field--name-field-icon{
+    height: 110px;
+    width: 110px;
+    @include flexbox;
+    justify-content: center;
+    align-items: center;
+    @extend %image-hover;
+    .field__item{
+      img{
+        width: auto;
+      }
+    }
+  }
+  .node__content{
+    @include flexbox;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .node__title{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.36;
+    letter-spacing: .1px;
+    margin-bottom: 15px;
+  }
+  .field--name-body{
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: .1px;
+    .more-link {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.2px;
+      margin: 20px auto 0;
+      max-width: 225px;
+      &:after{
+        @include faicon('\f178');
+        padding-left: 7px;
+      }
+    }
+  }
+  @include breakpoint($tab){
+    flex-direction: row;
+    justify-content: flex-start;
+    header{
+      margin-right: 30px;
+    }
+    .node__content{
+      align-items: flex-start;
+    }
+    .field--name-body{
+      text-align: left;
+      .more-link{
+        text-align: left;
+        margin: 20px 0 0;
+      }
+    }
+  }
+}

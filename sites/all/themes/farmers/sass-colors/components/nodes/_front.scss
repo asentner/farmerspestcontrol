@@ -1,0 +1,27 @@
+.front {
+  .l-main {
+    $color-bg: palette(primary, base);
+    $color-block-title: palette(tertiary, base);
+    $color-body: palette(white, pure);
+
+    background: $color-bg;
+    .node--page--full {
+      h1 {
+        color: $color-block-title;
+      }
+      .field--name-body {
+        color: $color-body;
+        h3{
+          color: $color-block-title;
+        }
+      }
+    }
+    .l-content{
+      .block--system-main{
+        .node__title, .field--name-field-display-title{
+          color: $color-block-title;
+        }
+      }
+    }
+  }
+}

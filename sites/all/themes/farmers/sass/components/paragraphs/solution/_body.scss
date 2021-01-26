@@ -1,0 +1,75 @@
+div.entity.solution-body {
+  max-width: 1044px;
+  margin: 0 auto;
+  font-size: 19px;
+  line-height: 1.74;
+  h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    em {
+      font-family: $font-body;
+      text-transform: none;
+      font-size: (48/30) * 1em;
+      display: inline-block;
+      margin: 0 10px;
+    }
+    strong {
+      font-weight: 800;
+    }
+  }
+  h4 {
+    font-weight: bold;
+  }
+  > .content {
+    > .field--name-field-intro {
+      margin-bottom: 30px;
+      h2 {
+        letter-spacing: 3px;
+        text-align: center;
+        margin-bottom: 0;
+      }
+    }
+    > .paragraphs-items-field-content{
+      > .field--name-field-content{
+        > .field__items{
+          > .paragraphs-item-body--wrap{
+            > .paragraphs-item-body{
+              > .content{
+                > .field--name-field-body-text{
+                  .field__items{
+                    .field__item{
+                      img{
+                        height: auto !important;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .field--name-field-content {
+    > .field__items {
+      .field__item {
+        + .field__item {
+          margin-top: 30px;
+        }
+      }
+    }
+  }
+  @include breakpoint($tab) {
+    padding: 55px 30px;
+    h2 {
+      font-size: 30px;
+    }
+    h3 {
+      font-size: 32px;
+    }
+    h4 {
+      font-size: 26px;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.block--views-locations-list {
+  .node--location--teaser{
+    h2{
+      color: palette(neutral, alto);
+    }
+    .node__content{
+      color: palette(neutral, alto);
+      border-color: palette(neutral, alto);
+    }
+    .field-phone-number{
+      color: palette(neutral, alto);
+      a{
+        color: palette(neutral, alto);
+        &:hover{
+          color: palette(primary, base);
+        }
+        &:before{
+          color: palette(neutral, alto);
+        }
+      }
+    }
+  }
+}

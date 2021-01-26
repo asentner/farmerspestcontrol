@@ -1,0 +1,5 @@
+@mixin faicon($icon) {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  content: $icon;
+}

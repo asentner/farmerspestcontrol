@@ -1,0 +1,90 @@
+body.node-type-solution {
+    .solution--full--header {
+        background-color: palette(secondary, light);
+
+    }
+
+    @include breakpoint($tab) {
+        .block--block-3 {
+            color: #513c33;
+            a {
+                color: #513c33;
+            }
+
+            .menu-toggle {
+                color: #b52a29;
+            }
+        }
+    }
+
+    .scm-modal-container {
+        .mfp-close {
+            &:after {
+                color: palette(primary, dark);
+            }
+        }
+        .concern-title {
+            color: palette(primary, dark);
+        }
+
+        .node__title {
+            color: palette(secondary, base);
+        }
+
+
+        .field--name-field-icon-file {
+            &:after {
+                background: palette(neutral, haze);
+            }
+
+            .field__item {
+                background-color: palette(primary, dark);
+                border: solid 10px palette(neutral, haze);
+            }
+            svg {
+                path {
+                    fill: palette(white, pure);
+                }
+            }
+
+        }
+
+        .field--name-field-concern-treatment,
+        .field--name-field-concern-steps {
+            .field__label {
+                color: palette(secondary, base);
+            }
+        }
+
+        .controls {
+            .button {
+                background-color: palette(primary, dark);
+                color: palette(white, pure);
+                border-color: palette(primary, dark);
+                &:after {
+                    color: inherit;
+                    position: static;
+                    text-align: left;
+                }
+                &:hover {
+                    color: palette(primary, dark);
+                    background-color: palette(white, pure);
+                }
+
+                &.scm-left {
+                    &:before {
+                        color: inherit;
+                        position: static;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+
+    .l-footer {
+        &:before {
+            display: none;
+        }
+    }
+}

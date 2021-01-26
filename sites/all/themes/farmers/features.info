@@ -1,0 +1,13 @@
+;list all of the new features to be enabled here in the format:
+;features[] = example_feature
+
+features[] = farmers_contexts
+features[] = farmers_local_target_context
+
+;list all features you want enabled instead of a sprowt feature in this format:
+;overrides[sprowt_feature] = example_feature
+
+;list all features you want excluded from being enabled:
+;excludes[] = example_feature
+
+excludes[] = sprowt_contexts

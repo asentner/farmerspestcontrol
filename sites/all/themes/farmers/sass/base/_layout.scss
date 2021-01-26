@@ -1,0 +1,111 @@
+@mixin container($width:$container) {
+  max-width: $width;
+  margin: 0 auto;
+}
+
+@mixin clear {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+* {
+  &, &:before, &:after {
+    box-sizing: border-box;
+  }
+}
+
+.l-region--sidebar {
+  padding-top: 40px;
+  .block {
+    + .block {
+      margin-top: 2em;
+    }
+  }
+}
+
+.l-page {
+  @include flexbox;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  > div {
+    width: 100%;
+  }
+  .l-main {
+    flex: 1 1 auto;
+  }
+}
+
+.l-main {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0 20px;
+}
+
+@include breakpoint($tab) {
+  .l-main {
+    @include container;
+    @include flexbox;
+    justify-content: space-between;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 0;
+  }
+  .l-content {
+    flex: 1 1 auto;
+    max-width: $content;
+    width: 100%; // IE fix
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .l-region--sidebar {
+    flex: 0 0 30%;
+    order: -1;
+    max-width: $sidebar;
+    margin-left: 20px;
+    padding-top: 6px // align top of sidebar with page heading
+  }
+  .no-sidebar {
+    .l-main {
+      padding: 0 20px;
+    }
+    .l-content {
+      margin: 0 auto;
+    }
+  }
+}
+
+@include breakpoint($desk) {
+  .l-main {
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
+}
+
+.flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  @include breakpoint($tab){
+    flex-direction: row;
+    p + p{
+      margin-top: 0;
+    }
+  }
+  @include breakpoint($desk){
+    p + p{
+      margin-top: 0;
+    }
+  }
+}

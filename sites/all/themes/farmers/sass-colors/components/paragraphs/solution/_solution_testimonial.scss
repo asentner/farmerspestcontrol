@@ -1,0 +1,17 @@
+div.entity-paragraphs-item.solution-testimonial {
+    background-color: palette(secondary, base);
+    color: palette(neutral, gallery);
+
+    h2 {
+        color: palette(neutral, gallery);
+    }
+
+    .field--name-body {
+        color: palette(white, pure);
+    }
+    .rating{
+      i{
+        color: palette(tertiary, dark);
+      }
+    }
+}

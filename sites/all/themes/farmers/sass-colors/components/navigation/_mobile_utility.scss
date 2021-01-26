@@ -1,0 +1,19 @@
+.block--nav-mobile-utility {
+  $color-bg-odd: palette(primary, base);
+  $color-bg-even: palette(primary, dark);
+  $color-fg: palette(white, pure);
+
+  .menu {
+    li {
+      &:nth-of-type(odd) {
+        background-color: $color-bg-odd;
+      }
+      &:nth-of-type(even) {
+        background-color: $color-bg-even;
+      }
+      a {
+        color: $color-fg;
+      }
+    }
+  }
+}

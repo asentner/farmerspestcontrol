@@ -1,0 +1,489 @@
+//Use this styling for static background of gradient & mascot on homepage
+.block--views-slideshow-front {
+	text-align: center;
+	.node--slide {
+
+	}
+	.slide-image {
+		position: relative;
+		&:after{
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+	}
+	.slide-content{
+		max-width: 800px;
+		margin: auto;
+		position: relative;
+		padding: 40px 15px 0px;
+		z-index: 10;
+		&:after{
+			border-radius: 100%;
+			padding: 3px 5px;
+			@include faicon('\f01a');
+			font-size: 34px;
+			line-height: .93;
+			position: relative;
+			top: 18px;
+		}
+	}
+	.node__title {
+		font-size: 20px;
+		font-weight: 700;
+		line-height: 1.37;
+		letter-spacing: 2.2px;
+		text-transform: uppercase;
+	}
+	.field--name-field-subtitle{
+		font-size: 34px;
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: normal;
+		margin: 0;
+	}
+	.field--name-body{
+		margin-top: 20px;
+		text-transform: uppercase;
+		font-size: 21px;
+		font-weight: 700;
+		letter-spacing: 1.6px;
+		line-height: 1.95;
+	}
+	.button {
+		margin: 20px auto 0;
+		max-width: 225px;
+		width: 100%;
+	}
+	.flexslider:hover .flex-direction-nav a {
+		opacity: 1;
+	}
+	.flexslider .slides {
+		width: 100%;
+	}
+	.flex-direction-nav a {
+		&:before {
+			@extend .fa;
+			content: "\f104";
+			font-size: 45px;
+		}
+		&.flex-next:before {
+			@extend .fa;
+			content: "\f105";
+			font-size: 45px;
+		}
+	}
+	@include breakpoint($tab) {
+		.node--slide{
+			background-image: url('../images/background-pilot.svg');
+			background-position: -28% 100%;
+			background-repeat: no-repeat;
+			background-size: 49%;
+		}
+		.slide-image {
+			min-height: 490px;
+		}
+		.slide-content {
+			padding-top: 85px;
+			&:after{
+				font-size: 39px;
+			}
+		}
+		.node__title {
+			font-size: 21px;
+		}
+		.field--name-field-subtitle{
+			font-size: 42px;
+		}
+		.field--name-body{
+			font-size: 18px;
+		}
+	}
+	@include breakpoint($desk) {
+		.node--slide{
+			background-position: 0% 10%;
+			background-repeat: no-repeat;
+			background-size: 31%;
+		}
+		.slide-image{
+			min-height: 520px;
+		}
+		.slide-content{
+			padding: 80px 25px 30px;
+			&:after{
+				font-size: 44px;
+			}
+		}
+		.node__title {
+			font-size: 30px;
+		}
+		.field--name-field-subtitle{
+			font-size: 60px;
+		}
+		.field--name-body{
+			padding-top: 20px;
+			font-size: 21px;
+		}
+	}
+}
+
+//Use this styling for static background of gradient & mascot on homepage
+.block--views-slideshow-localtarget {
+	text-align: center;
+	.node--slide {
+
+	}
+	.slide-image {
+		position: relative;
+		&:after{
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+	}
+	.slide-content{
+		max-width: 800px;
+		margin: auto;
+		position: relative;
+		padding: 40px 15px 0px;
+		z-index: 10;
+		&:after{
+			border-radius: 100%;
+			padding: 3px 5px;
+			@include faicon('\f01a');
+			font-size: 34px;
+			line-height: .93;
+			position: relative;
+			top: 18px;
+		}
+	}
+	.node__title {
+		font-size: 20px;
+		font-weight: 700;
+		line-height: 1.37;
+		letter-spacing: 2.2px;
+		text-transform: uppercase;
+	}
+	.field--name-field-subtitle{
+		font-size: 34px;
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: normal;
+		margin: 0;
+	}
+	.field--name-body{
+		margin-top: 20px;
+		text-transform: uppercase;
+		font-size: 21px;
+		font-weight: 700;
+		letter-spacing: 1.6px;
+		line-height: 1.95;
+	}
+	.button {
+		margin: 20px auto 0;
+		max-width: 225px;
+		width: 100%;
+	}
+	.flexslider:hover .flex-direction-nav a {
+		opacity: 1;
+	}
+	.flexslider .slides {
+		width: 100%;
+	}
+	.flex-direction-nav a {
+		&:before {
+			@extend .fa;
+			content: "\f104";
+			font-size: 45px;
+		}
+		&.flex-next:before {
+			@extend .fa;
+			content: "\f105";
+			font-size: 45px;
+		}
+	}
+	@include breakpoint($tab) {
+		.node--slide{
+			background-image: url('../images/background-pilot.svg');
+			background-position: -28% 100%;
+			background-repeat: no-repeat;
+			background-size: 49%;
+		}
+		.slide-image {
+			min-height: 490px;
+		}
+		.slide-content {
+			padding-top: 85px;
+			&:after{
+				font-size: 39px;
+			}
+		}
+		.node__title {
+			font-size: 21px;
+		}
+		.field--name-field-subtitle{
+			font-size: 42px;
+		}
+		.field--name-body{
+			font-size: 18px;
+		}
+	}
+	@include breakpoint($desk) {
+		.node--slide{
+			background-position: -10% 10%;
+			background-repeat: no-repeat;
+			background-size: 31%;
+		}
+		.slide-image{
+			min-height: 520px;
+		}
+		.slide-content{
+			padding: 80px 25px 30px;
+			&:after{
+				font-size: 44px;
+			}
+		}
+		.node__title {
+			font-size: 30px;
+		}
+		.field--name-field-subtitle{
+			font-size: 56px;
+		}
+		.field--name-body{
+			padding-top: 20px;
+			font-size: 21px;
+		}
+	}
+}
+
+
+//Use this styling if loading a hero image on the homepage
+// .block--views-slideshow-front{
+// 	text-align: center;
+// 	.node--slide {
+// 		background-position: center center;
+// 		background-repeat: no-repeat;
+// 		background-size: cover;
+// 	}
+// 	.slide-image {
+// 		position: relative;
+// 		min-height: 360px;
+// 	}
+// 	.slide-content{
+// 		&:after{
+// 			@include faicon('\f01a');
+// 			font-size: 34px;
+// 			line-height: .93;
+// 			position: relative;
+// 			top: 18px;
+// 		}
+// 	}
+// 	.node__title {
+// 		font-size: 24px;
+// 		font-weight: 700;
+// 		line-height: 1.37;
+// 		letter-spacing: 2.2px;
+// 		text-transform: uppercase;
+// 	}
+// 	.field--name-field-subtitle{
+// 		font-size: 40px;
+// 		font-weight: 800;
+// 		line-height: 1;
+// 		letter-spacing: normal;
+// 		margin: 0;
+// 	}
+// 	.field--name-body{
+// 		padding-top: 20px;
+// 		text-transform: uppercase;
+// 		font-size: 21px;
+// 		font-weight: 700;
+// 		letter-spacing: 1.6px;
+// 		line-height: 1.95;
+// 	}
+// 	.flexslider:hover .flex-direction-nav a {
+// 		opacity: 1;
+// 	}
+// 	.flexslider .slides {
+// 		width: 100%;
+// 	}
+// 	.flex-direction-nav a {
+// 		&:before {
+// 			@extend .fa;
+// 			content: "\f104";
+// 			font-size: 45px;
+// 		}
+// 		&.flex-next:before {
+// 			@extend .fa;
+// 			content: "\f105";
+// 			font-size: 45px;
+// 		}
+// 	}
+//
+// 	.button {
+// 		margin: 20px auto 0;
+// 		max-width: 225px;
+// 		width: 100%;
+// 	}
+// 	.field--name-body {
+// 		margin-top: 20px;
+// 	}
+// 	.slide-content {
+// 		max-width: 800px;
+// 		margin: auto;
+// 		padding: 80px 25px 30px;
+// 		position: relative;
+// 	}
+// 	.field--name-body {
+// 		font-size: 1.15em;
+// 	}
+//
+// 	@include breakpoint($tab) {
+// 		.slide-image {
+// 			min-height: 520px;
+// 		}
+// 		.slide-content {
+// 			padding-top: 85px;
+// 			&:after{
+// 				font-size: 39px;
+// 			}
+// 		}
+// 		.node__title {
+// 			font-size: 26px;
+// 		}
+// 		.field--name-field-subtitle{
+// 			font-size: 50px;
+// 		}
+// 	}
+// 	@include breakpoint($desk) {
+// 		.slide-content{
+// 			&:after{
+// 				font-size: 44px;
+// 			}
+// 		}
+// 		.node__title {
+// 			font-size: 30px;
+// 		}
+// 		.field--name-field-subtitle{
+// 			font-size: 60px;
+// 		}
+// 	}
+// }
+
+
+// //Local target hero
+// .block--views-slideshow-localtarget {
+// 	text-align: center;
+// 	.node--slide {
+// 		background-position: center center;
+// 		background-repeat: no-repeat;
+// 		background-size: cover;
+// 	}
+// 	.slide-image {
+// 		position: relative;
+// 		min-height: 360px;
+// 	}
+// 	.slide-content{
+// 		&:after{
+// 			@include faicon('\f01a');
+// 			font-size: 34px;
+// 			line-height: .93;
+// 			position: relative;
+// 			top: 18px;
+// 		}
+// 	}
+// 	.node__title {
+// 		font-size: 24px;
+// 		font-weight: 700;
+// 		line-height: 1.37;
+// 		letter-spacing: 2.2px;
+// 		text-transform: uppercase;
+// 	}
+// 	.field--name-field-subtitle{
+// 		font-size: 40px;
+// 		font-weight: 800;
+// 		line-height: 1;
+// 		letter-spacing: normal;
+// 		margin: 0;
+// 	}
+// 	.field--name-body{
+// 		padding-top: 20px;
+// 		text-transform: uppercase;
+// 		font-size: 21px;
+// 		font-weight: 700;
+// 		letter-spacing: 1.6px;
+// 		line-height: 1.95;
+// 	}
+// 	.flexslider:hover .flex-direction-nav a {
+// 		opacity: 1;
+// 	}
+// 	.flexslider .slides {
+// 		width: 100%;
+// 	}
+// 	.flex-direction-nav a {
+// 		&:before {
+// 			@extend .fa;
+// 			content: "\f104";
+// 			font-size: 45px;
+// 		}
+// 		&.flex-next:before {
+// 			@extend .fa;
+// 			content: "\f105";
+// 			font-size: 45px;
+// 		}
+// 	}
+//
+// 	.button {
+// 		margin: 20px auto 0;
+// 		max-width: 225px;
+// 		width: 100%;
+// 	}
+// 	.field--name-body {
+// 		margin-top: 20px;
+// 	}
+// 	.slide-content {
+// 		max-width: 800px;
+// 		margin: auto;
+// 		padding: 80px 25px 30px;
+// 		position: relative;
+// 	}
+// 	.field--name-body {
+// 		font-size: 1.15em;
+// 	}
+//
+// 	@include breakpoint($tab) {
+// 		.slide-image {
+// 			min-height: 520px;
+// 		}
+// 		.slide-content {
+// 			padding-top: 85px;
+// 			&:after{
+// 				font-size: 39px;
+// 			}
+// 		}
+// 		.node__title {
+// 			font-size: 26px;
+// 		}
+// 		.field--name-field-subtitle{
+// 			font-size: 50px;
+// 		}
+// 	}
+// 	@include breakpoint($desk) {
+// 		.slide-content{
+// 			&:after{
+// 				font-size: 44px;
+// 			}
+// 		}
+// 		.node__title {
+// 			font-size: 30px;
+// 		}
+// 		.field--name-field-subtitle{
+// 			font-size: 60px;
+// 		}
+// 	}
+// }
