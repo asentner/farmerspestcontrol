@@ -17,12 +17,11 @@
       color: $color-body;
     }
     .button{
-      background-color: palette(primary, dark);
-      border-color: palette(primary, dark);
+      background-color: palette(secondary, base);
       color: $color-body;
       &:hover{
         background-color: $color-body;
-        color: palette(primary, dark);
+        color: palette(primary, base);
       }
     }
   }

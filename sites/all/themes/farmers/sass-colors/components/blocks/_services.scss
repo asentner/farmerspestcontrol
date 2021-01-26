@@ -6,25 +6,30 @@
     $color-services-body: palette(black, base);
 
     $color-title: palette(tertiary, base);
-    $color-title-hover: palette(primary, dark);
+    $color-title-hover: palette(primary, base);
 
 
     .view-content {
       .views-row{
         .node--service--teaser, .node--service--alt-teaser{
-          background: transparent;
-          @include breakpoint($tab){
-            border-color: palette(white, base);
-            background: palette(white, pure);
+          background-color: transparent;
+          transition: .3s;
+          &:hover {
+            background-color: palette(white, pure);
+            border: solid 4px #65a43c;
+            cursor: pointer;
+            .field--name-field-icon{
+              background-color: palette(secondary, base);
+            }
           }
           .field--name-field-icon{
-            background: palette(primary, base);
+            background-color: palette(white, pure);
           }
           .node__title {
             a {
-              color: $color-title;
+              color: #515151;
               &:hover {
-                color: $color-title-hover;
+                color: palette(secondary, base);
               }
             }
           }
@@ -32,12 +37,12 @@
             color: $color-services-body;
             .more-link{
               background-color: transparent;
-              color: palette(primary, base);
+              color: #515151;
               &:after{
-                color: palette(secondary, light);
+                color: palette(secondary, base);
               }
               &:hover{
-                color: palette(tertiary, dark);
+                color: palette(secondary, base);
                 &:after{
                   color: palette(primary, dark);
                 }

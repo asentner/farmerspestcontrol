@@ -22,6 +22,14 @@
       }
       a.button {
         color: #fff;
+        background-color: palette(secondary, base);
+        &:hover{
+          color: #fff;
+          background-color: palette(primary, base);
+          &:after{
+            color: palette(white, pure);
+          }
+        }
       }
     }
   }

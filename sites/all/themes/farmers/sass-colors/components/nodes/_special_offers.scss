@@ -1,20 +1,69 @@
-// secondary teaser
+
 // front page and sidebar offers by default
-.node--special-offer--secondary-teaser{
-    border-color: palette(neutral, iron);
+.node--special-offer--tertiary-teaser{
+    border-color: #acacac;
+    .node__content {
+        outline-color: #acacac;
+    }
     h2{
         color: palette(tertiary, base);
     }
     h3{
-        color: palette(tertiary, base);
+        color: #515151;
     }
     .field--name-field-button{
         .button{
-        background-color: palette(primary, dark);
+        background-color: palette(secondary, base);
         color: palette(white, pure);
         }
     }
     .field--name-field-expiration-date{
-        color: #c80108;
+        color: #2a2c2d;
     }
 }
+
+// featured offer
+.node--special-offer--tertiary-teaser.featured-offer{
+    background-color: palette(secondary, base);
+    overflow: hidden;
+    .node__content {
+        outline-color: #fff;
+    }
+    &:after {
+      content: "Great Deal!";
+      position: absolute;
+      top: 0;
+      right: -100px;
+      width: 300px;
+      height: 50px;
+      padding: 18px 20px 20px 121px;
+      transform: rotate(45deg);
+      background-color: #0e4d82;
+      color: #fff;
+      box-shadow: 0px 6px 0 0 rgba(0, 0, 0, 0.14);
+      font-weight: bold;
+    }
+      h2.field--name-field-offer-headline {
+        color: palette(white, pure);
+        text-shadow: 0px 4px 11.7px rgba(0, 0, 0, 0.38);
+      }
+      h3{
+        color: #fff;
+      }
+      .field--name-body{
+        color: palette(white, pure);
+      }
+      .field--name-field-disclaimer {
+        color: palette(white, pure);
+      }
+      .field--name-field-expiration-date{
+        color: palette(white, pure);
+      }
+      .field--name-field-button{
+          .button{
+            background-color: palette(white, pure);
+            color: palette(secondary, base);
+            transition: .3s;
+          }
+      }
+  }

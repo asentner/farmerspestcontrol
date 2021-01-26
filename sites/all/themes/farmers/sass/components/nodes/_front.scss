@@ -6,8 +6,9 @@
     .l-content{
       max-width: 100%;
       .front-content{
-        background-image: url('../farmers/images/family-fade-tablet.jpg');
+        background-image: url('../images/family-fade-tablet.jpg');
         background-size: cover;
+        background-repeat: no-repeat;
         background-position: center center;
       }
       .block--system-main{
@@ -58,7 +59,8 @@
     @include breakpoint($tab){
       .l-content{
         .front-content{
-          background-image: url('../farmers/images/family-fade-desktop.jpg');
+          background-image: url('../images/family-fade-desktop.jpg');
+          background-position: 70px 0px;
         }
         .block--system-main{
           padding: 65px 35px 300px;
@@ -67,7 +69,7 @@
             &:after {
               right: -590px;
               top: 280px;
-              transform: scale(.8);
+              transform: scale(.5);
             }
           }
           .field--name-body{
@@ -85,10 +87,10 @@
           .block__content{
             max-width: 615px;
             &:after {
-              right: -1115px;
-              top: 190px;
+              right: -895px;
+              top: -420px;
               bottom: auto;
-              transform: scale(1);
+              transform: scale(0.5);
             }
           }
           .node__title{

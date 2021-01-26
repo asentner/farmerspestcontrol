@@ -21,7 +21,7 @@
 
 //front body call out
 .block--bean-front-body-call-out{
-  background: palette(primary, dark);
+  background-color: palette(secondary, base);
   .block__content{
     .content{
       .field--name-field-call-out-text{
@@ -29,18 +29,18 @@
         a{
           color: palette(white, pure);
           &:hover{
-            color: palette(tertiary, base);
+            color: palette(primary, base);
           }
         }
       }
       .field--name-field-button{
         .button{
-          color: palette(primary, dark);
+          color: palette(secondary, base);
           background-color: palette(white, pure);
           border-color: palette(white, pure);
           &:hover{
             color: palette(white, pure);
-            background-color: transparent;
+            background-color: palette(primary, base);
             border-color: palette(white, pure);
           }
         }
@@ -51,7 +51,7 @@
 
 //front reviews callout
 .block--bean-reviews-call-out-front{
-  background: palette(white, pure);
+  background-color: palette(white, pure);
   .content{
     .field--name-field-display-title{
       color: palette(tertiary, base);

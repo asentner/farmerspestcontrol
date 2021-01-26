@@ -1,6 +1,9 @@
 //front forms
 .front, .node-type-city-page, .node-type-localtarget{
   .block--webform{
+    h2 {
+      color: palette(tertiary, base);
+    }
     .block__content{
       .webform-client-form{
         .form-actions{

@@ -5,8 +5,8 @@
   margin: 0 auto;
   .block__title{
     text-align: left;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 21px;
+    font-weight: bold;
     text-transform: uppercase;
     line-height: 1.1;
     letter-spacing: 3px;
@@ -45,7 +45,8 @@
              line-height: 2;
            }
            .field--title{
-             font-weight: 700;
+             font-size: 21px;
+             font-weight: bold;
            }
            .field--name-field-market{
              .field__item{
@@ -59,7 +60,6 @@
          .field--name-body{
            p{
              font-size: 18px;
-             font-style: italic;
              line-height: 1.78;
            }
          }
@@ -116,12 +116,12 @@
  @include breakpoint($desk){
    padding: 55px 0;
    .block__title{
-     font-size: 30px;
+     font-size: 21px;
    }
    .block__content{
      .view-header{
        h2{
-         font-size: 50px;
+         font-size: 42px;
        }
      }
      .view-content{

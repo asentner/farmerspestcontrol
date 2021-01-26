@@ -4,7 +4,7 @@
     $color-block-title: palette(tertiary, base);
     $color-body: palette(white, pure);
 
-    background: $color-bg;
+    background-color: $color-bg;
     .node--page--full {
       h1 {
         color: $color-block-title;
