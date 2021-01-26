@@ -6,7 +6,7 @@
     .l-content{
       max-width: 100%;
       .front-content{
-        background-image: url('../images/brand-bg.jpg');
+        background-image: url('../farmers/images/family-fade-tablet.jpg');
         background-size: cover;
         background-position: center center;
       }
@@ -19,7 +19,7 @@
           max-width: 550px;
           position: relative;
           &:after {
-            content: url('../images/brand-truck.png');
+            content: url('../images/tech@2x.png');
             position: absolute;
             right: -470px;
             bottom: -375px;
@@ -57,6 +57,9 @@
     }
     @include breakpoint($tab){
       .l-content{
+        .front-content{
+          background-image: url('../farmers/images/family-fade-desktop.jpg');
+        }
         .block--system-main{
           padding: 65px 35px 300px;
           .block__content{
