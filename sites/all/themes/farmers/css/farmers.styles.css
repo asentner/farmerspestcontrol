@@ -4217,7 +4217,7 @@ li.addtoany {
       margin: 0 auto; } }
 
 .front .bean-hero {
-  background-image: url("../images/pattern-no-fade.png");
+  background-image: url("../images/hero-tablet.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -4234,12 +4234,6 @@ li.addtoany {
       width: 100%;
       height: 100%;
       opacity: 0.2; }
-    .front .bean-hero .content-wrap:after {
-      content: url("../images/hero.png");
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: -500px; }
   .front .bean-hero .content {
     max-width: 850px;
     width: 100%;
@@ -4313,58 +4307,43 @@ li.addtoany {
       transform: scale(0.5);
       transition: 2s;
       animation: arrowBounce 2s linear infinite; }
-  .front .bean-hero .field--name-field-button-extension {
-    margin-left: 10px;
-    margin-top: 20px;
-    display: inline-block;
-    position: relative; }
-    .front .bean-hero .field--name-field-button-extension:after {
-      content: url("../images/arrow@2x.png");
-      position: absolute;
-      right: -80px;
-      bottom: -90px;
-      transform: scale(0.5);
-      transition: 2s;
-      animation: arrowBounce 2s linear infinite; }
-    .front .bean-hero .field--name-field-button-extension .field__item {
-      font-size: 16px;
-      font-weight: 600; }
   @media (min-width: 768px) {
-    .front .bean-hero .content-wrap {
-      min-height: 520px; }
-      .front .bean-hero .content-wrap:after {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: -500px; }
-    .front .bean-hero .content {
-      padding: 100px 25px 160px;
-      max-width: 1000px; }
-      .front .bean-hero .content:after {
-        font-size: 39px; }
-    .front .bean-hero .block__title,
-    .front .bean-hero h2,
-    .front .bean-hero .field--name-field-intro + h1,
-    .front .bean-hero .field--name-field-intro + .field--name-field-display-title,
-    .front .bean-hero .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title
-    .front .bean-hero .field-item,
-    .front .bean-hero body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment
-    .front .bean-hero .field__label,
-    .front .bean-hero
-    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
-    body.node-type-solution .scm-modal-container .field--name-field-concern-steps
-    .front .bean-hero .field__label,
-    .front .bean-hero div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta
-    .front .bean-hero em {
-      font-size: 48px;
-      max-width: 600px; }
-    .front .bean-hero h2.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + h1.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + .field--name-field-subtitle.field--name-field-display-title, .front .bean-hero .field--name-field-intro + .field--name-field-seo-title .field--name-field-subtitle.field-item, .field--name-field-intro + .field--name-field-seo-title .front .bean-hero .field--name-field-subtitle.field-item, .front .bean-hero body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-subtitle.field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero
-    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-subtitle.field__label,
-    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero div.entity-paragraphs-item.cta em.field--name-field-subtitle, div.entity-paragraphs-item.cta .front .bean-hero em.field--name-field-subtitle {
-      font-size: 24px;
-      max-width: 390px; }
-    .front .bean-hero .field--name-field-button-extension {
-      margin-top: 0; } }
+    .front .bean-hero {
+      background-image: none; }
+      .front .bean-hero .content-wrap {
+        min-height: 520px; }
+        .front .bean-hero .content-wrap:after {
+          content: url("../images/hero-desktop-wide.jpg");
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: -500px; }
+      .front .bean-hero .content {
+        padding: 100px 25px 160px;
+        max-width: 1000px; }
+        .front .bean-hero .content:after {
+          font-size: 39px; }
+      .front .bean-hero .block__title,
+      .front .bean-hero h2,
+      .front .bean-hero .field--name-field-intro + h1,
+      .front .bean-hero .field--name-field-intro + .field--name-field-display-title,
+      .front .bean-hero .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title
+      .front .bean-hero .field-item,
+      .front .bean-hero body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment
+      .front .bean-hero .field__label,
+      .front .bean-hero
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps
+      .front .bean-hero .field__label,
+      .front .bean-hero div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta
+      .front .bean-hero em {
+        font-size: 48px;
+        max-width: 600px; }
+      .front .bean-hero h2.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + h1.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + .field--name-field-subtitle.field--name-field-display-title, .front .bean-hero .field--name-field-intro + .field--name-field-seo-title .field--name-field-subtitle.field-item, .field--name-field-intro + .field--name-field-seo-title .front .bean-hero .field--name-field-subtitle.field-item, .front .bean-hero body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-subtitle.field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-subtitle.field__label,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero div.entity-paragraphs-item.cta em.field--name-field-subtitle, div.entity-paragraphs-item.cta .front .bean-hero em.field--name-field-subtitle {
+        font-size: 24px;
+        max-width: 390px; } }
   @media (min-width: 1024px) {
     .front .bean-hero .content-wrap {
       min-height: 620px; }
