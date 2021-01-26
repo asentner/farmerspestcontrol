@@ -6,7 +6,7 @@
           color: palette(white, pure);
           border-color: palette(primary, base);
           &:hover{
-            color: palette(primary, base);
+            color: palette(secondary, base);
           }
         }
         >.menu{ //second level

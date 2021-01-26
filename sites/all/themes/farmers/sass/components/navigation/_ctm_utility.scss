@@ -14,39 +14,58 @@
       justify-content: center;
       align-items: center;
       a, .nolink{
-        font-size: 18px;
+        font-size: 25px;
         font-weight: 800;
         line-height: 1.0;
         text-align: center;
       }
       .nolink{
         padding-left: 7px;
-      }
-      &:first-of-type{
-        a{
-          font-style: italic;
-          &:before{
-            @include faicon('\f2a0');
-            font-size: 33px;
-            font-style: normal;
-            line-height: 1;
-            text-align: center;
-            padding-right: 5px;
-          }
-        }
+        font-size: 21px;
       }
     }
   }
   @include breakpoint($tab){
     display: block;
-  }
-  @include breakpoint($nav){
-    .menu{
+    .menu {
+      align-items: flex-end;
       padding-right: 0;
-      li{
-        flex-direction: column;
-        a, .nolink{
+      li {
+        a {
+          font-size: 24px;
+        }
+        .nolink{
+          margin-top: 5px;
+          font-size: 24px;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+      }
+      .ctm-wrapper {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+        li {
+          &:nth-child(2) {
+            .nolink {
+              font-style: italic;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint($desk){
+    .menu{
+      li {
+        a {
           font-size: 32px;
+        }
+        .nolink{
+          margin-top: 5px;
+          font-size: 27px;
+          font-weight: bold;
+          text-transform: uppercase;
         }
       }
     }

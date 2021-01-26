@@ -200,14 +200,16 @@ hr {
 .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title {
   color: #7f776f; }
 
+.block--views-benefits-front,
 .local-target-benefits {
-  background-color: #f4f4f4; }
+  background-color: transparent; }
+  .block--views-benefits-front .node__title,
   .local-target-benefits .node__title {
-    color: #0e4d82; }
+    color: #7f776f; }
+    .block--views-benefits-front .node__title a,
     .local-target-benefits .node__title a {
-      color: #0e4d82; }
-      .local-target-benefits .node__title a:hover {
-        color: #5d9732; }
+      color: #7f776f; }
+  .block--views-benefits-front .field--name-field-image img,
   .local-target-benefits .field--name-field-image img {
     border-color: #fff;
     background-color: #fff; }
@@ -374,20 +376,20 @@ hr {
         color: #fff; }
 
 .block--views-locations-list .node--location--teaser h2 {
-  color: #d1d1d1; }
+  color: #fff; }
 
 .block--views-locations-list .node--location--teaser .node__content {
-  color: #d1d1d1;
-  border-color: #d1d1d1; }
+  color: #fff;
+  color: #fff; }
 
 .block--views-locations-list .node--location--teaser .field-phone-number {
-  color: #d1d1d1; }
+  color: #fff; }
   .block--views-locations-list .node--location--teaser .field-phone-number a {
-    color: #d1d1d1; }
+    color: #fff; }
     .block--views-locations-list .node--location--teaser .field-phone-number a:hover {
-      color: #0e4d82; }
+      color: #5d9732; }
     .block--views-locations-list .node--location--teaser .field-phone-number a:before {
-      color: #d1d1d1; }
+      color: #fff; }
 
 .block--logo-block-logo .mobile-menu-toggle i {
   color: #0e4d82; }
@@ -595,14 +597,11 @@ hr {
     background-color: transparent; } }
 
 .block--sprowt-settings-sprowt-social-media .block__content a {
-  color: #fff; }
+  color: #5d9732; }
   .block--sprowt-settings-sprowt-social-media .block__content a i {
-    background-color: #0e4d82; }
-  .block--sprowt-settings-sprowt-social-media .block__content a:hover i {
-    background-color: #fff;
-    color: #0e4d82; }
-  .block--sprowt-settings-sprowt-social-media .block__content a:hover span {
-    color: #0e4d82; }
+    background-color: transparent; }
+  .block--sprowt-settings-sprowt-social-media .block__content a:hover {
+    color: #fff; }
 
 .solution-finder-form .concern-wrap label:hover svg path, .solution-finder-form .concern-wrap label.checked svg path {
   fill: #0e4d82; }
@@ -714,7 +713,7 @@ hr {
   color: #fff;
   border-color: #0e4d82; }
   .footer-nav .menu-block-wrapper > .menu > li > a:hover {
-    color: #0e4d82; }
+    color: #5d9732; }
 
 .footer-nav .menu-block-wrapper > .menu > li > .menu > li > a {
   color: #d1d1d1; }

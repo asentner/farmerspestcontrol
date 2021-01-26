@@ -1,7 +1,7 @@
 .footer-nav{
   max-width: $container;
   margin: 0 auto;
-  padding: 45px 0;
+  padding: 15px 0;
   .block__title{
     display: none;
   }
@@ -33,8 +33,8 @@
       }
     }
   }
-  @include breakpoint($desk){
-    padding: 0 0 50px;
+  @include breakpoint($tab){
+    padding: 0;
     .menu-block-wrapper{
       >.menu{ //first level
         @include flexbox;
@@ -48,9 +48,8 @@
             font-weight: 600;
             text-transform: uppercase;
             margin-right: 50px;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             padding-bottom: 5px;
-            border-bottom: solid 8px;
           }
           &:last-child > a {
             margin-right: 0;

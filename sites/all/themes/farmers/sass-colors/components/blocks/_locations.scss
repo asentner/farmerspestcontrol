@@ -1,21 +1,21 @@
 .block--views-locations-list {
   .node--location--teaser{
     h2{
-      color: palette(neutral, alto);
+      color: palette(white, pure);
     }
     .node__content{
-      color: palette(neutral, alto);
-      border-color: palette(neutral, alto);
+      color: palette(white, pure);
+      color: palette(white, pure);
     }
     .field-phone-number{
-      color: palette(neutral, alto);
+      color: palette(white, pure);
       a{
-        color: palette(neutral, alto);
+        color: palette(white, pure);
         &:hover{
-          color: palette(primary, base);
+          color: palette(secondary, base);
         }
         &:before{
-          color: palette(neutral, alto);
+          color: palette(white, pure);
         }
       }
     }

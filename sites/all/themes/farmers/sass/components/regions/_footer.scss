@@ -1,4 +1,5 @@
 .l-footer{
+  border-top: 13px solid #65a43c;
   position: relative;
   .footer-wrap{
     @include flexbox;
@@ -21,21 +22,14 @@
   }
   @include breakpoint($tab){
     .l-region--footer-fourth{
-      padding: 45px 20px;
+      padding: 40px 20px;
     }
   }
   @include breakpoint($desk){
     .footer-wrap{
-      background-image: url('../images/star.png');
-      background-position-x: -10%;
-      background-position-y: 150%;
-      background-repeat: no-repeat;
       .l-region--footer-first{
-        padding: 0 0 40px;
+        padding: 0;
       }
-    }
-    .l-region--footer-fourth{
-      padding: 20px;
     }
   }
 }

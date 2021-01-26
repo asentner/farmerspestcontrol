@@ -66,17 +66,17 @@
       }
     }
   }
-  @include breakpoint($tab) {
-    $border-width: 3px;
-    $padding-link: 25px 15px;
-    $padding-link-top: 25px; // top padding of 1st level menu items
-    // order: 0;
-    transition: transform .5s;
+
+  @include breakpoint($tab){
+    $border-width: 0;
+    $padding-top-link: 22px 20px;
+    $padding-link: 22px 20px;
+    $padding-link-top: 7px; // top padding of 1st level menu items
+
+    position: relative;
+    right: 10px;
     transform: translateX(0);
-    position: static;
-    z-index: 52;
-    width: auto;
-    // margin-bottom: 1px; // fix firefox issue
+    width: 100%;
     .block__content {
       display: block !important; // override js
     }
@@ -84,39 +84,31 @@
       a, .nolink {
         border: 0;
         line-height: 1;
-        padding: $padding-link;
+        padding: $padding-top-link;
       }
       > .menu { // first level
         @include flexbox;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         position: relative;
         > li {
           border-bottom: none;
-          &:first-of-type{
-            border-left: none;
-          }
-          &:last-of-type{
-            border-right: none;
-          }
         }
         > li > a {
-          text-align: center;
-          text-transform: uppercase;
           font-size: 16px;
           font-weight: 600;
+          text-transform: capitalize;
+          text-align: center;
           &:first-child {
-            padding-top: $padding-link-top;
+            padding-bottom: 20px;
           }
         }
         > li.expanded > a {
-          &:before {
-            @include faicon("\f0da");
-            margin-right: 5px;
-          }
           &:first-child {
             &:after {
-              content: none;
+              @include faicon('\f107');
+              margin-left: 5px;
+              font-weight: bold;
             }
           }
         }
@@ -160,7 +152,7 @@
       }
       > .menu > li > .menu > li.first:hover > .menu {
         border-top: $border-width solid;
-        top: -$border-width;
+        top: $border-width;
       }
       > .menu > li:last-child > .menu > li:hover > .menu {
         right: 100%;
@@ -177,15 +169,25 @@
       .expanded,
       .leaf {
         a:first-child {
-          padding: $padding-link;
+          padding: 17px 5px;
         }
       }
     }
   }
-  @include breakpoint($nav){
-    $padding-top-link: 28px 42px;
-    $padding-link: 15px 42px;
-    $padding-link-top: 28px; // top padding of 1st level menu items
+  @include breakpoint($desk){
+    $border-width: 0;
+    $padding-top-link: 22px 20px;
+    $padding-link: 22px 20px;
+    $padding-link-top: 7px; // top padding of 1st level menu items
+
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: translateX(0);
+    width: 100%;
+    .block__content {
+      display: block !important; // override js
+    }
     .menu-block-wrapper {
       a, .nolink {
         border: 0;
@@ -193,36 +195,99 @@
         padding: $padding-top-link;
       }
       > .menu { // first level
+        @include flexbox;
+        justify-content: flex-end;
+        align-items: center;
+        position: relative;
+        > li {
+          border-bottom: none;
+          &:last-child a {
+            padding-right: 20px;
+          }
+          @include breakpoint(1240px) {
+            &:last-child a {
+              padding-right: 0;
+            }
+          }
+        }
         > li > a {
           font-size: 18px;
+          font-weight: 600;
+          text-transform: uppercase;
           text-align: center;
           &:first-child {
-            padding-top: $padding-link-top;
+            padding-bottom: 35px;
           }
         }
       }
       > .menu > li:hover > .menu { // second level
+        display: block !important; // override JS
+        position: absolute;
+        top: 54px;
+        min-width: 180px;
+        z-index: 52;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        text-transform: uppercase;
+        font-weight: 600;
+        border-top: 3px solid #42aadf;
         > li > a {
+          white-space: nowrap;
           padding: $padding-link;
         }
         > li > .nolink {
+          white-space: nowrap;
           padding: $padding-link;
         }
       }
+      > .menu > li:last-child:hover > .menu {
+        right: 0;
+      }
       > .menu > li > .menu > li:hover > .menu { // third level
+        display: block !important; // overide js
+        position: absolute;
+        left: 100%;
+        top: 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        z-index: 52;
         > li > a {
+          white-space: nowrap;
           padding: $padding-link;
         }
         > li > .nolink {
+          white-space: nowrap;
           padding: $padding-link;
+        }
+      }
+      > .menu > li > .menu > li.first:hover > .menu {
+        border-top: $border-width solid;
+        top: $border-width;
+      }
+      > .menu > li:last-child > .menu > li:hover > .menu {
+        right: 100%;
+        left: auto;
+      }
+    }
+    &.menu-processed {
+      .block__title {
+        display: none;
+      }
+      .menu-child-toggle {
+        display: none;
+      }
+      .expanded,
+      .leaf {
+        a:first-child {
+          padding: 0 8px 22px;
         }
       }
     }
+  }
+  @include breakpoint(1125px) {
     &.menu-processed {
       .expanded,
       .leaf {
         a:first-child {
-          padding: $padding-top-link;
+          padding: 0 20px 22px;
         }
       }
     }

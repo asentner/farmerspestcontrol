@@ -1,291 +1,271 @@
 //front Benefits intro
-.front, .node-type-localtarget{
-  .block--bean-benefits-intro-block-front{
-    padding-bottom: 40px;
-    .content{
-      .field--name-field-h1-title {
-        font-size: 28px;
-        line-height: 1;
-        font-weight: 700;
-      }
-      .field--name-field-body-text{
-        p{
-          font-size: 18px;
-          line-height: 1.67;
+.front,
+.node-type-localtarget {
+    .block--bean-benefits-intro-block-front {
+        padding-bottom: 40px;
+        .content {
+            .field--name-field-h1-title {
+                font-size: 28px;
+                line-height: 1;
+                font-weight: 800;
+            }
+            .field--name-field-body-text {
+                p {
+                    font-size: 18px;
+                    line-height: 1.67;
+                }
+            }
         }
-      }
+        @include breakpoint($tab) {
+            max-width: 675px;
+            padding-bottom: 30px;
+            .content {
+                .field--name-field-h1-title {
+                    font-size: 36px;
+                }
+            }
+        }
+        @include breakpoint($desk) {
+            max-width: 690px;
+            padding-bottom: 25px;
+            .content {
+                .field--name-field-h1-title {
+                    // font-size: 42px;
+                }
+                .field--name-field-body-text {
+                    p {
+                        font-size: 17px;
+                    }
+                }
+            }
+        }
     }
-    @include breakpoint($tab){
-      max-width: 675px;
-      padding-bottom: 30px;
-      .content{
-        .field--name-field-h1-title{
-          font-size: 36px;
-        }
-      }
-    }
-    @include breakpoint($desk){
-      max-width: 650px;
-      padding-bottom: 25px;
-      .content{
-        .field--name-field-h1-title{
-          font-size: 42px;
-        }
-        .field--name-field-body-text{
-          p{
-            font-size: 17px;
-          }
-        }
-      }
-    }
-  }
 }
 
 //ltp Benefits intro
-.node-type-localtarget{
-  .block--bean-benefits-intro-block-ltp{
-    padding-bottom: 40px;
-    .block__title{
-      font-size: 28px;
-      line-height: 1;
-      font-weight: 700;
-    }
-    .block__content{
-      .field--name-field-body-text{
-        p{
-          font-size: 18px;
-          line-height: 1.67;
+.node-type-localtarget {
+    .block--bean-benefits-intro-block-ltp {
+        padding-bottom: 40px;
+        .block__title {
+            font-size: 28px;
+            line-height: 1;
+            font-weight: 700;
         }
-      }
-    }
-    @include breakpoint($tab){
-      max-width: 675px;
-      margin: 0 auto;
-      padding-bottom: 30px;
-      .block__title{
-        font-size: 36px;
-      }
-    }
-    @include breakpoint($desk){
-      max-width: 650px;
-      margin: 0;
-      padding-bottom: 25px;
-      .block__title{
-        font-size: 42px;
-      }
-      .block__content{
-        .field--name-field-body-text{
-          p{
-            font-size: 17px;
-          }
+        .block__content {
+            .field--name-field-body-text {
+                p {
+                    font-size: 18px;
+                    line-height: 1.67;
+                }
+            }
         }
-      }
+        @include breakpoint($tab) {
+            max-width: 675px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+            .block__title {
+                font-size: 36px;
+            }
+        }
+        @include breakpoint($desk) {
+            max-width: 650px;
+            margin: 0;
+            padding-bottom: 25px;
+            .block__title {
+                font-size: 42px;
+            }
+            .block__content {
+                .field--name-field-body-text {
+                    p {
+                        font-size: 17px;
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
 //front Benefits block
-.block--views-benefits-front{
-  position: relative;
-  &:after {
-    content: url('../images/benefits-bg.jpg');
-    position: absolute;
-    right: -115px;
-    bottom: -465px;
-    margin: auto;
-    transform: scale(.7);
-  }
-  .view-content{
-    @include flexbox;
-    flex-direction: column;
-    justify-content: space-between;
-    .views-row{
-      .node--benefit--teaser{
-        max-width: 300px;
-        margin: 0 auto;
+.block--views-benefits-front {
+    position: relative;
+    &:after {
+        content: url("../images/benefits-section-image@2x.png");
+        position: absolute;
+        right: -350px;
+        bottom: -795px;
+        margin: auto;
+        transform: scale(0.27);
+    }
+    .view-content {
         @include flexbox;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
-        .field--name-field-icon{
-          min-width: 100px;
-          text-align: center;
-          img{
-            height: 50px;
-            width: auto;
-            max-width: none;
-          }
-        }
-        .node__content{
-          padding-left: 15px;
-          .node__title{
-            font-size: 17px;
-            font-weight: 700;
-            line-height: 1.41;
-          }
-          .field--name-body{
-            p{
-              font-size: 15px;
-              font-style: italic;
-              line-height: 1.44;
+        .views-row {
+            .node--benefit--teaser {
+                @include flexbox;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+                .field--name-field-icon {
+                    min-width: 100px;
+                    margin-bottom: 10px;
+                    img {
+                        height: 74px;
+                        width: auto;
+                    }
+                }
+                .node__content {
+                    .node__title {
+                        font-size: 21px;
+                        font-weight: 600;
+                        line-height: 1.41;
+                        margin: 0 0 10px;
+                    }
+                    .field--name-body {
+                        p {
+                            font-size: 17px;
+                            font-style: normal;
+                            line-height: 1.65;
+                        }
+                    }
+                }
             }
-          }
-        }
-      }
-      &:first-of-type{
-        padding-bottom: 40px;
-      }
-    }
-  }
-  @include breakpoint($tab){
-    &:after {
-      right: -450px;
-      bottom: -125px;
-    }
-    .view-content{
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-around;
-      .views-row{
-        .node--benefit--teaser{
-          margin: 0;
-          .field--name-field-icon{
-            min-width: 65px;
-            img{
-              height: auto;
-              width: 65px;
-              max-width: none;
+            &:first-of-type {
+                padding-bottom: 40px;
             }
-          }
-          .node__content{
-            .field--name-body{
-              p{
-                font-size: 16px;
-              }
+        }
+    }
+    @include breakpoint($tab) {
+        position: relative;
+        &:after {
+            right: -420px;
+            bottom: -375px;
+            transform: scale(0.45);
+        }
+        .view-content {
+            .views-row {
+                .node--benefit--teaser {
+                    max-width: 340px;
+                    margin: 0;
+                }
+                &:first-child {
+                    padding-bottom: 40px;
+                }
             }
-          }
         }
-        &:first-of-type{
-          padding-bottom: 0;
+    }
+    @include breakpoint($desk) {
+        &:after {
+            right: -775px;
+            bottom: -400px;
+            transform: scale(0.5);
         }
-      }
-    }
-  }
-  @include breakpoint($desk){
-    &:after {
-      right: -595px;
-      bottom: -125px;
-      transform: scale(1);
-    }
-    .view-content{
-      justify-content: space-between;
-      .views-row{
-        .node--benefit--teaser{
-          max-width: 370px;
-          .field--name-field-icon{
-            min-width: auto;
-            img{
-              height: 50px;
-              width: auto;
-              max-width: none;
+        .view-content {
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-around;
+            .views-row {
+                &:first-child {
+                    padding-bottom: 0;
+                }
+                .node--benefit--teaser {
+                    max-width: 370px;
+                }
             }
-          }
         }
-      }
     }
-  }
 }
 
 //LTP benefits
 .local-target-benefits {
-   padding: 20px 20px 40px;
-   text-align: center;
-   .view-content {
-      flex-wrap: nowrap;
-      max-width: 1160px;
-      position: relative;
-      z-index: 99;
-   }
-   .views-row {
-    max-width: 360px;
-    margin: 0 auto 20px;
-  }
-   .node__title {
-      font-size: 1.325em;
-      font-weight: 600;
-   }
-   .field--name-field-image,
-   .field--name-field-icon {
-      margin-bottom: 20px;
-      img {
-         border-radius: 50%;
-         border: 2px solid;
-      }
-      a > img {
-        @extend %image-hover;
-      }
-   }
-   @include breakpoint($tab) {
-      .view-content {
-         @include container;
-         @include flexbox;
-         justify-content: space-around;
-      }
-      .views-row {
-        flex: 0 1 percentage(1/2);
-        width: percentage(1/2);
-        padding: 0 20px;
-        margin: 0;
-      }
-   }
-   @include breakpoint($desk) {
-      .views-row {
-        flex: 0 1 percentage(1/3);
-        width: percentage(1/3);
-      }
-      .node__title {
-        font-size: 1.5em;
-      }
+    padding: 20px 20px 40px;
+    text-align: center;
+    .view-content {
+        flex-wrap: nowrap;
+        max-width: 1160px;
+        position: relative;
+        z-index: 99;
+    }
+    .views-row {
+        max-width: 360px;
+        margin: 0 auto 20px;
+    }
+    .node__title {
+        font-size: 1.325em;
+        font-weight: 600;
+    }
+    .field--name-field-image,
+    .field--name-field-icon {
+        margin-bottom: 20px;
+        img {
+            border-radius: 50%;
+            border: 2px solid;
+        }
+        a > img {
+            @extend %image-hover;
+        }
+    }
+    @include breakpoint($tab) {
+        .view-content {
+            @include container;
+            @include flexbox;
+            justify-content: space-around;
+        }
+        .views-row {
+            flex: 0 1 percentage(1/2);
+            width: percentage(1/2);
+            padding: 0 20px;
+            margin: 0;
+        }
+    }
+    @include breakpoint($desk) {
+        .views-row {
+            flex: 0 1 percentage(1/3);
+            width: percentage(1/3);
+        }
+        .node__title {
+            font-size: 1.5em;
+        }
     }
 }
 
 //Benefits bean list
-.node--benefit--alt-teaser{
-  @include flexbox;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 0 15px;
-  .field--name-field-icon{
-    width: 30%;
-    margin-bottom: 20px;
-  }
-  .node__content{
-    max-width: 630px;
-    .node__title{
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.67;
-      margin-bottom: .1em;
+.node--benefit--alt-teaser {
+    @include flexbox;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 15px;
+    .field--name-field-icon {
+        width: 30%;
+        margin-bottom: 20px;
     }
-    .field--name-body{
-      font-size: 18px;
-      line-height: 1.67;
+    .node__content {
+        max-width: 630px;
+        .node__title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.67;
+            margin-bottom: 0.1em;
+        }
+        .field--name-body {
+            font-size: 18px;
+            line-height: 1.67;
+        }
     }
-  }
-  @include breakpoint($tab){
-    flex-direction: row;
-    .field--name-field-icon{
-      width: 35%;
-      margin-bottom: 0;
+    @include breakpoint($tab) {
+        flex-direction: row;
+        .field--name-field-icon {
+            width: 35%;
+            margin-bottom: 0;
+        }
+        .node__content {
+            margin-left: 35px;
+        }
     }
-    .node__content{
-      margin-left: 35px;
+    @include breakpoint($desk) {
+        .field--name-field-icon {
+            width: 13%;
+        }
     }
-  }
-  @include breakpoint($desk){
-    .field--name-field-icon{
-      width: 13%;
-    }
-  }
 }

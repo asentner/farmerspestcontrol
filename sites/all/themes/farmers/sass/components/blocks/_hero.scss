@@ -1,102 +1,199 @@
 //Confirm what format the Hero needs to be and ensure conflicting styling is commented out for both Front page and LTP pages.
 
-
 // Use this styling when NO solutions finder on Front
-.front{
-  .bean-hero{
-    $overlay-opacity: 0.6; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+.front {
+	.bean-hero {
+			$overlay-opacity: 0.2; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
 
-  	text-align: center;
-  	background-position: center center;
-  	background-repeat: no-repeat;
-  	background-size: cover;
-  	.content-wrap {
-  		position: relative;
-  		min-height: 360px;
-      text-align: center;
-      &:before {
-  			content: '';
-  			position: absolute;
-  			top: 0;
-  			left: 0;
-  			width: 100%;
-  			height: 100%;
-  			opacity: $overlay-opacity;
-  		}
-  	}
-  	.content{
-      max-width: 800px;
-      width: 100%;
-      padding: 50px 25px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translateY(-50%) translateX(-50%);
-  	}
-  	.block__title {
-  		font-size: 40px;
-  		font-weight: 700;
-  		line-height: 1;
-  		letter-spacing: .6px;
-  		text-transform: capitalize;
-  	}
-  	.field--name-field-subtitle{
-  		font-size: 20px;
-  		font-weight: 700;
-  		line-height: 1.15;
-  		letter-spacing: .3px;
-  		margin: 0;
-  	}
-  	.field--name-field-body-text{
-  		padding-top: 20px;
-  		text-transform: uppercase;
-  		font-size: 21px;
-  		font-weight: 700;
-  		letter-spacing: 1.6px;
-  		line-height: 1.95;
-      margin-top: 20px;
-  	}
-  	.button {
-  		margin: 20px auto 0;
-  		max-width: 310px;
-  		width: 100%;
-  	}
-  	@include breakpoint($tab) {
-  		.content-wrap {
-  			min-height: 400px;
-  		}
-  		.content {
-        padding: 100px 25px;
-  			&:after{
-  				font-size: 39px;
-  			}
-  		}
-  		.block__title {
-  			font-size: 48px;
-  		}
-  		.field--name-field-subtitle{
-  			font-size: 24px;
-  		}
-  	}
-  	@include breakpoint($desk) {
-      .content-wrap {
-  			min-height: 520px;
-  		}
-  		.content{
-        padding: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-50%) translateX(-50%);
-  		}
-  		.block__title {
-  			font-size: 56px;
-  		}
-  		.field--name-field-subtitle{
-  			font-size: 26px;
-  		}
-  	}
-  }
+			background-image: url('../images/pattern-no-fade.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+			position: relative;
+			overflow: hidden;
+			// &:before {
+			// 	content: "";
+			// 	background-image: url('../images/pattern-no-fade.png');
+			// 	background-repeat: repeat;
+			// 	position: absolute;
+			// 	top: 0;
+			// 	bottom: 0;
+			// 	right: 0;
+			// 	left: 0;
+			// 	opacity: .5;
+			// }
+			.content-wrap {
+				position: relative;
+				min-height: 510px;
+				text-align: left;
+				&:before {
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					opacity: $overlay-opacity;
+				}
+				&:after {
+					content: url('../images/hero.png');
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					right: -500px;
+				}
+			}
+			.content {
+				max-width: 850px;
+				width: 100%;
+				padding: 0 20px 70px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translateY(-50%) translateX(-50%);
+				z-index: 1;
+			}
+			.block__title,
+			h2 {
+					font-size: 34px;
+					font-weight: 800;
+					line-height: 1.2;
+					text-transform: capitalize;
+					max-width: 360px;
+					position: relative;
+					z-index: 12;
+			}
+			.block__title {
+				margin-bottom: 0;
+			}
+			.field--name-field-title {
+				margin-top: 0;
+				margin-bottom: 20px;
+			}
+			h2.field--name-field-subtitle {
+					font-size: 21px;
+					font-weight: 600;
+					font-style: italic;
+					line-height: 1.2;
+					letter-spacing: 0.3px;
+					margin: 0;
+					position: relative;
+					z-index: 1;
+			}
+			.field--name-field-body-text {
+					padding-top: 0;
+					margin-top: 0;
+					text-transform: uppercase;
+					font-size: 21px;
+					font-weight: 700;
+					letter-spacing: 1.6px;
+					line-height: 1.95;
+					position: relative;
+					z-index: 1;
+			}
+			.field--name-field-button {
+					margin: 20px auto 0;
+					max-width: 210px;
+					width: 100%;
+					display: inline-block;
+			}
+			.field--name-field-button-extension {
+				font-size: 16px;
+				font-weight: 600;
+				position: relative;
+				&:after {
+					content: url("../images/arrow@2x.png");
+					position: absolute;
+					right: -80px;
+					bottom: -90px;
+					transform: scale(0.5);
+					transition: 2s;
+					animation: arrowBounce 2s linear infinite;
+				}
+			}
+			.field--name-field-button-extension {
+					margin-left: 10px;
+					margin-top: 20px;
+					display: inline-block;
+					position: relative;
+					&:after {
+						content: url("../images/arrow@2x.png");
+						position: absolute;
+						right: -80px;
+						bottom: -90px;
+						transform: scale(0.5);
+						transition: 2s;
+						animation: arrowBounce 2s linear infinite;
+					}
+					.field__item {
+						font-size: 16px;
+						font-weight: 600;
+					}
+			}
+			@include breakpoint($tab) {
+					.content-wrap {
+						min-height: 520px;
+						&:after {
+							// content: url('../images/hero.png');
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							right: -500px;
+						}
+					}
+					.content {
+						padding: 100px 25px 160px;
+						max-width: 1000px;
+						&:after {
+							font-size: 39px;
+						}
+					}
+					.block__title,
+					h2 {
+						font-size: 48px;
+						max-width: 600px;
+					}
+					h2.field--name-field-subtitle {
+						font-size: 24px;
+						max-width: 390px;
+					}
+					.field--name-field-button-extension {
+						margin-top: 0;
+					}
+			}
+			@include breakpoint($desk) {
+					.content-wrap {
+						min-height: 620px;
+						&:after {
+							// content: url('../images/hero.png');
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							right: -270px;
+						}
+					}
+					.content {
+						padding: 0 30px;
+						position: absolute;
+						top: 40%;
+						left: 40%;
+						transform: translateY(-50%) translateX(-50%);
+						max-width: 820px;
+					}
+					.block__title,
+					h2 {
+						font-size: 60px;
+						max-width: 850px;
+					}
+					h2.field--name-field-subtitle {
+						max-width: 100%;
+					}
+			}
+			@include breakpoint(1260px) {
+				.content {
+					max-width: 1000px;
+				}
+			}
+	 }
 }
 
 // Use this styling when NO solutions finder on LTP
@@ -295,98 +392,98 @@
 // }
 
 //Use this styling if using the Solutions Finder on LTP
-.node-type-localtarget.ltp--solutions-finder{
-  .bean-hero{
-    text-align: center;
-    background-image: url('../images/hero-bg-pattern.png');
-    background-size: contain;
-    background-repeat: repeat;
-  	.content-wrap {
-  		position: relative;
-  		min-height: 360px;
-      text-align: center;
-  	}
-  	.content{
-      max-width: 800px;
-  		margin: auto;
-  		position: relative;
-  		padding: 40px 15px 0px;
-  		z-index: 10;
-  		&:after{
-  			border-radius: 100%;
-  			padding: 3px 5px;
-  			@include faicon('\f01a');
-  			font-size: 34px;
-  			line-height: .93;
-  			position: relative;
-  			top: 18px;
-  		}
-  	}
-  	.block__title {
-      font-size: 20px;
-  		font-weight: 700;
-  		line-height: 1.37;
-  		letter-spacing: .3px;
-      text-transform: capitalize;
-  	}
-  	.field--name-field-subtitle{
-      font-size: 34px;
-  		font-weight: 800;
-  		line-height: 1;
-  		letter-spacing: normal;
-  		margin: 0;
-  	}
-  	.field--name-field-body-text{
-      margin-top: 20px;
-  		text-transform: uppercase;
-  		font-size: 21px;
-  		font-weight: 700;
-  		letter-spacing: 1.6px;
-  		line-height: 1.95;
-  	}
-  	.button {
-  		display: none;
-  	}
-  	@include breakpoint($tab) {
-  		.content-wrap {
-  			min-height: 490px;
-  		}
-  		.content {
-        padding: 85px 25px;
-  			&:after{
-  				font-size: 39px;
-  			}
-  		}
-  		.block__title {
-  			font-size: 21px;
-  		}
-  		.field--name-field-subtitle{
-  			font-size: 42px;
-  		}
-      .field--name-field-body-text{
-        font-size: 18px;
-      }
-  	}
-  	@include breakpoint($desk) {
-      .content-wrap {
-  			min-height: 475px;
-  		}
-  		.content{
-        padding: 80px 25px 30px;
-  			&:after{
-  				font-size: 44px;
-  			}
-  		}
-  		.block__title {
-  			font-size: 26px;
-  		}
-  		.field--name-field-subtitle{
-  			font-size: 66px;
-  		}
-      .field--name-field-body-text{
-        padding-top: 20px;
-        font-size: 21px;
-      }
-  	}
-  }
+.node-type-localtarget.ltp--solutions-finder {
+	.bean-hero {
+			text-align: center;
+			background-image: url("../images/hero-bg-pattern.png");
+			background-size: contain;
+			background-repeat: repeat;
+			.content-wrap {
+					position: relative;
+					min-height: 360px;
+					text-align: center;
+			}
+			.content {
+					max-width: 850px;
+					margin: auto;
+					position: relative;
+					padding: 40px 15px 0px;
+					z-index: 10;
+					&:after {
+							border-radius: 100%;
+							padding: 3px 5px;
+							@include faicon("\f01a");
+							font-size: 34px;
+							line-height: 0.93;
+							position: relative;
+							top: 18px;
+					}
+			}
+			.block__title {
+					font-size: 20px;
+					font-weight: 850;
+					line-height: 1.37;
+					letter-spacing: 0.3px;
+					text-transform: capitalize;
+			}
+			.field--name-field-subtitle {
+					font-size: 34px;
+					font-weight: 800;
+					line-height: 1;
+					letter-spacing: normal;
+					margin: 0;
+			}
+			.field--name-field-body-text {
+					margin-top: 20px;
+					text-transform: uppercase;
+					font-size: 21px;
+					font-weight: 700;
+					letter-spacing: 1.6px;
+					line-height: 1.95;
+			}
+			.button {
+					display: none;
+			}
+			@include breakpoint($tab) {
+					.content-wrap {
+							min-height: 490px;
+					}
+					.content {
+							padding: 85px 25px;
+							&:after {
+									font-size: 39px;
+							}
+					}
+					.block__title {
+							font-size: 21px;
+					}
+					.field--name-field-subtitle {
+							font-size: 42px;
+					}
+					.field--name-field-body-text {
+							font-size: 18px;
+					}
+			}
+			@include breakpoint($desk) {
+					.content-wrap {
+							min-height: 475px;
+					}
+					.content {
+							padding: 80px 25px 30px;
+							&:after {
+									font-size: 44px;
+							}
+					}
+					.block__title {
+							font-size: 26px;
+					}
+					.field--name-field-subtitle {
+							font-size: 66px;
+					}
+					.field--name-field-body-text {
+							padding-top: 20px;
+							font-size: 21px;
+					}
+			}
+	}
 }

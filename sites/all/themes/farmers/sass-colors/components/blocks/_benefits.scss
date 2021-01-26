@@ -9,12 +9,11 @@
   }
 }
 
-//LTP benefits
+.block--views-benefits-front,
 .local-target-benefits {
-   $color-bg: palette(neutral, wild-sand);
+   $color-bg: transparent;
    $color-border: palette(white, pure);
-   $color-title: palette(primary, base);
-   $color-title-hover: palette(secondary, base);
+   $color-title: palette(tertiary, base);
 
    background-color: $color-bg;
 
@@ -22,9 +21,6 @@
       color: $color-title;
       a {
         color: $color-title;
-        &:hover {
-          color: $color-title-hover;
-        }
       }
    }
    .field--name-field-image {
