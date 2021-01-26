@@ -1,6 +1,6 @@
 .block--nav-utility-footer {
   $color-fg: palette(white, pure);
-  $color-bg-left: palette(neutral, cool-gray);
+  $color-bg-left: palette(secondary, base);
   $color-bg-right: palette(primary, base);
 
   .menu {
@@ -16,7 +16,7 @@
       color: $color-fg;
       &[href^='tel:'] {
         &:before {
-          color: $color-bg-right;
+          color: #fff;
         }
       }
     }

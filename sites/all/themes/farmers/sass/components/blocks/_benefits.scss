@@ -89,12 +89,12 @@
 .block--views-benefits-front {
     position: relative;
     &:after {
-        content: url("../images/benefits-section-image@2x.png");
+        content: url("../images/tech-circle-benefit-seciton@2x.png");
         position: absolute;
-        right: -350px;
-        bottom: -795px;
+        right: -220px;
+        bottom: -635px;
         margin: auto;
-        transform: scale(0.27);
+        transform: scale(0.33);
     }
     .view-content {
         @include flexbox;
@@ -107,19 +107,26 @@
                 justify-content: space-between;
                 align-items: flex-start;
                 .field--name-field-icon {
-                    min-width: 100px;
+                    border: 2px solid #65a43c;
+                    border-radius: 50%;
+                    width: 96px;
+                    height: 96px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 15px;
                     margin-bottom: 10px;
                     img {
-                        height: 74px;
+                        max-height: 74px;
                         width: auto;
                     }
                 }
                 .node__content {
                     .node__title {
                         font-size: 21px;
-                        font-weight: 600;
+                        font-weight: bold;
                         line-height: 1.41;
-                        margin: 0 0 10px;
+                        margin: 5px 0;
                     }
                     .field--name-body {
                         p {
@@ -138,9 +145,9 @@
     @include breakpoint($tab) {
         position: relative;
         &:after {
-            right: -420px;
-            bottom: -375px;
-            transform: scale(0.45);
+            right: -310px;
+            bottom: -205px;
+            transform: scale(0.5);
         }
         .view-content {
             .views-row {
@@ -156,9 +163,9 @@
     }
     @include breakpoint($desk) {
         &:after {
-            right: -775px;
-            bottom: -400px;
-            transform: scale(0.5);
+            right: -665px;
+            bottom: -252px;
+            transform: scale(0.55);
         }
         .view-content {
             flex-direction: row;

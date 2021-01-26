@@ -1,36 +1,18 @@
 .not-front .l-breadcrumb {
-  background-color: palette(secondary, base);
-  color: palette(white, pure);
+  background-color: palette(neutral, haze);
+  color: palette(primary, base);
   li{
     &:last-of-type{
-      color: palette(white, base);
+      color: palette(neutral, mine-shaft);
       &:before{
-        color: palette(white, pure);
+        color: palette(primary, base);
       }
     }
   }
   a {
     color: inherit;
     &:hover {
-      color: palette(primary, base);
-    }
-  }
-  @include breakpoint($tab){
-    background-color: palette(neutral, haze);
-    color: palette(primary, base);
-    li{
-      &:last-of-type{
-        color: palette(neutral, mine-shaft);
-        &:before{
-          color: palette(primary, base);
-        }
-      }
-    }
-    a {
-      color: inherit;
-      &:hover {
-        color: palette(secondary, base);
-      }
+      color: palette(secondary, base);
     }
   }
 }

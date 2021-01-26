@@ -692,28 +692,16 @@ hr {
     color: #fff; }
 
 .not-front .l-breadcrumb {
-  background-color: #5d9732;
-  color: #fff; }
+  background-color: #eaebeb;
+  color: #0e4d82; }
   .not-front .l-breadcrumb li:last-of-type {
-    color: #eee; }
+    color: #333333; }
     .not-front .l-breadcrumb li:last-of-type:before {
-      color: #fff; }
+      color: #0e4d82; }
   .not-front .l-breadcrumb a {
     color: inherit; }
     .not-front .l-breadcrumb a:hover {
-      color: #0e4d82; }
-  @media (min-width: 768px) {
-    .not-front .l-breadcrumb {
-      background-color: #eaebeb;
-      color: #0e4d82; }
-      .not-front .l-breadcrumb li:last-of-type {
-        color: #333333; }
-        .not-front .l-breadcrumb li:last-of-type:before {
-          color: #0e4d82; }
-      .not-front .l-breadcrumb a {
-        color: inherit; }
-        .not-front .l-breadcrumb a:hover {
-          color: #5d9732; } }
+      color: #5d9732; }
 
 .block--menu-menu-ctm-utility-menu .menu li:first-of-type .nolink {
   color: #5d9732; }
@@ -733,22 +721,22 @@ hr {
 .block--nav-main .menu-block-wrapper a, .block--nav-main .menu-block-wrapper .nolink {
   color: #fff; }
   .block--nav-main .menu-block-wrapper a.open, .block--nav-main .menu-block-wrapper .nolink.open {
-    background-color: #e1e1e1; }
+    background-color: #0e4d82; }
 
 .block--nav-main .menu-block-wrapper > .menu > li {
   border-bottom-color: #5d9732; }
 
 .block--nav-main .menu-block-wrapper .active,
 .block--nav-main .menu-block-wrapper .active-trail {
-  color: #0e4d82; }
+  color: #fff; }
 
 .block--nav-main.menu-processed .expanded .menu a, .block--nav-main.menu-processed .expanded .menu .nolink,
 .block--nav-main.menu-processed .leaf .menu a,
 .block--nav-main.menu-processed .leaf .menu .nolink {
-  background-color: #e1e1e1; }
+  background-color: #0e4d82; }
 
 .block--nav-main.menu-processed .menu-child-toggle:after {
-  color: #0e4d82; }
+  color: #fff; }
 
 @media (min-width: 768px) {
   .block--nav-main .menu-block-wrapper a {
@@ -812,11 +800,14 @@ hr {
 .block--nav-mobile-utility .menu li:nth-of-type(odd) {
   background-color: #0e4d82; }
 
+.block--nav-mobile-utility .menu li:nth-of-type(even) {
+  background-color: #5d9732; }
+
 .block--nav-mobile-utility .menu li a {
   color: #fff; }
 
 .block--nav-utility-footer .menu li.first {
-  background-color: #3a4648; }
+  background-color: #5d9732; }
 
 .block--nav-utility-footer .menu li.last {
   background-color: #0e4d82; }
@@ -824,7 +815,7 @@ hr {
 .block--nav-utility-footer .menu a {
   color: #fff; }
   .block--nav-utility-footer .menu a[href^='tel:']:before {
-    color: #0e4d82; }
+    color: #fff; }
 
 .block--nav-submenu {
   background-color: #fff; }

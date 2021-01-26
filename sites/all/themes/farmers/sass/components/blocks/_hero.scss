@@ -3,7 +3,7 @@
 // Use this styling when NO solutions finder on Front
 .front {
 	.bean-hero {
-			$overlay-opacity: 0.2; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
+			$overlay-opacity: 0.5; // opacity percentage as a decimal (0 - 1), use zero for no overlay;
 
 			background-image: url('../images/hero-tablet.jpg');
 			background-repeat: no-repeat;
@@ -27,7 +27,7 @@
 			.content {
 				max-width: 850px;
 				width: 100%;
-				padding: 0 20px 70px;
+				padding: 110px 20px 70px;
 				position: absolute;
 				top: 50%;
 				left: 50%;
@@ -92,7 +92,7 @@
 						}
 					}
 					.content {
-						padding: 100px 25px 160px;
+						padding: 100px 25px;
 						max-width: 1000px;
 						&:after {
 							font-size: 39px;
