@@ -8,6 +8,22 @@
     $color-title: palette(tertiary, base);
     $color-title-hover: palette(primary, base);
 
+    .block__title {
+      color: palette(tertiary, base);
+    }
+    h3 {
+      color: palette(tertiary, base)
+    }
+    .view-services > .more-link {
+      a {
+        background-color: palette(secondary, base);
+        color: #fff;
+        &:hover {
+          background-color: palette(primary, base);
+          color: palette(white, pure);
+        }
+      }
+    }
 
     .view-content {
       .views-row{

@@ -8,12 +8,13 @@
       .webform-client-form{
         .form-actions{
           input{
-            background-color: palette(primary, dark);
+            background-color: palette(secondary, base);
             color: palette(white, pure);
-            border-color: palette(primary, dark) !important;
+            border-color: transparent !important;
+            transition: .3s;
             &:hover{
-              color: palette(primary, dark);
-              background-color: palette(white, pure);
+              color: palette(white, pure);
+              background-color: palette(primary, base);
             }
           }
         }

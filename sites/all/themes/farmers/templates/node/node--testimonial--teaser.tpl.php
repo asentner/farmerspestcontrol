@@ -10,7 +10,6 @@
         <div class="field--title" itemprop="author">
             <?php print $title; ?>
         </div>
-        <?php print render($content['field_market']); ?>
     </div>
 
     <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">

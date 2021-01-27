@@ -16,6 +16,19 @@
     h2, h3{
       color: $color-body;
     }
+    ul {
+      li {
+        &:before {
+          color: palette(secondary, base);
+        }
+        a {
+          color: #fff;
+          &:hover {
+            color: palette(secondary, base);
+          }
+        }
+      }
+    }
     .button{
       background-color: palette(secondary, base);
       color: $color-body;

@@ -19,19 +19,18 @@
     padding: 20px;
     overflow: hidden;
     .block__title{
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 700;
-      letter-spacing: 3px;
+      letter-spacing: 1px;
       text-align: center;
       text-transform: uppercase;
     }
     .view-header{
       h3{
-        font-family: $font-headings;
-        font-size: 36px;
-        font-weight: 800;
+        font-size: 32px;
+        font-weight: bold;
         text-align: center;
-        text-transform: uppercase;
+        text-transform: capitalize;
       }
     }
     .view-content {
@@ -108,14 +107,34 @@
         letter-spacing: .2px;
       }
     }
+    .view-services > .more-link {
+      display: block;
+      font: inherit;
+      font-size: 17px;
+      font-weight: 600;
+      text-transform: capitalize;
+      outline: 0;
+      line-height: normal;
+      letter-spacing: .2px;
+      max-width: 300px;
+      margin: 60px auto 0;
+      text-align: center;
+      a {
+        padding: 15px 30px;
+        border-radius: 25px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
     @include breakpoint($tab){
       max-width: 1350px;
       .block__title{
-        font-size: 30px
+        font-size: 21px
       }
       .view-header{
         h3{
-          font-size: 51px;
+          font-size: 36px;
         }
       }
       .view-content{
@@ -137,6 +156,11 @@
       }
     }
     @include breakpoint($desk) {
+      .view-header{
+        h3{
+          font-size: 42px;
+        }
+      }
       .view-content{
         .views-row{
           max-width: 350px;

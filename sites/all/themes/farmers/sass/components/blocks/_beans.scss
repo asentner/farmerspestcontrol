@@ -73,83 +73,66 @@
 }
 
 //front reviews call out
-.block--bean-reviews-call-out-front{
-  padding: 35px 0;
-  .content{
-    @include flexbox;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .field--name-field-display-title{
-      padding: 0 25px 25px;
-      margin-bottom: 0;
-      font-size: 18px;
-      font-weight: 600;
-      text-transform: uppercase;
-      line-height: 1.5;
-      letter-spacing: normal;
-      position: relative;
-      .field__items{
-        position: relative;
-        z-index: 1;
-      }
-    }
-    .field--name-field-images{
-      >.field__items{
-        @include flexbox;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        >.field__item{
-          flex: 1 0 50%;
-          padding: 15px;
-          @extend %image-hover;
-        }
-      }
-    }
-  }
-  @include breakpoint($tab){
-    .content{
-      .field--name-field-images{
-        >.field__items{
-          flex-direction: row;
-          flex-wrap: nowrap;
-          >.field__item{
-            flex: 1 0 25%;
+.block--bean-reviews-call-out-front {
+  padding: 15px 0 45px;
+  .content {
+      @include flexbox;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .field--name-field-display-title {
+          text-align: center;
+          padding: 0 25px 25px;
+          margin-bottom: 0;
+          font-size: 18px;
+          font-weight: 600;
+          text-transform: uppercase;
+          line-height: 1.5;
+          letter-spacing: normal;
+          position: relative;
+          .field__items {
+              position: relative;
+              z-index: 1;
           }
-        }
       }
-    }
-  }
-  @include breakpoint($desk){
-    padding: 0;
-    .content{
-      flex-direction: row;
-      > div + div{
-        max-width: 100%;
-      }
-      .field--name-field-display-title{
-        padding: 50px 25px;
-        font-size: 18px;
-        z-index: 1;
-      }
-      .field--name-field-images{
-        padding: 0;
-        padding-left: 25px;
-        >.field__items{
-          >.field__item{
-            padding: 0 5px;
-            flex: 1 0 auto;
-            .field--name-field-image{
-              img{
-                max-width: 93%;
+      .field--name-field-images {
+          > .field__items {
+              @include flexbox;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              flex-wrap: wrap;
+              > .field__item {
+                  flex: 1 0 50%;
+                  padding: 15px;
+                  @extend %image-hover;
+                  img {
+                      max-width: 147px;
+                      min-width: 147px;
+                  }
               }
-            }
           }
-        }
       }
-    }
+  }
+  @include breakpoint($tab) {
+      min-height: 0;
+      padding: 0 0 50px;
+      .content {
+          .field--name-field-images {
+              > .field__items {
+                  flex-direction: row;
+                  flex-wrap: nowrap;
+                  > .field__item {
+                      flex: 1 0 25%;
+                      &:first-child {
+                          img {
+                              max-width: 200px;
+                          }
+                      }
+                  }
+              }
+          }
+      }
   }
 }
 
@@ -299,13 +282,12 @@
     max-width: 235px;
   }
   @include breakpoint($tab){
-    padding: 50px 0 20px;
+    padding: 40px 0 20px;
     img{
       max-width: 275px;
     }
   }
   @include breakpoint($desk){
-    padding: 90px 0 20px;
     img{
       max-width: 305px;
     }

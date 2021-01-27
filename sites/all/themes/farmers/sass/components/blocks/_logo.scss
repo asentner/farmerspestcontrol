@@ -5,6 +5,14 @@
   justify-content: space-between;
   padding: 15px;
   width: 100%;
+  position: relative;
+  z-index: 1;
+  &:hover {
+    cursor: pointer;
+    img {
+      transform: scale(0.95);
+    }
+  }
   .block__content {
     a{
       img{

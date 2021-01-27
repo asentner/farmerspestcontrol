@@ -28,10 +28,10 @@
           }
         }
         .node__title{
-          font-size: 24px;
-          font-weight: 700;
+          font-size: 21px;
+          font-weight: bold;
           line-height: 1.1;
-          letter-spacing: 3px;
+          letter-spacing: 1px;
           text-transform: uppercase;
         }
         .field--name-body{
@@ -39,8 +39,8 @@
           h2, h3{
             font-size: 32px;
             font-weight: 700;
-            line-height: auto;
-            margin-bottom: 0;
+            line-height: 1.1;
+            margin-bottom: 15px;
           }
           p{
             font-size: 18px;
@@ -74,7 +74,8 @@
           }
           .field--name-body{
             h2, h3{
-              font-size: 38px;
+              font-size: 36px;
+              max-width: 500px;
             }
           }
         }
@@ -94,11 +95,11 @@
             }
           }
           .node__title{
-            font-size: 30px;
+            font-size: 21px;
           }
           .field--name-body{
             h2, h3{
-              font-size: 48px;
+              font-size: 42px;
             }
           }
         }
