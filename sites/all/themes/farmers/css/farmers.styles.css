@@ -9250,6 +9250,9 @@ div.entity-paragraphs-item.paragraphs-item-table td {
           margin-left: auto; }
       .l-header .header-third-wrap {
         padding: 10px 20px 15px; } }
+  @media (min-width: 1024px) {
+    .l-header .l-region--header-first {
+      padding: 0 15px; } }
 
 .logged-in .l-header {
   margin-top: 0; }

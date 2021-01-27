@@ -38,6 +38,11 @@
       padding: 10px 20px 15px;
     }
   }
+  @include breakpoint($desk) {
+    .l-region--header-first {
+      padding: 0 15px;
+    }
+  }
 }
 
 // if logged in remove margin top
