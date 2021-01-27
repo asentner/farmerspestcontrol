@@ -1,35 +1,63 @@
 div.entity-paragraphs-item.plan-details {
-  background-color: palette(primary, dark);
-  color: palette(secondary, base);
+  background-color: palette(primary, base);
+
   h2, h3, h4, h5, h6 {
       color: palette(secondary, base);
   }
 
+  > .content > h2 {
+    color: palette(white, pure);
+  }
+  > .content > .field--name-field-intro {
+    color: palette(white, pure);
+  }
+
   .paragraphs-item-plan-information{
     .header{
-      background-color: palette(secondary, light);
+      background-color: palette(secondary, base);
     }
     .field--name-field-plan-features-header{
-      color: palette(primary, dark);
+      color: palette(black, pure);
+    }
+    .field--name-field-body-text {
+      color: palette(black, pure);
     }
     .field--name-field-plan-features{
-      .field__item:before{
-        color: palette(primary, base);
+      .field__item {
+        color: palette(black, pure);
+        &:before{
+          color: palette(secondary, base);
+        }
       }
     }
     .field--name-field-call-out{
+      color: palette(black, pure);
+      a {
+        color: palette(secondary, base);
+        &:hover {
+          color: palette(black, pure);
+        }
+      }
       strong{
-        color: palette(primary, dark);
+        color: palette(black, pure);
         &:before, &:after{
-          color: palette(secondary, light);
+          color: #ffcc00;
         }
       }
     }
     .field--name-field-link{
       a{
-        color: palette(primary, base);
+        color: #fff;
+        background-color: palette(secondary, base);
         &:before{
           color: palette(primary, base);
+          transition: .3s;
+        }
+        &:hover {
+          background-color: palette(secondary, base);
+          &:before{
+            color: palette(secondary, base);
+          }
         }
       }
     }
@@ -37,26 +65,31 @@ div.entity-paragraphs-item.plan-details {
 
   .paragraphs-item-body{ //add box shadow and border to box - override module
     box-shadow: 0 5px 49.2px 8px rgba(0, 0, 0, 0.35);
-    // border-color: #b2b2b2;
     .field--name-field-header{
-      color: palette(primary, dark);
+      color: palette(black, base);
     }
-    .field--name-field-body-text {
+    .field--name-field-call-out {
+      color: palette(black, pure);
+      a {
+        color: palette(secondary, base);
+        &:hover {
+          color: palette(black, pure);
+        }
+      }
+      .button {
+        color: #fff;
+        background-color: palette(primary, base);
+        &:hover {
+          color: #fff;
+          background-color: palette(secondary, base);
+        }
+      }
     }
 
     .field--name-field-intro{
       .starting-at{
-        color: palette(primary, dark);
+        color: palette(secondary, base);
       }
     }
-  }
-
-  @include breakpoint($tab) {
-  }
-
-  @include breakpoint($desk) {
-      background-size: auto 120%;
-      background-repeat: no-repeat;
-      background-position: -500px;
   }
 }

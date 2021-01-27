@@ -1,7 +1,9 @@
 body.node-type-solution {
     .solution--full--header {
-        background-color: palette(secondary, light);
-
+        background-color: palette(primary, base);
+        h1 {
+            color: palette(white, pure);
+        }
     }
 
     @include breakpoint($tab) {

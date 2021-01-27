@@ -25,9 +25,10 @@ div.entity-paragraphs-item.cta {
     }
 
     .button {
-        text-transform: uppercase;
+        text-transform: capitalize;
         font-size: 20px;
         font-weight: 600;
+        font-style: normal;
     }
 
     > .content {

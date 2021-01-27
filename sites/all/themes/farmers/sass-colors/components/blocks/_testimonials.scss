@@ -27,7 +27,7 @@
 }
 
 %block--testimonials-sidebar {
-  $color-bg: palette(primary, dark);
+  $color-bg: palette(primary, base);
   $color-title: palette(white, pure);
   $color-stars: palette(tertiary, light);
   $color-body: palette(white, pure);
@@ -40,7 +40,7 @@
     color: $color-body;
   }
   .fa-star {
-    color: $color-stars;
+    color: #ffcc00;
   }
   .node--testimonial{
     .field--title, .field--name-field-market{

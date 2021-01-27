@@ -4,9 +4,12 @@ div.entity-paragraphs-item.plan-info-concerns {
         background: palette(white, pure);
         .scm-links {
             a {
-                color: palette(secondary, base);
+                color: #515151;
                 &:after{
-                  color: palette(primary, base);
+                  color: palette(secondary, base);
+                }
+                &:hover {
+                  color: palette(secondary, base);
                 }
             }
         }
@@ -15,27 +18,31 @@ div.entity-paragraphs-item.plan-info-concerns {
     .paragraphs-item-plan-information {
         .header {
             color: palette(secondary, base);
+            .field--name-field-header {
+              color: palette(tertiary, base);
+            }
         }
         .field--name-field-plan-features {
-            color: palette(secondary, base);
+            color: #515151;
             .field__item:before{
-              color: palette(primary, base);
+              color: palette(secondary, base);
             }
         }
         .field--name-field-intro{
+          color: #515151;
           .concern-names{
-            color: palette(primary, base);
+            color: palette(secondary, base);
           }
         }
     }
 
     .paragraphs-item-body {
         .content .field--name-field-intro {
-            color: palette(secondary, base);
+          color: #515151;
         }
 
         .field--name-field-header{
-          background-color: palette(primary, dark);
+          background-color: palette(secondary, base);
         }
     }
 }

@@ -6584,8 +6584,11 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     margin-bottom: 1em; }
   .block--testimonials-sidebar .fa-star, .block--views-testimonials-random .fa-star {
     font-size: 14px; }
+  .block--testimonials-sidebar .field--title, .block--views-testimonials-random .field--title, .block--testimonials-sidebar [itemprop="reviewRating"], .block--views-testimonials-random [itemprop="reviewRating"] {
+    text-align: center; }
   .block--testimonials-sidebar .node--testimonial .field--name-body, .block--views-testimonials-random .node--testimonial .field--name-body {
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    text-align: center; }
     .block--testimonials-sidebar .node--testimonial .field--name-body p, .block--views-testimonials-random .node--testimonial .field--name-body p {
       font-size: 19px;
       line-height: 1.79; }
@@ -8365,9 +8368,42 @@ body.node-type-solution .l-header {
   box-shadow: 0.6px 7px 6px 0 rgba(0, 0, 0, 0.27); }
 
 body.node-type-solution .solution--full--header {
-  background-image: url("../images/hero-bg-pattern.png") !important;
-  background-size: contain;
-  background-repeat: repeat; }
+  position: relative;
+  display: block;
+  overflow: hidden; }
+  body.node-type-solution .solution--full--header .interior {
+    max-width: 1190px;
+    margin: 0 auto;
+    padding: 70px 20px;
+    text-align: left; }
+    body.node-type-solution .solution--full--header .interior .post-title {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      opacity: 1; }
+      body.node-type-solution .solution--full--header .interior .post-title .learn-more {
+        font-style: normal;
+        margin-right: 10px; }
+      body.node-type-solution .solution--full--header .interior .post-title a:after {
+        font-size: 28px; }
+    @media (min-width: 768px) {
+      body.node-type-solution .solution--full--header .interior .node__title {
+        max-width: 700px; } }
+    @media (min-width: 1024px) {
+      body.node-type-solution .solution--full--header .interior .node__title:after {
+        right: -610px;
+        bottom: -540px; }
+      body.node-type-solution .solution--full--header .interior .node__title:before {
+        bottom: -870px;
+        left: 1035px; } }
+    @media (min-width: 1200px) {
+      body.node-type-solution .solution--full--header .interior .node__title:after {
+        right: -730px;
+        bottom: -540px; }
+      body.node-type-solution .solution--full--header .interior .node__title:before {
+        bottom: -870px;
+        left: 1155px; } }
 
 body.node-type-solution h1.node__title strong:after, body.node-type-solution .node__title.field--name-field-display-title strong:after {
   content: "™";
@@ -8410,11 +8446,9 @@ body.node-type-solution h1.node__title strong:after, body.node-type-solution .no
       body.node-type-solution .solution-menu-toggle .menu-toggle .fa, body.node-type-solution .solution-menu-toggle .menu-toggle .block--views-slideshow-front .flex-direction-nav a:before, .block--views-slideshow-front .flex-direction-nav body.node-type-solution .solution-menu-toggle .menu-toggle a:before, body.node-type-solution .solution-menu-toggle .menu-toggle .block--views-slideshow-localtarget .flex-direction-nav a:before, .block--views-slideshow-localtarget .flex-direction-nav body.node-type-solution .solution-menu-toggle .menu-toggle a:before, body.node-type-solution .solution-menu-toggle .menu-toggle .breadcrumb li:first-child a:before, .breadcrumb li:first-child body.node-type-solution .solution-menu-toggle .menu-toggle a:before {
         font-size: 27.7px;
         font-weight: normal;
-        margin-left: 5px; }
-  body.node-type-solution .block--nav-main {
-    display: none; } }
+        margin-left: 5px; } }
 
-@media (min-width: 1030px) {
+@media (min-width: 1024px) {
   body.node-type-solution .block--block-3 {
     font-size: 23.8px; } }
 
@@ -8872,6 +8906,15 @@ body.node-type-solution .scm-modal-container .controls {
       height: 100%;
       width: 100%; }
 
+@media (min-width: 768px) {
+  .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser .node__content {
+    min-height: 0; } }
+
+.block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser h2, .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser .field--name-field-intro + h1, .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser .field--name-field-intro + .field--name-field-display-title, .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser .field-item, .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser .field__label, .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser
+body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
+body.node-type-solution .scm-modal-container .field--name-field-concern-steps .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser .field__label, .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .block--views-special-offers-sidebar-sec .node--special-offer--tertiary-teaser em {
+  font-size: 42px; }
+
 .node--testimonial [itemprop="reviewRating"] {
   font-size: 18px;
   line-height: 1;
@@ -8942,36 +8985,26 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .p
 div.entity-paragraphs-item.solution-annotated-image h2, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + h1, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + .field--name-field-display-title, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.solution-annotated-image .field-item, div.entity-paragraphs-item.solution-annotated-image body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.solution-annotated-image .field__label, div.entity-paragraphs-item.solution-annotated-image
 body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
 body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.solution-annotated-image .field__label, div.entity-paragraphs-item.solution-annotated-image div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity-paragraphs-item.solution-annotated-image em {
-  font-weight: bold;
-  text-transform: uppercase; }
-  div.entity-paragraphs-item.solution-annotated-image h2 em, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + h1 em, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + .field--name-field-display-title em, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + .field--name-field-seo-title .field-item em, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.solution-annotated-image .field-item em, div.entity-paragraphs-item.solution-annotated-image body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.solution-annotated-image .field__label em, div.entity-paragraphs-item.solution-annotated-image
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label em,
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.solution-annotated-image .field__label em, div.entity-paragraphs-item.solution-annotated-image div.entity-paragraphs-item.cta em em, div.entity-paragraphs-item.cta div.entity-paragraphs-item.solution-annotated-image em em {
-    font-family: "Open Sans", "Verdana", "Helvetica", "Arial", sans-serif;
-    text-transform: none;
-    font-size: 1.6em;
-    display: inline-block;
-    margin: 0 10px; }
-  div.entity-paragraphs-item.solution-annotated-image h2 strong, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + h1 strong, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + .field--name-field-display-title strong, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + .field--name-field-seo-title .field-item strong, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.solution-annotated-image .field-item strong, div.entity-paragraphs-item.solution-annotated-image body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label strong, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.solution-annotated-image .field__label strong, div.entity-paragraphs-item.solution-annotated-image
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label strong,
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.solution-annotated-image .field__label strong, div.entity-paragraphs-item.solution-annotated-image div.entity-paragraphs-item.cta em strong, div.entity-paragraphs-item.cta div.entity-paragraphs-item.solution-annotated-image em strong {
-    font-weight: 800; }
+  font-weight: 800;
+  font-size: 36px; }
+
+div.entity-paragraphs-item.solution-annotated-image strong {
+  font-weight: 800; }
 
 div.entity-paragraphs-item.solution-annotated-image .field--name-field-annotation-label {
-  font-size: 17px; }
+  font-size: 17px;
+  text-align: left; }
 
 div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro {
-  max-width: 940px;
-  margin: 0 auto; }
+  max-width: 1130px;
+  margin: 0 auto;
+  text-align: center; }
 
 div.entity-paragraphs-item.solution-annotated-image .field--name-field-annotation-description {
-  line-height: 1.53; }
+  line-height: 1.53;
+  text-align: left; }
 
 @media (min-width: 768px) {
-  div.entity-paragraphs-item.solution-annotated-image h2, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + h1, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + .field--name-field-display-title, div.entity-paragraphs-item.solution-annotated-image .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.solution-annotated-image .field-item, div.entity-paragraphs-item.solution-annotated-image body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.solution-annotated-image .field__label, div.entity-paragraphs-item.solution-annotated-image
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.solution-annotated-image .field__label, div.entity-paragraphs-item.solution-annotated-image div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity-paragraphs-item.solution-annotated-image em {
-    font-size: 30px; }
   div.entity-paragraphs-item.solution-annotated-image .paragraphs-item-annotated-image > .content {
     -ms-flex-direction: column;
         flex-direction: column; }
@@ -9015,9 +9048,11 @@ div.entity.solution-body {
     div.entity.solution-body > .content > .field--name-field-intro h2, div.entity.solution-body > .content > .field--name-field-intro .field--name-field-intro + h1, div.entity.solution-body > .content > .field--name-field-intro .field--name-field-intro + .field--name-field-display-title, div.entity.solution-body > .content > .field--name-field-intro .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity.solution-body > .content > .field--name-field-intro .field-item, div.entity.solution-body > .content > .field--name-field-intro body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity.solution-body > .content > .field--name-field-intro .field__label, div.entity.solution-body > .content > .field--name-field-intro
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity.solution-body > .content > .field--name-field-intro .field__label, div.entity.solution-body > .content > .field--name-field-intro div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity.solution-body > .content > .field--name-field-intro em {
-      letter-spacing: 3px;
-      text-align: center;
-      margin-bottom: 0; }
+      font-weight: 800;
+      font-size: 36px;
+      letter-spacing: normal;
+      text-transform: capitalize;
+      text-align: center; }
   div.entity.solution-body > .content > .paragraphs-items-field-content > .field--name-field-content > .field__items > .paragraphs-item-body--wrap > .paragraphs-item-body > .content > .field--name-field-body-text .field__items .field__item img {
     height: auto !important; }
   div.entity.solution-body .field--name-field-content > .field__items .field__item + .field__item {
@@ -9068,9 +9103,10 @@ div.entity-paragraphs-item.cta {
     font-style: normal;
     font-weight: 800; }
   div.entity-paragraphs-item.cta .button {
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-size: 20px;
-    font-weight: 600; }
+    font-weight: 600;
+    font-style: normal; }
   div.entity-paragraphs-item.cta > .content {
     max-width: 560px;
     margin: 0 auto; }
@@ -9095,12 +9131,11 @@ div.entity.guarantee {
   max-width: 984px;
   margin: 40px auto 0;
   padding: 0;
-  position: relative;
-  background-image: url("../images/hero-bg-pattern.png") !important;
-  background-repeat: repeat; }
+  position: relative; }
   div.entity.guarantee h2, div.entity.guarantee .field--name-field-intro + h1, div.entity.guarantee .field--name-field-intro + .field--name-field-display-title, div.entity.guarantee .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity.guarantee .field-item, div.entity.guarantee body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity.guarantee .field__label, div.entity.guarantee
   body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity.guarantee .field__label, div.entity.guarantee div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity.guarantee em, div.entity.guarantee .field--name-field-header {
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity.guarantee .field__label, div.entity.guarantee div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity.guarantee em,
+  div.entity.guarantee .field--name-field-header {
     font-family: "Open Sans", "Verdana", "Helvetica", "Arial", sans-serif; }
   div.entity.guarantee h2, div.entity.guarantee .field--name-field-intro + h1, div.entity.guarantee .field--name-field-intro + .field--name-field-display-title, div.entity.guarantee .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity.guarantee .field-item, div.entity.guarantee body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity.guarantee .field__label, div.entity.guarantee
   body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
@@ -9108,7 +9143,7 @@ div.entity.guarantee {
     font-size: 36px;
     font-weight: 700;
     line-height: 1.25;
-    letter-spacing: .4px; }
+    letter-spacing: 0.4px; }
   div.entity.guarantee .field--name-field-body-text {
     font-size: 21px;
     font-style: italic;
@@ -9121,68 +9156,122 @@ div.entity.guarantee {
       max-width: 575px; }
   @media (min-width: 768px) {
     div.entity.guarantee:after {
-      content: url("../images/tech-cta.png");
+      content: url("../images/guarantee.png");
       position: absolute;
-      bottom: 0;
-      right: 0; } }
+      top: -110px;
+      right: -120px;
+      transform: scale(0.35); } }
   @media (min-width: 1000px) {
     div.entity.guarantee {
       margin: 40px auto 70px; } }
-
-div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro {
-  font-family: "Open Sans", "Verdana", "Helvetica", "Arial", sans-serif;
-  font-weight: normal;
-  font-style: normal; }
-
-div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-icon-file {
-  position: static;
-  margin-bottom: 15px; }
-
-div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header {
-  padding: 20px 20px 30px;
-  position: relative; }
-  div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header h2, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field--name-field-intro + h1, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field--name-field-intro + .field--name-field-display-title, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field-item, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field__label, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
-  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field__label, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header em, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field--name-field-intro {
-    font-weight: 600; }
-
-div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-body-text p {
-  line-height: 1.25; }
-
-div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-plan-features .field__item {
-  font-size: 21px; }
-
-div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:before, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:after {
-  font-size: 8px; }
-  @media (min-width: 420px) {
-    div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:before, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:after {
-      font-size: 13.5px; } }
-
-div.entity-paragraphs-item.plan-details .paragraphs-item-body {
-  box-shadow: 0 5px 49.2px 8px rgba(0, 0, 0, 0.35); }
-  div.entity-paragraphs-item.plan-details .paragraphs-item-body .field--name-field-body-text {
-    font-size: 16px; }
-  div.entity-paragraphs-item.plan-details .paragraphs-item-body .field--name-field-intro p {
-    line-height: 1.25; }
-
-@media (min-width: 768px) {
-  div.entity-paragraphs-item.plan-details {
-    position: relative;
-    overflow: hidden; }
-    div.entity-paragraphs-item.plan-details:after {
-      content: " ";
+  @media (min-width: 1024px) {
+    div.entity.guarantee:after {
+      top: -110px;
+      right: -15px;
+      transform: scale(0.7); } }
+  div.entity.guarantee.solution-2:after {
+    display: none; }
+  div.entity.guarantee.solution-2 .button {
+    font-style: normal; }
+  div.entity.guarantee.solution-2 > .content {
+    padding: 270px 20px 50px;
+    text-align: center; }
+    div.entity.guarantee.solution-2 > .content:after {
+      content: url("../images/guarantee.png");
       position: absolute;
-      width: 100%;
-      height: 500%;
-      top: 50%;
-      transform: translateY(-50%) rotate(25deg);
-      right: -70%; }
-    div.entity-paragraphs-item.plan-details > * {
+      top: -55px;
+      right: 0;
+      left: 0;
+      transform: scale(0.6); }
+    div.entity.guarantee.solution-2 > .content > * {
+      max-width: 100%; }
+    div.entity.guarantee.solution-2 > .content h2, div.entity.guarantee.solution-2 > .content .field--name-field-intro + h1, div.entity.guarantee.solution-2 > .content .field--name-field-intro + .field--name-field-display-title, div.entity.guarantee.solution-2 > .content .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity.guarantee.solution-2 > .content .field-item, div.entity.guarantee.solution-2 > .content body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity.guarantee.solution-2 > .content .field__label, div.entity.guarantee.solution-2 > .content
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity.guarantee.solution-2 > .content .field__label, div.entity.guarantee.solution-2 > .content div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity.guarantee.solution-2 > .content em {
+      max-width: 650px;
+      margin: 0 auto 10px; }
+    div.entity.guarantee.solution-2 > .content .field--name-field-body-text {
+      max-width: 800px;
+      margin: 0 auto; }
+
+div.entity-paragraphs-item.plan-details {
+  padding: 60px 20px; }
+  div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro {
+    font-family: "Open Sans", "Verdana", "Helvetica", "Arial", sans-serif;
+    font-weight: normal;
+    font-style: normal; }
+  div.entity-paragraphs-item.plan-details > .content > h2.field--name-field-header, div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro + h1.field--name-field-header, div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro + .field--name-field-header.field--name-field-display-title, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field__label,
+  body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field__label, div.entity-paragraphs-item.cta div.entity-paragraphs-item.plan-details > .content > em.field--name-field-header {
+    font-size: 21px;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 45px; }
+    div.entity-paragraphs-item.plan-details > .content > h2.field--name-field-header:after, div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro + h1.field--name-field-header:after, div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro + .field--name-field-header.field--name-field-display-title:after, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field-item:after, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field__label:after,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field__label:after, div.entity-paragraphs-item.cta div.entity-paragraphs-item.plan-details > .content > em.field--name-field-header:after {
+      content: "";
+      position: absolute;
+      top: 35px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 180px;
+      height: 6px;
+      background-color: #65a43c; }
+    @media (min-width: 768px) {
+      div.entity-paragraphs-item.plan-details > .content > h2.field--name-field-header, div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro + h1.field--name-field-header, div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro + .field--name-field-header.field--name-field-display-title, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field__label,
+      body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.plan-details > .content > .field--name-field-header.field__label, div.entity-paragraphs-item.cta div.entity-paragraphs-item.plan-details > .content > em.field--name-field-header {
+        font-size: 21px;
+        font-weight: bold; } }
+  @media (min-width: 572px) {
+    div.entity-paragraphs-item.plan-details > .content > .field--name-field-intro {
+      font-weight: bold;
+      font-size: 36px; } }
+  div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-icon-file {
+    position: static;
+    margin-bottom: 15px; }
+  div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header {
+    padding: 20px 20px 30px;
+    position: relative; }
+    div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header h2, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field--name-field-intro + h1, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field--name-field-intro + .field--name-field-display-title, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field-item, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field__label, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
+    body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field__label, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header em, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .header .field--name-field-intro {
+      font-weight: 600; }
+  div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-body-text p {
+    line-height: 1.25; }
+  div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-plan-features .field__item {
+    font-size: 21px; }
+  div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:before, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:after {
+    font-size: 8px; }
+    @media (min-width: 420px) {
+      div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:before, div.entity-paragraphs-item.plan-details .paragraphs-item-plan-information .field--name-field-call-out strong:after {
+        font-size: 13.5px; } }
+  div.entity-paragraphs-item.plan-details .paragraphs-item-body {
+    box-shadow: 0 5px 49.2px 8px rgba(0, 0, 0, 0.35); }
+    div.entity-paragraphs-item.plan-details .paragraphs-item-body .field--name-field-body-text {
+      font-size: 16px; }
+    div.entity-paragraphs-item.plan-details .paragraphs-item-body .field--name-field-intro p {
+      line-height: 1.25; }
+  @media (min-width: 768px) {
+    div.entity-paragraphs-item.plan-details {
       position: relative;
-      z-index: 2; } }
+      overflow: hidden; }
+      div.entity-paragraphs-item.plan-details:after {
+        content: " ";
+        position: absolute;
+        width: 100%;
+        height: 500%;
+        top: 50%;
+        transform: translateY(-50%) rotate(25deg);
+        right: -70%; }
+      div.entity-paragraphs-item.plan-details > * {
+        position: relative;
+        z-index: 2; } }
 
 div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .field--name-field-intro {
   font-size: 17px; }
+  div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .field--name-field-intro .concern-names {
+    font-size: 18px;
+    font-style: normal; }
 
 div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .body-content {
   font-size: 15px; }
@@ -9203,6 +9292,8 @@ div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-body .scm-links {
     margin-left: 10px; }
 
 @media (min-width: 635px) {
+  div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .field--name-field-icon-file {
+    margin-right: 15px; }
   div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .field--name-field-body-text {
     width: 70%; } }
 
@@ -9220,11 +9311,12 @@ div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-body .scm-links {
       margin: 0;
       margin-top: 30px; }
     div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .field--name-field-icon-file {
-      width: 148px; }
+      width: 235px; }
     div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header h2, div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header .field--name-field-intro + h1, div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header .field--name-field-intro + .field--name-field-display-title, div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header .field-item, div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header .field__label, div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header .field__label, div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .header em {
-      font-size: 41px; }
+      font-size: 32px;
+      margin-bottom: 0; }
     div.entity-paragraphs-item.plan-info-concerns .paragraphs-item-plan-information .field--name-field-intro {
       font-size: 22px;
       line-height: 26px; }
@@ -9304,21 +9396,42 @@ div.entity-paragraphs-item.solution-testimonial {
   body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
   body.node-type-solution .scm-modal-container .field--name-field-concern-steps div.entity-paragraphs-item.solution-testimonial .field__label, div.entity-paragraphs-item.solution-testimonial div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta div.entity-paragraphs-item.solution-testimonial em {
     text-transform: uppercase;
-    font-size: .9em;
-    font-weight: normal;
-    margin-bottom: 20px; }
+    text-align: center;
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 5px; }
   div.entity-paragraphs-item.solution-testimonial .node--testimonial [itemprop="reviewRating"] {
     margin-bottom: 7px; }
   div.entity-paragraphs-item.solution-testimonial .node--testimonial--teaser .node__content {
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column-reverse;
-        flex-direction: column-reverse; }
-    div.entity-paragraphs-item.solution-testimonial .node--testimonial--teaser .node__content > * {
-      -ms-flex: 0 1 auto; }
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: center;
+        justify-content: center; }
+    div.entity-paragraphs-item.solution-testimonial .node--testimonial--teaser .node__content [itemprop="reviewRating"] {
+      text-align: center;
+      -ms-flex-order: 1;
+          order: 1;
+      margin-bottom: 10px; }
+      div.entity-paragraphs-item.solution-testimonial .node--testimonial--teaser .node__content [itemprop="reviewRating"] .fa-star {
+        font-size: 21px; }
+    div.entity-paragraphs-item.solution-testimonial .node--testimonial--teaser .node__content [itemprop="description"] {
+      -ms-flex-order: 2;
+          order: 2; }
+    div.entity-paragraphs-item.solution-testimonial .node--testimonial--teaser .node__content .reviewer {
+      -ms-flex-order: 3;
+          order: 3;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px; }
+    div.entity-paragraphs-item.solution-testimonial .node--testimonial--teaser .node__content .field--name-field-market {
+      -ms-flex-order: 4;
+          order: 4; }
   div.entity-paragraphs-item.solution-testimonial .field--name-body {
     font-weight: 600;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    text-align: center; }
     div.entity-paragraphs-item.solution-testimonial .field--name-body:after, div.entity-paragraphs-item.solution-testimonial .field--name-body:before {
       content: '"'; }
     div.entity-paragraphs-item.solution-testimonial .field--name-body * {
@@ -9334,7 +9447,9 @@ div.entity-paragraphs-item.solution-testimonial {
     font-size: 18px;
     font-style: normal; }
   div.entity-paragraphs-item.solution-testimonial .reviewer .field--name-field-market:before {
-    content: ", "; }
+    content: ",";
+    margin-left: -4px;
+    margin-right: 4px; }
   @media (min-width: 768px) {
     div.entity-paragraphs-item.solution-testimonial {
       text-align: left; }
@@ -9351,7 +9466,7 @@ div.entity-paragraphs-item.solution-testimonial {
         font-size: 21px;
         letter-spacing: 2.1px; }
       div.entity-paragraphs-item.solution-testimonial .field--name-body {
-        font-size: 24px; }
+        font-size: 26px; }
       div.entity-paragraphs-item.solution-testimonial .field--name-field-icon-file {
         width: 222px;
         -ms-flex: 0 0 222px;

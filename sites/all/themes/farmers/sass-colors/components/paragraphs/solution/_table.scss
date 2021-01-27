@@ -1,13 +1,13 @@
 div.entity-paragraphs-item.paragraphs-item-table{
   .field--name-field-header{
-    background: palette(primary, dark);
+    background: palette(secondary, base);
     color: palette(white, pure);
   }
   table {
     background-color: palette(neutral, haze);
   }
   th {
-    background-color: palette(secondary, base);
+    background-color: palette(primary, base);
     color: palette(white, pure);
   }
   td{

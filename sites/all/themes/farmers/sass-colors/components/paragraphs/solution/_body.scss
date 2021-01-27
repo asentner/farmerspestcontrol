@@ -1,15 +1,33 @@
 div.entity.solution-body {
   h2 {
-    em {
-      color: palette(primary, dark);
-    }
+      color: palette(secondary, base);
   }
   > .content {
     > .field--name-field-intro h2 {
-      color: palette(primary, dark);
+      color: palette(tertiary, base);
     }
   }
-  h4 {
-    color: palette(secondary, light);
+  .field--name-field-body-text {
+    h4 {
+      color: palette(tertiary, base);
+      a {
+        color: palette(tertiary, base);
+        &:hover {
+          color: palette(secondary, base);
+        }
+      }
+    }
+    a {
+      color: palette(secondary, base);
+      &:hover {
+        color: palette(primary, base);
+      }
+    }
+    a.button {
+      color: palette(white, pure);
+      &:hover {
+        color: palette(white, pure);
+      }
+    }
   }
 }

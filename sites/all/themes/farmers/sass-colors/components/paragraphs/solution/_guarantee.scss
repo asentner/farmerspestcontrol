@@ -1,12 +1,19 @@
-div.entity.guarantee {
+ div.entity.guarantee {
     color: palette(neutral, gallery);
-    background-color: palette(primary, dark);
+    background-color: palette(secondary, base);
     h2, .field--name-field-header {
         color: palette(white, pure);
     }
 
     > .content {
         border-color: #e52025;
+    }
+    .button {
+        background-color: palette(primary, base);
+        &:hover {
+            background-color: palette(white, pure);
+            color: palette(secondary, base);
+        }
     }
 }
 

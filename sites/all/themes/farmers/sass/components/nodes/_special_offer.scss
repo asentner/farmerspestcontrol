@@ -273,3 +273,16 @@
   }
 }
 
+// tertiary teaser sidebar
+.block--views-special-offers-sidebar-sec {
+  .node--special-offer--tertiary-teaser{
+    .node__content{
+      @include breakpoint($tab) {
+        min-height: 0;
+      }
+    }
+    h2{
+      font-size: 42px;
+    }
+  }
+}

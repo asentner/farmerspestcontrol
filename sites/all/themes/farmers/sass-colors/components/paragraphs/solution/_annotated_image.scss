@@ -1,13 +1,14 @@
 div.entity-paragraphs-item.solution-annotated-image {
-    background-color: palette(neutral, haze);
-    background-size: cover;
-    background-position: center;
+    background-color: #f2f2f2;
 
     h2 {
-      color: palette(primary, dark);
+      color: palette(tertiary, base);
         em {
             color: palette(primary, dark);
         }
+    }
+    .field--name-field-annotation-label {
+      color: palette(tertiary, base);
     }
     .pointer{
       background: palette(primary, base);

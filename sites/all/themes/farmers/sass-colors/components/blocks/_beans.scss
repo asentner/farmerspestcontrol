@@ -164,16 +164,17 @@
 
 //Sidebar Reviews Bean
 .block--bean-sidebar-review-links{
-  background: palette(secondary, light);
+  background: palette(secondary, base);
   a{
     color: palette(white, pure);
     &:before{
-      color: palette(primary, base);
+      color: palette(white, pure);
+      transition: .3s;
     }
     &:hover{
-      color: palette(primary, base);
+      color: palette(white, pure);
       &:before{
-        color: palette(white, pure);
+        color: palette(primary, base);
       }
     }
   }

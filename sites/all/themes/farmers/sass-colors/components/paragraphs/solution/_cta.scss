@@ -1,14 +1,17 @@
 div.entity-paragraphs-item.cta {
-    background-color: palette(neutral, haze);
+    background-color: #f2f2f2;
     color: palette(neutral, gallery);
     .field--name-field-header {
-        color: palette(primary, base);
+        color: palette(tertiary, base);
     }
 
     em {
-        color: palette(secondary, base);
+        color: palette(tertiary, base);
         a {
             color: palette(secondary, base);
+            &:hover {
+                color: palette(tertiary, base);
+            }
         }
     }
 }

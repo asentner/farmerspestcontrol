@@ -178,9 +178,14 @@
   .fa-star {
     font-size: 14px;
   }
+  .field--title,
+  [itemprop="reviewRating"] {
+    text-align: center;
+  }
   .node--testimonial {
     .field--name-body {
       margin-bottom: 0;
+      text-align: center;
       p {
         font-size: 19px;
         line-height: 1.79;

@@ -2,6 +2,10 @@ div.entity-paragraphs-item.plan-info-concerns {
   .paragraphs-item-plan-information {
     .field--name-field-intro {
       font-size: 17px;
+      .concern-names {
+        font-size: 18px;
+        font-style: normal;
+      }
     }
     .body-content {
       font-size: 15px;
@@ -34,6 +38,9 @@ div.entity-paragraphs-item.plan-info-concerns {
   }
   @include breakpoint(635px){
     .paragraphs-item-plan-information{
+      .field--name-field-icon-file {
+        margin-right: 15px;
+      }
       .field--name-field-body-text{
         width: 70%;
       }
@@ -61,11 +68,12 @@ div.entity-paragraphs-item.plan-info-concerns {
     }
     .paragraphs-item-plan-information {
       .field--name-field-icon-file {
-        width: 148px;
+        width: 235px;
       }
       .header {
         h2 {
-          font-size: 41px;
+          font-size: 32px;
+          margin-bottom: 0;
         }
       }
       .field--name-field-intro {

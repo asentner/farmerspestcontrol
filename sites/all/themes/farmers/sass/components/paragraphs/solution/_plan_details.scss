@@ -1,9 +1,37 @@
 div.entity-paragraphs-item.plan-details {
+  padding: 60px 20px;
     > .content {
         > .field--name-field-intro {
             font-family: $font-body;
             font-weight: normal;
             font-style: normal;
+        }
+        > h2.field--name-field-header {
+          font-size: 21px;
+          font-weight: bold;
+          position: relative;
+          margin-bottom: 45px;
+          &:after {
+            content: "";
+            position: absolute;
+            top: 35px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 180px;
+            height: 6px;
+            background-color: #65a43c;
+          }
+          @include breakpoint($tab) {
+            font-size: 21px;
+            font-weight: bold;
+          }
+        }
+        @media (min-width: 572px) {
+          > .field--name-field-intro {
+            font-weight: bold;
+            font-size: 36px;
+          }
         }
     }
 

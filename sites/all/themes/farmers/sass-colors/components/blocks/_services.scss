@@ -83,18 +83,18 @@
 
 .node--service--quinary-teaser{
   .field--name-field-icon{
-    background: palette(primary, base);
+    background: transparent;
+    border: 2px solid #5d9732;
   }
   .node__title {
     a {
-      color: palette(primary, base);
+      color: palette(tertiary, base);
       &:hover {
         color: palette(secondary, base);
       }
     }
   }
   .field--name-body {
-    color: palette(secondary, base);
     .more-link{
       color: palette(primary, base);
       &:after{
