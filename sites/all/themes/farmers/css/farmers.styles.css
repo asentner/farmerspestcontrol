@@ -4338,7 +4338,7 @@ li.addtoany {
     letter-spacing: 0.2px;
     margin: 0;
     position: relative;
-    z-index: 1; }
+    z-index: 12; }
   .front .bean-hero .field--name-field-body-text {
     padding-top: 0;
     margin-top: 0;
@@ -4353,7 +4353,9 @@ li.addtoany {
     margin: 20px auto 0;
     max-width: 210px;
     width: 100%;
-    display: inline-block; }
+    display: inline-block;
+    position: relative;
+    z-index: 12; }
   @media (min-width: 768px) {
     .front .bean-hero {
       background-image: none; }
@@ -4387,6 +4389,15 @@ li.addtoany {
       .front .bean-hero em {
         font-size: 48px;
         max-width: 600px; }
+      .front .bean-hero .block__title:before {
+        content: url("../images/hero-logo-2x.png");
+        position: absolute;
+        left: -630px;
+        top: -120px;
+        bottom: 0;
+        right: 0;
+        transform: scale(0.5);
+        z-index: -1; }
       .front .bean-hero h2.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + h1.field--name-field-subtitle, .front .bean-hero .field--name-field-intro + .field--name-field-subtitle.field--name-field-display-title, .front .bean-hero .field--name-field-intro + .field--name-field-seo-title .field--name-field-subtitle.field-item, .field--name-field-intro + .field--name-field-seo-title .front .bean-hero .field--name-field-subtitle.field-item, .front .bean-hero body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-subtitle.field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero
       body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field--name-field-subtitle.field__label,
       body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .bean-hero .field--name-field-subtitle.field__label, .front .bean-hero div.entity-paragraphs-item.cta em.field--name-field-subtitle, div.entity-paragraphs-item.cta .front .bean-hero em.field--name-field-subtitle {
@@ -5552,14 +5563,26 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
         justify-content: center;
     -ms-flex-align: center;
         align-items: center;
-    margin-top: 20px; }
+    margin-top: 20px;
+    position: relative; }
     .front .block--views-services-all .view-content > *, .front .block--views-services-all-mobile .view-content > * {
       -ms-flex: 0 1 auto; }
+    .front .block--views-services-all .view-content:before, .front .block--views-services-all-mobile .view-content:before {
+      content: url("../images/logo-icon-faded-service-section@2x.png");
+      position: absolute;
+      left: -470px;
+      top: 280px;
+      bottom: 0;
+      right: 0;
+      transform: scale(0.4);
+      z-index: 1; }
     .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
       max-width: 275px;
       -ms-flex: 1 1 50%;
           flex: 1 1 50%;
-      margin-top: 10px; }
+      margin-top: 10px;
+      position: relative;
+      z-index: 1; }
       .front .block--views-services-all .view-content .views-row .node--service--teaser, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser {
         display: -ms-flexbox;
         display: flex;
@@ -5639,7 +5662,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     line-height: normal;
     letter-spacing: .2px;
     max-width: 300px;
-    margin: 60px auto 0;
+    margin: 60px auto;
     text-align: center; }
     .front .block--views-services-all .view-services > .more-link a, .front .block--views-services-all-mobile .view-services > .more-link a {
       padding: 15px 30px;
@@ -5688,6 +5711,9 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
             align-items: flex-start;
         padding: 0;
         margin-top: 10px; }
+        .front .block--views-services-all .view-content:before, .front .block--views-services-all-mobile .view-content:before {
+          top: -120px;
+          transform: scale(0.6); }
         .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
           -ms-flex: 1 1 30%;
               flex: 1 1 30%; }
@@ -5700,7 +5726,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
               width: 120px;
               height: 120px; }
       .front .block--views-services-all .view-services > .more-link, .front .block--views-services-all-mobile .view-services > .more-link {
-        margin: 10px auto 0; } }
+        margin: 10px auto 60px; } }
   @media (min-width: 1024px) {
     .front .block--views-services-all .view-header h3, .front .block--views-services-all .view-header .node__title, .front .block--views-services-all .view-header .not-front.node-type-localtarget .preface-third-wrap .block--webform .block__title, .not-front.node-type-localtarget .preface-third-wrap .block--webform .front .block--views-services-all .view-header .block__title, .front .block--views-services-all .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment h2, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .block--views-services-all .view-header h2, .front .block--views-services-all .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + h1, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .block--views-services-all .view-header .field--name-field-intro + h1, .front .block--views-services-all .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-display-title, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .block--views-services-all .view-header .field--name-field-intro + .field--name-field-display-title, .front .block--views-services-all .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .front .block--views-services-all .view-header .field-item, .front .block--views-services-all .view-header .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field-item, .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .block--views-services-all .view-header .field-item, .front .block--views-services-all .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .block--views-services-all .view-header .field__label, .front .block--views-services-all .view-header body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta .front .block--views-services-all .view-header em, .front .block--views-services-all .view-header div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment em, div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .block--views-services-all .view-header em, .front .block--views-services-all .view-header
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps h2,
@@ -5732,6 +5758,8 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps em, div.entity-paragraphs-item.cta
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .block--views-services-all-mobile .view-header em, .front .block--views-services-all-mobile .view-header div.entity-paragraphs-item.cta .field--name-field-header, div.entity-paragraphs-item.cta .front .block--views-services-all-mobile .view-header .field--name-field-header {
       font-size: 42px; }
+    .front .block--views-services-all .view-content:before, .front .block--views-services-all-mobile .view-content:before {
+      top: -55px; }
     .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
       max-width: 310px; }
       .front .block--views-services-all .view-content .views-row .node--service--teaser, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser {
@@ -5746,7 +5774,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
           font-size: 21px;
           font-weight: 700; }
     .front .block--views-services-all .view-services > .more-link, .front .block--views-services-all-mobile .view-services > .more-link {
-      margin: 60px auto 0; } }
+      margin: 60px auto; } }
   @media (min-width: 1100px) {
     .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
       max-width: 350px; } }
@@ -9646,15 +9674,15 @@ div.entity-paragraphs-item.paragraphs-item-table td {
   z-index: 5; }
 
 .front .l-region--preface-fourth {
-  padding: 60px 20px;
+  padding: 60px 0 0;
   margin: 0 auto;
   position: relative; }
   @media (min-width: 768px) {
     .front .l-region--preface-fourth {
-      padding: 60px 20px 40px; } }
+      padding: 60px 0 0; } }
   @media (min-width: 1024px) {
     .front .l-region--preface-fourth {
-      padding: 50px 0; } }
+      padding: 50px 0 0; } }
 
 .front .preface-third-wrap, .node-type-localtarget .preface-third-wrap {
   padding: 40px 20px 375px;

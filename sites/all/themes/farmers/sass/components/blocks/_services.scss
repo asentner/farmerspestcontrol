@@ -53,10 +53,23 @@
       justify-content: center;
       align-items: center;
       margin-top: 20px;
+      position: relative;
+      &:before {
+        content: url('../images/logo-icon-faded-service-section@2x.png');
+        position: absolute;
+        left: -470px;
+        top: 280px;
+        bottom: 0;
+        right: 0;
+        transform: scale(.4);
+        z-index: 1;
+      }
       .views-row{
         max-width: 275px;
         flex: 1 1 50%;
         margin-top: 10px;
+        position: relative;
+        z-index: 1;
         .node--service--teaser, .node--service--alt-teaser{
           @include flexbox;
           flex-direction: column;
@@ -131,7 +144,7 @@
       line-height: normal;
       letter-spacing: .2px;
       max-width: 300px;
-      margin: 60px auto 0;
+      margin: 60px auto;
       text-align: center;
       a {
         padding: 15px 30px;
@@ -156,6 +169,10 @@
         align-items: flex-start;
         padding: 0;
         margin-top: 10px;
+        &:before {
+          top: -120px;
+          transform: scale(.6);
+        }
         .views-row{
           flex: 1 1 30%;
           + .views-row {
@@ -172,7 +189,7 @@
         }
       }
       .view-services > .more-link {
-        margin: 10px auto 0;
+        margin: 10px auto 60px;
       }
     }
     @include breakpoint($desk) {
@@ -182,6 +199,9 @@
         }
       }
       .view-content{
+        &:before {
+          top: -55px;
+        }
         .views-row{
           max-width: 310px;
           .node--service--teaser, .node--service--alt-teaser{
@@ -202,7 +222,7 @@
         }
       }
       .view-services > .more-link {
-        margin: 60px auto 0;
+        margin: 60px auto;
       }
     }
     @include breakpoint(1100px) {

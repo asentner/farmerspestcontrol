@@ -534,14 +534,7 @@ hr {
     color: #fff; }
 
 .front .block--views-services-all .view-content .views-row .node--service--teaser, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser {
-  background-color: transparent;
-  transition: .3s; }
-  .front .block--views-services-all .view-content .views-row .node--service--teaser:hover, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser:hover, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser:hover, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser:hover {
-    background-color: #fff;
-    border: solid 4px #65a43c;
-    cursor: pointer; }
-    .front .block--views-services-all .view-content .views-row .node--service--teaser:hover .field--name-field-icon, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser:hover .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser:hover .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser:hover .field--name-field-icon {
-      background-color: #5d9732; }
+  background-color: transparent; }
   .front .block--views-services-all .view-content .views-row .node--service--teaser .field--name-field-icon, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .field--name-field-icon {
     background-color: #fff; }
   .front .block--views-services-all .view-content .views-row .node--service--teaser .node__title a, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .node__title a, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .node__title a, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .node__title a {
@@ -557,6 +550,15 @@ hr {
         color: #5d9732; }
       .front .block--views-services-all .view-content .views-row .node--service--teaser .field--name-body .more-link:hover, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .field--name-body .more-link:hover, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .field--name-body .more-link:hover, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .field--name-body .more-link:hover {
         color: #5d9732; }
+  @media (min-width: 768px) {
+    .front .block--views-services-all .view-content .views-row .node--service--teaser, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser {
+      transition: .3s; }
+      .front .block--views-services-all .view-content .views-row .node--service--teaser:hover, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser:hover, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser:hover, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser:hover {
+        background-color: #fff;
+        border: solid 4px #65a43c;
+        cursor: pointer; }
+        .front .block--views-services-all .view-content .views-row .node--service--teaser:hover .field--name-field-icon, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser:hover .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser:hover .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser:hover .field--name-field-icon {
+          background-color: #5d9732; } }
 
 .block--views-services-our-services .view-content .views-row {
   border-color: #eaebeb; }

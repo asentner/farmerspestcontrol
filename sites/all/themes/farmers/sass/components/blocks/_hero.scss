@@ -59,7 +59,7 @@
 					letter-spacing: 0.2px;
 					margin: 0;
 					position: relative;
-					z-index: 1;
+					z-index: 12;
 			}
 			.field--name-field-body-text {
 					padding-top: 0;
@@ -77,6 +77,8 @@
 					max-width: 210px;
 					width: 100%;
 					display: inline-block;
+					position: relative;
+					z-index: 12;
 			}
 			@include breakpoint($tab) {
 				background-image: none;
@@ -102,6 +104,18 @@
 					h2 {
 						font-size: 48px;
 						max-width: 600px;
+					}
+					.block__title {
+						&:before {
+							content: url('../images/hero-logo-2x.png');
+							position: absolute;
+							left: -630px;
+							top: -120px;
+							bottom: 0;
+							right: 0;
+							transform: scale(.5);
+							z-index: -1;
+						}
 					}
 					h2.field--name-field-subtitle {
 						font-size: 22px;

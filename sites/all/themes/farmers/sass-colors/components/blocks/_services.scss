@@ -29,15 +29,6 @@
       .views-row{
         .node--service--teaser, .node--service--alt-teaser{
           background-color: transparent;
-          transition: .3s;
-          &:hover {
-            background-color: palette(white, pure);
-            border: solid 4px #65a43c;
-            cursor: pointer;
-            .field--name-field-icon{
-              background-color: palette(secondary, base);
-            }
-          }
           .field--name-field-icon{
             background-color: palette(white, pure);
           }
@@ -62,6 +53,17 @@
                 &:after{
                   color: palette(primary, dark);
                 }
+              }
+            }
+          }
+          @include breakpoint($tab) {
+            transition: .3s;
+            &:hover {
+              background-color: palette(white, pure);
+              border: solid 4px #65a43c;
+              cursor: pointer;
+              .field--name-field-icon{
+                background-color: palette(secondary, base);
               }
             }
           }
