@@ -2591,11 +2591,11 @@ input[type=text], input[type=email], input[type=password], textarea, select {
   width: auto; }
 
 .block--list .field--name-field-image img, .block--views-affiliates-list img, .block--bean-reviews-call-out-front .content .field--name-field-images > .field__items > .field__item, .local-target-benefits .field--name-field-image a > img,
-.local-target-benefits .field--name-field-icon a > img, .block--logo-block-logo .block__content a img, .block--views-team-list .field--name-field-image img, .node--service--quinary-teaser .field--name-field-icon, .block--views-city-pages-benefits .field--name-field-image a > img,
+.local-target-benefits .field--name-field-icon a > img, .block--logo-block-logo .block__content a img, .block--views-team-list .field--name-field-image img, .block--views-city-pages-benefits .field--name-field-image a > img,
 .block--views-city-pages-benefits .field--name-field-icon a > img {
   transition: 0.2s ease-out; }
   .block--list .field--name-field-image img:hover, .block--views-affiliates-list img:hover, .block--bean-reviews-call-out-front .content .field--name-field-images > .field__items > .field__item:hover, .local-target-benefits .field--name-field-image a > img:hover,
-  .local-target-benefits .field--name-field-icon a > img:hover, .block--logo-block-logo .block__content a img:hover, .block--views-team-list .field--name-field-image img:hover, .node--service--quinary-teaser .field--name-field-icon:hover, .block--views-city-pages-benefits .field--name-field-image a > img:hover,
+  .local-target-benefits .field--name-field-icon a > img:hover, .block--logo-block-logo .block__content a img:hover, .block--views-team-list .field--name-field-image img:hover, .block--views-city-pages-benefits .field--name-field-image a > img:hover,
   .block--views-city-pages-benefits .field--name-field-icon a > img:hover {
     transform: scale(0.95); }
 
@@ -5768,18 +5768,23 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     .node--service--quinary-teaser header > * {
       -ms-flex: 0 1 auto; }
   .node--service--quinary-teaser .field--name-field-icon {
-    height: 110px;
-    width: 110px;
+    border-radius: 50%;
+    padding: 25px;
+    width: 115px;
+    height: 115px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: center;
         justify-content: center;
     -ms-flex-align: center;
-        align-items: center; }
-    .node--service--quinary-teaser .field--name-field-icon > * {
-      -ms-flex: 0 1 auto; }
-    .node--service--quinary-teaser .field--name-field-icon .field__item img {
-      width: auto; }
+        align-items: center;
+    transition: .3s; }
+    .node--service--quinary-teaser .field--name-field-icon:hover {
+      transform: scale(0.95); }
+    .node--service--quinary-teaser .field--name-field-icon img {
+      max-width: 55px; }
+    .node--service--quinary-teaser .field--name-field-icon:hover {
+      cursor: pointer; }
   .node--service--quinary-teaser .node__content {
     display: -ms-flexbox;
     display: flex;
@@ -5788,7 +5793,8 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     -ms-flex-align: center;
         align-items: center;
     -ms-flex-pack: center;
-        justify-content: center; }
+        justify-content: center;
+    width: 100%; }
     .node--service--quinary-teaser .node__content > * {
       -ms-flex: 0 1 auto; }
   .node--service--quinary-teaser .node__title {
@@ -5796,14 +5802,15 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     font-weight: 600;
     line-height: 1.36;
     letter-spacing: .1px;
-    margin-bottom: 15px; }
+    margin-bottom: 5px; }
   .node--service--quinary-teaser .field--name-body {
     font-size: 16px;
     line-height: 1.75;
-    letter-spacing: .1px; }
+    letter-spacing: .1px;
+    max-width: 100%; }
     .node--service--quinary-teaser .field--name-body .more-link {
       text-align: center;
-      text-transform: uppercase;
+      text-transform: capitalize;
       font-size: 18px;
       font-weight: 600;
       line-height: 1;
@@ -6996,13 +7003,12 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     .block--nav-main .menu-block-wrapper > .menu > li:hover > .menu {
       display: block !important;
       position: absolute;
-      top: 54px;
+      top: 69px;
       min-width: 180px;
       z-index: 52;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
       text-transform: uppercase;
-      font-weight: 600;
-      border-top: 3px solid #42aadf; }
+      font-weight: 600; }
       .block--nav-main .menu-block-wrapper > .menu > li:hover > .menu > li > a {
         white-space: nowrap;
         padding: 22px 20px; }

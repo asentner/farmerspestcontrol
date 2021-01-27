@@ -239,17 +239,23 @@
     justify-content: center;
     align-items: center;
   }
-  .field--name-field-icon{
-    height: 110px;
-    width: 110px;
-    @include flexbox;
+  .field--name-field-icon {
+    border-radius: 50%;
+    padding: 25px;
+    width: 115px;
+    height: 115px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    @extend %image-hover;
-    .field__item{
-      img{
-        width: auto;
-      }
+    transition: .3s;
+    &:hover {
+      transform: scale(.95);
+    }
+    img {
+      max-width: 55px;
+    }
+    &:hover {
+      cursor: pointer;
     }
   }
   .node__content{
@@ -257,21 +263,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
   .node__title{
     font-size: 24px;
     font-weight: 600;
     line-height: 1.36;
     letter-spacing: .1px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
   .field--name-body{
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: .1px;
+    max-width: 100%;
     .more-link {
       text-align: center;
-      text-transform: uppercase;
+      text-transform: capitalize;
       font-size: 18px;
       font-weight: 600;
       line-height: 1;

@@ -224,13 +224,12 @@
       > .menu > li:hover > .menu { // second level
         display: block !important; // override JS
         position: absolute;
-        top: 54px;
+        top: 69px;
         min-width: 180px;
         z-index: 52;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         text-transform: uppercase;
         font-weight: 600;
-        border-top: 3px solid #42aadf;
         > li > a {
           white-space: nowrap;
           padding: $padding-link;
