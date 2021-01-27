@@ -5553,7 +5553,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
             height: 120px; } }
   @media (min-width: 1024px) {
     .front .block--views-services-all .view-content .views-row, .front .block--views-services-all-mobile .view-content .views-row {
-      max-width: 290px; }
+      max-width: 350px; }
       .front .block--views-services-all .view-content .views-row .node--service--teaser, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser {
         min-height: auto; }
         .front .block--views-services-all .view-content .views-row .node--service--teaser .field--name-field-icon, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .field--name-field-icon {

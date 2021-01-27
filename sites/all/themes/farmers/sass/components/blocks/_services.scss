@@ -139,7 +139,7 @@
     @include breakpoint($desk) {
       .view-content{
         .views-row{
-          max-width: 290px;
+          max-width: 350px;
           .node--service--teaser, .node--service--alt-teaser{
             min-height: auto;
             .field--name-field-icon {
