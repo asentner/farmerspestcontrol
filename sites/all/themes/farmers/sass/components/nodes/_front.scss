@@ -33,9 +33,20 @@
           line-height: 1.1;
           letter-spacing: 1px;
           text-transform: uppercase;
+          position: relative;
+          &:after {
+            content: "";
+            position: absolute;
+            top: 35px;
+            left: 0;
+            right: auto;
+            width: 180px;
+            height: 5px;
+            background-color: #65a43c;
+          }
         }
         .field--name-body{
-          padding-top: 30px;
+          padding-top: 40px;
           h2, h3{
             font-size: 32px;
             font-weight: 700;

@@ -24,6 +24,18 @@
       letter-spacing: 1px;
       text-align: center;
       text-transform: uppercase;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 180px;
+        height: 6px;
+        background-color: #65a43c;
+      }
     }
     .view-header{
       h3{
@@ -31,6 +43,7 @@
         font-weight: bold;
         text-align: center;
         text-transform: capitalize;
+        margin-top: 50px;
       }
     }
     .view-content {

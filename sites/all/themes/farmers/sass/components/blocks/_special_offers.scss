@@ -13,8 +13,19 @@
       font-size: 21px;
       font-weight: bold;
       line-height: 1.1;
-      letter-spacing: 3px;
+      letter-spacing: 1px;
       text-transform: uppercase;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: auto;
+        width: 180px;
+        height: 5px;
+        background-color: #65a43c;
+      }
       @include breakpoint($tab) {
         font-size: 21px;
       }
@@ -23,8 +34,8 @@
       text-transform: capitalize;
       font-size: 32px;
       font-weight: bold;
-      line-height: .89;
-      margin-top: 40px;
+      line-height: 1.1;
+      margin-top: 70px;
       @include breakpoint($tab) {
         font-size: 42px;
       }

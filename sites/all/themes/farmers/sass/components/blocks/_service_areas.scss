@@ -24,6 +24,17 @@
       letter-spacing: 1px;
       line-height: 1.1;
       text-transform: uppercase;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: 0;
+        right: auto;
+        width: 180px;
+        height: 5px;
+        background-color: #65a43c;
+      }
     }
     h2{
       max-width: 760px;

@@ -10,7 +10,7 @@
     }
 
     .postscript-fourth-wrap{
-      padding: 50px 20px;
+      padding: 50px 20px 155px;
       .l-region--postscript-fourth{
         @include flexbox;
         flex-direction: column;
@@ -18,10 +18,10 @@
         margin: 0 auto;
       }
       @include breakpoint($tab){
-        padding: 60px 85px;
+        padding: 60px 20px 255px;
       }
       @include breakpoint($desk){
-        padding: 65px 0 95px;
+        padding: 65px 0 355px;
         .l-region--postscript-fourth{
           flex-direction: row;
           justify-content: space-between;

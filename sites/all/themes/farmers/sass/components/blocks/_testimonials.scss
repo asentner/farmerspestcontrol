@@ -9,7 +9,19 @@
     font-weight: bold;
     text-transform: uppercase;
     line-height: 1.1;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
+    position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 180px;
+        height: 6px;
+        background-color: #65a43c;
+      }
   }
  .block__content{
    .view-header{
@@ -21,7 +33,7 @@
        line-height: 1;
        text-align: left;
        text-transform: capitalize;
-       padding-top: 15px;
+       padding-top: 35px;
      }
    }
    .view-content{
@@ -133,7 +145,7 @@
            margin: 0;
            box-shadow: none;
            &:hover{
-             box-shadow: 0 29px 49.2px 10.8px rgba(0, 0, 0, 0.18);
+             box-shadow: 0 29px 49.2px -19.2px rgba(0, 0, 0, 0.18);
            }
            .reviewer{
              @include flexbox;
