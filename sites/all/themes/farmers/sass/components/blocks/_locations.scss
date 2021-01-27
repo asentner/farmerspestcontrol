@@ -1,4 +1,6 @@
 .block--views-locations-list {
+  position: relative;
+  z-index: 1;
   .view-content{
     padding-top: 10px;
     .views-row{

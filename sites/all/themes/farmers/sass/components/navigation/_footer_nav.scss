@@ -2,6 +2,18 @@
   max-width: $container;
   margin: 0 auto;
   padding: 15px 0;
+  position: relative;
+  z-index: 1;
+  &:before {
+    content: url('../images/logo-footer-icon@2x.png');
+    position: absolute;
+    left: -470px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transform: scale(.4);
+    z-index: -1;
+  }
   .block__title{
     display: none;
   }
@@ -35,6 +47,11 @@
   }
   @include breakpoint($tab){
     padding: 0;
+    &:before {
+      left: -520px;
+      top: -320px;
+      transform: scale(.55);
+    }
     .menu-block-wrapper{
       >.menu{ //first level
         @include flexbox;
@@ -59,6 +76,12 @@
           }
         }
       }
+    }
+  }
+  @include breakpoint($desk) {
+    &:before {
+      left: -720px;
+      top: -350px;
     }
   }
 }
