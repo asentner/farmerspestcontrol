@@ -5500,8 +5500,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
 
 .front .block--views-services-all, .front .block--views-services-all-mobile {
   margin: 0 auto;
-  padding: 0 0 20px;
-  overflow: hidden; }
+  padding: 0 0 20px; }
   .front .block--views-services-all .block__title, .front .block--views-services-all-mobile .block__title {
     font-size: 21px;
     font-weight: 700;
