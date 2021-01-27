@@ -22,9 +22,9 @@
           &:after {
             content: url('../images/tech@2x.png');
             position: absolute;
-            right: -470px;
-            bottom: -375px;
-            transform: scale(.6);
+            right: -320px;
+            bottom: -625px;
+            transform: scale(0.25);
           }
         }
         .node__title{
@@ -71,16 +71,16 @@
       .l-content{
         .front-content{
           background-image: url('../images/family-fade-desktop.jpg');
-          background-position: 70px 0px;
+          background-position: -410px 0px;
         }
         .block--system-main{
-          padding: 65px 35px 300px;
+          padding: 65px 20px;
           .block__content{
-            max-width: 580px;
+            max-width: 380px;
             &:after {
-              right: -590px;
-              top: 280px;
-              transform: scale(.5);
+              right: -700px;
+              top: -420px;
+              transform: scale(0.4);
             }
           }
           .field--name-body{
@@ -94,13 +94,16 @@
     }
     @include breakpoint($desk){
       .l-content{
+        .front-content{
+          background-position: -200px 0px;
+        }
         .block--system-main{
           padding: 130px 20px 100px;
           .block__content{
             max-width: 615px;
             &:after {
-              right: -895px;
-              top: -420px;
+              right: -775px;
+              top: -350px;
               bottom: auto;
               transform: scale(0.5);
             }

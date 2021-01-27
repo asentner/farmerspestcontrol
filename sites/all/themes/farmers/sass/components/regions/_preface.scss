@@ -5,11 +5,11 @@
   }
 
   .l-region--preface-fourth{
-    padding: 60px 35px;
+    padding: 60px 20px;
     margin: 0 auto;
     position: relative;
     @include breakpoint($tab){
-      padding: 60px 50px;
+      padding: 60px 20px 40px;
     }
     @include breakpoint($desk){
       padding: 50px 0;
@@ -33,7 +33,7 @@
       max-width: $tab;
     }
     @include breakpoint($tab){
-      padding: 40px;
+      padding: 60px 20px 40px;
       background-image: none;
       .l-region--preface-third{
         margin: 0 auto;
@@ -67,7 +67,7 @@
       max-width: $tab;
     }
     @include breakpoint($tab){
-      padding: 40px;
+      padding: 60px 20px 40px;
       background-image: none;
     }
     @include breakpoint($desk){

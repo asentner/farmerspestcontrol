@@ -91,10 +91,10 @@
     &:after {
         content: url("../images/tech-circle-benefit-seciton@2x.png");
         position: absolute;
-        right: -220px;
+        right: -250px;
         bottom: -635px;
         margin: auto;
-        transform: scale(0.33);
+        transform: scale(0.35);
     }
     .view-content {
         @include flexbox;
@@ -150,7 +150,7 @@
             transform: scale(0.5);
         }
         .view-content {
-            .views-row {
+            .views-row {;
                 .node--benefit--teaser {
                     max-width: 340px;
                     margin: 0;

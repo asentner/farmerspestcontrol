@@ -1,5 +1,6 @@
 .block-areas-map {
   padding: 250px 20px 50px;
+  overflow: hidden;
   .block__content{
     max-width: 500px;
     text-align: left;
@@ -8,10 +9,10 @@
     &:before {
       content: url('../images/map@2x.png');
       position: absolute;
-      top: -700px;
-      left: 15px;
+      top: -670px;
+      left: 35px;
       right: 0;
-      transform: scale(0.27);
+      transform: scale(0.3);
     }
     .intro {
       position: relative;
