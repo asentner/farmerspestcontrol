@@ -6,13 +6,25 @@
 
   padding: 35px 20px 55px;
   .block__title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 21px;
+    font-weight: bold;
     line-height: 1.1;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 45px;
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 55px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 180px;
+      height: 6px;
+      background-color: #65a43c;
+    }
   }
   .view-content {
     @include flexbox;
@@ -34,7 +46,12 @@
     @extend %image-hover;
   }
   @include breakpoint($tab) {
-    padding: 65px 20px 85px;
+    padding: 45px 20px 55px;
+    .block__title {
+      &:after {
+        top: 35px;
+      }
+    }
     .view-content {
       flex-direction: row;
       align-items: center;
@@ -53,8 +70,9 @@
     }
   }
   @include breakpoint($desk){
+    padding: 95px 20px 55px;
     .block__title{
-      font-size: 30px;
+      font-size: 21px;
     }
     .views-row {
       padding: 0 $image-spacing-horiz/2;

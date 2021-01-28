@@ -3028,13 +3028,24 @@ li.addtoany {
 .block--views-affiliates-list {
   padding: 35px 20px 55px; }
   .block--views-affiliates-list .block__title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 21px;
+    font-weight: bold;
     line-height: 1.1;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 45px; }
+    margin-bottom: 45px;
+    position: relative; }
+    .block--views-affiliates-list .block__title:after {
+      content: "";
+      position: absolute;
+      top: 55px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 180px;
+      height: 6px;
+      background-color: #65a43c; }
   .block--views-affiliates-list .view-content {
     display: -ms-flexbox;
     display: flex;
@@ -3054,7 +3065,9 @@ li.addtoany {
     width: auto; }
   @media (min-width: 768px) {
     .block--views-affiliates-list {
-      padding: 65px 20px 85px; }
+      padding: 45px 20px 55px; }
+      .block--views-affiliates-list .block__title:after {
+        top: 35px; }
       .block--views-affiliates-list .view-content {
         -ms-flex-direction: row;
             flex-direction: row;
@@ -3071,12 +3084,14 @@ li.addtoany {
       .block--views-affiliates-list img {
         max-height: 70px; } }
   @media (min-width: 1024px) {
-    .block--views-affiliates-list .block__title {
-      font-size: 30px; }
-    .block--views-affiliates-list .views-row {
-      padding: 0 10px; }
-    .block--views-affiliates-list img {
-      max-height: 90px; } }
+    .block--views-affiliates-list {
+      padding: 95px 20px 55px; }
+      .block--views-affiliates-list .block__title {
+        font-size: 21px; }
+      .block--views-affiliates-list .views-row {
+        padding: 0 10px; }
+      .block--views-affiliates-list img {
+        max-height: 90px; } }
 
 .block--bean-google-reviews-block {
   padding: 10px; }
@@ -4206,6 +4221,13 @@ li.addtoany {
     left: -270px;
     right: 0;
     transform: scale(0.2); }
+  .front .block--webform:before, .node-type-city-page .block--webform:before, .node-type-localtarget .block--webform:before {
+    content: url("../images/curve-wide.png");
+    position: absolute;
+    bottom: -265px;
+    left: -640px;
+    right: 0;
+    transform: scale(0.6); }
   .front .block--webform h2, .front .block--webform .field--name-field-intro + h1, .front .block--webform .field--name-field-intro + .field--name-field-display-title, .front .block--webform .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .front .block--webform .field-item, .front .block--webform body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .block--webform .field__label, .front .block--webform
   body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
   body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .block--webform .field__label, .front .block--webform div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .front .block--webform em, .node-type-city-page .block--webform h2, .node-type-city-page .block--webform .field--name-field-intro + h1, .node-type-city-page .block--webform .field--name-field-intro + .field--name-field-display-title, .node-type-city-page .block--webform .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .node-type-city-page .block--webform .field-item, .node-type-city-page .block--webform body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .node-type-city-page .block--webform .field__label, .node-type-city-page .block--webform
@@ -4292,6 +4314,11 @@ li.addtoany {
       left: -350px;
       right: 0;
       transform: scale(0.35); }
+    .front .block--webform:before, .node-type-city-page .block--webform:before, .node-type-localtarget .block--webform:before {
+      bottom: -250px;
+      left: -700px;
+      right: 0;
+      transform: scale(1); }
     .front .block--webform h2, .front .block--webform .field--name-field-intro + h1, .front .block--webform .field--name-field-intro + .field--name-field-display-title, .front .block--webform .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .front .block--webform .field-item, .front .block--webform body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .front .block--webform .field__label, .front .block--webform
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps .field__label,
     body.node-type-solution .scm-modal-container .field--name-field-concern-steps .front .block--webform .field__label, .front .block--webform div.entity-paragraphs-item.cta em, div.entity-paragraphs-item.cta .front .block--webform em, .node-type-city-page .block--webform h2, .node-type-city-page .block--webform .field--name-field-intro + h1, .node-type-city-page .block--webform .field--name-field-intro + .field--name-field-display-title, .node-type-city-page .block--webform .field--name-field-intro + .field--name-field-seo-title .field-item, .field--name-field-intro + .field--name-field-seo-title .node-type-city-page .block--webform .field-item, .node-type-city-page .block--webform body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .node-type-city-page .block--webform .field__label, .node-type-city-page .block--webform
@@ -4320,7 +4347,11 @@ li.addtoany {
       bottom: -540px;
       left: -460px;
       right: 0;
-      transform: scale(0.5); } }
+      transform: scale(0.5); }
+    .front .block--webform:before, .node-type-city-page .block--webform:before, .node-type-localtarget .block--webform:before {
+      bottom: 0;
+      bottom: -400px;
+      left: -900px; } }
 
 .not-front .block--form-sidebar {
   border: 2px solid;

@@ -12,6 +12,14 @@
       right: 0;
       transform: scale(0.2);
     }
+    &:before {
+      content: url('../images/curve-wide.png');
+      position: absolute;
+      bottom: -265px;
+      left: -640px;
+      right: 0;
+      transform: scale(.6);
+    }
     h2{
       font-size: 32px;
       font-weight: 800;
@@ -94,6 +102,12 @@
         right: 0;
         transform: scale(0.35);
       }
+      &:before {
+        bottom: -250px;
+        left: -700px;
+        right: 0;
+        transform: scale(1);
+      }
       h2{
         font-size: 46px;
       }
@@ -124,6 +138,11 @@
         left: -460px;
         right: 0;
         transform: scale(0.5);
+      }
+      &:before {
+        bottom: 0;
+        bottom: -400px;
+        left: -900px;
       }
     }
   }
