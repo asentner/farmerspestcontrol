@@ -31,7 +31,7 @@
 
   <div class="content"<?php print $content_attributes; ?>>
   <div class="title-image-wrap">
-        <?php print render($content['field_image']); ?>
+        <?php print render($content['field_icon']); ?>
         <div class="title-wrap">
               <?php print render($content['field_title']); ?>
               <?php print render($content['field_subtitle']); ?>
