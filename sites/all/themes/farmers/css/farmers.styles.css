@@ -3671,11 +3671,13 @@ li.addtoany {
   .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-h1-title {
     font-size: 28px;
     line-height: 1;
-    font-weight: 800; }
+    font-weight: 800;
+    text-align: center; }
   .front .block--bean-benefits-intro-block-front .content .field--name-field-body-text p,
   .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-body-text p {
     font-size: 18px;
-    line-height: 1.67; }
+    line-height: 1.67;
+    text-align: center; }
   @media (min-width: 768px) {
     .front .block--bean-benefits-intro-block-front,
     .node-type-localtarget .block--bean-benefits-intro-block-front {
@@ -3683,7 +3685,11 @@ li.addtoany {
       padding-bottom: 30px; }
       .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title,
       .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-h1-title {
-        font-size: 36px; } }
+        font-size: 36px;
+        text-align: left; }
+      .front .block--bean-benefits-intro-block-front .content .field--name-field-body-text p,
+      .node-type-localtarget .block--bean-benefits-intro-block-front .content .field--name-field-body-text p {
+        text-align: left; } }
   @media (min-width: 1024px) {
     .front .block--bean-benefits-intro-block-front,
     .node-type-localtarget .block--bean-benefits-intro-block-front {
@@ -3744,8 +3750,8 @@ li.addtoany {
           flex-direction: column;
       -ms-flex-pack: justify;
           justify-content: space-between;
-      -ms-flex-align: start;
-          align-items: flex-start; }
+      -ms-flex-align: center;
+          align-items: center; }
       .block--views-benefits-front .view-content .views-row .node--benefit--teaser > * {
         -ms-flex: 0 1 auto; }
       .block--views-benefits-front .view-content .views-row .node--benefit--teaser .field--name-field-icon {
@@ -3768,11 +3774,13 @@ li.addtoany {
         font-size: 21px;
         font-weight: bold;
         line-height: 1.41;
-        margin: 5px 0; }
+        margin: 5px 0;
+        text-align: center; }
       .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .field--name-body p {
         font-size: 17px;
         font-style: normal;
-        line-height: 1.65; }
+        line-height: 1.65;
+        text-align: center; }
     .block--views-benefits-front .view-content .views-row:first-of-type {
       padding-bottom: 40px; }
   @media (min-width: 768px) {
@@ -3784,7 +3792,13 @@ li.addtoany {
         transform: scale(0.5); }
       .block--views-benefits-front .view-content .views-row .node--benefit--teaser {
         max-width: 340px;
-        margin: 0; }
+        margin: 0;
+        -ms-flex-align: start;
+            align-items: flex-start; }
+        .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .node__title {
+          text-align: left; }
+        .block--views-benefits-front .view-content .views-row .node--benefit--teaser .node__content .field--name-body p {
+          text-align: left; }
       .block--views-benefits-front .view-content .views-row:first-child {
         padding-bottom: 40px; } }
   @media (min-width: 1024px) {
@@ -5715,6 +5729,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
           padding: 25px;
           width: 120px;
           height: 120px;
+          border: solid 4px #65a43c;
           display: -ms-flexbox;
           display: flex;
           -ms-flex-pack: center;
@@ -5723,8 +5738,8 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
               align-items: center;
           transition: .3s; }
           .front .block--views-services-all .view-content .views-row .node--service--teaser .field--name-field-icon img, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .field--name-field-icon img, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .field--name-field-icon img, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .field--name-field-icon img {
-            max-width: 55px;
-            max-height: 160px; }
+            width: 100px;
+            height: 120px; }
         .front .block--views-services-all .view-content .views-row .node--service--teaser .node__title, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .node__title, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .node__title, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .node__title {
           font-size: 19px;
           font-weight: 600;
@@ -5870,9 +5885,6 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
         .front .block--views-services-all .view-content .views-row .node--service--teaser .field--name-field-icon, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .field--name-field-icon {
           width: 172px;
           height: 172px; }
-          .front .block--views-services-all .view-content .views-row .node--service--teaser .field--name-field-icon img, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .field--name-field-icon img, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .field--name-field-icon img, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .field--name-field-icon img {
-            max-width: 84px;
-            max-height: 117px; }
         .front .block--views-services-all .view-content .views-row .node--service--teaser .node__title, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser .node__title, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser .node__title, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser .node__title {
           font-size: 21px;
           font-weight: 700; }

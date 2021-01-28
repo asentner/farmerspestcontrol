@@ -575,7 +575,7 @@ hr {
         border: solid 4px #65a43c;
         cursor: pointer; }
         .front .block--views-services-all .view-content .views-row .node--service--teaser:hover .field--name-field-icon, .front .block--views-services-all .view-content .views-row .node--service--alt-teaser:hover .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--teaser:hover .field--name-field-icon, .front .block--views-services-all-mobile .view-content .views-row .node--service--alt-teaser:hover .field--name-field-icon {
-          background-color: #5d9732; } }
+          background-color: #eaebeb; } }
 
 .block--views-services-our-services .view-content .views-row {
   border-color: #eaebeb; }

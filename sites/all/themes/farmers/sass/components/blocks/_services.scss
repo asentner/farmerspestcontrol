@@ -87,13 +87,14 @@
             padding: 25px;
             width: 120px;
             height: 120px;
+            border: solid 4px #65a43c;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: .3s;
             img {
-              max-width: 55px;
-              max-height: 160px;
+              width: 100px;
+              height: 120px;
             }
           }
           .node__title{
@@ -208,10 +209,6 @@
             .field--name-field-icon {
               width: 172px;
               height: 172px;
-              img {
-                max-width: 84px;
-                max-height: 117px;
-              }
             }
             .node__title{
               font-size: 21px;

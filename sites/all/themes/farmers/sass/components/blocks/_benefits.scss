@@ -8,11 +8,13 @@
                 font-size: 28px;
                 line-height: 1;
                 font-weight: 800;
+                text-align: center;
             }
             .field--name-field-body-text {
                 p {
                     font-size: 18px;
                     line-height: 1.67;
+                    text-align: center;
                 }
             }
         }
@@ -22,6 +24,12 @@
             .content {
                 .field--name-field-h1-title {
                     font-size: 36px;
+                    text-align: left;
+                }
+                .field--name-field-body-text {
+                    p {
+                        text-align: left;
+                    }
                 }
             }
         }
@@ -105,7 +113,7 @@
                 @include flexbox;
                 flex-direction: column;
                 justify-content: space-between;
-                align-items: flex-start;
+                align-items: center;
                 .field--name-field-icon {
                     border: 2px solid #65a43c;
                     border-radius: 50%;
@@ -127,12 +135,14 @@
                         font-weight: bold;
                         line-height: 1.41;
                         margin: 5px 0;
+                        text-align: center;
                     }
                     .field--name-body {
                         p {
                             font-size: 17px;
                             font-style: normal;
                             line-height: 1.65;
+                            text-align: center;
                         }
                     }
                 }
@@ -154,6 +164,17 @@
                 .node--benefit--teaser {
                     max-width: 340px;
                     margin: 0;
+                    align-items: flex-start;
+                    .node__content {
+                        .node__title {
+                            text-align: left;
+                        }
+                        .field--name-body {
+                            p {
+                                text-align: left;
+                            }
+                        }
+                    }
                 }
                 &:first-child {
                     padding-bottom: 40px;
