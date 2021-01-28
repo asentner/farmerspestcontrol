@@ -3577,6 +3577,78 @@ li.addtoany {
       content: "";
       padding-right: 10px; }
 
+.block--bean-hero-cta {
+  padding: 40px 20px; }
+  .block--bean-hero-cta .content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    max-width: 1210px;
+    margin: 0 auto; }
+  .block--bean-hero-cta .title-image-wrap {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    padding: 20px;
+    border-top: 6px solid #65a43c; }
+    .block--bean-hero-cta .title-image-wrap img {
+      max-width: 65px; }
+  .block--bean-hero-cta .title-wrap {
+    padding-left: 5px; }
+    .block--bean-hero-cta .title-wrap .field--name-field-title {
+      font-size: 25px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0;
+      line-height: 1; }
+    .block--bean-hero-cta .title-wrap .field--name-field-subtitle {
+      font-size: 32px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-top: 0;
+      line-height: 1; }
+  .block--bean-hero-cta .field--name-field-body-text {
+    font-size: 16px;
+    padding: 40px 0;
+    text-align: center;
+    max-width: 650px; }
+    .block--bean-hero-cta .field--name-field-body-text span {
+      font-weight: 800;
+      font-style: italic; }
+  .block--bean-hero-cta .field--name-field-link .field__item {
+    display: -ms-flexbox;
+    display: flex; }
+  .block--bean-hero-cta .field--name-field-link a {
+    font-size: 17px;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 25px;
+    max-width: 200px;
+    text-align: center; }
+  @media (min-width: 1024px) {
+    .block--bean-hero-cta .content {
+      -ms-flex-direction: row;
+          flex-direction: row; }
+    .block--bean-hero-cta .title-image-wrap {
+      max-width: 30%; }
+    .block--bean-hero-cta .title-wrap .field--name-field-title {
+      font-size: 23px; }
+    .block--bean-hero-cta .title-wrap .field--name-field-subtitle {
+      font-size: 30px; }
+    .block--bean-hero-cta .field--name-field-body-text {
+      padding: 0 20px;
+      max-width: 56%;
+      text-align: left; } }
+  @media (min-width: 1060px) {
+    .block--bean-hero-cta .title-wrap .field--name-field-title {
+      font-size: 25px; }
+    .block--bean-hero-cta .title-wrap .field--name-field-subtitle {
+      font-size: 32px; } }
+
 .front .block--bean-benefits-intro-block-front,
 .node-type-localtarget .block--bean-benefits-intro-block-front {
   padding-bottom: 40px; }

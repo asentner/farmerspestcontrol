@@ -179,3 +179,35 @@
     }
   }
 }
+
+// Hero cta
+.block--bean-hero-cta {
+  background-color: palette(primary, base);
+  .content {
+
+  }
+  .title-image-wrap {
+    background-color: #fff;
+  }
+  .title-wrap {
+    .field--name-field-title {
+      color: palette(tertiary, base);
+    }
+    .field--name-field-subtitle {
+      color: palette(secondary, base);
+    }
+  }
+  .field--name-field-body-text {
+    color: #fff;
+  }
+  .field--name-field-link {
+    a {
+      color: #fff;
+      background-color: palette(secondary, base);
+      &:hover {
+        color: palette(primary, base);
+        background-color: #fff;
+      }
+    }
+  }
+}

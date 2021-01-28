@@ -204,6 +204,23 @@ hr {
       .block--bean-sidebar-review-links a:hover:before {
         color: #0e4d82; }
 
+.block--bean-hero-cta {
+  background-color: #0e4d82; }
+  .block--bean-hero-cta .title-image-wrap {
+    background-color: #fff; }
+  .block--bean-hero-cta .title-wrap .field--name-field-title {
+    color: #7f776f; }
+  .block--bean-hero-cta .title-wrap .field--name-field-subtitle {
+    color: #5d9732; }
+  .block--bean-hero-cta .field--name-field-body-text {
+    color: #fff; }
+  .block--bean-hero-cta .field--name-field-link a {
+    color: #fff;
+    background-color: #5d9732; }
+    .block--bean-hero-cta .field--name-field-link a:hover {
+      color: #0e4d82;
+      background-color: #fff; }
+
 .front .block--bean-benefits-intro-block-front .content .field--name-field-h1-title {
   color: #7f776f; }
 
@@ -335,7 +352,7 @@ hr {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #5d9732; }
+  background-color: #0e4d82; }
   .bean-hero .content-wrap:before {
     background-color: #000; }
   .bean-hero .content:after {

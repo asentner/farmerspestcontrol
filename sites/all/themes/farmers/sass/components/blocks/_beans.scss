@@ -474,3 +474,94 @@
     }
   }
 }
+
+// Hero cta
+.block--bean-hero-cta {
+  padding: 40px 20px;
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @include container;
+  }
+  .title-image-wrap {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-top: 6px solid #65a43c;
+    img {
+      max-width: 65px;
+    }
+  }
+  .title-wrap {
+    padding-left: 5px;
+    .field--name-field-title {
+      font-size: 25px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0;
+      line-height: 1;
+    }
+    .field--name-field-subtitle {
+      font-size: 32px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-top: 0;
+      line-height: 1;
+    }
+  }
+  .field--name-field-body-text {
+    font-size: 16px;
+    padding: 40px 0;
+    text-align: center;
+    max-width: 650px;
+    span {
+      font-weight: 800;
+      font-style: italic;
+    }
+  }
+  .field--name-field-link {
+    .field__item {
+      display: flex;
+    }
+    a {
+      font-size: 17px;
+      font-weight: bold;
+      padding: 10px 30px;
+      border-radius: 25px;
+      max-width: 200px;
+      text-align: center;
+    }
+  }
+  @include breakpoint($desk) {
+    .content {
+      flex-direction: row;
+    }
+    .title-image-wrap {
+      max-width: 30%;
+    }
+    .title-wrap {
+      .field--name-field-title {
+        font-size: 23px;
+      }
+      .field--name-field-subtitle {
+        font-size: 30px;
+      }
+    }
+    .field--name-field-body-text {
+      padding: 0 20px;
+      max-width: 56%;
+      text-align: left;
+    }
+  }
+  @include breakpoint(1060px) {
+    .title-wrap {
+      .field--name-field-title {
+        font-size: 25px;
+      }
+      .field--name-field-subtitle {
+        font-size: 32px;
+      }
+    }
+  }
+}
