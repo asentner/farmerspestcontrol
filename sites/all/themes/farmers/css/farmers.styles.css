@@ -5946,7 +5946,7 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     .node--service--quinary-teaser .field--name-field-icon:hover {
       transform: scale(0.95); }
     .node--service--quinary-teaser .field--name-field-icon img {
-      max-width: 55px; }
+      width: 55px; }
     .node--service--quinary-teaser .field--name-field-icon:hover {
       cursor: pointer; }
   .node--service--quinary-teaser .node__content {
