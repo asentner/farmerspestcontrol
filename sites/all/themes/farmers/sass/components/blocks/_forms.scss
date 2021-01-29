@@ -87,6 +87,8 @@
           text-align: center;
           margin: 0 auto;
           padding-top: 25px;
+          position: relative;
+          z-index: 1;
           input{
             min-width: 225px;
             margin: 0 auto;

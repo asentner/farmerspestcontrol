@@ -4334,7 +4334,9 @@ li.addtoany {
       .front .block--webform .block__content .webform-client-form .form-actions, .node-type-city-page .block--webform .block__content .webform-client-form .form-actions, .node-type-localtarget .block--webform .block__content .webform-client-form .form-actions {
         text-align: center;
         margin: 0 auto;
-        padding-top: 25px; }
+        padding-top: 25px;
+        position: relative;
+        z-index: 1; }
         .front .block--webform .block__content .webform-client-form .form-actions input, .node-type-city-page .block--webform .block__content .webform-client-form .form-actions input, .node-type-localtarget .block--webform .block__content .webform-client-form .form-actions input {
           min-width: 225px;
           margin: 0 auto;
