@@ -6747,11 +6747,27 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
     font-weight: 400;
     line-height: 1;
     text-align: center;
-    margin-bottom: 1em; }
+    margin-bottom: 10px; }
   .block--testimonials-sidebar .fa-star, .block--views-testimonials-random .fa-star {
     font-size: 14px; }
   .block--testimonials-sidebar .field--title, .block--views-testimonials-random .field--title, .block--testimonials-sidebar [itemprop="reviewRating"], .block--views-testimonials-random [itemprop="reviewRating"] {
     text-align: center; }
+  .block--testimonials-sidebar .node--testimonial .node__content, .block--views-testimonials-random .node--testimonial .node__content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: center;
+        justify-content: center; }
+    .block--testimonials-sidebar .node--testimonial .node__content .reviewer, .block--views-testimonials-random .node--testimonial .node__content .reviewer {
+      -ms-flex-order: 3;
+          order: 3; }
+    .block--testimonials-sidebar .node--testimonial .node__content [itemprop="reviewRating"], .block--views-testimonials-random .node--testimonial .node__content [itemprop="reviewRating"] {
+      -ms-flex-order: 1;
+          order: 1; }
+    .block--testimonials-sidebar .node--testimonial .node__content [itemprop="description"], .block--views-testimonials-random .node--testimonial .node__content [itemprop="description"] {
+      -ms-flex-order: 2;
+          order: 2; }
   .block--testimonials-sidebar .node--testimonial .field--name-body, .block--views-testimonials-random .node--testimonial .field--name-body {
     margin-bottom: 0;
     text-align: center; }
@@ -6760,6 +6776,8 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .n
       line-height: 1.79; }
       .block--testimonials-sidebar .node--testimonial .field--name-body p:before, .block--views-testimonials-random .node--testimonial .field--name-body p:before, .block--testimonials-sidebar .node--testimonial .field--name-body p:after, .block--views-testimonials-random .node--testimonial .field--name-body p:after {
         content: '"'; }
+  .block--testimonials-sidebar .field--title, .block--views-testimonials-random .field--title {
+    margin-top: 15px; }
   .block--testimonials-sidebar .field--title, .block--views-testimonials-random .field--title, .block--testimonials-sidebar .field--name-field-market, .block--views-testimonials-random .field--name-field-market {
     font-style: normal;
     font-size: 16px;
@@ -9112,6 +9130,9 @@ body.node-type-solution .scm-modal-container .field--name-field-concern-steps .b
 .node--testimonial .field--name-field-market,
 .node--testimonial .field--title {
   margin-top: .5em; }
+
+.sidebar [itemprop="reviewRating"] {
+  margin-top: 10px; }
 
 .paragraphs-item-faq .content h3, .paragraphs-item-faq .content .block--views-team-list .node__title, .block--views-team-list .paragraphs-item-faq .content .node__title, .paragraphs-item-faq .content .block--views-services-all .node__title, .block--views-services-all .paragraphs-item-faq .content .node__title, .paragraphs-item-faq .content .block--views-services-all-mobile .node__title, .block--views-services-all-mobile .paragraphs-item-faq .content .node__title, .paragraphs-item-faq .content .not-front.node-type-localtarget .preface-third-wrap .block--webform .block__title, .not-front.node-type-localtarget .preface-third-wrap .block--webform .paragraphs-item-faq .content .block__title, .paragraphs-item-faq .content body.node-type-solution .scm-modal-container .field--name-field-concern-treatment h2, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .paragraphs-item-faq .content h2, .paragraphs-item-faq .content body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + h1, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .paragraphs-item-faq .content .field--name-field-intro + h1, .paragraphs-item-faq .content body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-display-title, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .paragraphs-item-faq .content .field--name-field-intro + .field--name-field-display-title, .paragraphs-item-faq .content body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .field-item, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field--name-field-intro + .field--name-field-seo-title .paragraphs-item-faq .content .field-item, .paragraphs-item-faq .content .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field-item, .field--name-field-intro + .field--name-field-seo-title body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .paragraphs-item-faq .content .field-item, .paragraphs-item-faq .content body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .field__label, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .paragraphs-item-faq .content .field__label, .paragraphs-item-faq .content body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta em, body.node-type-solution .scm-modal-container .field--name-field-concern-treatment div.entity-paragraphs-item.cta .paragraphs-item-faq .content em, .paragraphs-item-faq .content div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment em, div.entity-paragraphs-item.cta body.node-type-solution .scm-modal-container .field--name-field-concern-treatment .paragraphs-item-faq .content em, .paragraphs-item-faq .content
 body.node-type-solution .scm-modal-container .field--name-field-concern-steps h2,
