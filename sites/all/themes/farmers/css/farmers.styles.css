@@ -2484,7 +2484,7 @@ body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links {
     font-weight: 600;
     padding-bottom: 10px; }
 
-.front .captcha .fieldset-wrapper {
+.front .captcha .g-recaptcha {
   display: -ms-flexbox !important;
   display: flex !important;
   -ms-flex-pack: center !important;
