@@ -36,6 +36,9 @@
         background-color: #65a43c;
       }
     }
+    .block__content {
+      padding: 0 20px;
+    }
     .view-header{
       h3{
         font-size: 32px;
@@ -158,6 +161,9 @@
       max-width: 1350px;
       .block__title{
         font-size: 21px
+      }
+      .block__content {
+        padding: 0;
       }
       .view-header{
         h3{
