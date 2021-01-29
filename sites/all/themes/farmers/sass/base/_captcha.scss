@@ -8,3 +8,27 @@
     padding-bottom: 10px;
   }
 }
+
+// front only
+.front {
+  .captcha {
+    .fieldset-wrapper {
+      display: flex !important;
+      justify-content: center !important;
+    }
+  }
+}
+
+// sidebar captcha
+.l-region--sidebar {
+  .captcha{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    margin-left: -20px;
+    .g-recaptcha {
+      transform: scale(.75);
+    }
+  }
+}

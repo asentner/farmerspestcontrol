@@ -2484,6 +2484,23 @@ body.admin-menu.adminimal-menu:not(.node-type-solution) .action-links {
     font-weight: 600;
     padding-bottom: 10px; }
 
+.front .captcha .fieldset-wrapper {
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-pack: center !important;
+      justify-content: center !important; }
+
+.l-region--sidebar .captcha {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  padding: 0;
+  margin: 0;
+  margin-left: -20px; }
+  .l-region--sidebar .captcha .g-recaptcha {
+    transform: scale(0.75); }
+
 .node--teaser .field--name-body .field__item > *,
 .node--alt-teaser .field--name-body .field__item > *,
 .node--tertiary-teaser .field__item > *,
